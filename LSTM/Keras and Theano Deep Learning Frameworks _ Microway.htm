@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://www.microway.com/hpc-tech-tips/keras-theano-deep-learning-frameworks/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class=" js no-mobile desktop no-ie chrome chrome57 hpc-tech-tips-section keras-theano-deep-learning-frameworks-section w-1440 gt-240 gt-320 gt-480 gt-640 gt-768 gt-800 gt-1024 gt-1280 lt-1680 lt-1920 no-portrait landscape gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions no-touch retina fontface webkit chrome mac js domloaded" id="index-page"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Keras and Theano Deep Learning Frameworks | Microway</title>
+    <link href="./Keras and Theano Deep Learning Frameworks _ Microway_files/css" rel="stylesheet" type="text/css">
+    <link href="./Keras and Theano Deep Learning Frameworks _ Microway_files/css(1)" rel="stylesheet" type="text/css">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<script async="" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/analytics.js"></script><script src="./Keras and Theano Deep Learning Frameworks _ Microway_files/head.min.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/css_browser_selector.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="./Keras and Theano Deep Learning Frameworks _ Microway_files/style.css">
+
+<link rel="pingback" href="https://www.microway.com/xmlrpc.php">
+
+<!-- This site is optimized with the Yoast SEO plugin v3.1.2 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Keras and Theano Deep Learning frameworks are used to compute neural networks for estimating movie review sentiment and identifying images of digits">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://www.microway.com/hpc-tech-tips/keras-theano-deep-learning-frameworks/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Keras and Theano Deep Learning Frameworks | Microway">
+<meta property="og:description" content="Keras and Theano Deep Learning frameworks are used to compute neural networks for estimating movie review sentiment and identifying images of digits">
+<meta property="og:url" content="https://www.microway.com/hpc-tech-tips/keras-theano-deep-learning-frameworks/">
+<meta property="og:site_name" content="Microway">
+<meta property="article:section" content="Hardware">
+<meta property="article:published_time" content="2015-10-05T11:15:52-04:00">
+<meta property="article:modified_time" content="2015-10-26T11:31:17-04:00">
+<meta property="og:updated_time" content="2015-10-26T11:31:17-04:00">
+<meta property="og:image" content="http://www.microway.com/wp-content/uploads/Theano_Keras_Blog_masthead_flattened_masthead-680x200.png">
+<meta property="og:image" content="http://www.microway.com/wp-content/uploads/Theano_Keras_Blog_masthead_flattened-680x421.png">
+<meta property="og:image" content="http://www.microway.com/wp-content/uploads/nn-1a.png">
+<meta property="og:image" content="http://www.microway.com/wp-content/uploads/nn_imdb_sideways-680x107.png">
+<meta property="og:image" content="http://www.microway.com/wp-content/uploads/nn_mnist_sideways-680x78.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Keras and Theano Deep Learning frameworks are used to compute neural networks for estimating movie review sentiment and identifying images of digits">
+<meta name="twitter:title" content="Keras and Theano Deep Learning Frameworks | Microway">
+<meta name="twitter:site" content="@MicrowayHPC">
+<meta name="twitter:image" content="http://www.microway.com/wp-content/uploads/Theano_Keras_Blog_masthead_flattened_masthead-680x200.png">
+<meta name="twitter:creator" content="@MicrowayHPC">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="Microway » Feed" href="https://www.microway.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Microway » Comments Feed" href="https://www.microway.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Microway » Keras and Theano Deep Learning Frameworks Comments Feed" href="https://www.microway.com/hpc-tech-tips/keras-theano-deep-learning-frameworks/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"https:\/\/www.microway.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.4.2"}};
+			!function(a,b,c){function d(a){var c,d=b.createElement("canvas"),e=d.getContext&&d.getContext("2d"),f=String.fromCharCode;return e&&e.fillText?(e.textBaseline="top",e.font="600 32px Arial","flag"===a?(e.fillText(f(55356,56806,55356,56826),0,0),d.toDataURL().length>3e3):"diversity"===a?(e.fillText(f(55356,57221),0,0),c=e.getImageData(16,16,1,1).data.toString(),e.fillText(f(55356,57221,55356,57343),0,0),c!==e.getImageData(16,16,1,1).data.toString()):("simple"===a?e.fillText(f(55357,56835),0,0):e.fillText(f(55356,57135),0,0),0!==e.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8"),diversity:d("diversity")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8&&c.supports.diversity||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="wpfb-css" href="./Keras and Theano Deep Learning Frameworks _ Microway_files/wp-filebase.css" type="text/css" media="all">
+<link rel="stylesheet" id="contact-form-7-css" href="./Keras and Theano Deep Learning Frameworks _ Microway_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="collapseomatic-css-css" href="./Keras and Theano Deep Learning Frameworks _ Microway_files/light_style.css" type="text/css" media="all">
+<link rel="stylesheet" id="slb_core-css" href="./Keras and Theano Deep Learning Frameworks _ Microway_files/app.css" type="text/css" media="all">
+<link rel="stylesheet" id="ubermenu-basic-css" href="./Keras and Theano Deep Learning Frameworks _ Microway_files/basic.css" type="text/css" media="all">
+<link rel="stylesheet" id="ubermenu-grey-white-css" href="./Keras and Theano Deep Learning Frameworks _ Microway_files/blackwhite.css" type="text/css" media="all">
+<!-- This site uses the Google Analytics by Yoast plugin v5.4.6 - Universal enabled - https://yoast.com/wordpress/plugins/google-analytics/ -->
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-2830423-1', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+
+</script>
+<!-- / Google Analytics by Yoast -->
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/jquery.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/cycle.js"></script>
+<link rel="https://api.w.org/" href="https://www.microway.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.microway.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.microway.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 4.4.2">
+<link rel="shortlink" href="https://www.microway.com/?p=5720">
+<link rel="alternate" type="application/json+oembed" href="https://www.microway.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.microway.com%2Fhpc-tech-tips%2Fkeras-theano-deep-learning-frameworks%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.microway.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.microway.com%2Fhpc-tech-tips%2Fkeras-theano-deep-learning-frameworks%2F&amp;format=xml">
+<style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through !important;
+}</style><style type="text/css">.removed_link, a.removed_link {
+	text-decoration: line-through !important;
+}</style><link rel="stylesheet" type="text/css" href="./Keras and Theano Deep Learning Frameworks _ Microway_files/shCore.css"><link rel="stylesheet" type="text/css" href="./Keras and Theano Deep Learning Frameworks _ Microway_files/shThemeDefault.css"><style type="text/css" id="syntaxhighlighteranchor"></style>
+</head>
+
+<body class="single single-post postid-5720 single-format-standard">
+
+	<div id="header">
+		<div id="masthead">
+			<div id="branding">
+            <div id="topLinks">
+            <a href="mailto:sales@microway.com">sales@microway.com</a> | 508.746.7341<br>
+            <span class="redLinks"><a href="https://www.microway.com/">HOME</a> <a href="https://www.microway.com/hpc-tech-tips/">BLOG</a> <a href="https://www.microway.com/knowledge-center/">KNOWLEDGE CENTER</a> <a href="https://www.microway.com/contact/">CONTACT </a></span></div>
+			<a href="https://www.microway.com/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/microway-logo.png" width="297" height="53" alt="Microway"></a>
+			</div><!-- #branding -->
+
+			
+		</div><!-- #masthead -->
+        <div style="clear:both;"></div>
+	</div><!-- #header -->
+    <div id="access-wrapper">
+<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="https://www.microway.com/hpc-tech-tips/keras-theano-deep-learning-frameworks/#content" title="Skip to content">Skip to content</a></div>
+								<div id="megaMenu" class="megaMenuContainer megaFullWidth wpmega-preset-grey-white megaMenuHorizontal megaMenuOnHover wpmega-withjs wpmega-noconflict megaMenu-withjs"><ul id="megaUber" class="megaMenu"><li id="menu-item-169" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children ss-nav-menu-item-0 ss-nav-menu-item-depth-0 ss-nav-menu-reg mega-with-sub"><a href="https://www.microway.com/why-microway/"><span class="wpmega-link-title">Why Microway</span></a>
+<ul class="sub-menu sub-menu-1" style="display: none;">
+	<li id="menu-item-327" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/why-microway/clients-and-testimonials/"><span class="wpmega-link-title">Clients and Testimonials</span></a></li>
+	<li id="menu-item-328" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/why-microway/testing-process/"><span class="wpmega-link-title">Testing Process</span></a></li>
+	<li id="menu-item-326" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/why-microway/awards/"><span class="wpmega-link-title">Awards</span></a></li>
+</ul>
+</li>
+<li id="menu-item-168" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children ss-nav-menu-item-1 ss-nav-menu-item-depth-0 ss-nav-menu-reg mega-with-sub"><a href="https://www.microway.com/markets-served/"><span class="wpmega-link-title">Markets Served</span></a>
+<ul class="sub-menu sub-menu-1" style="display: none;">
+	<li id="menu-item-629" class="menu-item menu-item-type-custom menu-item-object-custom ss-nav-menu-item-depth-1 ss-sidebar"><a><span class="wpmega-link-title">Markets Served DD</span></a><div class="wpmega-nonlink wpmega-widgetarea ss-colgroup-1"><ul id="wpmega-ubermenu-widget-area-3"><li id="black-studio-tinymce-11" class="widget widget_black_studio_tinymce"><h2 class="widgettitle">Markets Served</h2><div class="textwidget"><div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/markets-served/university/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-university.jpg" alt="University" width="140" height="105" class="alignnone size-full wp-image-522"></a><h3><a href="https://www.microway.com/markets-served/university">University</a></h3>
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/markets-served/government-and-defense/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-government.jpg" alt="Government &amp; Defense" width="140" height="105" class="alignnone size-full wp-image-547"></a><h3><a href="https://www.microway.com/markets-served/government-and-defense/">Government and <br>Defense</a></h3>
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/markets-served/engineering-and-manufacturing/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-engineering.jpg" alt="Engineering &amp; Manufacturing" width="140" height="105" class="alignnone size-full wp-image-548"></a><h3><a href="https://www.microway.com/markets-served/engineering-and-manufacturing/">Engineering and <br> Manufacturing</a></h3>
+</div>
+
+<div class="megadrop-item" style="margin-right:0 !important;"><a href="https://www.microway.com/markets-served/finance/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-finance.jpg" alt="Finance" width="140" height="105" class="alignnone size-full wp-image-550"></a><h3><a href="https://www.microway.com/markets-served/finance/">Finance</a></h3>
+</div>
+
+</div>
+
+<div style="clear:both;">
+
+<div class="megadrop-item"><a href="https://www.microway.com/markets-served/life-sciences/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-lifesciences.jpg" alt="Life Sciences" width="140" height="105" class="alignnone size-full wp-image-551"></a><h3><a href="https://www.microway.com/markets-served/life-sciences/">Life Sciences</a></h3>
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/markets-served/oil-gas-solar-wind/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-oil.jpg" alt="Oil &amp; Gas, Solar &amp; Wind" width="140" height="105" class="alignnone size-full wp-image-551"></a><h3><a href="https://www.microway.com/markets-served/oil-gas-solar-wind/">Oil, Gas, Solar,<br> and Wind</a></h3>
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/markets-served/media-and-entertainment/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-media.jpg" alt="Media and Entertainment" width="140" height="105" class="alignnone size-full wp-image-551"></a><h3><a href="https://www.microway.com/markets-served/media-and-entertainment/">Media and <br>Entertainment</a></h3>
+</div>
+
+<div class="megadrop-item" style="margin-right:0 !important;"><a href="https://www.microway.com/markets-served/ocean-and-weather-modeling/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-ocean.jpg" alt="Media and Entertainment" width="140" height="105" class="alignnone size-full wp-image-551"></a><h3><a href="https://www.microway.com/markets-served/ocean-and-weather-modeling/">Ocean and Weather <br>Modeling</a></h3>
+</div>
+
+</div>
+</div></li>
+</ul><div class="clear"></div></div></li>
+	<li id="menu-item-325" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/markets-served/university/"><span class="wpmega-link-title">University</span></a></li>
+	<li id="menu-item-321" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/markets-served/government-and-defense/"><span class="wpmega-link-title">Government and Defense</span></a></li>
+	<li id="menu-item-319" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/markets-served/engineering-and-manufacturing/"><span class="wpmega-link-title">Engineering and Manufacturing</span></a></li>
+	<li id="menu-item-320" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/markets-served/finance/"><span class="wpmega-link-title">Finance</span></a></li>
+	<li id="menu-item-322" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/markets-served/life-sciences/"><span class="wpmega-link-title">Life Sciences</span></a></li>
+	<li id="menu-item-324" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/markets-served/oil-gas-solar-wind/"><span class="wpmega-link-title">Oil &amp; Gas, Solar &amp; Wind</span></a></li>
+	<li id="menu-item-323" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/markets-served/media-and-entertainment/"><span class="wpmega-link-title">Media and Entertainment</span></a></li>
+	<li id="menu-item-745" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/markets-served/ocean-and-weather-modeling/"><span class="wpmega-link-title">Ocean And Weather Modeling</span></a></li>
+</ul>
+</li>
+<li id="menu-item-167" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children ss-nav-menu-item-2 ss-nav-menu-item-depth-0 ss-nav-menu-reg mega-with-sub"><a href="https://www.microway.com/technologies/"><span class="wpmega-link-title">Technologies</span></a>
+<ul class="sub-menu sub-menu-1" style="display: none;">
+	<li id="menu-item-582" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1 ss-sidebar"><a href="https://www.microway.com/site-map/"><span class="wpmega-link-title">Technologies DD</span></a><div class="wpmega-nonlink wpmega-widgetarea ss-colgroup-1"><ul id="wpmega-ubermenu-widget-area-2"><li id="black-studio-tinymce-10" class="widget widget_black_studio_tinymce"><h2 class="widgettitle">Technologies</h2><div class="textwidget"><div class="megadrop-item"><a href="https://www.microway.com/technologies/gpu-computing/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-gpu.jpg" alt="GPU Computing" width="140" height="105" class="alignnone size-full wp-image-522"></a><h3><a href="https://www.microway.com/technologies/gpu-computing/">GPU Computing</a></h3>
+<div class="dd-copy">
+<p>NVIDIA Tesla GPU solutions with massive parallelism to dramatically accelerate your HPC applications. </p>
+</div>
+<p class="dd-learnmore"><a href="https://www.microway.com/technologies/gpu-computing/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/technologies/ibm-power/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-ibm-power.jpg" alt="IBM Power" width="140" height="105" class="alignnone size-full wp-image-6921"></a><h3><a href="https://www.microway.com/technologies/ibm-power/">IBM POWER</a></h3>
+<div class="dd-copy">
+<p>Leverage the power of IBM's Power architecture, GPU/FPGA accelerators, and the innovation of the OpenPOWER foundation.</p>
+</div>
+<p class="dd-learnmore"><a href="https://www.microway.com/technologies/ibm-power/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/technologies/intel/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-xeon.jpg" alt="Intel" width="140" height="105" class="alignnone size-full wp-image-548"></a><h3><a href="https://www.microway.com/technologies/intel/">Intel</a></h3>
+<div class="dd-copy">
+<p>Leading edge Xeon x86 CPU solutions for the most demanding HPC applications.</p>
+</div>
+<p class="dd-learnmore"><a href="https://www.microway.com/technologies/intel/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/technologies/xeon-phi/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-xeonphi.jpg" alt="Xeon Phi" width="140" height="105" class="alignnone size-full wp-image-547"></a><h3><a href="https://www.microway.com/technologies/xeon-phi/">Xeon Phi</a></h3>
+<div class="dd-copy">
+<p>Many-core Intel x86 processor solutions for scale-out HPC workloads.</p>
+</div>
+<p class="dd-learnmore"><a href="https://www.microway.com/technologies/xeon-phi/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/technologies/amd/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-amd.jpg" alt="AMD" width="140" height="105" class="alignnone size-full wp-image-550"></a><h3><a href="https://www.microway.com/technologies/amd/">AMD</a></h3>
+<div class="dd-copy">
+<p>High core count AMD Opteron CPU solutions with excellent price-performance.</p>
+</div>
+<p class="dd-learnmore"><a href="https://www.microway.com/technologies/amd/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+</div>
+
+<div class="megadrop-item" style="margin-right:0 !important;"><a href="https://www.microway.com/technologies/software/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-software.jpg" alt="Software" width="140" height="105" class="alignnone size-full wp-image-551"></a><h3><a href="https://www.microway.com/technologies/software/">Software</a></h3>
+<div class="dd-copy">
+<p>HPC software to ease systems administration, validate hardware, and generate high performance code.</p>
+</div>
+<p class="dd-learnmore"><a href="https://www.microway.com/technologies/software/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+</div></div></li>
+</ul><div class="clear"></div></div></li>
+	<li id="menu-item-335" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/technologies/nvidia-tesla-gpu-computing/"><span class="wpmega-link-title">NVIDIA Tesla GPU Computing</span></a></li>
+	<li id="menu-item-339" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/technologies/xeon-phi/"><span class="wpmega-link-title">Xeon Phi</span></a></li>
+	<li id="menu-item-336" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/technologies/intel/"><span class="wpmega-link-title">Intel</span></a></li>
+	<li id="menu-item-334" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/technologies/amd/"><span class="wpmega-link-title">AMD</span></a></li>
+	<li id="menu-item-338" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/technologies/software/"><span class="wpmega-link-title">Software</span></a></li>
+	<li id="menu-item-4554" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/technologies/3dprinters/"><span class="wpmega-link-title">Additive Manufacturing with 3D Printers</span></a></li>
+</ul>
+</li>
+<li id="menu-item-166" class="menu-item menu-item-type-post_type menu-item-object-page current-post-parent menu-item-has-children ss-nav-menu-item-3 ss-nav-menu-item-depth-0 ss-nav-menu-mega ss-nav-menu-mega-alignCenter mega-with-sub"><a href="https://www.microway.com/products/"><span class="wpmega-link-title">Products</span></a>
+<ul class="sub-menu sub-menu-1" style="left: -234px; display: none;">
+	<li id="menu-item-523" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent ss-nav-menu-item-depth-1 ss-sidebar"><a href="https://www.microway.com/hpc-tech-tips/category/hardware/"><span class="wpmega-link-title">Products DD</span></a><div class="wpmega-nonlink wpmega-widgetarea ss-colgroup-1"><ul id="wpmega-ubermenu-widget-area-1"><li id="black-studio-tinymce-9" class="widget widget_black_studio_tinymce"><h2 class="widgettitle">Products</h2><div class="textwidget"><div class="megadrop-item"><a href="https://www.microway.com/products/workstations/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-workstations.jpg" alt="workstations-dd" width="140" height="105" class="alignnone size-full wp-image-522"></a><h3><a href="https://www.microway.com/products/workstations/">Workstations</a></h3>
+<div class="dd-copy">
+<p>State-of-the-art, quiet supercomputing performance at your desk with WhisperStation. </p>
+</div>
+
+<p class="dd-learnmore"><a href="https://www.microway.com/products/workstations/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/products/rackmount-servers/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-rackmount.jpg" alt="rackmount-dd" width="140" height="105" class="alignnone size-full wp-image-547"></a><h3><a href="https://www.microway.com/products/rackmount-servers/">Rackmount Servers</a></h3>
+<div class="dd-copy">
+<p>High performance servers for your datacenter, thoroughly tested and integrated.</p>
+</div>
+<p class="dd-learnmore"><a href="https://www.microway.com/products/rackmount-servers/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/products/hpc-clusters/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-hpc.jpg" alt="hpc-clusters-dd" width="140" height="105" class="alignnone size-full wp-image-548"></a><h3><a href="https://www.microway.com/products/hpc-clusters/">HPC Clusters</a></h3>
+<div class="dd-copy">
+<p>Custom designed clusters for maximum HPC throughput. Built upon the latest processor and accelerator technologies.</p>
+
+<p class="dd-learnmore"><a href="https://www.microway.com/products/hpc-clusters/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+</div>
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/products/storage/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/storage-dd.jpg" alt="storage-dd" width="140" height="105" class="alignnone size-full wp-image-550"></a><h3><a href="https://www.microway.com/products/storage/">Storage</a></h3>
+<div class="dd-copy">
+<p>Enterprise class storage solutions providing superior reliability, redundancy, and performance.</p>
+</div>
+<p class="dd-learnmore"><a href="https://www.microway.com/products/storage/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+
+</div>
+
+<div class="megadrop-item"><a href="https://www.microway.com/products/hpc-storage/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-hpc-storage.jpg" alt="hpc-storage-dd" width="140" height="105" class="alignnone size-full wp-image-551"></a><h3><a href="https://www.microway.com/products/hpc-storage/">HPC Storage</a></h3>
+<div class="dd-copy">
+<p>High performance clustered storage with parallel filesystems.</p>
+</div>
+<p class="dd-learnmore"><a href="https://www.microway.com/products/hpc-storage/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+
+</div>
+
+<div class="megadrop-item" style="margin-right:0 !important;"><a href="https://www.microway.com/products/preconfiguredsystems/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/dd-preconfigured.jpg" alt="pre-configured-dd" width="140" height="105" class="alignnone size-full wp-image-630"></a><h3><a href="https://www.microway.com/products/preconfiguredsystems/">Pre-Configured Systems</a></h3>
+<div class="dd-copy2">Tailor-designed systems for common applications.</div>
+
+<p class="dd-learnmore"><a href="https://www.microway.com/products/preconfiguredsystems/"><span style="color:#013a72;">&gt;&gt;</span>  Learn More</a></p>
+
+</div></div></li>
+</ul><div class="clear"></div></div></li>
+	<li id="menu-item-577" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/products/hpc-clusters/"><span class="wpmega-link-title">HPC Clusters</span></a></li>
+	<li id="menu-item-578" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/products/hpc-storage/"><span class="wpmega-link-title">HPC Storage</span></a></li>
+	<li id="menu-item-579" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/products/rackmount-servers/"><span class="wpmega-link-title">Rackmount Servers</span></a></li>
+	<li id="menu-item-580" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/products/storage/"><span class="wpmega-link-title">Storage</span></a></li>
+	<li id="menu-item-581" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/products/workstations/"><span class="wpmega-link-title">Workstations</span></a></li>
+	<li id="menu-item-886" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/products/preconfiguredsystems/"><span class="wpmega-link-title">Pre-Configured Systems</span></a></li>
+</ul>
+</li>
+<li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children ss-nav-menu-item-4 ss-nav-menu-item-depth-0 ss-nav-menu-reg mega-with-sub"><a href="https://www.microway.com/knowledge-center/"><span class="wpmega-link-title">Knowledge Center</span></a>
+<ul class="sub-menu sub-menu-1" style="display: none;">
+	<li id="menu-item-183" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/knowledge-center/resources/"><span class="wpmega-link-title">Technical Resources</span></a></li>
+	<li id="menu-item-184" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/knowledge-center/support/"><span class="wpmega-link-title">Support</span></a></li>
+</ul>
+</li>
+<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children ss-nav-menu-item-5 ss-nav-menu-item-depth-0 ss-nav-menu-reg mega-with-sub"><a href="https://www.microway.com/company/"><span class="wpmega-link-title">Company</span></a>
+<ul class="sub-menu sub-menu-1" style="display: none;">
+	<li id="menu-item-402" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/company/events/"><span class="wpmega-link-title">Events</span></a></li>
+	<li id="menu-item-1852" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/company/microway-hpc-newsletter/"><span class="wpmega-link-title">HPC Newsletter</span></a></li>
+	<li id="menu-item-405" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/company/press-room/"><span class="wpmega-link-title">Press Room</span></a></li>
+	<li id="menu-item-404" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/company/partners/"><span class="wpmega-link-title">Partners</span></a></li>
+	<li id="menu-item-1879" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/company/employment/"><span class="wpmega-link-title">Employment</span></a></li>
+	<li id="menu-item-403" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/company/history/"><span class="wpmega-link-title">History</span></a></li>
+	<li id="menu-item-1857" class="menu-item menu-item-type-post_type menu-item-object-page ss-nav-menu-item-depth-1"><a href="https://www.microway.com/company/map-and-company-directory/"><span class="wpmega-link-title">Map and Company Directory</span></a></li>
+</ul>
+</li>
+</ul></div>                
+                <div class="search-microway"><form role="search" method="get" id="searchform" action="https://www.microway.com/">
+	<label class="screen-reader-text" for="s">Search Microway</label>
+	<input type="text" value="Search Microway" class="search-tri" style="vertical-align:middle" name="s" id="s" onclick="this.value=&#39;&#39;">
+<input type="image" style=" vertical-align:middle" id="searchsubmit2" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/search-btn.gif" alt="search"></form>
+                </div>
+                
+                
+                 </div><!-- #access -->
+            <div style="clear:both;"></div>
+            </div><!-- #access-wrapper -->
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+<p id="breadcrumbs"><span xmlns:v="http://rdf.data-vocabulary.org/#"><span typeof="v:Breadcrumb"><a href="https://www.microway.com/" rel="v:url" property="v:title">Home</a> &gt; <span rel="v:child" typeof="v:Breadcrumb"><a href="https://www.microway.com/hpc-tech-tips/" rel="v:url" property="v:title">HPC Tech Tips</a> &gt; <span class="breadcrumb_last">Keras and Theano Deep Learning Frameworks</span></span></span></span></p>				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="https://www.microway.com/hpc-tech-tips/caffe-deep-learning-using-nvidia-digits-tesla-gpus/" rel="prev"><span class="meta-nav">←</span> Caffe Deep Learning Tutorial using NVIDIA DIGITS on Tesla K80 &amp; K40 GPUs</a></div>
+					<div class="nav-next"><a href="https://www.microway.com/hpc-tech-tips/deep-learning-frameworks-survey-tensorflow-torch-theano-caffe-neon-ibm-machine-learning-stack/" rel="next">Deep Learning Frameworks: A Survey of TensorFlow, Torch, Theano, Caffe, Neon, and the IBM Machine Learning Stack <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-5720" class="post-5720 post type-post status-publish format-standard hentry category-hardware category-software category-test-drive">
+
+                
+					<h1 class="entry-title">Keras and Theano Deep Learning Frameworks</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="https://www.microway.com/hpc-tech-tips/keras-theano-deep-learning-frameworks/" title="11:15 am" rel="bookmark"><span class="entry-date">October 5, 2015</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="https://www.microway.com/hpc-tech-tips/author/john/" title="View all posts by John Murphy">John Murphy</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/Theano_Keras_Blog_masthead_flattened_masthead-680x200.png" alt="Theano_Keras_Blog_masthead_flattened_masthead" width="680" height="200" class="aligncenter size-large wp-image-5941" srcset="https://www.microway.com/wp-content/uploads/Theano_Keras_Blog_masthead_flattened_masthead-140x41.png 140w, https://www.microway.com/wp-content/uploads/Theano_Keras_Blog_masthead_flattened_masthead-680x200.png 680w, https://www.microway.com/wp-content/uploads/Theano_Keras_Blog_masthead_flattened_masthead-300x88.png 300w, https://www.microway.com/wp-content/uploads/Theano_Keras_Blog_masthead_flattened_masthead.png 852w" sizes="(max-width: 680px) 100vw, 680px"></p>
+<p>Here we will explore how to use the <b><a href="http://deeplearning.net/software/theano/" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;http://deeplearning.net/software/theano/&#39;, &#39;Theano&#39;);" title="Theano" target="_blank">Theano</a></b> and <b><a href="https://github.com/fchollet/keras/" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;https://github.com/fchollet/keras/&#39;, &#39;Keras&#39;);" title="Keras" target="_blank">Keras</a></b> Python frameworks for designing neural networks in order to accomplish specific classification tasks.  In the process, we will see how Keras offers a great amount of leverage and flexibility in designing neural nets.  In particular, we will examine two active areas of research: classification of textual and image data.  </p>
+<p><span id="more-5720"></span></p>
+<h2>The Theano Framework</h2>
+<p>Theano was originally developed as a symbolic math processor at the <a href="http://www.umontreal.ca/" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;http://www.umontreal.ca/&#39;, &#39;University of Montreal&#39;);" title="University of Montreal" target="_blank">University of Montreal</a>, for the purpose of performing symbolic differentiation or integration, on complicated non-linear functions.  The University of Montreal offers many learning resources for Theano and its spin-off frameworks of Keras, <b>Blocks</b>, and <b>Fuel</b>.  The reader is encouraged to explore their resources and <b><a href="http://videolectures.net/deeplearning2015_montreal/" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;http://videolectures.net/deeplearning2015_montreal/&#39;, &#39;summer school 2015 course content&#39;);" title="summer 2015 course content" target="_blank">summer school 2015 course content</a></b>.</p>
+<p>The symbolic math processing feature of Theano gives it a similarity to Mathematica, or Maple.  However, the Theano interface is lower-level, since Python is a scripted programming language.  In Theano, functions are represented symbolically, but they can also be evaluated at coordinates, producing numerical values.  Theano can be used for solving problems outside the realm of neural networks, such as <b>logistic regression</b>.  Because Theano computes the gradient symbolically, it removes the chance of errors arising from determining an analytic form of the gradient by hand, and then translating it into code.  Since Theano makes use of GPUs for computation in general, other types of machine learning approaches, outside of the scope neural networks, can also realize performance gains in Theano.  Any CUDA-capable GPU will work with Theano.</p>
+<h2>Method of Backpropagation</h2>
+<p>Theano was not designed for the goal of building neural networks.  Rather, it was widely adopted by neural network and machine learning researchers as a useful development environment for computing the gradients of an error function with respect to the weights of a network.  The calculation of these gradients is important for the neural network training method called <b>backpropagation</b>.  The method is so-called because of the way the chain rule of differentiation applies at each layer of the network, from the output layer, chaining backward (or “propagating” backward) toward the input layer.  Strictly speaking, there are no signals propagating backward in this picture.  The term propagation is applied here in the sense of how the chain rule of differentiation is performed in successive steps for each layer, progressing (no actual movement) from the output to the input.  I mention this here to clear any confusion, since the network is an abstract mathematical model for a biological neural network, where electrical signals do actually propagate forward, along axons, to reach neurons directed in forward positions.</p>
+<p><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/Theano_Keras_Blog_masthead_flattened-680x421.png" alt="Building Neural Networks with the Theano with Keras Frameworks: Exploring the MNIST and IMDB datasets with Feedforward Networks"><br>
+<i>Keras and Theano Deep Learning Frameworks are first used to compute sentiment from a movie review data set and then classify digits from the MNIST dataset</i></p>
+<h2>Gradient Instability Problem</h2>
+<p>Neural network gradients can have instability, which poses a challenge to network design.  If a network is too deep, and the weights are too small, signals will become attenuated as they move deeper into a network.  The same is true of the gradient, when calculated from the output layer, and then chained into successive layers toward the input.  This can make it difficult to effectively train neurons which are positioned more than several layers back toward the input. After the gradient is computed through several layers, the weights become multiplied into the gradient expression. The gradient can then become attenuated by the weights, if they are too small. This immediately leads to corrective terms becoming too small for neurons in the deeper layers, thereby making the network training ineffective by backpropagation. In others words, the training will not be able to reach far enough backward into a network. This problem is especially pronounced in <b>recurring neural networks</b> (<b>RNNs</b>), where a network’s output feeds back to its input, increasing the network’s depth.</p>
+<p>The opposite of the attenuation scenario can also occur, where if the weights are too large, a signal will grow exponentially, and cause the network to be unstable, with corrective terms growing without bound. So how does Theano help to address these problems? If a network’s weights are too small or too large, backpropagation will not work. There is a way to balance the weights connecting the network layers, such that they do not grow too large or small. This method is called <b>L2 Regularization</b>, and involves adding the <b>2-norms</b> of the Weight matrices to the cost function. <b>L2 Regularization</b> also helps to reduce <b>overfitting</b> to data.  This, however, makes the cost function more complicated.</p>
+<p>Successive chaining of nonlinear activation functions, such as <b>logistic functions</b>, <b>hyperbolic tangents</b> (<b>tanh</b>), or rectified linear units (<b>ReLUs</b>), along with L2 regularization leads to a pretty complicated cost function. Theano calculates the error gradient symbolically, and precisely, despite the complexity, with respect to each weight value, yielding an analytic form, which is evaluated numerically. This precision helps to eliminate numerical errors that arise in computing the gradient, using a Runge-Kutta methods. Numerical errors accumulate and worsen as the gradient is computed deeper into a network. Since each layer is connected by a non-linear function, the effect of these errors worsen. Theano produces an analytic function at every layer in a network, eliminating the accumulation of numerical errors.</p>
+<h2>The Advantage of using Theano for Developing Neural Networks</h2>
+<p>Theano makes the backpropagation training method more effective, by producing more accurate corrections for each neuron, even if they are positioned far back toward the input layer.  It cannot fix a badly balanced network, but it will make the training more effective for a correctly balanced network with self-balancing mechanisms.  Modern networks, such as those trained to play computer Atari games, can only remember a short distance into the past [<b>1</b>].  </p>
+<p>Various approaches have been considered for the initial assignment of network weights. One method is the <b>Xavier algorithm</b>, which balances initial weight assignments such that attenuation or unstable signal growth does not occur initially in <b>convolutional neural networks</b> (<b>CNNs</b>) [<b>2</b>]. The weights in this method are assigned within a uniform distribution having bounding values determined by network properties.  In recurring networks, additional mechanisms must be introduced in order to prevent signal attenuation. Memory elements can be positioned in the network, where they effectively sustain signal strength at each stage of recurrence. Two memory models are the <b>Long Short Term Memory</b> (<b>LSTM</b>) [<b>3</b>], and the <b>Gated Recurring Unit</b> (<b>GRU</b>) [<b>4</b>]. The GRU is simpler in structure compared to the <b>LSTM</b> and has been demonstrated to perform better under certain circumstances. The <b>LSTM</b> model, however, has been shown to produce the best network performance given more training time, and a certain constant initial bias parameter value.</p>
+<h2>The Keras Framework</h2>
+<p>Keras puts all of these neural network features and enhancements at the developer’s fingertips. It is possible to define a training and testing set, and then train a multi-layered recurring network with <b>LSTM</b> (or <b>GRU</b>), within an abbreviated body of code consisting approximately of merely fifty to seventy lines. Keras is a high-level framework built on top of Theano.  As a framework upon a framework, it provides a great amount of leverage.  While Keras provides a high-level interface, it is still possible to program at the lower level Theano framework within the same body of code.</p>
+<p>Since we will be using an <a href="http://www.microway.com/file/nvidia_tesla_k80_product_info-pdf/" title="Tesla K80 GPU" target="_blank"><b>NVIDIA Tesla K80 GPU card</b></a>, we want to examine a network which has sufficient complexity, such that using a GPU provides some practical benefit.  Simple models, or smaller components of larger networks, such as <b>Perceptrons</b>, <b>Autoencoders</b> (Restricted Boltzmann Machines), or <b>Multi-layer Perceptrons</b> (<b>MLPs</b>), do not contain enough neurons and connecting weights to require the use of GPUs.  These smaller networks can instead be solved on a CPU within reasonable time. Larger networks, inspired by biological models, such as <b>LeNet</b>[<b>5</b>], <b>AlexNet</b>[<b>6</b>], <b>GoogLeNet</b>[<b>7</b>], and other deep network architectures, do require GPUs in order to decrease compute time to a practical range.  Modern neural networks designed in order to do image classification, or Natural Language Processing (<b>NLP</b>), require a GPU [<b>8</b>].</p>
+<p><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/nn-1a.png" alt="A schematic of a perceptron having one hidden layer." align="middle"><br>
+<i>A schematic of a perceptron having one hidden layer</i></p>
+<p>Using Keras, doing 1D convolutions on text data, or 2D convolutions on image data, requires about the same amount of code. The framework makes these different sorts of network convolutions relatively easy.  We will examine two different types of network models: one which uses 1D convolution on textual data, and another which uses 2D convolution on image data.</p>
+<p>We will first train a neural network on textual data contained in an IMDB movie review data set[<b>9</b>]. The network will then be demonstrated on a test set in order to classify reviews and categorize each as positive or negative in <i>sentiment</i>. In our second use case, we will create a neural network image classifier, by defining a neural network similar to <b>LeNet5</b>. We will train this network on the <b>MNIST</b> data[<b>10</b>], and then use the trained network to classify a set of test images.</p>
+<h2>Building a Movie Review Sentiment Classifier using Keras and Theano Deep Learning Frameworks</h2>
+<p>This tutorial will assume that you have already set up a working Python environment and that you have installed <b>CUDA</b>, <b>cuDNN</b>, <b>Theano</b>, <b>Keras</b>, along with their associated Python dependencies. The process of setting up a development environment with Keras and Theano is beyond the scope of this tutorial, but very good resources exist which explain how to do this. Using python <b>virtual environments</b> can greatly facilitate the task of setting up a working environment on a <a href="http://www.microway.com/products/hpc-clusters/" title="HPC Clusters" target="_blank">multi-user cluster</a>, and is recommended. Virtual environments also make this process easier for non-administrative users who require installation of their own python packages. </p>
+<p>To begin, you should define some Python runtime parameters in your <b><code>~/.theanorc</code></b> file.</p>
+<div><div id="highlighter_310843" class="syntaxhighlighter  xml"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">floatX = float32</code></div><div class="line number2 index1 alt1"><code class="xml plain">force_device = True</code></div><div class="line number3 index2 alt2"><code class="xml plain">device = gpu0</code></div><div class="line number4 index3 alt1"><code class="xml plain">mode=FAST_RUN</code></div><div class="line number5 index4 alt2"><code class="xml plain">[nvcc]</code></div><div class="line number6 index5 alt1"><code class="xml plain">fastmath = True</code></div><div class="line number7 index6 alt2"><code class="xml plain">[cuda]</code></div><div class="line number8 index7 alt1"><code class="xml plain">root=/path/to/cuda</code></div></div></td></tr></tbody></table></div></div>
+<p>On the node where I will build the network, there are four GPUs, numbered 0 through 3, all on NVIDIA K80 cards. Here I have selected <b>gpu0</b>. If you would like to compare runtimes to CPU, you can just set <code>"device = CPU"</code>.  You will also need to set <code>floatX</code> to be <code>float32</code>, along with your path to CUDA.  Theano does not yet support float64 (it will soon), so <b>float32</b> must, for now, be assigned to floatX.  The environment variables, <b>PATH</b> and <b>LD_LIBRARY</b>, will need to be set to the correct respective directories. </p>
+<p>On computing clusters, you will first need to log onto a node having a GPU.  Logging into GPU-enabled nodes is can be done using an interactive session.  </p>
+<p><u>Import Keras modules:</u></p>
+<div><div id="highlighter_51155" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">from</code> <code class="python plain">__future__ </code><code class="python keyword">import</code> <code class="python plain">absolute_import</code></div><div class="line number2 index1 alt1"><code class="python keyword">from</code> <code class="python plain">__future__ </code><code class="python keyword">import</code> <code class="python plain">print_function</code></div><div class="line number3 index2 alt2"><code class="python keyword">import</code> <code class="python plain">numpy as np</code></div><div class="line number4 index3 alt1"><code class="python plain">np.random.seed(</code><code class="python value">2222</code><code class="python plain">) </code><code class="python comments"># use the same random number seed, if you want reproducibility</code></div></div></td></tr></tbody></table></div></div>
+<p><u>Import other needed components, such as <b>RMSprop</b>, <b>Sequential</b>, layer types, etc.:</u></p>
+<div><div id="highlighter_206979" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">from</code> <code class="python plain">keras.preprocessing </code><code class="python keyword">import</code> <code class="python plain">sequence</code></div><div class="line number2 index1 alt1"><code class="python keyword">from</code> <code class="python plain">keras.optimizers </code><code class="python keyword">import</code> <code class="python plain">RMSprop</code></div><div class="line number3 index2 alt2"><code class="python keyword">from</code> <code class="python plain">keras.models </code><code class="python keyword">import</code> <code class="python plain">Sequential</code></div><div class="line number4 index3 alt1"><code class="python keyword">from</code> <code class="python plain">keras.layers.core </code><code class="python keyword">import</code> <code class="python plain">Dense, Dropout, Activation, Flatten</code></div><div class="line number5 index4 alt2"><code class="python keyword">from</code> <code class="python plain">keras.layers.embeddings </code><code class="python keyword">import</code> <code class="python plain">Embedding</code></div><div class="line number6 index5 alt1"><code class="python keyword">from</code> <code class="python plain">keras.layers.convolutional </code><code class="python keyword">import</code> <code class="python plain">Convolution1D, MaxPooling1D</code></div><div class="line number7 index6 alt2"><code class="python keyword">from</code> <code class="python plain">keras.datasets </code><code class="python keyword">import</code> <code class="python plain">imdb</code></div><div class="line number8 index7 alt1"><code class="python keyword">from</code> <code class="python plain">keras.utils.dot_utils </code><code class="python keyword">import</code> <code class="python plain">Grapher</code></div></div></td></tr></tbody></table></div></div>
+<p><u>Now some network parameters are defined:</u></p>
+<div><div id="highlighter_690893" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">vocab_size </code><code class="python keyword">=</code> <code class="python value">5000</code>&nbsp;&nbsp;&nbsp;&nbsp; <code class="python comments">#this is the number of features to use</code></div><div class="line number2 index1 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments">#or, size of the vocabulary</code></div><div class="line number3 index2 alt2"><code class="python plain">paddedlength </code><code class="python keyword">=</code> <code class="python value">100</code>&nbsp;&nbsp;&nbsp; <code class="python comments">#this is the length to which each sentence is padded</code></div><div class="line number4 index3 alt1"><code class="python plain">batch_size </code><code class="python keyword">=</code> <code class="python value">32</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code class="python comments">#number of input batches processed per epoch</code></div><div class="line number5 index4 alt2"><code class="python plain">embedding_dims </code><code class="python keyword">=</code> <code class="python value">100</code>&nbsp; <code class="python comments">#number of dimensions into which each vocabulary index is embedded</code></div><div class="line number6 index5 alt1"><code class="python plain">num_filters </code><code class="python keyword">=</code> <code class="python value">250</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code class="python comments">#number of filters to apply/learn in the 1D convolutional layer</code></div><div class="line number7 index6 alt2"><code class="python plain">filter_length </code><code class="python keyword">=</code> <code class="python value">3</code>&nbsp;&nbsp;&nbsp;&nbsp; <code class="python comments">#linear length of each filter (this is 1D)</code></div><div class="line number8 index7 alt1"><code class="python plain">hidden_dims1 </code><code class="python keyword">=</code> <code class="python value">250</code>&nbsp;&nbsp;&nbsp; <code class="python comments">#number of output neurons for the first Dense layer</code></div><div class="line number9 index8 alt2"><code class="python plain">hidden_dims2 </code><code class="python keyword">=</code> <code class="python value">100</code>&nbsp;&nbsp;&nbsp; <code class="python comments">#number of output neurons for the second Dense layer</code></div><div class="line number10 index9 alt1"><code class="python plain">epochs </code><code class="python keyword">=</code> <code class="python value">5</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code class="python comments">#number of training epochs</code></div></div></td></tr></tbody></table></div></div>
+<p><u>The IMDB data is loaded and stored into training, validation, and test sets:</u></p>
+<div><div id="highlighter_155658" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python comments"># split the X &amp;amp; Y data 80%/20% in terms of training and test data</code></div><div class="line number2 index1 alt1"><code class="python comments">#</code></div><div class="line number3 index2 alt2"><code class="python plain">(X_train, Y_train), (X_test, Y_test) </code><code class="python keyword">=</code> <code class="python plain">imdb.load_data(nb_words</code><code class="python keyword">=</code><code class="python plain">vocab_size,test_split</code><code class="python keyword">=</code><code class="python value">0.2</code><code class="python plain">)</code></div><div class="line number4 index3 alt1"><code class="python comments"># each training and test sentence is padded to be paddedlength</code></div><div class="line number5 index4 alt2"><code class="python comments">#</code></div><div class="line number6 index5 alt1"><code class="python plain">X_train </code><code class="python keyword">=</code> <code class="python plain">sequence.pad_sequences(X_train, maxlen</code><code class="python keyword">=</code><code class="python plain">paddedlength)</code></div><div class="line number7 index6 alt2"><code class="python plain">X_test </code><code class="python keyword">=</code> <code class="python plain">sequence.pad_sequences(X_test, maxlen</code><code class="python keyword">=</code><code class="python plain">paddedlength)</code></div></div></td></tr></tbody></table></div></div>
+<p><u>Next, the network is build by adding layers to the nn object, which is the data object for the neural network model:</u></p>
+<div><div id="highlighter_663771" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">grapher </code><code class="python keyword">=</code> <code class="python plain">Grapher()</code></div><div class="line number2 index1 alt1"><code class="python plain">nn </code><code class="python keyword">=</code> <code class="python plain">Sequential()</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="python comments"># the vocab vectors for this dataset each begin as just an integer representing its frequency in the dataset as a whole</code></div><div class="line number5 index4 alt2"><code class="python comments"># the array of integers representing a sequence of words (or sentence) is transformed so that each word in the sequence</code></div><div class="line number6 index5 alt1"><code class="python comments"># is represented by fixed-size vectors, each having embedding_dims dimensions</code></div><div class="line number7 index6 alt2"><code class="python comments">#</code></div><div class="line number8 index7 alt1"><code class="python plain">nn.add(Embedding(vocab_size, embedding_dims))</code></div><div class="line number9 index8 alt2"><code class="python plain">nn.add(Dropout(</code><code class="python value">0.5</code><code class="python plain">))</code></div><div class="line number10 index9 alt1">&nbsp;</div><div class="line number11 index10 alt2"><code class="python comments"># we add a Convolution1D, which will learn num_filters (250) filters </code></div><div class="line number12 index11 alt1"><code class="python comments"># word group filters of size filter_length-- here, it is 3</code></div><div class="line number13 index12 alt2"><code class="python comments"># the 1D convolution captures short multi-word features across the sentence</code></div><div class="line number14 index13 alt1"><code class="python comments">#</code></div><div class="line number15 index14 alt2"><code class="python plain">nn.add(Convolution1D(input_dim</code><code class="python keyword">=</code><code class="python plain">embedding_dims, nb_filter</code><code class="python keyword">=</code><code class="python plain">num_filters, filter_length</code><code class="python keyword">=</code><code class="python plain">filter_length, border_mode</code><code class="python keyword">=</code><code class="python string">"valid"</code><code class="python plain">, activation</code><code class="python keyword">=</code><code class="python string">"relu"</code><code class="python plain">, subsample_length</code><code class="python keyword">=</code><code class="python value">1</code><code class="python plain">))</code></div></div></td></tr></tbody></table></div></div>
+<p>A pooling layer is added to give the network some <b>invariance</b> to word vector position.  Neural networks exhibit better performance by also training on the reverse of sentences, where the order of words are reversed, but not the letters within the words [<b>8</b>]  Here, we train only on the original order of the sentence. </p>
+<div><div id="highlighter_513516" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python comments"># we use standard max pooling in 1D, halving the output of the previous layer</code></div><div class="line number2 index1 alt1"><code class="python plain">nn.add(MaxPooling1D(pool_length</code><code class="python keyword">=</code><code class="python value">2</code><code class="python plain">))</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="python comments"># We flatten the output of the convolutional layer</code></div><div class="line number5 index4 alt2"><code class="python comments"># this reduces each embedded word vector to one dimension </code></div><div class="line number6 index5 alt1"><code class="python comments"># this way, the output of this layer can be fully connected to a proceeding dense layer:</code></div><div class="line number7 index6 alt2"><code class="python comments">#</code></div><div class="line number8 index7 alt1"><code class="python plain">nn.add(Flatten())</code></div><div class="line number9 index8 alt2">&nbsp;</div><div class="line number10 index9 alt1"><code class="python comments"># calculate the number of output neurons for this conv layer</code></div><div class="line number11 index10 alt2"><code class="python comments"># a "valid" type 1D convolution is sequence_length - filter_length +1</code></div><div class="line number12 index11 alt1"><code class="python comments"># then we divide by 2 for the maxpooling</code></div><div class="line number13 index12 alt2"><code class="python comments"># in the expression below paddedlength-filter_length is divided by 1 first, to refect the fact that</code></div><div class="line number14 index13 alt1"><code class="python comments"># the subsample_length was set to 1 as an input argument to Convolution1D()</code></div><div class="line number15 index14 alt2"><code class="python comments">#</code></div><div class="line number16 index15 alt1"><code class="python plain">output_size </code><code class="python keyword">=</code> <code class="python plain">num_filters </code><code class="python keyword">*</code> <code class="python plain">(((paddedlength </code><code class="python keyword">-</code> <code class="python plain">filter_length) </code><code class="python keyword">/</code> <code class="python value">1</code><code class="python plain">) </code><code class="python keyword">+</code> <code class="python value">1</code><code class="python plain">) </code><code class="python keyword">/</code> <code class="python value">2</code></div></div></td></tr></tbody></table></div></div>
+<p>A fully connected layer is added with a <b>ReLU activation function</b> (rectified linear unit). ReLU has been demonstrated to improve the learning rate in convolutional neural networks [<b>6</b>]. The dropout method is used here in order to reduce overfitting to the data.  When overfitting occurs, the network becomes too fit to particular details of images in the training set which do not generalize well. </p>
+<div><div id="highlighter_491495" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python comments"># A Dense layer is added which is fully connected to the previous convolutional layer.&nbsp; </code></div><div class="line number2 index1 alt1"><code class="python comments"># The activation function on the output of this Dense layer is set to ReLU, in order to improve learning speed.&nbsp; </code></div><div class="line number3 index2 alt2"><code class="python comments"># The hidden_dims1 here is the number of output neurons for the Dense layer.</code></div><div class="line number4 index3 alt1"><code class="python comments"># output_size is the number of outputs from the previous convolutional layer, or inputs into each neuron of the Dense layer</code></div><div class="line number5 index4 alt2"><code class="python comments">#</code></div><div class="line number6 index5 alt1"><code class="python plain">nn.add(Dense(output_size, hidden_dims1))</code></div><div class="line number7 index6 alt2"><code class="python plain">nn.add(Dropout(</code><code class="python value">0.25</code><code class="python plain">))</code></div><div class="line number8 index7 alt1"><code class="python plain">nn.add(Activation(</code><code class="python string">'relu'</code><code class="python plain">))</code></div><div class="line number9 index8 alt2">&nbsp;</div><div class="line number10 index9 alt1"><code class="python plain">nn.add(Dense(hidden_dims1, hidden_dims2))</code></div><div class="line number11 index10 alt2"><code class="python plain">nn.add(Dropout(</code><code class="python value">0.25</code><code class="python plain">))</code></div><div class="line number12 index11 alt1"><code class="python plain">nn.add(Activation(</code><code class="python string">'relu'</code><code class="python plain">))</code></div></div></td></tr></tbody></table></div></div>
+<p>Finally, the network converges onto a single neuron, with a logistic activation. This neuron will, after training, provide the network’s estimation of the sentiment of a text input. The network, after having been trained on a sentiment labelled set of movie reviews, is now able to evaluate sentences not previously encountered as input, and then output its computational estimate of the sentiment.  It is fascinating that sentences can be analyzed in this way using one-dimensional convolution, with fairly good results, as we will see below.</p>
+<div><div id="highlighter_948977" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python comments"># The output layer consists of a single neuron, which is fully connected from the previous layer.&nbsp; </code></div><div class="line number2 index1 alt1"><code class="python comments"># The output signal is then tranformed with a sigmoid (logistic) function</code></div><div class="line number3 index2 alt2"><code class="python plain">nn.add(Dense(hidden_dims2, </code><code class="python value">1</code><code class="python plain">))</code></div><div class="line number4 index3 alt1"><code class="python plain">nn.add(Activation(</code><code class="python string">'sigmoid'</code><code class="python plain">))</code></div><div class="line number5 index4 alt2"><code class="python comments"># write the neural network model representation to a png image</code></div><div class="line number6 index5 alt1"><code class="python plain">grapher.plot(nn, </code><code class="python string">'nn_imdb.png'</code><code class="python plain">)</code></div></div></td></tr></tbody></table></div></div>
+<p>The cost function is defined here as <b>binary cross entropy</b>, and <b>root mean square gradient backpropagation</b> as the training method.</p>
+<div><div id="highlighter_486129" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">nn.</code><code class="python functions">compile</code><code class="python plain">(loss</code><code class="python keyword">=</code><code class="python string">'binary_crossentropy'</code><code class="python plain">, optimizer</code><code class="python keyword">=</code><code class="python string">'adam'</code><code class="python plain">, class_mode</code><code class="python keyword">=</code><code class="python string">"binary"</code><code class="python plain">)</code></div><div class="line number2 index1 alt1"><code class="python plain">nn.fit(X_train, Y_train, batch_size</code><code class="python keyword">=</code><code class="python plain">batch_size, nb_epoch</code><code class="python keyword">=</code><code class="python plain">epochs, show_accuracy</code><code class="python keyword">=</code><code class="python color1">True</code><code class="python plain">, validation_data</code><code class="python keyword">=</code><code class="python plain">(X_test, Y_test))</code></div></div></td></tr></tbody></table></div></div>
+<p><u>Finally, the network will be tested on some test samples:</u></p>
+<div><div id="highlighter_35437" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python comments"># assess the network performance on unseen test data</code></div><div class="line number2 index1 alt1"><code class="python plain">results </code><code class="python keyword">=</code> <code class="python plain">nn.evaluate(X_test, Y_test, show_accuracy</code><code class="python keyword">=</code><code class="python color1">True</code><code class="python plain">, verbose</code><code class="python keyword">=</code><code class="python value">0</code><code class="python plain">)</code></div><div class="line number3 index2 alt2"><code class="python functions">print</code><code class="python plain">(</code><code class="python string">'score:'</code><code class="python plain">, results[</code><code class="python value">0</code><code class="python plain">])</code></div><div class="line number4 index3 alt1"><code class="python functions">print</code><code class="python plain">(</code><code class="python string">'accuracy:'</code><code class="python plain">, results[</code><code class="python value">1</code><code class="python plain">])</code></div></div></td></tr></tbody></table></div></div>
+<p><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/nn_imdb_sideways-680x107.png" alt="Network Diagram for a 1D Convolutional Feedforward Network Designed for the Purpose of Evaluation IMDB Movie Review Sentiment as Positive or Negative "><br>
+<i>Network Diagram for a 1D Convolutional Feedforward Network Designed for the Purpose of Evaluation IMDB Movie Review Sentiment as Positive or Negative</i></p>
+<p>On a CPU, the calculation requires 7864 seconds (2 hr, 11 mins, 4 seconds), resulting in 92.1% accuracy on the training set and 84.2% accuracy on the validation set, with a validation loss of 38.5%, within four training epochs.  Overfitting was observed to increase beyond the fourth epoch.</p>
+<p>Using a Tesla K80 GPU, the calculation is completed in 112 seconds, yielding essentially the same accuracies.  This reflects a speedup factor of <b>17.6</b>, using the Tesla K80 GPU, compared to CPU- a huge performance boost.  The speedup was observed to vary according to the network architecture.  Overall, it was observed to be very good for this type of 1D convolutional network.  </p>
+<table>
+<thead>
+<tr>
+<th style="background-color: #4284c6;color: #ffffff">Neural Network Architecture</th>
+<th style="background-color: #4284c6;color: #ffffff">Hardware Configuration</th>
+<th style="background-color: #4284c6;color: #ffffff">Speedup Factor<sup>1</sup></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-D convolutional<br>
+neural network<br>
+Adam optimizer</td>
+<td>K80 GPU</td>
+<td>17.6</td>
+</tr>
+<tr>
+<td>1-D convolutional<br>
+neural network<br>
+Adam optimizer</td>
+<td>CPU</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup>speedups are with respect to runtimes on a CPU for the respective neural network architecture.<br>
+</p>
+<h2>Building an Image Classifier Using Keras and Theano Deep Learning Frameworks</h2>
+<p>Now we will turn to using Keras in order to define a neural network having an architecture similar to that of <b>LeNet5</b>, developed by Yann LeCun [<b>11</b>].  This network is a convolutional feedforward network, which was, like other convolutional neural networks, inspired by biological data taken from physiological experiments done on the cat visual cortex [<b>12</b>].  </p>
+<p>At the input of the network, there is a square 2-dimensional input layer, 28 pixels on side.  The networks consists of this input layer, which feeds into a convolutional layer, having 32 filters, each of size 3×3, with ReLU activations on outputs going to the next layer.  The first convolutions layer then feeds into a second identical convolutional layer.  The second convolutional layers feeds into a <b>Max Pooling</b> layer, which has dropout and a <b>flattened</b> output.  The flattened output is then fed into a fully connected (dense) layer, having ReLU activation, with dropout.  The final layer is fully connected to the previous dense layer with a <b>softmax</b> activation. </p>
+<p><u>In Keras, the code for this is:</u></p>
+<div><div id="highlighter_908715" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">from</code> <code class="python plain">__future__ </code><code class="python keyword">import</code> <code class="python plain">absolute_import</code></div><div class="line number2 index1 alt1"><code class="python keyword">from</code> <code class="python plain">__future__ </code><code class="python keyword">import</code> <code class="python plain">print_function</code></div><div class="line number3 index2 alt2"><code class="python keyword">import</code> <code class="python plain">numpy as np</code></div><div class="line number4 index3 alt1"><code class="python plain">np.random.seed(</code><code class="python value">2222</code><code class="python plain">)&nbsp; </code><code class="python comments"># for reproducibility</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="python keyword">from</code> <code class="python plain">keras.datasets </code><code class="python keyword">import</code> <code class="python plain">mnist</code></div><div class="line number7 index6 alt2"><code class="python keyword">from</code> <code class="python plain">keras.models </code><code class="python keyword">import</code> <code class="python plain">Sequential</code></div><div class="line number8 index7 alt1"><code class="python keyword">from</code> <code class="python plain">keras.layers.core </code><code class="python keyword">import</code> <code class="python plain">Dense, Dropout, Activation, Flatten</code></div><div class="line number9 index8 alt2"><code class="python keyword">from</code> <code class="python plain">keras.layers.convolutional </code><code class="python keyword">import</code> <code class="python plain">Convolution2D, MaxPooling2D</code></div><div class="line number10 index9 alt1"><code class="python keyword">from</code> <code class="python plain">keras.utils </code><code class="python keyword">import</code> <code class="python plain">np_utils</code></div><div class="line number11 index10 alt2"><code class="python keyword">from</code> <code class="python plain">keras.regularizers </code><code class="python keyword">import</code> <code class="python plain">l2, activity_l2</code></div><div class="line number12 index11 alt1"><code class="python keyword">from</code> <code class="python plain">keras.utils.dot_utils </code><code class="python keyword">import</code> <code class="python plain">Grapher</code></div></div></td></tr></tbody></table></div></div>
+<p><u>Defining network parameters:</u></p>
+<div><div id="highlighter_672560" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">batch_size </code><code class="python keyword">=</code> <code class="python value">128</code></div><div class="line number2 index1 alt1"><code class="python plain">num_classes </code><code class="python keyword">=</code> <code class="python value">10</code></div><div class="line number3 index2 alt2"><code class="python plain">epochs </code><code class="python keyword">=</code> <code class="python value">12</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="python comments"># x and y dimensions of input images</code></div><div class="line number6 index5 alt1"><code class="python plain">shapex, shapey </code><code class="python keyword">=</code> <code class="python value">28</code><code class="python plain">, </code><code class="python value">28</code></div><div class="line number7 index6 alt2"><code class="python comments"># number of convolutional filters to use</code></div><div class="line number8 index7 alt1"><code class="python plain">num_filters </code><code class="python keyword">=</code> <code class="python value">32</code></div><div class="line number9 index8 alt2"><code class="python comments"># side length of maxpooling square</code></div><div class="line number10 index9 alt1"><code class="python plain">num_pool </code><code class="python keyword">=</code> <code class="python value">2</code></div><div class="line number11 index10 alt2"><code class="python comments"># side length of convolution square</code></div><div class="line number12 index11 alt1"><code class="python plain">num_conv </code><code class="python keyword">=</code> <code class="python value">3</code></div></div></td></tr></tbody></table></div></div>
+<p><u>The MNIST data is loaded and stored into training, validation, and test sets:</u></p>
+<div><div id="highlighter_115436" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">(X_train, Y_train), (X_test, Y_test) </code><code class="python keyword">=</code> <code class="python plain">mnist.load_data()</code></div><div class="line number2 index1 alt1"><code class="python plain">X_train </code><code class="python keyword">=</code> <code class="python plain">X_train.reshape(X_train.shape[</code><code class="python value">0</code><code class="python plain">], </code><code class="python value">1</code><code class="python plain">, shapex, shapey)</code></div><div class="line number3 index2 alt2"><code class="python plain">X_test </code><code class="python keyword">=</code> <code class="python plain">X_test.reshape(X_test.shape[</code><code class="python value">0</code><code class="python plain">], </code><code class="python value">1</code><code class="python plain">, shapex, shapey)</code></div><div class="line number4 index3 alt1"><code class="python plain">X_train </code><code class="python keyword">=</code> <code class="python plain">X_train.astype(</code><code class="python string">"float32"</code><code class="python plain">)</code></div><div class="line number5 index4 alt2"><code class="python plain">X_test </code><code class="python keyword">=</code> <code class="python plain">X_test.astype(</code><code class="python string">"float32"</code><code class="python plain">)</code></div><div class="line number6 index5 alt1"><code class="python plain">X_train </code><code class="python keyword">/</code><code class="python keyword">=</code> <code class="python value">255</code></div><div class="line number7 index6 alt2"><code class="python plain">X_test </code><code class="python keyword">/</code><code class="python keyword">=</code> <code class="python value">255</code></div><div class="line number8 index7 alt1"><code class="python functions">print</code><code class="python plain">(</code><code class="python string">'X_train shape:'</code><code class="python plain">, X_train.shape)</code></div><div class="line number9 index8 alt2"><code class="python functions">print</code><code class="python plain">(X_train.shape[</code><code class="python value">0</code><code class="python plain">], </code><code class="python string">'train samples'</code><code class="python plain">)</code></div><div class="line number10 index9 alt1"><code class="python functions">print</code><code class="python plain">(X_test.shape[</code><code class="python value">0</code><code class="python plain">], </code><code class="python string">'test samples'</code><code class="python plain">)</code></div><div class="line number11 index10 alt2">&nbsp;</div><div class="line number12 index11 alt1"><code class="python comments"># convert class vectors to binary class matrices</code></div><div class="line number13 index12 alt2"><code class="python plain">Y_train </code><code class="python keyword">=</code> <code class="python plain">np_utils.to_categorical(Y_train, num_classes)</code></div><div class="line number14 index13 alt1"><code class="python plain">Y_test </code><code class="python keyword">=</code> <code class="python plain">np_utils.to_categorical(Y_test, num_classes)</code></div></div></td></tr></tbody></table></div></div>
+<p><u>Now instantiate the grapher and nn objects. Successive layers are added to nn:</u></p>
+<div><div id="highlighter_553483" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div><div class="line number32 index31 alt1">32</div><div class="line number33 index32 alt2">33</div><div class="line number34 index33 alt1">34</div><div class="line number35 index34 alt2">35</div><div class="line number36 index35 alt1">36</div><div class="line number37 index36 alt2">37</div><div class="line number38 index37 alt1">38</div><div class="line number39 index38 alt2">39</div><div class="line number40 index39 alt1">40</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">grapher </code><code class="python keyword">=</code> <code class="python plain">Grapher()</code></div><div class="line number2 index1 alt1"><code class="python plain">nn </code><code class="python keyword">=</code> <code class="python plain">Sequential()</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="python comments"># declare the first layers of convolution and pooling</code></div><div class="line number5 index4 alt2"><code class="python comments">#</code></div><div class="line number6 index5 alt1"><code class="python plain">nn.add(Convolution2D( num_filters, </code><code class="python value">1</code><code class="python plain">, num_conv, num_conv, border_mode</code><code class="python keyword">=</code><code class="python string">'full'</code> <code class="python plain">))</code></div><div class="line number7 index6 alt2"><code class="python plain">nn.add(Activation(</code><code class="python string">'relu'</code><code class="python plain">))</code></div><div class="line number8 index7 alt1"><code class="python plain">nn.add(Convolution2D(num_filters, num_filters, num_conv, num_conv))</code></div><div class="line number9 index8 alt2"><code class="python plain">nn.add(Activation(</code><code class="python string">'relu'</code><code class="python plain">))</code></div><div class="line number10 index9 alt1"><code class="python plain">nn.add(MaxPooling2D( poolsize </code><code class="python keyword">=</code> <code class="python plain">(num_pool,num_pool) ))</code></div><div class="line number11 index10 alt2"><code class="python plain">nn.add(Dropout(</code><code class="python value">0.5</code><code class="python plain">))</code></div><div class="line number12 index11 alt1">&nbsp;</div><div class="line number13 index12 alt2"><code class="python plain">nn.add(Convolution2D( num_filters, num_filters, num_conv, num_conv, border_mode</code><code class="python keyword">=</code><code class="python string">'full'</code> <code class="python plain">))</code></div><div class="line number14 index13 alt1"><code class="python plain">nn.add(Activation(</code><code class="python string">'relu'</code><code class="python plain">))</code></div><div class="line number15 index14 alt2"><code class="python plain">nn.add(Convolution2D(num_filters, num_filters, num_conv, num_conv))</code></div><div class="line number16 index15 alt1"><code class="python plain">nn.add(Activation(</code><code class="python string">'relu'</code><code class="python plain">))</code></div><div class="line number17 index16 alt2"><code class="python plain">nn.add(MaxPooling2D( poolsize </code><code class="python keyword">=</code> <code class="python plain">(num_pool,num_pool) ))</code></div><div class="line number18 index17 alt1"><code class="python plain">nn.add(Dropout(</code><code class="python value">0.5</code><code class="python plain">))</code></div><div class="line number19 index18 alt2">&nbsp;</div><div class="line number20 index19 alt1"><code class="python plain">nn.add(Flatten())</code></div><div class="line number21 index20 alt2">&nbsp;</div><div class="line number22 index21 alt1"><code class="python comments"># three convolutional layers chained together -- might work for larger images</code></div><div class="line number23 index22 alt2"><code class="python comments"># full, valid, maxpool then full, valid, maxpool</code></div><div class="line number24 index23 alt1"><code class="python plain">n_neurons </code><code class="python keyword">=</code> <code class="python plain">num_filters </code><code class="python keyword">*</code> <code class="python plain">(shapex</code><code class="python keyword">/</code><code class="python plain">num_pool</code><code class="python keyword">/</code><code class="python plain">num_pool) </code><code class="python keyword">*</code> <code class="python plain">(shapey</code><code class="python keyword">/</code><code class="python plain">num_pool</code><code class="python keyword">/</code><code class="python plain">num_pool) </code></div><div class="line number25 index24 alt2">&nbsp;</div><div class="line number26 index25 alt1"><code class="python functions">print</code><code class="python plain">(n_neurons)</code></div><div class="line number27 index26 alt2"><code class="python plain">nn.add(Dense(n_neurons, </code><code class="python value">128</code><code class="python plain">))&nbsp; </code><code class="python comments"># flattens n_neuron connections per neuron in the fully connected layer</code></div><div class="line number28 index27 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments"># here, the fully connected layer is defined to have 128 neurons</code></div><div class="line number29 index28 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments"># therefore all n_neurons inputs from the previous layer connecting to each</code></div><div class="line number30 index29 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments"># of these fully connected neurons (FC layer), reduces it's input to a single</code></div><div class="line number31 index30 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments"># output signal.&nbsp; Here's the activation function is given be ReLU.&nbsp; </code></div><div class="line number32 index31 alt1"><code class="python plain">nn.add(Activation(</code><code class="python string">'relu'</code><code class="python plain">))</code></div><div class="line number33 index32 alt2"><code class="python plain">nn.add(Dropout(</code><code class="python value">0.5</code><code class="python plain">))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="python comments"># dropout is then applied </code></div><div class="line number34 index33 alt1">&nbsp;</div><div class="line number35 index34 alt2"><code class="python comments"># finally the 128 outputs of the previous FC layer are fully connected to num_classes of neurons, which </code></div><div class="line number36 index35 alt1"><code class="python comments"># is activated by a softmax function</code></div><div class="line number37 index36 alt2"><code class="python plain">nn.add( Dense(</code><code class="python value">128</code><code class="python plain">, num_classes, W_regularizer</code><code class="python keyword">=</code><code class="python plain">l2(</code><code class="python value">0.01</code><code class="python plain">) ))</code></div><div class="line number38 index37 alt1"><code class="python plain">nn.add( Activation(</code><code class="python string">'softmax'</code><code class="python plain">) )</code></div><div class="line number39 index38 alt2"><code class="python comments"># write the neural network model representation to a png image</code></div><div class="line number40 index39 alt1"><code class="python plain">grapher.plot(nn, </code><code class="python string">'nn_mnist.png'</code><code class="python plain">)</code></div></div></td></tr></tbody></table></div></div>
+<p><u>The neural network object, nn, is compiled in Theano, and then trained on the validation set:</u></p>
+<div><div id="highlighter_458197" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">nn.</code><code class="python functions">compile</code><code class="python plain">(loss</code><code class="python keyword">=</code><code class="python string">'categorical_crossentropy'</code><code class="python plain">, optimizer</code><code class="python keyword">=</code><code class="python string">'adam'</code><code class="python plain">)</code></div><div class="line number2 index1 alt1"><code class="python plain">nn.fit(X_train, Y_train, batch_size</code><code class="python keyword">=</code><code class="python plain">batch_size, nb_epoch</code><code class="python keyword">=</code><code class="python plain">epochs, show_accuracy</code><code class="python keyword">=</code><code class="python color1">True</code><code class="python plain">, verbose</code><code class="python keyword">=</code><code class="python value">1</code><code class="python plain">, validation_data</code><code class="python keyword">=</code><code class="python plain">(X_test, Y_test))</code></div></div></td></tr></tbody></table></div></div>
+<p>Note here that we are using the categorical cross entropy as our cost function to be minimized.  The optimizer chosen here is Adam.  Adam was proposed as an optimizer method by Kingma and Ba [<b>13</b>]
+</p><p><u>Finally, test the neural network against an unseen test data set:</u></p>
+<div><div id="highlighter_468033" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python plain">results </code><code class="python keyword">=</code> <code class="python plain">nn.evaluate(X_test, Y_test, show_accuracy</code><code class="python keyword">=</code><code class="python color1">True</code><code class="python plain">, verbose</code><code class="python keyword">=</code><code class="python value">0</code><code class="python plain">)</code></div><div class="line number2 index1 alt1"><code class="python functions">print</code><code class="python plain">(</code><code class="python string">'score:'</code><code class="python plain">, results[</code><code class="python value">0</code><code class="python plain">])</code></div><div class="line number3 index2 alt2"><code class="python functions">print</code><code class="python plain">(</code><code class="python string">'accuracy:'</code><code class="python plain">, results[</code><code class="python value">1</code><code class="python plain">])</code></div></div></td></tr></tbody></table></div></div>
+<p><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/nn_mnist_sideways-680x78.png" alt=""><br>
+<i>Network Diagram for a 2D Convolutional Feedforward Network Designed for the Purpose of Evaluating Images of Digits from the MNIST Data Set </i></p>
+<p>Using <b>RMSProp</b>, the training on 60,000 samples, and validation on 10,000 samples, required 898 seconds on a CPU, using only 1 layer on convolution and subsampling.  After 12 epochs, the optimization using RMSProp ended with <b>97.93%</b> accuracy.  There is only one convolutional layer in this network, and the number of filter features has been set to 26.  </p>
+<p>The number of filters was then increased to 32 in order to draw a comparison.  The calculation takes ~18% more time to complete.  With the larger number of filters, more convolutions are performed.  The accuracy, however, remains essentially the same at 97.94%.  The Adam optimizer was used here.  Compared to the <b>RMSprop</b> optimization method, the <b>Adam optimizer</b> progresses through each epoch must faster, with a speedup factor of <b>~28x</b>.  </p>
+<p>Other published results reach accuracies of over 99%.  Here we are simplifying the network by removing a second convolutional and max pooling layer.  When the Adam optimization algorithm is used, the accuracies are well over 97%.  The table below shows various runtime comparisons using one and two-layer convolutional neural networks on the MNIST digits data.  An L2-Regularization was added to the cost function.  The Adam optimizer was used in computing all results in the table.  </p>
+<h2>Benchmarking Results for Modified LeNet</h2>
+<table>
+<thead>
+<tr>
+<th style="background-color: #4284c6;color: #ffffff">Neural Network Architecture</th>
+<th style="background-color: #4284c6;color: #ffffff">Hardware Configuration</th>
+<th style="background-color: #4284c6;color: #ffffff">Speedup Factor<sup>2</sup></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LeNet (modified)<br>
+<u>layers:</u> (1) 2xconv3x3 + 1xsubsampling2x2<br>
+L2 Regularization<br>
+Adam optimizer</td>
+<td>K80 GPU</td>
+<td>2.9</td>
+</tr>
+<tr>
+<td>LeNet (modified)<br>
+<u>layers:</u> (1) 2xconv3x3 + 1xsubsampling2x2<br>
+L2 Regularization<br>
+Adam optimizer</td>
+<td>CPU</td>
+<td>1</td>
+</tr>
+<tr>
+<td>LeNet (modified)<br>
+<u>layers:</u> (2) 2xconv3x3 + 1xsubsampling2x2<br>
+L2 Regularization<br>
+Adam optimizer</td>
+<td>K80 GPU</td>
+<td>33.6</td>
+</tr>
+<tr>
+<td>LeNet (modified)<br>
+<u>layers:</u> (2) 2xconv3x3 + 1xsubsampling2x2<br>
+L2 Regularization<br>
+Adam optimizer</td>
+<td>CPU</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><sup>2</sup>speedups are with respect to runtimes on a CPU for the respective neural network architecture.</p>
+<p>The networks in this tutorial were run on a <a href="http://www.microway.com/file/nvidia_tesla_k80_product_info-pdf/" title="Tesla K80 GPU" target="_blank">Tesla K80 GPU</a>. The neural networks built in this tutorial, however, can also be built using other NVIDIA GPU accelerators, such as the <a href="http://www.microway.com/knowledge-center-articles/comparison-of-nvidia-geforce-gpus-and-nvidia-tesla-gpus/" title="Comparison of NVIDIA Tesla and NVIDIA GeForce GPUs" target="_blank">NVIDIA GeForce GTX Titan X</a>, or the NVIDIA Quadro line (<a href="http://www.microway.com/file/nvidia_quadro_k6000_data_sheet-pdf/" title="NVIDIA Quadro K6000 Data Sheet" target="_blank">K6000</a>, for example).  Both of these GPUs are available in Microway’s <a href="http://www.microway.com/preconfiguredsystems/whisperstation-deep-learning/" title="WhisperStation™- Deep Learning" target="_blank">Deep Learning WhisperStation™</a>, a quiet, desktop-sized GPU supercomputer pre-configured for extensive Deep Learning computation. </p>
+<p>The NVIDIA GPU hardware on Microway’s HPC cluster is available for “Test Driving”.  If you are interested in testing your own deep learning software, you can <a href="http://www.microway.com/gpu-test-drive/" title="GPU Test Drive" target="_blank">request a GPU Test Drive</a>.  If you are interested in neural networks for image classification, we have more information in our blog on using <a href="http://www.microway.com/hpc-tech-tips/caffe-deep-learning-using-nvidia-digits-tesla-gpus/" title="NVIDIA DIGITS" target="_blank">NVIDIA DIGITS</a>.</p>
+<h2>Speeding up Theano</h2>
+<p>A Python wrapper for a re-implementation of convnet, written in C++, is now available. It runs faster on GPUs, so if you are looking for a boost in speedup beyond what Theano can provide, you might want to look into <b><a href="http://deeplearning.net/software/pylearn2/" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;http://deeplearning.net/software/pylearn2/&#39;, &#39;pylearn2&#39;);" title="pylearn2" target="_blank">pylearn2</a></b>, which was also developed at the University of Montreal.</p>
+<p>There is a method for running Theano on more than one GPU.  This requires a bit of extra coding, and is described in <a href="https://github.com/Theano/Theano/wiki/Using-Multiple-GPUs" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;https://github.com/Theano/Theano/wiki/Using-Multiple-GPUs&#39;, &#39;Theano’s GitHub page&#39;);" title="Thano&#39;s GitHub page" target="_blank">Theano’s GitHub page</a> on using multiple GPUs.</p>
+<h2>References</h2>
+<p><b>1.</b> Playing Atari with Deep Reinforcement Learning. arXiv preprint: <a href="http://arxiv.org/abs/1312.5602" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;http://arxiv.org/abs/1312.5602&#39;, &#39;arxiv.org/abs/1312.5602&#39;);" title="arxiv.org/abs/1312.5602" target="_blank">arxiv.org/abs/1312.5602</a>.</p>
+<p><b>2.</b> Xavier, G, Bengio, Y. <a href="http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;download&#39;, &#39;http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf&#39;);" title="http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf" target="_blank">http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf</a>.</p>
+<p><b>3.</b> Hochreiter, S, Schmidhuber, J. Long Short-Term Memory.  Neural Computation 9(8):1735-1780, 1997 </p>
+<p><b>4.</b> Cho, K., et al.  Learning Phrase Representations using RNN Encoder Decoder for Statistical Machine Translation. arXiv preprint: <a href="http://arxiv.org/abs/1406.1078" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;http://arxiv.org/abs/1406.1078&#39;, &#39;arXiv:1406.1078&#39;);" title="arxiv.org/abs/1406.1078" target="_blank">arXiv:1406.1078</a>, 2014.</p>
+<p><b>5.</b> Le Cun, Y. and Bengio, Y.  Convolutional Networks for Images, Speech, and Time-Series. In M. A. Arbib, editor, The Handbook of Brain Theory and Neural Networks. MIT Press, 1995.</p>
+<p><b>6.</b> Krizhevsky, A., Sutskever, I.  Hinton, G.E.  ImageNet Classification with Deep Convolutional Neural Networks. Part of: Advances in Neural Information Processing Systems. 25 (NIPS 2012).</p>
+<p><b>7.</b> Szegedy, C., Liu, W., Jia, Y., et al.  Going Deeper with Convolutions. arXiv preprint: <a href="http://arxiv.org/abs/1409.4842" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;http://arxiv.org/abs/1409.4842&#39;, &#39;http://arxiv.org/abs/1409.4842&#39;);" title="arxiv.org/abs/1409.4842" target="_blank">http://arxiv.org/abs/1409.4842</a>.</p>
+<p><b>8.</b> Nogueira dos Santos, C., Gatti, M.  Deep Convolutional Neural Networks for Sentiment Analysis of Short Texts.  Proc. of COLING 2014., Aug. 2014, pp 69-78.  </p>
+<p><b>9.</b> Andrew L. Maas, Raymond E. Daly, Peter T. Pham, Dan Huang, Andrew Y. Ng, and Christopher Potts. Learning Word Vectors for Sentiment Analysis. The 49th Annual Meeting of the Association for Computational Linguistics (ACL 2011).</p>
+<p><b>10.</b> LeCun et al. (1999): The MNIST Dataset Of Handwritten Digits (Images).</p>
+<p><b>11.</b> LeCun, Y., Bottou, L., Bengio, Y., and Haffner, P. (1998). Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86, 2278–2324.</p>
+<p><b>12.</b> Hubel, D.H., Wiesel, T.N. Receptive Fields of Single Neurones in the Cat’s Striate Cortex. J. Physiol. (1959) 148, 574-591.</p>
+<p><b>13.</b> Kingma, D. and Ba, J.  Adam: a Method for Stochastic Optimization, arXiv preprint: <a href="http://arxiv.org/pdf/1412.6980v8.pdf" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;download&#39;, &#39;http://arxiv.org/pdf/1412.6980v8.pdf&#39;);" title="http://arxiv.org/pdf/1412.6980v8.pdf" target="_blank">arxiv.org/pdf/1412.6980v8.pdf</a>.</p>
+<p><b>14.</b> Cowan, M. Neural Network LaTeX package, <a href="http://www.ctan.org/tex-archive/graphics/pgf/contrib/neuralnetwork" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;http://www.ctan.org/tex-archive/graphics/pgf/contrib/neuralnetwork&#39;, &#39;ctan.org/tex-archive/graphics/pgf/contrib/neuralnetwork&#39;);" title="http://www.ctan.org/tex-archive/graphics/pgf/contrib/neuralnetwork" target="_blank">ctan.org/tex-archive/graphics/pgf/contrib/neuralnetwork</a>.</p>
+<h2>Special Thanks</h2>
+<p>We wish to extend special thanks to Dr. Andrew Mass, of Stanford University, for allowing use of the IMDB text data set. The IMDB data set used here was originally published in [9].</p>
+<div style="clear:both;"></div>											</div><!-- .entry-content -->
+
+					<div id="entry-author-info">
+						<div id="author-avatar">
+							<img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/Microway_profile-94x94.png" width="60" height="60" alt="John Murphy" class="avatar avatar-60 wp-user-avatar wp-user-avatar-60 alignnone photo">						</div><!-- #author-avatar -->
+						<div id="author-description">
+							<h2>About John Murphy</h2>
+							My background in HPC includes building two clusters at the University of Massachusetts, along with doing computational research in quantum chemistry on the facilities of the Massachusetts Green High Performance Computing Center.  My personal interests and academic background encompass a range of topics across science and engineering.  In recent work, I used the GAMESS quantum chemistry package in order to study theoretical highly strained hydrocarbon structures, derived from prismane building blocks.  I also recently authored a small software application in Python for generating amorphous cellulose within a periodic space.  This application was used for generating structures for further study in NAMD and LAMMPS.  Prior to doing research in Quantum and Materials Chemistry, I worked on problems related to protein folding and docking.  It is very exciting, especially, to be involved with applications of GPU computing to these, as well as to other scientific questions.  For several years, while not doing research, I was a consulting software engineer and built a variety of internet and desktop software applications.
+
+As an HPC Sales Specialist at Microway, I greatly look forward to advising Microway's clients in order to provide them with well-configured, optimal HPC solutions.							<div id="author-link">
+								<a href="https://www.microway.com/hpc-tech-tips/author/john/" rel="author">
+									View all posts by John Murphy <span class="meta-nav">→</span>								</a>
+							</div><!-- #author-link	-->
+						</div><!-- #author-description -->
+					</div><!-- #entry-author-info -->
+
+					<div class="entry-utility">
+						This entry was posted in <a href="https://www.microway.com/hpc-tech-tips/category/hardware/" rel="category tag">Hardware</a>, <a href="https://www.microway.com/hpc-tech-tips/category/software/" rel="category tag">Software</a>, <a href="https://www.microway.com/hpc-tech-tips/category/test-drive/" rel="category tag">Test Drive</a>. Bookmark the <a href="https://www.microway.com/hpc-tech-tips/keras-theano-deep-learning-frameworks/" title="Permalink to Keras and Theano Deep Learning Frameworks" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="https://www.microway.com/hpc-tech-tips/caffe-deep-learning-using-nvidia-digits-tesla-gpus/" rel="prev"><span class="meta-nav">←</span> Caffe Deep Learning Tutorial using NVIDIA DIGITS on Tesla K80 &amp; K40 GPUs</a></div>
+					<div class="nav-next"><a href="https://www.microway.com/hpc-tech-tips/deep-learning-frameworks-survey-tensorflow-torch-theano-caffe-neon-ibm-machine-learning-stack/" rel="next">Deep Learning Frameworks: A Survey of TensorFlow, Torch, Theano, Caffe, Neon, and the IBM Machine Learning Stack <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+
+
+				<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://www.microway.com/hpc-tech-tips/keras-theano-deep-learning-frameworks/#respond" style="display:none;">Cancel reply</a></small></h3>				<form action="https://www.microway.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+					<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required="true" required="required"></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required="true" required="required"></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30"></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="5720" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="79dc8c0dec"></p><p style="display: none;"></p>				<input type="hidden" id="ak_js" name="ak_js" value="1493013194863"></form>
+					</div><!-- #respond -->
+		
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+
+
+
+			<li id="search" class="widget-container widget_search">
+				<form role="search" method="get" id="searchform" class="searchform" action="https://www.microway.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s">
+					<input type="submit" id="searchsubmit" value="Search">
+				</div>
+			</form>			</li>
+
+			<li id="archives" class="widget-container">
+				<h3 class="widget-title">Archives</h3>
+				<ul>
+						<li><a href="https://www.microway.com/hpc-tech-tips/2017/01/">January 2017</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2016/12/">December 2016</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2016/08/">August 2016</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2016/07/">July 2016</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2016/06/">June 2016</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2016/04/">April 2016</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2016/03/">March 2016</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2016/02/">February 2016</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2016/01/">January 2016</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2015/10/">October 2015</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2015/09/">September 2015</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2015/07/">July 2015</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2015/06/">June 2015</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2015/05/">May 2015</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2015/04/">April 2015</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2014/11/">November 2014</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2014/10/">October 2014</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2014/09/">September 2014</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2014/06/">June 2014</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2014/05/">May 2014</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2014/04/">April 2014</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2014/03/">March 2014</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2014/02/">February 2014</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2014/01/">January 2014</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/12/">December 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/11/">November 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/10/">October 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/09/">September 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/08/">August 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/07/">July 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/06/">June 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/04/">April 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/03/">March 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/02/">February 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2013/01/">January 2013</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2012/09/">September 2012</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2012/05/">May 2012</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2012/04/">April 2012</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2012/01/">January 2012</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2011/12/">December 2011</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2011/09/">September 2011</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2011/08/">August 2011</a></li>
+	<li><a href="https://www.microway.com/hpc-tech-tips/2011/07/">July 2011</a></li>
+				</ul>
+			</li>
+
+			<li id="meta" class="widget-container">
+				<h3 class="widget-title">Meta</h3>
+				<ul>
+										<li><a rel="nofollow" href="https://www.microway.com/wp-login.php">Log in</a></li>
+									</ul>
+			</li>
+
+					</ul>
+		</div><!-- #primary .widget-area -->
+
+
+		<div id="secondary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+             				<li id="black-studio-tinymce-8" class="widget-container widget_black_studio_tinymce"><h3 class="widget-title">Talk to an Expert</h3><div class="textwidget"><a href="https://www.microway.com/contact"><img class="alignnone size-full wp-image-453" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/talk-to-an-expert1.gif" alt="talk-to-an-expert" width="280" height="124"></a></div></li><li id="black-studio-tinymce-12" class="widget-container widget_black_studio_tinymce"><h3 class="widget-title">Take a Test Drive</h3><div class="textwidget"><p><a href="https://www.microway.com/take-a-test-drive/"><img class="alignnone size-full wp-image-452" alt="Benchmark Server and Workstation" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/test-drive.gif" width="280" height="124"></a></p></div></li><li id="black-studio-tinymce-6" class="widget-container widget_black_studio_tinymce"><h3 class="widget-title">Configure Your Solution</h3><div class="textwidget"><a href="https://www.microway.com/configure-your-solution"><img class="alignnone size-full wp-image-451" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/configure-your-solution1.jpg" alt="configure-your-solution" width="280" height="124"></a></div></li><li id="black-studio-tinymce-15" class="widget-container widget_black_studio_tinymce"><h3 class="widget-title">Subscribe to Microway’s Technical Newsletter</h3><div class="textwidget"><strong><a title="Microway HPC Newsletter" href="http://www.microway.com/company/microway-hpc-newsletter/" target="_blank">Join our Bi-Monthly Newsletter</a></strong></div></li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">HPC-Tech-Tip Categories</h3>		<ul>
+	<li class="cat-item cat-item-6"><a href="https://www.microway.com/hpc-tech-tips/category/administration/">Administration</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://www.microway.com/hpc-tech-tips/category/benchmarking/">Benchmarking</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="https://www.microway.com/hpc-tech-tips/category/development/">Development</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://www.microway.com/hpc-tech-tips/category/hardware/">Hardware</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="https://www.microway.com/hpc-tech-tips/category/pitfalls/">Pitfalls</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="https://www.microway.com/hpc-tech-tips/category/software/">Software</a>
+</li>
+	<li class="cat-item cat-item-88"><a href="https://www.microway.com/hpc-tech-tips/category/test-drive/">Test Drive</a>
+</li>
+		</ul>
+</li><li id="tag_cloud-2" class="widget-container widget_tag_cloud"><h3 class="widget-title">HPC-Tech-Tip Tags</h3><div class="tagcloud"><a href="https://www.microway.com/hpc-tech-tips/tag/amber/" class="tag-link-17" title="1 topic" style="font-size: 8pt;">AMBER</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/benchmark/" class="tag-link-89" title="8 topics" style="font-size: 15.39837398374pt;">benchmark</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/cloudera/" class="tag-link-21" title="1 topic" style="font-size: 8pt;">Cloudera</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/cluster/" class="tag-link-143" title="3 topics" style="font-size: 11.414634146341pt;">cluster</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/coprocessor/" class="tag-link-19" title="6 topics" style="font-size: 14.260162601626pt;">coprocessor</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/cpu/" class="tag-link-79" title="7 topics" style="font-size: 14.829268292683pt;">cpu</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/cuda/" class="tag-link-46" title="14 topics" style="font-size: 18.016260162602pt;">CUDA</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/deep-learning/" class="tag-link-139" title="6 topics" style="font-size: 14.260162601626pt;">deep learning</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/gk210/" class="tag-link-96" title="1 topic" style="font-size: 8pt;">GK210</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/gpu/" class="tag-link-141" title="33 topics" style="font-size: 22pt;">gpu</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/gromacs/" class="tag-link-94" title="1 topic" style="font-size: 8pt;">GROMACS</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/grub/" class="tag-link-9" title="1 topic" style="font-size: 8pt;">grub</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/guide/" class="tag-link-90" title="4 topics" style="font-size: 12.552845528455pt;">guide</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/hadoop/" class="tag-link-22" title="1 topic" style="font-size: 8pt;">Hadoop</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/high-performance-computing/" class="tag-link-23" title="12 topics" style="font-size: 17.219512195122pt;">High Performance Computing</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/hoomd-blue/" class="tag-link-92" title="1 topic" style="font-size: 8pt;">hoomd-blue</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/hpc/" class="tag-link-24" title="3 topics" style="font-size: 11.414634146341pt;">HPC</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/k80/" class="tag-link-95" title="4 topics" style="font-size: 12.552845528455pt;">K80</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/linux-kernel/" class="tag-link-7" title="1 topic" style="font-size: 8pt;">Linux kernel</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/m40/" class="tag-link-157" title="2 topics" style="font-size: 10.048780487805pt;">M40</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/matlab/" class="tag-link-93" title="1 topic" style="font-size: 8pt;">MATLAB</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/mdadm/" class="tag-link-11" title="2 topics" style="font-size: 10.048780487805pt;">mdadm</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/memory/" class="tag-link-102" title="2 topics" style="font-size: 10.048780487805pt;">memory</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/namd/" class="tag-link-91" title="1 topic" style="font-size: 8pt;">NAMD</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/nvidia-digits/" class="tag-link-140" title="1 topic" style="font-size: 8pt;">NVIDIA DIGITS</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/nvlink/" class="tag-link-174" title="1 topic" style="font-size: 8pt;">NVLink</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/openacc/" class="tag-link-156" title="2 topics" style="font-size: 10.048780487805pt;">OpenACC</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/openmp/" class="tag-link-159" title="1 topic" style="font-size: 8pt;">OpenMP</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/openpower/" class="tag-link-160" title="2 topics" style="font-size: 10.048780487805pt;">OpenPOWER</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/p100/" class="tag-link-163" title="4 topics" style="font-size: 12.552845528455pt;">P100</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/phi/" class="tag-link-20" title="5 topics" style="font-size: 13.463414634146pt;">Phi</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/raid/" class="tag-link-12" title="3 topics" style="font-size: 11.414634146341pt;">RAID</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/sc-conference/" class="tag-link-81" title="1 topic" style="font-size: 8pt;">SC Conference</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/tesla/" class="tag-link-142" title="22 topics" style="font-size: 20.065040650407pt;">tesla</a>
+<a href="https://www.microway.com/hpc-tech-tips/tag/test-drive/" class="tag-link-158" title="1 topic" style="font-size: 8pt;">Test Drive</a></div>
+</li><li id="black-studio-tinymce-13" class="widget-container widget_black_studio_tinymce"><h3 class="widget-title">Subscribe to Blog</h3><div class="textwidget"><a title="Subscribe to Microway&#39;s blog: HPC Tech Tips" href="http://www.microway.com/feed/"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/feed-icon-28x28.png" width="28" height="28" border="0"></a></div></li>			</ul>
+		</div><!-- #secondary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+		<div class="footer-nav-menu"><h4><a href="https://www.microway.com/technologies">Technologies</a></h4><div class="menu-technologies-container"><ul id="menu-technologies" class="menu"><li id="menu-item-8293" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8293"><a href="https://www.microway.com/technologies/ibm-power/">IBM POWER</a></li>
+<li id="menu-item-171" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-171"><a href="https://www.microway.com/technologies/nvidia-tesla-gpu-computing/">NVIDIA Tesla GPUs</a></li>
+<li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="https://www.microway.com/technologies/intel/">Intel</a></li>
+<li id="menu-item-175" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-175"><a href="https://www.microway.com/technologies/xeon-phi/">Xeon Phi</a></li>
+<li id="menu-item-170" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170"><a href="https://www.microway.com/technologies/amd/">AMD</a></li>
+<li id="menu-item-174" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-174"><a href="https://www.microway.com/technologies/software/">Software</a></li>
+</ul></div></div>
+        <div class="footer-nav-menu"><h4><a href="https://www.microway.com/products">Products</a></h4><div class="menu-products-container"><ul id="menu-products" class="menu"><li id="menu-item-176" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-176"><a href="https://www.microway.com/products/hpc-clusters/">HPC Clusters</a></li>
+<li id="menu-item-177" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-177"><a href="https://www.microway.com/products/hpc-storage/">HPC Storage</a></li>
+<li id="menu-item-178" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-178"><a href="https://www.microway.com/products/rackmount-servers/">Rackmount Servers</a></li>
+<li id="menu-item-179" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-179"><a href="https://www.microway.com/products/storage/">Storage</a></li>
+<li id="menu-item-180" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-180"><a href="https://www.microway.com/products/workstations/">Workstations</a></li>
+</ul></div></div>
+        <div class="footer-nav-menu"><h4><a href="https://www.microway.com/knowledge-center">Knowledge Center</a></h4><div class="menu-knowledge-center-container"><ul id="menu-knowledge-center" class="menu"><li id="menu-item-187" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-187"><a href="https://www.microway.com/knowledge-center/resources/">Resources</a></li>
+<li id="menu-item-188" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-188"><a href="https://www.microway.com/knowledge-center/support/">Support</a></li>
+</ul></div></div>
+        <div class="preconfigured-footer">
+        <h4><a href="https://www.microway.com/products/preconfiguredsystems">Pre-Configured Systems</a></h4>
+          <div class="preconfigured-footer-item">
+  <div class="preconfigured-footer-image-wrap">
+  <a href="https://www.microway.com/preconfiguredsystems/boost-tesla-pascal-servers/" rel="bookmark" title="Permanent Link to Boost Up to Tesla Servers"><img width="94" height="33" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/Pascal-Boost-header-960x333-Tesla-Platform-Web-Banner-94x33.png" class="preconfigured-system-image wp-post-image" alt="NVIDIA Tesla Pascal Boost" srcset="https://www.microway.com/wp-content/uploads/Pascal-Boost-header-960x333-Tesla-Platform-Web-Banner-94x33.png 94w, https://www.microway.com/wp-content/uploads/Pascal-Boost-header-960x333-Tesla-Platform-Web-Banner-140x49.png 140w" sizes="(max-width: 94px) 100vw, 94px"></a>
+        </div>
+    <h3><a href="https://www.microway.com/preconfiguredsystems/boost-tesla-pascal-servers/" rel="bookmark" title="Permanent Link to Boost Up to Tesla Servers">Boost Up to Tesla Servers</a></h3>
+
+
+    <div style="clear:both;">&nbsp;</div>
+    </div>
+  <div class="preconfigured-footer-item">
+  <div class="preconfigured-footer-image-wrap">
+  <a href="https://www.microway.com/preconfiguredsystems/whisperstation-deep-learning/" rel="bookmark" title="Permanent Link to WhisperStation™- Deep Learning"><img width="94" height="59" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/WhisperStation_Deep_Learning_DIGITS_Dev_Box1-94x59.png" class="preconfigured-system-image wp-post-image" alt="Photo of Microway WhisperStation with a screenshot of NVIDIA DIGITS" srcset="https://www.microway.com/wp-content/uploads/WhisperStation_Deep_Learning_DIGITS_Dev_Box1-94x59.png 94w, https://www.microway.com/wp-content/uploads/WhisperStation_Deep_Learning_DIGITS_Dev_Box1-140x88.png 140w, https://www.microway.com/wp-content/uploads/WhisperStation_Deep_Learning_DIGITS_Dev_Box1-350x219.png 350w, https://www.microway.com/wp-content/uploads/WhisperStation_Deep_Learning_DIGITS_Dev_Box1-300x188.png 300w" sizes="(max-width: 94px) 100vw, 94px"></a>
+        </div>
+    <h3><a href="https://www.microway.com/preconfiguredsystems/whisperstation-deep-learning/" rel="bookmark" title="Permanent Link to WhisperStation™- Deep Learning">WhisperStation™-  Deep Learning</a></h3>
+
+
+    <div style="clear:both;">&nbsp;</div>
+    </div>
+  <div class="preconfigured-footer-item">
+  <div class="preconfigured-footer-image-wrap">
+  <a href="https://www.microway.com/preconfiguredsystems/gpu-accelerated-server-large-electronic-simulations-cst-studio-suite/" rel="bookmark" title="Permanent Link to GPU-Accelerated Server for Large Electronic Simulations in CST STUDIO SUITE®"><img width="94" height="71" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/CST_Preconfigured_GPU_Server_for_Large_Electronic_Simulations-94x71.png" class="preconfigured-system-image wp-post-image" alt="Photo of Microway&#39;s GPU Server for Large Electronic Simulations in CST STUDIO SUITE" srcset="https://www.microway.com/wp-content/uploads/CST_Preconfigured_GPU_Server_for_Large_Electronic_Simulations-94x71.png 94w, https://www.microway.com/wp-content/uploads/CST_Preconfigured_GPU_Server_for_Large_Electronic_Simulations-140x106.png 140w" sizes="(max-width: 94px) 100vw, 94px"></a>
+        </div>
+    <h3><a href="https://www.microway.com/preconfiguredsystems/gpu-accelerated-server-large-electronic-simulations-cst-studio-suite/" rel="bookmark" title="Permanent Link to GPU-Accelerated Server for Large Electronic Simulations in CST STUDIO SUITE®">GPU- Accelerated Server for Large Electronic Simulations in CST STUDIO SUITE®</a></h3>
+
+
+    <div style="clear:both;">&nbsp;</div>
+    </div>
+  <div class="preconfigured-footer-item">
+  <div class="preconfigured-footer-image-wrap">
+  <a href="https://www.microway.com/preconfiguredsystems/nvidia-dgx-1-deep-learning-system/" rel="bookmark" title="Permanent Link to NVIDIA DGX-1 Deep Learning System"><img width="94" height="43" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/NVIDIA_DGX-1_GPU-Accelerated_Deep_Learning_Appliance-94x43.jpg" class="preconfigured-system-image wp-post-image" alt="Photo of the NVIDIA DGX-1 GPU-Accelerated Deep Learning Appliance" srcset="https://www.microway.com/wp-content/uploads/NVIDIA_DGX-1_GPU-Accelerated_Deep_Learning_Appliance-94x43.jpg 94w, https://www.microway.com/wp-content/uploads/NVIDIA_DGX-1_GPU-Accelerated_Deep_Learning_Appliance-140x64.jpg 140w" sizes="(max-width: 94px) 100vw, 94px"></a>
+        </div>
+    <h3><a href="https://www.microway.com/preconfiguredsystems/nvidia-dgx-1-deep-learning-system/" rel="bookmark" title="Permanent Link to NVIDIA DGX-1 Deep Learning System">NVIDIA DGX-1 Deep Learning System</a></h3>
+
+
+    <div style="clear:both;">&nbsp;</div>
+    </div>
+        </div>
+		<div id="fbottom">
+        <div id="fbottoml">
+          <p><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/gsa-contract-schedule-gs-35f-0431n.gif" width="180" height="39" alt="Microway GSA Contract Schedule number GS-35F-0431N"></p>
+          <p>© Copyright 2017 Microway. All Rights Reserved.  |  <a href="https://www.microway.com/site-map">Site Map</a> |  <a href="https://www.microway.com/terms-of-use">Terms of Use</a></p>
+        </div>
+        <div id="fbottomr">
+
+
+
+        <p><a href="https://www.microway.com/products/preconfiguredsystems"><span style="color: #fff;">&gt;&gt;</span> VIEW ALL PRE-CONFIGURED SYSTEMS</a></p>
+		<p class="connect">Connect with Microway: <a href="https://www.facebook.com/pages/Microway/250225379438" target="_blank"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/logo-facebook.gif" width="24" height="24" alt="facebook"></a><a href="https://twitter.com/MicrowayHPC" target="_blank"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/logo-twitter.gif" width="24" height="24" alt="Twitter"></a><a href="http://www.linkedin.com/company/microway-inc" target="_blank"><img src="./Keras and Theano Deep Learning Frameworks _ Microway_files/logo-linked-in.gif" width="24" height="24" alt="LinkedIn"></a></p>
+        </div>
+        </div>
+    	</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+
+<script src="./Keras and Theano Deep Learning Frameworks _ Microway_files/fusion.min.js"></script>
+
+
+
+<script>
+		jQuery(window).load(function() {
+
+
+jQuery('#fusion1').show().fusion({
+				effect: 'vertical',
+				animSpeed: 300,
+				eventTrigger: 'hover',//click, hover, etc.
+				autoHeight: true,
+				bar: 'aside', //aside, top
+				showControls: true,
+				showPlay: true,
+				playInterval: 5000,
+				autoPlay: true,
+				keyboardNav: true
+			});
+
+		});
+	</script>
+
+<script type="text/javascript">
+var colomatduration = 'fast';
+var colomatslideEffect = 'slideFade';
+</script><script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/core.min.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/widget.min.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/tabs.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var tab_settings = {"total_tabsets":"0","select_active":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/post-ui-tabs.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/form.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/shCore.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/shBrushXml.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/shBrushPython.js"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://www.microway.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://www.microway.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/hoverIntent.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var uberMenuSettings = {"speed":"300","trigger":"hoverIntent","orientation":"horizontal","transition":"slide","hoverInterval":"20","hoverTimeout":"400","removeConflicts":"on","autoAlign":"off","noconflict":"off","fullWidthSubs":"off","androidClick":"on","loadGoogleMaps":"off"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/ubermenu.min.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/comment-reply.min.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/jquery.form.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"https:\/\/www.microway.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptchaEmpty":"Please verify that you are not a robot.","sending":"Sending ..."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/scripts.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/collapse.js"></script>
+<script type="text/javascript" src="./Keras and Theano Deep Learning Frameworks _ Microway_files/wp-embed.min.js"></script>
+<script type="text/javascript" id="slb_context">/* <![CDATA[ */if ( !!window.jQuery ) {(function($){$(document).ready(function(){if ( !!window.SLB ) { {$.extend(SLB, {"context":["public","user_guest"]});} }})})(jQuery);}/* ]]> */</script>
+
+
+</body></html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)https://richliao.github.io/supervised/classification/2016/12/26/textclassifier-HATN/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Text Classification, Part 3 - Hierarchical attention network – Richard's deep learning blog</title>
+    <link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com/">
+    <link rel="dns-prefetch" href="https://cdn.mathjax.org/">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Collections of ideas of deep learning application.">
+    <meta name="robots" content="all">
+    <meta name="author" content="Richard Liao">
+    
+    <meta name="keywords" content="supervised, classification">
+    <link rel="canonical" href="https://richliao.github.io//supervised/classification/2016/12/26/textclassifier-HATN/">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for Richard&#39;s deep learning blog" href="https://richliao.github.io/feed.xml">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/pixyll.css" type="text/css">
+
+    <!-- Fonts -->
+    
+    <link href="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/css" rel="stylesheet" type="text/css">
+    <link href="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/css(1)" rel="stylesheet" type="text/css">
+    
+    
+
+    <!-- MathJax -->
+    
+
+    <!-- Verifications -->
+    
+    
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Text Classification, Part 3 - Hierarchical attention network">
+    <meta property="og:description" content="Collections of ideas of deep learning application.">
+    <meta property="og:url" content="https://richliao.github.io//supervised/classification/2016/12/26/textclassifier-HATN/">
+    <meta property="og:site_name" content="Richard&#39;s deep learning blog">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:site" content="@richard_liao">
+    
+    <meta name="twitter:title" content="Text Classification, Part 3 - Hierarchical attention network">
+    <meta name="twitter:description" content="Collections of ideas of deep learning application.">
+    <meta name="twitter:url" content="https://richliao.github.io//supervised/classification/2016/12/26/textclassifier-HATN/">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="https://richliao.github.io/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://richliao.github.io/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://richliao.github.io/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://richliao.github.io/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://richliao.github.io/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://richliao.github.io/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://richliao.github.io/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://richliao.github.io/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://richliao.github.io/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="https://richliao.github.io/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="https://richliao.github.io/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="https://richliao.github.io/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://richliao.github.io/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://richliao.github.io/favicon-32x32.png" sizes="32x32">
+
+    
+<script async="" src="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/analytics.js"></script><script src="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/embed.js" data-timestamp="1493012549517"></script><link rel="preload" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.5f04e83cf97ee6a6cf16dc8e296ed78d.css"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.08b03b11c747b79c4d4135b49e2f8725.js"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.987c6346e2effb8e4f350d48ecf53d13.js"><link rel="preload" as="script" href="https://disqus.com/next/config.js"><script src="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/alfie.f51946af45e0b561c60f768335c9eb79.js" async="" charset="UTF-8"></script></head>
+
+<body class="site">
+  
+	
+
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="https://richliao.github.io/" class="site-title">Richard's deep learning blog</a>
+      <nav class="site-nav">
+        
+    
+
+    
+        <a href="https://richliao.github.io/about/">About me</a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+        <a href="https://richliao.github.io/contact/">Say Hello</a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+      </nav>
+      <div class="clearfix"></div>
+      
+    </div>
+  </div>
+</header>
+
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+<div class="post-header mb2">
+  <h1>Text Classification, Part 3 - Hierarchical attention network</h1>
+  <span class="post-meta">Dec 26, 2016</span><br>
+  
+  <span class="post-meta small">
+  
+    7 minute read
+  
+  </span>
+</div>
+
+<article class="post-content">
+  <p>After the exercise of building convolutional, RNN, sentence level attention RNN, finally I have come to implement <a href="https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf">Hierarchical Attention Networks for Document Classification</a>. I’m very thankful to Keras, which make building this project painless. The custom layer is very powerful and flexible to build your custom logic to embed into the existing frame work. Functional API makes the Hierarchical InputLayers very easy to implement.</p>
+
+<p>Please note that all exercises are based on Kaggle’s <a href="https://www.kaggle.com/c/word2vec-nlp-tutorial/data">IMDB dataset</a>.</p>
+
+<h2 id="text-classification-using-hierarchical-lstm">Text classification using Hierarchical LSTM</h2>
+
+<p>Before fully implement Hierarchical attention network, I want to build a Hierarchical LSTM network as a base line. To have it implemented, I have to construct the data input as 3D other than 2D in previous two posts. So the input tensor would be [# of reviews each batch, # of sentences, # of words in each sentence].</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">nb_words</span><span class="o">=</span><span class="n">MAX_NB_WORDS</span><span class="p">)</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">),</span> <span class="n">MAX_SENTS</span><span class="p">,</span> <span class="n">MAX_SENT_LENGTH</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sentences</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reviews</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">sent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sentences</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">&lt;</span> <span class="n">MAX_SENTS</span><span class="p">:</span>
+            <span class="n">wordTokens</span> <span class="o">=</span> <span class="n">text_to_word_sequence</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
+            <span class="c">#update 1/10/2017 - bug fixed - set max number of words</span>
+            <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">wordTokens</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">MAX_SENT_LENGTH</span> <span class="ow">and</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">&lt;</span><span class="n">MAX_NB_WORDS</span><span class="p">:</span>
+                    <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+                    <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>                 </code></pre></figure>
+
+<p>After that we can use Keras magic function TimeDistributed to construct the Hierarchical input layers as following. This is what I have learned from this <a href="https://offbit.github.io/how-to-read/">post</a></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">embedding_layer</span> <span class="o">=</span> <span class="n">Embedding</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_index</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                            <span class="n">EMBEDDING_DIM</span><span class="p">,</span>
+                            <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="n">embedding_matrix</span><span class="p">],</span>
+                            <span class="n">input_length</span><span class="o">=</span><span class="n">MAX_SENT_LENGTH</span><span class="p">,</span>
+                            <span class="n">trainable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">sentence_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">MAX_SENT_LENGTH</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">)</span>
+<span class="n">embedded_sequences</span> <span class="o">=</span> <span class="n">embedding_layer</span><span class="p">(</span><span class="n">sentence_input</span><span class="p">)</span>
+<span class="n">l_lstm</span> <span class="o">=</span> <span class="n">Bidirectional</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">100</span><span class="p">))(</span><span class="n">embedded_sequences</span><span class="p">)</span>
+<span class="n">sentEncoder</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">sentence_input</span><span class="p">,</span> <span class="n">l_lstm</span><span class="p">)</span>
+
+<span class="n">review_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">MAX_SENTS</span><span class="p">,</span><span class="n">MAX_SENT_LENGTH</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">)</span>
+<span class="n">review_encoder</span> <span class="o">=</span> <span class="n">TimeDistributed</span><span class="p">(</span><span class="n">sentEncoder</span><span class="p">)(</span><span class="n">review_input</span><span class="p">)</span>
+<span class="n">l_lstm_sent</span> <span class="o">=</span> <span class="n">Bidirectional</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">100</span><span class="p">))(</span><span class="n">review_encoder</span><span class="p">)</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'softmax'</span><span class="p">)(</span><span class="n">l_lstm_sent</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">review_input</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
+
+<span class="n">Layer</span> <span class="p">(</span><span class="nb">type</span><span class="p">)</span>                     <span class="n">Output</span> <span class="n">Shape</span>          <span class="n">Param</span> <span class="c">#     Connected to</span>
+<span class="o">====================================================================================================</span>
+<span class="n">input_2</span> <span class="p">(</span><span class="n">InputLayer</span><span class="p">)</span>             <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>       <span class="mi">0</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="n">timedistributed_1</span> <span class="p">(</span><span class="n">TimeDistribute</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>       <span class="mi">8217800</span>     <span class="n">input_2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="n">bidirectional_2</span> <span class="p">(</span><span class="n">Bidirectional</span><span class="p">)</span>  <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>           <span class="mi">240800</span>      <span class="n">timedistributed_1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="n">dense_1</span> <span class="p">(</span><span class="n">Dense</span><span class="p">)</span>                  <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>             <span class="mi">402</span>         <span class="n">bidirectional_2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="o">====================================================================================================</span>
+<span class="n">Total</span> <span class="n">params</span><span class="p">:</span> <span class="mi">8459002</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="bp">None</span>
+<span class="n">Train</span> <span class="n">on</span> <span class="mi">20000</span> <span class="n">samples</span><span class="p">,</span> <span class="n">validate</span> <span class="n">on</span> <span class="mi">5000</span> <span class="n">samples</span>
+<span class="n">Epoch</span> <span class="mi">1</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">494</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.5558</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.6976</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.4443</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.7962</span>
+<span class="n">Epoch</span> <span class="mi">2</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">494</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.3135</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.8659</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.3219</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8552</span>
+<span class="n">Epoch</span> <span class="mi">3</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">495</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.2319</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9076</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.2627</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8948</span>
+<span class="n">Epoch</span> <span class="mi">4</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">494</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.1753</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9323</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.2784</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8920</span>
+<span class="n">Epoch</span> <span class="mi">5</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">495</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.1306</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9517</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.2884</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8944</span>
+<span class="n">Epoch</span> <span class="mi">6</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">495</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.0901</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9696</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.3073</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8972</span>
+<span class="n">Epoch</span> <span class="mi">7</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">494</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.0586</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9796</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.4159</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8874</span>
+<span class="n">Epoch</span> <span class="mi">8</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">495</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.0369</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9880</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.4317</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8956</span>
+<span class="n">Epoch</span> <span class="mi">9</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">495</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.0233</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9936</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.4392</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8818</span>
+<span class="n">Epoch</span> <span class="mi">10</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">494</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.0148</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9960</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.5817</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8840</span></code></pre></figure>
+
+<p>The performance is slightly worser than previous post at about <em>89.4%</em>. However, the training time is much faster than one level of LSTM in the second post.</p>
+
+<h3 id="attention-network">Attention Network</h3>
+
+<p>In the following, I am going to implement an attention layer which is well studied in many papers including <a href="https://arxiv.org/pdf/1409.0473v7.pdf">sequence to sequence learning</a>. Particularly for this text classification task, I have followed the implementation of <a href="http://colinraffel.com/publications/iclr2016feed.pdf">FEED-FORWARD NETWORKS WITH ATTENTION CAN
+SOLVE SOME LONG-TERM MEMORY PROBLEMS by Colin Raffel</a></p>
+
+<table class="image">
+<caption align="bottom"></caption>
+<tbody><tr><td><img src="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/FeedForwardAttention.png" alt=""></td></tr>
+</tbody></table>
+
+<p>To implement the attention layer, we need to build a custom Keras layer. You can follow the instruction <a href="https://keras.io/layers/writing-your-own-keras-layers/">here</a></p>
+
+<p>The following code can only strictly run on Theano backend since tensorflow matrix dot product doesn’t behave the same as np.dot. I don’t know how to get a 2D tensor by dot product of 3D tensor of recurrent layer output and 1D tensor of weight.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">AttLayer</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init</span> <span class="o">=</span> <span class="n">initializations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'normal'</span><span class="p">)</span>
+        <span class="c">#self.input_spec = [InputSpec(ndim=3)]</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AttLayer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span> <span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_shape</span><span class="p">)</span><span class="o">==</span><span class="mi">3</span>
+        <span class="c">#self.W = self.init((input_shape[-1],1))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">((</span><span class="n">input_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],))</span>
+        <span class="c">#self.input_spec = [InputSpec(shape=input_shape)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trainable_weights</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">]</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AttLayer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">input_shape</span><span class="p">)</span>  <span class="c"># be sure you call this somewhere!</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">eij</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">))</span>
+
+        <span class="n">ai</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">eij</span><span class="p">)</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">ai</span><span class="o">/</span><span class="n">K</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">dimshuffle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s">'x'</span><span class="p">)</span>
+
+        <span class="n">weighted_input</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">weights</span><span class="o">.</span><span class="n">dimshuffle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">'x'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">weighted_input</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_output_shape_for</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">input_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">input_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></code></pre></figure>
+
+<p>Following the paper, <a href="https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf">Hierarchical Attention Networks for Document Classification</a>. I have also added a dense layer taking the output from GRU before feeding into attention layer. In the following implementation, there’re two layers of attention network built in, one at sentence level and the other at review level.</p>
+
+<table class="image">
+<caption align="bottom"></caption>
+<tbody><tr><td><img src="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/HierachicalAttention.png" alt=""></td></tr>
+</tbody></table>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">sentence_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">MAX_SENT_LENGTH</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">)</span>
+<span class="n">embedded_sequences</span> <span class="o">=</span> <span class="n">embedding_layer</span><span class="p">(</span><span class="n">sentence_input</span><span class="p">)</span>
+<span class="n">l_lstm</span> <span class="o">=</span> <span class="n">Bidirectional</span><span class="p">(</span><span class="n">GRU</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="bp">True</span><span class="p">))(</span><span class="n">embedded_sequences</span><span class="p">)</span>
+<span class="n">l_dense</span> <span class="o">=</span> <span class="n">TimeDistributed</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">200</span><span class="p">))(</span><span class="n">l_lstm</span><span class="p">)</span>
+<span class="n">l_att</span> <span class="o">=</span> <span class="n">AttLayer</span><span class="p">()(</span><span class="n">l_dense</span><span class="p">)</span>
+<span class="n">sentEncoder</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">sentence_input</span><span class="p">,</span> <span class="n">l_att</span><span class="p">)</span>
+
+<span class="n">review_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">MAX_SENTS</span><span class="p">,</span><span class="n">MAX_SENT_LENGTH</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">)</span>
+<span class="n">review_encoder</span> <span class="o">=</span> <span class="n">TimeDistributed</span><span class="p">(</span><span class="n">sentEncoder</span><span class="p">)(</span><span class="n">review_input</span><span class="p">)</span>
+<span class="n">l_lstm_sent</span> <span class="o">=</span> <span class="n">Bidirectional</span><span class="p">(</span><span class="n">GRU</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="bp">True</span><span class="p">))(</span><span class="n">review_encoder</span><span class="p">)</span>
+<span class="n">l_dense_sent</span> <span class="o">=</span> <span class="n">TimeDistributed</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">200</span><span class="p">))(</span><span class="n">l_lstm_sent</span><span class="p">)</span>
+<span class="n">l_att_sent</span> <span class="o">=</span> <span class="n">AttLayer</span><span class="p">()(</span><span class="n">l_dense_sent</span><span class="p">)</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'softmax'</span><span class="p">)(</span><span class="n">l_att_sent</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">review_input</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="n">fitting</span> <span class="o">-</span> <span class="n">Hierachical</span> <span class="n">attention</span> <span class="n">network</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="n">Layer</span> <span class="p">(</span><span class="nb">type</span><span class="p">)</span>                     <span class="n">Output</span> <span class="n">Shape</span>          <span class="n">Param</span> <span class="c">#     Connected to</span>
+<span class="o">====================================================================================================</span>
+<span class="n">input_4</span> <span class="p">(</span><span class="n">InputLayer</span><span class="p">)</span>             <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>       <span class="mi">0</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="n">timedistributed_3</span> <span class="p">(</span><span class="n">TimeDistribute</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>       <span class="mi">8218000</span>     <span class="n">input_4</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="n">bidirectional_4</span> <span class="p">(</span><span class="n">Bidirectional</span><span class="p">)</span>  <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>       <span class="mi">180600</span>      <span class="n">timedistributed_3</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="n">timedistributed_4</span> <span class="p">(</span><span class="n">TimeDistribute</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>       <span class="mi">40200</span>       <span class="n">bidirectional_4</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="n">attlayer_2</span> <span class="p">(</span><span class="n">AttLayer</span><span class="p">)</span>            <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>           <span class="mi">200</span>         <span class="n">timedistributed_4</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="n">dense_4</span> <span class="p">(</span><span class="n">Dense</span><span class="p">)</span>                  <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>             <span class="mi">402</span>         <span class="n">attlayer_2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="o">====================================================================================================</span>
+<span class="n">Total</span> <span class="n">params</span><span class="p">:</span> <span class="mi">8439402</span>
+<span class="n">____________________________________________________________________________________________________</span>
+<span class="bp">None</span>
+<span class="n">Train</span> <span class="n">on</span> <span class="mi">20000</span> <span class="n">samples</span><span class="p">,</span> <span class="n">validate</span> <span class="n">on</span> <span class="mi">5000</span> <span class="n">samples</span>
+<span class="n">Epoch</span> <span class="mi">1</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">441</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.5509</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.7072</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.3391</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8564</span>
+<span class="n">Epoch</span> <span class="mi">2</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">440</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.2972</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.8776</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.2767</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8850</span>
+<span class="n">Epoch</span> <span class="mi">3</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">442</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.2212</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9141</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.2670</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8898</span>
+<span class="n">Epoch</span> <span class="mi">4</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">440</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.1635</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9392</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.2500</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.9040</span>
+<span class="n">Epoch</span> <span class="mi">5</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">441</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.1183</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9582</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.2795</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.9040</span>
+<span class="n">Epoch</span> <span class="mi">6</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">440</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.0793</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9721</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.3198</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8924</span>
+<span class="n">Epoch</span> <span class="mi">7</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">441</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.0479</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9849</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.3575</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8948</span>
+<span class="n">Epoch</span> <span class="mi">8</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">441</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.0279</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9913</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.3876</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8934</span>
+<span class="n">Epoch</span> <span class="mi">9</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">440</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.0158</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9954</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.6058</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8838</span>
+<span class="n">Epoch</span> <span class="mi">10</span><span class="o">/</span><span class="mi">10</span>
+<span class="mi">20000</span><span class="o">/</span><span class="mi">20000</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">440</span><span class="n">s</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.0109</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9968</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.8289</span> <span class="o">-</span> <span class="n">val_acc</span><span class="p">:</span> <span class="mf">0.8816</span></code></pre></figure>
+
+<p>The best performance is pretty much still cap at <strong>90.4%</strong></p>
+
+<p>What has remained to do is deriving attention weights so that we can visualize the importance of words and sentences, which is not hard to do. By using K.function in Keras, we can derive GRU and dense layer output and compute the attention weights on the fly. I will update the post as long as I have it completed.</p>
+
+<p>Full source code is in <a href="https://github.com/richliao/textClassifier/blob/master/textClassifierHATT.py">my repository in github</a>.</p>
+
+<p>Also see the <a href="https://groups.google.com/forum/#!topic/keras-users/IWK9opMFavQ">Keras group discussion</a> about this implementation</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>The result is a bit disappointing. I couldn’t achieve a better accuracy although the training time is much faster, comparing to different approaches from using convolutional, bidirectional RNN, to one level attention network. Maybe the dataset is too small for Hierarchical attention network to be powerful. However, given the potential power of explaining the importance of words and sentences, Hierarchical attention network could have the potential to be the best text classification method. At last, please contact me or comment below if I have made any mistaken in the exercise or anything I can improve. Thank you!</p>
+
+<h2 id="update---1112017">Update - 1/11/2017</h2>
+<p>Ben on Keras google group nicely pointed out to me where to download emnlp data. So I have used the same code run against Yelp-2013 dataset. I can’t match author’s performance. The one level LSTM attention and Hierarchical attention network can only achieve 65%, while BiLSTM achieves roughly 64%. However, I didn’t follow exactly author’s text preprocessing. I am still using Keras data preprocessing logic that takes top 20,000 or 50,000 tokens, skip the rest and pad remaining with 0. I felt there could be some major improvement in performance if we can do the text processing right, such as replacing time and money to unique tokens and attaching POS information on the sequence etc.</p>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+<div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 4646px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe><iframe id="indicator-north" name="indicator-north" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 840px !important; border: none !important; overflow: hidden !important; top: 0px !important; min-width: 840px !important; max-width: 840px !important; position: fixed !important; z-index: 2147483646 !important; height: 18px !important; min-height: 18px !important; max-height: 18px !important; display: none !important;" src="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/saved_resource(1).html"></iframe><iframe id="indicator-south" name="indicator-south" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 840px !important; border: none !important; overflow: hidden !important; bottom: 0px !important; min-width: 840px !important; max-width: 840px !important; position: fixed !important; z-index: 2147483646 !important; height: 18px !important; min-height: 18px !important; max-height: 18px !important; display: none !important;" src="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/saved_resource(2).html"></iframe></div>
+<script>
+
+
+var disqus_config = function () {
+this.page.url = "https://richliao.github.io/";  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//richliao-github-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89524158-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  <footer class="center">
+  <div class="measure">
+    <small>
+      Theme crafted with &lt;3 by <a href="http://johnotander.com/">John Otander</a> (<a href="https://twitter.com/4lpine">@4lpine</a>).<br>
+      &lt;/&gt; available on <a href="https://github.com/johnotander/pixyll">Github</a>.
+    </small>
+  </div>
+</footer>
+
+
+
+
+<iframe style="display: none;" src="./Text Classification, Part 3 - Hierarchical attention network – Richard&#39;s deep learning blog_files/saved_resource(3).html"></iframe></body></html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://www.statmethods.net/advstats/cluster.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link href="./Quick-R_ Cluster Analysis_files/css" rel="stylesheet">
+    <title>Quick-R: Cluster Analysis</title>
+    <meta name="Description" content="Learn R functions for cluster analysis. This section describes three of the many approaches: hierarchical agglomerative, partitioning, and model based.">
+
+    
+    <meta name="Distribution" content="Global">
+    <meta name="Author" content="Robert Kabacoff - robk@statmethods.net">
+    <meta name="Robots" content="index,follow">
+    <meta name="verify-v1" content="mRsSDOT/ebuSJJB2GXuo1UZi3nZ+NsE+JIBwg77QtNE=">
+    <meta name="y_key" content="c94970a1faf084da">
+    <link href="./Quick-R_ Cluster Analysis_files/style.css" rel="stylesheet" type="text/css">
+<script src="./Quick-R_ Cluster Analysis_files/286618111707433" async=""></script><script async="" src="./Quick-R_ Cluster Analysis_files/fbevents.js"></script><script async="" src="./Quick-R_ Cluster Analysis_files/gtm.js"></script><script async="" src="./Quick-R_ Cluster Analysis_files/analytics.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-55355690-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M63JRHD');</script>
+<!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <div id="header">
+ <nav>
+        <a href="http://www.statmethods.net/index.html"><img id="logo" src="./Quick-R_ Cluster Analysis_files/logo.png" alt="Quick-R Logo"></a>
+        <div id="menu">
+          <ul>
+                <li><a href="http://www.statmethods.net/r-tutorial/index.html">R Tutorial</a></li>
+		        <li>|<a href="http://www.statmethods.net/interface/index.html">R Interface</a></li>
+		        <li>|<a href="http://www.statmethods.net/input/index.html">Data Input</a></li>
+		        <li>|<a href="http://www.statmethods.net/management/index.html">Data Management</a></li>
+		        <li>|<a href="http://www.statmethods.net/stats/index.html">Statistics</a></li>
+			    <li>|<a href="http://www.statmethods.net/advstats/index.html">Advanced Statistics</a></li>
+			    <li>|<a href="http://www.statmethods.net/graphs/index.html">Graphs</a></li>
+			    <li>|<a href="http://www.statmethods.net/advgraphs/index.html">Advanced Graphs</a></li>
+            </ul>
+   </div>
+   </nav>
+
+
+<form id="search" action="http://search.freefind.com/find.html" method="get" accept-charset="utf-8" target="_self">
+            <input type="hidden" name="si" value="23055275">
+			<input type="hidden" name="pid" value="r">
+		    <input type="hidden" name="n" value="0">
+			<input type="hidden" name="_charset_" value="">
+			<input type="hidden" name="bcd" value="÷">
+			<input type="hidden" name="nsb">
+			<input type="hidden" name="css" value="">
+			<input class="text" type="text" name="query">
+			<input name="search" class="submit" value="Search" type="submit">
+        </form>
+</div><!-- header -->
+    <div id="main"><div id="main2">
+            <div id="sidebar">
+<nav>
+                <h2>&lt; <a href="http://www.statmethods.net/advstats/index.html">Advanced Statistics</a></h2>
+            <ul>
+
+              <li><a href="http://www.statmethods.net/advstats/glm.html">Generalized Linear Models </a></li>
+              <li><a href="http://www.statmethods.net/advstats/discriminant.html">Discriminant Function </a></li>
+              <li><a href="http://www.statmethods.net/advstats/timeseries.html">Time Series </a></li>
+              <li><a href="http://www.statmethods.net/advstats/factor.html">Factor Analysis </a></li>
+              <li><a href="http://www.statmethods.net/advstats/ca.html">Correspondence Analysis </a></li>
+              <li><a href="http://www.statmethods.net/advstats/mds.html">Multidimensional Scaling </a></li>
+              <li style="color:#3476A8;"> Cluster Analysis </li>
+              <li><a href="http://www.statmethods.net/advstats/cart.html">Tree-Based Models </a></li>
+              <li><a href="http://www.statmethods.net/advstats/bootstrapping.html">Bootstrapping</a></li>
+              <li><a href="http://www.statmethods.net/advstats/matrix.html">Matrix Algebra </a></li>
+            </ul>
+                    </nav>
+<h2>R in Action</h2>
+               <div class="box">
+                    <p><a href="http://www.manning.com/kabacoff2/?a_aid=RiA2ed&amp;a_bid=5c2b1e1d"><img src="./Quick-R_ Cluster Analysis_files/kabacoff_cover150.jpg" alt="R in Action" width="73" height="90" class="float-left"></a></p>
+                    <p><a href="http://www.manning.com/kabacoff2/?a_aid=RiA2ed&amp;a_bid=5c2b1e1d" target="_blank">R in Action</a> (2nd ed) significantly expands upon this material.
+					Use promo code <b>ria38</b> for a 38% discount.</p>
+
+                </div>
+
+            </div><!-- sidebar -->
+            <div id="content">
+
+
+
+ <h1>Cluster Analysis   </h1>
+
+ 				<p>R has an <a href="http://wiki.math.yorku.ca/index.php/R:_Cluster_analysis">amazing variety </a>of functions for <a href="http://cran.cnr.berkeley.edu/web/views/Cluster.html">cluster analysis</a>. In this section, I will describe three of the many approaches: hierarchical agglomerative, partitioning, and model based. While there are no best solutions for the problem of determining the number of clusters to extract, several approaches are given below. </p>
+ 				<h2>Data Preparation </h2>
+ 				<p>Prior to clustering data, you may want to remove or estimate missing data and rescale variables for comparability.</p>
+ 				<p><code># Prepare Data<br>
+ 		      mydata &lt;- na.omit(mydata) # listwise deletion of missing<br>
+ 				  mydata &lt;- scale(mydata) # standardize variables
+ </code></p>
+ 				<h2>Partitioning</h2>
+ 				<p><strong>K-means</strong> clustering is the most popular partitioning method. It requires the analyst to specify the number of clusters to extract. A plot of the within groups sum of squares by number of clusters extracted can help determine the appropriate number of clusters. The analyst looks for a bend in the plot similar to a scree test in factor analysis. See <a href="http://www.statmethods.net/about/books.html">Everitt &amp; Hothorn (pg. 251)</a>. </p>
+ 			    <p><code># Determine number of clusters<br>
+ 			  wss &lt;- (nrow(mydata)-1)*sum(apply(mydata,2,var))<br>
+ 			  for (i in 2:15) wss[i] &lt;- sum(kmeans(mydata, <br>
+ &nbsp;&nbsp;		    centers=i)$withinss)<br>
+ plot(1:15, wss, type="b", xlab="Number of Clusters",<br>
+ &nbsp;&nbsp;ylab="Within groups sum of squares") </code></p>
+ 			<p><code># K-Means Cluster Analysis<br>
+ 			  fit &lt;- kmeans(mydata, 5) # 5 cluster solution<br>
+ 		      # get cluster means <br>
+ 		      aggregate(mydata,by=list(fit$cluster),FUN=mean)<br>
+ 		      # append cluster assignment<br>
+ 		      mydata &lt;- data.frame(mydata, fit$cluster)
+ 			</code></p>
+ 			<p>A robust version of<strong> K-means</strong> based on mediods can be invoked by using <strong>pam( ) </strong>instead of <strong>kmeans( )</strong>. The function <strong>pamk( )</strong> in the <strong><a href="http://cran.r-project.org/web/packages/fpc/index.html">fpc</a> </strong>package is a wrapper for pam that also prints the suggested number of clusters based on optimum average silhouette width. </p>
+ 			<h2>Hierarchical Agglomerative</h2>
+ 			<p>There are a wide range of hierarchical clustering approaches. I have had good luck with Ward's method described below. </p>
+ 			<p><code># Ward Hierarchical Clustering<br>
+ 			  d &lt;- dist(mydata,
+ method = "euclidean") # distance matrix<br>
+ fit &lt;- hclust(d, method="ward")
+ <br>
+ 			plot(fit) # display dendogram<br>
+ 			groups &lt;- cutree(fit, k=5) # cut tree into 5 clusters<br>
+ 			# draw dendogram with red borders around the 5 clusters <br>
+ rect.hclust(fit, k=5, border="red")
+ 		  </code></p>
+ 			<p><a href="http://www.statmethods.net/advstats/images/cluster1.jpg"><img src="./Quick-R_ Cluster Analysis_files/smcluster1.jpg" alt="dendogram" width="103" height="103"></a> click to view </p>
+ 			<p>The <strong>pvclust( )</strong> function in the <a href="http://cran.r-project.org/web/packages/pvclust/index.html">pvclust</a> package provides p-values for hierarchical clustering based on multiscale bootstrap resampling. Clusters that are highly supported by the data will have large p values. Interpretation details are provided <a href="http://www.is.titech.ac.jp/~shimo/prog/pvclust/">Suzuki</a>. Be aware that <a href="http://cran.r-project.org/web/packages/pvclust/index.html">pvclust</a> clusters columns, not rows. Transpose your data before using. </p>
+ 			<p><code># Ward Hierarchical Clustering with Bootstrapped p values<br>
+ 			  library(pvclust)<br>
+ 			  fit &lt;-
+ pvclust(mydata, method.hclust="ward",<br>
+ &nbsp;&nbsp; method.dist="euclidean")<br>
+ 			plot(fit) # dendogram with p values<br>
+ 			# add rectangles around groups highly supported by the data<br>
+ pvrect(fit, alpha=.95) </code></p>
+ 			<p><a href="http://www.statmethods.net/advstats/images/cluster2.jpg"><img src="./Quick-R_ Cluster Analysis_files/smcluster2.jpg" alt="clustering with p values" width="103" height="103"></a> click to view </p>
+
+ 			<h2>Model Based </h2>
+ 				<p>Model based approaches assume a variety of data models and apply maximum likelihood estimation and Bayes criteria to identify the most likely model and number of clusters. Specifically, the <strong>Mclust( ) </strong>function in the <a href="http://cran.r-project.org/web/packages/mclust/index.html">mclust</a> package selects the optimal model according to BIC for EM initialized by hierarchical clustering   for parameterized Gaussian mixture models. (phew!). One chooses the model and number of clusters with the largest BIC. See <a href="http://finzi.psych.upenn.edu/R/library/mclust/html/mclustModelNames.html">help(mclustModelNames)</a> to details on the model chosen as best. </p>
+ 				<p><code># Model Based Clustering<br>
+ 				  library(mclust)<br>
+ 				  fit &lt;- Mclust(mydata)<br>
+ 				  plot(fit) # plot results
+ 				  <br>
+ 				summary(fit) # display the best model </code></p>
+ 				<p><a href="http://www.statmethods.net/advstats/images/cluster3.jpg"><img src="./Quick-R_ Cluster Analysis_files/smcluster3.jpg" alt="model based clustering" width="103" height="103"></a> <a href="http://www.statmethods.net/advstats/images/cluster4.jpg"><img src="./Quick-R_ Cluster Analysis_files/smcluster4.jpg" alt="cluster scatter plots" width="103" height="103"></a> click to view </p>
+ 				<h2>Plotting Cluster Solutions </h2>
+ 		  <p>It is always a good idea to look at the cluster results.</p>
+ 				<p><code># K-Means Clustering with 5 clusters<br>
+ 				  fit &lt;- kmeans(mydata, 5)<br>
+ 				  <br>
+ 				  # Cluster Plot against 1st 2 principal components<br>
+ <br>
+ 				  # vary parameters for most readable graph<br>
+ 				  library(cluster)
+ 			    <br>
+ 				  clusplot(mydata, fit$cluster, color=TRUE, shade=TRUE, <br>
+ &nbsp;&nbsp;			    labels=2, lines=0)<br>
+ 				  <br>
+ 				  # Centroid Plot against 1st 2 discriminant functions<br>
+ 				  library(fpc)<br>
+ 				  plotcluster(mydata, fit$cluster)
+ 			      </code></p>
+ 				<p><a href="http://www.statmethods.net/advstats/images/cluster5.jpg"><img src="./Quick-R_ Cluster Analysis_files/smcluster5.jpg" alt="clusplot" width="103" height="103"></a> <a href="http://www.statmethods.net/advstats/images/cluster6.jpg"><img src="./Quick-R_ Cluster Analysis_files/smcluster6.jpg" alt="discriminant plot" width="103" height="103"></a> click to view </p>
+ 				<h2>Validating cluster solutions</h2>
+ 				<p> The function <strong>cluster.stats() </strong>in the <a href="http://cran.r-project.org/web/packages/fpc/index.html">fpc</a> package provides a mechanism for comparing the similarity of two cluster solutions using a variety of validation criteria (Hubert's gamma coefficient, the Dunn index and the corrected rand index) </p>
+ 				<p><code># comparing 2 cluster solutions<br>
+ 			    library(fpc)<br>
+ 				  cluster.stats(d, fit1$cluster, fit2$cluster)
+ </code></p>
+ 				<p>where <strong>d </strong>is a distance matrix among objects, and <strong>fit1$cluster</strong> and <strong>fit$cluste</strong>r are integer vectors containing classification results from two different clusterings of the same data.
+		  </p>
+            <h2>To Practice</h2>
+<p>Try the clustering exercise <a href="https://www.datacamp.com/courses/introduction-to-machine-learning-with-r"> in this introduction to machine learning course.</a></p>
+</div><!-- content -->
+            <div class="clearing">&nbsp;</div>
+    </div></div><!-- main --><!-- main2 -->
+    <div id="footer">
+        <p>Copyright © 2017 <a href="http://www.statmethods.net/about/author.html">Robert I. Kabacoff, Ph.D.</a> | <a href="http://www.statmethods.net/about/sitemap.html">Sitemap</a></p>
+    </div>
+
+
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","286618111707433");fbq("track","PageView");</script>
+<noscript>&lt;img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=286618111707433&amp;amp;ev=PageView&amp;amp;noscript=1"&gt;</noscript>
+
+
+</body></html>

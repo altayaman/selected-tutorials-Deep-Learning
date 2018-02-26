@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<!-- saved from url=(0112)http://debajyotidatta.github.io/nlp/deep/learning/word-embeddings/2016/11/27/Understanding-Convolutions-In-Text/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Understanding Convolutions in Text – blink</title>
+    <link rel="dns-prefetch" href="http://maxcdn.bootstrapcdn.com/">
+    <link rel="dns-prefetch" href="http://cdn.mathjax.org/">
+    <link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Understanding Convolutions in text classification systems">
+    <meta name="robots" content="all">
+    <meta name="author" content="Debajyoti Datta">
+    
+    <meta name="keywords" content="nlp, deep, learning, word-embeddings">
+    <link rel="canonical" href="http://debajyotidatta.github.io//nlp/deep/learning/word-embeddings/2016/11/27/Understanding-Convolutions-In-Text/">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for blink" href="http://debajyotidatta.github.io/feed.xml">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./Understanding Convolutions in Text – blink_files/pixyll.css" type="text/css">
+
+    <!-- Fonts -->
+    
+    <link href="./Understanding Convolutions in Text – blink_files/css" rel="stylesheet" type="text/css">
+    <link href="./Understanding Convolutions in Text – blink_files/css(1)" rel="stylesheet" type="text/css">
+    
+    
+
+    <!-- MathJax -->
+    
+
+    <!-- Verifications -->
+    
+    
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Understanding Convolutions in Text">
+    <meta property="og:description" content="Relying heavily on the work of others since 1991">
+    <meta property="og:url" content="http://debajyotidatta.github.io//nlp/deep/learning/word-embeddings/2016/11/27/Understanding-Convolutions-In-Text/">
+    <meta property="og:site_name" content="blink">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Understanding Convolutions in Text">
+    <meta name="twitter:description" content="Understanding Convolutions in text classification systems">
+    <meta name="twitter:url" content="http://debajyotidatta.github.io//nlp/deep/learning/word-embeddings/2016/11/27/Understanding-Convolutions-In-Text/">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://debajyotidatta.github.io/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://debajyotidatta.github.io/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://debajyotidatta.github.io/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://debajyotidatta.github.io/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="http://debajyotidatta.github.io/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://debajyotidatta.github.io/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://debajyotidatta.github.io/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://debajyotidatta.github.io/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://debajyotidatta.github.io/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="http://debajyotidatta.github.io/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="http://debajyotidatta.github.io/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="http://debajyotidatta.github.io/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="http://debajyotidatta.github.io/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="http://debajyotidatta.github.io/favicon-32x32.png" sizes="32x32">
+
+    
+    <script async="" src="./Understanding Convolutions in Text – blink_files/analytics.js"></script><script type="text/javascript">
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-87323741-1', 'auto');
+       ga('send', 'pageview');
+    </script>
+    
+</head>
+
+<body class="site">
+  
+	
+
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="http://debajyotidatta.github.io/" class="site-title">blink</a>
+      <nav class="site-nav">
+        
+    
+
+    
+        <a href="http://debajyotidatta.github.io/about/">About blink</a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+        <a href="http://debajyotidatta.github.io/contact/">Say Hello</a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+      </nav>
+      <div class="clearfix"></div>
+      
+    </div>
+  </div>
+</header>
+
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+<div class="post-header mb2">
+  <h1>Understanding Convolutions in Text</h1>
+  <span class="post-meta">Nov 27, 2016</span><br>
+  
+  <span class="post-meta small">
+  
+    16 minute read
+  
+  </span>
+</div>
+
+<article class="post-content">
+  <p>In this post, we will build a Convolutional Neural Network (CNNs), but we will understand it through images. CNNs are really powerful, and there is a huge body of research that have used CNNs for a variety of tasks. CNNs have become widely popular in text classification systems. CNNs help in reduction in computation by exploiting local correlation of the input data.</p>
+
+<p>A variant of this work essentially describes the approach I took to create a conversational agent as part of my thesis which involved intent classification for a virtual patient training system. <a href="http://iva2016.ict.usc.edu/wp-content/uploads/Papers/100110430.pdf">1</a>, <a href="http://search.lib.virginia.edu/catalog/libra-oa:11279">2</a>.</p>
+
+<p>This post relies on a lot of fantastic work that has already been done on convolutions in the text,
+and here is a list of papers that delve into the details of most of the content I have described here.</p>
+
+<ul>
+  <li><a href="https://arxiv.org/abs/1103.0398">Natural Language Processing (almost) from Scratch</a></li>
+  <li><a href="https://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf">Character-level Convolutional Networks for Text
+Classification</a></li>
+  <li><a href="http://www.aclweb.org/anthology/D14-1181">Convolutional Neural Networks for Sentence Classification</a></li>
+</ul>
+
+<p>Let’s start with inputs:</p>
+
+<p><img src="./Understanding Convolutions in Text – blink_files/conv.001.png" alt="png"></p>
+
+<p>So the green boxes represent the words or the characters depending on your approach. If you are using character based convolutional neural network then it is characters whereas if you are using words as a unit then it is the word based convolution. And the corresponding blue rows represent the representation of the words or the characters. In the case of character based convolutions, since the number of characters was around 70, including punctuations, numbers, and alphabets, this is generally the one-hot representation. In the case of words, the blue boxes generally represent dense vectors. These dense vectors can be pre-trained word embeddings or word vectors trained during training. See my previous blog post about word embeddings <a href="http://debajyotidatta.github.io/nlp/deep/learning/word-embeddings/2016/09/28/fast-text-and-skip-gram/">here</a>.</p>
+
+<!-- <img src="conv/conv.002.png",width=550,height=550> -->
+
+<p><img src="./Understanding Convolutions in Text – blink_files/conv.002.png" alt="png"></p>
+
+<p>Now as you can see, filters (also known as kernels) can be of any length. Here the length refers to the number of rows of the filter. In the case of images, the width and length of the kernel can be any size. But the width of the kernel in case of character and word representations is the dimension of the entire word embedding or the entire character representation. Thus the only dimension that matters in the case of convolutions in NLP tasks, is the length of the filter or the size of the filter.</p>
+
+<p>Now the filters need to convolve with the input and produce the output. Convolve is a fancy term for multiplication with corresponding cells and adding up the sum. This part is slightly tricky to understand and varies based on things like stride (How much the filter moves every stage?) and the length of the filter. The output of the convolution operation is directly dependent on these two aspects. This will become clearer in the following image.</p>
+
+<!-- <img src="conv/conv.003.png",width=300,height=300>
+<img src="conv/conv.004.png",width=300,height=300>
+<img src="conv/conv.005.png",width=300,height=300>
+<img src="conv/conv.006.png",width=300,height=300> -->
+
+<p><img src="./Understanding Convolutions in Text – blink_files/conv.003.png" alt="png">
+<img src="./Understanding Convolutions in Text – blink_files/conv.004.png" alt="png">
+<img src="./Understanding Convolutions in Text – blink_files/conv.005.png" alt="png">
+<img src="./Understanding Convolutions in Text – blink_files/conv.006.png" alt="png"></p>
+
+<p>Now, this is where all the interesting bit happens! The convolution is just the multiplication of the weights in the filters and the corresponding representation of the words or characters. Each of the output of the multiplication is then just summed up and it produces one output, shown with the arrow. Thus if the filter would have moved with a stride of 2, then the number of filter outputs would have been different. If the filter length was different, the convolved output would be different. Convince yourself that the filter of the length 4, when convolved, will just produce 2 outputs.</p>
+
+<p>Like multiple filter lengths, there can be multiple filters of the same length. So there can be a 100 filters of length 2, a hundred filters of length 4 and so on.</p>
+
+<p>Each of these will then produce multiple outputs!</p>
+
+<!-- <img src="conv/conv2.006.png",width=400,height=400> -->
+
+<p><img src="./Understanding Convolutions in Text – blink_files/conv2.006.png" alt="png"></p>
+
+<p>The final stage comprises of max pooling then concatenation and softmax regularization.</p>
+
+<!-- <img src="conv/conv2.007.png",width=300,height=300> -->
+
+<p><img src="./Understanding Convolutions in Text – blink_files/conv2.007.png" alt="png"></p>
+
+<p>Aha! And that is it! The entire process was very nicely illustrated by Zhang et al, in the paper “A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional
+Neural Networks for Sentence Classification”, for words. The above is just replicating the same for characters and how it would appear at every step!</p>
+
+<!-- <img src="conv/Zhang.png",width=400,height=400> -->
+
+<p><img src="./Understanding Convolutions in Text – blink_files/Zhang.png" alt="png"></p>
+
+<p>Let’s now dive into the code and explore these features in depth!</p>
+
+<p>Understanding convolutions through code will make the process of understanding CNN really easy and can thus be used for a variety of other tasks.</p>
+
+<p>The task we are trying to accomplish here is to classify text. Specifically, the input to the convolutional network can be words or characters like we discussed before. Here, from the sequence of words, in a sentence or from the sequence of characters in a sentence we would want to classify the category of the sentence, like positive or negative and so on.</p>
+
+<p>This post assumes familiarity with Keras, but that may not be necessary if you just want an overview of the architectures.</p>
+
+<p>The papers we mentioned above, are the ones we will touch upon in this post.</p>
+
+<p>I will use the imdb data for the text classification part of the work instead of the dataset I used for my thesis. The idea and implementation, however, is very similar.</p>
+
+<p>So the data we will be exploring is the imdb sentiment analysis data, that can be found in the UCI Machine Learning Repository
+<a href="https://archive.ics.uci.edu/ml/datasets/Sentiment+Labelled+Sentences">here</a></p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">keras.utils.np_utils</span> <span class="kn">import</span> <span class="n">to_categorical</span>
+
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Using TensorFlow backend.
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"sentiment labelled sentences/imdb_labelled.txt"</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'review'</span><span class="p">,</span><span class="s">'label'</span><span class="p">])</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"sentiment labelled sentences/yelp_labelled.txt"</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'review'</span><span class="p">,</span><span class="s">'label'</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">data</span>
+</code></pre>
+</div>
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Wow... Loved this place.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Crust is not good.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Not tasty and the texture was just nasty.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Stopped by during the late May bank holiday of...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>The selection on the menu was great and so wer...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Now I am getting angry and I want my damn pho.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Honeslty it didn't taste THAT fresh.)</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>The potatoes were like rubber and you could te...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>The fries were great too.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>A great touch.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Service was very prompt.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Would not go back.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>The cashier had no care what so ever on what I...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>I tried the Cape Cod ravoli, chicken,with cran...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>I was disgusted because I was pretty sure that...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>I was shocked because no signs indicate cash o...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Highly recommended.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Waitress was a little slow in service.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>This place is not worth your time, let alone V...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>did not like at all.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>The Burrittos Blah!</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>The food, amazing.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Service is also cute.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>I could care less... The interior is just beau...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>So they performed.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>That's right....the red velvet cake.....ohhh t...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>- They never brought a salad we asked for.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>This hole in the wall has great Mexican street...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Took an hour to get our food only 4 tables in ...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>The worst was the salmon sashimi.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>970</th>
+      <td>I immediately said I wanted to talk to the man...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>971</th>
+      <td>The ambiance isn't much better.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>972</th>
+      <td>Unfortunately, it only set us up for disapppoi...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>973</th>
+      <td>The food wasn't good.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>974</th>
+      <td>Your servers suck, wait, correction, our serve...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>975</th>
+      <td>What happened next was pretty....off putting.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>976</th>
+      <td>too bad cause I know it's family owned, I real...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>977</th>
+      <td>Overpriced for what you are getting.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>978</th>
+      <td>I vomited in the bathroom mid lunch.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>979</th>
+      <td>I kept looking at the time and it had soon bec...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>980</th>
+      <td>I have been to very few places to eat that und...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>981</th>
+      <td>We started with the tuna sashimi which was bro...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>982</th>
+      <td>Food was below average.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>983</th>
+      <td>It sure does beat the nachos at the movies but...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>984</th>
+      <td>All in all, Ha Long Bay was a bit of a flop.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>985</th>
+      <td>The problem I have is that they charge $11.99 ...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>986</th>
+      <td>Shrimp- When I unwrapped it (I live only 1/2 a...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>987</th>
+      <td>It lacked flavor, seemed undercooked, and dry.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>988</th>
+      <td>It really is impressive that the place hasn't ...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>989</th>
+      <td>I would avoid this place if you are staying in...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>990</th>
+      <td>The refried beans that came with my meal were ...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>991</th>
+      <td>Spend your money and time some place else.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>992</th>
+      <td>A lady at the table next to us found a live gr...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>993</th>
+      <td>the presentation of the food was awful.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>994</th>
+      <td>I can't tell you how disappointed I was.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>995</th>
+      <td>I think food should have flavor and texture an...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>Appetite instantly gone.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>997</th>
+      <td>Overall I was not impressed and would not go b...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>998</th>
+      <td>The whole experience was underwhelming, and I ...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>Then, as if I hadn't wasted enough of my life ...</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1000 rows × 2 columns</p>
+</div>
+
+<h2 id="character-based-cnn">Character based CNN</h2>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">docs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sentences</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sentiments</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">sentences</span><span class="p">,</span> <span class="n">sentiment</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">review</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">label</span><span class="p">):</span>
+    <span class="n">sentences_cleaned</span> <span class="o">=</span> <span class="p">[</span><span class="n">sent</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
+    <span class="n">docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sentences_cleaned</span><span class="p">)</span>
+    <span class="n">sentiments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sentiment</span><span class="p">)</span>
+
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="nb">len</span><span class="p">(</span><span class="n">docs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentiments</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(1000, 1000)
+</code></pre>
+</div>
+
+<p>Now that we have documents of length 1000, and sentiments of length 1000, let’s do the NLP part.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">maxlen</span> <span class="o">=</span> <span class="mi">1024</span> <span class="c"># In the original paper for character level convolutions, Zhang et al. used</span>
+<span class="c"># a maxlen of 1014. Just using 1024, because for the sake of consitency, of comparison</span>
+<span class="c"># with the next model. Also, the number 1014 kinda bothered me. 1024 makes me feel a lot better.</span>
+<span class="n">nb_filter</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">dense_outputs</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">filter_kernels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">n_out</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">nb_epoch</span> <span class="o">=</span> <span class="mi">10</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">txt</span> <span class="o">=</span> <span class="s">''</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+        <span class="n">txt</span> <span class="o">+=</span> <span class="n">s</span>
+<span class="n">chars</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'total chars:'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">))</span>
+<span class="n">char_indices</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">c</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chars</span><span class="p">))</span>
+<span class="n">indices_char</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chars</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>('total chars:', 56)
+</code></pre>
+</div>
+
+<p>Here we have a total of 57 characters.  In the original paper, the number of characters was 70, which included 26 English letters, 10 digits, 33 other characters and the new line character. The non-space characters are: <br></p>
+
+<p>abcdefghijklmnopqrstuvwxyz0123456789 <br></p>
+
+<p>-,;.!?:’’’/|_@#$%ˆ&amp;*˜‘+-=&lt;&gt;()[]{}</p>
+
+<p>Before the convolutions, we need the data to the neural network to be of a particular format.</p>
+
+<p>The format is as follows:</p>
+
+<p>Number_of_Reviews X maxlen X Vocab_Size</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.preprocessing.sequence</span> <span class="kn">import</span> <span class="n">pad_sequences</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">vectorize_sentences</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">char_indices</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sentences</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">char_indices</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">char_indices</span><span class="p">))[</span><span class="n">x</span><span class="p">]</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">maxlen</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">train_data</span> <span class="o">=</span> <span class="n">vectorize_sentences</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span><span class="n">char_indices</span><span class="p">)</span>
+<span class="n">train_data</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">sentiments</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Now we have the data in the right format! Number_of_Reviews X maxlen X Vocab_Size</p>
+
+<p>Now the model is fairly simple. Here are the details:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Flatten</span>
+<span class="kn">from</span> <span class="nn">keras.layers.convolutional</span> <span class="kn">import</span> <span class="n">Convolution1D</span><span class="p">,</span> <span class="n">MaxPooling1D</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">maxlen</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s">'input'</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s">'float32'</span><span class="p">)</span>
+
+<span class="n">conv</span> <span class="o">=</span> <span class="n">Convolution1D</span><span class="p">(</span><span class="n">nb_filter</span><span class="o">=</span><span class="n">nb_filter</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="n">filter_kernels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                     <span class="n">border_mode</span><span class="o">=</span><span class="s">'valid'</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">,</span>
+                     <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">maxlen</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">))(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">conv</span> <span class="o">=</span> <span class="n">MaxPooling1D</span><span class="p">(</span><span class="n">pool_length</span><span class="o">=</span><span class="mi">3</span><span class="p">)(</span><span class="n">conv</span><span class="p">)</span>
+
+<span class="n">conv1</span> <span class="o">=</span> <span class="n">Convolution1D</span><span class="p">(</span><span class="n">nb_filter</span><span class="o">=</span><span class="n">nb_filter</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="n">filter_kernels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="n">border_mode</span><span class="o">=</span><span class="s">'valid'</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">conv</span><span class="p">)</span>
+<span class="n">conv1</span> <span class="o">=</span> <span class="n">MaxPooling1D</span><span class="p">(</span><span class="n">pool_length</span><span class="o">=</span><span class="mi">3</span><span class="p">)(</span><span class="n">conv1</span><span class="p">)</span>
+
+<span class="n">conv2</span> <span class="o">=</span> <span class="n">Convolution1D</span><span class="p">(</span><span class="n">nb_filter</span><span class="o">=</span><span class="n">nb_filter</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="n">filter_kernels</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                      <span class="n">border_mode</span><span class="o">=</span><span class="s">'valid'</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">conv1</span><span class="p">)</span>
+
+<span class="n">conv3</span> <span class="o">=</span> <span class="n">Convolution1D</span><span class="p">(</span><span class="n">nb_filter</span><span class="o">=</span><span class="n">nb_filter</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="n">filter_kernels</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                      <span class="n">border_mode</span><span class="o">=</span><span class="s">'valid'</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">conv2</span><span class="p">)</span>
+
+<span class="n">conv4</span> <span class="o">=</span> <span class="n">Convolution1D</span><span class="p">(</span><span class="n">nb_filter</span><span class="o">=</span><span class="n">nb_filter</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="n">filter_kernels</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                      <span class="n">border_mode</span><span class="o">=</span><span class="s">'valid'</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">conv3</span><span class="p">)</span>
+
+<span class="n">conv5</span> <span class="o">=</span> <span class="n">Convolution1D</span><span class="p">(</span><span class="n">nb_filter</span><span class="o">=</span><span class="n">nb_filter</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="n">filter_kernels</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                      <span class="n">border_mode</span><span class="o">=</span><span class="s">'valid'</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">conv4</span><span class="p">)</span>
+<span class="n">conv5</span> <span class="o">=</span> <span class="n">MaxPooling1D</span><span class="p">(</span><span class="n">pool_length</span><span class="o">=</span><span class="mi">3</span><span class="p">)(</span><span class="n">conv5</span><span class="p">)</span>
+<span class="n">conv5</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()(</span><span class="n">conv5</span><span class="p">)</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)(</span><span class="n">Dense</span><span class="p">(</span><span class="n">dense_outputs</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">conv5</span><span class="p">))</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)(</span><span class="n">Dense</span><span class="p">(</span><span class="n">dense_outputs</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">z</span><span class="p">))</span>
+
+<span class="n">pred</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_out</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'softmax'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'output'</span><span class="p">)(</span><span class="n">z</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">pred</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">'categorical_crossentropy'</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s">'rmsprop'</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s">'accuracy'</span><span class="p">])</span>
+
+<span class="c"># model.fit(train_data, y_train, batch_size=32,</span>
+<span class="c">#            nb_epoch=120, validation_split=0.2, verbose=False)</span>
+
+
+<span class="kn">from</span> <span class="nn">keras.utils.visualize_util</span> <span class="kn">import</span> <span class="n">model_to_dot</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">Image</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s">'dot'</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">'png'</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p><img src="./Understanding Convolutions in Text – blink_files/output_20_0.png" alt="png"></p>
+
+<h2 id="word-based-cnn">Word based CNN</h2>
+
+<p>The next part, we will use convolutions on words. Since convolutions on words also have produced really good results.</p>
+
+<p>Now the input data needs to be in the form:</p>
+
+<p>Number_of_reviews X maxlen</p>
+
+<p>So let’s process the data in that format. Here we will use a variation of Yoon Kim’s paper.
+Now the imdb data is really small, for these to be very effective. But hopefully, this will be sufficient for you to do experiments with your own data sets.</p>
+
+<p>For tokenization, there is a fantastic NLP library, <a href="https://spacy.io/">Spacy</a> that has become popular recently, and we will use that. Tokenization the right way is a very important task and can drastically affect the result. For instance, if you just decide to tokenize based on space then the word ‘did’ will have two representations in ‘did!’ and ‘did’. You can even define custom rules for tokenization based on your dataset. Spacy has a really good example of that <a href="https://spacy.io/docs/usage/customizing-tokenizer">here</a>.  Since the IMDB dataset is a relatively clean one, we will just use the default tokenizer that spacy gives us. Feel free to experiment with the variety of options Spacy provides.</p>
+
+<p>Examples: ‘did!’ and ‘did’</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"sentiment labelled sentences/yelp_labelled.txt"</span><span class="p">,</span>
+                   <span class="n">delimiter</span><span class="o">=</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'review'</span><span class="p">,</span><span class="s">'label'</span><span class="p">],</span><span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+<span class="c"># z = list(nlp.pipe(data['review'], n_threads=20, batch_size=20000))</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">spacy.en</span> <span class="kn">import</span> <span class="n">English</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">raw_text</span> <span class="o">=</span> <span class="s">'Hello, world. Here are two sentences.'</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
+
+
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tokenizeSentences</span><span class="p">(</span><span class="n">sent</span><span class="p">):</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">sent</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sentences</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">Xs</span> <span class="o">=</span> <span class="p">[]</span>    
+<span class="k">for</span> <span class="n">texts</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s">'review'</span><span class="p">]:</span>
+    <span class="n">Xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tokenizeSentences</span><span class="p">(</span><span class="n">texts</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">Xs</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[[u'Wow', u'...', u'Loved', u'this', u'place', u'.'],
+ [u'Crust', u'is', u'not', u'good', u'.'],
+ [u'Not',
+  u'tasty',
+  u'and',
+  u'the',
+  u'texture',
+  u'was',
+  u'just',
+  u'nasty',
+  u'.']]
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">vocab</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">|</span> <span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="k">for</span> <span class="n">words</span> <span class="ow">in</span> <span class="n">Xs</span><span class="p">)))</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>2349
+</code></pre>
+</div>
+
+<p>At this stage, you can go ahead with this vocab, but ideally, we would want to get rid of the very infrequent words. So cases where the tokenizer failed, or the emoticons and so on. This is because if someone used the word ‘amaaazzziiinggg’ or ‘Wooooooow’ to describe the movie we do not want to create two different tokens for the word ‘amazing’. Also, you can define custom rules in Spacy to take these into account. Secondly, another option that is often followed in information retrieval approaches is to get rid of the most frequent words. This is because words like ‘the’, ‘an’ and so on occur very frequently and do not add to the meaning. We will ignore this part of the IMDB dataset since it is already really small but the following code snippet will help you get rid of the most frequent and the least frequent words in case you desire so.</p>
+
+<p>So let’s build a function to get words that have at least appeared more than once in our vocab. The reason for doing this, instead of selecting the most frequent 500 words, is that there will be a lot of words that get eliminated arbitrarily as soon as we reach the 500-word limit. (A lot of words have very similar counts!)</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">operator</span>
+
+<span class="k">def</span> <span class="nf">word_freq</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+    <span class="n">all_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">words</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">sentences</span> <span class="ow">in</span> <span class="n">Xs</span> <span class="k">for</span> <span class="n">words</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
+    <span class="n">sorted_vocab</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">all_words</span><span class="p">))</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">final_vocab</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">sorted_vocab</span> <span class="k">if</span> <span class="n">v</span><span class="o">&gt;</span><span class="n">num</span><span class="p">]</span>
+    <span class="n">word_idx</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">c</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">final_vocab</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">final_vocab</span><span class="p">,</span> <span class="n">word_idx</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">final_vocab</span><span class="p">,</span> <span class="n">word_idx</span> <span class="o">=</span> <span class="n">word_freq</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">vocab_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">final_vocab</span><span class="p">)</span> <span class="c"># Finally we have 598 words!</span>
+</code></pre>
+</div>
+
+<p>Here is something I do often during text processing. The vectorize function will vectorize the words we have. Now there are three possible scenarios that can occur. Because we didn’t specifically lower case all the words:
+    the word is in the dictionary and we found it
+    the lower case word is in the dictionary and we found it
+    the word is not in the dictionary</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">vectorize_sentences</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">word_idx</span><span class="p">,</span> <span class="n">final_vocab</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">40</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">paddingIdx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">final_vocab</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span>
+    <span class="k">for</span> <span class="n">sentences</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">final_vocab</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word_idx</span><span class="p">[</span><span class="n">word</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">final_vocab</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word_idx</span><span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">paddingIdx</span><span class="p">)</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">maxlen</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">train_data</span> <span class="o">=</span> <span class="n">vectorize_sentences</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span> <span class="n">word_idx</span><span class="p">,</span> <span class="n">final_vocab</span><span class="p">)</span>
+<span class="n">train_data</span><span class="o">.</span><span class="n">shape</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(1000, 40)
+</code></pre>
+</div>
+
+<p>The following convolution architecture is very similar to the one proposed by Kim et al.,
+except here we are not using pre-trained word embeddings. The addition of pre-trained word
+embeddings should be fairly simple. <a href="https://blog.keras.io/">Here</a> is a nice example, on the keras blog.</p>
+
+<p>https://blog.keras.io/</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.layers.core</span> <span class="kn">import</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Merge</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Convolution1D</span>
+<span class="kn">from</span> <span class="nn">keras.layers.pooling</span> <span class="kn">import</span> <span class="n">MaxPooling1D</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers.embeddings</span> <span class="kn">import</span> <span class="n">Embedding</span>
+<span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="kn">import</span> <span class="n">Adam</span><span class="p">,</span> <span class="n">rmsprop</span>
+
+
+<span class="n">n_in</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">EMBEDDING_DIM</span><span class="o">=</span><span class="mi">100</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">filter_sizes</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">dropout_prob</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]</span>
+
+<span class="n">graph_in</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">EMBEDDING_DIM</span><span class="p">))</span>
+<span class="n">convs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">avgs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fsz</span> <span class="ow">in</span> <span class="n">filter_sizes</span><span class="p">:</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="n">Convolution1D</span><span class="p">(</span><span class="n">nb_filter</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+                         <span class="n">filter_length</span><span class="o">=</span><span class="n">fsz</span><span class="p">,</span>
+                         <span class="n">border_mode</span><span class="o">=</span><span class="s">'valid'</span><span class="p">,</span>
+                         <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">,</span>
+                         <span class="n">subsample_length</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span><span class="n">graph_in</span><span class="p">)</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">MaxPooling1D</span><span class="p">(</span><span class="n">pool_length</span><span class="o">=</span><span class="n">n_in</span><span class="o">-</span><span class="n">fsz</span><span class="o">+</span><span class="mi">1</span><span class="p">)(</span><span class="n">conv</span><span class="p">)</span>
+    <span class="n">flattenMax</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()(</span><span class="n">pool</span><span class="p">)</span>
+    <span class="n">convs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flattenMax</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filter_sizes</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">Merge</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s">'concat'</span><span class="p">)(</span><span class="n">convs</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">convs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">graph_in</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">out</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"graphModel"</span><span class="p">)</span>
+
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Embedding</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">vocab_len</span><span class="p">,</span> <span class="c">#size of vocabulary</span>
+                 <span class="n">output_dim</span> <span class="o">=</span> <span class="n">EMBEDDING_DIM</span><span class="p">,</span>
+                 <span class="n">input_length</span> <span class="o">=</span> <span class="n">n_in</span><span class="p">,</span>
+                 <span class="n">trainable</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout_prob</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout_prob</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s">'relu'</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s">'sigmoid'</span><span class="p">))</span>
+
+<span class="n">number_of_epochs</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="c"># adam = Adam(clipnorm=.1)</span>
+<span class="n">model</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">'categorical_crossentropy'</span><span class="p">,</span>
+              <span class="n">optimizer</span><span class="o">=</span><span class="s">'adam'</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s">'acc'</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">train_data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>((1000, 40), (1000, 2))
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+           <span class="n">nb_epoch</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Train on 800 samples, validate on 200 samples
+Epoch 1/10
+800/800 [==============================] - 0s - loss: 0.0542 - acc: 0.9838 - val_loss: 0.5125 - val_acc: 0.7850
+Epoch 2/10
+800/800 [==============================] - 0s - loss: 0.0305 - acc: 0.9950 - val_loss: 0.7075 - val_acc: 0.7700
+Epoch 3/10
+800/800 [==============================] - 0s - loss: 0.0288 - acc: 0.9937 - val_loss: 0.7525 - val_acc: 0.7700
+Epoch 4/10
+800/800 [==============================] - 0s - loss: 0.0204 - acc: 0.9950 - val_loss: 0.8603 - val_acc: 0.7600
+Epoch 5/10
+800/800 [==============================] - 0s - loss: 0.0116 - acc: 0.9975 - val_loss: 0.6404 - val_acc: 0.7950
+Epoch 6/10
+800/800 [==============================] - 0s - loss: 0.0242 - acc: 0.9937 - val_loss: 0.7380 - val_acc: 0.7800
+Epoch 7/10
+800/800 [==============================] - 0s - loss: 0.0141 - acc: 0.9975 - val_loss: 0.5975 - val_acc: 0.8050
+Epoch 8/10
+800/800 [==============================] - 0s - loss: 0.0123 - acc: 0.9975 - val_loss: 0.8370 - val_acc: 0.7700
+Epoch 9/10
+800/800 [==============================] - 0s - loss: 0.0093 - acc: 0.9988 - val_loss: 0.7746 - val_acc: 0.7800
+Epoch 10/10
+800/800 [==============================] - 0s - loss: 0.0102 - acc: 0.9962 - val_loss: 0.7894 - val_acc: 0.7900
+
+
+
+
+
+&lt;keras.callbacks.History at 0x7f071234ea50&gt;
+</code></pre>
+</div>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="center">
+  <div class="measure">
+    <small>
+      Theme crafted with &lt;3 by <a href="http://johnotander.com/">John Otander</a> (<a href="https://twitter.com/4lpine">@4lpine</a>).<br>
+      &lt;/&gt; available on <a href="https://github.com/johnotander/pixyll">Github</a>.
+    </small>
+  </div>
+</footer>
+
+
+
+
+</body></html>

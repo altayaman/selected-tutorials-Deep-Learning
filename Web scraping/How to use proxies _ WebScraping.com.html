@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://webscraping.com/blog/How-to-use-proxies/ -->
+<html lang="en" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>How to use proxies | WebScraping.com</title>
+    
+    <meta name="author" content="WebScraping.com">
+    <meta content="description" name="">
+    <meta content="keywords" name="web scraping, example, proxies">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="./How to use proxies _ WebScraping.com_files/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./How to use proxies _ WebScraping.com_files/custom.css">
+    <link rel="shortcut icon" type="image/x-icon" href="https://webscraping.com/favicon.ico">
+    <link rel="alternate" type="application/atom+xml" title="Feed for webscraping.com" href="https://webscraping.com/atom.xml">
+    <link rel="stylesheet" type="text/css" href="./How to use proxies _ WebScraping.com_files/blog.css" media="screen">
+    <script async="" src="./How to use proxies _ WebScraping.com_files/analytics.js"></script><script type="text/javascript" src="./How to use proxies _ WebScraping.com_files/jquery.min.js"></script>
+<script type="text/javascript" async="" src="./How to use proxies _ WebScraping.com_files/embed.js"></script><link rel="preload" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.5f04e83cf97ee6a6cf16dc8e296ed78d.css"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.08b03b11c747b79c4d4135b49e2f8725.js"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.987c6346e2effb8e4f350d48ecf53d13.js"><link rel="preload" as="script" href="https://disqus.com/next/config.js"><script src="./How to use proxies _ WebScraping.com_files/alfie.f51946af45e0b561c60f768335c9eb79.js" async="" charset="UTF-8"></script></head>
+
+<body>
+  <!--<div class="flash"></div>-->
+  <div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand logo" href="http://webscraping.com/">
+            <img src="./How to use proxies _ WebScraping.com_files/logo.png">
+          </a>
+        </div><!-- navbar-header -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">   
+              <li><a href="https://webscraping.com/about">About</a></li>
+              <li class="active"><a href="https://webscraping.com/blog">Blog</a></li>
+              <li><a href="https://webscraping.com/data">Data</a></li>	  
+              <li class="dropdown">
+                <a href="https://webscraping.com/blog/How-to-use-proxies/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Contact<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="https://webscraping.com/quote">Request a Quote</a></li>	      
+                  <li><a href="https://webscraping.com/contact">Send email</a></li>
+                </ul>
+              </li>    
+            </ul>
+            <form class="navbar-form navbar-right" role="search" action="https://webscraping.com/search">
+                <div class="form-group has-feedback">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search">
+                  <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+                </div>
+            </form>
+         </div><!-- collapse navbar-collapse -->
+    </div><!-- container -->
+  </div><!--/top navbar -->
+  
+  <script type="text/javascript" src="./How to use proxies _ WebScraping.com_files/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./How to use proxies _ WebScraping.com_files/modernizr.custom.js"></script>
+  <script type="text/javascript" src="./How to use proxies _ WebScraping.com_files/jquery.placeholder.js"></script>
+  <div class="container">
+    <section id="main" class="main row">
+    <div class="col-sm-9 col-md-9">
+    <div class="each_blog">
+    <div class="heading center">How to use proxies</div>
+    <div class="meta">Posted 29 Nov 2011 in <a href="https://webscraping.com/blog/category/example/">example</a> and <a href="https://webscraping.com/blog/category/proxies/">proxies</a></div>
+    <p></p><p>Proxies can be necessary when web scraping because some websites restrict the number of page downloads from each user. With proxies it looks like your requests come from multiple users so the chance of being blocked is reduced.</p>
+
+<p>Most people seem to first try collecting their proxies from the various free lists such as <a href="http://hidemyass.com/proxy-list/">this one</a> and then get frustrated because the proxies stop working. 
+If this is more than a hobby then it would be a better use of your time to rent your proxies from a provider like <a href="http://packetflip.com/">packetflip</a>, <a href="http://usaproxies.net/">USA proxies</a>, or <a href="http://proxybonanza.com/">proxybonanza</a>.
+These free lists are not reliable because so many people use them.</p>
+
+<p>Each proxy will have the format <em>login:password@IP:port</em><br>
+The login details and port are optional. Here are some examples:</p>
+
+<ul>
+  <li>bob:eakej34@66.12.121.140:8000</li>
+  <li>219.66.12.12</li>
+  <li>219.66.12.14:8080</li>
+</ul>
+
+<p>With the <a href="http://code.google.com/p/webscraping/">webscraping library</a> you can then use the proxies like this:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">webscraping</span> <span class="kn">import</span> <span class="n">download</span>  
+<span class="n">D</span> <span class="o">=</span> <span class="n">download</span><span class="o">.</span><span class="n">Download</span><span class="p">(</span><span class="n">proxies</span><span class="o">=</span><span class="n">proxies</span><span class="p">,</span> <span class="n">user_agent</span><span class="o">=</span><span class="n">user_agent</span><span class="p">)</span>  
+<span class="n">html</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></code></pre></figure>
+
+<p>The above script will download content through a random proxy from the given list. Here is a standalone version:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">urllib2</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="kn">import</span> <span class="nn">random</span>  
+<span class="kn">import</span> <span class="nn">StringIO</span>  
+  
+<span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">user_agent</span><span class="o">=</span><span class="s">'Mozilla/5.0'</span><span class="p">):</span>  
+    <span class="s">"""Download the content at this url and return the content  
+"""</span>  
+    <span class="n">opener</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">build_opener</span><span class="p">()</span>  
+    <span class="k">if</span> <span class="n">proxies</span><span class="p">:</span>  
+        <span class="c"># download through a random proxy from the list  </span>
+        <span class="n">proxy</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">proxies</span><span class="p">)</span>  
+        <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'https://'</span><span class="p">):</span>  
+            <span class="n">opener</span><span class="o">.</span><span class="n">add_handler</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">({</span><span class="s">'https'</span> <span class="p">:</span> <span class="n">proxy</span><span class="p">}))</span>  
+        <span class="k">else</span><span class="p">:</span>  
+            <span class="n">opener</span><span class="o">.</span><span class="n">add_handler</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">({</span><span class="s">'http'</span> <span class="p">:</span> <span class="n">proxy</span><span class="p">}))</span>  
+      
+    <span class="c"># submit these headers with the request  </span>
+    <span class="n">headers</span> <span class="o">=</span>  <span class="p">{</span><span class="s">'User-agent'</span><span class="p">:</span> <span class="n">user_agent</span><span class="p">,</span> <span class="s">'Accept-encoding'</span><span class="p">:</span> <span class="s">'gzip'</span><span class="p">,</span> <span class="s">'Referer'</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span>  
+      
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>  
+        <span class="c"># need to post this data  </span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  
+    <span class="k">try</span><span class="p">:</span>  
+        <span class="n">response</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">))</span>  
+        <span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'content-encoding'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'gzip'</span><span class="p">:</span>  
+            <span class="c"># data came back gzip-compressed so decompress it            </span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">GzipFile</span><span class="p">(</span><span class="n">fileobj</span><span class="o">=</span><span class="n">StringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">content</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  
+    <span class="k">except</span> <span class="nb">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>  
+        <span class="c"># so many kinds of errors are possible here so just catch them all  </span>
+        <span class="k">print</span> <span class="s">'Error: </span><span class="si">%</span><span class="s">s </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>  
+        <span class="n">content</span> <span class="o">=</span> <span class="bp">None</span>  
+    <span class="k">return</span> <span class="n">content</span></code></pre></figure>
+
+<p></p>
+</div>
+
+
+    <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./How to use proxies _ WebScraping.com_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 582px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+    
+<script type="text/javascript">
+/* disqus settings */
+var disqus_shortname = 'sitescraper';
+var disqus_url = 'http://webscraping.com/blog/How-to-use-proxies/';
+var disqus_title = 'How to use proxies';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+
+
+    </div>
+
+    <div class="right-sidebar col-sm-3 col-md-3">
+       <a href="https://webscraping.com/atom.xml"><img src="./How to use proxies _ WebScraping.com_files/rss.png" alt="Subscribe to blog Feed"></a>
+       <br>
+       <br>
+       <br>
+
+       <div class="cloud"><a style="font-size: 145%" href="https://webscraping.com/blog/category/big%20picture">big picture</a>
+<a style="font-size: 179%" href="https://webscraping.com/blog/category/business">business</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/html">html</a>
+<a style="font-size: 102%" href="https://webscraping.com/blog/category/lxml">lxml</a>
+<a style="font-size: 200%" href="https://webscraping.com/blog/category/python">python</a>
+<a style="font-size: 102%" href="https://webscraping.com/blog/category/xpath">xpath</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/regex">regex</a>
+<a style="font-size: 152%" href="https://webscraping.com/blog/category/opensource">opensource</a>
+<a style="font-size: 102%" href="https://webscraping.com/blog/category/sitescraper">sitescraper</a>
+<a style="font-size: 118%" href="https://webscraping.com/blog/category/CAPTCHA">CAPTCHA</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/IP">IP</a>
+<a style="font-size: 102%" href="https://webscraping.com/blog/category/OCR">OCR</a>
+<a style="font-size: 145%" href="https://webscraping.com/blog/category/google">google</a>
+<a style="font-size: 138%" href="https://webscraping.com/blog/category/crawling">crawling</a>
+<a style="font-size: 118%" href="https://webscraping.com/blog/category/proxies">proxies</a>
+<a style="font-size: 102%" href="https://webscraping.com/blog/category/user-agent">user-agent</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/chickenfoot">chickenfoot</a>
+<a style="font-size: 138%" href="https://webscraping.com/blog/category/javascript">javascript</a>
+<a style="font-size: 145%" href="https://webscraping.com/blog/category/qt">qt</a>
+<a style="font-size: 145%" href="https://webscraping.com/blog/category/webkit">webkit</a>
+<a style="font-size: 118%" href="https://webscraping.com/blog/category/ajax">ajax</a>
+<a style="font-size: 102%" href="https://webscraping.com/blog/category/flash">flash</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/linux">linux</a>
+<a style="font-size: 118%" href="https://webscraping.com/blog/category/gae">gae</a>
+<a style="font-size: 102%" href="https://webscraping.com/blog/category/web2py">web2py</a>
+<a style="font-size: 138%" href="https://webscraping.com/blog/category/cache">cache</a>
+<a style="font-size: 166%" href="https://webscraping.com/blog/category/website">website</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/elance">elance</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/freelancing">freelancing</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/beautifulsoup">beautifulsoup</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/scrapy">scrapy</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/image">image</a>
+<a style="font-size: 118%" href="https://webscraping.com/blog/category/IR">IR</a>
+<a style="font-size: 118%" href="https://webscraping.com/blog/category/concurrent">concurrent</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/mobile">mobile</a>
+<a style="font-size: 173%" href="https://webscraping.com/blog/category/example">example</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/screenshot">screenshot</a>
+<a style="font-size: 102%" href="https://webscraping.com/blog/category/learn">learn</a>
+<a style="font-size: 118%" href="https://webscraping.com/blog/category/efficiency">efficiency</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/sqlite">sqlite</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/Business">Business</a>
+<a style="font-size: 118%" href="https://webscraping.com/blog/category/database">database</a>
+<a style="font-size: 118%" href="https://webscraping.com/blog/category/mobile%20apps">mobile apps</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/cookies">cookies</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/android">android</a>
+<a style="font-size: 102%" href="https://webscraping.com/blog/category/Oxford">Oxford</a>
+<a style="font-size: 75%" href="https://webscraping.com/blog/category/book">book</a>
+</div>
+    </div>
+</section>
+
+  </div>
+
+  <!--<script src="/static/js/custom.js"></script>-->
+  <!--[if lt IE 7 ]>
+      <script src="/static/js/dd_belatedpng.js"></script>
+      <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]-->
+  <script type="text/javascript">    
+      $(function() {
+        $('input, textarea').placeholder();
+      });
+  </script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5434000-4', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+
+<iframe style="display: none;" src="./How to use proxies _ WebScraping.com_files/saved_resource(1).html"></iframe></body></html>

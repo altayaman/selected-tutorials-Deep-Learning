@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://www.yseam.com/blog/WV.html -->
+<html lang="en"><head profile="http://www.w3.org/2005/10/profile"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="icon" type="image/png" href="http://www.yseam.com/blog/img/ylogo.png">
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Feature learning with Word2Vec</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="./Feature learning with Word2Vec_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="./Feature learning with Word2Vec_files/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="./Feature learning with Word2Vec_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="./Feature learning with Word2Vec_files/css" rel="stylesheet" type="text/css">
+    <link href="./Feature learning with Word2Vec_files/css(1)" rel="stylesheet" type="text/css">
+<script async="" src="./Feature learning with Word2Vec_files/analytics.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56429609-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<script type="text/javascript" async="" src="./Feature learning with Word2Vec_files/embed.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><script async="" type="text/javascript" src="./Feature learning with Word2Vec_files/count.js"></script><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><link rel="preload" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.5f04e83cf97ee6a6cf16dc8e296ed78d.css"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.08b03b11c747b79c4d4135b49e2f8725.js"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.987c6346e2effb8e4f350d48ecf53d13.js"><link rel="preload" as="script" href="https://disqus.com/next/config.js"><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax:focus, body :focus .MathJax {display: inline-table}
+.MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax_LineBox {display: table!important}
+.MathJax_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Blank; src: url('about:blank')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.yseam.com/index.php">yseam</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="http://www.yseam.com/blog/index.html">Blog Home</a>
+                    </li>
+                    <!--li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="post.html">Sample Post</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li-->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url(&#39;img/Untitled2.png&#39;)">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Feature learning with Word2Vec</h1>
+                        <h2 class="subheading">Learning similar features of job postings</h2>
+                        <span class="meta">Posted by <a href="http://www.yseam.com/#team">Matt</a> on October 30, 2014</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <h2 class="section-heading">Introduction</h2>
+
+                    <p>Trying to utilize meaningful and useful text features is an art in itself and sometimes simply choosing a model can be an uphill battle. In this particular problem, we were trying to understand the linguistic features of the current job market. When attempting this, one has two easy options: learning from job posts or learning from resumes, the latter being more difficult to get than the former. Job posts can give you a sense of demand in a certain market and the resumes can act as supply quality metric that is trying to meet that market demand. For our task of trying to understand skill similarity and transferability of skill-assets, I turned to word2vec due to its speed and ease of use.</p>
+
+                    <p>This, however, was not an easy decision as a myriad of awesome options exist. One such option was to use GloVe, <strong>Glo</strong>bal <strong> Ve</strong>ctors for Word Representation. GloVe learns word vectors by analyzing word co-occurences within a large text corpus. It is a rather cool implementation. I recommend reading <a href="http://stanford.edu/~jpennin/papers/glove.pdf">this paper</a> for a description of how word vectors are manipulated. The reason I did not utilize this method was for the fact that I wanted to avoid storing any massive matrix in memory, albeit even if it were a sparse matrix. I like utilizing online learning whenever I can and especially with the convenient <a href="http://radimrehurek.com/gensim/models/word2vec.html">gensim-word2vec</a> functionality that only uses in-memory computation with the actual training itself (a bit of code on that later), it made the decision a tad bit easier. Another method that I considered using for this task was the well documented <a href="http://machinelearning.wustl.edu/mlpapers/paper_files/BleiNJ03.pdf">Latent Dirichlet Allocation</a>(LDA). My initial reaction was that LDA was going to be a great solution for my problem of extracting skills from text, but upon further reflection, I realized that what I wanted to do was look for features that are similar with respect to their linguistic context as opposed to words that are related via a 'topic'. For instance: python, data science, sklearn, R, and CRAN might appear in the same 'topic' with LDA, but if I only wanted python and R to appear in a given similarity query, my uneducated guess is word2vec would offer a greater probability of that happening. I suppose that might not be the best example of where my mind was going, but in my experience with LDA, a lot of noise ends up in the actual topic buckets and I really wanted to find a way to minimize that noise. So with that, I went down the path of word2vec.</p>
+
+                    <h2 class="section-heading">Word2Vec</h2>
+                    
+                    <p></p><blockquote>Word2vec is a pretty cool tool. -Biggy Smalls</blockquote><p></p>
+
+
+                    <p>Word2vec computes vector representations of words using a few different techniques, two of which are continuous bag-of-words (CBOW) and an architecture called a Skipgram. The high-level training objective of the CBOW model is to combine the representations of surrounding words to predict the word in the middle, while the training objective of the skipgram model is to learn word-vector representations that are good at predicting its context in the same sentence <a class="footnote-reference" href="http://www.yseam.com/blog/WV.html#id11" id="id1">[1]</a>. It is important to note that both models are trainable in a short amount of time, but that CBOW is slightly faster and is more suited for when the dataset is larger <a class="footnote-reference" href="http://www.yseam.com/blog/WV.html#id22" id="id2">[2]</a>. Considering my toy dataset only consists of ~80,000 sentences, I will use the skip-gram architecture for this post. (In my actual model consisting of a few billion sentences, I will be using CBOW).</p> 
+
+                    <h2 class="section-heading">Skipgram</h2>
+                    
+                    <p> Given a sequence of training words <span class="MathJax_Preview" style="color: inherit; display: none;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-29-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/msub&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msub&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mn&gt;3&lt;/mn&gt;&lt;/msub&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mo&gt;.&lt;/mo&gt;&lt;mo&gt;.&lt;/mo&gt;&lt;mo&gt;.&lt;/mo&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;/msub&gt;&lt;mtext&gt;&amp;#xA0;&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" style="width: 8.925em; display: inline-block;"><span style="display: inline-block; position: relative; width: 7.675em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.942em 1007.42em 2.804em -999.998em); top: -2.498em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="msubsup" id="MathJax-Span-3"><span style="display: inline-block; position: relative; width: 1.08em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.65em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-4" style="font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.649em;"><span class="mn" id="MathJax-Span-5" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-6" style="font-family: STIXGeneral-Regular;">,</span><span class="msubsup" id="MathJax-Span-7" style="padding-left: 0.175em;"><span style="display: inline-block; position: relative; width: 1.08em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.65em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-8" style="font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.649em;"><span class="mn" id="MathJax-Span-9" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-10" style="font-family: STIXGeneral-Regular;">,</span><span class="msubsup" id="MathJax-Span-11" style="padding-left: 0.175em;"><span style="display: inline-block; position: relative; width: 1.08em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.65em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-12" style="font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.649em;"><span class="mn" id="MathJax-Span-13" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">3</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-14" style="font-family: STIXGeneral-Regular;">,</span><span class="mo" id="MathJax-Span-15" style="font-family: STIXGeneral-Regular; padding-left: 0.175em;">.</span><span class="mo" id="MathJax-Span-16" style="font-family: STIXGeneral-Regular; padding-left: 0.175em;">.</span><span class="mo" id="MathJax-Span-17" style="font-family: STIXGeneral-Regular; padding-left: 0.175em;">.</span><span class="mo" id="MathJax-Span-18" style="font-family: STIXGeneral-Regular; padding-left: 0.175em;">,</span><span class="msubsup" id="MathJax-Span-19" style="padding-left: 0.175em;"><span style="display: inline-block; position: relative; width: 1.209em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.65em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-20" style="font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.649em;"><span class="mi" id="MathJax-Span-21" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">T<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.045em;"></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mtext" id="MathJax-Span-22" style="font-family: STIXGeneral-Regular;">&nbsp;</span></span><span style="display: inline-block; width: 0px; height: 2.502em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 0.802em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>w</mi><mn>1</mn></msub><mo>,</mo><msub><mi>w</mi><mn>2</mn></msub><mo>,</mo><msub><mi>w</mi><mn>3</mn></msub><mo>,</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>,</mo><msub><mi>w</mi><mi>T</mi></msub><mtext>&nbsp;</mtext></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-29">w_1,w_2,w_3,...,w_T\</script> 
+                    the objective of the Skipgram model is to maximize the average log probability </p>
+
+                    <span class="MathJax_Preview" style="color: inherit; display: none;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-19-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;mfrac&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mtext class=&quot;MJX-tex-mathit&quot; mathvariant=&quot;italic&quot;&gt;T&lt;/mtext&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;munderover&gt;&lt;mo&gt;&amp;#x2211;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mtext class=&quot;MJX-tex-mathit&quot; mathvariant=&quot;italic&quot;&gt;t =&lt;/mtext&gt;&lt;/mrow&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mtext class=&quot;MJX-tex-mathit&quot; mathvariant=&quot;italic&quot;&gt;T&lt;/mtext&gt;&lt;/mrow&gt;&lt;/munderover&gt;&lt;mo stretchy=&quot;false&quot;&gt;[&lt;/mo&gt;&lt;munderover&gt;&lt;mo&gt;&amp;#x2211;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mtext class=&quot;MJX-tex-mathit&quot; mathvariant=&quot;italic&quot;&gt;j = -k&lt;/mtext&gt;&lt;/mrow&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mtext class=&quot;MJX-tex-mathit&quot; mathvariant=&quot;italic&quot;&gt;k&lt;/mtext&gt;&lt;/mrow&gt;&lt;/munderover&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mtext class=&quot;MJX-tex-mathit&quot; mathvariant=&quot;italic&quot;&gt;p&lt;/mtext&gt;&lt;/mrow&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mtext class=&quot;MJX-tex-mathit&quot; mathvariant=&quot;italic&quot;&gt;w&lt;/mtext&gt;&lt;/mrow&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mtext class=&quot;MJX-tex-mathit&quot; mathvariant=&quot;italic&quot;&gt;t+j&lt;/mtext&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;]&lt;/mo&gt;&lt;mtext&gt;&amp;#xA0;&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-23" style="width: 12.33em; display: inline-block;"><span style="display: inline-block; position: relative; width: 10.606em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(0.606em 1010.35em 4.011em -999.998em); top: -2.498em; left: 0em;"><span class="mrow" id="MathJax-Span-24"><span class="mfrac" id="MathJax-Span-25"><span style="display: inline-block; position: relative; width: 0.692em; height: 0px; margin-right: 0.131em; margin-left: 0.131em;"><span style="position: absolute; clip: rect(3.192em 1000.39em 4.14em -999.998em); top: -4.696em; left: 50%; margin-left: -0.256em;"><span class="mn" id="MathJax-Span-26" style="font-family: STIXGeneral-Regular;">1</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.235em 1000.65em 4.14em -999.998em); top: -3.317em; left: 50%; margin-left: -0.256em;"><span class="texatom" id="MathJax-Span-27"><span class="mrow" id="MathJax-Span-28"><span class="mtext" id="MathJax-Span-29" style="font-family: STIXGeneral-Italic;">T</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(0.907em 1000.69em 1.209em -999.998em); top: -1.291em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.4px solid; width: 0.692em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.08em;"></span></span></span></span><span class="munderover" id="MathJax-Span-30" style="padding-left: 0.175em;"><span style="display: inline-block; position: relative; width: 1.295em; height: 0px;"><span style="position: absolute; clip: rect(2.89em 1001.21em 4.614em -999.998em); top: -4.006em; left: 0em;"><span class="mo" id="MathJax-Span-31" style="font-family: STIXSizeOneSym; vertical-align: -0.515em;">∑</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.407em 1001.12em 4.269em -999.998em); top: -2.843em; left: 0.045em;"><span class="texatom" id="MathJax-Span-32"><span class="mrow" id="MathJax-Span-33"><span class="texatom" id="MathJax-Span-34"><span class="mrow" id="MathJax-Span-35"><span class="mtext" id="MathJax-Span-36" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">t =</span></span></span><span class="mn" id="MathJax-Span-37" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.321em 1000.43em 4.14em -999.998em); top: -5.213em; left: 0.433em;"><span class="texatom" id="MathJax-Span-38"><span class="mrow" id="MathJax-Span-39"><span class="mtext" id="MathJax-Span-40" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">T</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-41" style="font-family: STIXGeneral-Regular;">[</span><span class="munderover" id="MathJax-Span-42"><span style="display: inline-block; position: relative; width: 1.597em; height: 0px;"><span style="position: absolute; clip: rect(2.89em 1001.21em 4.614em -999.998em); top: -4.006em; left: 0.131em;"><span class="mo" id="MathJax-Span-43" style="font-family: STIXSizeOneSym; vertical-align: -0.515em;">∑</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.407em 1001.6em 4.399em -999.998em); top: -2.843em; left: 0em;"><span class="texatom" id="MathJax-Span-44"><span class="mrow" id="MathJax-Span-45"><span class="mtext" id="MathJax-Span-46" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">j = -k</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.278em 1000.35em 4.14em -999.998em); top: -5.213em; left: 0.649em;"><span class="texatom" id="MathJax-Span-47"><span class="mrow" id="MathJax-Span-48"><span class="mtext" id="MathJax-Span-49" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">k</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mi" id="MathJax-Span-50" style="font-family: STIXGeneral-Regular; padding-left: 0.175em;">log</span><span class="mo" id="MathJax-Span-51"></span><span class="texatom" id="MathJax-Span-52" style="padding-left: 0.175em;"><span class="mrow" id="MathJax-Span-53"><span class="mtext" id="MathJax-Span-54" style="font-family: STIXGeneral-Italic;">p</span></span></span><span class="mo" id="MathJax-Span-55" style="font-family: STIXGeneral-Regular;">(</span><span class="msubsup" id="MathJax-Span-56"><span style="display: inline-block; position: relative; width: 1.597em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.65em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="texatom" id="MathJax-Span-57"><span class="mrow" id="MathJax-Span-58"><span class="mtext" id="MathJax-Span-59" style="font-family: STIXGeneral-Italic;">w</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.649em;"><span class="texatom" id="MathJax-Span-60"><span class="mrow" id="MathJax-Span-61"><span class="mtext" id="MathJax-Span-62" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">t+j</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="texatom" id="MathJax-Span-63"><span class="mrow" id="MathJax-Span-64"><span class="mo" id="MathJax-Span-65" style="font-family: STIXVariants;">|</span></span></span><span class="msubsup" id="MathJax-Span-66"><span style="display: inline-block; position: relative; width: 0.95em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.65em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-67" style="font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.649em;"><span class="mi" id="MathJax-Span-68" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-69" style="font-family: STIXGeneral-Regular;">)</span><span class="mo" id="MathJax-Span-70" style="font-family: STIXGeneral-Regular;">]</span><span class="mtext" id="MathJax-Span-71" style="font-family: STIXGeneral-Regular;">&nbsp;</span></span><span style="display: inline-block; width: 0px; height: 2.502em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.648em; border-left: 0px solid; width: 0px; height: 3.802em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mfrac><mn>1</mn><mrow class="MJX-TeXAtom-ORD"><mtext class="MJX-tex-mathit" mathvariant="italic">T</mtext></mrow></mfrac><munderover><mo>∑</mo><mrow class="MJX-TeXAtom-ORD"><mrow class="MJX-TeXAtom-ORD"><mtext class="MJX-tex-mathit" mathvariant="italic">t =</mtext></mrow><mn>1</mn></mrow><mrow class="MJX-TeXAtom-ORD"><mtext class="MJX-tex-mathit" mathvariant="italic">T</mtext></mrow></munderover><mo stretchy="false">[</mo><munderover><mo>∑</mo><mrow class="MJX-TeXAtom-ORD"><mtext class="MJX-tex-mathit" mathvariant="italic">j = -k</mtext></mrow><mrow class="MJX-TeXAtom-ORD"><mtext class="MJX-tex-mathit" mathvariant="italic">k</mtext></mrow></munderover><mi>log</mi><mo>⁡</mo><mrow class="MJX-TeXAtom-ORD"><mtext class="MJX-tex-mathit" mathvariant="italic">p</mtext></mrow><mo stretchy="false">(</mo><msub><mrow class="MJX-TeXAtom-ORD"><mtext class="MJX-tex-mathit" mathvariant="italic">w</mtext></mrow><mrow class="MJX-TeXAtom-ORD"><mtext class="MJX-tex-mathit" mathvariant="italic">t+j</mtext></mrow></msub><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><msub><mi>w</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">]</mo><mtext>&nbsp;</mtext></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-19"> \frac{1}{\textit{T}}\sum^\textit{T}_{\textit{t =}1}[ \sum^\textit{k}_\textit{j = -k}\log \textit{p}(\textit{w}_\textit{t+j}|w_t)] \</script>
+                         
+                        <!--$\frac{1}{\textit{T}}\sum^\textit{T}_{\textit{t =}1}[ \sum^\textit{k}_\textit{j = -k}\log \textit{p}(\textit{w}_\textit{t+j}|w_t)] \$-->
+
+                    <p> where k is the size of the training window.  The inner summation goes from −k to k in the training window to compute the log probability of correctly predicting the word wt+j given the word in the middle, wt. The outer summation goes over all words in the training corpus. Every word, w, is associated with two learnable parameter vectors, uw and vw. The probability of correctly predicting the word wi given the word wj is defined as </p>
+                
+                    <span class="MathJax_Preview" style="color: inherit; display: none;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-39-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;/msub&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;mi&gt;exp&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;msub&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;mo&gt;&amp;#x2ADF;&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;mrow&gt;&lt;munderover&gt;&lt;mo&gt;&amp;#x2211;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;/munderover&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;/msub&gt;&lt;mo&gt;&amp;#x2ADF;&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;mtext&gt;&amp;#xA0;&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-72" style="width: 14.916em; display: inline-block;"><span style="display: inline-block; position: relative; width: 12.847em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(0.907em 1012.59em 3.881em -999.998em); top: -2.498em; left: 0em;"><span class="mrow" id="MathJax-Span-73"><span class="mi" id="MathJax-Span-74" style="font-family: STIXGeneral-Italic;">p</span><span class="mo" id="MathJax-Span-75" style="font-family: STIXGeneral-Regular;">(</span><span class="msubsup" id="MathJax-Span-76"><span style="display: inline-block; position: relative; width: 0.95em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.65em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-77" style="font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.649em;"><span class="mi" id="MathJax-Span-78" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="texatom" id="MathJax-Span-79"><span class="mrow" id="MathJax-Span-80"><span class="mo" id="MathJax-Span-81" style="font-family: STIXVariants;">|</span></span></span><span class="msubsup" id="MathJax-Span-82"><span style="display: inline-block; position: relative; width: 0.95em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.65em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-83" style="font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.649em;"><span class="mi" id="MathJax-Span-84" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">j<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-85" style="font-family: STIXGeneral-Regular;">)</span><span class="mo" id="MathJax-Span-86" style="font-family: STIXGeneral-Regular; padding-left: 0.304em;">=</span><span class="mfrac" id="MathJax-Span-87" style="padding-left: 0.304em;"><span style="display: inline-block; position: relative; width: 7.675em; height: 0px; margin-right: 0.131em; margin-left: 0.131em;"><span style="position: absolute; clip: rect(3.192em 1005.82em 4.485em -999.998em); top: -4.825em; left: 50%; margin-left: -2.929em;"><span class="mrow" id="MathJax-Span-88"><span class="mi" id="MathJax-Span-89" style="font-family: STIXGeneral-Regular;">exp</span><span class="mo" id="MathJax-Span-90"></span><span class="mo" id="MathJax-Span-91" style="font-family: STIXGeneral-Regular;">(</span><span class="texatom" id="MathJax-Span-92"><span class="mrow" id="MathJax-Span-93"><span class="msubsup" id="MathJax-Span-94"><span style="display: inline-block; position: relative; width: 1.252em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.48em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-95" style="font-family: STIXGeneral-Italic;">u</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.519em;"><span class="texatom" id="MathJax-Span-96"><span class="mrow" id="MathJax-Span-97"><span class="msubsup" id="MathJax-Span-98"><span style="display: inline-block; position: relative; width: 0.649em; height: 0px;"><span style="position: absolute; clip: rect(3.58em 1000.48em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-99" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.92em; left: 0.476em;"><span class="mi" id="MathJax-Span-100" style="font-size: 50%; font-family: STIXGeneral-Italic;">i</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span></span></span><span class="mo" id="MathJax-Span-101" style="font-family: STIXGeneral-Regular; padding-left: 0.304em;">⫟</span><span class="msubsup" id="MathJax-Span-102" style="padding-left: 0.304em;"><span style="display: inline-block; position: relative; width: 1.252em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.48em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-103" style="font-family: STIXGeneral-Italic;">u</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.519em;"><span class="texatom" id="MathJax-Span-104"><span class="mrow" id="MathJax-Span-105"><span class="msubsup" id="MathJax-Span-106"><span style="display: inline-block; position: relative; width: 0.649em; height: 0px;"><span style="position: absolute; clip: rect(3.58em 1000.48em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-107" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.92em; left: 0.476em;"><span class="mi" id="MathJax-Span-108" style="font-size: 50%; font-family: STIXGeneral-Italic;">j<span style="display: inline-block; overflow: hidden; height: 1px; width: 0em;"></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-109" style="font-family: STIXGeneral-Regular;">)</span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(2.933em 1007.5em 4.485em -999.998em); top: -3.101em; left: 50%; margin-left: -3.791em;"><span class="mrow" id="MathJax-Span-110"><span class="munderover" id="MathJax-Span-111"><span style="display: inline-block; position: relative; width: 2.028em; height: 0px;"><span style="position: absolute; clip: rect(3.106em 1000.86em 4.399em -999.998em); top: -4.006em; left: 0em;"><span class="mo" id="MathJax-Span-112" style="font-family: STIXGeneral-Regular; vertical-align: 0.002em;">∑</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.407em 1000.56em 4.14em -999.998em); top: -4.481em; left: 0.907em;"><span class="mi" id="MathJax-Span-113" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">V<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.045em;"></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.407em 1001.12em 4.14em -999.998em); top: -3.705em; left: 0.907em;"><span class="texatom" id="MathJax-Span-114"><span class="mrow" id="MathJax-Span-115"><span class="mi" id="MathJax-Span-116" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">l<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span class="mo" id="MathJax-Span-117" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">=</span><span class="mn" id="MathJax-Span-118" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mi" id="MathJax-Span-119" style="font-family: STIXGeneral-Italic; padding-left: 0.175em;">e</span><span class="mi" id="MathJax-Span-120" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span class="mi" id="MathJax-Span-121" style="font-family: STIXGeneral-Italic;">p</span><span class="mo" id="MathJax-Span-122" style="font-family: STIXGeneral-Regular;">(</span><span class="msubsup" id="MathJax-Span-123"><span style="display: inline-block; position: relative; width: 0.778em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.48em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-124" style="font-family: STIXGeneral-Italic;">u</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.519em;"><span class="mi" id="MathJax-Span-125" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">l<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-126" style="font-family: STIXGeneral-Regular; padding-left: 0.304em;">⫟</span><span class="msubsup" id="MathJax-Span-127" style="padding-left: 0.304em;"><span style="display: inline-block; position: relative; width: 1.252em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.48em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-128" style="font-family: STIXGeneral-Italic;">u</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.519em;"><span class="texatom" id="MathJax-Span-129"><span class="mrow" id="MathJax-Span-130"><span class="msubsup" id="MathJax-Span-131"><span style="display: inline-block; position: relative; width: 0.649em; height: 0px;"><span style="position: absolute; clip: rect(3.58em 1000.48em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-132" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.92em; left: 0.476em;"><span class="mi" id="MathJax-Span-133" style="font-size: 50%; font-family: STIXGeneral-Italic;">j<span style="display: inline-block; overflow: hidden; height: 1px; width: 0em;"></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-134" style="font-family: STIXGeneral-Regular;">)</span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(0.907em 1007.67em 1.209em -999.998em); top: -1.291em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.4px solid; width: 7.675em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.08em;"></span></span></span></span><span class="mtext" id="MathJax-Span-135" style="font-family: STIXGeneral-Regular;">&nbsp;</span></span><span style="display: inline-block; width: 0px; height: 2.502em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.498em; border-left: 0px solid; width: 0px; height: 3.302em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>p</mi><mo stretchy="false">(</mo><msub><mi>w</mi><mi>t</mi></msub><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><msub><mi>w</mi><mi>j</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>exp</mi><mo>⁡</mo><mo stretchy="false">(</mo><mrow class="MJX-TeXAtom-ORD"><msub><mi>u</mi><mrow class="MJX-TeXAtom-ORD"><msub><mi>w</mi><mi>i</mi></msub></mrow></msub></mrow><mo>⫟</mo><msub><mi>u</mi><mrow class="MJX-TeXAtom-ORD"><msub><mi>w</mi><mi>j</mi></msub></mrow></msub><mo stretchy="false">)</mo></mrow><mrow><munderover><mo>∑</mo><mrow class="MJX-TeXAtom-ORD"><mi>l</mi><mo>=</mo><mn>1</mn></mrow><mi>V</mi></munderover><mi>e</mi><mi>x</mi><mi>p</mi><mo stretchy="false">(</mo><msub><mi>u</mi><mi>l</mi></msub><mo>⫟</mo><msub><mi>u</mi><mrow class="MJX-TeXAtom-ORD"><msub><mi>w</mi><mi>j</mi></msub></mrow></msub><mo stretchy="false">)</mo></mrow></mfrac><mtext>&nbsp;</mtext></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-39"> p(w_t|w_j)= \frac{\exp({u_{w_i}}⫟ u_{w_j})}{\sum^V_{l=1}exp(u_l ⫟ u_{w_j})} \</script>
+
+                    where V is the number of words in the vocabulary. (Mikolov et al. 2013) An efficient alternative to the cost of computing ∇ log p(wi|wj) is the hierarchical softmax<a class="footnote-reference" href="http://www.yseam.com/blog/WV.html#id33" id="id3">[3]</a><p></p>
+
+                    <p>In the computation of hierarchical softmax, the first step is to compute a binary Huffman Tree that is based on word frequencies where each word is a leaf on that tree. <a href="https://mitpress.mit.edu/sicp/full-text/sicp/book/node41.html">Here</a> you can find a bit more information on Huffman Trees.</p>
+
+                    <p>The binary tree acts as a representation of the output layer whereby a random walk assigns probabilities to words for each word and its child nodes. 
+
+                    The task of predicting the target word wO, p(wO|wI) is defined by hierarchical softmax as:
+
+                    <span class="MathJax_Preview" style="color: inherit; display: none;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-59-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;|&lt;/mo&gt;&lt;/mrow&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi&gt;I&lt;/mi&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;munderover&gt;&lt;mo&gt;&amp;#x220F;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;/munderover&gt;&lt;mi&gt;&amp;#x03C3;&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;&amp;#x27E6;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;mi&gt;h&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;&amp;#x27E7;&lt;/mo&gt;&lt;mo class=&quot;MJX-variant&quot;&gt;&amp;#x22C5;&lt;/mo&gt;&lt;msubsup&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;mi class=&quot;MJX-variant&quot; mathvariant=&quot;normal&quot;&gt;&amp;#x2032;&lt;/mi&gt;&lt;/msubsup&gt;&lt;mo&gt;&amp;#x2ADF;&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;msub&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mtext&gt;&amp;#xA0;&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-136" style="width: 28.321em; display: inline-block;"><span style="display: inline-block; position: relative; width: 24.399em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(0.563em 1024.14em 4.011em -999.998em); top: -2.498em; left: 0em;"><span class="mrow" id="MathJax-Span-137"><span class="mi" id="MathJax-Span-138" style="font-family: STIXGeneral-Italic;">p</span><span class="mo" id="MathJax-Span-139" style="font-family: STIXGeneral-Regular;">(</span><span class="mi" id="MathJax-Span-140" style="font-family: STIXGeneral-Italic;">w</span><span class="texatom" id="MathJax-Span-141"><span class="mrow" id="MathJax-Span-142"><span class="mo" id="MathJax-Span-143" style="font-family: STIXVariants;">|</span></span></span><span class="msubsup" id="MathJax-Span-144"><span style="display: inline-block; position: relative; width: 1.037em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.65em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-145" style="font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.649em;"><span class="mi" id="MathJax-Span-146" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">I<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.045em;"></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-147" style="font-family: STIXGeneral-Regular;">)</span><span class="mo" id="MathJax-Span-148" style="font-family: STIXGeneral-Regular; padding-left: 0.304em;">=</span><span class="munderover" id="MathJax-Span-149" style="padding-left: 0.304em;"><span style="display: inline-block; position: relative; width: 2.157em; height: 0px;"><span style="position: absolute; clip: rect(2.89em 1001.29em 4.614em -999.998em); top: -4.006em; left: 0.433em;"><span class="mo" id="MathJax-Span-150" style="font-family: STIXSizeOneSym; vertical-align: -0.515em;">∏</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.407em 1000.95em 4.399em -999.998em); top: -2.843em; left: 0.563em;"><span class="texatom" id="MathJax-Span-151"><span class="mrow" id="MathJax-Span-152"><span class="mi" id="MathJax-Span-153" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">j<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span class="mo" id="MathJax-Span-154" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">=</span><span class="mn" id="MathJax-Span-155" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.321em 1002.11em 4.269em -999.998em); top: -5.213em; left: 0em;"><span class="texatom" id="MathJax-Span-156"><span class="mrow" id="MathJax-Span-157"><span class="mi" id="MathJax-Span-158" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">L<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span class="mo" id="MathJax-Span-159" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">(</span><span class="mi" id="MathJax-Span-160" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">w</span><span class="mo" id="MathJax-Span-161" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">)</span><span class="mo" id="MathJax-Span-162" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">−</span><span class="mn" id="MathJax-Span-163" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mi" id="MathJax-Span-164" style="font-family: STIXGeneral-Italic; padding-left: 0.175em;">σ<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.045em;"></span></span><span class="mo" id="MathJax-Span-165" style="font-family: STIXGeneral-Regular;">(</span><span class="mo" id="MathJax-Span-166" style="font-family: STIXGeneral-Regular;">⟦</span><span class="mi" id="MathJax-Span-167" style="font-family: STIXGeneral-Italic;">n</span><span class="mo" id="MathJax-Span-168" style="font-family: STIXGeneral-Regular;">(</span><span class="mi" id="MathJax-Span-169" style="font-family: STIXGeneral-Italic;">w</span><span class="mo" id="MathJax-Span-170" style="font-family: STIXGeneral-Regular;">,</span><span class="mi" id="MathJax-Span-171" style="font-family: STIXGeneral-Italic; padding-left: 0.175em;">j<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span class="mo" id="MathJax-Span-172" style="font-family: STIXGeneral-Regular; padding-left: 0.261em;">+</span><span class="mn" id="MathJax-Span-173" style="font-family: STIXGeneral-Regular; padding-left: 0.261em;">1</span><span class="mo" id="MathJax-Span-174" style="font-family: STIXGeneral-Regular;">)</span><span class="mo" id="MathJax-Span-175" style="font-family: STIXGeneral-Regular; padding-left: 0.304em;">=</span><span class="mi" id="MathJax-Span-176" style="font-family: STIXGeneral-Italic; padding-left: 0.304em;">c</span><span class="mi" id="MathJax-Span-177" style="font-family: STIXGeneral-Italic;">h</span><span class="mo" id="MathJax-Span-178" style="font-family: STIXGeneral-Regular;">(</span><span class="mi" id="MathJax-Span-179" style="font-family: STIXGeneral-Italic;">n</span><span class="mo" id="MathJax-Span-180" style="font-family: STIXGeneral-Regular;">(</span><span class="mi" id="MathJax-Span-181" style="font-family: STIXGeneral-Italic;">w</span><span class="mo" id="MathJax-Span-182" style="font-family: STIXGeneral-Regular;">,</span><span class="mi" id="MathJax-Span-183" style="font-family: STIXGeneral-Italic; padding-left: 0.175em;">j<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span class="mo" id="MathJax-Span-184" style="font-family: STIXGeneral-Regular;">)</span><span class="mo" id="MathJax-Span-185" style="font-family: STIXGeneral-Regular;">)</span><span class="mo" id="MathJax-Span-186" style="font-family: STIXGeneral-Regular;">⟧</span><span class="mo" id="MathJax-Span-187" style="font-family: STIXGeneral-Regular; padding-left: 0.261em;">⋅</span><span class="msubsup" id="MathJax-Span-188" style="padding-left: 0.261em;"><span style="display: inline-block; position: relative; width: 2.2em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.43em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-189" style="font-family: STIXGeneral-Italic;">v</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.494em 1000.3em 4.14em -999.998em); top: -4.351em; left: 0.433em;"><span class="mi" id="MathJax-Span-190" style="font-size: 70.7%; font-family: STIXVariants;">′</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.407em 1001.73em 4.269em -999.998em); top: -3.705em; left: 0.433em;"><span class="texatom" id="MathJax-Span-191"><span class="mrow" id="MathJax-Span-192"><span class="mi" id="MathJax-Span-193" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">n</span><span class="mo" id="MathJax-Span-194" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">(</span><span class="mi" id="MathJax-Span-195" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">w</span><span class="mo" id="MathJax-Span-196" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">,</span><span class="mi" id="MathJax-Span-197" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">j<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span class="mo" id="MathJax-Span-198" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">)</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-199" style="font-family: STIXGeneral-Regular; padding-left: 0.304em;">⫟</span><span class="msubsup" id="MathJax-Span-200" style="padding-left: 0.304em;"><span style="display: inline-block; position: relative; width: 1.166em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.43em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-201" style="font-family: STIXGeneral-Italic;">v</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.433em;"><span class="texatom" id="MathJax-Span-202"><span class="mrow" id="MathJax-Span-203"><span class="msubsup" id="MathJax-Span-204"><span style="display: inline-block; position: relative; width: 0.649em; height: 0px;"><span style="position: absolute; clip: rect(3.58em 1000.48em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-205" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">w</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.92em; left: 0.476em;"><span class="mi" id="MathJax-Span-206" style="font-size: 50%; font-family: STIXGeneral-Italic;">i</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mo" id="MathJax-Span-207" style="font-family: STIXGeneral-Regular;">)</span><span class="mtext" id="MathJax-Span-208" style="font-family: STIXGeneral-Regular;">&nbsp;</span></span><span style="display: inline-block; width: 0px; height: 2.502em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.648em; border-left: 0px solid; width: 0px; height: 3.802em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>p</mi><mo stretchy="false">(</mo><mi>w</mi><mrow class="MJX-TeXAtom-ORD"><mo stretchy="false">|</mo></mrow><msub><mi>w</mi><mi>I</mi></msub><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∏</mo><mrow class="MJX-TeXAtom-ORD"><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mrow class="MJX-TeXAtom-ORD"><mi>L</mi><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo><mo>−</mo><mn>1</mn></mrow></munderover><mi>σ</mi><mo stretchy="false">(</mo><mo stretchy="false">⟦</mo><mi>n</mi><mo stretchy="false">(</mo><mi>w</mi><mo>,</mo><mi>j</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mi>c</mi><mi>h</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">(</mo><mi>w</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">⟧</mo><mo class="MJX-variant">⋅</mo><msubsup><mi>v</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo stretchy="false">(</mo><mi>w</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow><mi class="MJX-variant" mathvariant="normal">′</mi></msubsup><mo>⫟</mo><msub><mi>v</mi><mrow class="MJX-TeXAtom-ORD"><msub><mi>w</mi><mi>i</mi></msub></mrow></msub><mo stretchy="false">)</mo><mtext>&nbsp;</mtext></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-59">p(w|w_I) = \prod^{L(w)-1}_{j=1} \sigma  (⟦ n(w, j+1)=ch(n(w, j)) ⟧ \centerdot v^\prime_{n(w, j)}⫟ v_{w_i})\</script>
+
+
+                    Here, let n(w, j) be the j-th node on the path from the root to word w, and let L(w) be the length of this path, so n(w, 1) = root and n(w, L(w)) = w. 
+                    For any inner node n, let ch(n) be an arbitrary fixed child of n and let ⟦x⟧ be 1 if x is true, otherwise -1. In this instance, σ(x) = 1/(1 + exp(−x)).
+                    <a class="footnote-reference" href="http://www.yseam.com/blog/WV.html#id44" id="id4">[4]</a></p>
+
+                    <p>Unlike the standard softmax formulation that assigns two representations <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-69-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msub&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mtext&gt;&amp;#xA0;&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-209" style="width: 1.468em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.252em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.942em 1000.99em 2.804em -999.998em); top: -2.498em; left: 0em;"><span class="mrow" id="MathJax-Span-210"><span class="msubsup" id="MathJax-Span-211"><span style="display: inline-block; position: relative; width: 0.994em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.43em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-212" style="font-family: STIXGeneral-Italic;">v</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.433em;"><span class="texatom" id="MathJax-Span-213"><span class="mrow" id="MathJax-Span-214"><span class="mi" id="MathJax-Span-215" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">w</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mtext" id="MathJax-Span-216" style="font-family: STIXGeneral-Regular;">&nbsp;</span></span><span style="display: inline-block; width: 0px; height: 2.502em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 0.802em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>v</mi><mrow class="MJX-TeXAtom-ORD"><mi>w</mi></mrow></msub><mtext>&nbsp;</mtext></math></span></span><script type="math/tex" id="MathJax-Element-69">v_{w}\</script>
+                    and <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-79-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msubsup&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;/mrow&gt;&lt;mi class=&quot;MJX-variant&quot; mathvariant=&quot;normal&quot;&gt;&amp;#x2032;&lt;/mi&gt;&lt;/msubsup&gt;&lt;mtext&gt;&amp;#xA0;&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-217" style="width: 1.468em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.252em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.64em 1000.99em 2.804em -999.998em); top: -2.498em; left: 0em;"><span class="mrow" id="MathJax-Span-218"><span class="msubsup" id="MathJax-Span-219"><span style="display: inline-block; position: relative; width: 0.994em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.43em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-220" style="font-family: STIXGeneral-Italic;">v</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.494em 1000.3em 4.14em -999.998em); top: -4.351em; left: 0.433em;"><span class="mi" id="MathJax-Span-221" style="font-size: 70.7%; font-family: STIXVariants;">′</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.58em 1000.56em 4.14em -999.998em); top: -3.877em; left: 0.433em;"><span class="texatom" id="MathJax-Span-222"><span class="mrow" id="MathJax-Span-223"><span class="mi" id="MathJax-Span-224" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">w</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span><span class="mtext" id="MathJax-Span-225" style="font-family: STIXGeneral-Regular;">&nbsp;</span></span><span style="display: inline-block; width: 0px; height: 2.502em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 1.153em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msubsup><mi>v</mi><mrow class="MJX-TeXAtom-ORD"><mi>w</mi></mrow><mi class="MJX-variant" mathvariant="normal">′</mi></msubsup><mtext>&nbsp;</mtext></math></span></span><script type="math/tex" id="MathJax-Element-79">v^\prime_{w}\</script> to each word w, the hierarchical softmax formulation has one representation 
+                    <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-89-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msub&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/math&gt;" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-226" style="width: 1.166em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.994em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.64em 1000.99em 2.502em -999.998em); top: -2.196em; left: 0em;"><span class="mrow" id="MathJax-Span-227"><span class="msubsup" id="MathJax-Span-228"><span style="display: inline-block; position: relative; width: 0.994em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.43em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-229" style="font-family: STIXGeneral-Italic;">v</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; top: -3.877em; left: 0.433em;"><span class="texatom" id="MathJax-Span-230"><span class="mrow" id="MathJax-Span-231"><span class="mi" id="MathJax-Span-232" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">w</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.2em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 0.802em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>v</mi><mrow class="MJX-TeXAtom-ORD"><mi>w</mi></mrow></msub></math></span></span><script type="math/tex" id="MathJax-Element-89">v_{w}</script> for each word w and one representation 
+<span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-99-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msubsup&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;/mrow&gt;&lt;mi class=&quot;MJX-variant&quot; mathvariant=&quot;normal&quot;&gt;&amp;#x2032;&lt;/mi&gt;&lt;/msubsup&gt;&lt;/math&gt;" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-233" style="width: 1.166em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.994em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.338em 1000.99em 2.502em -999.998em); top: -2.196em; left: 0em;"><span class="mrow" id="MathJax-Span-234"><span class="msubsup" id="MathJax-Span-235"><span style="display: inline-block; position: relative; width: 0.994em; height: 0px;"><span style="position: absolute; clip: rect(3.45em 1000.43em 4.14em -999.998em); top: -4.006em; left: 0em;"><span class="mi" id="MathJax-Span-236" style="font-family: STIXGeneral-Italic;">v</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.494em 1000.3em 4.14em -999.998em); top: -4.351em; left: 0.433em;"><span class="mi" id="MathJax-Span-237" style="font-size: 70.7%; font-family: STIXVariants;">′</span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span><span style="position: absolute; clip: rect(3.58em 1000.56em 4.14em -999.998em); top: -3.877em; left: 0.433em;"><span class="texatom" id="MathJax-Span-238"><span class="mrow" id="MathJax-Span-239"><span class="mi" id="MathJax-Span-240" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">w</span></span></span><span style="display: inline-block; width: 0px; height: 4.011em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.2em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 1.153em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msubsup><mi>v</mi><mrow class="MJX-TeXAtom-ORD"><mi>w</mi></mrow><mi class="MJX-variant" mathvariant="normal">′</mi></msubsup></math></span></span><script type="math/tex" id="MathJax-Element-99">v^\prime_{w}</script> for every inner node n of the binary tree.</p>
+
+                    <p>So in the formula above, all the words and child nodes and have initialized embeddings which will be gradually updated. If a given context is more similar with the child-nodes of a certain word, then that word has higher probability to be the target word in the given context.
+
+                    The formula converts the similarity score to probabilities in order to search the subnodes of the particular word. So, if the j+1 ancestor of target word w is a child of its j ancestor, then the probability of j choosing j+1 is σ(+ similarity between context and ancestor j). Multiplying the child nodes along a path one by one gives the normalized probability of a target word given its context.</p>
+                    
+                    <!--p>Another alternate method for computing the cost is referred to as Negative Sampling (NEG). NEG is built on the concept of Noise Contrastive Estimation (NCE), which was created by Gutmann and Hyvarinen <a class="footnote-reference" href="#id44" id="id4">[4]</a>. NCE states that logistic regression should be able to differentiate data from noise in a good model. So while NCE can be shown to approximately maximize the log probability of the softmax, the team of Mikolov et al. 2013 were only concerned with learning high-quality vector representations; thus this gave them the ability to simply NCE, so long as the vectors retained their quality. The main difference between the NEG and NCE is that NEG only uses samples whereas NCE needs both samples and numerical probabilities of the noise distribution.</p>
+
+
+                    <p>Here, Negative Sampling is defined by the objective 
+
+                     <script type="math/tex; mode=display" id="MathJax-Element-49"> \text{log }\sigma(v^\prime_{w_O}⫟ v_{w_I}) + \sum^k_{i = 1}E_{w_i \sim P_n(w)}[ \text{ }\text{log} \sigma(- v_{w_i}\text{ }\top v_{w_I})]</script>
+
+
+                    which is used to replace every log P(wO|wI) term in the Skip-gram objective function.</p> 
+
+
+                    <p>The task is then to distinguish the target word wO against draws from the noise distribution Pn(w) using logistic regression, where there are k negative samples for each data sample <a class="footnote-reference" href="#id55" id="id5">[5]</a>. In my model below, I am going to be using heirachical softmax option for computing the cost.</p-->
+
+
+                    <h2 class="section-heading">word2vec code</h2>
+                    <p>Instead of writing my own word2vec code, I turned to the already well documented version, gensim. <a href="http://radimrehurek.com/gensim/models/word2vec.html">Gensim</a>'s implementation of word2vec is incredibly intuitive and easy to use. I recommend looking at the docs to get a feel of how to integrate the tool into your existing pipeline.</p>
+
+                    <p>In this instance, I collected job postings from a few job-posting websites using titles generated by <a href="http://www.payscale.com/index/US/Job">Payscale</a>. For the sake of sparing the job-posting websites' servers, I would advise one to go the api route rather than harass someone's servers with scraping calls. The data in this case is in the dictionary format of:</p>
+
+                    <p>{'Account Manager Sales': [u'Job Description 1...',u'Job Description 2...], Sr. Data Scientist:[u'Job Description 1...']..., George W. Bush:[I was the boss at USA...],...}</p>
+
+                    <p>The goal was to try to find enough varied job postings and resumes so that there was enough data for each job title as well as enough resumes to support the sentence structure from both sides of the job equation. Below is the code used to generate a word2vec model on an in-memory list.</p>
+
+                    <p>
+                        <script src="./Feature learning with Word2Vec_files/dc005e9e596e77496395.js"></script><link rel="stylesheet" href="./Feature learning with Word2Vec_files/gist-embed-9f0a4ad9c85ca776e669003688baa9d55f9db315562ce4d231d37dab2714c70a.css"></p><div id="gist15525249" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-word2vec_model-py" class="file">
+    
+
+  <div itemprop="text" class="blob-wrapper data type-python">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tbody><tr>
+        <td id="file-word2vec_model-py-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-word2vec_model-py-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">from</span> string <span class="pl-k">import</span> translate,maketrans,punctuation</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-word2vec_model-py-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">from</span> itertools <span class="pl-k">import</span> chain</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-word2vec_model-py-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">from</span> nltk <span class="pl-k">import</span> PunktSentenceTokenizer</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-word2vec_model-py-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> datetime </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-word2vec_model-py-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> re</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-word2vec_model-py-LC6" class="blob-code blob-code-inner js-file-line"> </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-word2vec_model-py-LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-k">def</span> <span class="pl-en">log</span>(<span class="pl-smi">msg</span>):</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-word2vec_model-py-LC8" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-c1">{}</span> <span class="pl-c1">{}</span><span class="pl-pds">"</span></span>.format(<span class="pl-c1">str</span>(datetime.datetime.now()), msg))</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-word2vec_model-py-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-k">def</span> <span class="pl-en">removeNonAscii</span>(<span class="pl-smi">s</span>): </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-word2vec_model-py-LC10" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>.join(<span class="pl-c1">filter</span>(<span class="pl-k">lambda</span> <span class="pl-smi">x</span>: <span class="pl-c1">ord</span>(x)<span class="pl-k">&lt;</span><span class="pl-c1">128</span>, s))</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-word2vec_model-py-LC11" class="blob-code blob-code-inner js-file-line"> </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-word2vec_model-py-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> keeps -, +, # in words                            </span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-word2vec_model-py-LC13" class="blob-code blob-code-inner js-file-line">punctuation <span class="pl-k">=</span> punctuation.replace(<span class="pl-s"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>).replace(<span class="pl-s"><span class="pl-pds">'</span>+<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>).replace(<span class="pl-s"><span class="pl-pds">'</span>#<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-word2vec_model-py-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span>makes a C translation dictionary converting punctuations to white spaces</span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-word2vec_model-py-LC15" class="blob-code blob-code-inner js-file-line">Trans <span class="pl-k">=</span> maketrans(punctuation, <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span><span class="pl-k">*</span><span class="pl-c1">len</span>(punctuation))</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-word2vec_model-py-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span>splits text into sentences'</span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-word2vec_model-py-LC17" class="blob-code blob-code-inner js-file-line">tknr <span class="pl-k">=</span> PunktSentenceTokenizer()</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-word2vec_model-py-LC18" class="blob-code blob-code-inner js-file-line"> </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-word2vec_model-py-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span>fast ngrammer if you end up using it for phrases</span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-word2vec_model-py-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-k">def</span> <span class="pl-en">ngrammer2</span>(<span class="pl-smi">l</span>,<span class="pl-smi">n</span>):</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-word2vec_model-py-LC21" class="blob-code blob-code-inner js-file-line">    temp <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span>.join(l[i:i<span class="pl-k">+</span>n]) <span class="pl-k">for</span> i <span class="pl-k">in</span> <span class="pl-v">xrange</span>(<span class="pl-c1">0</span>,<span class="pl-c1">len</span>(l)) <span class="pl-k">if</span> <span class="pl-c1">len</span>(l[i:i<span class="pl-k">+</span>n])<span class="pl-k">==</span>n]</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-word2vec_model-py-LC22" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">return</span> temp</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-word2vec_model-py-LC23" class="blob-code blob-code-inner js-file-line"> </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-word2vec_model-py-LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">'</span>Loading the post data<span class="pl-pds">'</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-word2vec_model-py-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> pickle</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="file-word2vec_model-py-LC26" class="blob-code blob-code-inner js-file-line">s<span class="pl-k">=</span>pickle.load(<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">"</span>title_and_job.p<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>rb<span class="pl-pds">"</span></span>))</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L27" class="blob-num js-line-number" data-line-number="27"></td>
+        <td id="file-word2vec_model-py-LC27" class="blob-code blob-code-inner js-file-line">x_train_RAW<span class="pl-k">=</span>[]</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L28" class="blob-num js-line-number" data-line-number="28"></td>
+        <td id="file-word2vec_model-py-LC28" class="blob-code blob-code-inner js-file-line"><span class="pl-k">for</span> i <span class="pl-k">in</span> s:</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L29" class="blob-num js-line-number" data-line-number="29"></td>
+        <td id="file-word2vec_model-py-LC29" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">if</span> <span class="pl-c1">len</span>(i.values()[<span class="pl-c1">0</span>])<span class="pl-k">&gt;=</span><span class="pl-c1">30</span>:</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L30" class="blob-num js-line-number" data-line-number="30"></td>
+        <td id="file-word2vec_model-py-LC30" class="blob-code blob-code-inner js-file-line">        title<span class="pl-k">=</span>i.keys()[<span class="pl-c1">0</span>]   </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L31" class="blob-num js-line-number" data-line-number="31"></td>
+        <td id="file-word2vec_model-py-LC31" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">for</span> q <span class="pl-k">in</span> i.values()[<span class="pl-c1">0</span>]:</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L32" class="blob-num js-line-number" data-line-number="32"></td>
+        <td id="file-word2vec_model-py-LC32" class="blob-code blob-code-inner js-file-line">            x_train_RAW.append(q.encode(<span class="pl-s"><span class="pl-pds">'</span>utf-8<span class="pl-pds">'</span></span>))</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L33" class="blob-num js-line-number" data-line-number="33"></td>
+        <td id="file-word2vec_model-py-LC33" class="blob-code blob-code-inner js-file-line"> </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L34" class="blob-num js-line-number" data-line-number="34"></td>
+        <td id="file-word2vec_model-py-LC34" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span>can use the ngrammer here if you want to look at phrase similarity</span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L35" class="blob-num js-line-number" data-line-number="35"></td>
+        <td id="file-word2vec_model-py-LC35" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span>I get rid of html characters from this corpus</span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L36" class="blob-num js-line-number" data-line-number="36"></td>
+        <td id="file-word2vec_model-py-LC36" class="blob-code blob-code-inner js-file-line"><span class="pl-k">def</span> <span class="pl-en">spliter</span>(<span class="pl-smi">jobpost</span>):</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L37" class="blob-num js-line-number" data-line-number="37"></td>
+        <td id="file-word2vec_model-py-LC37" class="blob-code blob-code-inner js-file-line">    sentences2<span class="pl-k">=</span>[]</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L38" class="blob-num js-line-number" data-line-number="38"></td>
+        <td id="file-word2vec_model-py-LC38" class="blob-code blob-code-inner js-file-line">    s<span class="pl-k">=</span>tknr.tokenize(jobpost)  </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L39" class="blob-num js-line-number" data-line-number="39"></td>
+        <td id="file-word2vec_model-py-LC39" class="blob-code blob-code-inner js-file-line">    cleaned_words <span class="pl-k">=</span> [<span class="pl-c1">list</span>(translate(re.sub(<span class="pl-sr"><span class="pl-k">r</span><span class="pl-pds">'</span><span class="pl-c1">[</span><span class="pl-c1">0-9</span><span class="pl-c1">]</span><span class="pl-k">|</span><span class="pl-cce">\-</span><span class="pl-k">|</span><span class="pl-cce">\\</span>~<span class="pl-k">|</span><span class="pl-cce">\`</span><span class="pl-k">|</span><span class="pl-cce">\@</span><span class="pl-k">|</span><span class="pl-cce">\$</span><span class="pl-k">|</span><span class="pl-cce">\%</span><span class="pl-k">|</span><span class="pl-cce">\^</span><span class="pl-k">|</span><span class="pl-cce">\&amp;</span><span class="pl-k">|</span><span class="pl-cce">\*</span><span class="pl-k">|</span><span class="pl-cce">\(</span><span class="pl-k">|</span><span class="pl-cce">\)</span><span class="pl-k">|</span><span class="pl-cce">\_</span><span class="pl-k">|</span><span class="pl-cce">\=</span><span class="pl-k">|</span><span class="pl-cce">\[</span><span class="pl-k">|</span><span class="pl-cce">\]</span><span class="pl-k">|</span><span class="pl-cce">\\</span><span class="pl-k">|</span><span class="pl-cce">\&lt;</span><span class="pl-k">|</span><span class="pl-cce">\&lt;</span><span class="pl-k">|</span><span class="pl-cce">\&gt;</span><span class="pl-k">|</span><span class="pl-cce">\?</span><span class="pl-k">|</span><span class="pl-cce">\/</span><span class="pl-k">|</span><span class="pl-cce">\;</span><span class="pl-k">|</span><span class="pl-cce">\\</span><span class="pl-c1">.</span><span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>,sentence).lower().encode(<span class="pl-s"><span class="pl-pds">'</span>utf-8<span class="pl-pds">'</span></span>),Trans).split()) <span class="pl-k">for</span> sentence <span class="pl-k">in</span> s]</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L40" class="blob-num js-line-number" data-line-number="40"></td>
+        <td id="file-word2vec_model-py-LC40" class="blob-code blob-code-inner js-file-line">    <span class="pl-c"><span class="pl-c">#</span>two_three_ngrams = [ngrammer2(sent,num) for num in [1,2,3] for sent in cleaned_words]</span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L41" class="blob-num js-line-number" data-line-number="41"></td>
+        <td id="file-word2vec_model-py-LC41" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">for</span> U <span class="pl-k">in</span> cleaned_words:</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L42" class="blob-num js-line-number" data-line-number="42"></td>
+        <td id="file-word2vec_model-py-LC42" class="blob-code blob-code-inner js-file-line">        sentences2.append(U)</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L43" class="blob-num js-line-number" data-line-number="43"></td>
+        <td id="file-word2vec_model-py-LC43" class="blob-code blob-code-inner js-file-line">    sentences2<span class="pl-k">=</span><span class="pl-c1">list</span>(chain(<span class="pl-k">*</span>sentences2))</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L44" class="blob-num js-line-number" data-line-number="44"></td>
+        <td id="file-word2vec_model-py-LC44" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">return</span> sentences2</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L45" class="blob-num js-line-number" data-line-number="45"></td>
+        <td id="file-word2vec_model-py-LC45" class="blob-code blob-code-inner js-file-line"> </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L46" class="blob-num js-line-number" data-line-number="46"></td>
+        <td id="file-word2vec_model-py-LC46" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span>i always do this, not sure why. </span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L47" class="blob-num js-line-number" data-line-number="47"></td>
+        <td id="file-word2vec_model-py-LC47" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> random</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L48" class="blob-num js-line-number" data-line-number="48"></td>
+        <td id="file-word2vec_model-py-LC48" class="blob-code blob-code-inner js-file-line">random.shuffle(x_train_RAW)</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L49" class="blob-num js-line-number" data-line-number="49"></td>
+        <td id="file-word2vec_model-py-LC49" class="blob-code blob-code-inner js-file-line"> </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L50" class="blob-num js-line-number" data-line-number="50"></td>
+        <td id="file-word2vec_model-py-LC50" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span>going to multiprocess the tokenizer to make it faster</span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L51" class="blob-num js-line-number" data-line-number="51"></td>
+        <td id="file-word2vec_model-py-LC51" class="blob-code blob-code-inner js-file-line"><span class="pl-k">from</span> multiprocessing <span class="pl-k">import</span> Pool,cpu_count</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L52" class="blob-num js-line-number" data-line-number="52"></td>
+        <td id="file-word2vec_model-py-LC52" class="blob-code blob-code-inner js-file-line">pool<span class="pl-k">=</span>Pool(cpu_count())</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L53" class="blob-num js-line-number" data-line-number="53"></td>
+        <td id="file-word2vec_model-py-LC53" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">'</span>starting to sentence tokenize<span class="pl-pds">'</span></span></td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L54" class="blob-num js-line-number" data-line-number="54"></td>
+        <td id="file-word2vec_model-py-LC54" class="blob-code blob-code-inner js-file-line">x_train_RAW<span class="pl-k">=</span><span class="pl-c1">filter</span>(<span class="pl-c1">None</span>,pool.map(spliter,x_train_RAW))</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L55" class="blob-num js-line-number" data-line-number="55"></td>
+        <td id="file-word2vec_model-py-LC55" class="blob-code blob-code-inner js-file-line"> </td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L56" class="blob-num js-line-number" data-line-number="56"></td>
+        <td id="file-word2vec_model-py-LC56" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> gensim</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L57" class="blob-num js-line-number" data-line-number="57"></td>
+        <td id="file-word2vec_model-py-LC57" class="blob-code blob-code-inner js-file-line"><span class="pl-k">from</span> multiprocessing <span class="pl-k">import</span> cpu_count</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L58" class="blob-num js-line-number" data-line-number="58"></td>
+        <td id="file-word2vec_model-py-LC58" class="blob-code blob-code-inner js-file-line">model <span class="pl-k">=</span> gensim.models.Word2Vec(x_train_RAW, <span class="pl-v">size</span><span class="pl-k">=</span><span class="pl-c1">100</span>, <span class="pl-v">window</span><span class="pl-k">=</span><span class="pl-c1">5</span>, <span class="pl-v">min_count</span><span class="pl-k">=</span><span class="pl-c1">5</span>, <span class="pl-v">workers</span><span class="pl-k">=</span>cpu_count())</td>
+      </tr>
+      <tr>
+        <td id="file-word2vec_model-py-L59" class="blob-num js-line-number" data-line-number="59"></td>
+        <td id="file-word2vec_model-py-LC59" class="blob-code blob-code-inner js-file-line">pickle.dump(model,<span class="pl-c1">open</span>(<span class="pl-s"><span class="pl-pds">'</span>model.p<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>wb<span class="pl-pds">'</span></span>))</td>
+      </tr>
+</tbody></table>
+
+  </div>
+
+  </div>
+  
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/KayneWest/dc005e9e596e77496395/raw/a569f128e583ae227c976f9688140d065da93c7a/word2vec_model.py" style="float:right">view raw</a>
+        <a href="https://gist.github.com/KayneWest/dc005e9e596e77496395#file-word2vec_model-py">word2vec_model.py</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+                    <p></p>
+
+
+                    <p>An alternative to in-memory analysis, is to use <a href="http://radimrehurek.com/2014/02/word2vec-tutorial/">Radim's</a> method of iterating though files on multiple disks or instances and only using in-memory computation for the actual model/model training. (This is similar to what I will actually be using in my larger CBOW model.) Here is an example of what that might look like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">import gensim
+import pandas as pd
+import os
+import csv
+
+class MySentences(object):
+    
+    #this part is rather worthless, but if had more than one file you wanted 
+    #to go through, set the dir (potential example, jobs/courses/resumes)
+    def __init__(self, dirname):
+        self.dirname = dirname
+        
+    def __iter__(self):
+        #change it to whatever file has yoru data
+        file_name = "only_good_cols_final.csv"
+        f = csv.reader(open(file_name, "rb"), delimiter=',')
+        #set the column that the description is in, its in 
+        #[0,1,2,3] form NOT [1,2,3] (python numbering)
+        column = 3
+        for line in f:
+            yield str(line[column]).lower().split(' ')
+            
+sentences = MySentences('/home/ubuntu/') # a memory-friendly iterator
+from multiprocessing import cpu_count
+model = gensim.models.Word2Vec(sentences, size=100, window=5, min_count=5 workers = cpu_count(), sg = 0)
+model.save('fname')</span>
+</pre></div>
+
+                    <h2 class="section-heading">Some interesting features of the in-memory model</h2>
+                    <p>
+
+
+
+</p><div class="highlight-python"><div class="highlight"><pre><span class="gp">In [22]: </span><span class="n">model</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">positive</span><span class="o">=</span><span class="p">[</span><span class="s">'ceo'</span><span class="p">,</span> <span class="s">'woman'</span><span class="p">],</span> <span class="n">negative</span><span class="o">=</span><span class="p">[</span><span class="s">'man'</span><span class="p">],topn=3)</span>
+<span class="go">Out[22]: [('president', 0.5502843856811523),('cfo', 0.5502355098724365),('vice', 0.520388126373291)]</span>
+
+<span class="gp">In [23]: </span><span class="n">model</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">positive</span><span class="o">=</span><span class="p">[</span><span class="s">'ceo'</span><span class="p">,</span> <span class="s">'woman'</span><span class="p">],</span> <span class="n">negative</span><span class="o">=</span><span class="p">[</span><span class="s">'man'</span><span class="p">],topn=3)</span>
+<span class="go">Out[23]: [('cio', 0.5539180040359497),('presidents', 0.5108237862586975),('cto', 0.4993226230144501)]</span>
+
+<span class="gp">In [24]: model.most_similar('python')
+Out[24]: 
+[('scripting', 0.912078857421875),
+ ('bash', 0.9030072093009949),
+ ('perl', 0.897027850151062),
+ ('tcl', 0.8833462595939636),
+ ('ruby', 0.8729183673858643),
+ ('c++', 0.8634607195854187),
+ ('jython', 0.8467384576797485),
+ ('groovy', 0.846560001373291),
+ ('lua', 0.8416544795036316),
+ ('java', 0.8366264700889587)]
+
+In [25]: model.most_similar('hadoop')
+Out[25]: 
+[('splunk', 0.8380253314971924),
+ ('hbase', 0.8312206268310547),
+ ('nosql', 0.8239182233810425),
+ ('cassandra', 0.8228038549423218),
+ ('greenplum', 0.820797324180603),
+ ('hive', 0.819451093673706),
+ ('rabbitmq', 0.8175760507583618),
+ ('zookeeper', 0.816423773765564),
+ ('accumulo', 0.8148070573806763),
+ ('cloudera', 0.8085991740226746)]
+
+In [26]: model.most_similar('jquery')
+Out[26]: 
+[('ajax', 0.9611257314682007),
+ ('javascript', 0.9384799003601074),
+ ('dhtml', 0.9383583068847656),
+ ('xhtml', 0.9327742457389832),
+ ('xml', 0.9254889488220215),
+ ('json', 0.9110660552978516),
+ ('angularjs', 0.9058303833007812),
+ ('css', 0.9022014141082764),
+ ('bootstrap', 0.8986350893974304),
+ ('mvc', 0.8910885453224182)]</span>
+</pre></div>
+
+<p>In an attempt to quickly find clusters of similar features, I used Mini-Batch Kmeans to cluster the word vectors. I wanted to use this data to try to find finance-related terms and technology-related terms with the goal of using the results for a secondary classifier.</p>
+
+
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">import numpy as np
+from sklearn.cluster import MiniBatchKMeans
+from sklearn.cluster import AgglomerativeClustering
+
+#the vector dictionary of the model
+word2vec_dict={}
+for i in model.vocab.keys():
+    try:
+        word2vec_dict[i]=model[i]
+    except:    
+        pass
+
+
+#This is also interesting to try with Ward Hierarchical Clustering
+clusters = MiniBatchKMeans(n_clusters=100, max_iter=10,batch_size=200,
+                        n_init=1,init_size=2000)
+X = np.array([i.T for i in word2vec_dict.itervalues()])
+y = [i for i in word2vec_dict.iterkeys()]
+clusters.fit(X)
+from collections import defaultdict
+cluster_dict=defaultdict(list)
+for word,label in zip(y,clusters.labels_):
+    cluster_dict[label].append(word)</span>
+</pre>
+</div>
+
+<p>My assumption was that 'python' would be found with the technology cluster and that 'finance' would be with the financial cluster. Thankfully, I ended up being correct. Yipee.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">In [49]: for i in range(len(cluster_dict)):
+   ....:         if 'python' in cluster_dict[i]:
+   ....:                 cluster_dict[i].sort()
+   ....:                 print cluster_dict[i]
+   ....:
+['++', 'abap', 'actionscript', 'ado', 'adwords', 'agile', 'aix', 'ajax', 'ale', 'amazon', 'android', 'angular', 'angularjs', 'ansible', 'ant', 'antivirus', 'apache', 'apex', 'api', 'apis', 'apo', 'app', 'apple', 'arcgis', 'architecting', 'architecture', 'architectures', 'ats', 'automation', 'aws', 'azure', 'backbone', 'backend', 'bamboo', 'bash', 'bea', 'beans', 'bind', 'bing', 'bmc', 'bootstrap', 'boss', 'bpm', 'browser', 'browsers', 'bw', 'c#', 'c+', 'c++', 'cache', 'caching', 'cascading', 'cassandra', 'cdisc', 'centos', 'chrome', 'citrix', 'clearcase', 'cloud', 'cluster', 'clustered', 'clustering', 'clusters', 'cmdb', 'cobol', 'cognos', 'coldfusion', 'comptia', 'computing', 'configuration', 'confluence', 'cots', 'cpu', 'crm', 'crystal', 'css', 'cucumber', 'customization', 'database', 'databases', 'datacenter', 'datastage', 'db', 'dba', 'dbms', 'ddl', 'debuggers', 'debugging', 'dell', 'deploying', 'deployments', 'dev', 'developer', 'dhtml', 'directory', 'distributed', 'django', 'dojo', 'dom', 'domino', 'drupal', 'dts', 'dw', 'ebs', 'ecc', 'eclipse', 'edition', 'ee', 'eg', 'ejb', 'elasticsearch', 'embedded', 'ember', 'emc', 'emulation', 'enterprise', 'erp', 'erwin', 'esb', 'esri', 'essbase', 'esx', 'etl', 'extron', 'familiarity', 'fibre', 'firefox', 'fortran', 'framework', 'frameworks', 'ftp', 'fusion', 'git', 'github', 'google', 'gradle', 'grails', 'groovy', 'gui', 'gwt', 'hadoop', 'hana', 'hardening', 'hbase', 'hbss', 'hibernate', 'hive', 'hl', 'hosted', 'hosting', 'hrms', 'html', 'hw', 'hyper', 'hyperion', 'ibm', 'ide', 'iis', 'imap', 'ims', 'informatica', 'informix', 'infrastructures', 'integrations', 'integrator', 'intelli', 'internals', 'ios', 'iphone', 'ipsec', 'itil', 'itsm', 'ivr', 'java', 'javascript', 'jboss', 'jdbc', 'jde', 'jee', 'jenkins', 'jira', 'jmeter', 'jms', 'jpa', 'jquery', 'js', 'jsf', 'json', 'jsp', 'junit', 'jvm', 'kernel', 'knockout', 'labview', 'lamp', 'languages', 'layer', 'layers', 'ldap', 'linq', 'linux', 'lync', 'magento', 'mainframe', 'mapreduce', 'marketo', 'markup', 'matlab', 'maven', 'mcitp', 'mcp', 'mcsa', 'mcse', 'mcts', 'mdm', 'memcached', 'memory', 'metasploit', 'microcontrollers', 'microstrategy', 'middleware', 'migration', 'migrations', 'mitek', 'mongo', 'mongodb', 'mq', 'mssql', 'multicast', 'mvc', 'mware', 'mysql', 'nagios', 'nessus', 'net', 'netapp', 'netbackup', 'netezza', 'nexus', 'nfs', 'nginx', 'nmap', 'node', 'nosql', 'obiee', 'object', 'olap', 'oltp', 'omniture', 'oo', 'ooa', 'ood', 'oop', 'oracle', 'orm', 'osi', 'osx', 'paa', 'parallel', 'partitioning', 'pentaho', 'peoplesoft', 'perforce', 'perl', 'php', 'pki', 'pl', 'plm', 'plsql', 'plugins', 'portal', 'portals', 'postgres', 'postgresql', 'powershell', 'programming', 'provisioning', 'proxies', 'puppet', 'python', 'qtp', 'query', 'querying', 'rabbitmq', 'raid', 'rails', 'rational', 'rdbms', 'redhat', 'redis', 'relational', 'remedy', 'replication', 'rest', 'rhel', 'rsa', 'rtos', 'ruby', 'saa', 'saas', 'salesforce', 'sans', 'sap', 'sas', 'sass', 'scala', 'sccm', 'schema', 'schemas', 'script', 'scripting', 'scripts', 'scsi', 'sdk', 'sdtm', 'selenium', 'semantic', 'sencha', 'server', 'servlets', 'sfdc', 'sftp', 'shell', 'silverlight', 'simulink', 'sms', 'snmp', 'soa', 'soap', 'solaris', 'solr', 'sphere', 'splunk', 'spring', 'sql', 'sqlserver', 'srm', 'ssas', 'ssh', 'ssis', 'ssl', 'ssrs', 'stack', 'struts', 'subversion', 'svn', 'sybase', 'symantec', 'sync', 'tableau', 'tablet', 'tcl', 'tcpdump', 'technologies', 'telnet', 'teradata', 'testng', 'tfs', 'thin', 'tibco', 'tivoli', 'tmw', 'toad', 'tomcat', 'toolkit', 'toolsets', 'topology', 'transact', 'triggers', 'tsql', 'tuning', 'ubuntu', 'ucs', 'ui', 'uml', 'unix', 'vb', 'vba', 'vbscript', 'verilog', 'veritas', 'version', 'versioning', 'versions', 'vhdl', 'virtual', 'virtualization', 'virtualized', 'vm', 'vmware', 'ware', 'waterfall', 'wcf', 'weaver', 'web', 'weblogic', 'websphere', 'widgets', 'windows', 'wireshark', 'wordpress', 'wpf', 'wsdl', 'xen', 'xendesktop', 'xhtml', 'xi', 'xml', 'xsd', 'xsl', 'xslt', 'zend', 'zookeeper']
+
+In [50]: for i in range(len(cluster_dict)):
+   ....:         if 'finance' in cluster_dict[i]:
+   ....:                 cluster_dict[i].sort()
+   ....:                 print cluster_dict[i]
+   ....:
+['accounting', 'accruals', 'acquisitions', 'allocation', 'allocations', 'aml', 'amortization', 'annual', 'ar', 'asc', 'audit', 'audited', 'auditing', 'auditors', 'audits', 'basel', 'bookkeeping', 'budget', 'budgeting', 'calculation', 'capital', 'capitalization', 'cas', 'cib', 'commentary', 'consolidated', 'consolidation', 'consolidations', 'controllership', 'controversy', 'corporate', 'counterparties', 'counterparty', 'deductions', 'depreciation', 'derivative', 'diligence', 'disclosures', 'divestitures', 'entities', 'entity', 'entries', 'equalization', 'erforms', 'excise', 'expenditure', 'expenditures', 'expense', 'fas', 'fcg', 'filings', 'fin', 'finance', 'financial', 'financials', 'financings', 'fiscal', 'fixed', 'fmis', 'footnote', 'footnotes', 'forecast', 'forecasting', 'forecasts', 'forma', 'fund', 'gaap', 'gl', 'governance', 'grant', 'grants', 'headcount', 'hedging', 'hoc', 'ifrs', 'income', 'intercompany', 'invention', 'issuers', 'journal', 'kyc', 'ledger', 'ledgers', 'liabilities', 'liquidity', 'merger', 'monthly', 'multistate', 'onesource', 'payables', 'payroll', 'payrolls', 'preparer', 'preparers', 'projection', 'projections', 'pronouncements', 'proxy', 'quarterly', 'receivable', 'receivables', 'reconcile', 'reconciliation', 'reconciliations', 'reporting', 'reserving', 'restructuring', 'restructurings', 'returns', 'ria', 'risk', 'sec', 'securitization', 'shareholder', 'statements', 'structuring', 'tax', 'taxation', 'taxes', 'trading', 'transaction', 'transactional', 'treasury', 'valuation', 'valuations', 'variance', 'withholding', 'workpapers', 'yearly']</span>
+</pre>
+</div>
+
+    <p>From here, one interesting experiment will be learning new word embeddings from a different corpora using word embeddings like these as starting points for other similarity measures; quite possibility through LDA or a similar quick topic analysis. One thing we plan on doing is creating a simple twitter/reddit classifier to measure job-post lag. Because we believe that job-posts/job-openings lag behind the labor-market in terms of realizing skill-assets, we are going to be measuring the signal duration from twitter/reddit/resumes to when it is finally realized in the job market via open job postings. This will be interesting to almost anyone trying to capitalize on investing in new skills or simply to see whether the market is interested in investing in potential, or hype, or both (e.g. Hadoop).</p>
+
+    <p>In summary, I really like messing around with word2vec for a lot of the different text projects we come across. I think the flexibility and speed are some of the really cool qualities if a fast turn around is needed. Otherwise, it might be beneficial to check out GloVe if you have a lot of memory at your disposal. Until next time.</p>
+
+
+
+
+
+                    <h2 class="section-heading">References</h2>
+                    <!--footnotes-->    
+                    <table class="docutils footnote" frame="void" id="id11" rules="none">
+                    <colgroup><col class="label"><col></colgroup>
+                    <tbody valign="top">
+                    <tr><td class="label"><a class="fn-backref" href="http://www.yseam.com/blog/WV.html#id1">[1]</a></td><td>Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean. Efficient Estimation of Word Representations in Vector Space. 
+                    <a href="http://arxiv.org/pdf/1301.3781v3.pdf">http://arxiv.org/pdf/1301.3781v3.pdf</a>.</td></tr>
+                    </tbody>
+                    </table>
+
+                    <table class="docutils footnote" frame="void" id="id22" rules="none">
+                    <colgroup><col class="label"><col></colgroup>
+                    <tbody valign="top">
+                    <tr><td class="label"><a class="fn-backref" href="http://www.yseam.com/blog/WV.html#id2">[2]</a></td><td>Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. Exploiting Similarities among Languages for Machine Translation.
+                    <a href="http://arxiv.org/pdf/1309.4168.pdf">http://arxiv.org/pdf/1309.4168.pdf</a>.</td></tr>
+                    </tbody>
+                    </table>
+
+                    <table class="docutils footnote" frame="void" id="id33" rules="none">
+                    <colgroup><col class="label"><col></colgroup>
+                    <tbody valign="top">
+                    <tr><td class="label"><a class="fn-backref" href="http://www.yseam.com/blog/WV.html#id3">[3]</a></td><td>Frederic Morin and Yoshua Bengio. Hierarchical probabilistic neural network language model. 
+                    <a href="http://www.iro.umontreal.ca/~lisa/pointeurs/hierarchical-nnlm-aistats05.pdf">http://www.iro.umontreal.ca/~lisa/pointeurs/hierarchical-nnlm-aistats05.pdf</a>.</td></tr>
+                    </tbody>
+                    </table>
+
+                    <table class="docutils footnote" frame="void" id="id44" rules="none">
+                    <colgroup><col class="label"><col></colgroup>
+                    <tbody valign="top">
+                    <tr><td class="label"><a class="fn-backref" href="http://www.yseam.com/blog/WV.html#id5">[4]</a></td><td>Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. Distributed Representations of Words and Phrases and their Compositionality.
+                    <a href="http://arxiv.org/pdf/1310.4546.pdf">http://arxiv.org/pdf/1310.4546.pdf</a>.</td></tr>
+                    </tbody>
+                    </table>
+
+                    <!--table class="docutils footnote" frame="void" id="id44" rules="none">
+                    <colgroup><col class="label"><col></colgroup>
+                    <tbody valign="top">
+                    <tr><td class="label"><a class="fn-backref" href="#id4">[5]</a></td><td>Michael U Gutmann and Aapo Hyvarinen. Noise-contrastive estimation of unnormalized statistical models, with applications to natural image statistics. The Journal of Machine Learning Research, 13:307–361, 2012.</td></tr>
+                    </tbody>
+                    </table-->
+
+                    <h2 class="section-heading text-center"><a href="http://www.yseam.com/index.php#portfolio" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;click&#39;,&#39;interest-click-blog2home&#39;);">Check out some of the stuff we do</a></h2>
+
+
+                </div>
+            </div>
+        </div>
+    </div></div></div></div></article>
+
+    <hr>
+
+    <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Feature learning with Word2Vec_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 614px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yseamblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="https://twitter.com/YSeamData" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;click&#39;,&#39;twitter-blog&#39;);">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:matt@yseam.com" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;click&#39;,&#39;email-blog&#39;);">
+                                <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a> 
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright © yseam 2015</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="./Feature learning with Word2Vec_files/jquery.min.js"></script>
+    <script type="text/javascript" src="./Feature learning with Word2Vec_files/gist-embed.min.js"></script>
+    <!--script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script-->
+    <!--script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
+    <script type="text/x-mathjax-config;executed=true"> MathJax.Hub.Config({ TeX: { extensions: ["autobold.js"] }});</script>
+    <script type="text/javascript" src="./Feature learning with Word2Vec_files/MathJax.js"></script>
+    <!-- jQuery -->
+    <script src="./Feature learning with Word2Vec_files/jquery.min(1).js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./Feature learning with Word2Vec_files/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="./Feature learning with Word2Vec_files/clean-blog.min.js"></script>
+
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'yseamblog'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+
+
+
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: STIXSizeOneSym, sans-serif;"></div></div><iframe style="display: none;" src="./Feature learning with Word2Vec_files/saved_resource(1).html"></iframe></body></html>

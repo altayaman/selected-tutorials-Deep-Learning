@@ -1,0 +1,3650 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://github.com/fchollet/keras/issues/233 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+
+
+  <link crossorigin="anonymous" href="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/frameworks-d7b19415c108234b91acac0d0c02091c860993c13687a757ee345cc1ecd3a9d1.css" integrity="sha256-17GUFcEII0uRrKwNDAIJHIYJk8E2h6dX7jRcwezTqdE=" media="all" rel="stylesheet">
+  <link crossorigin="anonymous" href="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/github-678c6c9fa597e3eabad2135736d58fe40e2ef37d8e272589d7d39d7c1c0f9056.css" integrity="sha256-Z4xsn6WX4+q60hNXNtWP5A4u832OJyWJ19OdfBwPkFY=" media="all" rel="stylesheet">
+  
+  
+  <link crossorigin="anonymous" href="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/site-537c466d44a69d38c4bd60c2fd2955373ef96d051bd97b2ad30ed039acc97bff.css" integrity="sha256-U3xGbUSmnTjEvWDC/SlVNz75bQUb2Xsq0w7QOazJe/8=" media="all" rel="stylesheet">
+  
+
+  <meta name="viewport" content="width=device-width">
+  
+  <title>Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet/keras · GitHub</title>
+  <link rel="search" type="application/opensearchdescription+xml" href="https://github.com/opensearch.xml" title="GitHub">
+  <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+  <meta property="fb:app_id" content="1401488693436528">
+
+    
+    <meta content="https://avatars3.githubusercontent.com/u/2167017?v=3&amp;s=400" property="og:image"><meta content="GitHub" property="og:site_name"><meta content="object" property="og:type"><meta content="Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet/keras" property="og:title"><meta content="https://github.com/fchollet/keras/issues/233" property="og:url"><meta content="I&#39;d like to use keras to build a 1D convolutional net with pooling layers on some textual input, but I can&#39;t figure out the right input format and the right number of incoming connections above the..." property="og:description">
+
+  <link rel="assets" href="https://assets-cdn.github.com/">
+  
+  <meta name="pjax-timeout" content="1000">
+  
+  <meta name="request-id" content="C2DA:08C7:2C3BF65:456D953:58FD91E1" data-pjax-transient="">
+  
+
+  <meta name="selected-link" value="repo_issues" data-pjax-transient="">
+
+  <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+<meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
+    <meta name="google-analytics" content="UA-3769691-2">
+
+<meta content="collector.githubapp.com" name="octolytics-host"><meta content="github" name="octolytics-app-id"><meta content="https://collector.githubapp.com/github-external/browser_event" name="octolytics-event-url"><meta content="C2DA:08C7:2C3BF65:456D953:58FD91E1" name="octolytics-dimension-request_id">
+<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/issues/show" data-pjax-transient="true" name="analytics-location">
+
+
+
+
+  <meta class="js-ga-set" name="dimension1" content="Logged Out">
+
+
+  
+
+      <meta name="hostname" content="github.com">
+  <meta name="user-login" content="">
+
+      <meta name="expected-hostname" content="github.com">
+    <meta name="js-proxy-site-detection-payload" content="YTJlNmFjOTY4YTAxODU4YmIxOGYyODA1MjhmMjc1MTlhZjkwMDM0MWVhYjU1OGExMWZhNjY4OTA2MGJhMDJiZnx7InJlbW90ZV9hZGRyZXNzIjoiNjcuMTYxLjI2LjExMSIsInJlcXVlc3RfaWQiOiJDMkRBOjA4Qzc6MkMzQkY2NTo0NTZEOTUzOjU4RkQ5MUUxIiwidGltZXN0YW1wIjoxNDkzMDEyOTYyLCJob3N0IjoiZ2l0aHViLmNvbSJ9">
+
+
+  <meta name="html-safe-nonce" content="9096b19a61aeb560dbf92ded44431d9912049648">
+
+  <meta http-equiv="x-pjax-version" content="2e017d75c6ea5cb7f0c7e24d0a0382b8">
+  
+
+    
+  <meta name="description" content="keras - Deep Learning library for Python. Convnets, recurrent neural networks, and more. Runs on TensorFlow or Theano.">
+  <meta name="go-import" content="github.com/fchollet/keras git https://github.com/fchollet/keras.git">
+
+  <meta content="710255" name="octolytics-dimension-user_id"><meta content="fchollet" name="octolytics-dimension-user_login"><meta content="33015583" name="octolytics-dimension-repository_id"><meta content="fchollet/keras" name="octolytics-dimension-repository_nwo"><meta content="true" name="octolytics-dimension-repository_public"><meta content="false" name="octolytics-dimension-repository_is_fork"><meta content="33015583" name="octolytics-dimension-repository_network_root_id"><meta content="fchollet/keras" name="octolytics-dimension-repository_network_root_nwo">
+        <link href="https://github.com/fchollet/keras/commits/master.atom" rel="alternate" title="Recent Commits to keras:master" type="application/atom+xml">
+
+
+
+
+  <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+
+  <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+
+  <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#000000">
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+<meta name="theme-color" content="#1e2327">
+
+
+  <meta name="u2f-support" content="true">
+
+  </head>
+
+  <body class="logged-out env-production emoji-size-boost">
+    
+
+
+  <div class="position-relative js-header-wrapper ">
+    <a href="https://github.com/fchollet/keras/issues/233#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+    <div id="js-pjax-loader-bar" class="pjax-loader-bar"><div class="progress"></div></div>
+
+    
+    
+    
+
+
+
+          <header class="site-header js-details-container Details" role="banner">
+  <div class="container-responsive">
+    <a class="header-logo-invertocat" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+    </a>
+
+    <button class="btn-link float-right site-header-toggle js-details-target" type="button" aria-label="Toggle navigation">
+      <svg aria-hidden="true" class="octicon octicon-three-bars" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path fill-rule="evenodd" d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg>
+    </button>
+
+    <div class="site-header-menu">
+      <nav class="site-header-nav">
+        <a href="https://github.com/features" class="js-selected-navigation-item nav-item" data-ga-click="Header, click, Nav menu - item:features" data-selected-links="/features /features">
+          Features
+</a>        <a href="https://github.com/business" class="js-selected-navigation-item nav-item" data-ga-click="Header, click, Nav menu - item:business" data-selected-links="/business /business/security /business/customers /business">
+          Business
+</a>        <a href="https://github.com/explore" class="js-selected-navigation-item nav-item" data-ga-click="Header, click, Nav menu - item:explore" data-selected-links="/explore /trending /trending/developers /integrations /integrations/feature/code /integrations/feature/collaborate /integrations/feature/ship /showcases /explore">
+          Explore
+</a>        <a href="https://github.com/pricing" class="js-selected-navigation-item nav-item" data-ga-click="Header, click, Nav menu - item:pricing" data-selected-links="/pricing /pricing/developer /pricing/team /pricing/business-hosted /pricing/business-enterprise /pricing">
+          Pricing
+</a>      </nav>
+
+      <div class="site-header-actions">
+          <div class="header-search scoped-search site-scoped-search js-site-search" role="search">
+  <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/search" class="js-site-search-form" data-scoped-search-url="/fchollet/keras/search" data-unscoped-search-url="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+    <label class="form-control header-search-wrapper js-chromeless-input-container">
+        <a href="https://github.com/fchollet/keras/issues/233" class="header-search-scope no-underline">This repository</a>
+      <input type="text" class="form-control header-search-input js-site-search-focus js-site-search-field is-clearable" data-hotkey="s" name="q" value="" placeholder="Search" aria-label="Search this repository" data-unscoped-placeholder="Search GitHub" data-scoped-placeholder="Search" autocapitalize="off">
+        <input type="hidden" class="js-site-search-type-field" name="type">
+    </label>
+</form></div>
+
+
+          <a class="text-bold site-header-link" href="https://github.com/login?return_to=%2Ffchollet%2Fkeras%2Fissues%2F233" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+            <span class="text-gray">or</span>
+            <a class="text-bold site-header-link" href="https://github.com/join?source=header-repo" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+  </div>
+
+  <div id="start-of-content" class="accessibility-aid"></div>
+
+    <div id="js-flash-container">
+</div>
+
+
+
+  <div role="main">
+        <div itemscope="" itemtype="http://schema.org/SoftwareSourceCode">
+    <div id="js-repo-pjax-container" data-pjax-container="">
+        
+
+
+  <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+    <div class="container repohead-details-container">
+
+
+      <ul class="pagehead-actions">
+  <li>
+      <a href="https://github.com/login?return_to=%2Ffchollet%2Fkeras" class="btn btn-sm btn-with-count tooltipped tooltipped-n" aria-label="You must be signed in to watch a repository" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
+    Watch
+  </a>
+  <a class="social-count" href="https://github.com/fchollet/keras/watchers" aria-label="1019 users are watching this repository">
+    1,019
+  </a>
+
+  </li>
+
+  <li>
+      <a href="https://github.com/login?return_to=%2Ffchollet%2Fkeras" class="btn btn-sm btn-with-count tooltipped tooltipped-n" aria-label="You must be signed in to star a repository" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
+    Star
+  </a>
+
+    <a class="social-count js-social-count" href="https://github.com/fchollet/keras/stargazers" aria-label="14903 users starred this repository">
+      14,903
+    </a>
+
+  </li>
+
+  <li>
+      <a href="https://github.com/login?return_to=%2Ffchollet%2Fkeras" class="btn btn-sm btn-with-count tooltipped tooltipped-n" aria-label="You must be signed in to fork a repository" rel="nofollow">
+        <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
+        Fork
+      </a>
+
+    <a href="https://github.com/fchollet/keras/network" class="social-count" aria-label="5183 users forked this repository">
+      5,183
+    </a>
+  </li>
+</ul>
+
+      <h1 class="public ">
+  <svg aria-hidden="true" class="octicon octicon-repo" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path></svg>
+  <span class="author" itemprop="author"><a href="https://github.com/fchollet" class="url fn" rel="author">fchollet</a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong itemprop="name"><a href="https://github.com/fchollet/keras" data-pjax="#js-repo-pjax-container">keras</a></strong>
+
+</h1>
+
+    </div>
+    <div class="container">
+      
+<nav class="reponav js-repo-nav js-sidenav-container-pjax" itemscope="" itemtype="http://schema.org/BreadcrumbList" role="navigation" data-pjax="#js-repo-pjax-container">
+
+  <span itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="https://github.com/fchollet/keras" class="js-selected-navigation-item reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /fchollet/keras" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-code" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"></path></svg>
+      <span itemprop="name">Code</span>
+      <meta itemprop="position" content="1">
+</a>  </span>
+
+    <span itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+      <a href="https://github.com/fchollet/keras/issues" class="js-selected-navigation-item selected reponav-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /fchollet/keras/issues" itemprop="url">
+        <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg>
+        <span itemprop="name">Issues</span>
+        <span class="Counter">2,486</span>
+        <meta itemprop="position" content="2">
+</a>    </span>
+
+  <span itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="https://github.com/fchollet/keras/pulls" class="js-selected-navigation-item reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /fchollet/keras/pulls" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-git-pull-request" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 10 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v6.56A1.993 1.993 0 0 0 2 15a1.993 1.993 0 0 0 1-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
+      <span itemprop="name">Pull requests</span>
+      <span class="Counter">27</span>
+      <meta itemprop="position" content="3">
+</a>  </span>
+
+    <a href="https://github.com/fchollet/keras/projects" class="js-selected-navigation-item reponav-item" data-selected-links="repo_projects new_repo_project repo_project /fchollet/keras/projects">
+      <svg aria-hidden="true" class="octicon octicon-project" height="16" version="1.1" viewBox="0 0 15 16" width="15"><path fill-rule="evenodd" d="M10 12h3V2h-3v10zm-4-2h3V2H6v8zm-4 4h3V2H2v12zm-1 1h13V1H1v14zM14 0H1a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"></path></svg>
+      Projects
+      <span class="Counter">1</span>
+</a>
+    <a href="https://github.com/fchollet/keras/wiki" class="js-selected-navigation-item reponav-item" data-hotkey="g w" data-selected-links="repo_wiki /fchollet/keras/wiki">
+      <svg aria-hidden="true" class="octicon octicon-book" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"></path></svg>
+      Wiki
+</a>
+
+  <a href="https://github.com/fchollet/keras/pulse" class="js-selected-navigation-item reponav-item" data-selected-links="pulse /fchollet/keras/pulse">
+    <svg aria-hidden="true" class="octicon octicon-pulse" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0v2h3.6l.9-1.8.9 5.4L9 8.5l1.6 1.5H14V8z"></path></svg>
+    Pulse
+</a>
+  <a href="https://github.com/fchollet/keras/graphs" class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors /fchollet/keras/graphs">
+    <svg aria-hidden="true" class="octicon octicon-graph" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M16 14v1H0V0h1v14h15zM5 13H3V8h2v5zm4 0H7V3h2v10zm4 0h-2V6h2v7z"></path></svg>
+    Graphs
+</a>
+
+</nav>
+
+    </div>
+  </div>
+
+<div class="container new-discussion-timeline experiment-repo-nav">
+  <div class="repository-content">
+
+    
+          
+<style type="text/css" media="screen">
+  span.labelstyle-1d76db, .linked-labelstyle-1d76db {  background-color: #1d76db !important;  color: #fff !important;}.labelstyle-1d76db.selected {  background-color: #1d76db !important;  color: #fff !important;}.label-select-menu .labelstyle-1d76db.selected {  background:rgba(29, 118, 219, 0.12) !important;  color: #145299 !important;}
+
+span.labelstyle-fc2929, .linked-labelstyle-fc2929 {  background-color: #fc2929 !important;  color: #fff !important;}.labelstyle-fc2929.selected {  background-color: #fc2929 !important;  color: #fff !important;}.label-select-menu .labelstyle-fc2929.selected {  background:rgba(252, 41, 41, 0.12) !important;  color: #991818 !important;}
+
+span.labelstyle-cccccc, .linked-labelstyle-cccccc {  background-color: #cccccc !important;  color: #333333 !important;}.labelstyle-cccccc.selected {  background-color: #cccccc !important;  color: #333333 !important;}.label-select-menu .labelstyle-cccccc.selected {  background:rgba(204, 204, 204, 0.12) !important;  color: #999999 !important;}
+
+span.labelstyle-84b6eb, .linked-labelstyle-84b6eb {  background-color: #84b6eb !important;  color: #1c2733 !important;}.labelstyle-84b6eb.selected {  background-color: #84b6eb !important;  color: #1c2733 !important;}.label-select-menu .labelstyle-84b6eb.selected {  background:rgba(132, 182, 235, 0.12) !important;  color: #557699 !important;}
+
+span.labelstyle-159818, .linked-labelstyle-159818 {  background-color: #159818 !important;  color: #fff !important;}.labelstyle-159818.selected {  background-color: #159818 !important;  color: #fff !important;}.label-select-menu .labelstyle-159818.selected {  background:rgba(21, 152, 24, 0.12) !important;  color: #159918 !important;}
+
+span.labelstyle-e6e6e6, .linked-labelstyle-e6e6e6 {  background-color: #e6e6e6 !important;  color: #333333 !important;}.labelstyle-e6e6e6.selected {  background-color: #e6e6e6 !important;  color: #333333 !important;}.label-select-menu .labelstyle-e6e6e6.selected {  background:rgba(230, 230, 230, 0.12) !important;  color: #999999 !important;}
+
+span.labelstyle-cc317c, .linked-labelstyle-cc317c {  background-color: #cc317c !important;  color: #fff !important;}.labelstyle-cc317c.selected {  background-color: #cc317c !important;  color: #fff !important;}.label-select-menu .labelstyle-cc317c.selected {  background:rgba(204, 49, 124, 0.12) !important;  color: #99245c !important;}
+
+span.labelstyle-f9d0c4, .linked-labelstyle-f9d0c4 {  background-color: #f9d0c4 !important;  color: #332a28 !important;}.labelstyle-f9d0c4.selected {  background-color: #f9d0c4 !important;  color: #332a28 !important;}.label-select-menu .labelstyle-f9d0c4.selected {  background:rgba(249, 208, 196, 0.12) !important;  color: #997f78 !important;}
+
+span.labelstyle-e99695, .linked-labelstyle-e99695 {  background-color: #e99695 !important;  color: #332020 !important;}.labelstyle-e99695.selected {  background-color: #e99695 !important;  color: #332020 !important;}.label-select-menu .labelstyle-e99695.selected {  background:rgba(233, 150, 149, 0.12) !important;  color: #986261 !important;}
+
+span.labelstyle-ffffff, .linked-labelstyle-ffffff {  background-color: #ffffff !important;  color: #333333 !important;}.labelstyle-ffffff.selected {  background-color: #ffffff !important;  color: #333333 !important;}.label-select-menu .labelstyle-ffffff.selected {  background:rgba(255, 255, 255, 0.12) !important;  color: #999999 !important;}
+</style>
+
+<div class="issues-listing" data-pjax="">
+  
+  <div id="show_issue" class="js-issues-results">
+
+    
+  <div id="partial-discussion-header" class="gh-header js-details-container Details js-socket-channel js-updatable-content issue" data-channel="issue:88770386" data-url="/fchollet/keras/issues/233/show_partial?partial=issues%2Ftitle">
+
+  <div class="gh-header-show ">
+      <div class="gh-header-actions">
+          <a href="https://github.com/fchollet/keras/issues/new" class="btn btn-sm btn-primary float-right" data-hotkey="c">
+            New issue
+          </a>
+      </div>
+
+    <h1 class="gh-header-title">
+      <span class="js-issue-title">
+        Example of How to Construct 1D Convolutional Net on Text
+      </span>
+      <span class="gh-header-number">#233</span>
+    </h1>
+  </div>
+
+
+  <div class="TableObject gh-header-meta">
+    <div class="TableObject-item">
+        <div class="State State--red">
+          <svg aria-hidden="true" class="octicon octicon-issue-closed" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M7 10h2v2H7v-2zm2-6H7v5h2V4zm1.5 1.5l-1 1L12 9l4-4.5-1-1L12 7l-1.5-1.5zM8 13.7A5.71 5.71 0 0 1 2.3 8c0-3.14 2.56-5.7 5.7-5.7 1.83 0 3.45.88 4.5 2.2l.92-.92A6.947 6.947 0 0 0 8 1C4.14 1 1 4.14 1 8s3.14 7 7 7 7-3.14 7-7l-1.52 1.52c-.66 2.41-2.86 4.19-5.48 4.19v-.01z"></path></svg>
+          Closed
+        </div>
+    </div>
+    <div class="TableObject-item TableObject-item--primary">
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>  opened this <span class="noun">Issue</span>
+        <relative-time datetime="2015-06-16T16:11:20Z" title="Jun 16, 2015, 9:11 AM PDT">on Jun 16, 2015</relative-time>
+        · 38 comments
+    </div>
+  </div>
+</div>
+
+
+    <div id="discussion_bucket" class="clearfix">
+      <div class="discussion-sidebar">
+        <div id="partial-discussion-sidebar" class="js-socket-channel js-updatable-content" data-channel="issue:88770386" data-url="/fchollet/keras/issues/233/show_partial?partial=issues%2Fsidebar">
+
+  <div class="discussion-sidebar-item sidebar-assignee js-discussion-sidebar-item">
+  <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/issues/233?partial=issues%2Fsidebar%2Fshow%2Fassignees" class="js-issue-sidebar-form" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="n2B+oUBtTRFiEXf1jqdu+3ld3JCJnl9VG+oG3e9xTwfm5fBDcPyv+O5hCw8sOsYf1FuqN6wL8bOsw2h8MbuQ3w=="></div>
+    
+  <h3 class="discussion-sidebar-heading">
+    Assignees
+  </h3>
+
+
+    <span class="css-truncate">
+    No one assigned
+</span>
+
+</form></div>
+
+  <div class="discussion-sidebar-item sidebar-labels js-discussion-sidebar-item">
+  <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/issues/233?partial=issues%2Fsidebar%2Fshow%2Flabels" class="js-issue-sidebar-form" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="MLSB1HxH3u5Vyh6kMa7LxQ7kuGEGxTW0AsL1+y1vQBJJMQ82TNY8B9m6Yl6TM2Mho+LOxiNQm1K165ta86Wfyg=="></div>
+      
+  <h3 class="discussion-sidebar-heading">
+    Labels
+  </h3>
+
+
+    <div class="labels css-truncate">
+    None yet
+</div>
+
+</form></div>
+
+    <div class="discussion-sidebar-item js-discussion-sidebar-item">
+  <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/projects/issues/233" class="js-issue-sidebar-form" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="t2rLBoQHrhdPQnyhvzXnReIDyH+18/ttdI1rRULUAisPd1C5GIvnJ31w1qRCYhrsrCV0SfUAjtdNZrNMqXmKTA=="></div>
+    
+  <h3 class="discussion-sidebar-heading">
+    Projects
+  </h3>
+
+
+    <span class="css-truncate">
+    None yet
+</span>
+
+</form></div>
+
+  <div class="discussion-sidebar-item sidebar-milestone js-discussion-sidebar-item">
+  <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/issues/233/set_milestone?partial=issues%2Fsidebar%2Fshow%2Fmilestone" class="js-issue-sidebar-form" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="fsbsTY5YIBbTA71CK3UIFgSlSoji4JUKvi+Aw+JetFmN7TKuuC5gSo3qteKV+zgY99bC2pu3774OvfTm3YnbOw=="></div>
+    
+  <h3 class="discussion-sidebar-heading">
+    Milestone
+  </h3>
+
+
+      No milestone
+
+</form></div>
+
+  
+  <div id="partial-users-participants" class="discussion-sidebar-item">
+  <div class="participation">
+
+    <h3 class="discussion-sidebar-heading">
+      14 participants
+    </h3>
+    <div class="participation-avatars">
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="simonhughes22" href="https://github.com/simonhughes22"><img alt="@simonhughes22" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="lukedeo" href="https://github.com/lukedeo"><img alt="@lukedeo" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/3826382" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="fchollet" href="https://github.com/fchollet"><img alt="@fchollet" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/710255" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="ameasure" href="https://github.com/ameasure"><img alt="@ameasure" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/571959" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="manwinder123" href="https://github.com/manwinder123"><img alt="@manwinder123" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/6258160" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="xpact" href="https://github.com/xpact"><img alt="@xpact" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2922269" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="zachmayer" href="https://github.com/zachmayer"><img alt="@zachmayer" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/581590" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="wbars" href="https://github.com/wbars"><img alt="@wbars" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/5152749" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="eshijia" href="https://github.com/eshijia"><img alt="@eshijia" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/4308369" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="brianlow" href="https://github.com/brianlow"><img alt="@brianlow" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/938138" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="ddofer" href="https://github.com/ddofer"><img alt="@ddofer" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/5120387" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="vinayakumarr" href="https://github.com/vinayakumarr"><img alt="@vinayakumarr" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/18217467" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="ishalyminov" href="https://github.com/ishalyminov"><img alt="@ishalyminov" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/1062768" width="26"> </a>
+        <a class="participant-avatar tooltipped tooltipped-n" aria-label="rfalba" href="https://github.com/rfalba"><img alt="@rfalba" class="avatar" height="26" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/20891813" width="26"> </a>
+    </div>
+  </div>
+</div>
+
+
+  
+
+</div>
+
+      </div>
+
+      <div class="discussion-timeline js-quote-selection-container ">
+
+        <div class="js-discussion js-socket-channel" data-channel="marked-as-read:issue:88770386">
+          
+
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+      <a href="https://github.com/simonhughes22">
+        <img alt="@simonhughes22" class="timeline-comment-avatar" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+      </a>
+
+
+      
+
+<div id="issue-88770386" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="796424f8a221a87664775fb066ac4d5b">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issue-88770386" class="timestamp"><relative-time datetime="2015-06-16T16:11:20Z" title="Jun 16, 2015, 9:11 AM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>I'd like to use keras to build a 1D convolutional net with pooling layers on some textual input, but I can't figure out the right input format and the right number of incoming connections above the flatten layer. Would you be able to provide a simple example using one of the data sets?</p>
+<p>Awesome work by the way, great library.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/lukedeo">
+          <img alt="@lukedeo" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/3826382(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112489344" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="921ca6df7c021f95f65cbfc5e22720bf">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label tooltipped tooltipped-multiline tooltipped-s" aria-label="This user has previously committed to the keras repository.">
+      Contributor
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/lukedeo" class="author">lukedeo</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112489344" class="timestamp"><relative-time datetime="2015-06-16T16:31:04Z" title="Jun 16, 2015, 9:31 AM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>You actually should probably use a 2D convolution, depending on what you're trying to do. If you have word vectors of size <code>wv_sz</code>, and you truncate/pad each sentence to have <code>nb_tokens</code> tokens, you can form a "sentence image" of size <code>(nb_tokens, wv_sz)</code>. You can then choose 1 or more n-gram sizes to use as a filter. As long as you make sure your <code>X</code> has shape <code>(nb_examples, 1, nb_tokens, wv_sz)</code>, you can use something like</p>
+<div class="highlight highlight-source-python"><pre>model.add(Convolution2D(nb_feature_maps, <span class="pl-c1">1</span>, n_gram, wv_sz))
+model.add(MaxPooling2D(<span class="pl-v">poolsize</span><span class="pl-k">=</span>(nb_tokens <span class="pl-k">-</span> n_gram <span class="pl-k">+</span> <span class="pl-c1">1</span>, <span class="pl-c1">1</span>)))
+model.add(Flatten())
+model.add(WhateverLayer(nb_feature_maps, nb_outputs))
+model.add(<span class="pl-c1">...</span>)</pre></div>
+<p>If you want to add diversity, you can also do something like a <code>Merge</code> on a list conv-pool sub-models. Here is an example of something I've successfully used on a sentiment classifier:</p>
+<div class="highlight highlight-source-python"><pre>ngram_filters <span class="pl-k">=</span> [<span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">5</span>, <span class="pl-c1">6</span>, <span class="pl-c1">7</span>, <span class="pl-c1">8</span>]
+conv_filters <span class="pl-k">=</span> []
+
+<span class="pl-k">for</span> n_gram <span class="pl-k">in</span> ngram_filters:
+    conv_filters.append(Sequential())
+    conv_filters[<span class="pl-k">-</span><span class="pl-c1">1</span>].add(Convolution2D(nb_feature_maps, <span class="pl-c1">1</span>, n_gram, wv_sz))
+    conv_filters[<span class="pl-k">-</span><span class="pl-c1">1</span>].add(MaxPooling2D(<span class="pl-v">poolsize</span><span class="pl-k">=</span>(nb_tokens <span class="pl-k">-</span> n_gram <span class="pl-k">+</span> <span class="pl-c1">1</span>, <span class="pl-c1">1</span>)))
+    conv_filters[<span class="pl-k">-</span><span class="pl-c1">1</span>].add(Flatten())
+
+model <span class="pl-k">=</span> Sequential()
+model.add(Merge(conv_filters, <span class="pl-v">mode</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>concat<span class="pl-pds">'</span></span>))
+model.add(Dropout(<span class="pl-c1">0.5</span>))
+model.add(Dense(nb_feature_maps <span class="pl-k">*</span> <span class="pl-c1">len</span>(ngram_filters), <span class="pl-c1">1</span>))
+model.add(Activation(<span class="pl-s"><span class="pl-pds">'</span>sigmoid<span class="pl-pds">'</span></span>))</pre></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions has-reactions js-reactions-container ">
+    <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/reactions/update" class="js-pick-reaction" data-remote="true" data-type="json" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="6Taebq/IfXSMcLE87bOWCV9HU5buzBEPcc+ETsPJSXasceHcAP+4brIIW0h05YJheZki3rHzO5zzNhHWD5ixIA=="></div>
+      <input type="hidden" name="input[subjectId]" value="MDEyOklzc3VlQ29tbWVudDExMjQ4OTM0NA==">
+
+      <div class="comment-reactions-options">
+          <button disabled="" class="btn-link reaction-summary-item tooltipped tooltipped-se tooltipped-multiline " name="input[content]" type="submit" value="THUMBS_UP react" aria-label="anonoz reacted with thumbs up emoji">
+            <g-emoji alias="+1" class="emoji mr-1" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" ios-version="6.0">👍</g-emoji>
+            1
+          </button>
+      </div>
+</form></div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/fchollet">
+          <img alt="@fchollet" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/710255(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112517894" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="43664b5f3e3a1d01f41cddc40434306e">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label text-bold tooltipped tooltipped-multiline tooltipped-s" aria-label="This user is the owner of the keras repository.">
+      Owner
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/fchollet" class="author">fchollet</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112517894" class="timestamp"><relative-time datetime="2015-06-16T18:12:05Z" title="Jun 16, 2015, 11:12 AM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>2D convolution only really makes sense under the assumption that the input is spatially continuous over both dimensions (like pictures). A sentence is continuous over time, but not over the wv_sz dimension (unless you are using a kind of word/character embedding that is dense and continuous).</p>
+<p>Thinking about it, 2Dconv while using a kind of dense and continuous character embedding sounds like the best way to process text. But anyway, if your character embedding is sparse and arbitrary, 1Dconv makes sense.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions has-reactions js-reactions-container ">
+    <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/reactions/update" class="js-pick-reaction" data-remote="true" data-type="json" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="i7xIc/i6MvSLr6zXfebLvfGwmtk3LyexKHHSe+4Dz+nO+zfBV4337rXXRqPksN/V127rkWgQDSKqiEfjIlI3vw=="></div>
+      <input type="hidden" name="input[subjectId]" value="MDEyOklzc3VlQ29tbWVudDExMjUxNzg5NA==">
+
+      <div class="comment-reactions-options">
+          <button disabled="" class="btn-link reaction-summary-item tooltipped tooltipped-se tooltipped-multiline " name="input[content]" type="submit" value="THUMBS_UP react" aria-label="aktivkohle and wdroz reacted with thumbs up emoji">
+            <g-emoji alias="+1" class="emoji mr-1" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" ios-version="6.0">👍</g-emoji>
+            2
+          </button>
+      </div>
+</form></div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112548368" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="878e024cb60ad06744a4ca3355e2a0b3">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112548368" class="timestamp"><relative-time datetime="2015-06-16T19:47:16Z" title="Jun 16, 2015, 12:47 PM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Thanks. <a href="https://github.com/fchollet" class="user-mention">@fchollet</a> could you provide a quick example of how to do the 1D convolution on some of your textual data?</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/fchollet">
+          <img alt="@fchollet" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/710255(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112549024" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="860e6944db3cb8072f20643fc7688df7">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label text-bold tooltipped tooltipped-multiline tooltipped-s" aria-label="This user is the owner of the keras repository.">
+      Owner
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/fchollet" class="author">fchollet</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112549024" class="timestamp"><relative-time datetime="2015-06-16T19:49:06Z" title="Jun 16, 2015, 12:49 PM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/simonhughes22" class="user-mention">@simonhughes22</a> It's not something I've done before, but I can look into it (I'm a bit busy, so no promises). Is there a paper in particular that you are trying to reproduce?</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112551268" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="12b5a7a0fd552276cde2b5280e005264">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112551268" class="timestamp"><relative-time datetime="2015-06-16T19:59:28Z" title="Jun 16, 2015, 12:59 PM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Sure that would be awesome. Reproducing this excellent Zhang and LeCun paper would be great: <a href="http://arxiv.org/abs/1502.01710">http://arxiv.org/abs/1502.01710</a></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112551482" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="b481da66d72be6dd1c092d1e1f62d195">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112551482" class="timestamp"><relative-time datetime="2015-06-16T20:00:38Z" title="Jun 16, 2015, 1:00 PM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>or doing the same with words if characters are too slow. My dataset is not large, but an LSTM vastly out-performed more vanilla classification methods, and I am hoping using a convolutional network on the same task would be an interesting comparison, and may work well.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/fchollet">
+          <img alt="@fchollet" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/710255(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112557249" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="b8a11ec586156de614691041d99196e8">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label text-bold tooltipped tooltipped-multiline tooltipped-s" aria-label="This user is the owner of the keras repository.">
+      Owner
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/fchollet" class="author">fchollet</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112557249" class="timestamp"><relative-time datetime="2015-06-16T20:21:32Z" title="Jun 16, 2015, 1:21 PM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>I believe they are using 2D convolutions, and interestingly they are doing it over a sparse discontinuous character embedding. You can do better.</p>
+<p>Here is my suggestion: 2D convolutions over a continuous dense character embedding space learned jointly with the main task. Makes much more sense than the braille-like input Zhang and LeCun are using.</p>
+<div class="highlight highlight-source-python"><pre><span class="pl-c"><span class="pl-c">#</span> input: 2D tensor of integer indices of characters (eg. 1-57). </span>
+<span class="pl-c"><span class="pl-c">#</span> input tensor has shape (samples, maxlen)</span>
+model <span class="pl-k">=</span> Sequential()
+model.add(Embedding(max_features, <span class="pl-c1">256</span>)) <span class="pl-c"><span class="pl-c">#</span> embed into dense 3D float tensor (samples, maxlen, 256)</span>
+model.add(Reshape(<span class="pl-c1">1</span>, maxlen, <span class="pl-c1">256</span>)) <span class="pl-c"><span class="pl-c">#</span> reshape into 4D tensor (samples, 1, maxlen, 256)</span>
+<span class="pl-c"><span class="pl-c">#</span> VGG-like convolution stack</span>
+model.add(Convolution2D(<span class="pl-c1">32</span>, <span class="pl-c1">3</span>, <span class="pl-c1">3</span>, <span class="pl-c1">3</span>, <span class="pl-v">border_mode</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>full<span class="pl-pds">'</span></span>)) 
+model.add(Activation(<span class="pl-s"><span class="pl-pds">'</span>relu<span class="pl-pds">'</span></span>))
+model.add(Convolution2D(<span class="pl-c1">32</span>, <span class="pl-c1">32</span>, <span class="pl-c1">3</span>, <span class="pl-c1">3</span>))
+model.add(Activation(<span class="pl-s"><span class="pl-pds">'</span>relu<span class="pl-pds">'</span></span>))
+model.add(MaxPooling2D(<span class="pl-v">poolsize</span><span class="pl-k">=</span>(<span class="pl-c1">2</span>, <span class="pl-c1">2</span>)))
+model.add(Dropout(<span class="pl-c1">0.25</span>))
+model.add(Flatten())
+<span class="pl-c"><span class="pl-c">#</span> then finish up with Dense layers</span></pre></div>
+<p>Warning: untested, etc.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112568164" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="7187545f691f3fd4d08d0265db6f0f98">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112568164" class="timestamp"><relative-time datetime="2015-06-16T20:58:43Z" title="Jun 16, 2015, 1:58 PM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Awesome thanks I will try it out</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  
+
+
+      
+
+
+  <div class="discussion-item discussion-item-closed">
+    <div class="discussion-item-header" id="event-332529542">
+
+      <span class="discussion-item-icon">
+        <svg aria-hidden="true" class="octicon octicon-circle-slash" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm0 1.3c1.3 0 2.5.44 3.47 1.17l-8 8A5.755 5.755 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zm0 11.41c-1.3 0-2.5-.44-3.47-1.17l8-8c.73.97 1.17 2.17 1.17 3.47 0 3.14-2.56 5.7-5.7 5.7z"></path></svg>
+      </span>
+      <img alt="@simonhughes22" class="avatar" height="16" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(2)" width="16">
+      <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+      
+      closed this
+      
+      
+      <a href="https://github.com/fchollet/keras/issues/233#event-332529542" class="timestamp"><relative-time class="timestamp" datetime="2015-06-16T20:58:43Z" title="Jun 16, 2015, 1:58 PM PDT">on Jun 16, 2015</relative-time></a>
+    </div>
+  </div>
+
+  <div class="closed-banner"></div>
+
+
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/lukedeo">
+          <img alt="@lukedeo" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/3826382(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112577097" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="836de6d55d5ff0a135ec5bc667150623">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label tooltipped tooltipped-multiline tooltipped-s" aria-label="This user has previously committed to the keras repository.">
+      Contributor
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/lukedeo" class="author">lukedeo</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112577097" class="timestamp"><relative-time datetime="2015-06-16T21:42:19Z" title="Jun 16, 2015, 2:42 PM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>My 2D example with word/character vectors was geared towards the continuous embeddings -- in the style of <a href="http://arxiv.org/abs/1408.5882">this paper</a> if anyone's interested.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions has-reactions js-reactions-container ">
+    <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/reactions/update" class="js-pick-reaction" data-remote="true" data-type="json" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="u8DW66FKeCK6KD6t74jla00Cj+X5WUSpp87Zkzb3Z7P+h6lZDn29OIRQ1Nl23vEDa9z+raZmbjolN0wL+qaf5Q=="></div>
+      <input type="hidden" name="input[subjectId]" value="MDEyOklzc3VlQ29tbWVudDExMjU3NzA5Nw==">
+
+      <div class="comment-reactions-options">
+          <button disabled="" class="btn-link reaction-summary-item tooltipped tooltipped-se tooltipped-multiline " name="input[content]" type="submit" value="THUMBS_UP react" aria-label="ParseThis reacted with thumbs up emoji">
+            <g-emoji alias="+1" class="emoji mr-1" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" ios-version="6.0">👍</g-emoji>
+            1
+          </button>
+      </div>
+</form></div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112577865" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="fca55ed9e61d1b951c5dbad2855a533e">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112577865" class="timestamp"><relative-time datetime="2015-06-16T21:46:49Z" title="Jun 16, 2015, 2:46 PM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Cool thanks <a href="https://github.com/lukedeo" class="user-mention">@lukedeo</a></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/fchollet">
+          <img alt="@fchollet" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/710255(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-112578186" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="6fb7a07a9f6bab0571fd566cc7037432">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label text-bold tooltipped tooltipped-multiline tooltipped-s" aria-label="This user is the owner of the keras repository.">
+      Owner
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/fchollet" class="author">fchollet</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-112578186" class="timestamp"><relative-time datetime="2015-06-16T21:48:40Z" title="Jun 16, 2015, 2:48 PM PDT">on Jun 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/lukedeo" class="user-mention">@lukedeo</a> cool, makes sense!</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-115006733" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="683a21b0bc9749080526815770fab83a">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-115006733" class="timestamp"><relative-time datetime="2015-06-24T20:46:02Z" title="Jun 24, 2015, 1:46 PM PDT">on Jun 24, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/lukedeo" class="user-mention">@lukedeo</a> I'd like to try your example of different sized filters but can't figure out the correct output dimension size, you example above doesn't seem to work. My input dimensions are</p>
+<p>(number of sequences, 1, max number of tokens (padded to max len), word vector size). I am using a one hot encoded vector to make it simpler, but that shouldn't matter. I get the following error, using the model described by you above:</p>
+<p>results = model.fit(X_train, y_train, batch_size=batch_size, nb_epoch=epochs, validation_split=0.0, show_accuracy=True, verbose=1)<br>
+File "build/bdist.macosx-10.6-x86_64/egg/keras/models.py", line 204, in fit<br>
+File "/Users/simon.hughes/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/theano/compile/function_module.py", line 513, in <strong>call</strong><br>
+allow_downcast=s.allow_downcast)<br>
+File "/Users/simon.hughes/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/theano/tensor/type.py", line 169, in filter<br>
+data.shape))<br>
+TypeError: ('Bad input argument to theano function with name "build/bdist.macosx-10.6-x86_64/egg/keras/models.py:104"  at index 1(0-based)', 'Wrong number of dimensions: expected 4, got 2 with shape (16, 1).')</p>
+<p>Process finished with exit code 1</p>
+<p>Did you do anything else to transform the model or input? 16 is my mini-batch size I believe.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/ameasure">
+          <img alt="@ameasure" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/571959(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-117427013" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="ea0c687432debb3fdc645d1fd1a05d05">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label tooltipped tooltipped-multiline tooltipped-s" aria-label="This user has previously committed to the keras repository.">
+      Contributor
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/ameasure" class="author">ameasure</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-117427013" class="timestamp"><relative-time datetime="2015-07-01T03:48:25Z" title="Jun 30, 2015, 8:48 PM PDT">on Jun 30, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/simonhughes22" class="user-mention">@simonhughes22</a> That error suggests one of the layers is getting a 2 dimensional input where it was expecting 4-D. Convolution layers expect 4-D input so you may need to reshape something somewhere.</p>
+<p>An example of using a CNN for text classification is below. Note that I have already concatenated the embeddings of the words as a preprocessing step. In particular:</p>
+<ul>
+<li>For each text input I break it up into it's constituent words, retrieve pretrained 300-dimensional word embeddings for these, and then concatenate them all, zero padding as needed to get a vector of a fixed length (30000).</li>
+<li>I stack these into a (nb_samples, 30000) array which I call X_train</li>
+</ul>
+<div class="highlight highlight-source-python"><pre><span class="pl-c"><span class="pl-c">#</span> Convolution layers expect a 4-D input so we reshape our 2-D input</span>
+nb_samples <span class="pl-k">=</span> X_train.shape[<span class="pl-c1">0</span>]
+nb_features <span class="pl-k">=</span> X_train.shape[<span class="pl-c1">1</span>]
+newshape <span class="pl-k">=</span> (nb_samples, <span class="pl-c1">1</span>, nb_features, <span class="pl-c1">1</span>)
+X_train <span class="pl-k">=</span> np.reshape(X_train, newshape).astype(theano.config.floatX)
+
+<span class="pl-c"><span class="pl-c">#</span> We set some hyperparameters</span>
+<span class="pl-c1">BATCH_SIZE</span> <span class="pl-k">=</span> <span class="pl-c1">16</span>
+<span class="pl-c1">FIELD_SIZE</span> <span class="pl-k">=</span> <span class="pl-c1">5</span> <span class="pl-k">*</span> <span class="pl-c1">300</span>
+<span class="pl-c1">STRIDE</span> <span class="pl-k">=</span> <span class="pl-c1">300</span>
+N_FILTERS <span class="pl-k">=</span> <span class="pl-c1">200</span>
+
+<span class="pl-c"><span class="pl-c">#</span> We fit the model</span>
+model <span class="pl-k">=</span> Sequential()
+model.add(Convolution2D(<span class="pl-v">nb_filter</span><span class="pl-k">=</span>N_FILTERS, <span class="pl-v">stack_size</span><span class="pl-k">=</span><span class="pl-c1">1</span>, <span class="pl-v">nb_row</span><span class="pl-k">=</span><span class="pl-c1">FIELD_SIZE</span>, 
+                        <span class="pl-v">nb_col</span><span class="pl-k">=</span><span class="pl-c1">1</span>, <span class="pl-v">subsample</span><span class="pl-k">=</span>(<span class="pl-c1">STRIDE</span>, <span class="pl-c1">1</span>)))
+model.add(Activation(<span class="pl-s"><span class="pl-pds">'</span>relu<span class="pl-pds">'</span></span>))
+model.add(MaxPooling2D(<span class="pl-v">poolsize</span><span class="pl-k">=</span>(((nb_features <span class="pl-k">-</span> <span class="pl-c1">FIELD_SIZE</span>) <span class="pl-k">/</span> <span class="pl-c1">STRIDE</span>) <span class="pl-k">+</span> <span class="pl-c1">1</span>, <span class="pl-c1">1</span>)))
+model.add(Dropout(<span class="pl-c1">0.5</span>))
+model.add(Flatten())
+model.add(Dense(N_FILTERS, nb_classes))
+model.add(Activation(<span class="pl-s"><span class="pl-pds">'</span>softmax<span class="pl-pds">'</span></span>))
+
+model.compile(<span class="pl-v">loss</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>categorical_crossentropy<span class="pl-pds">'</span></span>, <span class="pl-v">optimizer</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>adadelta<span class="pl-pds">'</span></span>)
+<span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">'</span>fitting model<span class="pl-pds">'</span></span>
+model.fit(X_train, Y_train, <span class="pl-v">nb_epoch</span><span class="pl-k">=</span><span class="pl-c1">10</span>, <span class="pl-v">batch_size</span><span class="pl-k">=</span><span class="pl-c1">BATCH_SIZE</span>, <span class="pl-v">verbose</span><span class="pl-k">=</span><span class="pl-c1">1</span>, 
+          <span class="pl-v">show_accuracy</span><span class="pl-k">=</span><span class="pl-c1">True</span>, <span class="pl-v">validation_split</span><span class="pl-k">=</span><span class="pl-c1">0.1</span>)</pre></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-117700913" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="8176419187f6b3ed675f614d8ff82753">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-117700913" class="timestamp"><relative-time datetime="2015-07-01T14:39:22Z" title="Jul 1, 2015, 7:39 AM PDT">on Jul 1, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/ameasure" class="user-mention">@ameasure</a> it was actually a theano bug with the concatenation feature as <a href="https://github.com/fchollet" class="user-mention">@fchollet</a> kindly pointed out under a different issue. I got bleeding edge theano and it solved that issue. Thank you for your example. I got <a href="https://github.com/lukedeo" class="user-mention">@lukedeo</a>'s example to work with the newer theano, that's actually very powerful. <a href="https://github.com/ameasure" class="user-mention">@ameasure</a> wouldn't you be better seeding the embedding layer with your pre-trained vectors and allowing it to fine tune them to your task? This is how I ended up constructing my model:</p>
+<div class="highlight highlight-source-python"><pre>nb_feature_maps <span class="pl-k">=</span> <span class="pl-c1">32</span>
+embedding_size <span class="pl-k">=</span> <span class="pl-c1">64</span>
+
+<span class="pl-c"><span class="pl-c">#</span>ngram_filters = [3, 5, 7, 9]</span>
+ngram_filters <span class="pl-k">=</span> [<span class="pl-c1">2</span>, <span class="pl-c1">4</span>, <span class="pl-c1">6</span>, <span class="pl-c1">8</span>]
+conv_filters <span class="pl-k">=</span> []
+
+<span class="pl-k">for</span> n_gram <span class="pl-k">in</span> ngram_filters:
+    sequential <span class="pl-k">=</span> Sequential()
+    conv_filters.append(sequential)
+
+    sequential.add(Embedding(max_features, embedding_size))
+    sequential.add(Reshape(<span class="pl-c1">1</span>, maxlen, embedding_size))
+    sequential.add(Convolution2D(nb_feature_maps, <span class="pl-c1">1</span>, n_gram, embedding_size))
+    sequential.add(Activation(<span class="pl-s"><span class="pl-pds">"</span>relu<span class="pl-pds">"</span></span>))
+    sequential.add(MaxPooling2D(<span class="pl-v">poolsize</span><span class="pl-k">=</span>(maxlen <span class="pl-k">-</span> n_gram <span class="pl-k">+</span> <span class="pl-c1">1</span>, <span class="pl-c1">1</span>)))
+    sequential.add(Flatten())
+
+model <span class="pl-k">=</span> Sequential()
+model.add(Merge(conv_filters, <span class="pl-v">mode</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>concat<span class="pl-pds">'</span></span>))
+model.add(Dropout(<span class="pl-c1">0.5</span>))
+model.add(Dense(nb_feature_maps <span class="pl-k">*</span> <span class="pl-c1">len</span>(conv_filters), <span class="pl-c1">1</span>))
+model.add(Activation(<span class="pl-s"><span class="pl-pds">"</span>sigmoid<span class="pl-pds">"</span></span>))</pre></div>
+<p>I also have a model that uses a GRU and JZS1 (seems to work better) and an embedding layer, that gives comparable performance. I did try merging a recurrent network and a CNN like above but I got an error so it doesn't seem to like that. I'd be interested if anyone manages to figure out how to do that.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/ameasure">
+          <img alt="@ameasure" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/571959(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-117897240" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="7a0576d14e388c4972fbe709c3012976">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label tooltipped tooltipped-multiline tooltipped-s" aria-label="This user has previously committed to the keras repository.">
+      Contributor
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/ameasure" class="author">ameasure</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-117897240" class="timestamp"><relative-time datetime="2015-07-02T03:47:11Z" title="Jul 1, 2015, 8:47 PM PDT">on Jul 1, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/simonhughes22" class="user-mention">@simonhughes22</a> glad you got it working and thanks for sharing your code. I hope to try out <a href="https://github.com/lukedeo" class="user-mention">@lukedeo</a>''s approach soon but I want to figure out how to modify it to fine tune pre-trained word vectors first. Kim's work (<a href="http://arxiv.org/pdf/1408.5882v2.pdf">http://arxiv.org/pdf/1408.5882v2.pdf</a>) suggests fine tuning an existing embedding is better than starting from scratch.</p>
+<p>One thing that doesn't make sense to me however is convolving along the embedding dimension. That's not what other researchers have done and I can't think of any reason why the embedding vectors would be spatially related. Have you compared their approach to a purely 1 dimensional convolution along only the n_grams?</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-117898314" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="833bff42ef2ad0874ba9482ef861c5d6">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-117898314" class="timestamp"><relative-time datetime="2015-07-02T03:58:57Z" title="Jul 1, 2015, 8:58 PM PDT">on Jul 1, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/ameasure" class="user-mention">@ameasure</a> it's only a 2D convolution as the vectors as stacked vertically and you're convolving across the full depth, so it's just doing a convolution over multiple entire word vectors. Convolving parts of vectors wouldn't make sense, as the ordering of the vector elements is random. <a href="https://github.com/lukedeo" class="user-mention">@lukedeo</a> references a paper above if you want to know more about it. So it's just taking convolutions of different sizes for different ngrams and concatenating them together into one beastie of a model. For my data a single convolution using embeddings (which are essentially an additional convolution over words) works as well so far, as does a GRU for the most part, although its performance is less predictable.</p>
+<p>At some point i'll try using the glove or word2vec vectors as seeds for the embedding layer. What might be a good idea is to take pre-trained vectors as inputs and merge that with randomly seeded vectors, and prevent the pre-trained vectors from being updated by feeding them in directly as inputs. I think that's doable with the merge layer, as you essentially feed it two datasets, one could be vectors the other could be ids as input to an embedding layer. They do that in the some of the stanford papers building off the Glove work where they have pretrained vectors with an extra part of the vector that is updateable and randomly seeded, and supposedly that worked better.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/ameasure">
+          <img alt="@ameasure" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/571959(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-119405208" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="9c0f299f1965585c38c6ca43e1e74ec5">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label tooltipped tooltipped-multiline tooltipped-s" aria-label="This user has previously committed to the keras repository.">
+      Contributor
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/ameasure" class="author">ameasure</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-119405208" class="timestamp"><relative-time datetime="2015-07-08T02:54:34Z" title="Jul 7, 2015, 7:54 PM PDT">on Jul 7, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/simonhughes22" class="user-mention">@simonhughes22</a> <a href="https://github.com/fchollet" class="user-mention">@fchollet</a> <a href="https://github.com/lukedeo" class="user-mention">@lukedeo</a> I'm trying to implement the CNN text classifiers with embeddings and multiple convolution sizes suggested in your posts above but I keep getting the following error:</p>
+<pre><code>Loading data...
+8982 train sequences
+2246 test sequences
+46 classes
+X_train shape: (8982L, 50L)
+X_test shape: (2246L, 50L)
+Convert class vector to binary class matrix (for use with categorical_crossentropy)
+Y_train shape: (8982L, 46L)
+Y_test shape: (2246L, 46L)
+Train on 8083 samples, validate on 899 samples
+Epoch 0
+Traceback (most recent call last):
+
+  File "&lt;ipython-input-11-60c586a4ee9a&gt;", line 1, in &lt;module&gt;
+    runfile('C:/Users/ameasure/Desktop/Programming Projects/cnn/reuters_multi_cnn.py', wdir='C:/Users/ameasure/Desktop/Programming Projects/cnn')
+
+  File "C:\Users\ameasure\Anaconda\lib\site-packages\spyderlib\widgets\externalshell\sitecustomize.py", line 685, in runfile
+    execfile(filename, namespace)
+
+  File "C:\Users\ameasure\Anaconda\lib\site-packages\spyderlib\widgets\externalshell\sitecustomize.py", line 71, in execfile
+    exec(compile(scripttext, filename, 'exec'), glob, loc)
+
+  File "C:/Users/ameasure/Desktop/Programming Projects/cnn/reuters_multi_cnn.py", line 67, in &lt;module&gt;
+    model.fit(X=X_train, y=Y_train, batch_size=batch_size, nb_epoch=200, verbose=1, show_accuracy=True, validation_split=0.1)
+
+  File "build\bdist.win-amd64\egg\keras\models.py", line 371, in fit
+    validation_split=validation_split, val_f=val_f, val_ins=val_ins, shuffle=shuffle, metrics=metrics)
+
+  File "build\bdist.win-amd64\egg\keras\models.py", line 135, in _fit
+    outs = f(*ins_batch)
+
+  File "C:\Users\ameasure\Anaconda\lib\site-packages\theano-0.7.0-py2.7.egg\theano\compile\function_module.py", line 593, in __call__
+    self.inv_finder[c]))
+
+TypeError: Missing required input: y
+</code></pre>
+<p>My code is <a href="https://gist.github.com/ameasure/944439a04546f4c02cb9">here</a> and I'm using the bleeding edge versions of Theano and Keras. Any idea what's causing this strange error?</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-119421698" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="b3ada283774dd257964992bcd0c4bfd0">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-119421698" class="timestamp"><relative-time datetime="2015-07-08T04:12:45Z" title="Jul 7, 2015, 9:12 PM PDT">on Jul 7, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>See my notes on your Gist. The input format for the xs is incorrect. It expects a separate 2D array for each Merged sequence model, concatenated into a list.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/lukedeo">
+          <img alt="@lukedeo" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/3826382(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-119443010" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="c7d265339591a9a9630f75b6fae6671c">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label tooltipped tooltipped-multiline tooltipped-s" aria-label="This user has previously committed to the keras repository.">
+      Contributor
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/lukedeo" class="author">lukedeo</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-119443010" class="timestamp"><relative-time datetime="2015-07-08T05:37:00Z" title="Jul 7, 2015, 10:37 PM PDT">on Jul 7, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Also, think about how your embeddings are working <a href="https://github.com/ameasure" class="user-mention">@ameasure</a>. Right now, you have an embedding for <em>every</em> n-gram filter size, meaning no shared word vectors. I'd recommend using the <code>Graph</code> class and something like this. <em>NOTE</em> this is untested and uncompiled.</p>
+<div class="highlight highlight-source-python"><pre>ngram_filters <span class="pl-k">=</span> [<span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>]
+
+graph <span class="pl-k">=</span> Graph()
+
+graph.add_input(<span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>data<span class="pl-pds">'</span></span>)
+
+graph.add_node(Embedding(vocab_size <span class="pl-k">+</span> <span class="pl-c1">1</span>, embedding_size), 
+               <span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>embedding<span class="pl-pds">'</span></span>, <span class="pl-v">input</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>data<span class="pl-pds">'</span></span>)
+
+<span class="pl-k">for</span> n_gram <span class="pl-k">in</span> ngram_filters:
+    sequential <span class="pl-k">=</span> containers.Sequential()
+    sequential.add(Reshape(<span class="pl-c1">1</span>, maxlen, embedding_size))
+    sequential.add(Convolution2D(nb_feature_maps, <span class="pl-c1">1</span>, n_gram, embedding_size))
+    sequential.add(Activation(<span class="pl-s"><span class="pl-pds">'</span>relu<span class="pl-pds">'</span></span>))
+    sequential.add(MaxPooling2D(<span class="pl-v">poolsize</span><span class="pl-k">=</span>(maxlen <span class="pl-k">-</span> n_gram <span class="pl-k">+</span> <span class="pl-c1">1</span>, <span class="pl-c1">1</span>)))
+    sequential.add(Flatten())
+
+    graph.add_node(sequential, <span class="pl-v">name</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>unit_<span class="pl-pds">'</span></span> <span class="pl-k">+</span> n_gram)
+
+graph.add_node(Dropout(<span class="pl-c1">0.5</span>), <span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>dropout<span class="pl-pds">'</span></span>, <span class="pl-v">inputs</span><span class="pl-k">=</span>[<span class="pl-s"><span class="pl-pds">'</span>unit_<span class="pl-pds">'</span></span> <span class="pl-k">+</span> n <span class="pl-k">for</span> n <span class="pl-k">in</span> ngram_filters]) 
+
+fc <span class="pl-k">=</span> containers.Sequential()
+fc.add(Dense(nb_feature_maps <span class="pl-k">*</span> <span class="pl-c1">len</span>(ngram_filters), <span class="pl-c1">15</span>))
+fc.add(Activation(<span class="pl-s"><span class="pl-pds">'</span>sigmoid<span class="pl-pds">'</span></span>))
+fc.add(Dense(<span class="pl-c1">15</span>, nb_classes))
+fc.add(Activation(<span class="pl-s"><span class="pl-pds">'</span>softmax<span class="pl-pds">'</span></span>))
+
+graph.add_node(fc, <span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>fully_connected<span class="pl-pds">'</span></span>, <span class="pl-v">input</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>dropout<span class="pl-pds">'</span></span>)
+graph.add_output(<span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>output<span class="pl-pds">'</span></span>, <span class="pl-v">input</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>fully_connected<span class="pl-pds">'</span></span>)</pre></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/ameasure">
+          <img alt="@ameasure" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/571959(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-119785110" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="3de9868e84366c208d0d8d5e55f846df">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label tooltipped tooltipped-multiline tooltipped-s" aria-label="This user has previously committed to the keras repository.">
+      Contributor
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/ameasure" class="author">ameasure</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-119785110" class="timestamp"><relative-time datetime="2015-07-09T02:16:58Z" title="Jul 8, 2015, 7:16 PM PDT">on Jul 8, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/lukedeo" class="user-mention">@lukedeo</a> <a href="https://github.com/simonhughes22" class="user-mention">@simonhughes22</a> <a href="https://github.com/fchollet" class="user-mention">@fchollet</a> thank you! That fixed the issue and corrected my understanding of what's going on. I am now getting absolutely fantastic results on my dataset by the way, thank you for the help and the wonderful library!</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/lukedeo">
+          <img alt="@lukedeo" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/3826382(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-119842274" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="5a9b32901880640c9b1b7cc72724f76d">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label tooltipped tooltipped-multiline tooltipped-s" aria-label="This user has previously committed to the keras repository.">
+      Contributor
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/lukedeo" class="author">lukedeo</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-119842274" class="timestamp"><relative-time datetime="2015-07-09T06:47:20Z" title="Jul 8, 2015, 11:47 PM PDT">on Jul 8, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/ameasure" class="user-mention">@ameasure</a> glad to hear it!</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/manwinder123">
+          <img alt="@manwinder123" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/6258160(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-121758481" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="8d2c46236757bea259c80e9b7948d285">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/manwinder123" class="author">manwinder123</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-121758481" class="timestamp"><relative-time datetime="2015-07-15T21:40:41Z" title="Jul 15, 2015, 2:40 PM PDT">on Jul 15, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>hey guys, great library <a href="https://github.com/fchollet" class="user-mention">@fchollet</a></p>
+<p>So i have created a Feed forward neural network using Keras, think i can call it a deep nn, i have 3 hidden layers. sorry if my lingo is off. I am not hitting the accuracy i want on my test set so i wanna see if CNN can help. I have text that i send my nn, i send it a 100 characters (i normalize the characters by dividing their ascii integer value by 255), it does its work and comes out with an output of 20. I have a classification problem.</p>
+<p>So <a href="https://github.com/ameasure" class="user-mention">@ameasure</a> i am looking at your code and i am little confused. what would field size be in my case, or what is it in your case and how did you get the numbers. What about stride?</p>
+<p><a href="https://github.com/fchollet" class="user-mention">@fchollet</a> I would think that using a 1d CNN makes sense for text (since in my case it would be 100x1 sized array), you guys talk about 2d being optimal, why is that?</p>
+<p>looking at the api for 1d: Convolution1D(input_dim, nb_filter, filter_length, ...)<br>
+I think my settings would be:<br>
+*input_dim = 100 (guessing that this is the input size but you say that this is the # of channels, in pictures there are 3, rgb, so would i set this to 1)<br>
+*nb_filter = 25 (i'm not really sure about this one, on the Keras website you write "(dimensionality of the output)", i guess this is sorta like how many outputs the cnn layer will have<br>
+*filter_length = completely lost on this one</p>
+<p>looking at the api for 2d: Convolution2D(nb_filter, stack_size, nb_row, nb_col, ...)<br>
+I think my settings would be:<br>
+*nb_filter = 25 (see 1d above)<br>
+*stack_size = 1 (i've seen 3 in some of your examples and i assume that its 3 because the pictures have a red, green and blue color channel, my input is text so i think it has only 1 channel??)<br>
+*nb_row = 1 (my data doesn't have multiple rows, its just one row with 100 columns)<br>
+*nb_col = 100 (i have a 100 characters, so i guess thats 100 rows)</p>
+<p>I have 50 samples to train on and 20 to test on</p>
+<p>Also there is a subsample_length (1d) and subsample (2d) in the cnn layers, i have read that subsampling is similar to pooling. If i added the subsample option to my cnn layer would i skip pooling?</p>
+<p>Sorry about all the questions, i've spent hours looking for examples and trying to understand CNN's. I have a good concept of what they are, whats confusing me is the parameters and what i need to set them at. There is also the 1d vs 2d.</p>
+<pre><code># Convolution layers expect a 4-D input so we reshape our 2-D input
+nb_samples = X_train.shape[0]
+nb_features = X_train.shape[1]
+newshape = (nb_samples, 1, nb_features, 1)
+X_train = np.reshape(X_train, newshape).astype(theano.config.floatX)
+
+# We set some hyperparameters
+BATCH_SIZE = 16
+FIELD_SIZE = 5 * 300
+STRIDE = 300
+N_FILTERS = 200
+
+# We fit the model
+model = Sequential()
+model.add(Convolution2D(nb_filter=N_FILTERS, stack_size=1, nb_row=FIELD_SIZE, 
+                        nb_col=1, subsample=(STRIDE, 1)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(poolsize=(((nb_features - FIELD_SIZE) / STRIDE) + 1, 1)))
+model.add(Dropout(0.5))
+model.add(Flatten())
+model.add(Dense(N_FILTERS, nb_classes))
+model.add(Activation('softmax'))
+
+model.compile(loss='categorical_crossentropy', optimizer='adadelta')
+print 'fitting model'
+model.fit(X_train, Y_train, nb_epoch=10, batch_size=BATCH_SIZE, verbose=1, 
+          show_accuracy=True, validation_split=0.1)
+</code></pre>
+<p>thanks for any help :)</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/ameasure">
+          <img alt="@ameasure" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/571959(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-122156359" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="bfa52b9e9a22968fd833c57a30456355">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label tooltipped tooltipped-multiline tooltipped-s" aria-label="This user has previously committed to the keras repository.">
+      Contributor
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/ameasure" class="author">ameasure</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-122156359" class="timestamp"><relative-time datetime="2015-07-17T03:01:17Z" title="Jul 16, 2015, 8:01 PM PDT">on Jul 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/manwinder123" class="user-mention">@manwinder123</a> Take a look at the notes from the Stanford CNN class here: <a href="http://cs231n.github.io/convolutional-networks/">http://cs231n.github.io/convolutional-networks/</a>, it will introduce you to the lingo. The receptive field is the size of the input sequences we're going to feed through our filters in the convolutional layer. In my case it's 5 * 300 because each of my words has been replaced with a 300 dimension vector, and I want the filters to be applied to every contiguous 5 word sequence in my input. Presumably these filters learn to identify 5 word sequences that are useful for my classification task.</p>
+<p>Stride is how far we shift the filters after each application to the input. A stride of 300 means we shift the filter over by one full word vector before applying it to the input again.</p>
+<p>Regarding the 1d vs. 2d convolutions, it turns out it's all the same. The important thing is that you're shifting your filters across your input in a reasonable manner. Performance is not the same however. When I adopted the approach used by <a href="https://github.com/fchollet" class="user-mention">@fchollet</a> and <a href="https://github.com/simonhughes22" class="user-mention">@simonhughes22</a> and <a href="https://github.com/lukedeo" class="user-mention">@lukedeo</a> which basically converts a 1d convolution into a 2d convolution I got huge performance improvements. Presumably the underlying implementation is optimized for 2 dimensional convolutions.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-122160045" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="a813bf9bb458da15a7bb6923eedbf992">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-122160045" class="timestamp"><relative-time datetime="2015-07-17T03:35:11Z" title="Jul 16, 2015, 8:35 PM PDT">on Jul 16, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/manwinder123" class="user-mention">@manwinder123</a> I think you're making a mistake taking the ascii values as the inputs. What that is doing is taking things that are discrete, characters, and converting it to a continous quantity. This is implying that adjacent letters in the alphabet have very similar meanings, and letters further apart do not. Instead, what you want to do is either use an embedding layer (pass it a list of id's, one per character, counting from 1 upwards (if 0 padded, else start at 0), with no gaps in the ids), or a one-hot encoding (a 255 element vector of zeros, with a one in the index of the ascii value). Secondly, I would stick with a stride of 1,1, and do a convolution over the characters. In fact I'd go one further and recommend you use words and not characters with the encoding method as described. Assign a unique id to each word, replace the words with ids, do some zero padding and pass to an embedding layer and then a convolutional layer as in the code examples above. Once that's working, you can experiment with merging convolutions of different sizes. The idea then is to having 2D convolutions over the embeddings, where the word embeddings are stacked vertically, and so you are setting nb_rows = the emdedding size, i.e. the matrix height, and the nb_cols to the number of words you want to convolve over.</p>
+<p>Hope that makes sense. I guarantee that will work much better. I've also had as good results using the GRU and LSTM layers combined with embedding layers, although those run much slower as theano's scan function (which they rely on) is quite slow.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/manwinder123">
+          <img alt="@manwinder123" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/6258160(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-122280512" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="2f6fc33df0aa72e800c796ae7d318caa">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/manwinder123" class="author">manwinder123</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-122280512" class="timestamp"><relative-time datetime="2015-07-17T13:56:21Z" title="Jul 17, 2015, 6:56 AM PDT">on Jul 17, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/ameasure" class="user-mention">@ameasure</a> Thanks for the link, it clear up a lot of the questions i had</p>
+<p><a href="https://github.com/simonhughes22" class="user-mention">@simonhughes22</a> thanks for the tip, i'll try it out. hopefully everything goes well :)</p>
+<p>appreciate the support <g-emoji alias="dancer" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f483.png" ios-version="6.0">💃</g-emoji></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/xpact">
+          <img alt="@xpact" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2922269(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-127762076" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="dc1af6b52020c99b002235bdec08644e">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/xpact" class="author">xpact</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-127762076" class="timestamp"><relative-time datetime="2015-08-04T21:07:21Z" title="Aug 4, 2015, 2:07 PM PDT">on Aug 4, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>See great example of Convolutional1D applied to text classification from fchollet now in keras: <a href="https://github.com/fchollet/keras/blob/master/examples/imdb_cnn.py">https://github.com/fchollet/keras/blob/master/examples/imdb_cnn.py</a></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/manwinder123">
+          <img alt="@manwinder123" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/6258160(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-127802119" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="f78a76e180cf179c9b8d869aacc4882d">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/manwinder123" class="author">manwinder123</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-127802119" class="timestamp"><relative-time datetime="2015-08-05T00:19:44Z" title="Aug 4, 2015, 5:19 PM PDT">on Aug 4, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Thanks for the link.</p>
+<p>So I tried using 1d but it was extremely slow. My input dim size was the size of my input. So if my file had 5000 characters, I set input dim to 5000. I had set the nb of filters to 1 (I thought it would help speed it up). But it was way too slow, this was a few weeks ago. I haven't tried recently though</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/simonhughes22">
+          <img alt="@simonhughes22" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/2167017(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-128000765" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="6b6035f8c4a85129b5db5812863db8e1">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/simonhughes22" class="author">simonhughes22</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-128000765" class="timestamp"><relative-time datetime="2015-08-05T13:45:25Z" title="Aug 5, 2015, 6:45 AM PDT">on Aug 5, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>5000 characters is way too much to train an LSTM or some form of recurrent model. They can learn long distance relationship, but not that long. I'd either switch to a word model (although that's still likely too large), or use a sliding window approach of some sort.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+    
+  <div class="discussion-item discussion-item-ref">
+    <div class="discussion-item-header">
+      <span class="discussion-item-icon">
+        <svg aria-hidden="true" class="octicon octicon-bookmark" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M9 0H1C.27 0 0 .27 0 1v15l5-3.09L10 16V1c0-.73-.27-1-1-1zm-.78 4.25L6.36 5.61l.72 2.16c.06.22-.02.28-.2.17L5 6.6 3.12 7.94c-.19.11-.25.05-.2-.17l.72-2.16-1.86-1.36c-.17-.16-.14-.23.09-.23l2.3-.03.7-2.16h.25l.7 2.16 2.3.03c.23 0 .27.08.09.23h.01z"></path></svg>
+      </span>
+      This was referenced <relative-time datetime="2015-08-28T16:27:14Z" title="Aug 28, 2015, 9:27 AM PDT">on Aug 28, 2015</relative-time>
+    </div>
+
+
+      <div class="discussion-item-rollup-ref">
+          <span class="State State--red float-right" title="State: closed">
+                <svg aria-hidden="true" class="octicon octicon-issue-closed" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M7 10h2v2H7v-2zm2-6H7v5h2V4zm1.5 1.5l-1 1L12 9l4-4.5-1-1L12 7l-1.5-1.5zM8 13.7A5.71 5.71 0 0 1 2.3 8c0-3.14 2.56-5.7 5.7-5.7 1.83 0 3.45.88 4.5 2.2l.92-.92A6.947 6.947 0 0 0 8 1C4.14 1 1 4.14 1 8s3.14 7 7 7 7-3.14 7-7l-1.52 1.52c-.66 2.41-2.86 4.19-5.48 4.19v-.01z"></path></svg>
+            Closed
+          </span>
+
+
+
+        <div class="discussion-item-header" id="ref-issue-103718538">
+          <h4 class="discussion-item-ref-title">
+            <a href="https://github.com/fchollet/keras/issues/612" class="title-link">
+              How can I add another convolutional layer  and maxpooling layer processing texts in CNN?
+
+              <span class="issue-num">
+                #612
+              </span>
+</a>          </h4>
+        </div>
+      </div>
+
+      <div class="discussion-item-rollup-ref">
+          <span class="State State--green float-right" title="State: open">
+                <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg>
+            Open
+          </span>
+
+
+
+        <div class="discussion-item-header" id="ref-issue-126593572">
+          <h4 class="discussion-item-ref-title">
+            <a href="https://github.com/fchollet/keras/issues/1463" class="title-link">
+              Insufficient memory on GPU due to large vocab_size in embedding layer.
+
+              <span class="issue-num">
+                #1463
+              </span>
+</a>          </h4>
+        </div>
+      </div>
+
+      <div class="discussion-item-rollup-ref">
+          <span class="State State--red float-right" title="State: closed">
+                <svg aria-hidden="true" class="octicon octicon-issue-closed" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M7 10h2v2H7v-2zm2-6H7v5h2V4zm1.5 1.5l-1 1L12 9l4-4.5-1-1L12 7l-1.5-1.5zM8 13.7A5.71 5.71 0 0 1 2.3 8c0-3.14 2.56-5.7 5.7-5.7 1.83 0 3.45.88 4.5 2.2l.92-.92A6.947 6.947 0 0 0 8 1C4.14 1 1 4.14 1 8s3.14 7 7 7 7-3.14 7-7l-1.52 1.52c-.66 2.41-2.86 4.19-5.48 4.19v-.01z"></path></svg>
+            Closed
+          </span>
+
+
+
+        <div class="discussion-item-header" id="ref-issue-116778234">
+          <h4 class="discussion-item-ref-title">
+            <a href="https://github.com/fchollet/keras/issues/1005" class="title-link">
+              More then 3 channels and 1D convolutions
+
+              <span class="issue-num">
+                #1005
+              </span>
+</a>          </h4>
+        </div>
+      </div>
+
+      <div class="discussion-item-rollup-ref">
+          <span class="State State--red float-right" title="State: closed">
+                <svg aria-hidden="true" class="octicon octicon-issue-closed" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M7 10h2v2H7v-2zm2-6H7v5h2V4zm1.5 1.5l-1 1L12 9l4-4.5-1-1L12 7l-1.5-1.5zM8 13.7A5.71 5.71 0 0 1 2.3 8c0-3.14 2.56-5.7 5.7-5.7 1.83 0 3.45.88 4.5 2.2l.92-.92A6.947 6.947 0 0 0 8 1C4.14 1 1 4.14 1 8s3.14 7 7 7 7-3.14 7-7l-1.52 1.52c-.66 2.41-2.86 4.19-5.48 4.19v-.01z"></path></svg>
+            Closed
+          </span>
+
+
+
+        <div class="discussion-item-header" id="ref-issue-133001881">
+          <h4 class="discussion-item-ref-title">
+            <a href="https://github.com/fchollet/keras/issues/1692" class="title-link">
+              Reshape Error  __init__() 
+
+              <span class="issue-num">
+                #1692
+              </span>
+</a>          </h4>
+        </div>
+      </div>
+
+  </div>
+
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/zachmayer">
+          <img alt="@zachmayer" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/581590(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-193947936" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="be80fb077a25376a9963def79d855812">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/zachmayer" class="author">zachmayer</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-193947936" class="timestamp"><relative-time datetime="2016-03-08T20:10:48Z" title="Mar 8, 2016, 12:10 PM PST">on Mar 8, 2016</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>I know I'm digging up old code here, but I'm really inrigued by this approach. However, I get errors when trying to use the structure suggested by <a href="https://github.com/fchollet" class="user-mention">@fchollet</a>:</p>
+<div class="highlight highlight-source-python"><pre>max_features <span class="pl-k">=</span> <span class="pl-c1">1000</span>
+maxlen <span class="pl-k">=</span> <span class="pl-c1">10</span>
+
+model <span class="pl-k">=</span> Sequential()
+model.add(Embedding(max_features, <span class="pl-c1">256</span>)) <span class="pl-c"><span class="pl-c">#</span> embed into dense 3D float tensor (samples, maxlen, 256)</span>
+model.add(Reshape((<span class="pl-c1">1</span>, maxlen, <span class="pl-c1">256</span>))) <span class="pl-c"><span class="pl-c">#</span> reshape into 4D tensor (samples, 1, maxlen, 256)</span>
+<span class="pl-c"><span class="pl-c">#</span> VGG-like convolution stack</span>
+model.add(Convolution2D(<span class="pl-c1">32</span>, <span class="pl-c1">3</span>, <span class="pl-c1">3</span>, <span class="pl-c1">3</span>, <span class="pl-v">border_mode</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>full<span class="pl-pds">'</span></span>)) 
+model.add(Activation(<span class="pl-s"><span class="pl-pds">'</span>relu<span class="pl-pds">'</span></span>))
+model.add(Convolution2D(<span class="pl-c1">32</span>, <span class="pl-c1">32</span>, <span class="pl-c1">3</span>, <span class="pl-c1">3</span>))
+model.add(Activation(<span class="pl-s"><span class="pl-pds">'</span>relu<span class="pl-pds">'</span></span>))
+model.add(MaxPooling2D(<span class="pl-v">poolsize</span><span class="pl-k">=</span>(<span class="pl-c1">2</span>, <span class="pl-c1">2</span>)))
+model.add(Dropout(<span class="pl-c1">0.25</span>))
+model.add(Flatten())
+model.add(Dense(<span class="pl-c1">1</span>))</pre></div>
+<p>Returns:</p>
+<div class="highlight highlight-source-python"><pre>In [<span class="pl-c1">164</span>]: model <span class="pl-k">=</span> Sequential()
+
+In [<span class="pl-c1">165</span>]: model.add(Embedding(max_features, <span class="pl-c1">256</span>)) <span class="pl-c"><span class="pl-c">#</span> embed into dense 3D float tensor (samples, maxlen, 256)</span>
+
+In [<span class="pl-c1">166</span>]: model.add(Reshape((<span class="pl-c1">1</span>, maxlen, <span class="pl-c1">256</span>))) <span class="pl-c"><span class="pl-c">#</span> reshape into 4D tensor (samples, 1, maxlen, 256)</span>
+
+In [<span class="pl-c1">167</span>]: <span class="pl-c"><span class="pl-c">#</span> VGG-like convolution stack</span>
+
+In [<span class="pl-c1">168</span>]: model.add(Convolution2D(<span class="pl-c1">32</span>, <span class="pl-c1">3</span>, <span class="pl-c1">3</span>, <span class="pl-c1">3</span>)) 
+<span class="pl-ii">--------------------------------------------------------------------------</span><span class="pl-k">-</span>
+<span class="pl-c1">AttributeError</span>                            Traceback (most recent call last)
+<span class="pl-k">/</span>usr<span class="pl-k">/</span>local<span class="pl-k">/</span>lib<span class="pl-k">/</span>python3.5<span class="pl-k">/</span>site<span class="pl-k">-</span>packages<span class="pl-k">/</span>numpy<span class="pl-k">/</span>core<span class="pl-k">/</span>fromnumeric.py <span class="pl-k">in</span> prod(a, axis, dtype, out, keepdims)
+   <span class="pl-c1">2481</span>         <span class="pl-k">try</span>:
+<span class="pl-ii">-&gt;</span> <span class="pl-c1">2482</span>             prod <span class="pl-k">=</span> a.prod
+   <span class="pl-c1">2483</span>         <span class="pl-k">except</span> <span class="pl-c1">AttributeError</span>:
+
+<span class="pl-c1">AttributeError</span>: <span class="pl-s"><span class="pl-pds">'</span>tuple<span class="pl-pds">'</span></span> <span class="pl-c1">object</span> has no attribute <span class="pl-s"><span class="pl-pds">'</span>prod<span class="pl-pds">'</span></span>
+
+During handling of the above exception, another exception occurred:
+
+<span class="pl-c1">TypeError</span>                                 Traceback (most recent call last)
+<span class="pl-k">&lt;</span>ipython<span class="pl-k">-</span><span class="pl-c1">input</span><span class="pl-k">-</span><span class="pl-c1">168</span><span class="pl-k">-</span><span class="pl-ii">9b06d1cea8a5</span><span class="pl-k">&gt;</span> <span class="pl-k">in</span> <span class="pl-k">&lt;</span>module<span class="pl-k">&gt;</span>()
+<span class="pl-ii">----</span><span class="pl-k">&gt;</span> <span class="pl-c1">1</span> model.add(Convolution2D(<span class="pl-c1">32</span>, <span class="pl-c1">3</span>, <span class="pl-c1">3</span>, <span class="pl-c1">3</span>))
+
+<span class="pl-k">/</span>usr<span class="pl-k">/</span>local<span class="pl-k">/</span>lib<span class="pl-k">/</span>python3.5<span class="pl-k">/</span>site<span class="pl-k">-</span>packages<span class="pl-k">/</span>keras<span class="pl-k">/</span>layers<span class="pl-k">/</span>containers.py <span class="pl-k">in</span> add(<span class="pl-c1">self</span>, layer)
+     <span class="pl-c1">68</span>         <span class="pl-c1">self</span>.layers.append(layer)
+     <span class="pl-c1">69</span>         <span class="pl-k">if</span> <span class="pl-c1">len</span>(<span class="pl-c1">self</span>.layers) <span class="pl-k">&gt;</span> <span class="pl-c1">1</span>:
+<span class="pl-ii">--</span><span class="pl-ii">-&gt;</span> <span class="pl-c1">70</span>             <span class="pl-c1">self</span>.layers[<span class="pl-k">-</span><span class="pl-c1">1</span>].set_previous(<span class="pl-c1">self</span>.layers[<span class="pl-k">-</span><span class="pl-c1">2</span>])
+     <span class="pl-c1">71</span>             <span class="pl-k">if</span> <span class="pl-k">not</span> <span class="pl-c1">hasattr</span>(<span class="pl-c1">self</span>.layers[<span class="pl-c1">0</span>], <span class="pl-s"><span class="pl-pds">'</span>input<span class="pl-pds">'</span></span>):
+     <span class="pl-c1">72</span>                 <span class="pl-c1">self</span>.set_input()
+
+<span class="pl-k">/</span>usr<span class="pl-k">/</span>local<span class="pl-k">/</span>lib<span class="pl-k">/</span>python3.5<span class="pl-k">/</span>site<span class="pl-k">-</span>packages<span class="pl-k">/</span>keras<span class="pl-k">/</span>layers<span class="pl-k">/</span>core.py <span class="pl-k">in</span> set_previous(<span class="pl-c1">self</span>, layer)
+     <span class="pl-c1">96</span>         <span class="pl-k">assert</span> <span class="pl-c1">self</span>.nb_input <span class="pl-k">==</span> layer.nb_output <span class="pl-k">==</span> <span class="pl-c1">1</span>, <span class="pl-s"><span class="pl-pds">'</span>Cannot connect layers: input count and output count should be 1.<span class="pl-pds">'</span></span>
+     <span class="pl-c1">97</span>         <span class="pl-k">if</span> <span class="pl-c1">hasattr</span>(<span class="pl-c1">self</span>, <span class="pl-s"><span class="pl-pds">'</span>input_ndim<span class="pl-pds">'</span></span>):
+<span class="pl-ii">--</span><span class="pl-ii">-&gt;</span> <span class="pl-c1">98</span>             <span class="pl-k">assert</span> <span class="pl-c1">self</span>.input_ndim <span class="pl-k">==</span> <span class="pl-c1">len</span>(layer.output_shape), (<span class="pl-s"><span class="pl-pds">'</span>Incompatible shapes: layer expected input with ndim=<span class="pl-pds">'</span></span> <span class="pl-k">+</span>
+     <span class="pl-c1">99</span>                                                                 <span class="pl-c1">str</span>(<span class="pl-c1">self</span>.input_ndim) <span class="pl-k">+</span>
+    <span class="pl-c1">100</span>                                                                 <span class="pl-s"><span class="pl-pds">'</span> but previous layer has output_shape <span class="pl-pds">'</span></span> <span class="pl-k">+</span>
+
+<span class="pl-k">/</span>usr<span class="pl-k">/</span>local<span class="pl-k">/</span>lib<span class="pl-k">/</span>python3.5<span class="pl-k">/</span>site<span class="pl-k">-</span>packages<span class="pl-k">/</span>keras<span class="pl-k">/</span>layers<span class="pl-k">/</span>core.py <span class="pl-k">in</span> output_shape(<span class="pl-c1">self</span>)
+    <span class="pl-c1">764</span>     <span class="pl-k">@</span><span class="pl-c1">property</span>
+    <span class="pl-c1">765</span>     <span class="pl-k">def</span> output_shape(<span class="pl-c1">self</span>):
+<span class="pl-ii">--</span><span class="pl-k">&gt;</span> <span class="pl-c1">766</span>         <span class="pl-k">return</span> (<span class="pl-c1">self</span>.input_shape[<span class="pl-c1">0</span>],) <span class="pl-k">+</span> <span class="pl-c1">self</span>._fix_unknown_dimension(<span class="pl-c1">self</span>.input_shape[<span class="pl-c1">1</span>:], <span class="pl-c1">self</span>.dims)
+    <span class="pl-c1">767</span> 
+    <span class="pl-c1">768</span>     <span class="pl-k">def</span> get_output(<span class="pl-c1">self</span>, <span class="pl-v">train</span><span class="pl-k">=</span><span class="pl-c1">False</span>):
+
+<span class="pl-k">/</span>usr<span class="pl-k">/</span>local<span class="pl-k">/</span>lib<span class="pl-k">/</span>python3.5<span class="pl-k">/</span>site<span class="pl-k">-</span>packages<span class="pl-k">/</span>keras<span class="pl-k">/</span>layers<span class="pl-k">/</span>core.py <span class="pl-k">in</span> _fix_unknown_dimension(<span class="pl-c1">self</span>, input_shape, output_shape)
+    <span class="pl-c1">752</span>                 known <span class="pl-k">*</span>= dim
+    <span class="pl-c1">753</span> 
+<span class="pl-ii">--</span><span class="pl-k">&gt;</span> <span class="pl-c1">754</span>         original = np.prod(input_shape, <span class="pl-v">dtype</span><span class="pl-k">=</span><span class="pl-c1">int</span>)
+    <span class="pl-c1">755</span>         <span class="pl-k">if</span> unknown <span class="pl-k">is</span> <span class="pl-k">not</span> <span class="pl-c1">None</span>:
+    <span class="pl-c1">756</span>             <span class="pl-k">if</span> known <span class="pl-k">==</span> <span class="pl-c1">0</span> <span class="pl-k">or</span> original <span class="pl-k">%</span> known <span class="pl-k">!=</span> <span class="pl-c1">0</span>:
+
+<span class="pl-k">/</span>usr<span class="pl-k">/</span>local<span class="pl-k">/</span>lib<span class="pl-k">/</span>python3.5<span class="pl-k">/</span>site<span class="pl-k">-</span>packages<span class="pl-k">/</span>numpy<span class="pl-k">/</span>core<span class="pl-k">/</span>fromnumeric.py <span class="pl-k">in</span> prod(a, axis, dtype, out, keepdims)
+   <span class="pl-c1">2483</span>         <span class="pl-k">except</span> <span class="pl-c1">AttributeError</span>:
+   <span class="pl-c1">2484</span>             <span class="pl-k">return</span> _methods._prod(a, <span class="pl-v">axis</span><span class="pl-k">=</span>axis, <span class="pl-v">dtype</span><span class="pl-k">=</span>dtype,
+<span class="pl-ii">-&gt;</span> <span class="pl-c1">2485</span>                                   <span class="pl-v">out</span><span class="pl-k">=</span>out, <span class="pl-v">keepdims</span><span class="pl-k">=</span>keepdims)
+   <span class="pl-c1">2486</span>         <span class="pl-k">return</span> prod(<span class="pl-v">axis</span><span class="pl-k">=</span>axis, <span class="pl-v">dtype</span><span class="pl-k">=</span>dtype, <span class="pl-v">out</span><span class="pl-k">=</span>out)
+   <span class="pl-c1">2487</span>     <span class="pl-k">else</span>:
+
+<span class="pl-k">/</span>usr<span class="pl-k">/</span>local<span class="pl-k">/</span>lib<span class="pl-k">/</span>python3.5<span class="pl-k">/</span>site<span class="pl-k">-</span>packages<span class="pl-k">/</span>numpy<span class="pl-k">/</span>core<span class="pl-k">/</span>_methods.py <span class="pl-k">in</span> _prod(a, axis, dtype, out, keepdims)
+     <span class="pl-c1">33</span> 
+     <span class="pl-c1">34</span> <span class="pl-k">def</span> _prod(a, <span class="pl-v">axis</span><span class="pl-k">=</span><span class="pl-c1">None</span>, <span class="pl-v">dtype</span><span class="pl-k">=</span><span class="pl-c1">None</span>, <span class="pl-v">out</span><span class="pl-k">=</span><span class="pl-c1">None</span>, <span class="pl-v">keepdims</span><span class="pl-k">=</span><span class="pl-c1">False</span>):
+<span class="pl-ii">--</span><span class="pl-ii">-&gt;</span> <span class="pl-c1">35</span>     <span class="pl-k">return</span> umr_prod(a, axis, dtype, out, keepdims)
+     <span class="pl-c1">36</span> 
+     <span class="pl-c1">37</span> <span class="pl-k">def</span> _any(a, <span class="pl-v">axis</span><span class="pl-k">=</span><span class="pl-c1">None</span>, <span class="pl-v">dtype</span><span class="pl-k">=</span><span class="pl-c1">None</span>, <span class="pl-v">out</span><span class="pl-k">=</span><span class="pl-c1">None</span>, <span class="pl-v">keepdims</span><span class="pl-k">=</span><span class="pl-c1">False</span>):
+
+<span class="pl-c1">TypeError</span>: <span class="pl-c1">int</span>() argument must be a string, a <span class="pl-c1">bytes</span><span class="pl-k">-</span>like <span class="pl-c1">object</span> <span class="pl-k">or</span> a number, <span class="pl-k">not</span> <span class="pl-s"><span class="pl-pds">'</span>NoneType<span class="pl-pds">'</span></span></pre></div>
+<p>What am I doing wrong?</p>
+<p>(Note that I added another pair of parenthesis to the reshape layer, and took out the <code>border_mode='full'</code> in the first convolution)</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/wbars">
+          <img alt="@wbars" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/5152749(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-201181741" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="0a7624eb908debc403a9c68fc5fa43bf">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/wbars" class="author">wbars</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-201181741" class="timestamp"><relative-time datetime="2016-03-25T07:38:53Z" title="Mar 25, 2016, 12:38 AM PDT">on Mar 25, 2016</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Yeah, is there any examples of using CNN with simple 1d inputs? (<code>X_train</code> would be <code>n_samples</code> x <code>n_features</code> matrix i guess) and i want just organize first CNN layer to have <code>n_samples</code> inputs?</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions has-reactions js-reactions-container ">
+    <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/reactions/update" class="js-pick-reaction" data-remote="true" data-type="json" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="+2+JFacjhBp4sYvHEdnuhNQCrWHOvk6Z17ib+YYQMtC+KPanCBRBAEbJYbOIj/rs8tzcKZGBZApVQQ5hSkHKhg=="></div>
+      <input type="hidden" name="input[subjectId]" value="MDEyOklzc3VlQ29tbWVudDIwMTE4MTc0MQ==">
+
+      <div class="comment-reactions-options">
+          <button disabled="" class="btn-link reaction-summary-item tooltipped tooltipped-se tooltipped-multiline " name="input[content]" type="submit" value="THUMBS_UP react" aria-label="jntorres reacted with thumbs up emoji">
+            <g-emoji alias="+1" class="emoji mr-1" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" ios-version="6.0">👍</g-emoji>
+            1
+          </button>
+      </div>
+</form></div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/ameasure">
+          <img alt="@ameasure" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/571959(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-201703772" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="d2e189a1f0a2ad2fee92b538ab64d54c">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+    <span class="timeline-comment-label tooltipped tooltipped-multiline tooltipped-s" aria-label="This user has previously committed to the keras repository.">
+      Contributor
+    </span>
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/ameasure" class="author">ameasure</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-201703772" class="timestamp"><relative-time datetime="2016-03-26T04:43:36Z" title="Mar 25, 2016, 9:43 PM PDT">on Mar 25, 2016</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>I put together an example using one hot inputs here: <a href="https://gist.github.com/ameasure/985c87bb8b34ac30269f">https://gist.github.com/ameasure/985c87bb8b34ac30269f</a></p>
+<p>One hot text inputs work surprisingly well, especially for LSTM's.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions has-reactions js-reactions-container ">
+    <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/reactions/update" class="js-pick-reaction" data-remote="true" data-type="json" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="5AcsFYJQgesgdrGHmj0i7hPearVNDatvuaTLiC93T9ChQFOnLWdE8R4OW/MDazaGNQAb/RIygfw7XV4Q4ya3hg=="></div>
+      <input type="hidden" name="input[subjectId]" value="MDEyOklzc3VlQ29tbWVudDIwMTcwMzc3Mg==">
+
+      <div class="comment-reactions-options">
+          <button disabled="" class="btn-link reaction-summary-item tooltipped tooltipped-se tooltipped-multiline " name="input[content]" type="submit" value="THUMBS_UP react" aria-label="rilut reacted with thumbs up emoji">
+            <g-emoji alias="+1" class="emoji mr-1" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" ios-version="6.0">👍</g-emoji>
+            1
+          </button>
+          <button disabled="" class="btn-link reaction-summary-item tooltipped tooltipped-s tooltipped-multiline " name="input[content]" type="submit" value="LAUGH react" aria-label="ssierral reacted with laugh emoji">
+            <g-emoji alias="smile" class="emoji mr-1" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png" ios-version="6.0">😄</g-emoji>
+            1
+          </button>
+      </div>
+</form></div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/eshijia">
+          <img alt="@eshijia" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/4308369(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-204218501" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="a98d0543a0fa1c1bc76c4b1eabb0801b">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/eshijia" class="author">eshijia</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-204218501" class="timestamp"><relative-time datetime="2016-04-01T02:30:46Z" title="Mar 31, 2016, 7:30 PM PDT">on Mar 31, 2016</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/simonhughes22" class="user-mention">@simonhughes22</a> hi, as the code below:</p>
+<pre><code>for n_gram in ngram_filters:
+    sequential = Sequential()
+    conv_filters.append(sequential)
+
+    sequential.add(Embedding(max_features, embedding_size))
+    sequential.add(Reshape(1, maxlen, embedding_size))
+    sequential.add(Convolution2D(nb_feature_maps, 1, n_gram, embedding_size))
+    sequential.add(Activation("relu"))
+    sequential.add(MaxPooling2D(poolsize=(maxlen - n_gram + 1, 1)))
+    sequential.add(Flatten())
+
+model = Sequential()
+model.add(Merge(conv_filters, mode='concat'))
+model.add(Dropout(0.5))
+model.add(Dense(nb_feature_maps * len(conv_filters), 1))
+model.add(Activation("sigmoid"))
+</code></pre>
+<p>Was your input shape (to Embedding layer) still (nb_samples, 1, max_len, vector_size) ?</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/brianlow">
+          <img alt="@brianlow" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/938138(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-219256083" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="3983d54ee3e571b0e42051f023cf40ee">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/brianlow" class="author">brianlow</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-219256083" class="timestamp"><relative-time datetime="2016-05-14T22:54:59Z" title="May 14, 2016, 3:54 PM PDT">on May 14, 2016</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p><a href="https://github.com/eshijia" class="user-mention">@eshijia</a> I think the input shape is <code>(nb_samples, maxlen)</code>. Where nb_samples is the number of sentences and maxlen is the number of words per sentence. An example might be:</p>
+<pre><code>[ 
+  [1, 2, 3],    # Bob eyed Alice
+  [3, 4, 1]     # Alice uppercut Bob
+]
+</code></pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+    
+      <div class="discussion-item discussion-item-ref">
+    <div class="discussion-item-header" id="ref-issue-156832321">
+      <span class="discussion-item-icon">
+        <svg aria-hidden="true" class="octicon octicon-bookmark" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M9 0H1C.27 0 0 .27 0 1v15l5-3.09L10 16V1c0-.73-.27-1-1-1zm-.78 4.25L6.36 5.61l.72 2.16c.06.22-.02.28-.2.17L5 6.6 3.12 7.94c-.19.11-.25.05-.2-.17l.72-2.16-1.86-1.36c-.17-.16-.14-.23.09-.23l2.3-.03.7-2.16h.25l.7 2.16 2.3.03c.23 0 .27.08.09.23h.01z"></path></svg>
+      </span>
+
+      <img alt="@flyingpiglet" class="avatar" height="16" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/19554071" width="16">
+      <a href="https://github.com/flyingpiglet" class="author" truncate="true">flyingpiglet</a>
+      
+
+      referenced
+      this issue
+      <a class="timestamp" href="https://github.com/fchollet/keras/issues/233#ref-issue-156832321">
+        <relative-time datetime="2016-05-25T19:35:16Z" title="May 25, 2016, 12:35 PM PDT">on May 25, 2016</relative-time>
+      </a>
+    </div>
+
+      <span class="State State--green float-right" title="State: open">
+          <svg aria-hidden="true" class="octicon octicon-issue-opened" height="14" version="1.1" viewBox="0 0 14 16" width="12"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg>
+        Open
+      </span>
+
+
+
+    <h4 class="discussion-item-ref-title">
+      <a href="https://github.com/fchollet/keras/issues/2812" class="title-link">
+        How to add reshape layer following embedding(for the purpose of 2d convolution)? 
+        <span class="issue-num">#2812</span>
+</a>    </h4>
+    
+  </div>
+
+
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/ddofer">
+          <img alt="@ddofer" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/5120387(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-233134818" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="19cfc61d3319d956ff169804fc55646e">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/ddofer" class="author">ddofer</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-233134818" class="timestamp"><relative-time datetime="2016-07-16T15:11:00Z" title="Jul 16, 2016, 8:11 AM PDT">on Jul 16, 2016</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Any chance of updating this for current 1D convolutions and API?<br>
+(I'm running into issues when trying to translate this..)</p>
+<p>Thanks!</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/vinayakumarr">
+          <img alt="@vinayakumarr" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/18217467(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-234922765" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="78d821a4fe3f4eb04c0d3fc9e3d363af">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/vinayakumarr" class="author">vinayakumarr</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-234922765" class="timestamp"><relative-time datetime="2016-07-25T10:55:07Z" title="Jul 25, 2016, 3:55 AM PDT">on Jul 25, 2016</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>I have data set which is of size 393021 rows with 41 features and are classified in to 23 classes. I have used keras imdb_cnn.py example for my data set but i am able to get only 52 percentage accuracy. Could you please tell us regarding how to increase the accuracy for my data set</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/ddofer">
+          <img alt="@ddofer" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/5120387(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-234997723" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="8b9bec09d7e933f07d968449a68476a3">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/ddofer" class="author">ddofer</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-234997723" class="timestamp"><relative-time datetime="2016-07-25T15:59:57Z" title="Jul 25, 2016, 8:59 AM PDT">on Jul 25, 2016</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>I have a similar case - validation accuracy remains at about the baseline<br>
+distribution ; despite the use of various optimizers, dropout filter sizes<br>
+and +- pooling.</p>
+<p>On Mon, Jul 25, 2016 at 1:55 PM, vinayakumarr <a href="mailto:notifications@github.com">notifications@github.com</a><br>
+wrote:</p>
+<blockquote>
+<p>I have data set which is of size 393021 rows with 41 features and are<br>
+classified in to 23 classes. I have used keras imdb_cnn.py example for my<br>
+data set but i am able to get only 52 percentage accuracy. Could you please<br>
+tell us regarding how to increase the accuracy for my data set</p>
+<p>—<br>
+You are receiving this because you are subscribed to this thread.<br>
+Reply to this email directly, view it on GitHub<br>
+<a href="https://github.com/fchollet/keras/issues/233#issuecomment-234922765" class="issue-link js-issue-link" data-url="https://github.com/fchollet/keras/issues/233" data-id="88770386" data-error-text="Failed to load issue title" data-permission-text="Issue title is private">#233 (comment)</a>, or mute<br>
+the thread<br>
+<a href="https://github.com/notifications/unsubscribe-auth/AE4hg4gfT3jgiyBbE7525TeHGGDqVfdAks5qZJYigaJpZM4FEh-z">https://github.com/notifications/unsubscribe-auth/AE4hg4gfT3jgiyBbE7525TeHGGDqVfdAks5qZJYigaJpZM4FEh-z</a><br>
+.</p>
+</blockquote>
+<h2></h2>
+<p>Dan Ofer             -              דן עופר<br>
+Publications <a href="http://scholar.google.co.il/citations?hl=en&amp;user=uDx2ItYAAAAJ">http://scholar.google.co.il/citations?hl=en&amp;user=uDx2ItYAAAAJ</a></p>
+<p>Photography<br>
+<a href="http://picasaweb.google.com/ddofer">http://picasaweb.google.com/ddofer</a><br>
+<a href="http://500px.com/DanOfer">http://500px.com/DanOfer</a></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/ishalyminov">
+          <img alt="@ishalyminov" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/1062768(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-242874325" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="942152918ce654c9de41795702b27f65">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/ishalyminov" class="author">ishalyminov</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-242874325" class="timestamp"><relative-time datetime="2016-08-26T23:17:31Z" title="Aug 26, 2016, 4:17 PM PDT">on Aug 26, 2016</relative-time></a>
+
+
+      •
+      <span class="timestamp timestamp-edited tooltipped tooltipped-n" aria-label="ishalyminov edited this comment 8 months ago">
+          edited
+      </span>
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Hi all,</p>
+<p>I have an issue with basically the same task: minibatches of fixed-length sequences of 1-hot's --&gt; sequences of embeddings --&gt; 1-d convolution (chopping 3-grams)<br>
+And I'm using Keras Functional API. Here's what I got:</p>
+<pre><code>input_layer = Input(name='input', shape=(sequence_length, one_hot_size))
+emb = Embedding(one_hot_size, embedding_size, name='embedding')(input_layer)
+conv = Convolution1D(64, 3, name='conv')(emb)
+</code></pre>
+<p>and I get this error with the <code>emb</code> layer:</p>
+<p><code>Exception: Input 0 is incompatible with layer conv: expected ndim=3, found ndim=4</code></p>
+<p>Could you please tell me what is the problem and how do I control the shape of each layer in this case?</p>
+<p><strong>UPD</strong>: turns out, Embedding layer works fine with just one-hot indices, and I passed into it 1-hot vectors which messed up the shapes.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+    
+  <div class="discussion-item discussion-item-ref">
+    <div class="discussion-item-header">
+      <span class="discussion-item-icon">
+        <svg aria-hidden="true" class="octicon octicon-bookmark" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M9 0H1C.27 0 0 .27 0 1v15l5-3.09L10 16V1c0-.73-.27-1-1-1zm-.78 4.25L6.36 5.61l.72 2.16c.06.22-.02.28-.2.17L5 6.6 3.12 7.94c-.19.11-.25.05-.2-.17l.72-2.16-1.86-1.36c-.17-.16-.14-.23.09-.23l2.3-.03.7-2.16h.25l.7 2.16 2.3.03c.23 0 .27.08.09.23h.01z"></path></svg>
+      </span>
+      This was referenced <relative-time datetime="2017-01-19T09:32:33Z" title="Jan 19, 2017, 1:32 AM PST">on Jan 19</relative-time>
+    </div>
+
+
+      <div class="discussion-item-rollup-ref">
+          <span class="State State--green float-right" title="State: open">
+                <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg>
+            Open
+          </span>
+
+
+
+        <div class="discussion-item-header" id="ref-issue-201190970">
+          <h4 class="discussion-item-ref-title">
+            <a href="https://github.com/fchollet/keras/issues/5057" class="title-link">
+              Example to use word2vec with keras Convolution2D NN to do text classification?
+
+              <span class="issue-num">
+                #5057
+              </span>
+</a>          </h4>
+        </div>
+      </div>
+
+      <div class="discussion-item-rollup-ref">
+          <span class="State State--red float-right" title="State: closed">
+                <svg aria-hidden="true" class="octicon octicon-issue-closed" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M7 10h2v2H7v-2zm2-6H7v5h2V4zm1.5 1.5l-1 1L12 9l4-4.5-1-1L12 7l-1.5-1.5zM8 13.7A5.71 5.71 0 0 1 2.3 8c0-3.14 2.56-5.7 5.7-5.7 1.83 0 3.45.88 4.5 2.2l.92-.92A6.947 6.947 0 0 0 8 1C4.14 1 1 4.14 1 8s3.14 7 7 7 7-3.14 7-7l-1.52 1.52c-.66 2.41-2.86 4.19-5.48 4.19v-.01z"></path></svg>
+            Closed
+          </span>
+
+
+
+        <div class="discussion-item-header" id="ref-issue-205638121">
+          <h4 class="discussion-item-ref-title">
+            <a href="https://github.com/alexander-rakhlin/CNN-for-Sentence-Classification-in-Keras/issues/9" class="title-link">
+              original article use conv 2d layers.
+
+              <span class="issue-num">
+                alexander-rakhlin/CNN-for-Sentence-Classification-in-Keras#9
+              </span>
+</a>          </h4>
+        </div>
+      </div>
+
+  </div>
+
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+    <div class="avatar-parent-child timeline-comment-avatar">
+        <a href="https://github.com/rfalba">
+          <img alt="@rfalba" class="avatar rounded-1" height="44" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/20891813(1)" width="44">
+        </a>
+    </div>
+
+
+      
+
+<div id="issuecomment-282428460" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="855ca5f1c681edda41255615d5746bb6">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://github.com/rfalba" class="author">rfalba</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://github.com/fchollet/keras/issues/233#issuecomment-282428460" class="timestamp"><relative-time datetime="2017-02-24T22:57:16Z" title="Feb 24, 2017, 2:57 PM PST">on Feb 24</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>hi <a href="https://github.com/simonhughes22" class="user-mention">@simonhughes22</a>, could you try to explain how does you model change if one wants to use documents as input, represented as a matrix of sentence matrix, each sentence matrix would be the words vector stacked as you pointed out. One training sample would be in this case a 3d vector.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+      
+
+<div class="comment-reactions  js-reactions-container ">
+</div>
+
+  </div>
+
+</div>
+
+  </div>
+
+
+
+
+
+<!-- Rendered timeline since 2017-02-24 14:57:16 -->
+<div id="partial-timeline-marker" class="js-timeline-marker js-socket-channel js-updatable-content" data-channel="issue:88770386" data-url="/fchollet/keras/issues/233/show_partial?partial=issues%2Ftimeline_marker&amp;since=1487977036" data-last-modified="Fri, 24 Feb 2017 22:57:16 GMT">
+
+    <!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://github.com/fchollet/keras/notifications/mark?ids=85073843" class="d-none js-timeline-marker-form" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="Pf+HqFTXJX+yy4/EW/H8yzkF6Ce/66zifSIDX3rGc0Zgd0tcowCtd+FxdopnWjysvrycL7YOnWUHjWBvdg5YuQ=="></div>
+</form></div>
+
+
+        </div>
+
+          <div class="discussion-timeline-actions">
+                <div class="flash flash-warn mt-3">
+    <a href="https://github.com/join?source=comment-repo" class="btn btn-primary" rel="nofollow">Sign up for free</a>
+    <strong>to join this conversation on GitHub</strong>.
+    Already have an account?
+    <a href="https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Ffchollet%2Fkeras%2Fissues%2F233" rel="nofollow">Sign in to comment</a>
+</div>
+
+
+          </div>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+</div>
+
+
+  </div>
+  <div class="modal-backdrop js-touch-events"></div>
+</div>
+
+    </div>
+  </div>
+
+  </div>
+
+      <div class="container site-footer-container">
+  <div class="site-footer" role="contentinfo">
+    <ul class="site-footer-links float-right">
+        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact GitHub</a></li>
+      <li><a href="https://developer.github.com/" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li><a href="https://training.github.com/" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li><a href="https://shop.github.com/" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+
+    </ul>
+
+    <a href="https://github.com/" aria-label="Homepage" class="site-footer-mark" title="GitHub">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+</a>
+    <ul class="site-footer-links">
+      <li>© 2017 <span title="0.57936s from github-fe130-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+        <li><a href="https://help.github.com/" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+  
+
+  <div id="ajax-error-message" class="ajax-error-message flash flash-error">
+    <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"></path></svg>
+    <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
+    </button>
+    You can't perform that action at this time.
+  </div>
+
+
+    <script crossorigin="anonymous" integrity="sha256-ikMY/+oJoM24IUt2zykmufagztMYoxe+1BnbGSFMaQ0=" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/compat-8a4318ffea09a0cdb8214b76cf2926b9f6a0ced318a317bed419db19214c690d.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-bRCeda2EcbpBUIJybADDX7kpzquXUIJJKDXxHsqMB9k=" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/frameworks-6d109e75ad8471ba415082726c00c35fb929ceab975082492835f11eca8c07d9.js"></script>
+    <script async="async" crossorigin="anonymous" integrity="sha256-VTFrcOyetaTdXNFo+PjaTV/iDFNWRRLdWqzpiYrtcMU=" src="./Example of How to Construct 1D Convolutional Net on Text · Issue #233 · fchollet_keras · GitHub_files/github-55316b70ec9eb5a4dd5cd168f8f8da4d5fe20c53564512dd5aace9898aed70c5.js"></script>
+    
+    
+    
+    
+  <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner d-none">
+    <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"></path></svg>
+    <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="https://github.com/fchollet/keras/issues/233">Reload</a> to refresh your session.</span>
+    <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="https://github.com/fchollet/keras/issues/233">Reload</a> to refresh your session.</span>
+  </div>
+  <div class="facebox" id="facebox" style="display:none;">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+    </div>
+    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
+    </button>
+  </div>
+</div>
+
+
+  
+
+
+</body></html>

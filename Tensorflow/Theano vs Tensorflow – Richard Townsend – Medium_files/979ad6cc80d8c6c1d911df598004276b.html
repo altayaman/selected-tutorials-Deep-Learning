@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://medium.com/media/979ad6cc80d8c6c1d911df598004276b?postId=e25648c31800 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>tensorflow_cost.py – Medium</title><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./0e27302305904e7c31b7db2bd9c205f2.js" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-9f0a4ad9c85ca776e669003688baa9d55f9db315562ce4d231d37dab2714c70a.css"><div id="gist36219437" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-tensorflow_cost-py" class="file">
+    
+
+  <div itemprop="text" class="blob-wrapper data type-python">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tbody><tr>
+        <td id="file-tensorflow_cost-py-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-tensorflow_cost-py-LC1" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">def</span> <span class="pl-en">cost_fn</span>(<span class="pl-smi">cur</span>):</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-tensorflow_cost-py-LC2" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span> options[<span class="pl-s"><span class="pl-pds">'</span>ydim<span class="pl-pds">'</span></span>]</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-tensorflow_cost-py-LC3" class="blob-code blob-code-inner js-file-line">        <span class="pl-c"><span class="pl-c">#</span> TensorFlow does not support negative indexing WTF</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-tensorflow_cost-py-LC4" class="blob-code blob-code-inner js-file-line">        <span class="pl-c"><span class="pl-c">#</span> labels = cur[:, :, -1]</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-tensorflow_cost-py-LC5" class="blob-code blob-code-inner js-file-line">        labels <span class="pl-k">=</span> cur[:, options[<span class="pl-s"><span class="pl-pds">'</span>ydim<span class="pl-pds">'</span></span>]] <span class="pl-c"><span class="pl-c">#</span> <span class="pl-k">TODO</span>: don't hard-code me</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-tensorflow_cost-py-LC6" class="blob-code blob-code-inner js-file-line">        labels <span class="pl-k">=</span> tf.cast(labels, <span class="pl-v">dtype</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>int32<span class="pl-pds">'</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-tensorflow_cost-py-LC7" class="blob-code blob-code-inner js-file-line">        preds <span class="pl-k">=</span> cur[:, :options[<span class="pl-s"><span class="pl-pds">'</span>ydim<span class="pl-pds">'</span></span>]]</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-tensorflow_cost-py-LC8" class="blob-code blob-code-inner js-file-line">        <span class="pl-c"><span class="pl-c">#</span> The non-sparse version of this: y</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-tensorflow_cost-py-LC9" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> tf.nn.sparse_softmax_cross_entropy_with_logits(preds, labels)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-tensorflow_cost-py-LC10" class="blob-code blob-code-inner js-file-line">        </td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-tensorflow_cost-py-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Because you can't iterate over two tensors together, concat them</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-tensorflow_cost-py-LC12" class="blob-code blob-code-inner js-file-line">y <span class="pl-k">=</span> tf.cast(y, <span class="pl-v">dtype</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>float32<span class="pl-pds">'</span></span>, <span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>y_casted_to_float32<span class="pl-pds">"</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-tensorflow_cost-py-LC13" class="blob-code blob-code-inner js-file-line">y_expanded <span class="pl-k">=</span> tf.expand_dims(y, <span class="pl-k">-</span><span class="pl-c1">1</span>, <span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>y_expanded<span class="pl-pds">"</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-tensorflow_cost-py-LC14" class="blob-code blob-code-inner js-file-line">packed_format <span class="pl-k">=</span> tf.concat(<span class="pl-c1">2</span>, [pred_logits, y_expanded], <span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>y_concatenated_with_logits<span class="pl-pds">"</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-tensorflow_cost-py-LC15" class="blob-code blob-code-inner js-file-line">costs <span class="pl-k">=</span> tf.map_fn(cost_fn, packed_format)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_cost-py-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-tensorflow_cost-py-LC16" class="blob-code blob-code-inner js-file-line">cost <span class="pl-k">=</span> tf.reduce_mean(costs)</td>
+      </tr>
+</tbody></table>
+
+  </div>
+
+  </div>
+  
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Sentimentron/0e27302305904e7c31b7db2bd9c205f2/raw/15ab3a4a53c2351164482f9a8ecc0f1d24c02de1/tensorflow_cost.py" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Sentimentron/0e27302305904e7c31b7db2bd9c205f2#file-tensorflow_cost-py">tensorflow_cost.py</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200;function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height); resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);}maybeResize();</script></body></html>

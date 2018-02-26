@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<!-- saved from url=(0172)https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Highlighting a Web Element on Webpage | Selenium Cooked With Python and Spiced With Java</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://seleniumwithjavapython.wordpress.com/xmlrpc.php">
+<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="alternate" type="application/rss+xml" title="Selenium Cooked With Python and Spiced With Java » Feed" href="https://seleniumwithjavapython.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Selenium Cooked With Python and Spiced With Java » Comments Feed" href="https://seleniumwithjavapython.wordpress.com/comments/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1496863874h&ver=4.8.1-RC2-41203"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,56826,8203,55356,56819),0,0),c=j.toDataURL(),b===c&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55358,56794,8205,9794,65039),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55358,56794,8203,9794,65039),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="all-css-0-1" href="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/saved_resource" type="text/css" media="all">
+<link rel="stylesheet" id="big-brother-gentium-css" href="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="big-brother-open-sans-css" href="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/css(1)" type="text/css" media="all">
+<link rel="stylesheet" id="all-css-4-1" href="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/saved_resource(1)" type="text/css" media="all">
+<link rel="stylesheet" id="print-css-5-1" href="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/global-print.css" type="text/css" media="print">
+<link rel="stylesheet" id="all-css-6-1" href="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/saved_resource(2)" type="text/css" media="all">
+<script type="text/javascript" src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/saved_resource(3)"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://seleniumwithjavapython.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/">
+<link rel="shortlink" href="http://wp.me/P6kV8L-cA">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fseleniumwithjavapython.wordpress.com%2Fselenium-with-python%2Fintermediate-topics%2Fplaying-with-javascript-and-javascript-executor%2Fhighlighting-a-web-element-on-webpage%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fseleniumwithjavapython.wordpress.com%2Fselenium-with-python%2Fintermediate-topics%2Fplaying-with-javascript-and-javascript-executor%2Fhighlighting-a-web-element-on-webpage%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Highlighting a Web Element on Webpage">
+<meta property="og:url" content="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/">
+<meta property="og:description" content="If you’ve used UFT/QTP, then you must be familiar with this feature where it allows you to highlight the element selected or the element on focus. This is particularly useful since it allows …">
+<meta property="article:published_time" content="2016-07-15T10:43:11+00:00">
+<meta property="article:modified_time" content="2016-07-21T04:42:49+00:00">
+<meta property="og:site_name" content="Selenium Cooked With Python and Spiced With Java">
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:text:title" content="Highlighting a Web Element on Webpage">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="https://s0.wp.com/i/webclip.png">
+<link rel="openid.server" href="https://seleniumwithjavapython.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://seleniumwithjavapython.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://seleniumwithjavapython.wordpress.com/osd.xml" title="Selenium Cooked With Python and Spiced With Java">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Selenium Cooked With Python and Spiced With Java"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Selenium cooked with Python and Java"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://seleniumwithjavapython.wordpress.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="Highlighting a Web Element on Webpage | Selenium Cooked With Python and Spiced With Java on WordPress.com">
+<meta name="description" content="If you&#39;ve used UFT/QTP, then you must be familiar with this feature where it allows you to highlight the element selected or the element on focus. This is particularly useful since it allows the person performing test to know whether the code is able to recognize the element under test. Many times while running Selenium…">
+	<style type="text/css">
+			.site-title,
+		.site-description {
+			position: absolute;
+			clip: rect(1px, 1px, 1px, 1px);
+		}
+		</style>
+	<link rel="stylesheet" type="text/css" href="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/shCore.css"><link rel="stylesheet" type="text/css" href="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/shThemeDefault.css"><style type="text/css" id="syntaxhighlighteranchor"></style>
+
+<link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/services.css"></head>
+
+<body class="page-template page-template-full-width page-template-full-width-php page page-id-780 page-child parent-pageid-761 mp6 customizer-styles-applied highlander-enabled highlander-light">
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/#content">Skip to content</a>
+		<header id="masthead" class="site-header clearfix" role="banner">
+								<div class="header-image" style="background-image: url(https://seleniumwithjavapython.files.wordpress.com/2017/03/cropped-screen-shot-2017-03-05-at-6-25-07-pm.png); "></div>
+				<div class="site-branding has-header">
+						<h1 class="site-title"><a href="https://seleniumwithjavapython.wordpress.com/" rel="home">Selenium Cooked With Python and Spiced With Java</a></h1>
+			<h2 class="site-description">Selenium cooked with Python and Java</h2>
+		</div>
+
+		<nav id="site-navigation" class="main-navigation nav-horizontal has-header" role="navigation">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
+			<div class="menu-rahul-container"><ul id="primary-menu" class="menu nav-menu" aria-expanded="false"><li id="menu-item-493" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-493" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium/">Selenium</a>
+<ul class="sub-menu">
+	<li id="menu-item-494" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-494"><a href="https://seleniumwithjavapython.wordpress.com/selenium/selenium-suite/">Selenium Suite</a></li>
+	<li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-java/installation/">Installation</a>
+	<ul class="sub-menu">
+		<li id="menu-item-65" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65"><a href="https://seleniumwithjavapython.wordpress.com/installation-ubuntu-14-04-lts/">Installation- Ubuntu 14.04 LTS</a></li>
+		<li id="menu-item-77" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-77"><a href="https://seleniumwithjavapython.wordpress.com/selenium-installation-using-eclipse-windows/">Installation -Windows 7 using Eclipse</a></li>
+		<li id="menu-item-81" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-81"><a href="https://seleniumwithjavapython.wordpress.com/selenium-installation-using-eclipse-and-java-ubuntu-14-04-lts/">Installation -Ubuntu 14.04 LTS – Eclipse</a></li>
+	</ul>
+</li>
+	<li id="menu-item-507" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-507"><a href="https://seleniumwithjavapython.wordpress.com/selenium/selenium-vs-selenium-grid-vs-maven-vs-ant-vs-jenkins/">Selenium vs Selenium Grid vs Maven vs Ant vs Jenkins</a></li>
+	<li id="menu-item-645" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-645" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium/writing-a-proper-xpath/">Writing A Proper Xpath</a>
+	<ul class="sub-menu">
+		<li id="menu-item-760" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-760"><a href="https://seleniumwithjavapython.wordpress.com/selenium/writing-a-proper-xpath/an-xpath-example/">An Xpath Example</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current-menu-ancestor current_page_ancestor menu-item-has-children menu-item-45" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/">Selenium-Python</a>
+<ul class="sub-menu">
+	<li id="menu-item-72" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/selecting-an-ide/">Selecting An IDE</a></li>
+	<li id="menu-item-224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-224" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/basics-of-webdriver/">Basics Of Webdriver</a>
+	<ul class="sub-menu">
+		<li id="menu-item-63" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-63" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/first-script-selenium-with-python/">First Script-Selenium With Python</a>
+		<ul class="sub-menu">
+			<li id="menu-item-101" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/running-script-with-google-chrome/">Running Script with Google Chrome</a></li>
+			<li id="menu-item-797" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-797"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/basics-of-webdriver/marionette-driver-firefox/">Marionette Driver -Firefox</a></li>
+		</ul>
+</li>
+		<li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-128" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/basic-browser-commands/">Basic Browser Commands</a>
+		<ul class="sub-menu">
+			<li id="menu-item-141" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/browser-navigation/">Browser Navigation</a></li>
+		</ul>
+</li>
+		<li id="menu-item-357" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-357" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/basics-of-webdriver/pythons-unit-test-framework/">Python’s Unit Test Framework</a>
+		<ul class="sub-menu">
+			<li id="menu-item-386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-386"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/basics-of-webdriver/pythons-unit-test-framework/simple-script-using-unittest/">Simple Script Using Unittest</a></li>
+		</ul>
+</li>
+		<li id="menu-item-176" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-176" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/web-elements-locating-mechanisms/">Web Elements Locating Mechanisms</a>
+		<ul class="sub-menu">
+			<li id="menu-item-142" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-142"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/web-elements-locating-mechanisms/locating-webelements-on-a-webpage/">Locating WebElements On A Webpage</a></li>
+			<li id="menu-item-783" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-783"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/web-elements-locating-mechanisms/handling-multiple-css-selectors/">Handling Multiple CSS Selectors</a></li>
+		</ul>
+</li>
+		<li id="menu-item-150" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-150" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/understanding-webdriver-waits/">Understanding Webdriver Waits</a>
+		<ul class="sub-menu">
+			<li id="menu-item-153" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-153"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/understanding-webdriver-waits/implicit-waits-and-explicit-waits/">Implicit Waits and Explicit Waits</a></li>
+		</ul>
+</li>
+		<li id="menu-item-284" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-284"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/basics-of-webdriver/handling-dropdowns/">Handling Dropdowns</a></li>
+		<li id="menu-item-358" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-358"><a href="https://seleniumwithjavapython.wordpress.com/checkboxes-and-radio-buttons/">CheckBoxes and Radio Buttons</a></li>
+		<li id="menu-item-356" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-356"><a href="https://seleniumwithjavapython.wordpress.com/html-table-handling/">HTML Table Handling</a></li>
+		<li id="menu-item-482" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-482"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/basics-of-webdriver/taking-screenshot-of-a-page/">Taking Screenshot Of A Page</a></li>
+	</ul>
+</li>
+	<li id="menu-item-277" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current-menu-ancestor current_page_ancestor menu-item-has-children menu-item-277" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/">Intermediate Topics</a>
+	<ul class="sub-menu">
+		<li id="menu-item-763" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current-menu-ancestor current-menu-parent current-page-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-763" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/">Playing With JavaScript and JavaScript Executor</a>
+		<ul class="sub-menu">
+			<li id="menu-item-771" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-771"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/hidden-elements-in-javascript/">Hidden Elements In HTML Page</a></li>
+			<li id="menu-item-258" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-258"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/handling-javascript-alerts/">Handling JavaScript Alerts</a></li>
+			<li id="menu-item-402" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-402"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/scrolling-down-a-page/">Scrolling Down a Page</a></li>
+			<li id="menu-item-782" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-780 current_page_item menu-item-782"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/">Highlighting a Web Element on Webpage</a></li>
+		</ul>
+</li>
+		<li id="menu-item-166" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-166"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/switching-between-windows-and-alerts/">Switching Between Different Windows</a></li>
+		<li id="menu-item-392" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-392"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/using-excel-and-selenium/">Using Excel and Selenium</a></li>
+		<li id="menu-item-453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-453"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/drag-and-drop-scenarios/">Drag And Drop Scenarios</a></li>
+		<li id="menu-item-467" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-467"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/handling-iframes-in-a-webpage/">Handling Iframes In A Webpage</a></li>
+		<li id="menu-item-571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-571"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/mouse-hover-over/">Mouse Hover Over</a></li>
+	</ul>
+</li>
+	<li id="menu-item-411" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-411" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/advanced-topics/">Advanced Topics</a>
+	<ul class="sub-menu">
+		<li id="menu-item-410" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-410" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/advanced-topics/page-object-model/">Page Object Model</a>
+		<ul class="sub-menu">
+			<li id="menu-item-409" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-409"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/advanced-topics/page-object-model/example-of-pom/">Example of POM</a></li>
+		</ul>
+</li>
+		<li id="menu-item-474" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-474"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/advanced-topics/cropping-an-image-using-pil/">Cropping An Image Using PIL</a></li>
+		<li id="menu-item-517" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-517"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/advanced-topics/generating-a-html-report/">Generating A HTML Report</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-46" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-46" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-java/">Selenium-Java</a>
+<ul class="sub-menu">
+	<li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-205" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-java/code-snippets/">Code Snippets</a>
+	<ul class="sub-menu">
+		<li id="menu-item-206" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-206"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-java/code-snippets/refreshing-page-in-different-ways-using-webdriver/">Refreshing Page In Different Ways Using Webdriver</a></li>
+		<li id="menu-item-218" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-java/code-snippets/zoom-functionality-on-an-e-commerce-website/">Zoom Functionality On An E-Commerce Website</a></li>
+		<li id="menu-item-219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-219"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-java/code-snippets/screenshot-of-a-specific-element/">Screenshot Of A Specific Element</a></li>
+		<li id="menu-item-220" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-220"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-java/code-snippets/finding-out-all-links-in-a-webpage/">Finding Out All Links In A Webpage</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-1115" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1115" aria-haspopup="true"><a target="_blank" href="https://seleniumwithjavapython.wordpress.com/protractor/">Protractor</a>
+<ul class="sub-menu">
+	<li id="menu-item-1152" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1152"><a target="_blank" href="https://seleniumwithjavapython.wordpress.com/installation-mac/">Installation-Mac</a></li>
+</ul>
+</li>
+<li id="menu-item-1116" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1116"><a target="_blank" href="https://seleniumwithjavapython.wordpress.com/mongo-db/">Mongo-DB</a></li>
+<li id="menu-item-44" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-44" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/home/">Jenkins</a>
+<ul class="sub-menu">
+	<li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43"><a href="https://seleniumwithjavapython.wordpress.com/home/jenkins-installation/">Jenkins- Installation on Ubuntu 14.04 LTS</a></li>
+	<li id="menu-item-64" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-64"><a href="https://seleniumwithjavapython.wordpress.com/home/minor-configuration-before-getting-started/">Minor Configuration Before Getting Started</a></li>
+	<li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://seleniumwithjavapython.wordpress.com/home/creating-and-scheduling-a-job/">Creating and Scheduling a Job</a></li>
+	<li id="menu-item-257" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-257"><a href="https://seleniumwithjavapython.wordpress.com/starting-first-job-using-jenkins/">Starting First Job Using Jenkins</a></li>
+	<li id="menu-item-1318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1318"><a href="https://seleniumwithjavapython.wordpress.com/home/testing-rest-apis-with-postman-and-jenkins-part-1/">Testing REST API’s with Postman and Jenkins – Part 1</a></li>
+	<li id="menu-item-1362" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1362"><a href="https://seleniumwithjavapython.wordpress.com/home/testing-rest-apis-with-postman-and-jenkins-part-2/">Testing REST API’s with Postman and Jenkins – Part 2</a></li>
+	<li id="menu-item-1463" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1463"><a href="https://seleniumwithjavapython.wordpress.com/testing-rest-apis-with-postman-and-jenkins-part-3/">Testing REST API’s with Postman and Jenkins – Part 3</a></li>
+</ul>
+</li>
+<li id="menu-item-95" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-95" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/selenium-resources/">Selenium Resources</a>
+<ul class="sub-menu">
+	<li id="menu-item-108" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-108"><a href="https://seleniumwithjavapython.wordpress.com/selenium-resources/comprehensive-selenium-tutorials/">Comprehensive Selenium Tutorials</a></li>
+	<li id="menu-item-113" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-113"><a href="https://seleniumwithjavapython.wordpress.com/selenium-resources/other-selenium-resources/">Other Selenium Resources</a></li>
+	<li id="menu-item-303" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-303"><a href="https://seleniumwithjavapython.wordpress.com/selenium-resources/selenium-interview-questions/">Selenium Interview Questions</a></li>
+</ul>
+</li>
+<li id="menu-item-363" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-363" aria-haspopup="true"><a href="https://seleniumwithjavapython.wordpress.com/trails-and-errors/">Other Escapades</a>
+<ul class="sub-menu">
+	<li id="menu-item-380" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-380"><a href="https://seleniumwithjavapython.wordpress.com/trails-and-errors/interesting-scenarios/">Interesting Scenarios</a></li>
+</ul>
+</li>
+<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="https://seleniumwithjavapython.wordpress.com/about/">About</a></li>
+</ul></div>		</nav><!-- #site-navigation -->
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content clearfix">
+
+			<div class="breadcrumbs">
+			<a class="breadcrumbs-root" href="https://seleniumwithjavapython.wordpress.com/">Home</a><span class="breadcrumbs-ancestor"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/">Selenium-Python</a></span><span class="breadcrumbs-ancestor"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/">Intermediate Topics</a></span><span class="breadcrumbs-ancestor"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/">Playing With JavaScript and JavaScript&nbsp;Executor</a></span><span class="breadcrumbs-current">Highlighting a Web Element on&nbsp;Webpage</span>		</div>
+		<div class="content-area primary">
+		<main id="main" class="site-main" role="main">
+
+							<div class="article-wrapper">
+					
+<article id="post-780" class="post-780 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Highlighting a Web Element on&nbsp;Webpage</h1>
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p>If you’ve used UFT/QTP, then you must be familiar with this feature where it allows you to highlight the element selected or the element on focus. This is particularly useful since it allows the person performing test to know whether the code is able to recognize the element under test.</p>
+<p>Many times while running Selenium tests, we want to know whether the element under test was successfully selected by the code. Also many times, we want to screenshot the element with a highlighted border so that we can verify that the element was actually worked or located by the code. A highlighted element is also helpful for debugging purposes, since it allows us to focus on the element , for which the code was actually intended.</p>
+<p>However,Selenium, natively, doesn’t allows or gives any specific method to perform this highlighting. But this doesn’t mean we can’t achieve this. We can , certainly, with the power of code and with a little help from the JSExecutor that we have.</p>
+<h2 style="text-align:center;">Working</h2>
+<p>The crux of this code that we are going to use it that is uses the power of JS and JSExecutor to inject JavaScript , into the target application, or AUT. The code injects JS at run time so that the CSS properties of the element is changed. This change at run time, with the specified changed CSS allows us to highlight the element that we want to highlight.</p>
+<p>To achieve this,we would create a new function, in a new file that would contain the code for highlighting. We will then simply call this in the program where we want.</p>
+<div><div id="highlighter_5202" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">import</code> <code class="python plain">selenium</code></div><div class="line number2 index1 alt1"><code class="python keyword">from</code> <code class="python plain">selenium </code><code class="python keyword">import</code> <code class="python plain">webdriver</code></div><div class="line number3 index2 alt2"><code class="python keyword">import</code> <code class="python plain">time</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="python keyword">def</code> <code class="python plain">highlight(element):</code></div><div class="line number6 index5 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python comments">"""Highlights a Selenium webdriver element"""</code></div><div class="line number7 index6 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">driver </code><code class="python keyword">=</code> <code class="python plain">element._parent</code></div><div class="line number8 index7 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python keyword">def</code> <code class="python plain">apply_style(s):</code></div><div class="line number9 index8 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">driver.execute_script(</code><code class="python string">"arguments[0].setAttribute('style', arguments[1])"</code><code class="python plain">, element, s)</code></div><div class="line number10 index9 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">orignal_style </code><code class="python keyword">=</code> <code class="python plain">element.get_attribute(</code><code class="python string">'style'</code><code class="python plain">)</code></div><div class="line number11 index10 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">apply_style(</code><code class="python string">"border: 4px solid red"</code><code class="python plain">)</code></div><div class="line number12 index11 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python keyword">if</code> <code class="python plain">(element.get_attribute(</code><code class="python string">"style"</code><code class="python plain">)!</code><code class="python keyword">=</code><code class="python color1">None</code><code class="python plain">):</code></div><div class="line number13 index12 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">time.sleep(</code><code class="python value">5</code><code class="python plain">)</code></div><div class="line number14 index13 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">apply_style(orignal_style)</code></div></div></td></tr></tbody></table></div></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>This is how it will work-</p>
+<p>In the method <code>apply_style()</code>,</p>
+<p><code><i>arguments[0].setAttribute('style',arguments[1]):</i></code>– this line is injecting the CSS style tag into the element , and making its border settings with a 4px wide red line with solid look. We pass the style argument for this method, which contains the style information for this element. When the <code>apply_style()</code> method executes, it replaces, or injects, the custom JS code that we mentioned above.</p>
+<p>&nbsp;</p>
+<p>Now, we simply call this method in our program , and pass the element that we need to be highlighted.</p>
+<div><div id="highlighter_452002" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">import</code> <code class="python plain">unittest</code></div><div class="line number2 index1 alt1"><code class="python keyword">from</code> <code class="python plain">selenium </code><code class="python keyword">import</code> <code class="python plain">webdriver</code></div><div class="line number3 index2 alt2"><code class="python keyword">from</code> <code class="python plain">highlight_ele </code><code class="python keyword">import</code> <code class="python plain">highlight</code></div><div class="line number4 index3 alt1"><code class="python keyword">from</code> <code class="python plain">time </code><code class="python keyword">import</code> <code class="python plain">sleep</code></div><div class="line number5 index4 alt2"><code class="python plain">chromepath</code><code class="python keyword">=</code><code class="python string">"/home/rahul/Documents/SeleniumPy/chromedriver"</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="python keyword">class</code> <code class="python plain">JSExe(unittest.TestCase):</code></div><div class="line number8 index7 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python keyword">def</code> <code class="python plain">setUp(</code><code class="python color1">self</code><code class="python plain">):</code></div><div class="line number9 index8 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python color1">self</code><code class="python plain">.driver </code><code class="python keyword">=</code> <code class="python plain">webdriver.Chrome(chromepath)</code></div><div class="line number10 index9 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python color1">self</code><code class="python plain">.driver.maximize_window()</code></div><div class="line number11 index10 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python color1">self</code><code class="python plain">.driver.get(</code><code class="python string">'<a href="http://www.ufthelp.com/">http://www.ufthelp.com/</a>'</code><code class="python plain">)</code></div><div class="line number12 index11 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python keyword">def</code> <code class="python plain">test_JSExe(</code><code class="python color1">self</code><code class="python plain">):</code></div><div class="line number13 index12 alt2">&nbsp;</div><div class="line number14 index13 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">driver </code><code class="python keyword">=</code> <code class="python color1">self</code><code class="python plain">.driver</code></div><div class="line number15 index14 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">ele </code><code class="python keyword">=</code> <code class="python plain">driver.find_element_by_xpath(</code><code class="python string">"//a[contains(text(),'Home')]"</code><code class="python plain">)</code></div><div class="line number16 index15 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">highlight(ele)</code></div><div class="line number17 index16 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">driver.get_screenshot_as_file(</code><code class="python string">"/home/rahul/PycharmProjects/Screenshots/highlight.png"</code><code class="python plain">)</code></div><div class="line number18 index17 alt1">&nbsp;</div><div class="line number19 index18 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python keyword">def</code> <code class="python plain">tearDown(</code><code class="python color1">self</code><code class="python plain">):</code></div><div class="line number20 index19 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python color1">self</code><code class="python plain">.driver.quit()</code></div><div class="line number21 index20 alt2">&nbsp;</div><div class="line number22 index21 alt1"><code class="python keyword">if</code> <code class="python plain">__name__ </code><code class="python keyword">=</code><code class="python keyword">=</code> <code class="python string">'__main__'</code><code class="python plain">:</code></div><div class="line number23 index22 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">unittest.main()</code></div></div></td></tr></tbody></table></div></div>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-780" class="share-twitter sd-button share-icon" href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-780" class="share-facebook sd-button share-icon" href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/?share=facebook&amp;nb=1" target="_blank" title="Share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-780" class="share-google-plus-1 sd-button share-icon" href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/?share=google-plus-1&amp;nb=1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-93644227-780-5985970739655" data-src="//widgets.wp.com/likes/#blog_id=93644227&amp;post_id=780&amp;origin=seleniumwithjavapython.wordpress.com&amp;obj_id=93644227-780-5985970739655" data-name="like-post-frame-93644227-780-5985970739655"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-93644227-780-5985970739655" height="55px" width="100%" frameborder="0" src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/saved_resource.html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div></div>			</div><!-- .entry-content -->
+	</article><!-- #post-## -->
+				</div>
+				
+			
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-footer-wrapper">
+			<div class="site-info">
+								<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+				
+							</div><!-- .site-info -->
+					</div><!-- .site-footer-wrapper -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<!--  -->
+<script type="text/javascript" src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/seleniumwithjavapython.wordpress.com\/selenium-with-python\/intermediate-topics\/playing-with-javascript-and-javascript-executor\/highlighting-a-web-element-on-webpage\/":780};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+		<script type="text/javascript" src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/saved_resource(4)"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?m=1363304414h&amp;ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+// Infinite scroll support
+jQuery( function( $ ) {
+	$( document.body ).on( 'post-load', function() {
+		SyntaxHighlighter.highlight();
+	} );
+} );
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var comment_like_text = {"loading":"Loading..."};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"93644227","siteName":"Selenium Cooked With Python and Spiced With Java","siteURL":"http:\/\/seleniumwithjavapython.wordpress.com","icon":"<img alt='' src='https:\/\/s1.wp.com\/i\/logo\/wpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/big-brother","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/seleniumwithjavapython.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fseleniumwithjavapython.wordpress.com%2Fselenium-with-python%2Fintermediate-topics%2Fplaying-with-javascript-and-javascript-executor%2Fhighlighting-a-web-element-on-webpage%2F","themeURL":"https:\/\/wordpress.com\/theme\/big-brother\/","xhrURL":"https:\/\/seleniumwithjavapython.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"0cdb6cba45","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"aa85ec4881\" \/>","referer":"https:\/\/seleniumwithjavapython.wordpress.com\/selenium-with-python\/intermediate-topics\/playing-with-javascript-and-javascript-executor\/highlighting-a-web-element-on-webpage\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/seleniumwithjavapython.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fseleniumwithjavapython.wordpress.com%2Fselenium-with-python%2Fintermediate-topics%2Fplaying-with-javascript-and-javascript-executor%2Fhighlighting-a-web-element-on-webpage%2F","postID":"780","shortlink":"http:\/\/wp.me\/P6kV8L-cA","canEditPost":"","editLink":"https:\/\/wordpress.com\/page\/seleniumwithjavapython.wordpress.com\/780","statsLink":"https:\/\/wordpress.com\/stats\/post\/780\/seleniumwithjavapython.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Big Brother","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/seleniumwithjavapython.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fseleniumwithjavapython.wordpress.com%2Fselenium-with-python%2Fintermediate-topics%2Fplaying-with-javascript-and-javascript-executor%2Fhighlighting-a-web-element-on-webpage%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/saved_resource(5)"></script><div id="actionbar" class="actnbr-pub-big-brother actnbr-has-follow"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename actnbr-hidden"><a href="http://seleniumwithjavapython.wordpress.com/"><img alt="" src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/wpcom-gray-white.png" class="avatar avatar-50" height="50" width="50" scale="0"> Selenium Cooked With Python and Spiced With Java</a></li> 				   	<li class="actnbr-folded-customize actnbr-hidden"><a href="https://seleniumwithjavapython.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Fseleniumwithjavapython.wordpress.com%2Fselenium-with-python%2Fintermediate-topics%2Fplaying-with-javascript-and-javascript-executor%2Fhighlighting-a-web-element-on-webpage%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Customize<span></span></span></a></li> 				    <li class="actnbr-folded-follow actnbr-hidden"><a class="actnbr-action actnbr-actn-follow" href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a></li> 					<li class="actnbr-signup actnbr-hidden"><a href="https://wordpress.com/start/">Sign up</a></li> 				    <li class="actnbr-login actnbr-hidden"><a href="https://seleniumwithjavapython.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fseleniumwithjavapython.wordpress.com%2Fselenium-with-python%2Fintermediate-topics%2Fplaying-with-javascript-and-javascript-executor%2Fhighlighting-a-web-element-on-webpage%2F">Log in</a></li> 				     				    <li class="actnbr-shortlink actnbr-hidden"><a href="http://wp.me/P6kV8L-cA">Copy shortlink</a></li> 				    <li class="flb-report actnbr-hidden"><a href="http://en.wordpress.com/abuse/">Report this content</a></li> 				     				     				    <li class="actnbr-subs actnbr-hidden"><a href="https://subscribe.wordpress.com/">Manage subscriptions</a></li> 				    <li class="actnbr-fold actnbr-hidden"><a href="https://seleniumwithjavapython.wordpress.com/selenium-with-python/intermediate-topics/playing-with-javascript-and-javascript-executor/highlighting-a-web-element-on-webpage/">Collapse this bar</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>		<iframe src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+<script src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'93644227','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'93644227','v':'wpcom','tz':'0','user_id':'0','post':'780','subd':'seleniumwithjavapython'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1LVmwrVi5vQS5fVFtfdHBbPyw1VXIrU3hWLHhzVndTdktBX0ddJnpXRjVaOTd6fj1YMX4ydzR6MmRCYnxkNmdfVXFyNDhiOThhbUxnbnFsRWhub1l0V2NLTU84PWl5SjU/JmxKbEZUbnpjeG41JlBXSTZzNnduPUxCYW94W2hzKzk1dUtZfDZXUCx6VEJ5P0xdfEkteTEtP0xocWxpLC0lUWhHfm80UCtBcGNKXzVrd1gvV2dpaFBsQ1NuTn4vU3lpb10xUG1Ga2F+OEhDVVRaS1suZS5FTWdQV3orN3o2TUtEP2k='}]);
+_stq.push([ 'clickTrackerInit', '93644227', '780' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<div class="comment-likes-overlay" style="display: none;"></div><img src="./Highlighting a Web Element on Webpage _ Selenium Cooked With Python and Spiced With Java_files/g.gif" alt=":)" id="wpstats" scale="0"></body></html>

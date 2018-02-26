@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<!-- saved from url=(0333)https://disqus.com/embed/comments/?base=default&f=lateralblog&t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&s_o=default#version=d952d33e35a1c499438fbdfafc2ef715 -->
+<html lang="en" dir="ltr" class="js no-touch localstorage sessionstorage contenteditable use-opacity-transitions"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Disqus Comments</title>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <style>
+        .alert--warning {
+            border-radius: 3px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            background-color: #FFE070;
+            color: #A47703;
+        }
+
+        .alert--warning a,
+        .alert--warning a:hover,
+        .alert--warning strong {
+            color: #A47703;
+            font-weight: bold;
+        }
+
+        .alert--error p,
+        .alert--warning p {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        
+        </style>
+    
+    <style>
+        html {
+            overflow: hidden;
+        }
+
+        #error {
+            display: none;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        
+    </style>
+
+<script crossorigin="anonymous" id="bootstrap-script" data-app="lounge" src="./lounge.load.d952d33e35a1c499438fbdfafc2ef715.js"></script><meta http-equiv="Content-Security-Policy" content="script-src https:;"><link rel="stylesheet" href="./lounge.5f04e83cf97ee6a6cf16dc8e296ed78d.css"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="lounge/main" src="./lounge.bundle.987c6346e2effb8e4f350d48ecf53d13.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="remote/config" src="./config.js"></script><style id="css_1493014808172"></style><!--<base target="_parent">--><base href="." target="_parent"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ga" src="./ga.js"></script></head>
+<body>
+    
+
+    
+    <div id="error" class="alert--error">
+        <p>We were unable to load Disqus. If you are a moderator please see our <a href="https://docs.disqus.com/help/83/"> troubleshooting guide</a>. </p>
+    </div>
+
+    
+    <script type="text/json" id="disqus-forumData">{"session":{"canModerate":false,"audienceSyncVerified":false,"mustVerify":false,"canReply":true,"mustVerifyEmail":false},"features":{},"forum":{"raw_guidelines":null,"twitterName":"","guidelines":null,"favicon":{"permalink":"https://disqus.com/api/forums/favicons/lateralblog.jpg","cache":"//a.disquscdn.com/1492794604/images/favicon-default.png"},"disableDisqusBranding":false,"id":"lateralblog","createdAt":"2015-06-10T12:48:06.723949","category":"Tech","founder":"161120774","daysAlive":0,"installCompleted":true,"pk":"3638675","channel":null,"description":"","raw_description":"","permissions":{},"name":"Lateral - Blog","language":"en","settings":{"supportLevel":0,"adsDRNativeEnabled":false,"colorScheme":"auto","adsVideoEnabled":false,"adsProductVideoEnabled":false,"adsPositionTopEnabled":false,"ssoRequired":false,"unapproveLinks":false,"adsEnabled":false,"adsProductLinksThumbnailsEnabled":false,"adsProductStoriesEnabled":false,"organicDiscoveryEnabled":false,"allowMedia":false,"disable3rdPartyTrackers":true,"adsProductDisplayEnabled":false,"discoveryMax":false,"discoveryLocked":false,"moderatorText":"","linkAffiliationEnabled":false,"allowAnonPost":true,"hasCustomAvatar":false,"adultContent":false,"promotedDiscoveryEnabled":false,"allowAnonVotes":false,"mustVerify":true,"adsSettingsLocked":false,"mustVerifyEmail":true,"audienceSyncEnabled":false,"typeface":"auto","adsPositionBottomEnabled":false,"mediaembedEnabled":false,"adsProductLinksEnabled":false,"validateAllPosts":false,"discoveryThumbnailsEnabled":false,"isVIP":false,"adsPositionInthreadEnabled":false},"organizationId":2644285,"url":"","daysThreadAlive":0,"avatar":{"small":{"permalink":"https://disqus.com/api/forums/avatars/lateralblog.jpg?size=32","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"large":{"permalink":"https://disqus.com/api/forums/avatars/lateralblog.jpg?size=92","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}},"signedUrl":""}}</script>
+
+    
+    <script type="text/json" id="disqus-threadData">{"cursor":{"hasPrev":false,"prev":null,"total":6,"hasNext":false,"next":"1:0:0"},"code":0,"response":{"lastModified":1490034096,"posts":[{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Hi, nice write up!\u003cbr>what is you csoa model? How does the fastText it do in compare to other models such as factorization machines?\u003cbr>Can it be used for clustering and/or tagging putposes?\u003cbr>Thanks!\u003c/p>","id":"3213731085","isHighlighted":false,"author":{"username":"disqus_5JlzpJXIfA","about":"","name":"gidi","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2393509999999999,"profileUrl":"https://disqus.com/by/disqus_5JlzpJXIfA/","url":"","reputation":1.2393509999999999,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-06-09T09:06:28","id":"210996833","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/disqus_5JlzpJXIfA.jpg","cache":"https://c.disquscdn.com/uploads/users/21099/6833/avatar32.jpg?1490033995"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/disqus_5JlzpJXIfA.jpg","cache":"https://c.disquscdn.com/uploads/users/21099/6833/avatar92.jpg?1490033995","large":{"permalink":"https://disqus.com/api/users/avatars/disqus_5JlzpJXIfA.jpg","cache":"https://c.disquscdn.com/uploads/users/21099/6833/avatar92.jpg?1490033995"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2017-03-20T18:19:52","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Hi, nice write up!\nwhat is you csoa model? How does the fastText it do in compare to other models such as factorization machines?\nCan it be used for clustering and/or tagging putposes?\nThanks!","canVote":false,"thread":"5177591154","forum":"lateralblog","depth":0,"points":0,"moderationLabels":[],"isEdited":true},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>excellent write up\u003c/p>","id":"3181368134","isHighlighted":false,"author":{"username":"vijayakumarramdoss","about":"","name":"Vijay Ram","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2299529999999999,"profileUrl":"https://disqus.com/by/vijayakumarramdoss/","url":"","reputation":1.2299529999999999,"location":"","isPrivate":true,"signedUrl":"","isPrimary":true,"joinedAt":"2013-06-05T02:32:53","id":"54715518","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/vijayakumarramdoss.jpg","cache":"https://c.disquscdn.com/uploads/users/5471/5518/avatar32.jpg?1488395314"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/vijayakumarramdoss.jpg","cache":"https://c.disquscdn.com/uploads/users/5471/5518/avatar92.jpg?1488395314","large":{"permalink":"https://disqus.com/api/users/avatars/vijayakumarramdoss.jpg","cache":"https://c.disquscdn.com/uploads/users/5471/5518/avatar92.jpg?1488395314"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2017-03-01T19:08:33","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"excellent write up","canVote":false,"thread":"5177591154","forum":"lateralblog","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Great write up :) Have you tried it with 100 times more data :)?\u003c/p>","id":"3086852274","isHighlighted":false,"author":{"username":"pascalvankooten","about":"","name":"Pascal van Kooten","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.248818,"profileUrl":"https://disqus.com/by/pascalvankooten/","url":"","reputation":1.248818,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-10-11T13:26:29","id":"178155041","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/pascalvankooten.jpg","cache":"https://c.disquscdn.com/uploads/users/17815/5041/avatar32.jpg?1492337641"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/pascalvankooten.jpg","cache":"https://c.disquscdn.com/uploads/users/17815/5041/avatar92.jpg?1492337641","large":{"permalink":"https://disqus.com/api/users/avatars/pascalvankooten.jpg","cache":"https://c.disquscdn.com/uploads/users/17815/5041/avatar92.jpg?1492337641"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2017-01-06T23:55:17","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Great write up :) Have you tried it with 100 times more data :)?","canVote":false,"thread":"5177591154","forum":"lateralblog","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Thanks for sharing this great Article.Could you describe the entire flow of your model.Like lets say once you have the training data in the required format, how did you used the fastText library to train the model and evaluated on the test data with little bit code....?\u003c/p>","id":"2922543456","isHighlighted":false,"author":{"username":"disqus_h1KZDfatcC","about":"","name":"Prakash Anand","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2363009999999999,"profileUrl":"https://disqus.com/by/disqus_h1KZDfatcC/","url":"","reputation":1.2363009999999999,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-09-28T06:51:28","id":"224634111","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/disqus_h1KZDfatcC.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/disqus_h1KZDfatcC.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/disqus_h1KZDfatcC.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-09-28T06:51:49","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Thanks for sharing this great Article.Could you describe the entire flow of your model.Like lets say once you have the training data in the required format, how did you used the fastText library to train the model and evaluated on the test data with little bit code....?","canVote":false,"thread":"5177591154","forum":"lateralblog","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Hi Prakash, glad you enjoyed the article :) Once you've cloned and compiled fasttext as per their documentation, training is straightforward. Assuming the compiled fasttext binary is in the same directory as your training file train.csv, (assumed to have the format described in the post), just type, e.g.:\u003c/p>\u003cp>./fasttext supervised -input train.csv -output model -dim 100 -loss ns -thread 32 -minCount 5 -neg 10 -ws 20 -epoch 100000 -lr 0.05\u003c/p>\u003cp>The original source code prints out only the word vectors, not the label vectors. I modified the FastText::saveVectors() method in the \u003ca href=\"http://disq.us/url?url=http%3A%2F%2Ffasttext.cc%3AQLOEtEI_AlA2qU6Riw3J8FvqiAI&amp;cuid=3638675\" rel=\"nofollow noopener\">fasttext.cc\u003c/a> file, so that it also prints the label vectors to a separate file. Thus, when training is finished, I have two vector files: \"model_words.vec\" and \"model_labels.vec\". The latter contains both document and user labels, with prefixes \"__label__doc__id__\" and \"__label__user__id__\", respectively. To evaluate the code, I (i) load \"model_labels.vec\" into an ipython notebook, (ii) separate out the user and doc vecs, (iii) apply the MPR metric explained in the post. Note that to compute this metric as I did, you'll first need to l2-normalise all the user and document vectors. The intuition behind the MPR is explained in this wikipedia article:\u003c/p>\u003cp>\u003ca href=\"https://disq.us/url?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FPercentile_rank%3AHEM5SOY59_Gsmknb1kw_hfus_Rw&amp;cuid=3638675\" rel=\"nofollow noopener\">https://en.wikipedia.org/wi...\u003c/a>\u003c/p>\u003cp>This should complement the procedural description of MPR I wrote in the post. Good luck!\u003c/p>","id":"2922776936","isHighlighted":false,"author":{"username":"stephenenrightward","about":"","name":"Stephen Enright-Ward","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.235932,"profileUrl":"https://disqus.com/by/stephenenrightward/","url":"","reputation":1.235932,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-07-14T06:42:13","id":"165375586","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/stephenenrightward.jpg","cache":"https://c.disquscdn.com/uploads/users/16537/5586/avatar32.jpg?1475158599"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/stephenenrightward.jpg","cache":"https://c.disquscdn.com/uploads/users/16537/5586/avatar92.jpg?1475158599","large":{"permalink":"https://disqus.com/api/users/avatars/stephenenrightward.jpg","cache":"https://c.disquscdn.com/uploads/users/16537/5586/avatar92.jpg?1475158599"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-09-28T12:00:33","parent":2922543456,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Hi Prakash, glad you enjoyed the article :) Once you've cloned and compiled fasttext as per their documentation, training is straightforward. Assuming the compiled fasttext binary is in the same directory as your training file train.csv, (assumed to have the format described in the post), just type, e.g.: \n\n./fasttext supervised -input train.csv -output model -dim 100 -loss ns -thread 32 -minCount 5 -neg 10 -ws 20 -epoch 100000 -lr 0.05 \n\nThe original source code prints out only the word vectors, not the label vectors. I modified the FastText::saveVectors() method in the fasttext.cc file, so that it also prints the label vectors to a separate file. Thus, when training is finished, I have two vector files: \"model_words.vec\" and \"model_labels.vec\". The latter contains both document and user labels, with prefixes \"__label__doc__id__\" and \"__label__user__id__\", respectively. To evaluate the code, I (i) load \"model_labels.vec\" into an ipython notebook, (ii) separate out the user and doc vecs, (iii) apply the MPR metric explained in the post. Note that to compute this metric as I did, you'll first need to l2-normalise all the user and document vectors. The intuition behind the MPR is explained in this wikipedia article:\n\nhttps://en.wikipedia.org/wiki/Percentile_rank\n\nThis should complement the procedural description of MPR I wrote in the post. Good luck!","canVote":false,"thread":"5177591154","forum":"lateralblog","depth":1,"points":0,"moderationLabels":["links"],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Thanks Stephen for such prompt reply and in a detailed manner. Let me apply this on my training data if i'll face any problem i'll bother you again..:P..:)\u003c/p>","id":"2924254904","isHighlighted":false,"author":{"username":"disqus_h1KZDfatcC","about":"","name":"Prakash Anand","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2363009999999999,"profileUrl":"https://disqus.com/by/disqus_h1KZDfatcC/","url":"","reputation":1.2363009999999999,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-09-28T06:51:28","id":"224634111","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/disqus_h1KZDfatcC.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/disqus_h1KZDfatcC.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/disqus_h1KZDfatcC.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-09-29T04:36:06","parent":2922776936,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Thanks Stephen for such prompt reply and in a detailed manner. Let me apply this on my training data if i'll face any problem i'll bother you again..:P..:)","canVote":false,"thread":"5177591154","forum":"lateralblog","depth":2,"points":0,"moderationLabels":[],"isEdited":false}],"thread":{"feed":"https://lateralblog.disqus.com/a_fasttext_based_hybrid_recommender_lateral/latest.rss","identifiers":[],"dislikes":0,"likes":1,"message":"","id":"5177591154","createdAt":"2016-09-27T14:49:35","category":"3771559","author":"161120774","isSpam":false,"signedLink":"https://disq.us/?url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&key=u-XYaYpgZ6irtn58d0YlYA","isDeleted":false,"hasStreaming":false,"raw_message":"","isClosed":false,"link":"https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/","slug":"a_fasttext_based_hybrid_recommender_lateral","forum":"lateralblog","clean_title":"A fastText-based hybrid recommender - Lateral","posts":6,"moderators":[161205596,34767493,161120774],"title":"A fastText-based hybrid recommender - Lateral","highlightedPost":null}},"order":"popular"}</script>
+
+    
+
+    <div id="fixed-content"></div>
+
+
+    
+        
+<script type="text/json" id="disqus-urls">{
+    "root":"//disqus.com",
+    "next":"https://c.disquscdn.com/next/current/embed"
+}</script>
+
+        
+        <script>!function () {
+            var d = document;
+            var toH = d.head.appendChild.bind(d.head);
+
+            var v = window.location.href.match(/[#&?]version=([0-9a-f]{32})/);
+            var src = 'https://c.disquscdn.com/next/embed/lounge.load';
+            if (v)
+                src += '.' + v[1];
+            src += '.js';
+
+            var s = d.createElement('script');
+            s.crossOrigin = 'anonymous';
+            s.id = 'bootstrap-script';
+            s.setAttribute('data-app', 'lounge');
+            s.src = src;
+            toH(s);
+
+            var m = d.createElement('meta');
+            m.setAttribute('http-equiv', 'Content-Security-Policy');
+            m.setAttribute('content', "script-src https:;");
+            toH(m);
+        }();</script>
+    
+
+
+<script src="./common.bundle.08b03b11c747b79c4d4135b49e2f8725.js"></script><div id="layout" data-tracking-area="layout"><div id="onboard" data-tracking-area="onboard"></div><div id="highlighted-post" data-tracking-area="highlighted" class="highlighted-post" style="display: none;"></div><div id="global-alert"></div><header id="main-nav" data-tracking-area="main-nav"><nav class="nav nav-primary"><ul><li class="nav-tab nav-tab--primary tab-conversation active" data-role="post-count"><a class="publisher-nav-color"><span class="comment-count">6 comments</span><span class="comment-count-placeholder">Comments</span></a></li><li class="nav-tab nav-tab--primary tab-community"><a href="https://disqus.com/home/forums/lateralblog/" class="publisher-nav-color" data-action="community-sidebar" data-forum="lateralblog" id="community-tab"><span class="community-name"><strong>Lateral - Blog</strong></span><strong class="community-name-placeholder">Community</strong></a></li><li class="nav-tab nav-tab--primary dropdown user-menu" data-role="logout"><a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="dropdown-toggle" data-toggle="dropdown">
+<span class="dropdown-toggle-wrapper">
+
+<span>
+Login
+</span>
+
+</span> <span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+
+
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="auth:disqus">Disqus</a>
+</li>
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="auth:facebook">Facebook</a>
+</li>
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="auth:twitter">Twitter</a>
+</li>
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="auth:google">Google</a>
+</li>
+
+
+
+</ul>
+</li><li class="nav-tab nav-tab--primary notification-menu unread" data-role="notification-menu"><a href="https://disqus.com/home/inbox/" class="notification-container" data-action="home" data-home-path="home/inbox/">
+<span class="notification-icon icon-comment" aria-hidden=""></span>
+<span class="notification-count" data-role="notification-count">1</span>
+</a>
+</li></ul></nav></header><section id="conversation" data-role="main" data-tracking-area="main"><div class="nav nav-secondary" data-tracking-area="secondary-nav"><ul><li id="recommend-button" class="nav-tab nav-tab--secondary recommend dropdown"><div class="thread-likes"><a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="recommend" title="Recommend this discussion" class="dropdown-toggle ">
+<span class="label label-default"><span class="recommend-icon icon-heart-empty"></span> Recommend</span>
+<span class="label label-recommended"><span class="recommend-icon icon-heart"></span> Recommended</span>
+<span class="label label-count">1</span>
+</a>
+<ul class="dropdown-menu dropdown-menu--coachmark">
+<li>
+<h2 class="coachmark__heading">Discussion Recommended!</h2>
+<p class="coachmark__description">Recommending means this is a discussion worth sharing. It gets shared to your followers' Disqus feeds, and gives the creator kudos!</p>
+<a href="https://disqus.com/home/?utm_source=disqus_embed&amp;utm_content=recommend_btn" class="btn btn-primary coachmark__button" target="_blank">
+ Find More Discussions 
+</a>
+</li>
+</ul>
+</div></li><li id="thread-share-menu" class="nav-tab nav-tab--secondary dropdown share-menu hidden-sm"><a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="dropdown-toggle" data-toggle="dropdown" title="Share">
+<span class="icon-export"></span>
+<span class="label">Share</span>
+</a>
+<ul class="share-menu dropdown-menu">
+<li>
+<div class="share-menu__label">Share this discussion on</div>
+<ul>
+<li class="twitter">
+<a data-action="share:twitter" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#">Twitter</a>
+</li>
+<li class="facebook">
+<a data-action="share:facebook" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#">Facebook</a>
+</li>
+</ul>
+</li>
+</ul>
+</li><li data-role="post-sort" class="nav-tab nav-tab--secondary dropdown sorting pull-right"><a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="dropdown-toggle" data-toggle="dropdown">Sort by Best<span class="caret"></span></a><ul class="dropdown-menu pull-right"><li class="selected"><a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="sort" data-sort="popular">Best<i aria-hidden="true" class="icon-checkmark"></i></a></li><li class=""><a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="sort" data-sort="desc">Newest<i aria-hidden="true" class="icon-checkmark"></i></a></li><li class=""><a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="sort" data-sort="asc">Oldest<i aria-hidden="true" class="icon-checkmark"></i></a></li></ul></li></ul></div><div id="posts"><div id="form" class="textarea-wrapper--top-level"><form class="reply"><div class="postbox">
+<div role="alert"></div>
+<div class="avatar">
+<span class="user">
+<img data-role="user-avatar" src="./noavatar92.7b2fde640943965cc88df0cdee365907.png" alt="Avatar">
+</span>
+</div>
+
+<div class="textarea-wrapper" data-role="textarea" dir="auto"><div><span class="placeholder">Join the discussion…</span><div class="textarea" tabindex="0" role="textbox" aria-multiline="true" contenteditable="PLAINTEXT-ONLY" data-role="editable" aria-label="Join the discussion…" style="overflow: auto; word-wrap: break-word; max-height: 350px;"><p><br></p></div><div style="display: none;"><ul class="user-mention__list">
+<li class="header user-mention__header">
+<h5>in this conversation</h5>
+</li>
+</ul>
+</div></div>
+<div data-role="drag-drop-placeholder" class="media-drag-hover" style="display: none">
+<div class="drag-text">
+⬇ Drag and drop your images here to upload them.
+</div>
+</div>
+<div class="edit-alert" role="postbox-alert"></div>
+<div class="post-actions">
+<ul class="wysiwyg">
+</ul>
+</div>
+</div>
+
+<div data-role="login-form"><div><section class="auth-section logged-out">
+<div class="connect">
+<h6>Log in with</h6>
+<ul data-role="login-menu" class="services login-buttons">
+
+<li class="auth-disqus">
+<button type="button" data-action="auth:disqus" title="Disqus" class="connect__button"><i class="icon-disqus"></i></button>
+</li>
+<li class="auth-facebook">
+<button type="button" data-action="auth:facebook" title="Facebook" class="connect__button"><i class="icon-facebook-circle"></i></button>
+</li>
+<li class="auth-twitter">
+<button type="button" data-action="auth:twitter" title="Twitter" class="connect__button"><i class="icon-twitter-circle"></i></button>
+</li>
+<li class="auth-google">
+<button type="button" data-action="auth:google" title="Google" class="connect__button"><i class="icon-google-plus-circle"></i></button>
+</li>
+</ul>
+</div>
+<div class="guest">
+<h6 class="guest-form-title">
+<span class="register-text"> or sign up with Disqus </span>
+<span class="guest-text"> or pick a name </span>
+</h6>
+
+<div class="help-tooltip__wrapper help-icon">
+<div id="rules" class="tooltip show help-tooltip">
+<h3 class="help-tooltip__heading">Disqus is a discussion network</h3>
+<ul class="help-tooltip__list">
+<li><span>Disqus never moderates or censors. The rules on this community are its own.</span></li>
+<li><span>Your email is safe with us. It's only used for moderation and optional notifications.</span></li>
+<li><span>Don't be a jerk or do anything illegal. Everything is easier that way.</span></li>
+</ul>
+<p class="clearfix"><a href="https://docs.disqus.com/kb/terms-and-policies/" class="btn btn-small help-tooltip__button" target="_blank">Read full terms and conditions</a></p>
+</div>
+</div>
+
+<p class="input-wrapper">
+<input dir="auto" type="text" placeholder="Name" name="display_name" id="view42_display_name" maxlength="30" class="input--text">
+</p>
+
+<div class="guest-details " data-role="guest-details">
+<p class="input-wrapper">
+<input dir="auto" type="email" placeholder="Email" name="email" id="view42_email" class="input--text">
+</p>
+
+<p class="input-wrapper">
+<input dir="auto" type="password" class="register-text input--text" placeholder="Password" name="password" id="view42_password">
+</p>
+
+<div class="acceptance-wrapper register-text">
+By signing up, you agree to the Disqus <a target="_blank" href="https://help.disqus.com/customer/portal/articles/1753105-basic-rules-for-disqus-powered-profiles-and-discussions">Basic Rules</a>, <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466260-terms-of-service">Terms of Service</a>, and <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466259-privacy-policy">Privacy Policy</a>.
+</div>
+<div class="acceptance-wrapper guest-text">
+By posting, you agree to the Disqus <a target="_blank" href="https://help.disqus.com/customer/portal/articles/1753105-basic-rules-for-disqus-powered-profiles-and-discussions">Basic Rules</a>, <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466260-terms-of-service">Terms of Service</a>, and <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466259-privacy-policy">Privacy Policy</a>.
+</div>
+
+<div class="guest-checkbox">
+<label>
+<input type="checkbox" name="author-guest">
+I'd rather post as a guest
+</label>
+</div>
+
+<div class="proceed" data-role="submit-btn-container">
+<button type="submit" class="proceed__button btn submit" aria-label="Post"><span class="icon-proceed"></span><div class="spinner"></div></button>
+<button type="submit" class="proceed__button btn next" aria-label="Next"><span class="icon-proceed"></span><div class="spinner"></div></button>
+</div>
+</div>
+</div>
+</section>
+
+</div></div>
+</div>
+</form></div><button class="alert alert--realtime" data-role="realtime-notification" style="display: none;"></button><div id="no-posts" style="display: none;"></div><ul id="post-list" class="post-list"><li class="post" id="post-3213731085"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_5JlzpJXIfA/" class="user" data-action="profile" data-username="disqus_5JlzpJXIfA">
+<img data-role="user-avatar" data-user="210996833" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_5JlzpJXIfA/" data-action="profile" data-username="disqus_5JlzpJXIfA" data-role="username">gidi</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/#comment-3213731085" data-role="relative-time" class="time-ago" title="Monday, March 20, 2017 11:19 AM">
+a month ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Hi, nice write up!<br>what is you csoa model? How does the fastText it do in compare to other models such as factorization machines?<br>Can it be used for clustering and/or tagging putposes?<br>Thanks!</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer">
+<menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1h5derx" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:3213731085">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li><li class="post" id="post-3181368134"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/vijayakumarramdoss/" class="user" data-action="profile" data-username="vijayakumarramdoss">
+<img data-role="user-avatar" data-user="54715518" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/vijayakumarramdoss/" data-action="profile" data-username="vijayakumarramdoss" data-role="username">Vijay Ram</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/#comment-3181368134" data-role="relative-time" class="time-ago" title="Wednesday, March 1, 2017 11:08 AM">
+2 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>excellent write up</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer">
+<menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1gm3rd2" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:3181368134">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li><li class="post" id="post-3086852274"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/pascalvankooten/" class="user" data-action="profile" data-username="pascalvankooten">
+<img data-role="user-avatar" data-user="178155041" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/pascalvankooten/" data-action="profile" data-username="pascalvankooten" data-role="username">Pascal van Kooten</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/#comment-3086852274" data-role="relative-time" class="time-ago" title="Friday, January 6, 2017 3:55 PM">
+4 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Great write up :) Have you tried it with 100 times more data :)?</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer">
+<menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1f1tygi" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:3086852274">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li><li class="post" id="post-2922543456"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_h1KZDfatcC/" class="user" data-action="profile" data-username="disqus_h1KZDfatcC">
+<img data-role="user-avatar" data-user="224634111" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_h1KZDfatcC/" data-action="profile" data-username="disqus_h1KZDfatcC" data-role="username">Prakash Anand</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/#comment-2922543456" data-role="relative-time" class="time-ago" title="Tuesday, September 27, 2016 11:51 PM">
+7 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Thanks for sharing this great Article.Could you describe the entire flow of your model.Like lets say once you have the training data in the required format, how did you used the fastText library to train the model and evaluated on the test data with little bit code....?</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer">
+<menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1cc08yo" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2922543456">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2922776936"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/stephenenrightward/" class="user" data-action="profile" data-username="stephenenrightward">
+<img data-role="user-avatar" data-user="165375586" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/stephenenrightward/" data-action="profile" data-username="stephenenrightward" data-role="username">Stephen Enright-Ward</a></span>
+
+<span><a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/#comment-2922543456" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Prakash Anand</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/#comment-2922776936" data-role="relative-time" class="time-ago" title="Wednesday, September 28, 2016 5:00 AM">
+7 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Hi Prakash, glad you enjoyed the article :) Once you've cloned and compiled fasttext as per their documentation, training is straightforward. Assuming the compiled fasttext binary is in the same directory as your training file train.csv, (assumed to have the format described in the post), just type, e.g.:</p><p>./fasttext supervised -input train.csv -output model -dim 100 -loss ns -thread 32 -minCount 5 -neg 10 -ws 20 -epoch 100000 -lr 0.05</p><p>The original source code prints out only the word vectors, not the label vectors. I modified the FastText::saveVectors() method in the <a href="http://disq.us/url?url=http%3A%2F%2Ffasttext.cc%3AQLOEtEI_AlA2qU6Riw3J8FvqiAI&amp;cuid=3638675" rel="nofollow noopener">fasttext.cc</a> file, so that it also prints the label vectors to a separate file. Thus, when training is finished, I have two vector files: "model_words.vec" and "model_labels.vec". The latter contains both document and user labels, with prefixes "__label__doc__id__" and "__label__user__id__", respectively. To evaluate the code, I (i) load "model_labels.vec" into an ipython notebook, (ii) separate out the user and doc vecs, (iii) apply the MPR metric explained in the post. Note that to compute this metric as I did, you'll first need to l2-normalise all the user and document vectors. The intuition behind the MPR is explained in this wikipedia article:</p><p><a href="https://disq.us/url?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FPercentile_rank%3AHEM5SOY59_Gsmknb1kw_hfus_Rw&amp;cuid=3638675" rel="nofollow noopener">https://en.wikipedia.org/wi...</a></p><p>This should complement the procedural description of MPR I wrote in the post. Good luck!</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer">
+<menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1cc5948" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2922776936">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2924254904"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_h1KZDfatcC/" class="user" data-action="profile" data-username="disqus_h1KZDfatcC">
+<img data-role="user-avatar" data-user="224634111" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_h1KZDfatcC/" data-action="profile" data-username="disqus_h1KZDfatcC" data-role="username">Prakash Anand</a></span>
+
+<span><a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/#comment-2922776936" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Stephen Enright-Ward</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/#comment-2924254904" data-role="relative-time" class="time-ago" title="Wednesday, September 28, 2016 9:36 PM">
+7 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Thanks Stephen for such prompt reply and in a detailed manner. Let me apply this on my training data if i'll face any problem i'll bother you again..:P..:)</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer">
+<menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1cd0xiw" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2924254904">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li></ul>
+</li></ul><div class="load-more" data-role="more" style="display: none;"><a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" data-action="more-posts" class="btn load-more__button">Load more comments</a></div></div></section><div id="placement-bottom" data-tracking-area="discovery-south"></div><div id="footer" data-tracking-area="footer" class="disqus-footer__wrapper"><ul class="disqus-footer"><li class="disqus-footer__logo"><a href="https://disqus.com/" rel="nofollow" title="Powered by Disqus" class="disqus-footer__link">Powered by Disqus</a></li><li id="thread-subscribe-button" class="email disqus-footer__item"><div class="default"><a href="https://disqus.com/embed/comments/?base=default&amp;f=lateralblog&amp;t_u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t_d=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;t_t=Lateral%20Blog%20-%20A%20fastText-based%20hybrid%20recommender&amp;s_o=default#" rel="nofollow" data-action="subscribe" title="Subscribe and get email updates from this discussion" class="disqus-footer__link"><i aria-hidden="true" class="icon icon-mail"></i><span class="clip">Subscribe</span><i aria-hidden="true" class="icon icon-checkmark"></i></a></div><div class="form"><div class="input-wrapper"><input id="thread-subscribe-email" type="email" placeholder="yourname@email.com" class="disqus-footer__input input--text"></div></div></li><li class="install disqus-footer__item"><a href="https://publishers.disqus.com/engage?utm_source=lateralblog&amp;utm_medium=Disqus-Footer" rel="nofollow" target="_blank" class="disqus-footer__link"><i aria-hidden="true" class="icon icon-disqus"></i><span class="clip hidden-sm">Add Disqus to your site</span><span class="clip visible-sm hidden-xs">Add Disqus</span><span class="clip visible-xs">Add</span></a></li><li class="privacy disqus-footer__item"><a href="https://help.disqus.com/customer/portal/articles/1657951?utm_source=disqus&amp;utm_medium=embed-footer&amp;utm_content=privacy-btn" rel="nofollow" target="_blank" class="disqus-footer__link"><i aria-hidden="true" class="icon icon-lock"></i><span class="clip">Privacy</span></a></li></ul></div></div></body></html>

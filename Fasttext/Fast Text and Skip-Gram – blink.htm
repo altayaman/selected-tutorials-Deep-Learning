@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<!-- saved from url=(0101)http://debajyotidatta.github.io/nlp/deep/learning/word-embeddings/2016/09/28/fast-text-and-skip-gram/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fast Text and Skip-Gram – blink</title>
+    <link rel="dns-prefetch" href="http://maxcdn.bootstrapcdn.com/">
+    <link rel="dns-prefetch" href="http://cdn.mathjax.org/">
+    <link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Understanding word embeddings, how they work and how to use them.">
+    <meta name="robots" content="all">
+    <meta name="author" content="Debajyoti Datta">
+    
+    <meta name="keywords" content="nlp, deep, learning, word-embeddings">
+    <link rel="canonical" href="http://debajyotidatta.github.io//nlp/deep/learning/word-embeddings/2016/09/28/fast-text-and-skip-gram/">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for blink" href="http://debajyotidatta.github.io/feed.xml">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./Fast Text and Skip-Gram – blink_files/pixyll.css" type="text/css">
+
+    <!-- Fonts -->
+    
+    <link href="./Fast Text and Skip-Gram – blink_files/css" rel="stylesheet" type="text/css">
+    <link href="./Fast Text and Skip-Gram – blink_files/css(1)" rel="stylesheet" type="text/css">
+    
+    
+
+    <!-- MathJax -->
+    
+
+    <!-- Verifications -->
+    
+    
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Fast Text and Skip-Gram">
+    <meta property="og:description" content="Relying heavily on the work of others since 1991">
+    <meta property="og:url" content="http://debajyotidatta.github.io//nlp/deep/learning/word-embeddings/2016/09/28/fast-text-and-skip-gram/">
+    <meta property="og:site_name" content="blink">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Fast Text and Skip-Gram">
+    <meta name="twitter:description" content="Understanding word embeddings, how they work and how to use them.">
+    <meta name="twitter:url" content="http://debajyotidatta.github.io//nlp/deep/learning/word-embeddings/2016/09/28/fast-text-and-skip-gram/">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://debajyotidatta.github.io/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://debajyotidatta.github.io/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://debajyotidatta.github.io/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://debajyotidatta.github.io/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="http://debajyotidatta.github.io/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://debajyotidatta.github.io/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://debajyotidatta.github.io/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://debajyotidatta.github.io/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://debajyotidatta.github.io/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="http://debajyotidatta.github.io/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="http://debajyotidatta.github.io/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="http://debajyotidatta.github.io/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="http://debajyotidatta.github.io/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="http://debajyotidatta.github.io/favicon-32x32.png" sizes="32x32">
+
+    
+    <script async="" src="./Fast Text and Skip-Gram – blink_files/analytics.js"></script><script type="text/javascript">
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-87323741-1', 'auto');
+       ga('send', 'pageview');
+    </script>
+    
+</head>
+
+<body class="site">
+  
+	
+
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="http://debajyotidatta.github.io/" class="site-title">blink</a>
+      <nav class="site-nav">
+        
+    
+
+    
+        <a href="http://debajyotidatta.github.io/about/">About blink</a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+        <a href="http://debajyotidatta.github.io/contact/">Say Hello</a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+      </nav>
+      <div class="clearfix"></div>
+      
+    </div>
+  </div>
+</header>
+
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+<div class="post-header mb2">
+  <h1>Fast Text and Skip-Gram</h1>
+  <span class="post-meta">Sep 28, 2016</span><br>
+  
+  <span class="post-meta small">
+  
+    14 minute read
+  
+  </span>
+</div>
+
+<article class="post-content">
+  <p>In the last few years word embeddings have proved to be very effective in various natural language processing tasks like classification. <a href="https://arxiv.org/abs/1408.5882">Kim’s Paper</a>. The focus of the post is to understand word embeddings through code. This leaves scope for easy experimentation by the reader for the specific problems they are dealing with.</p>
+
+<p>There are various fantastic posts on word embeddings and the details behind them. Here is a short list of posts.</p>
+
+<ul>
+  <li><a href="https://arxiv.org/abs/1103.0398">Natural Language Processing (almost) from Scratch</a></li>
+  <li><a href="http://sebastianruder.com/word-embeddings-1/">Sebastian Ruder’s posts on word embeddings</a></li>
+  <li><a href="http://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">The actual Word2Vec paper</a> and Xin Rong and Yoav Goldberg explained various parameters and details of the paper <a href="https://arxiv.org/abs/1411.2738">here</a> and <a href="https://www.cs.bgu.ac.il/~yoavg/publications/negative-sampling.pdf">here</a></li>
+</ul>
+
+<p>In this post, we will implement a very simple version of the <a href="https://arxiv.org/abs/1607.04606">fastText</a> paper on word embeddings. We will build up to this paper using the concepts it uses and eventually the fast text paper. Word Embeddings are a way to represent words as dense vectors instead of just indices or as bag of words. The reasons for doing so are as follows:</p>
+
+<p>When you represent words as indices, the fact that words by themselves have meanings associated with them is not adequately represented.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>the:1, hello:2, cat:3, dog:4, television:5 ..
+</code></pre>
+</div>
+
+<p>Here even though cat and dog are both animals the corresponding indices they are represented by do not have any relationships between them. What would be ideal is if there was some way each of these words had some representation, such that the corresponding vectors or indices were also related.</p>
+
+<p>Bag of words also suffer from similar problems and more details about those problems can be found in the resources mentioned above.</p>
+
+<p>Now that the motivation is clear, the goal of word embeddings or word vectors is to have a representation for each word that also inherently carries some meanings.</p>
+
+<p><img src="./Fast Text and Skip-Gram – blink_files/20140619150536.png" alt="Classic Word2Vec example"></p>
+
+<p>In the above diagram the words are related to each other in the vector space, thus vector addition gives some interesting properties like the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>king - man + woman = queen
+</code></pre>
+</div>
+
+<p>Now the details of how words embeddings are constructed is where things get really interesting. The key idea behind word2vec is the distributional hypothesis, which essentially refers to the fact the words are characterized by the words they hang out with. This essentially refers to the fact that the word “rose” is more likely to be seen around the word “red” and the word “sky” is more likely to be seen around the word “blue”. This part will become clearer through code.</p>
+
+<p>Let’s start by using the Airbnb dataset. It can be found <a href="http://insideairbnb.com/get-the-data.html">here</a>. Also, I did some preprocessing
+but should be fairly easy to just extract the text field by loading into pandas
+data frame and getting the review column.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'AirbnbData/reviews.csv'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>The data is quite interesting and there is a lot of scopes to use it for other
+purposes but we are only interested in the text column so let’s concentrate on
+that. Here is a random example of a review.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">data</span><span class="p">[</span><span class="s">'text'</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>'I enjoy playing and watching sports and listening to music...all types and all sorts!'
+</code></pre>
+</div>
+
+<h2>Skip-Gram approach</h2>
+
+<p>The first concept we will go through is skip-gram. Here we want to learn words based on how they occur in the sentence, specifically the words they hang out with. (The distributional hypothesis part that we discussed above.)
+The fifth sentence in the dataset is “I enjoy playing and watching sports and listening to music…all types and all sorts!”. In order to create a training dataset for exploiting the distributional hypothesis, we will create the training batch which will create the word and context pairs for each of the words. What we want is, for each of the word, the words adjacent to that word to have a higher probability of occurring together and the words away from it, to have a lower probability. (Not quite true, essentially, words that are likely to occur together should have a higher probability than the words that don’t.) Eg: In the sentence “Color of the rose is red”, here we want to maximize p(red|is) and minimize may be p(green|orange) which is a noisy example.</p>
+
+<p>The goal is to have a dataset, where we can distinguish if a word is present in a context and then mark it positive, else mark the word as negative. Keras has some useful libraries that lets you do that very easily.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers.embeddings</span> <span class="kn">import</span> <span class="n">Embedding</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Merge</span><span class="p">,</span> <span class="n">Reshape</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.text</span> <span class="kn">import</span> <span class="n">Tokenizer</span><span class="p">,</span> <span class="n">base_filter</span><span class="p">,</span> <span class="n">text_to_word_sequence</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.sequence</span> <span class="kn">import</span> <span class="n">skipgrams</span><span class="p">,</span> <span class="n">make_sampling_table</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Using TensorFlow backend.
+</code></pre>
+</div>
+
+<p>The libraries we need have been imported above.</p>
+
+<p>Just as a quick note, we will randomly sample words from the dataset and create our training data. There is a problem with this, though. The more common words will get sampled more frequently than the uncommon ones. For instance the word “the” will be sampled really frequently because they occur often. Since we do not want to sample them that frequently, we will use a sampling table. A sampling table essentially is the probability of sampling the word i-th most common word in a dataset (more common words should be sampled less frequently, for balance) [From, keras documentation].</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'AirbnbData/reviews.csv'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="mi">4000</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">nb_words</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span>
+                      <span class="n">filters</span><span class="o">=</span><span class="n">base_filter</span><span class="p">())</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'text'</span><span class="p">])</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">word_index</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span>
+<span class="n">reverse_word_index</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">word_index</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Convolution1D</span><span class="p">,</span> <span class="n">MaxPooling1D</span>
+<span class="kn">from</span> <span class="nn">keras.utils.visualize_util</span> <span class="kn">import</span> <span class="n">model_to_dot</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+</code></pre>
+</div>
+
+<p>To go through the details of the model, we create target and context pairs first. More details on how to create these later. Then for each of the words, we represent the word in a new vector space of dimension 100. The layers “target” and “context” represents the two words and if the target word and the context word appear together in a context then the label is 1 otherwise a zero. This is how this has been framed together as a binary classification problem. So in our example,</p>
+
+<p>‘I enjoy playing and watching sports and listening to music…all types and all sorts!’</p>
+
+<p>The [target, context] pairs will be for instance,</p>
+
+<p>[enjoy, I], [enjoy,playing] with labels 1 (since these words occur next to each other) and some noisy examples from the vocabulary [enjoy, green] with labels 0</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">embedding_dim</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">target</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">input_length</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">context</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">input_length</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c"># merge the pivot and context models</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Merge</span><span class="p">([</span><span class="n">target_word</span><span class="p">,</span> <span class="n">context_word</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s">'dot'</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="c"># model.add(Flatten())</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s">'sigmoid'</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s">'adam'</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s">'binary_crossentropy'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">Image</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s">'dot'</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">'png'</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p><img src="./Fast Text and Skip-Gram – blink_files/output_17_0.png" alt="png"></p>
+
+<p>Just to go through the details of every step, when we did the dot product along the second axis in the Merge layer, we are essentially trying to find the similarity between the two vectors, the context word, and the target word. The reason for doing it this way is because now you can think of contexts in different ways. A context may not be just the words it occurs with, but the characters it contains. The char n-grams can be context. Yes, this is where the fasttext word embeddings come in. More on that later in this post.</p>
+
+<p>But let’s dive into contexts a bit more and how specific problems can specify contexts differently. Now may be in your task you can define contexts with not just words and characters, but with the shape of the word for instance. Do similarly shaped words tend to have similar meaning? May be “dog” and “cat” both have the shape “char-char-char”. Or are they always nouns? pronouns? verbs? But you get the idea.</p>
+
+<p>This is how we get the word vectors in skip-gram.</p>
+
+<p>We will come back to skipgram again when we discuss the fasttext embeddings. But there is another word embedding approach and that is known as CBOW or continuous bag of words.</p>
+
+<p>Now in CBOW the opposite happens, from a given word we try to predict the context words.</p>
+
+<h2>Subword Information</h2>
+
+<p>The skipgram approach is effective and useful because it emphasizes on the specific word and the words it generally occurs with. This intuitively makes sense, we expect to see words like “Octoberfest, beer, Germany” to occur together and words like “France, Germany England” to occur together.</p>
+
+<p>But each word also contains information that we want to capture. Like about the relationships between characters and within characters and so on. This is where character-based n-grams come in and this is what “subword” information that the fasttext paper refers to.</p>
+
+<p>So the way fasttext works is just with a new scoring function compared to the skipgram model. The new scoring function is described as follows:</p>
+
+<p>For skipgram you could see, we took a dot product of the two word embedding vectors and that was the score. In this case, it takes a dot product of not just the words but all it’s corresponding character n-grams from 3 to 6. So the word vector for the word will be the collection of the n-grams along with the word.</p>
+
+<p>“hello” = {hel, ell,llo,hell,ello, hello}</p>
+
+<p>“assumption” = {ass, ssu, sum, ump, mpt,pti, tio, ion,….., mption, assumption}</p>
+
+<p>Each word “hello” and “assumption”’s vector representation would be the sum of all the ngrams including the word.</p>
+
+<p>And that is the score function.</p>
+
+<p>Now that we have the score function, let’s actually go ahead and implement the code for the same.</p>
+
+<p>The libraries we will use are as follows:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Embedding</span><span class="p">,</span> <span class="n">Merge</span><span class="p">,</span> <span class="n">Reshape</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">merge</span><span class="p">,</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">keras.layers.core</span> <span class="kn">import</span> <span class="n">Lambda</span>
+<span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">np_utils</span>
+<span class="kn">from</span> <span class="nn">keras.utils.data_utils</span> <span class="kn">import</span> <span class="n">get_file</span>
+<span class="kn">from</span> <span class="nn">keras.utils.visualize_util</span> <span class="kn">import</span> <span class="n">model_to_dot</span><span class="p">,</span> <span class="n">plot</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.text</span> <span class="kn">import</span> <span class="n">Tokenizer</span><span class="p">,</span> <span class="n">base_filter</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.sequence</span> <span class="kn">import</span> <span class="n">skipgrams</span><span class="p">,</span> <span class="n">pad_sequences</span>
+<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+
+<span class="kn">from</span> <span class="nn">gensim.models.doc2vec</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Using TensorFlow backend.
+</code></pre>
+</div>
+
+<p>The Airbnb reviews dataset can be downloaded from the Airbnb data website <a href="http://insideairbnb.com/get-the-data.html">here</a>. The final results should be similar even if you do not use the specific review dataset.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">sentence</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">data2</span><span class="p">[</span><span class="s">'text'</span><span class="p">]</span> <span class="k">if</span> <span class="n">sentence</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">base_filter</span><span class="p">()</span><span class="o">+</span><span class="s">"'"</span><span class="p">)</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>This is the first important part. We need the corresponding character n-grams for each of the word The char_ngram_generator generates the n-grams for the word. The variables n1 and n2 refer to how many characters of n-grams should we use. The paper refers to adding a special character for the beginning and the end of the word so we have n-grams from length 4 to 7. Also for each of the words, the list also contains the actual word other than the corresponding n-grams.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c">#This creates the character n-grams like it is described in fasttext</span>
+<span class="k">def</span> <span class="nf">char_ngram_generator</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">n1</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n2</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c">#     There is a sentence in the paper where they mention they add a</span>
+<span class="c">#     special character for the beginning and end of the word to</span>
+<span class="c">#     distinguish prefixes and suffixes. This is what I understood.</span>
+<span class="c">#     Feel free to send a pull request if this means something else</span>
+    <span class="n">text2</span> <span class="o">=</span> <span class="s">'*'</span><span class="o">+</span><span class="n">text</span><span class="o">+</span><span class="s">'*'</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">):</span>
+        <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">text2</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text2</span><span class="p">)</span><span class="o">-</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">ngram</span> <span class="k">for</span> <span class="n">ngrams</span> <span class="ow">in</span> <span class="n">z</span> <span class="k">for</span> <span class="n">ngram</span> <span class="ow">in</span> <span class="n">ngrams</span><span class="p">]</span>
+    <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">z</span>
+<span class="n">ngrams2Idx</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">ngrams_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">vocab_ngrams</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vocab</span><span class="p">:</span>
+    <span class="n">ngrams_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char_ngram_generator</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">vocab_ngrams</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">char_ngram_generator</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">ngrams_vocab</span> <span class="o">=</span> <span class="p">[</span><span class="n">ngram</span> <span class="k">for</span> <span class="n">ngrams</span> <span class="ow">in</span> <span class="n">ngrams_list</span> <span class="k">for</span> <span class="n">ngram</span> <span class="ow">in</span> <span class="n">ngrams</span><span class="p">]</span>
+<span class="n">ngrams2Idx</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">c</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">6568</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ngrams_vocab</span><span class="p">))</span>
+<span class="n">ngrams2Idx</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">)</span>
+<span class="n">words_and_ngrams_vocab</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ngrams2Idx</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">words_and_ngrams_vocab</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>50993
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">char_ngram_generator</span><span class="p">(</span><span class="s">"hello"</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>['*hel',
+ 'hell',
+ 'ello',
+ 'llo*',
+ '*hell',
+ 'hello',
+ 'ello*',
+ '*hello',
+ 'hello*',
+ 'hello']
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">new_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">vocab_ngrams</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">new_dict</span><span class="p">[</span><span class="n">ngrams2Idx</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ngrams2Idx</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">v</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<p>Even though we are not using our own layer in Keras, Keras provides an extremely easy way to extend and write one’s own layers. Here is an example of how one can add all the rows of a matrix where each of the rows represents each char-ngram to get the overall vector for the entire word. This is the key idea behind the subword information of each word. Each word is essentially the sum of all it’s corresponding vectors of it’s n-grams.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.engine.topology</span> <span class="kn">import</span> <span class="n">Layer</span>
+<span class="k">class</span> <span class="nc">AddRows</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">get_output_shape_for</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">input_shape</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="c"># only valid for 3D tensors</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">K</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Here is the network. Each word can have the only certain number of n-grams. Here we are limiting that to 10. Each of these n-grams along with the word is then trained and we get a corresponding vector for each of the word and the ngrams in the word. The n-grams are a superset of the vocabulary. Also because we first created a dictionary of words and then a dictionary of the char n-grams, the word “as” and the bigram “as” in the word “paste” are assigned to different vectors. Finally, we add the corresponding vectors of n-grams in each word to get the final representation of the word from the corresponding char n-grams and do a dot product of these two vectors to find the similarity of these two words. Notice that the difference with normal skip-gram in word2vec is just that this time each word also has the information of the corresponding character n-grams. This is the subword information it refers to.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">maxlen</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">dim_embeddings</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">maxlen</span><span class="p">,),</span> <span class="n">name</span> <span class="o">=</span> <span class="s">'inputWord'</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">)</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">maxlen</span><span class="p">,),</span> <span class="n">name</span> <span class="o">=</span> <span class="s">'contextWord'</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">)</span>
+
+<span class="n">embedded_sequences_input</span> <span class="o">=</span> <span class="n">Embedding</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span>
+                                     <span class="n">dim_embeddings</span><span class="p">,</span>
+                                     <span class="n">input_length</span><span class="o">=</span><span class="n">maxlen</span><span class="p">,</span>
+                                    <span class="n">name</span><span class="o">=</span><span class="s">'input_embeddings'</span><span class="p">,</span>
+                                    <span class="n">trainable</span><span class="o">=</span><span class="bp">True</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">embedded_sequences_context</span> <span class="o">=</span> <span class="n">Embedding</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span>
+                                       <span class="n">dim_embeddings</span><span class="p">,</span>
+                                       <span class="n">input_length</span><span class="o">=</span><span class="n">maxlen</span><span class="p">,</span>
+                                       <span class="n">trainable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                       <span class="n">name</span><span class="o">=</span><span class="s">'context_embeddings'</span><span class="p">)(</span><span class="n">context</span><span class="p">)</span>
+
+<span class="n">embedded_sequences_context1</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">K</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">output_shape</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]))(</span><span class="n">embedded_sequences_context</span><span class="p">)</span>
+<span class="n">embedded_sequences_input1</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">K</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">output_shape</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]))(</span><span class="n">embedded_sequences_input</span><span class="p">)</span>
+
+<span class="c"># embedded_sequences_input1 = Reshape((1,), input_shape=(1,128))(embedded_sequences_input1)</span>
+<span class="c"># embedded_sequences_context1 = Reshape((1,), input_shape=(1,128))(embedded_sequences_context1)</span>
+
+<span class="n">final</span> <span class="o">=</span> <span class="n">merge</span><span class="p">([</span><span class="n">embedded_sequences_input1</span><span class="p">,</span> <span class="n">embedded_sequences_context1</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s">'dot'</span><span class="p">,</span> <span class="n">dot_axes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c"># final = Reshape((1,), input_shape=(1,1))(final)</span>
+<span class="n">final</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">)(</span><span class="n">final</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">([</span><span class="n">inputs</span><span class="p">,</span> <span class="n">context</span><span class="p">],</span> <span class="n">final</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">"binary_crossentropy"</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s">"rmsprop"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">SVG</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s">'dot'</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">'svg'</span><span class="p">)))</span>
+</code></pre>
+</div>
+
+<p><img src="./Fast Text and Skip-Gram – blink_files/output_11_0.svg" alt="svg"></p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">words_and_ngrams_vocab</span>
+</code></pre>
+</div>
+
+<p>Finally, we train the network with the various aspects we discussed.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">sentence</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">data1</span><span class="p">[</span><span class="s">'text'</span><span class="p">]</span> <span class="k">if</span> <span class="n">sentence</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">base_filter</span><span class="p">()</span><span class="o">+</span><span class="s">"'"</span><span class="p">)</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">maxlen</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s">'text'</span><span class="p">]):</span>
+<span class="c">#         print doc</span>
+        <span class="n">data</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">skipgrams</span><span class="p">(</span><span class="n">sequence</span><span class="o">=</span><span class="n">doc</span><span class="p">,</span> <span class="n">vocabulary_size</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">negative_samples</span><span class="o">=</span><span class="mf">5.</span><span class="p">)</span>
+        <span class="n">ngram_representation</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">ngram_contexts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">ngram_targets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">ngram_context_pairs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">word1</span> <span class="o">=</span> <span class="n">new_dict</span><span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">word2</span> <span class="o">=</span> <span class="n">new_dict</span><span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="n">ngram_contexts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span>
+            <span class="n">ngram_targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word2</span><span class="p">)</span>
+            <span class="n">ngram_context_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span>
+            <span class="n">ngram_context_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word2</span><span class="p">)</span>
+            <span class="n">ngram_representation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ngram_context_pairs</span><span class="p">)</span>
+
+        <span class="n">ngram_contexts</span> <span class="o">=</span> <span class="n">pad_sequences</span><span class="p">(</span><span class="n">ngram_contexts</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">)</span>
+        <span class="n">ngram_targets</span> <span class="o">=</span> <span class="n">pad_sequences</span><span class="p">(</span><span class="n">ngram_targets</span><span class="p">,</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">ngram_contexts</span><span class="p">,</span><span class="n">ngram_targets</span><span class="p">]</span>
+<span class="c">#         print len(ngram_contexts[0])</span>
+        <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="c">#         print ngram_contexts.shape, ngram_targets.shape, Y.shape</span>
+        <span class="k">if</span> <span class="n">ngram_contexts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+<span class="c">#             loss += model.train_on_batch(X,Y)</span>
+            <span class="k">try</span><span class="p">:</span>
+<span class="c">#                 print "tried"</span>
+                <span class="n">loss</span> <span class="o">+=</span> <span class="n">model</span><span class="o">.</span><span class="n">train_on_batch</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+            <span class="k">except</span> <span class="nb">IndexError</span><span class="p">:</span>
+                <span class="k">continue</span>
+    <span class="k">print</span> <span class="n">loss</span>
+
+</code></pre>
+</div>
+
+<p>We save the weights just so we can use it with gensim, for simple experimentation.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'vectorsFastText.txt'</span> <span class="p">,</span><span class="s">'w'</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">" "</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">dim_embedddings</span><span class="p">)]))</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+<span class="n">vectors</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">vectors</span><span class="p">[</span><span class="n">i</span><span class="p">,:]))))</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>Now that we have the words, let’s see how the word vectors did! This is the Airbnb reviews dataset, so let’s do some exploration on the word vectors we just created.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">gensim.models.doc2vec</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">codecs</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">w2v</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="o">.</span><span class="n">load_word2vec_format</span><span class="p">(</span><span class="s">'./vectorsFastText2.txt'</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">w2v</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">positive</span><span class="o">=</span><span class="p">[</span><span class="s">'nice'</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[(u'very', 0.4748566746711731),
+ (u'kind', 0.45726102590560913),
+ (u'easy', 0.433699369430542),
+ (u'person', 0.42663151025772095),
+ (u'responsible', 0.41765880584716797),
+ (u'friend', 0.41492557525634766),
+ (u'likes', 0.4143773913383484),
+ (u'accommodating', 0.40841665863990784),
+ (u'polite', 0.4058171212673187),
+ (u'earth', 0.4037408232688904)]
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">w2v</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">positive</span><span class="o">=</span><span class="p">[</span><span class="s">'house'</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[(u'apartment', 0.562881588935852),
+ (u'private', 0.525530219078064),
+ (u'hope', 0.49403220415115356),
+ (u'beautiful', 0.48529505729675293),
+ (u'studio', 0.46020960807800293),
+ (u'room', 0.46016234159469604),
+ (u'this', 0.4449312090873718),
+ (u'location', 0.4436565637588501),
+ (u'were', 0.44244450330734253),
+ (u'our', 0.43545401096343994)]
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">w2v</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">positive</span><span class="o">=</span><span class="p">[</span><span class="s">'clean'</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[(u'organized', 0.6887848377227783),
+ (u'neat', 0.6856114864349365),
+ (u'responsible', 0.6010746955871582),
+ (u'polite', 0.5982929468154907),
+ (u'tidy', 0.5712572336196899),
+ (u'keep', 0.5637409687042236),
+ (u'respectful', 0.5535181760787964),
+ (u'courteous', 0.5482512712478638),
+ (u'warm', 0.5135964155197144),
+ (u'easy', 0.5043907165527344)]
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+</code></pre>
+</div>
+
+<!--
+All links are easy to [locate and discern](#), yet don't detract from the [harmony
+of a paragraph](#). The _same_ goes for italics and __bold__ elements. Even the the strikeout
+works if <del>for some reason you need to update your post</del>. For consistency's sake,
+<ins>The same goes for insertions</ins>, of course.
+
+### Code, with syntax highlighting
+
+Here's an example of some ruby code with line anchors.
+
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># The most awesome of classes</span>
+<span class="k">class</span> <span class="nc">Awesome</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="kp">include</span> <span class="no">EvenMoreAwesome</span>
+
+  <span class="n">validates_presence_of</span> <span class="ss">:something</span>
+  <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">email_format: </span><span class="kp">true</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="nb">name</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">)</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">email</span> <span class="o">=</span> <span class="n">email</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">name</span> <span class="o">=</span> <span class="nb">name</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">favorite_number</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="nb">puts</span> <span class="s1">'created awesomeness'</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">email_format</span>
+    <span class="n">email</span> <span class="o">=~</span> <span class="sr">/\S+@\S+\.\S+/</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+
+Here's some CSS:
+
+
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.foobar</span> <span class="p">{</span>
+  <span class="c">/* Named colors rule */</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">tomato</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+
+Here's some JavaScript:
+
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">isPresent</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'is-present'</span><span class="p">)</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">doStuff</span><span class="p">(</span><span class="nx">things</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isPresent</span><span class="p">(</span><span class="nx">things</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">doOtherStuff</span><span class="p">(</span><span class="nx">things</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+
+Here's some HTML:
+
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"m0 p0 bg-blue white"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"h1"</span><span class="nt">&gt;</span>Hello, world!<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+
+# Headings!
+
+They're responsive, and well-proportioned (in `padding`, `line-height`, `margin`, and `font-size`).
+They also heavily rely on the awesome utility, [BASSCSS](http://www.basscss.com/).
+
+##### They draw the perfect amount of attention
+
+This allows your content to have the proper informational and contextual hierarchy. Yay.
+
+### There are lists, too
+
+  * Apples
+  * Oranges
+  * Potatoes
+  * Milk
+
+  1. Mow the lawn
+  2. Feed the dog
+  3. Dance
+
+### Images look great, too
+
+![desk](https://cloud.githubusercontent.com/assets/1424573/3378137/abac6d7c-fbe6-11e3-8e09-55745b6a8176.png)
+
+_![desk](https://cloud.githubusercontent.com/assets/1424573/3378137/abac6d7c-fbe6-11e3-8e09-55745b6a8176.png)_
+
+
+### There are also pretty colors
+
+Also the result of [BASSCSS](http://www.basscss.com/), you can <span class="bg-dark-gray white">highlight</span> certain components
+of a <span class="red">post</span> <span class="mid-gray">with</span> <span class="green">CSS</span> <span class="orange">classes</span>.
+
+I don't recommend using blue, though. It looks like a <span class="blue">link</span>.
+
+### Footnotes!
+
+Markdown footnotes are supported, and they look great! Simply put e.g. `[^1]` where you want the footnote to appear,[^1] and then add
+the reference at the end of your markdown.
+
+### Stylish blockquotes included
+
+You can use the markdown quote syntax, `>` for simple quotes.
+
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis porta mauris.
+
+However, you need to inject html if you'd like a citation footer. I will be working on a way to
+hopefully sidestep this inconvenience.
+
+<blockquote>
+  <p>
+    Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
+  </p>
+  <footer><cite title="Antoine de Saint-Exupéry">Antoine de Saint-Exupéry</cite></footer>
+</blockquote>
+
+### There's more being added all the time
+
+Checkout the [Github repository](https://github.com/johnotander/pixyll) to request,
+or add, features.
+
+Happy writing.
+
+---
+
+[^1]: Important information that may distract from the main text can go in footnotes. -->
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="center">
+  <div class="measure">
+    <small>
+      Theme crafted with &lt;3 by <a href="http://johnotander.com/">John Otander</a> (<a href="https://twitter.com/4lpine">@4lpine</a>).<br>
+      &lt;/&gt; available on <a href="https://github.com/johnotander/pixyll">Github</a>.
+    </small>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,84 @@
+var sas = sas || {};
+sas.utils = sas.utils || {};
+if (!sas.utils.cdns) {
+  sas.utils.cdns = {
+    "http:" : "http://ak-ns.sascdn.com",
+    //"http:" : "http://demo.smartadserver.com",
+    "https:" : "https://ec-ns.sascdn.com"
+  }
+}
+
+var sas=sas||{};sas.utils=sas.utils||{};sas.events=sas.events||{};sas.rev=sas.rev||20110214;(function(){if(!sas.utils.cdns){sas.utils.cdns={"http:":"http://ak-ns.sascdn.com","https:":"https://ec-ns.sascdn.com"}}else{if(!sas.utils.cdns["http:"]||sas.utils.cdns["http:"].length==0){sas.utils.cdns["http:"]="http://ak-ns.sascdn.com"}if(!sas.utils.cdns["https:"]||sas.utils.cdns["https:"].length==0){sas.utils.cdns["https:"]="https://ec-ns.sascdn.com"}}var e=function(){};sas.utils.getIEVersion=function(){var g=navigator.userAgent.match(/(?:MSIE |Trident\/.*; rv:)(\d+)/);return g?parseInt(g[1]):undefined};sas.events.addEvent=function(h,g,i){if(!h||!g||!i){return}if(h.attachEvent){h.attachEvent("on"+g,i)}else{if(h.addEventListener){h.addEventListener(g,i,false)}}return{removeEvent:function(){if(h.detachEvent){h.detachEvent("on"+g,i)}else{if(h.removeEventListener){h.removeEventListener(g,i,false)}}}}};sas.events.addLoadEvent=function(h,l){if(!h||!l){return}var g="load";var i=function(){return true};var k=sas.utils.getIEVersion();if(k<11||h==document){g="readystatechange";i=function(){if(!h.readyState||h.readyState=="complete"||h.readyState=="loaded"||h.readyState==4){return true}}}var j=sas.events.addEvent(h,g,function(){if(i()){j.removeEvent();l.apply(this,arguments)}})};sas.utils.Latch=function(n){n=n||[];var m=[];var l={};var k=n;var h=false;for(var j=0;j<k.length;j++){l[n[j]]={}}var o=function(){if(h){return}for(var p in l){if(!l[p].status){return}}h=true;var r=g();for(var q=0;q<m.length;q++){m[q].apply(this,r)}};var g=function(){var q=[];for(var p=0;p<k.length;p++){q.push(l[k[p]].result)}return q};this.notify=function(p,i){if(!l[p]){return}else{l[p].status=true;l[p].result=i;o()}};this.addListener=function(i){if(i!=null){h?i():m.push(i)}};o()};sas.utils._libs=sas.utils._libs||{};var b=function(h,g){if(h.charAt(h.length-1)=="/"){h=h.slice(0,-1)}if(g.charAt(0)=="/"){g=g.slice(1)}return h+"/"+g};var c=function(h){if(typeof h==="string"){h=[h]}var k=(document.location.protocol=="https:");var g=k?sas.utils.cdns["https:"]:(sas.utils.cdns[document.location.protocol]||sas.utils.cdns["http:"]);for(var j=0;j<h.length;j++){h[j]=b(g,h[j])}return h};sas.utils.loadLinkCdn=function(g){g=c(g);for(var h=0;h<g.length;h++){a(g[h],true)}};sas.utils.loadScriptCdn=function(g,h){g=c(g);sas.utils.loadScript(g,h)};var f=Math.floor(Math.random()*1000000);var d=1;sas.utils._callbacks=sas.utils._callbacks||{};var a=function(k,h,g,j){var l=(h?"link":"script")+"-"+f+"-"+d++;var i=document.createElement(h?"link":"script");i.id=l;i.setAttribute("type",h?"text/css":"text/javascript");i.setAttribute(h?"href":"src",k);if(h){i.setAttribute("rel","stylesheet")}if(!h&&g){i.setAttribute("async","true")}sas.utils._libs[k]={loaded:false,callbacks:[]};if(j!=null){sas.utils._libs[k].callbacks.push(j)}sas.utils._callbacks[l]=(function(m){return function(){sas.utils._libs[m].loaded=true;for(var n=0;n<sas.utils._libs[m].callbacks.length;n++){sas.utils._libs[m].callbacks[n]()}}})(k);if(h||g){document.getElementsByTagName("head")[0].appendChild(i);sas.events.addLoadEvent(document.getElementById(l),sas.utils._callbacks[l])}else{document.write(i.outerHTML);document.write("<script type='text/javascript'>(function() { sas.utils._callbacks['"+l+"'](); })();<\/script>")}};sas.utils.loadScript=function(h,j){j=j||{};j.async=j.async==null?true:j.async;var l=j.onLoad||e;if(typeof h==="string"){h=[h]}var m=new sas.utils.Latch(h);m.addListener(l);for(var k=0;k<h.length;k++){var n=h[k];var g=(function(i){return function(){m.notify(i)}})(n);if(!sas.utils._libs[n]){a(n,false,j.async,g)}else{if(sas.utils._libs[n].loaded){m.notify(n)}else{sas.utils._libs[n].callbacks.push(g)}}}}})();
+
+(function() {
+
+var tag = document.getElementById('sas_30292');
+if (!tag) {
+  document.write("<div id='sas_30292'></div>");
+} else {
+  /* Pre-create something in the DOM to have the sas_loadHandler to work */
+  var d = document.createElement("div");
+  d.style.display = "none";
+  tag.appendChild(d);
+}
+
+var sas = window.sas;
+// used to detect ajax call for pubj
+var isAsync = window.sas_ajax || false;
+
+// Config 
+var config = {
+        id: 6592351,
+        formatId: 30292,
+        tagId: "sas_30292",
+        instanceIndex: 1,
+        customScript: '',
+        forcedIframeWidth: 0,
+        forcedIframeHeight: 0,
+        oba: 0,
+        creatives:
+        [{
+          id: '18609559',
+          type: 0,
+          url: '',
+          countUrl: '',
+          clickUrl: 'http://r.turn.com/r/tpclick/urlid/1zmfkKVxqsU4YM42jXTZvUOCIK0kiuZMjcdnqubUKgw5-YVeL00I3s--rxUKyRgo2RcQ9CnQ8oQR6wyu4dFDl6QVUaa81rE5Va5TPoJV_1Ntn4-ZNPeiesLCUWGi5Q0pMIlxWeHujtiWU4hIRmxZhGDbLcisF5vf52pYjnxx7sgLDq60qaLSM9lSDH_P7r3m2LfHLNhuhT3pi82fEsIKY-zMcLaIqUa9FRu7ru1ABYiOgU6qE3aVEvk_6GakVUkp2vDaVqWyuU8o869OEz-2YvhnDK9_x9zqNi8CWGrLN8xmWPPSz3X20qj_l_JBCDGSAXHps7FPk5D8MuZA9uzw6GafJ9IVpCPn8yiSjZyDm0UVEMCSsnpo0OKssT28fUp6PkzCwu6sZ9LqDhKO3CkdIU513Bhf6ySBGnkXYB1kjpDjOJvO2AHmwUPBgH4FBwduusVohVPlPQmLwvNqNV9DxWIctk2q_YrbWRyEdXi_y4eoirG_z-U_wTlp6Y1q9_Nz2ZdUNWV_nCUT6P-OputayxgIvgb8bsZnExoDxqxHrV0GIImEZhhQZuNLbgnap6xgF3bDch6RNPMupgXXQoFrBkgMJIP2rWSQoz1-79fFmcMO2gZqzzzfv3pD39tWJVoI3c_y3cwK0sSBnMpn-pnJel_oItWRae53X-BtUPr2M5g4rXAtAooopljb9Bqe9o6Td4hjhBY7UDwj208hjQYsXRMGoNYuI2BoPtXZKy4fPrcFYPy33xkbPTw61Z8_KjSc1/3c/https://adclick.g.doubleclick.net/aclk?sa=L&ai=CC4XnzJL9WJ2FHIibmATEqI24CdDM75RG6YaF0PgBwI23ARABIABgyeb-hsijoBmCARdjYS1wdWItMjk1MDA4MjMwNDk2OTk4NMgBCagDAaoEkwFP0EBZT5fcu8mtPPw0xTQhHkeQR1yIrbIvnzAHwL4UVznWa06P6tEVeegqTnxcQNN7qtA5A8YWLK8wKkWaTJGRDuQslxLPc3C6b8jx7WIdUWCjxdZmVO2_9NcWv5UVWItzx-tpLRiwKATLPebtjv85xkmEeg6ya5NVc2ptQJ-5RGk7_YPYdZmDI0fgiSBkp4nC5IiABoHhnbr69rDnPqAGIagHpr4b2AcA0ggFCIBhEAE&num=1&sig=AOD64_0-AD3yk8orq4sbjyWTnHX25hf4Eg&client=ca-pub-2950082304969984&adurl=/url/https://www6.smartadserver.com/click?imgid=18609559&insid=6592351&pgid=779007&uid=404451181970800651&tgt=%24dt%3d1t%3b%24dma%3d807%3bsiteid%3d6%3bsitename%3dhttps%3a%2f%2flibraries.io%2fgithub%2ffchollet%2fkeras-resources%3b%3b%24hc&systgt=%24qc%3d4799583%3b%24ql%3dmedium%3b%24qpc%3d95050%3b%24qpp%3d408%3b%24qt%3d152_2199_35499t%3b%24dma%3d807%3b%24b%3d16570%3b%24o%3d12100%3b%24sw%3d1280%3b%24sh%3d768&pgDomain=https%3a%2f%2fgoogleads.g.doubleclick.net%2fpagead%2fads%3fclient%3dca-pub-2950082304969984%26format%3d750x90%26output%3dhtml%26h%3d90%26slotname%3d1929607435%26adk%3d453791610%26adf%3d1477197835%26w%3d750%26afmt%3dauto%26lmt%3d1493013196%26loeid%3d368226011%252C389613000%26rafmt%3d1%26flash%3d25.0.0%26fwr%3d0%26url%3dhttps%253A%252F%252Flibraries.io%252Fgithub%252Ffchollet%252Fkeras-resources%26resp_fmts%3d3%26wgl%3d1%26dt%3d1493013195955%26bpp%3d57%26bdt%3d4527%26fdt%3d62%26idt%3d227%26shv%3dr20170417%26cbv%3dr20170110%26saldr%3daa%26correlator%3d374774108740%26frm%3d20%26ga_vid%3d108224247.1489909382%26ga_sid%3d1493013196%26ga_hid%3d637068634%26ga_fc%3d0%26pv%3d2%26iag%3d3%26icsg%3d2%26nhd%3d1%26dssz%3d2%26mdo%3d0%26mso%3d0%26u_tz%3d-420%26u_his%3d1%26u_java%3d0%26u_h%3d900%26u_w%3d1440%26u_ah%3d820%26u_aw%3d1440%26u_cd%3d24%26u_nplug%3d5%26u_nmime%3d7%26adx%3d150%26ady%3d312%26biw%3d1440%26bih%3d679%26eid%3d368226001%26oid%3d3%26rx%3d0%26eae%3d0%26fc%3d16%26brdim%3d0%252C0%252C0%252C0%252C1440%252C23%252C0%252C0%252C1440%252C679%26vis%3d2%26rsz%3d%257C%257CeEr%257C%26abl%3dCS%26ppjl%3df%26pfx%3d0%26fu%3d144%26bc%3d1%26ifi%3d1%26xpc%3dgEbfRo4pXk%26p%3dhttps%253A%2f%2flibraries.io%26dtd%3d275&go=https%3a%2f%2fwww.youtube.com%2fchannel%2fUCdTz-Jbx6ZZoFxXHkQxg0ew',
+          clickTarget: '_blank',
+          clickUrlArray: ["http://r.turn.com/r/tpclick/urlid/1zmfkKVxqsU4YM42jXTZvUOCIK0kiuZMjcdnqubUKgw5-YVeL00I3s--rxUKyRgo2RcQ9CnQ8oQR6wyu4dFDl6QVUaa81rE5Va5TPoJV_1Ntn4-ZNPeiesLCUWGi5Q0pMIlxWeHujtiWU4hIRmxZhGDbLcisF5vf52pYjnxx7sgLDq60qaLSM9lSDH_P7r3m2LfHLNhuhT3pi82fEsIKY-zMcLaIqUa9FRu7ru1ABYiOgU6qE3aVEvk_6GakVUkp2vDaVqWyuU8o869OEz-2YvhnDK9_x9zqNi8CWGrLN8xmWPPSz3X20qj_l_JBCDGSAXHps7FPk5D8MuZA9uzw6GafJ9IVpCPn8yiSjZyDm0UVEMCSsnpo0OKssT28fUp6PkzCwu6sZ9LqDhKO3CkdIU513Bhf6ySBGnkXYB1kjpDjOJvO2AHmwUPBgH4FBwduusVohVPlPQmLwvNqNV9DxWIctk2q_YrbWRyEdXi_y4eoirG_z-U_wTlp6Y1q9_Nz2ZdUNWV_nCUT6P-OputayxgIvgb8bsZnExoDxqxHrV0GIImEZhhQZuNLbgnap6xgF3bDch6RNPMupgXXQoFrBkgMJIP2rWSQoz1-79fFmcMO2gZqzzzfv3pD39tWJVoI3c_y3cwK0sSBnMpn-pnJel_oItWRae53X-BtUPr2M5g4rXAtAooopljb9Bqe9o6Td4hjhBY7UDwj208hjQYsXRMGoNYuI2BoPtXZKy4fPrcFYPy33xkbPTw61Z8_KjSc1/3c/https://adclick.g.doubleclick.net/aclk?sa=L&ai=CC4XnzJL9WJ2FHIibmATEqI24CdDM75RG6YaF0PgBwI23ARABIABgyeb-hsijoBmCARdjYS1wdWItMjk1MDA4MjMwNDk2OTk4NMgBCagDAaoEkwFP0EBZT5fcu8mtPPw0xTQhHkeQR1yIrbIvnzAHwL4UVznWa06P6tEVeegqTnxcQNN7qtA5A8YWLK8wKkWaTJGRDuQslxLPc3C6b8jx7WIdUWCjxdZmVO2_9NcWv5UVWItzx-tpLRiwKATLPebtjv85xkmEeg6ya5NVc2ptQJ-5RGk7_YPYdZmDI0fgiSBkp4nC5IiABoHhnbr69rDnPqAGIagHpr4b2AcA0ggFCIBhEAE&num=1&sig=AOD64_0-AD3yk8orq4sbjyWTnHX25hf4Eg&client=ca-pub-2950082304969984&adurl=/url/https://www6.smartadserver.com/click?imgid=18609559&insid=6592351&pgid=779007&uid=404451181970800651&tgt=%24dt%3d1t%3b%24dma%3d807%3bsiteid%3d6%3bsitename%3dhttps%3a%2f%2flibraries.io%2fgithub%2ffchollet%2fkeras-resources%3b%3b%24hc&systgt=%24qc%3d4799583%3b%24ql%3dmedium%3b%24qpc%3d95050%3b%24qpp%3d408%3b%24qt%3d152_2199_35499t%3b%24dma%3d807%3b%24b%3d16570%3b%24o%3d12100%3b%24sw%3d1280%3b%24sh%3d768&pgDomain=https%3a%2f%2fgoogleads.g.doubleclick.net%2fpagead%2fads%3fclient%3dca-pub-2950082304969984%26format%3d750x90%26output%3dhtml%26h%3d90%26slotname%3d1929607435%26adk%3d453791610%26adf%3d1477197835%26w%3d750%26afmt%3dauto%26lmt%3d1493013196%26loeid%3d368226011%252C389613000%26rafmt%3d1%26flash%3d25.0.0%26fwr%3d0%26url%3dhttps%253A%252F%252Flibraries.io%252Fgithub%252Ffchollet%252Fkeras-resources%26resp_fmts%3d3%26wgl%3d1%26dt%3d1493013195955%26bpp%3d57%26bdt%3d4527%26fdt%3d62%26idt%3d227%26shv%3dr20170417%26cbv%3dr20170110%26saldr%3daa%26correlator%3d374774108740%26frm%3d20%26ga_vid%3d108224247.1489909382%26ga_sid%3d1493013196%26ga_hid%3d637068634%26ga_fc%3d0%26pv%3d2%26iag%3d3%26icsg%3d2%26nhd%3d1%26dssz%3d2%26mdo%3d0%26mso%3d0%26u_tz%3d-420%26u_his%3d1%26u_java%3d0%26u_h%3d900%26u_w%3d1440%26u_ah%3d820%26u_aw%3d1440%26u_cd%3d24%26u_nplug%3d5%26u_nmime%3d7%26adx%3d150%26ady%3d312%26biw%3d1440%26bih%3d679%26eid%3d368226001%26oid%3d3%26rx%3d0%26eae%3d0%26fc%3d16%26brdim%3d0%252C0%252C0%252C0%252C1440%252C23%252C0%252C0%252C1440%252C679%26vis%3d2%26rsz%3d%257C%257CeEr%257C%26abl%3dCS%26ppjl%3df%26pfx%3d0%26fu%3d144%26bc%3d1%26ifi%3d1%26xpc%3dgEbfRo4pXk%26p%3dhttps%253A%2f%2flibraries.io%26dtd%3d275&go=https%3a%2f%2fwww.youtube.com%2fchannel%2fUCdTz-Jbx6ZZoFxXHkQxg0ew"],
+          width: '728',
+          height: '90',
+          pixelRatio: '1',
+          altText: '',
+          creativeScript: '<div id="aniplayer"></div>\r\n'+'<scr'+'ipt type="text/javascript" id="aniviewJS">\r\n'+'(function()\r\n'+'{\r\n'+'	var myPlayer;\r\n'+'	var adConfig = {\r\n'+'		publisherId : \'5641d3f9181f46f4738b4567\',\r\n'+'		channelId   : \'58d39c6d28a0614a9a2908ed\', \r\n'+'		ref1    :\'AV_URL=https://libraries.io/github/fchollet/keras-resources&AV_DOMAIN=https://libraries.io/github/fchollet/keras-resources\',\r\n'+'		width           : 728,\r\n'+'		height          : 90,\r\n'+'                contentClickThrough : \'https://www.youtube.com/channel/UCdTz-Jbx6ZZoFxXHkQxg0ew\',  \r\n'+'		HD              : true,\r\n'+'		autoPlay        : true,\r\n'+'		loop            : true,\r\n'+'		vastRetry 	    : 4,	\r\n'+'		errorLimit		: 13,\r\n'+'		midRollTime     : 3,\r\n'+'		mode			: 0,\r\n'+'		soundButton     : true,\r\n'+'		pauseButton     : true,\r\n'+'		closeButton     : true,\r\n'+'		Preloader       : {\r\n'+'                type: \'Image\',\r\n'+'                link  :\'\',\r\n'+'				clickthrough :\'\',\r\n'+'                poster : \'\',\r\n'+'        },\r\n'+'		position		: \'aniplayer\'\r\n'+'	};\r\n'+'	(new Image).src = "https://track.aniview.com/track?pid="+adConfig.publisherId+"&cid="+adConfig.channelId+"&e=playerLoaded"+"&cb="+Date.now();\r\n'+'	var PlayerUrl = \'https://aniview.hs.llnwd.net/d1/script/6.1/aniview.js\';\r\n'+'	function downloadScript(src,adData) {\r\n'+'	   var scp = document.createElement(\'script\');\r\n'+'	   scp.src = src;\r\n'+'	   scp.onload = function() {\r\n'+'			myPlayer= new avPlayer(adData);\r\n'+'			myPlayer.onLoad    = function(type) {\r\n'+'			};\r\n'+'			myPlayer.play(adConfig);\r\n'+'	   }\r\n'+'		document.getElementsByTagName(\'head\')[0].appendChild(scp);\r\n'+'	};\r\n'+'	downloadScript(PlayerUrl,adConfig);\r\n'+'})();\r\n'+' \r\n'+'</scr'+'ipt>',
+          flashVars: '',
+          version: '',
+          wMode: 'Opaque',
+          backupImage: {
+            id: '',
+            type: 1,
+            url: '',
+            clickUrl: '',
+            clickTarget: '',
+            width: '',
+            height: '',
+            altText: ''
+          }
+        }]
+      };
+
+if(sas.utils.getIEVersion() < 10 && !isAsync){
+// IE9- require full script injection in sync case.
+  
+  
+  
+  sas.banner.render(config, {async: isAsync});
+}else{
+  sas.utils.loadScriptCdn("/diff/templates/js/sas/sas-browser.js", { async: isAsync, onLoad: function() {
+    sas.utils.loadScriptCdn("/diff/templates/js/sas/sas-dom.js", { async: isAsync, onLoad: function() {
+    sas.utils.loadScriptCdn("/diff/templates/js/banner/sas-banner-2.3.js", { async: isAsync, onLoad: function() {
+      sas.banner.render(config, {async: isAsync});
+    }});
+  }});
+}});
+}
+})();

@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0062)http://scikit-learn.org/stable/modules/scaling_strategies.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+  
+    <title>6. Strategies to scale computationally: bigger data — scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/bootstrap.min.css" media="screen">
+  <link rel="stylesheet" href="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/bootstrap-responsive.css">
+
+    
+    <link rel="stylesheet" href="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/nature.css" type="text/css">
+    <link rel="stylesheet" href="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/pygments.css" type="text/css">
+    <link rel="stylesheet" href="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/gallery.css" type="text/css">
+    <link rel="stylesheet" href="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/gallery.css" type="text/css">
+    
+    <script async="" src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/async-ads.js"></script><script type="text/javascript" async="" src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/ga.js"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/jquery.js"></script>
+    <script type="text/javascript" src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/underscore.js"></script>
+    <script type="text/javascript" src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/doctools.js"></script>
+    <script type="text/javascript" src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/copybutton.js"></script>
+    <link rel="shortcut icon" href="http://scikit-learn.org/stable/_static/favicon.ico">
+    <link rel="author" title="About these documents" href="http://scikit-learn.org/stable/about.html">
+    <link rel="search" title="Search" href="http://scikit-learn.org/stable/search.html">
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="http://scikit-learn.org/stable/index.html">
+    <link rel="up" title="User Guide" href="http://scikit-learn.org/stable/user_guide.html">
+    <link rel="next" title="7. Computational Performance" href="http://scikit-learn.org/stable/modules/computational_performance.html">
+    <link rel="prev" title="5.6.6. RCV1 dataset" href="http://scikit-learn.org/stable/datasets/rcv1.html">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/scaling_strategies.html">
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
+  </script>
+
+  <style type="text/css">.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;position:relative;user-select:none;-webkit-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsq_a{padding:0}.gscsep_a{display:none}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em;-webkit-appearance:button}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_a{padding:0 7px}.gssb_e{border:0}.gssb_l{margin:5px 0}#gsc-i-id1::-webkit-input-placeholder{font-size:14px}#gsc-i-id1:-moz-placeholder{font-size:14px}#gsc-i-id1::-moz-placeholder{font-size:14px}#gsc-i-id1:-ms-input-placeholder{font-size:14px}#gsc-i-id1:focus::-webkit-input-placeholder{color:transparent}#gsc-i-id1:focus:-moz-placeholder{color:transparent}#gsc-i-id1:focus::-moz-placeholder{color:transparent}#gsc-i-id1:focus:-ms-input-placeholder{color:transparent}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style></head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="http://scikit-learn.org/stable/index.html">
+            <img src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/scikit-learn-logo-small.png" alt="Logo">
+        </a>
+        </p><div class="navbar" id="scikit-navbar">
+            <ul>
+                <li><a href="http://scikit-learn.org/stable/index.html">Home</a></li>
+                <li><a href="http://scikit-learn.org/stable/install.html">Installation</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="http://scikit-learn.org/stable/documentation.html">Documentation</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.18 (stable)</li>
+            <li><a href="http://scikit-learn.org/stable/tutorial/index.html">Tutorials</a></li>
+            <li><a href="http://scikit-learn.org/stable/user_guide.html">User guide</a></li>
+            <li><a href="http://scikit-learn.org/stable/modules/classes.html">API</a></li>
+            <li><a href="http://scikit-learn.org/stable/faq.html">FAQ</a></li>
+            <li><a href="http://scikit-learn.org/stable/developers/contributing.html">Contributing</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.19-dev (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.17/documentation.html">Scikit-learn 0.17</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+                <li><a href="http://scikit-learn.org/0.15/documentation.html">Scikit-learn 0.15</a></li>
+				<li><a href="http://scikit-learn.org/stable/_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="http://scikit-learn.org/stable/auto_examples/index.html">Examples</a></li>
+            </ul>
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"><div class="gsc-control-cse gsc-control-cse-en"><div class="gsc-control-wrapper-cse" dir="ltr"><form class="gsc-search-box" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><input autocomplete="off" type="text" size="10" class=" gsc-input" name="search" title="search" id="gsc-i-id1" dir="ltr" spellcheck="false" placeholder="Custom Search" style="outline: none; background: url(&quot;http://www.google.com/cse/static/images/1x/googlelogo_lightgrey_46x16dp.png&quot;) left center no-repeat rgb(255, 255, 255); text-indent: 48px;"><input type="hidden" name="bgresponse" id="bgresponse"></td><td class="gsc-search-button"><input type="button" value="Search" class="gsc-search-button" title="search"></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gsc-branding"><tbody><tr><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/googlelogo_grey_46x15dp.png" class="gsc-branding-img" srcset="https://www.google.com/cse/static/images/2x/googlelogo_grey_46x15dp.png 2x"></td></tr></tbody></table></form><div class="gsc-results-wrapper-nooverlay"><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table cellspacing="0" cellpadding="0" class="gsc-above-wrapper-area-container"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table cellspacing="0" cellpadding="0" class="gsc-resultsHeader"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div class="gsc-result-selector gsc-one-result" title="show one result">&nbsp;</div><div class="gsc-result-selector gsc-more-results" title="show more results">&nbsp;</div><div class="gsc-result-selector gsc-all-results" title="show all results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div></div></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/forkme.png" alt="Fork me on GitHub">
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+        <div class="rellink">
+        <a href="http://scikit-learn.org/stable/datasets/rcv1.html" accesskey="P">Previous
+        <br>
+        <span class="smallrellink">
+        5.6.6. RCV1 d...
+        </span>
+            <span class="hiddenrellink">
+            5.6.6. RCV1 dataset
+            </span>
+        </a>
+        </div>
+            <div class="spacer">
+            &nbsp;
+            </div>
+        <div class="rellink">
+        <a href="http://scikit-learn.org/stable/modules/computational_performance.html" accesskey="N">Next
+        <br>
+        <span class="smallrellink">
+        7. Computatio...
+        </span>
+            <span class="hiddenrellink">
+            7. Computational Performance
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="http://scikit-learn.org/stable/user_guide.html">
+        Up
+        <br>
+        <span class="smallrellink">
+        User Guide
+        </span>
+            <span class="hiddenrellink">
+            User Guide
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> — <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="http://scikit-learn.org/stable/about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#">6. Strategies to scale computationally: bigger data</a><ul>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#scaling-with-instances-using-out-of-core-learning">6.1. Scaling with instances using out-of-core learning</a><ul>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#streaming-instances">6.1.1. Streaming instances</a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#extracting-features">6.1.2. Extracting features</a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#incremental-learning">6.1.3. Incremental learning</a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#examples">6.1.4. Examples</a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#notes">6.1.5. Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked="">
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="strategies-to-scale-computationally-bigger-data">
+<span id="scaling-strategies"></span><h1>6. Strategies to scale computationally: bigger data<a class="headerlink" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#strategies-to-scale-computationally-bigger-data" title="Permalink to this headline">¶</a></h1>
+<p>For some applications the amount of examples, features (or both) and/or the
+speed at which they need to be processed are challenging for traditional
+approaches. In these cases scikit-learn has a number of options you can
+consider to make your system scale.</p>
+<div class="section" id="scaling-with-instances-using-out-of-core-learning">
+<h2>6.1. Scaling with instances using out-of-core learning<a class="headerlink" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#scaling-with-instances-using-out-of-core-learning" title="Permalink to this headline">¶</a></h2>
+<p>Out-of-core (or “external memory”) learning is a technique used to learn from
+data that cannot fit in a computer’s main memory (RAM).</p>
+<p>Here is sketch of a system designed to achieve this goal:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>a way to stream instances</li>
+<li>a way to extract features from instances</li>
+<li>an incremental algorithm</li>
+</ol>
+</div></blockquote>
+<div class="section" id="streaming-instances">
+<h3>6.1.1. Streaming instances<a class="headerlink" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#streaming-instances" title="Permalink to this headline">¶</a></h3>
+<p>Basically, 1. may be a reader that yields instances from files on a
+hard drive, a database, from a network stream etc. However,
+details on how to achieve this are beyond the scope of this documentation.</p>
+</div>
+<div class="section" id="extracting-features">
+<h3>6.1.2. Extracting features<a class="headerlink" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#extracting-features" title="Permalink to this headline">¶</a></h3>
+<p>2. could be any relevant way to extract features among the
+different <a class="reference internal" href="http://scikit-learn.org/stable/modules/feature_extraction.html#feature-extraction"><span class="std std-ref">feature extraction</span></a> methods supported by
+scikit-learn. However, when working with data that needs vectorization and
+where the set of features or values is not known in advance one should take
+explicit care. A good example is text classification where unknown terms are
+likely to be found during training. It is possible to use a statefull
+vectorizer if making multiple passes over the data is reasonable from an
+application point of view. Otherwise, one can turn up the difficulty by using
+a stateless feature extractor. Currently the preferred way to do this is to
+use the so-called <a class="reference internal" href="http://scikit-learn.org/stable/modules/feature_extraction.html#feature-hashing"><span class="std std-ref">hashing trick</span></a> as implemented by
+<a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_extraction.FeatureHasher</span></code></a> for datasets with categorical
+variables represented as list of Python dicts or
+<a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_extraction.text.HashingVectorizer</span></code></a> for text documents.</p>
+</div>
+<div class="section" id="incremental-learning">
+<h3>6.1.3. Incremental learning<a class="headerlink" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#incremental-learning" title="Permalink to this headline">¶</a></h3>
+<p>Finally, for 3. we have a number of options inside scikit-learn. Although all
+algorithms cannot learn incrementally (i.e. without seeing all the instances
+at once), all estimators implementing the <code class="docutils literal"><span class="pre">partial_fit</span></code> API are candidates.
+Actually, the ability to learn incrementally from a mini-batch of instances
+(sometimes called “online learning”) is key to out-of-core learning as it
+guarantees that at any given time there will be only a small amount of
+instances in the main memory. Choosing a good size for the mini-batch that
+balances relevancy and memory footprint could involve some tuning <a class="footnote-reference" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#id2" id="id1">[1]</a>.</p>
+<p>Here is a list of incremental estimators for different tasks:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Classification</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB" title="sklearn.naive_bayes.MultinomialNB"><code class="xref py py-class docutils literal"><span class="pre">sklearn.naive_bayes.MultinomialNB</span></code></a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB" title="sklearn.naive_bayes.BernoulliNB"><code class="xref py py-class docutils literal"><span class="pre">sklearn.naive_bayes.BernoulliNB</span></code></a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron" title="sklearn.linear_model.Perceptron"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.Perceptron</span></code></a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.SGDClassifier</span></code></a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PassiveAggressiveClassifier.html#sklearn.linear_model.PassiveAggressiveClassifier" title="sklearn.linear_model.PassiveAggressiveClassifier"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.PassiveAggressiveClassifier</span></code></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Regression</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.SGDRegressor</span></code></a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PassiveAggressiveRegressor.html#sklearn.linear_model.PassiveAggressiveRegressor" title="sklearn.linear_model.PassiveAggressiveRegressor"><code class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.PassiveAggressiveRegressor</span></code></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Clustering</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans" title="sklearn.cluster.MiniBatchKMeans"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.MiniBatchKMeans</span></code></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Decomposition / feature Extraction</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.MiniBatchDictionaryLearning.html#sklearn.decomposition.MiniBatchDictionaryLearning" title="sklearn.decomposition.MiniBatchDictionaryLearning"><code class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.MiniBatchDictionaryLearning</span></code></a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA" title="sklearn.decomposition.IncrementalPCA"><code class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.IncrementalPCA</span></code></a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.LatentDirichletAllocation.html#sklearn.decomposition.LatentDirichletAllocation" title="sklearn.decomposition.LatentDirichletAllocation"><code class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.LatentDirichletAllocation</span></code></a></li>
+<li><a class="reference internal" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans" title="sklearn.cluster.MiniBatchKMeans"><code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.MiniBatchKMeans</span></code></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>For classification, a somewhat important thing to note is that although a
+stateless feature extraction routine may be able to cope with new/unseen
+attributes, the incremental learner itself may be unable to cope with
+new/unseen targets classes. In this case you have to pass all the possible
+classes to the first <code class="docutils literal"><span class="pre">partial_fit</span></code> call using the <code class="docutils literal"><span class="pre">classes=</span></code> parameter.</p>
+<p>Another aspect to consider when choosing a proper algorithm is that all of them
+don’t put the same importance on each example over time. Namely, the
+<code class="docutils literal"><span class="pre">Perceptron</span></code> is still sensitive to badly labeled examples even after many
+examples whereas the <code class="docutils literal"><span class="pre">SGD*</span></code> and <code class="docutils literal"><span class="pre">PassiveAggressive*</span></code> families are more
+robust to this kind of artifacts. Conversely, the later also tend to give less
+importance to remarkably different, yet properly labeled examples when they
+come late in the stream as their learning rate decreases over time.</p>
+</div>
+<div class="section" id="examples">
+<h3>6.1.4. Examples<a class="headerlink" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#examples" title="Permalink to this headline">¶</a></h3>
+<p>Finally, we have a full-fledged example of
+<a class="reference internal" href="http://scikit-learn.org/stable/auto_examples/applications/plot_out_of_core_classification.html#sphx-glr-auto-examples-applications-plot-out-of-core-classification-py"><span class="std std-ref">Out-of-core classification of text documents</span></a>. It is aimed at
+providing a starting point for people wanting to build out-of-core learning
+systems and demonstrates most of the notions discussed above.</p>
+<p>Furthermore, it also shows the evolution of the performance of different
+algorithms with the number of processed examples.</p>
+<p class="centered">
+<strong><a class="reference external" href="http://scikit-learn.org/stable/auto_examples/applications/plot_out_of_core_classification.html"><img alt="accuracy_over_time" src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/sphx_glr_plot_out_of_core_classification_0011.png" style="width: 640.0px; height: 480.0px;"></a></strong></p><p>Now looking at the computation time of the different parts, we see that the
+vectorization is much more expensive than learning itself. From the different
+algorithms, <code class="docutils literal"><span class="pre">MultinomialNB</span></code> is the most expensive, but its overhead can be
+mitigated by increasing the size of the mini-batches (exercise: change
+<code class="docutils literal"><span class="pre">minibatch_size</span></code> to 100 and 10000 in the program and compare).</p>
+<p class="centered">
+<strong><a class="reference external" href="http://scikit-learn.org/stable/auto_examples/applications/plot_out_of_core_classification.html"><img alt="computation_time" src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/sphx_glr_plot_out_of_core_classification_0031.png" style="width: 640.0px; height: 480.0px;"></a></strong></p></div>
+<div class="section" id="notes">
+<h3>6.1.5. Notes<a class="headerlink" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#notes" title="Permalink to this headline">¶</a></h3>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="http://scikit-learn.org/stable/modules/scaling_strategies.html#id1">[1]</a></td><td>Depending on the algorithm the mini-batch size can influence results or
+not. SGD*, PassiveAggressive*, and discrete NaiveBayes are truly online
+and are not affected by batch size. Conversely, MiniBatchKMeans
+convergence rate is affected by the batch size. Also, its memory
+footprint can vary dramatically with batch size.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        © 2010 - 2016, scikit-learn developers (BSD License).
+      <a href="http://scikit-learn.org/stable/_sources/modules/scaling_strategies.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="http://scikit-learn.org/stable/datasets/rcv1.html">Previous
+      </a>
+    </div>
+    <div class="buttonNext">
+      <a href="http://scikit-learn.org/stable/modules/computational_performance.html">Next
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script><script src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/saved_resource" type="text/javascript"></script><link href="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/default+en.css" type="text/css" rel="stylesheet"><script src="./6. Strategies to scale computationally_ bigger data — scikit-learn 0.18.1 documentation_files/default+en.I.js" type="text/javascript"></script>
+  
+<table cellspacing="0" cellpadding="0" class="gstl_50 gssb_c" style="width: 192px; display: none; top: 38px; left: 402px; position: absolute;"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table></body></html>

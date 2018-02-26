@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!-- saved from url=(0202)https://s0.2mdn.net/ads/richmedia/studio/pv2/47119294/20170314084426975/BUS_BDL_ENG_3490ChampExpD1000000534_GETNOW_3490TP_HTML_300x250.html?e=69&renderingType=2&leftOffset=0&topOffset=0&c=kvi3HhFrK2&t=1 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+
+	<script src="./TweenLite.min.js"></script>
+	<script src="./TweenMax.min.js"></script>
+	<script src="./EasePack.min.js"></script>
+	<script src="./CSSPlugin.min.js"></script>
+	<!-- Studio Enabler Required -->
+	<script src="./Enabler_01_159.js" type="text/javascript"></script>
+
+	 
+  
+    <style type="text/css">
+		body, body * {
+			color: #fff;
+		}
+		#loading_dc{
+			width:100%;
+			height:100%;
+			background-color:white;
+			z-index:10;
+		}
+		#loading_image_dc{
+			position:absolute;
+			left:50%;
+			margin-left:-15px;
+			top:50%;
+			margin-top:-15px;	
+		}
+		#container_dc{display:none;z-index:20}
+	</style>
+    
+    <script language="javascript">
+		var Exit_URL;
+		var frame1_active; 
+		var frame2_active;
+		var colorCss; 
+		//Initialize Enabler
+		if (Enabler.isInitialized()) {
+			init();
+		} else {
+			Enabler.addEventListener(studio.events.StudioEvent.INIT, init);
+		}
+		//Run when Enabler is ready
+		function init()
+		{
+			if ( Enabler.isPageLoaded() )
+			{
+			    pageLoadedHandler();
+			} else
+			{
+			    Enabler.addEventListener( studio.events.StudioEvent.PAGE_LOADED, pageLoadedHandler );
+			}
+		}
+		
+		function pageLoadedHandler()
+		{		
+			//Load in CSS
+			var extCSS=document.createElement('link');
+			extCSS.setAttribute("rel", "stylesheet");
+			extCSS.setAttribute("type", "text/css");
+			// extCSS.setAttribute("href", Enabler.getUrl( "style.css" )); 
+
+
+			frame1_active = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame1_Exists;
+			frame2_active = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame2_Exists;
+			colorCss = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Creative_Color;
+			var Frame1_Headline = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame1_Headline;
+			//var Frame1_Image_Overlay = dynamicContent.CB__SMB_Base_Feed_Sheet1[0].Frame1_Image_Overlay.Url;
+
+			var Frame2_Headline = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame2_Headline;
+			//var Frame2_Image_Overlay = dynamicContent.CB__SMB_Base_Feed_Sheet1[0].Frame2_Image_Overlay.Url;
+
+			var Frame3_Headline = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame3_Headline;
+			var Frame3_Subheadline1 = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame3_Subheadline1;
+			var Price_Intro = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Price_Intro;
+			var Price_Dollars = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Price_Dollars;
+			var Price_Cents = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Price_Cents;
+			var Price_Freq = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Price_Freq;
+			var Frame3_Bottom_Message = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame3_Bottom_Message;
+
+ 		
+ 			var uniqueId = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Unique_ID;
+
+ 			var Phone_Number = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Phone_Number;
+ 			var CTA_Date = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame1_CTA;
+ 			var CTA_Text = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame3_CTA;
+ 			
+ 			Exit_URL = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Exit_URL.Url;
+ 			 
+ 			// var KeyVisual_image_url = devDynamicContent.CB__SMB_Base_Feed_Sheet1[0].Phone_Number;
+ 		
+ 			var	Disclosure_Active = "on"
+ 			if(Price_Dollars > 99){
+ 				document.getElementById('currency').classList.add( "long" );
+				document.getElementById('price').classList.add ("long");
+				document.getElementById('leftContent').classList.add("long");
+ 			}
+
+ 			 if(Price_Cents === "%"){
+ 				document.getElementById('currency').classList.add( "text" );
+				document.getElementById('price').classList.add ("text");
+				document.getElementById('leftContent').classList.add("text");
+ 			}else{
+ 				priceIntro.setAttribute("style","display:none");
+
+ 				if(Frame3_Bottom_Message !=""){
+ 					document.getElementById('currency').classList.add( "bmsg" );
+					document.getElementById('price').classList.add ("bmsg");
+					document.getElementById('priceFreq').classList.add ("bmsg");
+					document.getElementById('leftContent').classList.add("bmsg");
+ 				}
+ 				
+ 			}
+
+ 			//colorCss = 1;
+
+ 			if(colorCss == 1){extCSS.setAttribute("href", Enabler.getUrl( "style.css" )); }
+ 			if(colorCss == 2){extCSS.setAttribute("href", Enabler.getUrl( "styleyellow.css" )); }
+ 			if(colorCss == 3){extCSS.setAttribute("href", Enabler.getUrl( "styleblue.css" )); }
+ 			
+
+ 			document.getElementsByTagName("head")[0].appendChild( extCSS );
+			document.getElementById("container_dc").style.opacity=1;
+			document.getElementById("loading_image_dc").style.opacity=0;
+			document.getElementById("container_dc").style.display = "block";
+
+
+ 			// set content on Html
+
+			hf1.innerHTML = Frame1_Headline;
+			
+			// img1.innerHTML = "<img src="+Frame1_Image_Overlay+"></div>"
+			
+			//alert(img1)
+			
+			hf2.innerHTML = Frame2_Headline;
+			// img2.innerHTML = "<img src="+Frame2_Image_Overlay+"></div>"
+ 			
+ 			hEnd.innerHTML = Frame3_Headline;
+ 			shEnd.innerHTML = Frame3_Subheadline1;
+ 			priceIntro.innerHTML = Price_Intro;
+ 			price.innerHTML = Price_Dollars;
+ 			cents.innerHTML = Price_Cents;
+ 			priceFreq.innerHTML = Price_Freq;
+ 			lastmsg.innerHTML = Frame3_Bottom_Message;
+
+ 			phoneN.innerHTML = Phone_Number;
+ 			ctaDate.innerHTML = CTA_Date;
+ 			ctaCopy.innerHTML = CTA_Text;
+ 
+ 			var extJavascript = document.createElement('script');
+			extJavascript.setAttribute('type', 'text/javascript');
+			extJavascript.setAttribute( 'src', Enabler.getUrl( 'animation.js' ) ); 
+			document.getElementsByTagName('head')[0].appendChild( extJavascript );
+ 			if(Price_Cents == -1){leftContent.setAttribute("style","display:none");}
+ 			if(Price_Cents == 0){cents.innerHTML += Price_Cents;}       
+		}
+
+	</script>
+    
+<link rel="stylesheet" type="text/css" href="./style(1).css"><script type="text/javascript" src="./animation.js"></script></head>
+
+<body>
+	<div id="loading_dc"><!-- Loading Animation -->
+        <div id="loading_image_dc" style="opacity: 0;">
+               <img src="./loading.gif">
+        </div>    
+    </div>
+       <div id="container_dc" style="opacity: 1; display: block;">
+        <div id="content_dc" style="display: block;">
+         <div id="bg_color">
+        <!-- <div id="guide"><img src="g2.jpg"></div>	 -->
+		<div id="frame1" style="text-shadow: rgb(255, 255, 255) 0px 0px 0px; left: -300px;">
+			<div id="hf1">SAVE 50% <br> ON 50 MBPS <br> OF INTERNET</div>	
+		</div>
+		<div id="img1" style="left: -300px;"></div>
+		<div id="frame2" style="text-shadow: rgb(255, 255, 255) 0px 0px 0px; left: -221px;">
+			<div id="hf2">WHEN YOU ADD <br> 2 VOICE MOBILITY LINES &amp; TV</div>
+		</div>
+		<div id="img2" style="left: -221px;"></div>
+		<div id="borders"></div>
+		<div id="endframe">
+			<div id="hEnd" style="left: 20px;">GET 50 MBPS INTERNET</div>
+			<div id="WhiteBorder"></div>
+			<div id="shEnd" style="left: 20px;">FOR ONLY</div>
+			<div id="endOffer" style="transform-style: preserve-3d; opacity: 0; transform: matrix(0.6, 0, 0, 0.6, 0, 0);">
+				<div id="priceIntro" style="display:none">FOR</div>
+				<div id="currency" class="bmsg shadowT">$</div>
+				<div id="price" class="bmsg shadowT">49</div>
+				<div id="leftContent" class="bmsg">
+					<div id="cents" class="shadowT">95</div>
+					<div id="priceFreq" class="bmsg">more per month</div>
+				</div>
+			</div>
+
+
+		<div id="lastmsg">WHEN YOU ADD 2 VOICE MOBILITY LINES &amp; TV</div>
+		</div>
+		<div id="logo"></div>
+		<div id="phoneContainer">
+			<div id="phoneIcon"></div>
+			<div id="phoneN">(866) 727-0065</div>
+		</div>
+		<div id="ctaContainer">
+			<div id="ctaBorder"></div>
+			<div id="ctaBG"></div>
+			<div id="shine" style="opacity: 0.7; left: -120px;"></div>
+			<div id="ctaDate">EXPIRES 5/21/17</div>
+			<div id="ctaCopy">ACT NOW</div>
+		</div>
+        <button id="background_exit_dc"></button>
+    </div>
+
+<!--
+ * Dynamic Content Enable code for Profile: 1110982
+ *
+ * The following code initializes the following dynamic variables for
+ * development testing and live serving of Fields associated to the above profile
+-->
+
+<!-- DynamicContent Start: HTML5 invocation code. -->
+<script type="text/javascript">
+
+// Dynamic Content variables and sample values
+    Enabler.setProfileId(1110982);
+    var devDynamicContent = {};
+
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES= [{}];
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0]._id = 0;
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Unique_ID = 1;
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Creative_Code = "D1000000240";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Creative_Name = "D1000000240_C5ST112_TPChampion_34.90_300x250";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Creative_Color = 1;
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Phone_Number = "(877) 330 3629";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Price_Intro = "Just";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Price_Dollars = "34";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Price_Cents = "90";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Price_Freq = "more per month";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame1_Exists = false;
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame1_Headline = "";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame1_CTA = "EXPIRES 6\/30\/15";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame2_Exists = false;
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame2_Headline = "";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame2_CTA = "EXPIRES 6\/30\/15";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame3_Headline = "CHOOSE ANY INTERNET";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame3_Subheadline1 = "THEN ADD PHONE+TV";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame3_Bottom_Message = "";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Frame3_CTA = "LEARN MORE";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Exit_URL = {};
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Exit_URL.Url = "http://business.comcast.com/landingpage/3490-tp";
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Is_Default = true;
+    devDynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Is_Active = true;
+    Enabler.setDevDynamicContent(devDynamicContent);
+
+</script>
+
+<!--
+ * You may access the variables in the following manner
+ * AFTER the Studio Enabler is initialized.
+ * var Unique_ID = dynamicContent.CB_BOLD_Base_Feed_v3_NO_DATES[0].Unique_ID;
+ * Note: be sure to use "dynamicContent", not "devDynamicContent"
+ * Note: be sure to use ExitOverride to create your exit URL dynamically; follow the instructions on our Help center: https://support.google.com/richmedia/answer/2664807
+-->
+
+
+
+
+</div></div></body></html>

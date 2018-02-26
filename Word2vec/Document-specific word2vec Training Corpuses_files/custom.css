@@ -1,0 +1,204 @@
+
+/**
+ * Custom CSS for the Cognonto Website
+ */
+ 
+pre.src-clojure {
+  margin-top: 25px;
+  margin-bottom: 25px;
+} 
+ 
+pre.example {
+  margin-top: 25px;
+  margin-bottom: 25px;
+} 
+
+.use-cases-header table{
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+ 
+.breadcrumb-search-bar {
+  width: 400px;
+}
+ 
+.breadcrumbs {
+  background: rgba(0, 0, 0, 0) url("/assets/img/patterns/breadcrumbs.png") repeat scroll 0 0;
+  border-bottom: 1px solid #eee;
+  overflow: visible;
+  padding: 10px 0 6px;
+}
+
+.input-group-search {
+    border-collapse: separate;
+    display: table;
+    padding-bottom: 18px;
+    position: relative;
+    top: 7px;
+}
+
+.use-cases-header {
+  border: 1px solid rgb(238, 238, 238); 
+  padding: 30px; 
+  /*background: rgba(0, 0, 0, 0) url("/assets/img/patterns/breadcrumbs.png") repeat scroll 0 0;*/
+  background-color: #f9f9f9;
+}
+ 
+body  {
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+.ws-block {
+  margin-bottom: 20px;
+  padding: 20px 30px;
+}
+
+.table-blank table,
+.table-blank tr,
+.table-blank td,
+.table-blank tbody,
+.table-blank {
+  border: none;
+}
+
+.header .navbar-default .navbar-nav > li > a, 
+.header .navbar-default .navbar-nav > li > a:hover,
+.header .navbar-default .navbar-nav > .active > a {
+  bottom: 6px;
+}
+
+.copyright {
+  font-size: 0.85em;
+  color: #ddd;
+  width: 100%;
+  text-align: right;
+}
+
+a:hover {
+  color: #f18b1b;
+}
+
+.btn-group {
+  margin-right: 6px;
+}
+
+.navbar-brand {
+  height: 75px;
+}
+
+#footer-logo-icon {
+  position: relative;
+  top: -3px;
+  padding-right: 10px;
+  padding-left: 5px;
+}
+
+.table-transparent {
+  background-color: transparent;
+}
+
+.table-transparent td {
+  padding: 8px;
+}
+
+li a {
+  color: #3498db;
+}
+
+.panel-heading .chevron{
+  position: relative;
+  top: 4px;
+}
+
+.panel-heading .chevron:after {
+    content: "\f078";   
+}
+
+.panel-heading.collapsed .chevron:after {
+    content: "\f054";   
+}   
+
+.pointer {
+  cursor: pointer;
+}
+
+.data-title:before {
+    content: attr(data-menutitle);
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: #DDD;
+    padding: 2px;
+
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+.data-title :first-child {
+    margin-top: 20px;
+}
+
+.context-menu-redef {
+  width: 225px;
+}
+
+/* Change overall Bootstrap's default font size */
+* {
+ font-size: 16px;
+ line-height: 1.75;
+}
+
+.h6, h6 a {
+  font-size: 12px;
+}
+
+sub, sup a {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* Typed analysis */
+
+#analysis-steps-canvas {
+  background-color: #F8F8F8;
+}
+
+#analysis-steps {
+  color: #404040;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}

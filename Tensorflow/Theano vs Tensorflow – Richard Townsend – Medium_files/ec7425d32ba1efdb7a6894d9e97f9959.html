@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://medium.com/media/ec7425d32ba1efdb7a6894d9e97f9959?postId=e25648c31800 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>theano_example.py – Medium</title><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./c6ade59b78629fb497286170392bc7b4.js" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-9f0a4ad9c85ca776e669003688baa9d55f9db315562ce4d231d37dab2714c70a.css"><div id="gist36216671" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-theano_example-py" class="file">
+    
+
+  <div itemprop="text" class="blob-wrapper data type-python">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tbody><tr>
+        <td id="file-theano_example-py-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-theano_example-py-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> theano</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-theano_example-py-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> theano.tensor <span class="pl-k">as</span> T</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-theano_example-py-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> numpy</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-theano_example-py-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-theano_example-py-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Again, make 100 points in numpy</span></td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-theano_example-py-LC6" class="blob-code blob-code-inner js-file-line">x_data <span class="pl-k">=</span> numpy.float32(numpy.random.rand(<span class="pl-c1">2</span>, <span class="pl-c1">100</span>))</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-theano_example-py-LC7" class="blob-code blob-code-inner js-file-line">y_data <span class="pl-k">=</span> numpy.dot([<span class="pl-c1">0.100</span>, <span class="pl-c1">0.200</span>], x_data) <span class="pl-k">+</span> <span class="pl-c1">0.3</span></td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-theano_example-py-LC8" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-theano_example-py-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Intialise the Theano model</span></td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-theano_example-py-LC10" class="blob-code blob-code-inner js-file-line">X <span class="pl-k">=</span> T.matrix()</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-theano_example-py-LC11" class="blob-code blob-code-inner js-file-line">Y <span class="pl-k">=</span> T.vector()</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-theano_example-py-LC12" class="blob-code blob-code-inner js-file-line">b <span class="pl-k">=</span> theano.shared(numpy.random.uniform(<span class="pl-k">-</span><span class="pl-c1">1</span>, <span class="pl-c1">1</span>), <span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>b<span class="pl-pds">"</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-theano_example-py-LC13" class="blob-code blob-code-inner js-file-line">W <span class="pl-k">=</span> theano.shared(numpy.random.uniform(<span class="pl-k">-</span><span class="pl-c1">1.0</span>, <span class="pl-c1">1.0</span>, (<span class="pl-c1">1</span>, <span class="pl-c1">2</span>)), <span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>W<span class="pl-pds">"</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-theano_example-py-LC14" class="blob-code blob-code-inner js-file-line">y <span class="pl-k">=</span> W.dot(X) <span class="pl-k">+</span> b </td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-theano_example-py-LC15" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-theano_example-py-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Compute the gradients WRT the mean-squared-error for each parameter</span></td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-theano_example-py-LC17" class="blob-code blob-code-inner js-file-line">cost <span class="pl-k">=</span> T.mean(T.sqr(y <span class="pl-k">-</span> Y))</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-theano_example-py-LC18" class="blob-code blob-code-inner js-file-line">gradientW <span class="pl-k">=</span> T.grad(<span class="pl-v">cost</span><span class="pl-k">=</span>cost, <span class="pl-v">wrt</span><span class="pl-k">=</span>W)</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-theano_example-py-LC19" class="blob-code blob-code-inner js-file-line">gradientB <span class="pl-k">=</span> T.grad(<span class="pl-v">cost</span><span class="pl-k">=</span>cost, <span class="pl-v">wrt</span><span class="pl-k">=</span>b)</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-theano_example-py-LC20" class="blob-code blob-code-inner js-file-line">updates <span class="pl-k">=</span> [[W, W <span class="pl-k">-</span> gradientW <span class="pl-k">*</span> <span class="pl-c1">0.5</span>], [b, b <span class="pl-k">-</span> gradientB <span class="pl-k">*</span> <span class="pl-c1">0.5</span>]] </td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-theano_example-py-LC21" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-theano_example-py-LC22" class="blob-code blob-code-inner js-file-line">train <span class="pl-k">=</span> theano.function(<span class="pl-v">inputs</span><span class="pl-k">=</span>[X, Y], <span class="pl-v">outputs</span><span class="pl-k">=</span>cost, <span class="pl-v">updates</span><span class="pl-k">=</span>updates, <span class="pl-v">allow_input_downcast</span><span class="pl-k">=</span><span class="pl-c1">True</span>) </td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-theano_example-py-LC23" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-theano_example-py-LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-k">for</span> i <span class="pl-k">in</span> <span class="pl-v">xrange</span>(<span class="pl-c1">0</span>, <span class="pl-c1">201</span>):</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-theano_example-py-LC25" class="blob-code blob-code-inner js-file-line">    train(x_data, y_data)</td>
+      </tr>
+      <tr>
+        <td id="file-theano_example-py-L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="file-theano_example-py-LC26" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">print</span> W.get_value(), b.get_value()</td>
+      </tr>
+</tbody></table>
+
+  </div>
+
+  </div>
+  
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Sentimentron/c6ade59b78629fb497286170392bc7b4/raw/e6833f9a6510c8730ec6679c35047929e07c9f59/theano_example.py" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Sentimentron/c6ade59b78629fb497286170392bc7b4#file-theano_example-py">theano_example.py</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200;function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height); resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);}maybeResize();</script></body></html>

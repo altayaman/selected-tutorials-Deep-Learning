@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<!-- saved from url=(0110)http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow</title>
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:domain" content="stackoverflow.com">
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="Using a pre-trained word embedding (word2vec or Glove) in TensorFlow">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I&#39;ve recently reviewed an interesting implementation for convolutional text classification. However all TensorFlow code I&#39;ve reviewed uses a random (not pre-trained) embedding vectors like the foll...">
+    <meta property="og:url" content="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow">
+    <link rel="canonical" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow">
+
+    
+    
+    <script type="text/javascript" async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/ados"></script><script async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/quant.js"></script><script async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/beacon.js"></script><script async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/analytics.js"></script><script type="text/javascript" async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/ados.js"></script><script src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/jquery.min.js"></script>
+    <script src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Using a pre-trained word embedding (word2vec or Glove) in TensorFlow&#39;" href="http://stackoverflow.com/feeds/question/35687678">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:35687678});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '35687678');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', true); });
+
+            });
+        </script>
+
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","serverTime":1495139938,"routeName":"Questions/Show","site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"enableInsertDocLinkDialog":true,"childUrl":"https://meta.stackoverflow.com","enableSocialMediaInSharePopup":true,"protocol":"http"},"user":{"fkey":"ad0a26ff933c727fc091241cc2da0369","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"canSeeNewHeaderDesign":true},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableNewLinkInsertDialog":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{"openGraphAPIKey":"58740831ad23540e00c58987"},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"b95a63fed95a","js/moderator.en.js":"813e402c1645","js/full-anon.en.js":"ef85fd40aa7b","js/full.en.js":"b40abe0b0eca","js/wmd.en.js":"cd3c8074a913","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"cd655e38a168","js/help.en.js":"a2f92aacc060","js/tageditor.en.js":"a253e2bfb935","js/tageditornew.en.js":"ec4594697637","js/inline-tag-editing.en.js":"77dde44800e2","js/revisions.en.js":"8f22ba768cac","js/review.en.js":"3221cc0cc068","js/tagsuggestions.en.js":"ddb0e41afe26","js/post-validation.en.js":"cac028249a04","js/explore-qlist.en.js":"d33e3ab2f2e0","js/events.en.js":"f8dd37cab61f","js/keyboard-shortcuts.en.js":"293e469653ce","js/external-editor.en.js":"dec8b7cab79e","js/adops.en.js":"9a6a7812a212","js/external-editor.en.js":"dec8b7cab79e","js/snippet-javascript.en.js":"a2935e2a1a88","js/snippet-javascript-codemirror.en.js":"c42f5069afb1"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    <noscript id="noscript-css">&lt;style type="text/css"&gt;body,.so-header{margin-top:1.9em}&lt;/style&gt;</noscript>
+<script async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/full-anon.en.js"></script><script async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/snippet-javascript.en.js"></script><script async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/post-validation.en.js"></script><script async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/prettify-full.en.js"></script><script async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/external-editor.en.js"></script><script type="text/javascript" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/adFeedback.js"></script><link rel="stylesheet" href="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/adFeedback.css"><link rel="stylesheet" href="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/jobs-multi.min.css" type="text/css"></head>
+<body class="question-page new-topbar">
+            <script>(function () { var old = $.fn.contents; $.fn.contents = function () { try { return old.apply(this, arguments); } catch (e) { return $([]); } } })()</script>
+        
+
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+<header class="so-header js-so-header _fixed">
+    <div class="-container">
+        <div class="-main">            
+            <a href="http://stackoverflow.com/" class="-logo js-gps-track " data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+
+                <span class="-img">Stack Overflow</span>
+            </a>
+
+            <nav class="navigation" role="navigation" aria-label="site navigation">
+                <ol class="-list">
+                        <li class="-item _current">
+        <a id="nav-questions" href="http://stackoverflow.com/questions" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">Questions</a>
+    </li>
+
+    <li class="-item">
+        <a id="nav-jobs" href="http://stackoverflow.com/jobs?med=site-ui&amp;ref=jobs-tab" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:6})">Jobs</a>
+    </li>
+                        <li class="-item">
+        <a id="nav-docs" href="http://stackoverflow.com/documentation" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:7})">Documentation <small class="beta-badge">beta</small></a>
+    </li>
+                        <li class="-item">
+        <a id="nav-tags" href="http://stackoverflow.com/tags" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">Tags</a>
+    </li>
+
+                        <li class="-item">
+        <a id="nav-users" href="http://stackoverflow.com/users" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">Users</a>
+    </li>
+
+                </ol>
+            </nav>
+
+                <form id="search" action="http://stackoverflow.com/search" method="get" class="searchbar" autocomplete="off" role="search">
+                    <svg role="icon" class="svg-icon" width="18" height="18" viewBox="0 0 18 18"><path d="M12.864 11.321L18 16.5 16.5 18l-5.178-5.136v-.357a7 7 0 1 1 1.186-1.186h.356zM7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"></path></svg>
+                    <input name="q" type="text" placeholder="Search..." value="" tabindex="1" autocomplete="off" maxlength="240" class="f-input js-search-field">
+                    <button type="submit" class="btn js-search-submit">
+                        <svg role="icon" class="svg-icon" width="18" height="18" viewBox="0 0 18 18"><path d="M12.864 11.321L18 16.5 16.5 18l-5.178-5.136v-.357a7 7 0 1 1 1.186-1.186h.356zM7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"></path></svg>
+                    </button>
+                </form>
+
+        </div>
+        
+
+
+    
+
+<div class="-actions">
+    <nav class="secondary-nav">
+        <div class="-dialog-container js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="http://stackoverflow.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+            <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:14 })">help</a>
+                    <a href="http://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+    <a href="http://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                        
+    <a href="https://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="site.switch({ target_site:552, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f35687678%2fusing-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+                <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="http://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+
+        </div>
+        <ol class="-list">
+
+
+    <li class="-item"><a href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#" class="-link js-help-button" title="Help Center and other resources">
+        <svg role="icon" class="svg-icon" width="18" height="18" viewBox="0 0 18 18"><path d="M9 0a9 9 0 1 0 .001 18.001A9 9 0 0 0 9 0zm.812 13.126c-.02.716-.55 1.157-1.238 1.137-.659-.02-1.177-.49-1.157-1.209.02-.715.566-1.17 1.225-1.15.691.021 1.194.507 1.17 1.222zm1.956-5.114c-.168.237-.546.542-1.02.912l-.527.361c-.257.197-.417.43-.502.695-.044.141-.076.507-.084.752-.004.048-.032.156-.181.156H7.883c-.165 0-.185-.096-.18-.144.023-.667.12-1.218.397-1.66.374-.594 1.426-1.221 1.426-1.221.161-.12.286-.25.382-.39.177-.24.321-.51.321-.8 0-.333-.08-.65-.293-.915-.249-.31-.518-.458-1.036-.458-.51 0-.808.257-1.021.594-.213.338-.177.735-.177 1.097H5.746c0-1.366.357-2.238 1.112-2.752.51-.35 1.162-.502 1.921-.502.996 0 1.788.184 2.487.715.647.49.988 1.181.988 2.113 0 .575-.2 1.057-.486 1.447z"></path></svg>
+    </a></li>
+                <li class="-item">
+        <a href="https://stackexchange.com/" class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 167 Stack Exchange sites">
+            <svg role="icon" class="svg-icon" width="18" height="18" viewBox="0 0 18 18"><path d="M0 14a2 2 0 0 0 2 2h10v3l3-3h1a2 2 0 0 0 2-2v-2H0v2zM16 0H2a2 2 0 0 0-2 2v2h18V2a2 2 0 0 0-2-2zM0 6h18v4H0V6z"></path></svg>
+        </a>
+    </li>
+
+
+        </ol>
+    </nav>
+        <div class="-ctas">
+                <a href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f35687678%2fusing-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow" class="login-link btn-clear" rel="nofollow">Log In</a>
+                    <a href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;utm_source=stackoverflow.com&amp;utm_medium=dev-story&amp;utm_campaign=signup-redirect" class="login-link btn" rel="nofollow">Sign Up</a>
+
+        </div>
+</div>
+    </div>
+</header>
+
+    <script>
+        StackExchange.ready(function () { StackExchange.topbar.init(); });
+            StackExchange.scrollPadding.setPaddingTop(60, 10);     </script>
+
+    <div class="container">
+        
+
+
+        <div id="content" class="snippet-hidden">
+
+
+
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+
+<div id="herobox" class="alternate">
+    <div class="test"></div>
+        <div id="close">
+            <a title="click to minimize"><span>x</span> Dismiss</a>
+        </div>
+    <div class="content">
+        <b>Join the Stack Overflow Community</b>
+        <div class="separator"></div>
+        <div class="blurb">
+            Stack Overflow is a community of 7.1 million programmers, just like you, helping each other.
+                <br>
+Join them; it only takes a minute:                <br>
+        </div>
+        <a href="http://stackoverflow.com/users/signup?ssrc=hero&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" id="tell-me-more" class="button">Sign up</a>
+    </div>
+</div>
+<script>
+    StackExchange.ready(function () {
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("question-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;;
+        } else if ($("body").hasClass("home-page")) {
+            location = 3;;
+        }
+        
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+        
+        $('#herobox #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+            });
+            
+            $.cookie("hero", "mini", { path: "/", expires: 365 });
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $("#herobox").fadeOut("fast", function () {
+                        $("#herobox").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+
+</script>			<div id="question-header">
+                <h1 itemprop="name"><a href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow" class="question-hyperlink">Using a pre-trained word embedding (word2vec or Glove) in TensorFlow</a></h1>
+
+            
+<div class="aside-cta" role="navigation" aria-label="ask new question">
+    <a href="http://stackoverflow.com/questions/ask" class="btn-outlined">Ask Question</a>
+</div>
+		</div>
+			<div id="mainbar" role="main" aria-label="question and answers">
+
+			
+
+<div class="question" data-questionid="35687678" id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk347418527",4).setZone(43); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk347418527"><a href="http://engine.adzerk.net/r?e=eyJhdiI6NDIxMCwiYXQiOjQsImJ0IjowLCJjbSI6NTQ3NzgxLCJjaCI6MTE3OCwiY2siOnt9LCJjciI6MjM4Njc0MSwiZGkiOiJkZjY3YWY0YmRmMzE0YzVjYWYzNGM5OWZlOWFkMjgyNCIsImRtIjoxLCJmYyI6Mjk4NzkxMSwiZmwiOjI4NzcwMTgsImlwIjoiNTAuMjMyLjc1LjE5NCIsImt3IjoicHl0aG9uLG51bXB5LHRlbnNvcmZsb3csZGVlcC1sZWFybmluZyx4LXBlcnNvbmEtYmlnZGF0YSIsIm1rIjoiZGVlcC1sZWFybmluZyxudW1weSx0ZW5zb3JmbG93IiwibnciOjIyLCJwYyI6Ny42LCJlYyI6Ny42LCJwciI6NzY1LCJydCI6MiwicmYiOiJodHRwczovL3d3dy5nb29nbGUuY29tLyIsInNiIjoiaS0wMGMzZTQ3ODU4OGMwN2ExMCIsInNwIjozMTM0LCJzdCI6ODI3NywidWsiOiJ1ZTEtOTc0MWZiMWExNzRlNGNkNjk3ZTg4NDllMGU1ODYxOWIiLCJ6biI6NDMsInRzIjoxNDk1MTM5OTQwMTA1LCJiZiI6dHJ1ZSwicG4iOiJhZHplcmszNDc0MTg1MjciLCJ1ciI6Imh0dHBzOi8vc29mdHdhcmUuaW50ZWwuY29tL2FpL2FjYWRlbXk_Y2lkPSZ1dG1fY29udGVudD1NYWNoaW5lX0xlYXJuaW5nX0VudGh1c2lhc3RzJnV0bV9tZWRpdW09QmFubmVyX0FkJnV0bV9zb3VyY2U9U3RhY2tPdmVyZmxvdyZ1dG1fY2FtcGFpZ249QUlfMUhfMTdfU3RhY2tfT3ZlcmZsb3dfQ2FtcGFpZ24ifQ&amp;s=l2V0gmdXld6cFI-vNYZje4r678Q" rel="nofollow" target="_blank" title=""><img src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/51dad1fa34954285b760c4d92f6ecf61.png" title="" alt="" border="0" width="728" height="90"></a><div class="adzerk-vote-controls" style="display: none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/i.gif"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="35687678">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">45</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#">favorite</a>
+        <div class="favoritecount"><b>29</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I've recently reviewed an interesting implementation for <a href="http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/">convolutional text classification</a>. However all TensorFlow code I've reviewed uses a random (not pre-trained) embedding vectors like the following:</p>
+
+<pre class="lang-py prettyprint prettyprinted"><code><span class="kwd">with</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">device</span><span class="pun">(</span><span class="str">'/cpu:0'</span><span class="pun">),</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">name_scope</span><span class="pun">(</span><span class="str">"embedding"</span><span class="pun">):</span><span class="pln">
+    W </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="typ">Variable</span><span class="pun">(</span><span class="pln">
+        tf</span><span class="pun">.</span><span class="pln">random_uniform</span><span class="pun">([</span><span class="pln">vocab_size</span><span class="pun">,</span><span class="pln"> embedding_size</span><span class="pun">],</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1.0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1.0</span><span class="pun">),</span><span class="pln">
+        name</span><span class="pun">=</span><span class="str">"W"</span><span class="pun">)</span><span class="pln">
+    self</span><span class="pun">.</span><span class="pln">embedded_chars </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">nn</span><span class="pun">.</span><span class="pln">embedding_lookup</span><span class="pun">(</span><span class="pln">W</span><span class="pun">,</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">input_x</span><span class="pun">)</span><span class="pln">
+    self</span><span class="pun">.</span><span class="pln">embedded_chars_expanded </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">expand_dims</span><span class="pun">(</span><span class="pln">self</span><span class="pun">.</span><span class="pln">embedded_chars</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></code></pre>
+
+<p>Does anybody know how to use the results of Word2vec or a GloVe pre-trained word embedding instead of a random one?</p>
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/python" class="post-tag js-gps-track" title="show questions tagged &#39;python&#39;" rel="tag">python</a> <a href="http://stackoverflow.com/questions/tagged/numpy" class="post-tag js-gps-track" title="show questions tagged &#39;numpy&#39;" rel="tag">numpy</a> <a href="http://stackoverflow.com/questions/tagged/tensorflow" class="post-tag js-gps-track" title="show questions tagged &#39;tensorflow&#39;" rel="tag">tensorflow</a> <a href="http://stackoverflow.com/questions/tagged/deep-learning" class="post-tag js-gps-track" title="show questions tagged &#39;deep-learning&#39;" rel="tag">deep-learning</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/q/35687678" title="short permalink to this question" class="short-link" id="link-post-35687678">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/35687678/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/35687678/revisions" title="show all edits to this post">edited <span title="2016-02-28 21:02:15Z" class="relativetime">Feb 28 '16 at 21:02</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/3574081/mrry"><div class="gravatar-wrapper-32"><img src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/LIW6C.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/3574081/mrry">mrry</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 50,593" dir="ltr">50.6k</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="123 silver badges"><span class="badge2"></span><span class="badgecount">123</span></span><span title="179 bronze badges"><span class="badge3"></span><span class="badgecount">179</span></span>
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2016-02-28 20:11:43Z" class="relativetime">Feb 28 '16 at 20:11</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/3147590/user3147590"><div class="gravatar-wrapper-32"><img src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/08d9bb328a4d8667f56ca08c570acc65" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/3147590/user3147590">user3147590</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">392</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-35687678" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-35687678" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+                                <span style="display:none;" itemprop="answerCount">3</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="35688187"></a>
+<div id="answer-35688187" class="answer accepted-answer" data-answerid="35688187" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="35688187">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">54</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>There are a few ways that you can use a pre-trained embedding in TensorFlow. Let's say that you have the embedding in a NumPy array called <code>embedding</code>, with <code>vocab_size</code> rows and <code>embedding_dim</code> columns and you want to create a tensor <code>W</code> that can be used in a call to <a href="https://www.tensorflow.org/versions/r0.7/api_docs/python/nn.html#embedding_lookup"><code>tf.nn.embedding_lookup()</code></a>.</p>
+
+<ol>
+<li><p>Simply create <code>W</code> as a <a href="https://www.tensorflow.org/versions/r0.7/api_docs/python/constant_op.html#constant"><code>tf.constant()</code></a> that takes <code>embedding</code> as its value:</p>
+
+<pre class="lang-py prettyprint prettyprinted"><code><span class="pln">W </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">constant</span><span class="pun">(</span><span class="pln">embedding</span><span class="pun">,</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"W"</span><span class="pun">)</span></code></pre>
+
+<p>This is the easiest approach, but it is not memory efficient because the value of a <code>tf.constant()</code> is stored multiple times in memory. Since <code>embedding</code> can be very large, you should only use this approach for toy examples.</p></li>
+<li><p>Create <code>W</code> as a <code>tf.Variable</code> and initialize it from the NumPy array via a <a href="https://www.tensorflow.org/versions/r0.7/api_docs/python/io_ops.html#placeholder"><code>tf.placeholder()</code></a>:</p>
+
+<pre class="lang-py prettyprint prettyprinted"><code><span class="pln">W </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="typ">Variable</span><span class="pun">(</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">constant</span><span class="pun">(</span><span class="lit">0.0</span><span class="pun">,</span><span class="pln"> shape</span><span class="pun">=[</span><span class="pln">vocab_size</span><span class="pun">,</span><span class="pln"> embedding_dim</span><span class="pun">]),</span><span class="pln">
+                trainable</span><span class="pun">=</span><span class="kwd">False</span><span class="pun">,</span><span class="pln"> name</span><span class="pun">=</span><span class="str">"W"</span><span class="pun">)</span><span class="pln">
+
+embedding_placeholder </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">placeholder</span><span class="pun">(</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">float32</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="pln">vocab_size</span><span class="pun">,</span><span class="pln"> embedding_dim</span><span class="pun">])</span><span class="pln">
+embedding_init </span><span class="pun">=</span><span class="pln"> W</span><span class="pun">.</span><span class="pln">assign</span><span class="pun">(</span><span class="pln">embedding_placeholder</span><span class="pun">)</span><span class="pln">
+
+</span><span class="com"># ...</span><span class="pln">
+sess </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="typ">Session</span><span class="pun">()</span><span class="pln">
+
+sess</span><span class="pun">.</span><span class="pln">run</span><span class="pun">(</span><span class="pln">embedding_init</span><span class="pun">,</span><span class="pln"> feed_dict</span><span class="pun">={</span><span class="pln">embedding_placeholder</span><span class="pun">:</span><span class="pln"> embedding</span><span class="pun">})</span></code></pre>
+
+<p>This avoid storing a copy of <code>embedding</code> in the graph, but it does require enough memory to keep two copies of the matrix in memory at once (one for the NumPy array, and one for the <code>tf.Variable</code>). Note that I've assumed that you want to hold the embedding matrix constant during training, so <code>W</code> is created with <code>trainable=False</code>.</p></li>
+<li><p>If the embedding was trained as part of another TensorFlow model, you can use a <a href="https://www.tensorflow.org/versions/r0.7/api_docs/python/state_ops.html#Saver"><code>tf.train.Saver</code></a> to load the value from the other model's checkpoint file. This means that the embedding matrix can bypass Python altogether. Create <code>W</code> as in option 2, then do the following:</p>
+
+<pre class="lang-py prettyprint prettyprinted"><code><span class="pln">W </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="typ">Variable</span><span class="pun">(...)</span><span class="pln">
+
+embedding_saver </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">train</span><span class="pun">.</span><span class="typ">Saver</span><span class="pun">({</span><span class="str">"name_of_variable_in_other_model"</span><span class="pun">:</span><span class="pln"> W</span><span class="pun">})</span><span class="pln">
+
+</span><span class="com"># ...</span><span class="pln">
+sess </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="typ">Session</span><span class="pun">()</span><span class="pln">
+embedding_saver</span><span class="pun">.</span><span class="pln">restore</span><span class="pun">(</span><span class="pln">sess</span><span class="pun">,</span><span class="pln"> </span><span class="str">"checkpoint_filename.ckpt"</span><span class="pun">)</span></code></pre></li>
+</ol>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/35688187" title="short permalink to this answer" class="short-link" id="link-post-35688187">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/35688187/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2016-02-28 20:59:12Z" class="relativetime">Feb 28 '16 at 20:59</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/3574081/mrry"><div class="gravatar-wrapper-32"><img src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/LIW6C.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/3574081/mrry">mrry</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 50,593" dir="ltr">50.6k</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="123 silver badges"><span class="badge2"></span><span class="badgecount">123</span></span><span title="179 bronze badges"><span class="badge3"></span><span class="badgecount">179</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-35688187" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-59058272" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I create W as follows: W = np.loadtxt("/media/w2vTest.txt",dtype ='string',delimiter = ' ') that creates as a row: ['in' '0.070312......'-0.0625']. There are problems here! shall I consider this as my W after removing 'in' and converting numbers from string to float32? if this is the case, then how to connect 'in' to its respective vector? OR I need to convert figures to float32 and then leave 'in' as it is ; expecting that tensorflow will do all required processing? Thanks!</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/3147590/user3147590" title="392 reputation" class="comment-user owner">user3147590</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#comment59058272_35688187"><span title="2016-02-29 00:44:56Z" class="relativetime-clean">Feb 29 '16 at 0:44</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 2 times"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-59095708" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Ah, you have a couple of options here. You <i>could</i> use the TensorFlow <code>tf.decode_csv()</code> op to convert the text file into a tensor, but this might be expensive (in particular, it requires you to create one <code>Tensor</code> per column, and then concatenate the numeric ones together). Perhaps an easier alternative would be to use <a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html" rel="nofollow noreferrer"><code>pandas.read_csv()</code></a> and <a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.as_matrix.html" rel="nofollow noreferrer"><code>pandas.DataFrame.as_matrix()</code></a> to get the input as a NumPy array.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/3574081/mrry" title="50,593 reputation" class="comment-user">mrry</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#comment59095708_35688187"><span title="2016-02-29 20:57:10Z" class="relativetime-clean">Feb 29 '16 at 20:57</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-59337755" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Using option 2, is there a way to throw away the NumPy array and save some memory?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/2168189/morphe" title="151 reputation" class="comment-user">morphe</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#comment59337755_35688187"><span title="2016-03-07 02:55:40Z" class="relativetime-clean">Mar 7 '16 at 2:55</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-59340360" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">The NumPy array should be garbage collected after the call to <code>sess.run(embedding_init, ...)</code> returns (assuming you don't keep a reference to it in your program). Depending on the structure of your program, you might want to <code>del embedding</code> (where <code>embedding</code> is the NumPy array) to release the array earlier.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/3574081/mrry" title="50,593 reputation" class="comment-user">mrry</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#comment59340360_35688187"><span title="2016-03-07 05:42:58Z" class="relativetime-clean">Mar 7 '16 at 5:42</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-69428279" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@mrry: can you talk more about option 1 and more specifically "it is not memory efficient because the value of a tf.constant() is stored multiple times in memory". Memory inefficient for the GPU or the CPU? More generally, why do tf.constant() have to have multiple copies in memory, while the tf.Variable() + feeding placeholder of option 2 does not have this problem?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/6621932/gabriel-parent" title="81 reputation" class="comment-user">Gabriel Parent</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#comment69428279_35688187"><span title="2016-12-13 00:34:58Z" class="relativetime-clean">Dec 13 '16 at 0:34</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-35688187" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk1032733515",4).setZone(44); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1032733515"><a href="http://engine.adzerk.net/r?e=eyJhdiI6NjUxNzUsImF0Ijo0LCJidCI6MCwiY20iOjU3NTQ0MSwiY2giOjExNzgsImNrIjp7fSwiY3IiOjI3MjI4NjQsImRpIjoiNjY4Y2YxZGQ0YmM4NGNkYTk3ODkxNTI2ZWViY2ZmMDkiLCJkbSI6MSwiZmMiOjQzNzg5ODIsImZsIjo0NjExNTM4LCJpcCI6IjUwLjIzMi43NS4xOTQiLCJrdyI6InB5dGhvbixudW1weSx0ZW5zb3JmbG93LGRlZXAtbGVhcm5pbmcseC1wZXJzb25hLWJpZ2RhdGEiLCJtayI6ImRlZXAtbGVhcm5pbmcsbnVtcHkiLCJudyI6MjIsInBjIjo0LjEzLCJlYyI6NC4xMywicHIiOjc2NSwicnQiOjIsInJmIjoiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8iLCJzYiI6ImktMDBjM2U0Nzg1ODhjMDdhMTAiLCJzcCI6MzEzNCwic3QiOjgyNzcsInVrIjoidWUxLTk3NDFmYjFhMTc0ZTRjZDY5N2U4ODQ5ZTBlNTg2MTliIiwiem4iOjQ0LCJ0cyI6MTQ5NTEzOTk0MDEwNywiYmYiOnRydWUsInBuIjoiYWR6ZXJrMTAzMjczMzUxNSIsInVyIjoiaHR0cDovL2dvLmRpZ2l0YWwuZ2UuY29tL3ByZWRpeC10c2hpcnQtd2VsY29tZS5odG1sP3V0bV9tZWRpdW09cHBjJnV0bV9zb3VyY2U9c3RhY2tvdmVyZmxvdyZ1dG1fY29udGVudD1wcmVkaXgtc3RhcnRlci1qb3VybmV5JnV0bV9jYW1wYWlnbj0yMDE2LTEwLUdMT0ItREctSE9SWi1QUkVESVgtSFdfU3RhcnRlcl9Kb3VybmV5LVBhcmVudF8zUFRZIn0&amp;s=tFx8RClqGrcYW1ghG2vC59CGrhg" rel="nofollow" target="_blank" title=""><img src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/5e4ffbcfa393471ba7910d616714f9d4.jpg" title="" alt="" border="0" width="728" height="90"></a><div class="adzerk-vote-controls" style="display: none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/i(1).gif"></div>
+  
+<a name="36880018"></a>
+<div id="answer-36880018" class="answer" data-answerid="36880018" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="36880018">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">14</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I use this method to load and share embedding.</p>
+
+<pre class="lang-py prettyprint prettyprinted"><code><span class="pln">W </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">get_variable</span><span class="pun">(</span><span class="pln">name</span><span class="pun">=</span><span class="str">"W"</span><span class="pun">,</span><span class="pln"> shape</span><span class="pun">=</span><span class="pln">embedding</span><span class="pun">.</span><span class="pln">shape</span><span class="pun">,</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">constant_initializer</span><span class="pun">(</span><span class="pln">embedding</span><span class="pun">),</span><span class="pln"> trainable</span><span class="pun">=</span><span class="kwd">False</span><span class="pun">)</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/36880018" title="short permalink to this answer" class="short-link" id="link-post-36880018">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/36880018/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/36880018/revisions" title="show all edits to this post">edited <span title="2016-04-27 05:33:21Z" class="relativetime">Apr 27 '16 at 5:33</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2016-04-27 03:58:22Z" class="relativetime">Apr 27 '16 at 3:58</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/5772548/liujia"><div class="gravatar-wrapper-32"><img src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/5d7fb6ae8063fee85d6df7fdf338ead0" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/5772548/liujia">LiuJia</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">156</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-36880018" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-36880018" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="40214916"></a>
+<div id="answer-40214916" class="answer" data-answerid="40214916" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="40214916">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">4</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>The answer of @mrry is not right because it provoques the overwriting of the embeddings weights each the network is run, so if you are following a minibatch approach to train your network, you are overwriting the weights of the embeddings. So, on my point of view the right way to pre-trained embeddings is:</p>
+
+<pre class="lang-py prettyprint prettyprinted"><code><span class="pln">embeddings </span><span class="pun">=</span><span class="pln"> tf</span><span class="pun">.</span><span class="pln">get_variable</span><span class="pun">(</span><span class="str">"embeddings"</span><span class="pun">,</span><span class="pln"> shape</span><span class="pun">=[</span><span class="pln">dim1</span><span class="pun">,</span><span class="pln"> dim2</span><span class="pun">],</span><span class="pln"> initializer</span><span class="pun">=</span><span class="pln">tf</span><span class="pun">.</span><span class="pln">constant_initializer</span><span class="pun">(</span><span class="pln">np</span><span class="pun">.</span><span class="pln">array</span><span class="pun">(</span><span class="pln">embeddings_matrix</span><span class="pun">))</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/40214916" title="short permalink to this answer" class="short-link" id="link-post-40214916">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/40214916/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2016-10-24 09:25:01Z" class="relativetime">Oct 24 '16 at 9:25</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/2984547/eugenio-mart%c3%adnez-c%c3%a1mara"><div class="gravatar-wrapper-32"><img src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/MaKUF.png" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/2984547/eugenio-mart%c3%adnez-c%c3%a1mara">Eugenio Martínez Cámara</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">49</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-40214916" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-69070547" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Exact duplicate of LiuJia's answer.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1293689/timzaman" title="1,300 reputation" class="comment-user">TimZaman</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#comment69070547_40214916"><span title="2016-12-02 10:21:03Z" class="relativetime-clean">Dec 2 '16 at 10:21</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-69347081" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@TimZaman .. In fact, he is missing the trainable=False argument, and thus will end up fine-tuning his embeddings in the process.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/501086/shatu" title="1,261 reputation" class="comment-user">Shatu</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#comment69347081_40214916"><span title="2016-12-09 22:40:32Z" class="relativetime-clean">Dec 9 '16 at 22:40</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-72279961" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Also, I think Eugenio's reasoning is incorrect. You just don't have to run the "embedding_init" op with every mini-batch, and everything will be fine. That is, just run the embedding initialization only once at the start of training.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/501086/shatu" title="1,261 reputation" class="comment-user">Shatu</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#comment72279961_40214916"><span title="2017-03-03 07:49:28Z" class="relativetime-clean">Mar 3 at 7:49</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-40214916" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="http://stackoverflow.com/questions/35687678/answer/submit" method="post" class="post-form">
+						    <input type="hidden" id="post-id" value="35687678">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.com/">
+							<h2 class="space">Your Answer</h2>
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="cbe153d9c8e4943557d600e50d8c5c31">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+								            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="http://stackoverflow.com/users/login?ssrc=question_page&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f35687678%2fusing-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid">
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false">
+                    <input type="hidden" name="use-google" class="use-google" value="false">
+                    <input type="button" class="submit-openid" value="Submit" style="display:none">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'http%3a%2f%2fstackoverflow.com%2fquestions%2f35687678%2fusing-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        &lt;h3&gt;Post as a guest&lt;/h3&gt;
+    &lt;div class="form-item"&gt;
+        &lt;table&gt;
+        &lt;tr&gt;
+                    &lt;td class="vm"&gt;
+                &lt;div&gt;
+                    &lt;label for="display-name"&gt;Name&lt;/label&gt;
+                    &lt;input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="m-address"&gt;Email&lt;/label&gt;
+                    &lt;input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" /&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+            </noscript>
+
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#" class="btn-clear discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href="http://stackexchange.com/legal/privacy-policy" name="privacy" target="_blank">privacy policy</a> and <a href="http://stackexchange.com/legal/terms-of-service" name="tos" target="_blank">terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1">								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/python" class="post-tag" title="show questions tagged &#39;python&#39;" rel="tag">python</a> <a href="http://stackoverflow.com/questions/tagged/numpy" class="post-tag" title="show questions tagged &#39;numpy&#39;" rel="tag">numpy</a> <a href="http://stackoverflow.com/questions/tagged/tensorflow" class="post-tag" title="show questions tagged &#39;tensorflow&#39;" rel="tag">tensorflow</a> <a href="http://stackoverflow.com/questions/tagged/deep-learning" class="post-tag" title="show questions tagged &#39;deep-learning&#39;" rel="tag">deep-learning</a>  or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2016-02-28 20:11:43Z"><b>1 year, 2 months ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>16221 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow?lastactivity" class="lastactivity-link" title="2016-10-24 09:25:01Z">6 months ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+			<div class="module community-bulletin" data-tracker="cb=1">
+    <div class="related">
+                <div class="bulletin-title">
+                    Blog
+                </div>
+                <hr>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://stackoverflow.blog/2017/05/16/exploring-state-mobile-development-stack-overflow-trends/?cb=1" class="question-hyperlink">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="https://stackoverflow.blog/2017/05/16/exploring-state-mobile-development-stack-overflow-trends/?cb=1" class="question-hyperlink">Exploring the State of Mobile Development with Stack Overflow Trends</a>
+                </div>
+                <br class="cbt">
+            </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://stackoverflow.blog/2017/05/16/stack-overflow-official-app-launches-ios-android/?cb=1" class="question-hyperlink">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="https://stackoverflow.blog/2017/05/16/stack-overflow-official-app-launches-ios-android/?cb=1" class="question-hyperlink">Stack Overflow Official App launches on both iOS and Android</a>
+                </div>
+                <br class="cbt">
+            </div>
+    </div>
+</div>			
+			<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk1905587856",[5,17,2221,1129,43]).setZone(45); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1905587856"><iframe id="ados_frame_adzerk1905587856_5105892" frameborder="0" scrolling="no" height="250" width="300" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/saved_resource.html"></iframe><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/35687678/using-a-pre-trained-word-embedding-word2vec-or-glove-in-tensorflow#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/i(2).gif"></div>
+            <div id="hireme" class="tag-themed python tagged tex2jax_ignore clc-jobs-multi"><a class="top " href="https://stackoverflow.com/jobs" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=46qsuPBSd94VD3U7zeBQJiYBdeZ_M5sEeafM_fKLodmsnvGj352AE4EMXAwpBxJrN1muzOGyZ2RkYJrP9CB2ctLqZE4uBsEDnlkCVjHMUfaMbAWVJRn5efOZ9i1kn3aFY-lpfiEuBqEDfvO5rXztguHyQkZMD_QYGNhYAxj3XWBkYGMLYOSXuZW7ocO6ecd-AA&amp;cr=10440&amp;ct=1&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%3Fmed=clc&amp;sig=OWWgIIEMPkPCUw"><span>Want a <span class="header-tag">python</span> job?</span></a><div class="middle"><ul class="jobs"><li class="&quot;clc-dismissable&quot;"><div class="job-wrap"><a class="job" title="Sr. Backend Engineer - Data Systems at PresenceLearning. Click to learn more." href="https://stackoverflow.com/jobs/125364/sr-backend-engineer-data-systems-presencelearning" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=46qsuPBSd94VD3U7zeBQJiYBdeZ_M5sEeafM_fKLodmsnvGj352AE4EMXAwpBxJrN1muzOGyZ2RkYJrP9CB2ctLqZE4uBsEDnlkCVjHMUfaMbAWVJRn5efOZ9i1kn3aFY-lpfiEuBqEDfvO5rXztguHyQkZMD_QYGNhYAxj3XWBkYGMLYOSXuZW7ocO6ecd-AA&amp;cr=12715&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F125364%2Fsr-backend-engineer-data-systems-presencelearning%3Fmed=clc&amp;sig=nTGr4z4DIOaG-Q"><div class="title">Sr. Backend Engineer - Data Systems</div><div><span class="company">PresenceLearning</span><span class="location">San Francisco, CA</span></div><div class="opts"><span class="opt salary">$130k - $140k</span></div><span class="post-tag highlight">python</span><span class="post-tag">etl</span></a></div><a class="clc-dismiss" data-clc-click="https://clc.stackoverflow.com/click?an=46qsuPBSd94VD3U7zeBQJiYBdeZ_M5sEeafM_fKLodmsnvGj352AE4EMXAwpBxJrN1muzOGyZ2RkYJrP9CB2ctLqZE4uBsEDnlkCVjHMUfaMbAWVJRn5efOZ9i1kn3aFY-lpfiEuBqEDfvO5rXztguHyQkZMD_QYGNhYAxj3XWBkYGMLYOSXuZW7ocO6ecd-AA&amp;cr=12715&amp;ct=-1&amp;sig=dMOgohY6u5-tNA" data-clc-meta-target="-1"><span class="clc-tooltip above-left">dismiss this job</span></a></li><li class="&quot;clc-dismissable&quot;"><div class="job-wrap"><a class="job" title="Backend Engineer at Buddy AI Inc.. Click to learn more." href="https://stackoverflow.com/jobs/139307/backend-engineer-buddy-ai-inc" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=46qsuPBSd94VD3U7zeBQJiYBdeZ_M5sEeafM_fKLodmsnvGj352AE4EMXAwpBxJrN1muzOGyZ2RkYJrP9CB2ctLqZE4uBsEDnlkCVjHMUfaMbAWVJRn5efOZ9i1kn3aFY-lpfiEuBqEDfvO5rXztguHyQkZMD_QYGNhYAxj3XWBkYGMLYOSXuZW7ocO6ecd-AA&amp;cr=255397&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F139307%2Fbackend-engineer-buddy-ai-inc%3Fmed=clc&amp;sig=F6a8RHLs9ZRnQQ"><div class="title">Backend Engineer</div><div><span class="company">Buddy AI Inc.</span><span class="location">Sunnyvale, CA</span></div><div class="opts"><span class="opt salary">$80k - $110k</span></div><span class="post-tag highlight">python</span><span class="post-tag">data</span></a></div><a class="clc-dismiss" data-clc-click="https://clc.stackoverflow.com/click?an=46qsuPBSd94VD3U7zeBQJiYBdeZ_M5sEeafM_fKLodmsnvGj352AE4EMXAwpBxJrN1muzOGyZ2RkYJrP9CB2ctLqZE4uBsEDnlkCVjHMUfaMbAWVJRn5efOZ9i1kn3aFY-lpfiEuBqEDfvO5rXztguHyQkZMD_QYGNhYAxj3XWBkYGMLYOSXuZW7ocO6ecd-AA&amp;cr=255397&amp;ct=-1&amp;sig=hpwsYOO89ttFfA" data-clc-meta-target="-1"><span class="clc-tooltip above-left">dismiss this job</span></a></li></ul></div><img src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/impression.gif" class="impression" style="display: none;"></div>
+        <script>
+window.clc_request = 'AvheIOktntQIAAAAAP6MIAICAAAAAgAAAAA5AAAAfHB5dGhvbnxudW1weXx0ZW5zb3JmbG93fGRlZXAtbGVhcm5pbmd8eC1wZXJzb25hLWJpZ2RhdGF8AIa8jpHvKwJixwY';;(function(n){var u={log:window.console.log.bind(window.console,"[clc]"),error:window.console.error.bind(window.console,"[clc]")},f,e,t,r,i;try{if(typeof[].indexOf!="function")return;if(window.attachEvent&&!window.addEventListener)return;if(f=n.allowed,!f)return;if(e=new RegExp(n.allowed),!e.test(location.hostname)){u.error("Invalid host: "+location.hostname);return}if(t=window,t.clc=t.clc||{},t.clc.init=t.clc.init||[],t.clc.init.push(function(n){return n.load()}),t.clc.options){for(r in t.clc.options)n[r]=t.clc.options[r];t.clc.options=n}else t.clc.options=n;i=document.createElement("script");i.async=!0;i.src=n.lib;document.body.appendChild(i)}catch(o){u.error("[clc] Error in loader:",o)}}).call(null, {"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=436861d2e2c5","u":"https://clc.stackoverflow.com/markup.js","azw":true,"kt":2000,"tto":true,"d":{"sb":["hireme","clc-sb"],"tlb":["careers1","clc-tlb"],"mlb":["careers3","clc-mlb"]},"h":"clc.stackoverflow.com","autoload":true,"allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$"});        </script>
+			
+
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/41226351?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/41226351/how-to-use-glove-pretrained-vectors-to-find-similarity-between-two-words-and-lat?noredirect=1&amp;lq=1" class="question-hyperlink">How to use glove pretrained vectors to find similarity between two words and later in two documnets?</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/39925631?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/39925631/how-to-train-word-embeddings-in-tensorflow?noredirect=1&amp;lq=1" class="question-hyperlink">How to train Word Embeddings in Tensorflow</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/35828037?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/35828037/training-a-cnn-with-pre-trained-word-embeddings-is-very-slow-tensorflow?noredirect=1&amp;lq=1" class="question-hyperlink">Training a CNN with pre-trained word embeddings is very slow (TensorFlow)</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/40329634?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/40329634/handling-unknown-word-in-word-embedding-in-tensorflow?noredirect=1&amp;lq=1" class="question-hyperlink">Handling unknown word in word embedding in Tensorflow</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/41487791?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/41487791/how-to-use-pretrained-glove-vectors-in-a-tensorflow-lstm-generative-model?noredirect=1&amp;lq=1" class="question-hyperlink">How to use pretrained GloVe vectors in a tensorflow LSTM generative model</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/40345607?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/40345607/how-does-fine-tuning-word-embeddings-work?noredirect=1&amp;lq=1" class="question-hyperlink">How does Fine-tuning Word Embeddings work?</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/41150741?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/41150741/in-tensorflow-what-is-the-difference-between-a-constant-and-a-non-trainable-var?noredirect=1&amp;lq=1" class="question-hyperlink">In tensorflow, what is the difference between a constant and a non-trainable variable?</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/41615654?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">2</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/41615654/how-to-pass-3d-tensor-to-tensorflow-rnn-embedding-rnn-seq2seq?noredirect=1&amp;lq=1" class="question-hyperlink">How to pass 3d Tensor to tensorflow RNN embedding_rnn_seq2seq</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/42944787?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/42944787/load-pretrained-word-embedding-into-tensorflow-model?noredirect=1&amp;lq=1" class="question-hyperlink">Load pretrained word embedding into Tensorflow model</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/42450156?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/42450156/why-is-the-value-of-a-tf-constant-stored-multiple-times-in-memory-in-tensorf?noredirect=1&amp;lq=1" class="question-hyperlink">Why is the value of a `tf.constant()` stored multiple times in memory in TensorFlow?</a>
+</div>					<div class="spacer more">
+				<a href="http://stackoverflow.com/questions/linked/35687678?lq=1">see more linked questions…</a>
+			</div>
+	</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/34175174?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">19</div></a><a href="http://stackoverflow.com/questions/34175174/extract-features-using-pre-trained-tensorflow-cnn?rq=1" class="question-hyperlink">Extract features using pre-trained (Tensorflow) CNN</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/35828037?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="http://stackoverflow.com/questions/35828037/training-a-cnn-with-pre-trained-word-embeddings-is-very-slow-tensorflow?rq=1" class="question-hyperlink">Training a CNN with pre-trained word embeddings is very slow (TensorFlow)</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/36415325?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="http://stackoverflow.com/questions/36415325/skflow-load-pre-train-word-embeddings-into-text-classification-cnn?rq=1" class="question-hyperlink">skflow load pre-train word embeddings into text_classification_cnn</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/38111129?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">10</div></a><a href="http://stackoverflow.com/questions/38111129/tensorflow-implementation-of-word2vec?rq=1" class="question-hyperlink">Tensorflow implementation of word2vec</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/38168819?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/38168819/apply-word2vec-for-convolution-neural-network-tensorflow?rq=1" class="question-hyperlink">Apply Word2vec for Convolution Neural Network (Tensorflow)</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/39582703?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">5</div></a><a href="http://stackoverflow.com/questions/39582703/using-pre-trained-inception-resnet-v2-with-tensorflow?rq=1" class="question-hyperlink">Using pre-trained inception_resnet_v2 with Tensorflow</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/39925631?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="http://stackoverflow.com/questions/39925631/how-to-train-word-embeddings-in-tensorflow?rq=1" class="question-hyperlink">How to train Word Embeddings in Tensorflow</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/40329634?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="http://stackoverflow.com/questions/40329634/handling-unknown-word-in-word-embedding-in-tensorflow?rq=1" class="question-hyperlink">Handling unknown word in word embedding in Tensorflow</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/41688839?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="http://stackoverflow.com/questions/41688839/large-word-embedding-matrix-update-in-tensorflow?rq=1" class="question-hyperlink">Large word embedding matrix update in tensorflow</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/42106032?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="http://stackoverflow.com/questions/42106032/tensorflow-word2vec-error?rq=1" class="question-hyperlink">tensorflow Word2Vec error</a></div>
+                    </div>
+				</div>
+            
+
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/81132/useful-late-medieval-weapon-against-iron-buildings" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Useful (late-)medieval Weapon against Iron Buildings?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/159521/what-is-the-reference-captain-america-understood" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is the reference Captain America understood?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-money" title="Personal Finance &amp; Money Stack Exchange"></div><a href="https://money.stackexchange.com/questions/79810/buying-from-an-aggressive-salesperson" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Buying from an aggressive salesperson
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-gaming" title="Arqade"></div><a href="https://gaming.stackexchange.com/questions/309274/do-the-market-place-fishing-guy-photo-guy-dog-tag-quests-in-ffxv-ever-end" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:41 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Do the market place / fishing guy / photo guy / dog tag quests in FFXV ever end?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-money" title="Personal Finance &amp; Money Stack Exchange"></div><a href="https://money.stackexchange.com/questions/79848/is-it-true-that-the-value-of-diamonds-is-based-on-a-monopoly" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it true that the value of diamonds is based on a monopoly?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="https://workplace.stackexchange.com/questions/91193/saying-bye-to-the-boss-when-leaving-office" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Saying "bye" to the boss when leaving office
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href="https://ell.stackexchange.com/questions/129724/why-do-we-say-i-love-cake-but-i-love-cars" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do we say "I love cake" but "I love cars"?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="https://tex.stackexchange.com/questions/370393/how-to-rotate-the-large-table-and-caption" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to rotate the large table and caption?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-earthscience" title="Earth Science Stack Exchange"></div><a href="https://earthscience.stackexchange.com/questions/10417/why-is-the-temperature-between-the-earth-core-and-surface-not-distributed-linear" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:553 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why is the temperature between the earth core and surface not distributed linearly?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="https://english.stackexchange.com/questions/389821/is-seafood-inclusive-of-seaweed" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is "seafood" inclusive of "seaweed"?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="https://mathematica.stackexchange.com/questions/146347/whats-the-foo-such-that-fooa-b-c-2-produces-a-a-b-b-c-c" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What's the foo such that foo[{a, b, c}, 2] produces {a, a, b, b, c, c}?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2286456/how-does-the-axiom-of-regularity-make-sense" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How does the axiom of regularity make sense?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="https://workplace.stackexchange.com/questions/91230/informal-chat-in-concluding-an-interview-is-it-appropriate-to-ask-about-a-hobby" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Informal Chat in Concluding an Interview; is it appropriate to ask about a hobby/interest?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="https://security.stackexchange.com/questions/159725/how-can-i-securely-develop-a-local-webapp-at-a-coffee-shop" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How can I securely develop a local webapp at a coffee shop?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/89629/should-you-recuse-yourself-from-the-hiring-committee-if-you-have-had-a-past-roma" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Should you recuse yourself from the hiring committee if you have had a past romantic relationship with an applicant?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="https://travel.stackexchange.com/questions/93514/luggage-use-of-someone-absent" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Luggage use of someone absent
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="https://mathematica.stackexchange.com/questions/146336/extract-the-first-element-in-the-list-when-second-element-is-minimal" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Extract the first element in the list when second element is minimal
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/121118/golf-a-custom-fibonacci-sequence" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Golf a Custom Fibonacci Sequence
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2282622/expected-number-of-unpecked-chicks-nyt-article" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Expected number of unpecked chicks - NYT article
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-skeptics" title="Skeptics Stack Exchange"></div><a href="https://skeptics.stackexchange.com/questions/38351/does-america-have-more-tax-preparers-than-police-and-firefighters-combined" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:212 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Does America have more tax preparers than police and firefighters combined?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-networkengineering" title="Network Engineering Stack Exchange"></div><a href="https://networkengineering.stackexchange.com/questions/41274/null-0-in-isp-core-router-running-bgp" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:496 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Null 0 in ISP Core Router running bGP?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/121320/check-if-a-matrix-is-a-toeplitz-matrix" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Check if a matrix is a Toeplitz matrix
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="https://mathematica.stackexchange.com/questions/146324/combinng-if-condition-and-for-loop-in-table" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Combinng If condition and For loop in Table
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-gaming" title="Arqade"></div><a href="https://gaming.stackexchange.com/questions/309265/should-i-update-my-wii-u-if-theres-a-chance-of-a-power-outage" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:41 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Should I update my Wii U if there's a chance of a power outage?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="http://stackoverflow.com/feeds/question/35687678" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/35687678/ivc/8ee2');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/35687678/ivc/8ee2" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">lang-py</div></div>
+
+
+        </div>
+    </div><script async="" src="./python - Using a pre-trained word embedding (word2vec or Glove) in TensorFlow - Stack Overflow_files/clc.min.js"></script>
+    <div id="footer" class="categories" role="contentinfo">
+        <div class="footerwrap">            
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                    <a href="http://stackoverflow.com/company/about">about us</a>
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="https://stackoverflow.blog/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="https://data.stackexchange.com/">data</a>
+                    <a href="https://stackexchange.com/legal">legal</a>
+                    <a href="https://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackoverflow.com/company/work-here">work here</a>
+                    <a href="https://www.stackoverflowbusiness.com/advertise">advertising info</a>
+                        <a href="http://stackoverflow.com/jobs/directory/developer-jobs">developer jobs directory</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="https://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                        <li><a href="http://softwareengineering.stackexchange.com/" title="professionals, academics, and students working within the systems development life cycle who care about creating, delivering, and maintaining software responsibly">Software Engineering</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="information security professionals">Information Security</a></li>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Wolfram Mathematica">Mathematica</a></li>
+                        <li><a href="http://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="http://expressionengine.stackexchange.com/" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                        <li><a href="http://crypto.stackexchange.com/" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://codereview.stackexchange.com/" title="peer programmer code reviews">Code Review</a></li>
+                        <li><a href="http://magento.stackexchange.com/" title="users of the Magento e-Commerce platform">Magento</a></li>
+                        <li><a href="http://dsp.stackexchange.com/" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                        <li><a href="http://raspberrypi.stackexchange.com/" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                        <li><a href="http://codegolf.stackexchange.com/" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="http://movies.stackexchange.com/" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="http://music.stackexchange.com/" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="http://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="http://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (8)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://ell.stackexchange.com/" title="speakers of other languages learning English">English Language Learners</a></li>
+                        <li><a href="http://japanese.stackexchange.com/" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                        <li><a href="http://anime.stackexchange.com/" title="anime and manga fans">Anime &amp; Manga</a></li>
+                        <li><a href="http://mechanics.stackexchange.com/" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (17)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://chemistry.stackexchange.com/" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="http://biology.stackexchange.com/" title="biology researchers, academics, and students">Biology</a></li>
+                        <li><a href="http://cs.stackexchange.com/" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                        <li><a href="http://philosophy.stackexchange.com/" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (3)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="https://www.stackoverflowbusiness.com/talent">Stack Overflow Talent</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+            <div id="copyright">
+                site design / logo © 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2017.5.18.25959
+            </div>
+                </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+<script>var z=document.createElement("script");z.type="text/javascript",z.async=!0,z.src="https://static.adzerk.net/ados.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(z,s);</script>
+<script>
+var ados = ados || {};
+ados.run = ados.run || [];
+
+
+ados.run.push(function () {
+    setTimeout(function () { $("#adzerk-user-match").remove(); }, window.AUMIframeDone ? 0 : 2000);
+    ados_setKeywords('python,numpy,tensorflow,deep-learning,x-persona-bigdata');; ados_load();
+});   
+
+</script>
+
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-1');
+                ga('create', 'UA-5620270-59', {name: 'pageData', sampleRate: 5 });
+                ga('set', 'dimension2', '|python|numpy|tensorflow|deep-learning|');
+                ga('pageData.set', 'dimension2', '|python|numpy|tensorflow|deep-learning|');
+                ga('send', 'pageview');
+                ga('pageData.send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i) || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') service =  2;
+                                    else if (service === 'Place') service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', function() {
+                                        StackExchange.gps.track('google_maps_places_api.call', { service: service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    
+</body></html>

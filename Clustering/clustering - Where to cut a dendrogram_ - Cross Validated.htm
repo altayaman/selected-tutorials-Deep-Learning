@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>clustering - Where to cut a dendrogram? - Cross Validated</title>
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stats/img/favicon.ico?v=573163e34adf">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stats/img/apple-touch-icon.png?v=8698dcfb5c72">
+    <link rel="search" type="application/opensearchdescription+xml" title="Cross Validated" href="https://stats.stackexchange.com/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackStats">
+    <meta name="twitter:domain" content="stats.stackexchange.com">
+    <meta property="og:type" content="website">
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stats/img/apple-touch-icon@2.png?v=344f57aa10cc">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="Where to cut a dendrogram?">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="Hierarchical clustering can be represented by a dendrogram. Cutting a dendrogram at a certain level gives a set of clusters. Cutting at another level gives another set of clusters. How would you pick ">
+    <meta property="og:url" content="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram">
+    <link rel="canonical" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram">
+
+    
+    
+    <script type="text/javascript" async="" src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/ados"></script><script async="" src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/quant.js"></script><script async="" src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/beacon.js"></script><script async="" src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/analytics.js"></script><script type="text/javascript" async="" src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/ados.js"></script><script src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/jquery.min.js"></script>
+    <script src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./clustering - Where to cut a dendrogram_ - Cross Validated_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Where to cut a dendrogram?&#39;" href="https://stats.stackexchange.com/feeds/question/3685">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:3685});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('65', '3685');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', false); });
+
+            });
+        </script>
+
+                <script type="text/x-mathjax-config;executed=true">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>        
+            <script src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/MathJax.js"></script>  
+
+    <script>
+        StackExchange.ready(function () {
+                        StackExchange.realtime.init('wss://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToReputationNotifications('65');
+                StackExchange.realtime.subscribeToTopBarNotifications('65');
+        });
+    </script>
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","serverTime":1493015054,"routeName":"Questions/Show","site":{"name":"Cross Validated","description":"Q&A for people interested in statistics, machine learning, data analysis, data mining, and data visualization","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","recaptchaAudioLang":"en","enableNewTagCreationWarning":false,"insertSpaceAfterNameTabCompletion":false,"id":65,"enableInsertDocLinkDialog":false,"childUrl":"https://stats.meta.stackexchange.com","enableSocialMediaInSharePopup":true,"protocol":"https"},"user":{"fkey":"cbe153d9c8e4943557d600e50d8c5c31","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true},"realtime":{"newest":true,"active":true,"tagged":true,"staleDisconnectIntervalInHours":0,"workerIframeDomain":"https://cdn.sstatic.net"},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"snippets":{"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"efaa486a4fd9","js/moderator.en.js":"fb3adb7a979d","js/full-anon.en.js":"9244f7ab7a3d","js/full.en.js":"654b45b66a02","js/wmd.en.js":"d6b54102c2b9","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"153e33c56ac2","js/help.en.js":"a56fdf9b9ff2","js/tageditor.en.js":"bc3ebe71b5f1","js/tageditornew.en.js":"679b12412824","js/inline-tag-editing.en.js":"69e72a3bd91c","js/revisions.en.js":"47de10a8358f","js/review.en.js":"2c5d38e5bc96","js/tagsuggestions.en.js":"2a9fc67ea337","js/post-validation.en.js":"94b6352ae825","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"274377649215","js/keyboard-shortcuts.en.js":"936bac23a9fa","js/external-editor.en.js":"cb487078c372","js/adops.en.js":"9a6a7812a212","js/mathjax-editing.en.js":"6a31ffe1a0d5"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    <noscript id="noscript-css">&lt;style type="text/css"&gt;body,.so-header{margin-top:1.9em}&lt;/style&gt;</noscript>
+<script async="" src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/full-anon.en.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><script async="" src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/post-validation.en.js"></script><script async="" src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/external-editor.en.js"></script><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax:focus, body :focus .MathJax {display: inline-table}
+.MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax_LineBox {display: table!important}
+.MathJax_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Blank; src: url('about:blank')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><script type="text/javascript" src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/adFeedback.js"></script><link rel="stylesheet" href="./clustering - Where to cut a dendrogram_ - Cross Validated_files/adFeedback.css"></head>
+<body class="question-page new-topbar"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+    
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+
+        <div class="js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="https://stats.stackexchange.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+                    <a href="http://chat.stackexchange.com/?tab=site&amp;host=stats.stackexchange.com" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+    <a href="https://stats.stackexchange.com/" class="current-site-link site-link js-gps-track" data-id="65" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stats" title="Cross Validated"></div>
+        Cross Validated
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                        
+    <a href="https://stats.meta.stackexchange.com/" class="site-link js-gps-track" data-id="66" data-gps-track="site.switch({ target_site:66, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-statsmeta" title="Cross Validated Meta"></div>
+        Cross Validated Meta
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://stats.stackexchange.com/users/signup?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f3685%2fwhere-to-cut-a-dendrogram" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stats.stackexchange.com/users/login?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f3685%2fwhere-to-cut-a-dendrogram" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+        </div>
+
+        <div class="network-items">
+                <a href="https://stackexchange.com/" class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 167 Stack Exchange sites">
+                    <span class="hidden-text">Stack Exchange</span>
+                </a>
+
+    <a href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" class="topbar-icon icon-inbox yes-hover js-inbox-button" title="Recent inbox messages">
+        <span class="hidden-text">Inbox</span>
+        <span class="unread-count" style="display:none"></span>
+    </a>
+    <a href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" class="topbar-icon icon-achievements yes-hover js-achievements-button " data-unread-class="" title="Recent achievements: reputation, badges, and privileges earned">
+        <span class="hidden-text">Reputation and Badges</span>
+        <span class="unread-count" style="display:none">
+            
+        </span>
+    </a>
+        </div>
+
+        <div class="topbar-links">
+
+                <div class="links-container">
+                <span class="topbar-menu-links">
+                                    <a href="https://stats.stackexchange.com/users/signup?ssrc=head&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f3685%2fwhere-to-cut-a-dendrogram" class="login-link" rel="nofollow">sign up</a>
+                                <a href="https://stats.stackexchange.com/users/login?ssrc=head&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f3685%2fwhere-to-cut-a-dendrogram" class="login-link" rel="nofollow">log in</a>
+
+                            <a href="https://stats.stackexchange.com/tour">tour</a>
+        <a href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" class="icon-help js-help-button" title="Help Center and other resources">
+            help
+            <span class="triangle"></span>
+        </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="https://stats.stackexchange.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="https://stats.stackexchange.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://stats.meta.stackexchange.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+                                            </span>
+                </div>
+
+            <div class="search-container">
+                <form id="search" action="https://stats.stackexchange.com/search" method="get" autocomplete="off" role="search">
+                        <input name="q" type="text" placeholder="Search Q&amp;A" value="" tabindex="1" autocomplete="off" maxlength="240">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+    </script>
+
+    <div class="container">
+            <div id="header">
+                <br class="cbt">
+                <div id="hlogo">
+                    <a href="https://stats.stackexchange.com/">
+                        Cross Validated
+                    </a>
+                </div>
+                <div id="hmenus">
+                        <div class="nav mainnavs" role="navigation" aria-label="site navigation">
+                            <ul>
+                                    <li class="youarehere">
+        <a id="nav-questions" href="https://stats.stackexchange.com/questions" class="js-gps-track" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">
+        Questions
+        </a>
+    </li>
+
+                                                                    <li>
+        <a id="nav-tags" href="https://stats.stackexchange.com/tags" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">
+        Tags
+        </a>
+    </li>
+
+                                    <li>
+        <a id="nav-users" href="https://stats.stackexchange.com/users" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">
+        Users
+        </a>
+    </li>
+
+                                    <li>
+        <a id="nav-badges" href="https://stats.stackexchange.com/help/badges" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:4})">
+        Badges
+        </a>
+    </li>
+
+    <li>
+        <a id="nav-unanswered" href="https://stats.stackexchange.com/unanswered" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:5})">
+        Unanswered
+        </a>
+    </li>
+                            </ul>
+                        </div>
+                    <div class="nav askquestion" role="navigation" aria-label="ask new question">
+                        <ul>
+                            <li>
+                                <a id="nav-askquestion" href="https://stats.stackexchange.com/questions/ask">Ask Question</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+
+
+        <div id="content">
+
+
+
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stats/img/apple-touch-icon.png?v=8698dcfb5c72">
+
+
+<div id="herobox">
+    <div id="hero-content">
+            <div id="close"><a title="click to minimize">_</a></div>
+        <div id="blurb">
+            Cross Validated is a question and answer site for people interested in statistics, machine learning, data analysis, data mining, and data visualization. Join them; it only takes a minute:
+            <br>
+            <br>
+            <a href="https://stats.stackexchange.com/users/signup?ssrc=hero&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f3685%2fwhere-to-cut-a-dendrogram" id="tell-me-more" class="button">Sign up</a>
+        </div>
+        <div id="desc">
+            <b>Here's how it works:</b>
+            <ol id="hiw">
+                <li id="q">
+                    Anybody can ask a question
+                </li>
+                <li id="an">
+                    Anybody can answer
+                </li>
+                <li id="b">
+                    The best answers are voted up and rise to the top
+                </li>
+            </ol>
+        </div>
+    <div style="clear: both"></div>
+    </div>
+</div><script>
+    StackExchange.ready(function () {
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("question-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;;
+        } else if ($("body").hasClass("home-page")) {
+            location = 3;;
+        }
+        
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+        
+        $('#herobox #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+            });
+            
+            $.cookie("hero", "mini", { path: "/", expires: 365 });
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $("#herobox").fadeOut("fast", function () {
+                        $("#herobox").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+
+</script>			<div id="question-header">
+                <h1 itemprop="name"><a href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram" class="question-hyperlink">Where to cut a dendrogram?</a></h1>
+
+            
+		</div>
+			<div id="mainbar" role="main" aria-label="question and answers">
+
+			
+
+<div class="question" data-questionid="3685" id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,0,"adzerk994853917",4).enableDynamicSiteSelection().setZone(29); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk994853917"><a href="https://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6NCwiYnQiOjAsImNtIjo1MDk5OTYsImNoIjoyNjU0NywiY2siOnt9LCJjciI6MTc5ODc4NSwiZGkiOiI2Mjc5NDI1YWIyNGI0ZjJiYjY5YzIxMmJlODk5YTNmNyIsImRtIjoxLCJmYyI6MjI4Njc5MSwiZmwiOjI3MjUyNDAsImlwIjoiNjcuMTYxLjI2LjExMSIsImt3IjoiY2x1c3RlcmluZyxkZW5kcm9ncmFtLHgtaG9zdC1zdGF0cy5zdGFja2V4Y2hhbmdlLmNvbSIsIm53IjoyMiwicGMiOjAsImVjIjowLCJwciI6MTAxMTg2LCJydCI6MSwic2IiOiJpLTBjMjMzOTMyMjg2NTkxYjI3Iiwic3AiOjU4NTUsInN0Ijo2NzgxMDEsInVrIjoidWUxLTk3NDFmYjFhMTc0ZTRjZDY5N2U4ODQ5ZTBlNTg2MTliIiwiem4iOjI5LCJ0cyI6MTQ5MzAxNTA1NTAyMywiYmYiOnRydWUsInBuIjoiYWR6ZXJrOTk0ODUzOTE3IiwidXIiOiJodHRwOi8vc3RhY2tvdmVyZmxvdy5jb20vam9icy9yZW1vdGU_dXRtX3NvdXJjZT13ZWJzaXRlJnV0bV9tZWRpdW09YmFubmVyJnV0bV9jb250ZW50PWxlYWRlcmJvYXJkXzQmdXRtX2NhbXBhaWduPWhvdXNlX2Fkc19ST1NfU1UifQ&amp;s=uB1ImV_7wg2BdzOTuQO4VtJkLFo" rel="nofollow" target="_blank" title=""><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/3ce23fa868ea401dac7e2fcfda5ec312.png" title="" alt="" border="0" width="728" height="90"></a><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/i.gif"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="3685">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">43</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#">favorite</a>
+        <div class="favoritecount"><b>20</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>Hierarchical clustering can be represented by a dendrogram. Cutting a dendrogram at a certain level gives a set of clusters. Cutting at another level gives another set of clusters. How would you pick where to cut the dendrogram? Is there something we could consider an optimal point? If I look at a dendrogram across time as it changes, should I cut at the same point?</p>
+    </div>
+    <div class="post-taglist">
+        <a href="https://stats.stackexchange.com/questions/tagged/clustering" class="post-tag js-gps-track" title="show questions tagged &#39;clustering&#39;" rel="tag">clustering</a> <a href="https://stats.stackexchange.com/questions/tagged/dendrogram" class="post-tag js-gps-track" title="show questions tagged &#39;dendrogram&#39;" rel="tag">dendrogram</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/q/3685" title="short permalink to this question" class="short-link" id="link-post-3685">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/3685/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="https://stats.stackexchange.com/posts/3685/revisions" title="show all edits to this post">edited <span title="2010-10-17 22:01:28Z" class="relativetime">Oct 17 '10 at 22:01</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/930/chl"><div class="gravatar-wrapper-32"><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/8fde274037596ee56ec97ce209c4ecdf" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/930/chl">chl</a><span class="mod-flair" title="moderator">♦</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 39,615" dir="ltr">39.6k</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="137 silver badges"><span class="badge2"></span><span class="badgecount">137</span></span><span title="253 bronze badges"><span class="badge3"></span><span class="badgecount">253</span></span>
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2010-10-17 21:57:55Z" class="relativetime">Oct 17 '10 at 21:57</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/1250/eduardas"><div class="gravatar-wrapper-32"><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/heMR2.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/1250/eduardas">Eduardas</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">844</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="21 bronze badges"><span class="badge3"></span><span class="badgecount">21</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3685" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-5092" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I have also wondered about this problem, but (unfortunately) haven't found any convincing answers yet. I think there is no solution. There are R/BioC packages like <code>hopack</code> (and others) which can estimate the number of clusters, but that doesn't answer your question.</span>
+                    –&nbsp;<a href="https://stats.stackexchange.com/users/1307/suncoolsu" title="5,026 reputation" class="comment-user">suncoolsu</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#comment5092_3685"><span title="2010-10-18 04:02:09Z" class="relativetime-clean">Oct 18 '10 at 4:02</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-112811" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">The <code>pvclust</code> package for <code>R</code> has functions that give bootstrapped p-values for dendrogram clusters, allowing you to identify groups: <a href="http://www.is.titech.ac.jp/~shimo/prog/pvclust/" rel="nofollow noreferrer">is.titech.ac.jp/~shimo/prog/pvclust</a></span>
+                    –&nbsp;<a href="https://stats.stackexchange.com/users/7744/ben" title="419 reputation" class="comment-user">Ben</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#comment112811_3685"><span title="2013-05-13 05:06:46Z" class="relativetime-clean">May 13 '13 at 5:06</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 2 times"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-3685" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								6 Answers
+                                <span style="display:none;" itemprop="answerCount">6</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="3692"></a>
+<div id="answer-3692" class="answer accepted-answer" data-answerid="3692" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="3692">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">34</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>There is no definitive answer since cluster analysis is essentially an exploratory approach; the interpretation of the resulting hierarchical structure is context-dependent and often several solutions are equally good from a theoretical point of view.</p>
+
+<p>Several clues were given in a related question, <a href="https://stats.stackexchange.com/questions/2597/what-stop-criteria-for-agglomerative-hierarchical-clustering-are-used-in-practice">What stop-criteria for agglomerative hierarchical clustering are used in practice?</a> I generally use visual criteria, e.g. silhouette plots, and some kind of numerical criteria, like Dunn’s validity index, Hubert's gamma, G2/G3 coefficient, or the corrected Rand index. Basically, we want to know how well the original distance matrix is approximated in the cluster space, so a measure of the <a href="http://en.wikipedia.org/wiki/Cophenetic_correlation" rel="nofollow noreferrer">cophenetic correlation</a> is also useful. I also use k-means, with several starting values, and the <a href="http://gremlin1.gdcb.iastate.edu/MIP/gene/MicroarrayData/gapstatistics.pdf" rel="nofollow noreferrer">gap statistic</a> (<a href="https://web.archive.org/web/20110124070213/http://gremlin1.gdcb.iastate.edu/MIP/gene/MicroarrayData/gapstatistics.pdf" rel="nofollow noreferrer">mirror</a>) to determine the number of clusters that minimize the within-SS. The concordance with Ward hierarchical clustering gives an idea of the stability of the cluster solution (You can use <code>matchClasses()</code> in the <a href="http://cran.r-project.org/web/packages/e1071/index.html" rel="nofollow noreferrer">e1071</a> package for that).</p>
+
+<p>You will find useful resources in the CRAN Task View <a href="http://cran.r-project.org/web/views/Cluster.html" rel="nofollow noreferrer">Cluster</a>, including <a href="http://cran.r-project.org/web/packages/pvclust/index.html" rel="nofollow noreferrer">pvclust</a>, <a href="http://cran.r-project.org/web/packages/fpc/index.html" rel="nofollow noreferrer">fpc</a>, <a href="http://cran.r-project.org/web/packages/clValid/index.html" rel="nofollow noreferrer">clv</a>, among others. Also worth to give a try is the <a href="http://cran.r-project.org/web/packages/clValid/index.html" rel="nofollow noreferrer">clValid</a> package (<a href="http://www.jstatsoft.org/v25/i04/paper" rel="nofollow noreferrer">described</a> in the <em>Journal of Statistical Software</em>).</p>
+
+<p>Now, if your clusters change over time, this is a bit more tricky; why choosing the first cluster-solution rather than another? Do you expect that some individuals move from one cluster to another as a result of an underlying process evolving with time?</p>
+
+<p>There are some measure that try to match clusters that have a maximum absolute or relative overlap, as was suggested to you in your preceding question. Look at <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.164.6189&amp;rep=rep1&amp;type=pdf" rel="nofollow noreferrer">Comparing Clusterings - An Overview</a> from Wagner and Wagner.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/a/3692" title="short permalink to this answer" class="short-link" id="link-post-3692">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/3692/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="https://stats.stackexchange.com/posts/3692/revisions" title="show all edits to this post">edited <span title="2017-04-13 12:44:28Z" class="relativetime">Apr 13 at 12:44</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/-1/community"><div class="gravatar-wrapper-32"><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/a007be5a61f6aa8f3e85ae2fc18dd66e" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/-1/community">Community</a><span class="mod-flair" title="moderator">♦</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1</span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2010-10-18 05:56:44Z" class="relativetime">Oct 18 '10 at 5:56</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/930/chl"><div class="gravatar-wrapper-32"><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/8fde274037596ee56ec97ce209c4ecdf" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/930/chl">chl</a><span class="mod-flair" title="moderator">♦</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 39,615" dir="ltr">39.6k</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="137 silver badges"><span class="badge2"></span><span class="badgecount">137</span></span><span title="253 bronze badges"><span class="badge3"></span><span class="badgecount">253</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3692" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-3692" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,0,"adzerk2028157600",4).enableDynamicSiteSelection().setZone(30); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk2028157600"></div>
+  
+<a name="3691"></a>
+<div id="answer-3691" class="answer" data-answerid="3691" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="3691">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">8</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>There isn't really an answer. It's somewhere between 1 and N.</p>
+
+<p>However, you can think about it from a profit perspective.</p>
+
+<p>For example, in marketing one uses segmentation, which is much like clustering. </p>
+
+<p>A message (an advertisement or letter, say) that is tailored for each individual will have the highest response rate. A generic message tailored to the average will have the lowest response rate. Having say three messages tailored to three segments will be somewhere in between. This is the revenue side.</p>
+
+<p>A message that is tailored to each individual will have the highest cost. A generic message tailored to the average will have the lowest cost. Three messages tailored to three segments will be somewhere in between. </p>
+
+<p>Say paying a writer to write a custom message costs 1000, two cost 2000 and so on. </p>
+
+<p>Say by using one message, your revenue will be 5000. If you segmented your customers into 2 segments, and wrote tailored messages to each segment, your response rate will be higher. Say revenues are now 7500. With three segments, a slightly higher response rate, and your revenues are 9000. One more segment, and you're at 9500. </p>
+
+<p>To maximize profit, keep segmenting until the marginal revenue from segmenting equals the marginal cost of segmenting. In this example, you would use three segments to maximize profit. </p>
+
+<pre><code>Segments  Revenue  Cost  Profit
+1         5000     1000  4000
+2         7500     2000  5500
+3         9000     3000  6000
+4         9500     4000  5500
+</code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/a/3691" title="short permalink to this answer" class="short-link" id="link-post-3691">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/3691/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://stats.stackexchange.com/posts/3691/revisions" title="show all edits to this post">edited <span title="2011-12-24 20:01:26Z" class="relativetime">Dec 24 '11 at 20:01</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2010-10-18 04:49:46Z" class="relativetime">Oct 18 '10 at 4:49</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/74/neil-mcguigan"><div class="gravatar-wrapper-32"><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/96883f361f3c422857fb34e5bd9e83d7" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/74/neil-mcguigan">Neil McGuigan</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">4,464</span><span title="8 gold badges"><span class="badge1"></span><span class="badgecount">8</span></span><span title="39 silver badges"><span class="badge2"></span><span class="badgecount">39</span></span><span title="55 bronze badges"><span class="badge3"></span><span class="badgecount">55</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3691" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-36488" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This is an interesting perspective!</span>
+                    –&nbsp;<a href="https://stats.stackexchange.com/users/702/andyf" title="539 reputation" class="comment-user">AndyF</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#comment36488_3691"><span title="2011-12-24 18:48:05Z" class="relativetime-clean">Dec 24 '11 at 18:48</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-3691" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="3686"></a>
+<div id="answer-3686" class="answer" data-answerid="3686" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="3686">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">4</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Perhaps one of the simplest methods would be a graphical representation in which the x-axis is the number of groups and the y-axis any evaluation metric as the distance or the similarity. In that plot you usually can observe two differentiated regions, being the x-axis value at the 'knee' of the line the 'optimal' number of cluster. </p>
+
+<p>There are also some statistics that could hepl on this task: Hubert' gamma, pseudo-t², pseudo-F or cubic clustering criteria (CCC) among others. </p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/a/3686" title="short permalink to this answer" class="short-link" id="link-post-3686">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/3686/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://stats.stackexchange.com/posts/3686/revisions" title="show all edits to this post">edited <span title="2010-10-18 06:13:33Z" class="relativetime">Oct 18 '10 at 6:13</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2010-10-17 22:30:44Z" class="relativetime">Oct 17 '10 at 22:30</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/221/manuel-ram%c3%b3n"><div class="gravatar-wrapper-32"><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/25904ecfe27f5cb9aca593910d710d90" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/221/manuel-ram%c3%b3n">Manuel Ramón</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,035</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="16 bronze badges"><span class="badge3"></span><span class="badgecount">16</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3686" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-205147" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I am in agree with chl. Cluster analyses are exploratory approaches and the interpretation of results, for this particular case the optimal number of clusters, depends on your context. For example, in my work is common to used cluster analyses to classify individuals based on several characteristics and sometimes the number of clusters is preset. In this case, our objective is to find the set of classificatory variables that best distinguishes the individuals belonging to different clusters.</span>
+                    –&nbsp;<a href="https://stats.stackexchange.com/users/221/manuel-ram%c3%b3n" title="1,035 reputation" class="comment-user">Manuel Ramón</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#comment205147_3686"><span title="2010-10-18 07:16:33Z" class="relativetime-clean">Oct 18 '10 at 7:16</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-3686" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="20223"></a>
+<div id="answer-20223" class="answer" data-answerid="20223" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="20223">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>There is also <a href="http://www.r-statistics.com/2010/06/clustergram-visualization-and-diagnostics-for-cluster-analysis-r-code/" rel="nofollow">"Clustergram: visualization and diagnostics for cluster analysis" (with R code)</a></p>
+
+<p>Not really an answer, but another interesting idea for the toolbox.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/a/20223" title="short permalink to this answer" class="short-link" id="link-post-20223">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/20223/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2011-12-25 14:15:49Z" class="relativetime">Dec 25 '11 at 14:15</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/253/tal-galili"><div class="gravatar-wrapper-32"><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/f5e789b2b75c42b109dab265927045ff" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/253/tal-galili">Tal Galili</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">8,019</span><span title="17 gold badges"><span class="badge1"></span><span class="badgecount">17</span></span><span title="95 silver badges"><span class="badge2"></span><span class="badgecount">95</span></span><span title="155 bronze badges"><span class="badge3"></span><span class="badgecount">155</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20223" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-20223" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="59449"></a>
+<div id="answer-59449" class="answer" data-answerid="59449" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="59449">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>In hierarchical clustering the number of output partitions is not just the horizontal cuts, 
+but also the non horizontal cuts which decides the final clustering. Thus this is can be seen as a third criterion aside the 1. distance metric 2. Linkage criterion. <a href="http://en.wikipedia.org/wiki/Hierarchical_clustering" rel="nofollow">http://en.wikipedia.org/wiki/Hierarchical_clustering</a> The criterion you have mentioned is a 3rd kind which is a sort of optimization constraint on the set of partitions in the hierarchy. This is formally presented in this paper and examples of segmentation is given!
+<a href="http://www.esiee.fr/~kiranr/ClimbingECCV2012_Preprint.pdf" rel="nofollow">http://www.esiee.fr/~kiranr/ClimbingECCV2012_Preprint.pdf</a></p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/a/59449" title="short permalink to this answer" class="short-link" id="link-post-59449">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/59449/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2013-05-19 14:48:27Z" class="relativetime">May 19 '13 at 14:48</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/25845/ravi-kiran"><div class="gravatar-wrapper-32"><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/caa19cda26f8e8dd7a7c136a79a223fe" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/25845/ravi-kiran">Ravi Kiran</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">21</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-59449" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-59449" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="221976"></a>
+<div id="answer-221976" class="answer" data-answerid="221976" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="221976">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>As the other answers said, it is definitely subjective and dependent on what type of granularity you are trying to study.  For a general approach, I cut this one to give me 2 clusters and 1 outlier.  I would then focus on the two clusters to see if there was anything significant between them. </p>
+
+<pre><code># Init
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns; sns.set()
+
+# Load data
+from sklearn.datasets import load_diabetes
+
+# Clustering
+from scipy.cluster.hierarchy import dendrogram, fcluster, leaves_list
+from scipy.spatial import distance
+from fastcluster import linkage # You can use SciPy one too
+
+%matplotlib inline
+
+# Dataset
+A_data = load_diabetes().data
+DF_diabetes = pd.DataFrame(A_data, columns = ["attr_%d" % j for j in range(A_data.shape[1])])
+
+# Absolute value of correlation matrix, then subtract from 1 for disimilarity
+DF_dism = 1 - np.abs(DF_diabetes.corr())
+
+# Compute average linkage
+A_dist = distance.squareform(DF_dism.as_matrix())
+Z = linkage(A_dist,method="average")
+
+# Dendrogram
+D = dendrogram(Z=Z, labels=DF_dism.index, color_threshold=0.7, leaf_font_size=12, leaf_rotation=45)
+</code></pre>
+
+<p><a href="./clustering - Where to cut a dendrogram_ - Cross Validated_files/pOuyb.png" rel="nofollow noreferrer"><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/pOuyb.png" alt="enter image description here"></a></p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/a/221976" title="short permalink to this answer" class="short-link" id="link-post-221976">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/221976/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2016-07-03 21:24:13Z" class="relativetime">Jul 3 '16 at 21:24</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/92493/o-rka"><div class="gravatar-wrapper-32"><img src="./clustering - Where to cut a dendrogram_ - Cross Validated_files/kZ2Ia.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/92493/o-rka">O.rka</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">274</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-221976" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-221976" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="https://stats.stackexchange.com/questions/3685/answer/submit" method="post" class="post-form">
+						    <input type="hidden" id="post-id" value="3685">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="">
+							<h2 class="space">Your Answer</h2>
+
+        <script>
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+        
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: false,
+                reputationToPostImages: null,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="cbe153d9c8e4943557d600e50d8c5c31">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+								            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="https://stats.stackexchange.com/users/login?ssrc=question_page&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f3685%2fwhere-to-cut-a-dendrogram%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid">
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false">
+                    <input type="hidden" name="use-google" class="use-google" value="false">
+                    <input type="button" class="submit-openid" value="Submit" style="display:none">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'https%3a%2f%2fstats.stackexchange.com%2fquestions%2f3685%2fwhere-to-cut-a-dendrogram%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        &lt;h3&gt;Post as a guest&lt;/h3&gt;
+    &lt;div class="form-item"&gt;
+        &lt;table&gt;
+        &lt;tr&gt;
+                    &lt;td class="vm"&gt;
+                &lt;div&gt;
+                    &lt;label for="display-name"&gt;Name&lt;/label&gt;
+                    &lt;input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="m-address"&gt;Email&lt;/label&gt;
+                    &lt;input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" /&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+            </noscript>
+
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram#" class="btn-clear discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href="http://stackexchange.com/legal/privacy-policy" name="privacy" target="_blank">privacy policy</a> and <a href="http://stackexchange.com/legal/terms-of-service" name="tos" target="_blank">terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1">								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="https://stats.stackexchange.com/questions/tagged/clustering" class="post-tag" title="show questions tagged &#39;clustering&#39;" rel="tag">clustering</a> <a href="https://stats.stackexchange.com/questions/tagged/dendrogram" class="post-tag" title="show questions tagged &#39;dendrogram&#39;" rel="tag">dendrogram</a>  or <a href="https://stats.stackexchange.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2010-10-17 21:57:55Z"><b>6 years, 6 months ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>29636 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="https://stats.stackexchange.com/questions/3685/where-to-cut-a-dendrogram?lastactivity" class="lastactivity-link" title="2016-07-03 21:24:13Z">9 months ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+						
+			<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,0,"adzerk2105026459",[5,17]).enableDynamicSiteSelection().setZone(56016); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk2105026459"></div>
+			
+
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+
+<div class="spacer">
+	<a href="https://stats.stackexchange.com/q/3713?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">61</div>
+	</a>
+	<a href="https://stats.stackexchange.com/questions/3713/choosing-a-clustering-method?noredirect=1&amp;lq=1" class="question-hyperlink">Choosing a clustering method</a>
+</div>
+<div class="spacer">
+	<a href="https://stats.stackexchange.com/q/2597?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">24</div>
+	</a>
+	<a href="https://stats.stackexchange.com/questions/2597/what-stop-criteria-for-agglomerative-hierarchical-clustering-are-used-in-practic?noredirect=1&amp;lq=1" class="question-hyperlink">What stop-criteria for agglomerative hierarchical clustering are used in practice?</a>
+</div>
+<div class="spacer">
+	<a href="https://stats.stackexchange.com/q/130974?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">8</div>
+	</a>
+	<a href="https://stats.stackexchange.com/questions/130974/how-to-use-both-binary-and-continuous-variables-together-in-clustering?noredirect=1&amp;lq=1" class="question-hyperlink">How to use both binary and continuous variables together in clustering?</a>
+</div>
+<div class="spacer">
+	<a href="https://stats.stackexchange.com/q/29114?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">4</div>
+	</a>
+	<a href="https://stats.stackexchange.com/questions/29114/cubic-clustering-criterion-in-r?noredirect=1&amp;lq=1" class="question-hyperlink">Cubic clustering criterion in R</a>
+</div>
+<div class="spacer">
+	<a href="https://stats.stackexchange.com/q/10088?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="https://stats.stackexchange.com/questions/10088/how-to-determine-optimal-number-of-clusters?noredirect=1&amp;lq=1" class="question-hyperlink">How to determine optimal number of clusters?</a>
+</div>
+<div class="spacer">
+	<a href="https://stats.stackexchange.com/q/33127?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">-1</div>
+	</a>
+	<a href="https://stats.stackexchange.com/questions/33127/is-there-an-analytical-function-that-approximates-number-of-clusters?noredirect=1&amp;lq=1" class="question-hyperlink">Is there an analytical function that approximates number of clusters?</a>
+</div>
+<div class="spacer">
+	<a href="https://stats.stackexchange.com/q/270860?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">-1</div>
+	</a>
+	<a href="https://stats.stackexchange.com/questions/270860/is-there-a-way-to-estimate-how-many-clusters-are-appropriate-for-a-data-set-befo?noredirect=1&amp;lq=1" class="question-hyperlink">Is there a way to estimate how many clusters are appropriate for a data set before running a clustering algorithm?</a>
+</div>			</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/3672?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">5</div></a><a href="https://stats.stackexchange.com/questions/3672/a-measure-to-describe-the-distribution-of-a-dendrogram?rq=1" class="question-hyperlink">A measure to describe the distribution of a dendrogram</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/26769?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">4</div></a><a href="https://stats.stackexchange.com/questions/26769/cluster-analysis-in-r-produces-reversals-on-dendrogram?rq=1" class="question-hyperlink">Cluster analysis in R produces reversals on dendrogram</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/44957?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">2</div></a><a href="https://stats.stackexchange.com/questions/44957/does-spss-rescale-dendrograms?rq=1" class="question-hyperlink">Does SPSS rescale dendrograms?</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/52843?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">4</div></a><a href="https://stats.stackexchange.com/questions/52843/how-to-randomize-the-tips-of-a-functional-trait-dendrogram?rq=1" class="question-hyperlink">How to randomize the tips of a functional trait dendrogram?</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/88176?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="https://stats.stackexchange.com/questions/88176/leaf-ordering-for-hierarchical-clustering-dendrogram?rq=1" class="question-hyperlink">Leaf ordering for hierarchical clustering dendrogram</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/104093?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="https://stats.stackexchange.com/questions/104093/cophenetic-distance-matrix-to-a-dendrogram?rq=1" class="question-hyperlink">Cophenetic distance matrix to a dendrogram</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/144386?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="https://stats.stackexchange.com/questions/144386/how-many-clusters-would-you-divide-this-dendrogram-into?rq=1" class="question-hyperlink">How many clusters would you divide this dendrogram into?</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/217519?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="https://stats.stackexchange.com/questions/217519/centroid-linkage-clustering-with-hclust-yields-wrong-dendrogram?rq=1" class="question-hyperlink">Centroid linkage clustering with hclust yields wrong dendrogram?</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/233131?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">2</div></a><a href="https://stats.stackexchange.com/questions/233131/purpose-of-dendrogram-and-hierarchical-clustering?rq=1" class="question-hyperlink">Purpose of dendrogram and hierarchical clustering</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/242360?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">2</div></a><a href="https://stats.stackexchange.com/questions/242360/dendrogram-in-hybrid-hierarchical-clustering-and-cut-off-criterion-calinski-har?rq=1" class="question-hyperlink">Dendrogram in Hybrid Hierarchical Clustering and Cut-off criterion (Calinski-Harabasz presently)</a></div>
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2247973/inequality-proof-is-there-a-simpler-way-to-solve-it" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Inequality proof - is there a simpler way to solve it?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href="https://rpg.stackexchange.com/questions/98311/player-may-be-manipulating-die-rolls-but-im-uncertain-how-do-i-approach-the-s" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Player may be manipulating die rolls, but I'm uncertain. How do I approach the situation?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/88321/is-it-plagiarism-if-someone-else-came-up-with-something-before-you-did" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it plagiarism if someone else came up with something before you did?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/88354/i-was-pushed-to-submit-a-mediocre-paper-to-a-conference-to-my-surprise-it-was-a" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    I was pushed to submit a mediocre paper to a conference. To my surprise it was accepted. How to save face?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="https://electronics.stackexchange.com/questions/301221/why-do-only-high-end-phones-support-a-lot-of-lte-bands" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do only high-end phones support a lot of LTE bands?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-space" title="Space Exploration Stack Exchange"></div><a href="https://space.stackexchange.com/questions/21206/is-there-a-mockup-of-the-iss-on-the-ground" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:508 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is there a mockup of the ISS on the ground?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="https://travel.stackexchange.com/questions/92175/how-to-search-for-weekend-flights" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to search for weekend flights?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/117017/arbitrary-length-currying" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Arbitrary-length currying
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="https://security.stackexchange.com/questions/157984/can-anti-virus-virus-protection-be-used-to-spy-on-you" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can anti-virus/virus protection be used to spy on you?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="https://tex.stackexchange.com/questions/366189/how-should-i-have-found-out-that-luatex-removed-write18" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How should I have found out that LuaTeX removed \write18?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-woodworking" title="Woodworking Stack Exchange"></div><a href="https://woodworking.stackexchange.com/questions/5891/how-to-fix-very-light-scratches-in-polyurethane-finish" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:603 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    how to fix very light scratches in polyurethane finish?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href="https://ell.stackexchange.com/questions/127213/how-should-i-reply-when-i-answer-some-question-on-stack-exchange-sites-people-t" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How should I reply when I answer some question on Stack Exchange sites, people thank me and say it helped?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/43576471/why-doesnt-returning-by-ref-work-for-elements-of-collections" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why doesn't returning by ref work for elements of collections?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-askubuntu" title="Ask Ubuntu"></div><a href="https://askubuntu.com/questions/908109/how-to-close-all-tabs-instantly" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:89 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to close all tabs instantly
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="https://english.stackexchange.com/questions/385994/the-meaning-of-a-short-excerpt-of-dialog-from-the-la-la-land-movie" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    The meaning of a short excerpt of dialog from the "La-La Land" movie
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-music" title="Music: Practice &amp; Theory Stack Exchange"></div><a href="https://music.stackexchange.com/questions/56647/can-music-time-signatures-really-be-irrational" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:240 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can music time signatures really be irrational?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="https://codereview.stackexchange.com/questions/161623/add-two-signed-integers-given-in-stdinspace-separated-in-i386-asm-linux-abi" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Add two signed integers, given in stdin(space separated) in i386 ASM Linux ABI
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="https://tex.stackexchange.com/questions/366291/can-fonts-have-patterns-instead-of-colors" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can fonts have patterns instead of colors?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-skeptics" title="Skeptics Stack Exchange"></div><a href="https://skeptics.stackexchange.com/questions/38024/did-einstein-comment-on-feeling-the-presence-of-jesus-while-reading-the-gospels" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:212 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Did Einstein comment on feeling the presence of Jesus while reading the Gospels?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-music" title="Music: Practice &amp; Theory Stack Exchange"></div><a href="https://music.stackexchange.com/questions/56674/is-there-any-way-for-my-to-become-a-better-judge-of-my-playing-especially-while" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:240 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is there any way for my to become a better judge of my playing? Especially while I'm playing
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-superuser" title="Super User"></div><a href="https://superuser.com/questions/1202062/what-happens-when-hardware-tries-to-draw-more-power-than-power-supply-can-provid" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:3 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What happens when hardware tries to draw more power than power supply can provide?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-writers" title="Writers Stack Exchange"></div><a href="https://writers.stackexchange.com/questions/27621/what-english-version-of-the-bible-should-i-quote-from" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:166 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What English version of the bible should I quote from?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="https://travel.stackexchange.com/questions/92146/can-i-bring-cut-orchids-from-singapore-to-australia" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can I bring cut orchids from Singapore to Australia?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/88453/can-i-submit-my-old-phd-thesis-to-arxiv-with-the-date-set-to-its-original-submis" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can I submit my old PhD thesis to arxiv with the date set to its original submission date?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="https://stats.stackexchange.com/feeds/question/3685" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/3685/ivc/4ccc');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/3685/ivc/4ccc" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories" role="contentinfo">
+        <div class="footerwrap">            
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                    <a href="http://stackoverflow.com/company/about">about us</a>
+                        <a href="https://stats.stackexchange.com/tour">tour</a>
+                    <a href="https://stats.stackexchange.com/help">help</a>
+                    <a href="https://stackoverflow.blog/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com/?tab=site&amp;host=stats.stackexchange.com">chat</a>
+                    <a href="https://data.stackexchange.com/">data</a>
+                    <a href="https://stackexchange.com/legal">legal</a>
+                    <a href="https://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackoverflow.com/company/work-here">work here</a>
+                    <a href="http://stackexchange.com/mediakit">advertising info</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="https://stats.stackexchange.com/contact">contact us</a></b>
+                        <b><a href="https://stats.meta.stackexchange.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="https://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="https://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="https://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="https://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="https://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="https://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="https://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="https://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                        <li><a href="https://softwareengineering.stackexchange.com/" title="professionals, academics, and students working within the systems development life cycle who care about creating, delivering, and maintaining software responsibly">Software Engineering</a></li>
+                        <li><a href="https://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="https://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="https://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="https://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="https://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="https://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="https://security.stackexchange.com/" title="information security professionals">Information Security</a></li>
+                        <li><a href="https://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="https://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="https://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="https://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="https://mathematica.stackexchange.com/" title="users of Wolfram Mathematica">Mathematica</a></li>
+                        <li><a href="https://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="https://expressionengine.stackexchange.com/" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                        <li><a href="https://crypto.stackexchange.com/" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="https://codereview.stackexchange.com/" title="peer programmer code reviews">Code Review</a></li>
+                        <li><a href="https://magento.stackexchange.com/" title="users of the Magento e-Commerce platform">Magento</a></li>
+                        <li><a href="https://dsp.stackexchange.com/" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                        <li><a href="https://raspberrypi.stackexchange.com/" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                        <li><a href="https://codegolf.stackexchange.com/" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="https://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="https://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="https://movies.stackexchange.com/" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="https://music.stackexchange.com/" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                        <li><a href="https://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="https://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="https://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="https://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (8)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="https://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="https://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="https://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="https://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="https://ell.stackexchange.com/" title="speakers of other languages learning English">English Language Learners</a></li>
+                        <li><a href="https://japanese.stackexchange.com/" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                        <li><a href="https://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="https://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="https://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                        <li><a href="https://anime.stackexchange.com/" title="anime and manga fans">Anime &amp; Manga</a></li>
+                        <li><a href="https://mechanics.stackexchange.com/" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (17)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="https://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="https://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="https://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="https://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="https://chemistry.stackexchange.com/" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="https://biology.stackexchange.com/" title="biology researchers, academics, and students">Biology</a></li>
+                        <li><a href="https://cs.stackexchange.com/" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                        <li><a href="https://philosophy.stackexchange.com/" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (3)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="https://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="https://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="https://www.stackoverflowbusiness.com/talent">Stack Overflow Talent</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+            <div id="copyright">
+                site design / logo © 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2017.4.21.25730
+            </div>
+                </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Cross Validated works best with JavaScript enabled&lt;img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+
+<script>var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script>
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    
+    
+        
+        ados.run.push(function () {
+                ados_setKeywords('clustering,dendrogram,x-host-stats.stackexchange.com');; ados_load();
+        });   
+        
+</script>
+
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-24', {'cookieDomain': 'stackexchange.com'});
+                ga('set', 'dimension2', '|clustering|dendrogram|');
+                ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i) || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') service =  2;
+                                    else if (service === 'Place') service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', function() {
+                                        StackExchange.gps.track('google_maps_places_api.call', { service: service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: STIXSizeOneSym, sans-serif;"></div></div></body></html>

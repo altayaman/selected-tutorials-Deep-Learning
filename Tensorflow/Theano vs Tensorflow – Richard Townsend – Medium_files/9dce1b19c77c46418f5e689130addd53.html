@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://medium.com/media/9dce1b19c77c46418f5e689130addd53?postId=e25648c31800 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>tensorflow_unittest.py – Medium</title><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./acc4adb5cae7c5953028920b7bcfa0bb.js" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-9f0a4ad9c85ca776e669003688baa9d55f9db315562ce4d231d37dab2714c70a.css"><div id="gist36216967" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-tensorflow_unittest-py" class="file">
+    
+
+  <div itemprop="text" class="blob-wrapper data type-python">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tbody><tr>
+        <td id="file-tensorflow_unittest-py-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-tensorflow_unittest-py-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">def</span> <span class="pl-en">test_embedding_layer</span>(<span class="pl-smi"><span class="pl-smi">self</span></span>):</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-tensorflow_unittest-py-LC2" class="blob-code blob-code-inner js-file-line">    L <span class="pl-k">=</span> numpy.zeros((<span class="pl-c1">4</span>, <span class="pl-c1">4</span>))</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-tensorflow_unittest-py-LC3" class="blob-code blob-code-inner js-file-line">    L[<span class="pl-c1">0</span>, :] <span class="pl-k">=</span> [<span class="pl-c1">0.2</span>, <span class="pl-c1">0.3</span>, <span class="pl-c1">0.4</span>, <span class="pl-c1">0.5</span>]</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-tensorflow_unittest-py-LC4" class="blob-code blob-code-inner js-file-line">    L[<span class="pl-c1">1</span>, :] <span class="pl-k">=</span> [<span class="pl-k">-</span><span class="pl-c1">0.2</span>, <span class="pl-k">-</span><span class="pl-c1">0.4</span>, <span class="pl-c1">0.6</span>, <span class="pl-c1">0.7</span>]</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-tensorflow_unittest-py-LC5" class="blob-code blob-code-inner js-file-line">    L[<span class="pl-c1">2</span>, :] <span class="pl-k">=</span> [<span class="pl-c1">0.8</span>, <span class="pl-k">-</span><span class="pl-c1">0.2</span>, <span class="pl-c1">0.3</span>, <span class="pl-k">-</span><span class="pl-c1">0.1</span>]</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-tensorflow_unittest-py-LC6" class="blob-code blob-code-inner js-file-line">    L[<span class="pl-c1">3</span>, :] <span class="pl-k">=</span> [<span class="pl-k">-</span><span class="pl-c1">0.4</span>, <span class="pl-c1">0.2</span>, <span class="pl-c1">0.8</span>, <span class="pl-c1">0.9</span>]</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-tensorflow_unittest-py-LC7" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-tensorflow_unittest-py-LC8" class="blob-code blob-code-inner js-file-line">    l <span class="pl-k">=</span> tf.Variable(L, <span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>emb<span class="pl-pds">'</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-tensorflow_unittest-py-LC9" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-tensorflow_unittest-py-LC10" class="blob-code blob-code-inner js-file-line">    P <span class="pl-k">=</span> numpy.zeros((<span class="pl-c1">4</span>, <span class="pl-c1">4</span>))</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-tensorflow_unittest-py-LC11" class="blob-code blob-code-inner js-file-line">    P[<span class="pl-c1">0</span>, <span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">1</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-tensorflow_unittest-py-LC12" class="blob-code blob-code-inner js-file-line">    P[<span class="pl-c1">0</span>, <span class="pl-c1">1</span>] <span class="pl-k">=</span> <span class="pl-c1">2</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-tensorflow_unittest-py-LC13" class="blob-code blob-code-inner js-file-line">    P[<span class="pl-c1">0</span>, <span class="pl-c1">3</span>] <span class="pl-k">=</span> <span class="pl-c1">3</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-tensorflow_unittest-py-LC14" class="blob-code blob-code-inner js-file-line">    P[<span class="pl-c1">1</span>, <span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">1</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-tensorflow_unittest-py-LC15" class="blob-code blob-code-inner js-file-line">    P[<span class="pl-c1">1</span>, <span class="pl-c1">1</span>] <span class="pl-k">=</span> <span class="pl-c1">2</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-tensorflow_unittest-py-LC16" class="blob-code blob-code-inner js-file-line">    p <span class="pl-k">=</span> tf.constant(P, <span class="pl-v">dtype</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>int32<span class="pl-pds">'</span></span>, <span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>char<span class="pl-pds">'</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-tensorflow_unittest-py-LC17" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-tensorflow_unittest-py-LC18" class="blob-code blob-code-inner js-file-line">    init <span class="pl-k">=</span> tf.initialize_all_variables()</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-tensorflow_unittest-py-LC19" class="blob-code blob-code-inner js-file-line">    sess <span class="pl-k">=</span> tf.Session()</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-tensorflow_unittest-py-LC20" class="blob-code blob-code-inner js-file-line">    sess.run(init)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-tensorflow_unittest-py-LC21" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-tensorflow_unittest-py-LC22" class="blob-code blob-code-inner js-file-line">    R <span class="pl-k">=</span> embeddings_layer(p, l).eval(<span class="pl-v">session</span><span class="pl-k">=</span>sess)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-tensorflow_unittest-py-LC23" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-tensorflow_unittest-py-LC24" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">self</span>.assertTrue(numpy.allclose(R[<span class="pl-c1">0</span>, <span class="pl-c1">0</span>], [<span class="pl-k">-</span><span class="pl-c1">0.2</span>, <span class="pl-k">-</span><span class="pl-c1">0.4</span>, <span class="pl-c1">0.6</span>, <span class="pl-c1">0.7</span>]))</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-tensorflow_unittest-py-LC25" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">self</span>.assertTrue(numpy.allclose(R[<span class="pl-c1">0</span>, <span class="pl-c1">1</span>], [<span class="pl-c1">0.8</span>, <span class="pl-k">-</span><span class="pl-c1">0.2</span>, <span class="pl-c1">0.3</span>, <span class="pl-k">-</span><span class="pl-c1">0.1</span>]))</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="file-tensorflow_unittest-py-LC26" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">self</span>.assertTrue(numpy.allclose(R[<span class="pl-c1">0</span>, <span class="pl-c1">3</span>], [<span class="pl-k">-</span><span class="pl-c1">0.4</span>, <span class="pl-c1">0.2</span>, <span class="pl-c1">0.8</span>, <span class="pl-c1">0.9</span>]))</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L27" class="blob-num js-line-number" data-line-number="27"></td>
+        <td id="file-tensorflow_unittest-py-LC27" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">self</span>.assertTrue(numpy.allclose(R[<span class="pl-c1">1</span>, <span class="pl-c1">0</span>], [<span class="pl-k">-</span><span class="pl-c1">0.2</span>, <span class="pl-k">-</span><span class="pl-c1">0.4</span>, <span class="pl-c1">0.6</span>, <span class="pl-c1">0.7</span>]))</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_unittest-py-L28" class="blob-num js-line-number" data-line-number="28"></td>
+        <td id="file-tensorflow_unittest-py-LC28" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">self</span>.assertTrue(numpy.allclose(R[<span class="pl-c1">1</span>, <span class="pl-c1">1</span>], [<span class="pl-c1">0.8</span>, <span class="pl-k">-</span><span class="pl-c1">0.2</span>, <span class="pl-c1">0.3</span>, <span class="pl-k">-</span><span class="pl-c1">0.1</span>]))</td>
+      </tr>
+</tbody></table>
+
+  </div>
+
+  </div>
+  
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Sentimentron/acc4adb5cae7c5953028920b7bcfa0bb/raw/6de62b229fc5d37238d9e8477dbb73990e8b2ad1/tensorflow_unittest.py" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Sentimentron/acc4adb5cae7c5953028920b7bcfa0bb#file-tensorflow_unittest-py">tensorflow_unittest.py</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200;function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height); resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);}maybeResize();</script></body></html>

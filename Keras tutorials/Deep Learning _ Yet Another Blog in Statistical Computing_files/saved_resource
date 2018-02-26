@@ -1,0 +1,937 @@
+/**
+ * Like Button toolbar button, loading text & container styles
+ *
+ * @todo: doesn't look like "style.css" is used anymore.
+ */
+
+
+/* Master container */
+#jp-post-flair {
+	padding-top: .5em;
+}
+
+/* Overall Sharedaddy block title */
+div.sharedaddy,
+#content div.sharedaddy,
+#main div.sharedaddy {
+	clear: both;
+}
+
+div.sharedaddy h3.sd-title {
+	margin: 0 0 1em 0;
+	display: inline-block;
+	line-height: 1.2;
+	font-size: 9pt;
+	font-weight: bold;
+}
+
+div.sharedaddy h3.sd-title:before {
+	content: "";
+	display: block;
+	width: 100%;
+	min-width: 30px;
+	border-top: 1px solid #ddd;
+	margin-bottom: 1em;
+}
+
+
+/* Toolbar */
+#wpadminbar li#wp-admin-bar-admin-bar-likes-widget {
+	width: 61px;
+	overflow: hidden;
+}
+
+#wpadminbar iframe.admin-bar-likes-widget {
+	width: 61px;
+	height: 28px;
+	min-height: 28px;
+	border-width: 0px;
+	position: absolute;
+	top: 0;
+}
+
+div.jetpack-likes-widget-wrapper {
+	width: 100%;
+	min-height: 50px;	/* Previous height, 60px */
+	position: relative; /* Need to abs position placeholder and iframe so there isn't a jarring jump */
+}
+
+div.jetpack-likes-widget-wrapper .sd-link-color {
+	font-size: 12px;
+}
+
+div.jetpack-likes-widget-wrapper.slim-likes-widget {
+	width: 1px; /* initial default */
+	min-height: 0;
+}
+
+#likes-other-gravatars {
+	display: none;
+	position: absolute;
+	padding: 10px 10px 12px 10px;
+	background-color: #2e4453;
+	border-width: 0;
+	box-shadow: 0 0 10px #2e4453;
+	box-shadow: 0 0 10px rgba(46,68,83,.6);
+	min-width: 130px;
+	z-index: 1000;
+}
+
+#likes-other-gravatars * {
+	line-height: normal;
+}
+
+#likes-other-gravatars .likes-text {
+	color: white;
+	font-size: 12px;
+	padding-bottom: 8px;
+}
+
+#likes-other-gravatars ul,
+#likes-other-gravatars li {
+	margin: 0;
+	padding: 0;
+	text-indent: 0;
+	list-style-type: none;
+}
+
+#likes-other-gravatars li::before {
+	content: "";
+}
+
+#likes-other-gravatars ul.wpl-avatars {
+	overflow: auto;
+	display: block;
+	max-height: 190px;
+}
+
+#likes-other-gravatars ul.wpl-avatars li {
+	width: 32px;
+	height: 32px;
+	float: left;
+	margin: 0 5px 5px 0;
+}
+
+#likes-other-gravatars ul.wpl-avatars li a {
+	margin: 0 2px 0 0;
+	border-bottom: none !important;
+	display: block;
+}
+
+#likes-other-gravatars ul.wpl-avatars li a img {
+	background: none;
+	border: none;
+	margin: 0 !important;
+	padding: 0 !important;
+	position: static;
+}
+
+div.sd-box {
+	border-top: 1px solid #ddd;
+	border-top: 1px solid rgba(0,0,0,.13);
+}
+
+.entry-content .post-likes-widget, .post-likes-widget,
+.comment-likes-widget {
+	margin: 0;
+	border-width: 0;
+	display: block;
+}
+
+
+/* Loading text */
+.post-likes-widget-placeholder {
+	margin: 0;
+	border-width: 0;
+	position: relative;
+}
+
+.post-likes-widget-placeholder .button {
+	display: none;	/* Let's not show a dummy like button, let's just make a great button experience once it's loaded */
+}
+
+.post-likes-widget-placeholder .button span {
+}
+
+.post-likes-widget-placeholder .loading {
+	color: #999;
+	font-size: 12px;
+}
+
+.slim-likes-widget .post-likes-widget {
+	width: auto;
+	float: none;
+}
+
+
+/* Like Special cases (display on it's own) */
+div.sharedaddy.sd-like-enabled .sd-like h3 {
+	display: none;
+}
+
+div.sharedaddy.sd-like-enabled .sd-like .post-likes-widget {
+	width: 100%;
+	float: none;
+	position: absolute; /* Need to abs position placeholder and iframe so there isn't a jarring jump */
+	top: 0;
+}
+
+.comment-likes-widget {
+	width: 100%;
+}
+
+
+/* Make ratings block. @todo: make !important unnecessary by removing inline style */
+.pd-rating {
+	display: block !important;
+}
+
+
+/* Hide G+ title */
+.sd-gplus .sd-title {
+	display: none;
+}
+/* =Infinity Styles
+-------------------------------------------------------------- */
+
+.infinite-wrap {
+	border-top: none;
+	padding: 0;
+}
+.infinite-loader {
+	margin-bottom: 3em;
+}
+.infinite-scroll #content .navigation,
+.infinite-scroll.neverending #footer {
+	display: none;
+}
+.infinite-scroll #content {
+	margin-bottom: 30px;
+}
+.infinite-scroll.infinity-end #content {
+	margin-bottom: 0;
+}
+.infinite-scroll.infinity-end #footer {
+	display: block;
+	position: relative;
+	top: 5px;
+}
+/**
+ * Add text colors to the playlist shortcode light color scheme.
+ * 
+ * Core ticket: https://core.trac.wordpress.org/ticket/27562
+ */
+
+.wp-playlist-light {
+	color: #000;
+}
+
+.wp-playlist-light .wp-playlist-item {
+	color: #333;
+}
+
+.wp-playlist-light .wp-playlist-playing {
+	background: #fff;
+	color: #000;
+}
+
+.wp-playlist-dark .wp-playlist-item .wp-playlist-caption {
+	color: #fff;
+}
+
+.wp-playlist-caption {
+	display: block;
+}/**
+ * MP6 hacks, CSS that's either WPCOM specific or otherwise not suitably for MP6 proper
+ */
+
+/* Invert stats sparkline on light theme */
+body.admin-color-mp6-light li#wp-admin-bar-stats img {
+	filter: invert(100%);
+	-webkit-filter: invert(100%);
+}
+
+/* Fix dashicons priority so Japanese users can use the toolbar. Should long term be fixed in whatever plugin that forces all fonts to be Arial */
+i.mce-i-bold, i.mce-i-italic, i.mce-i-bullist, i.mce-i-numlist, i.mce-i-blockquote, i.mce-i-alignleft, i.mce-i-aligncenter, i.mce-i-alignright, i.mce-i-link, i.mce-i-unlink, i.mce-i-wp_more, i.mce-i-strikethrough, i.mce-i-spellchecker, i.mce-i-fullscreen, i.mce-i-wp_fullscreen, i.mce-i-wp_adv, i.mce-i-underline, i.mce-i-alignjustify, i.mce-i-forecolor, i.mce-i-pastetext, i.mce-i-pasteword, i.mce-i-removeformat, i.mce-i-charmap, i.mce-i-outdent, i.mce-i-indent, i.mce-i-undo, i.mce-i-redo, i.mce-i-help, i.mce-i-wp_help, i.mce-i-wp-media-library, i.mce-i-ltr, i.mce-i-wp_page, .mce-close {
+	font: normal 20px/1 'dashicons' !important;
+}
+
+.dashicons, .dashicons-before:before {
+	font-family: 'dashicons' !important;
+}
+
+.noticon {
+	font-family: "Noticons" !important;
+}.bbp-staff-role {
+	color: #f1831e;
+}
+
+.bbp-a8c-reply {
+	background: #e9eff3 !important;
+	border: 1px solid #c8d7e1;
+	width: 98% !important;
+}/*
+Theme Name: The Journalist v1.9
+Theme URI: http://lucianmarin.com/
+Description: Journalist is a smart, minimal theme designed for professional journalists.
+Version: 1.9-wpcom
+Author: <a href="http://lucianmarin.com/">Lucian E. Marin</a>
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: journalist
+Tags: white, two-columns, fixed-layout, light, rtl-language-support, right-sidebar, sticky-post, translation-ready, blog, clean, conservative, minimal, infinite-scroll
+Status: inactive
+
+For the WordPress community (GPL), enjoy it guys.
+by Lucian E. Marin - lucianmarin.com
+*/
+
+body {
+background:#fff url(/wp-content/themes/pub/journalist/images/top.gif) repeat-x;
+font-family:"Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+font-size:13px;
+color:#222;
+padding:0;
+margin:0;
+}
+
+* {
+padding:0;
+margin:0;
+}
+
+a {
+color:#047;
+text-decoration:underline;
+}
+
+a:hover {
+color:#c00;
+}
+
+#container {
+width:911px; /* this has nothing to do with the '911' event */
+margin:0 auto;
+position:relative;
+}
+
+#container h1 {
+font-size:30px;
+font-weight:normal;
+letter-spacing:-1px;
+width:600px;
+padding:32px 0 25px 0;
+}
+
+#container h1 a {
+color:#222;
+text-decoration:none;
+}
+
+#container h1 a:hover {
+color:#c00;
+}
+
+#bubble {
+	background: #000;
+	border-radius: 10px;
+	display: block;
+	max-width: 300px;
+	position: absolute;
+		top: 40px;
+		right: 0;
+}
+#bubble:after {
+	-webkit-transform: rotate(40deg);
+	-moz-transform: rotate(40deg);
+	-ms-transform: rotate(40deg);
+	-o-transform: rotate(40deg);
+	border-color: transparent black transparent transparent;
+	border-style: solid;
+	border-width: 0 9px 19px;
+	content: '';
+	position: absolute;
+		bottom: -4px;
+		right: 15px;
+	z-index: -1;
+}
+#bubble p {
+ 	color: #fff;
+	display: block;
+ 	font-size: 11px;
+	padding: 4px 12px 4px 10px;
+}
+
+#content {
+float:left;
+width:700px;
+}
+
+#content h2 {
+font-size:20px;
+margin:5px 0 7px 0;
+}
+
+#content h2 a {
+color:#222;
+text-decoration:none;
+}
+
+#content h2 a:hover {
+color:#c00;
+}
+
+#content h2.archive {
+font-weight:normal;
+font-size:22px;
+color:#1c1c1c;
+padding:0;
+margin:5px 0 20px 0;
+border:none;
+text-align:left;
+}
+
+.comments {
+color:#333;
+margin:0 0 15px 0;
+border-bottom:#bbb 1px solid;
+}
+
+.comments a {
+background:#fff;
+padding:0 7px 5px 0;
+color:#333;
+text-decoration:none;
+}
+
+.comments a:hover {
+color:#c00;
+}
+
+.navigation {
+background:#f9f9f9;
+font-size:11px;
+padding:5px 10px;
+margin:0 0 20px 0;
+border-top:#bbb 1px solid;
+}
+
+.navigation a {
+color:#555;
+font-weight:bold;
+text-decoration:none;
+}
+
+.navigation a:hover {
+color:#333;
+text-decoration:none;
+}
+
+.main h3 {
+font-size:16px;
+font-weight:normal;
+margin:0 0 15px 0;
+}
+
+.main img {
+margin: 0 5px 0 5px;
+padding:2px;
+border:#ddd 2px solid;
+}
+
+.main a img {
+padding:2px;
+border:#0085b5 2px solid;
+}
+
+.main a:hover img {
+padding:2px;
+border:#ca0002 2px solid;
+}
+
+.main p {
+line-height:1.5;
+margin:0 0 15px 0;
+}
+
+.main ol {
+line-height:18px;
+margin:0 0 15px 40px;
+}
+
+.main ul {
+line-height:18px;
+margin:0 0 15px 30px;
+}
+
+.main li {
+margin:0 0 5px 0;
+}
+
+.main .gallery {
+padding-bottom: 15px;
+}
+
+.meta {
+background:#f3f3f3;
+font-size:11px;
+line-height:15px;
+color:#333;
+padding:5px 10px;
+margin:0 0 30px 0;
+border-top:#bbb 1px solid;
+clear:both;
+}
+
+.signature {
+float:left;
+padding:0 15px 0 0;
+border-right:#bbb 1px solid;
+width:200px;
+}
+
+.tags {
+float:left;
+padding:0 0 0 15px;
+width:440px;
+}
+
+#sidebar {
+font-size:12px;
+float:right;
+width:180px;
+border-left:#999 1px solid;
+padding:0 0 20px 15px;
+margin:0 0 20px 0;
+}
+
+#sidebar h3 {
+font-size:14px;
+margin:20px 0 5px 0;
+}
+
+#sidebar ul {
+list-style:none;
+}
+
+#sidebar ul ul {
+margin:5px 0 0 10px;
+}
+
+#sidebar ul ul ul {
+margin:5px 0 0 10px;
+}
+
+#sidebar ul li {
+padding:0 0 5px 0;
+}
+
+#sidebar a img {
+	border:0;
+}
+
+#author h3 {
+margin:5px 0 5px 0;
+}
+
+#searchform {
+margin:15px 0 0 0;
+}
+
+#searchform input {
+background:#222;
+font-size:11px;
+margin:2px 0;
+padding:1px 4px 2px 4px;
+border:#888 1px solid;
+color:#eee;
+}
+
+#searchform input:hover {
+background:#333;
+border:#999 1px solid;
+color:#fff;
+cursor:pointer;
+}
+
+#searchform #s {
+background:#f6f6f6;
+font-size:11px;
+margin:2px 0;
+padding:2px 4px;
+border:#aaa 1px solid;
+color:#222;
+}
+
+#searchform #s:hover {
+border:#c00 1px solid;
+cursor:text;
+}
+
+input.searchfield {
+background:#f6f6f6;
+font-size:11px;
+display:block;
+margin:5px 0 8px 0;
+padding:2px 4px;
+border:#aaa 1px solid;
+color:#222;
+}
+
+input.searchfield:hover {
+background:#eee;
+color:#222;
+}
+
+input#submit {
+background:#222;
+font-size:11px;
+display:block;
+margin:0 0 10px 0;
+padding:3px 4px 4px 4px;
+border:#888 1px solid;
+color:#eee;
+}
+
+input.submit:hover {
+background:#333;
+cursor:pointer;
+border:#999 1px solid;
+color:#fff;
+}
+
+input.subcom {
+background:#eee;
+font-size:11px;
+margin:0 0 10px 0;
+padding:1px 4px 2px 4px;
+border:#888 1px solid;
+color:#222;
+}
+
+input.subcom:hover {
+background:#222;
+cursor:pointer;
+border:#888 1px solid;
+color:#eee;
+}
+
+input[type="text"] {
+background:#f6f6f6;
+font-size:11px;
+padding:2px 4px;
+border:#aaa 1px solid;
+color:#222;
+}
+
+input[type="text"]:hover {
+border:#c00 1px solid;
+}
+
+textarea {
+background:#f6f6f6;
+font-size:12px;
+width:400px;
+padding:2px 4px;
+border:#aaa 1px solid;
+color:#222;
+}
+
+textarea:hover {
+border:#c00 1px solid;
+}
+
+.postinput small {
+font-size:11px;
+margin:0 0 0 5px;
+}
+
+p.logged {
+font-size:12px;
+}
+
+h3.reply {
+font-size:15px;
+margin:0 0 10px 0;
+}
+
+.nocomments {
+margin:0 0 30px 0;
+}
+
+ol.commentlist {
+font-size:12px;
+list-style:none;
+margin:10px 0 30px 0;
+border-bottom:#bbb 1px solid;
+}
+
+.commentlist li {
+border-top:#bbb 1px solid;
+padding:0 0 10px 0;
+list-style:none;
+}
+
+.commentlist .children{
+margin-left:2em;
+}
+
+.commentlist li.bypostauthor {
+border-top:#bbb 5px solid;
+background-color:#f3f3f3;
+}
+
+.commentlist .reply {
+margin: 0 0 5px 10px;
+}
+.comment_mod {
+margin:10px 0 0 10px;
+}
+
+.comment_mod em {
+background-color:#fff897;
+padding:1px 3px;
+}
+
+.comment_author {
+margin:10px 0;
+float:right;
+width:190px;
+}
+
+.comment_author img {
+float:left;
+margin:5px 12px 0 0;
+}
+
+.comment_author p {
+line-height:20px;
+}
+
+.comment_author small {
+font-size:11px;
+}
+
+.comment_text {
+float:left;
+width:470px;
+margin:0 0 0 10px;
+}
+
+.comment_text p {
+line-height:18px;
+margin:7px 0;
+}
+
+.comment_meta {
+font-size:12px;
+}
+
+#commentform p {
+line-height:18px;
+margin:0 0 15px 0;
+}
+#respond label {
+	clear: right;
+	font-size: 11px;
+}
+#respond input[type="text"] {
+	float: left;
+	margin-right: 8px;
+}
+#respond p {
+	line-height: 18px;
+}
+#respond .comment-form-comment label,
+#respond .form-allowed-tags {
+	display: none;
+}
+#respond .required {
+	font-size: 10px;
+	margin-left: 5px;
+	color: #ff4b33;
+	font-weight: bold;
+}
+#respond .subscribe-label {
+	font-size: 12px;
+}
+#respond .comment-notes {
+	font-size: 11px;
+}
+
+blockquote {
+background:url(/wp-content/themes/pub/journalist/images/quote.gif) no-repeat top left;
+padding:0 0 0 60px;
+min-height:50px;
+}
+
+#footer {
+background:#eee;
+font-size:11px;
+color:#555;
+margin:0 auto;
+padding:10px 0;
+text-align:center;
+position:relative;
+border-top:#bbb 1px solid;
+border-bottom:#222 6px solid;
+}
+
+#footer a {
+color:#555;
+font-weight:bold;
+text-decoration:none;
+}
+
+#footer a:hover {
+color:#333;
+text-decoration:none;
+}
+
+.clear {
+clear:both;
+}
+
+.warning p {
+background:url(/wp-content/themes/pub/journalist/images/warning.gif) no-repeat left;
+height:160px;
+padding:20px 0 0 90px;
+font-size:20px;
+margin:0 0 0 10px;
+}
+
+#wp-calendar {
+padding:10px 0 0 0;
+font-size:12px;
+}
+
+#wp-calendar caption {
+text-align:left;
+padding:0 0 5px 0;
+}
+
+#wp-calendar tr th,
+#wp-calendar tr td {
+padding:0 6px 0 0 ;
+text-align:right;
+}
+
+#wp-calendar td a {
+font-weight:bold;
+}
+
+#wp-calendar td a:hover {
+font-weight:bold;
+}
+
+img.wp-smiley {
+padding:0;
+border:none;
+}
+
+input:focus, textarea:focus{
+background-color:#ffc;
+}
+
+abbr {
+border:none;
+}
+
+.wp-caption {
+border:1px solid #ddd;
+text-align:center;
+background-color:#f3f3f3;
+padding-top:4px;
+margin:10px;
+-moz-border-radius:3px;
+-khtml-border-radius:3px;
+-webkit-border-radius:3px;
+border-radius:3px;
+}
+
+.wp-caption img {
+margin:0;
+padding:0;
+border:0 none;
+}
+
+.wp-caption a img {
+border: none;
+}
+
+.wp-caption a:hover img {
+border: none;
+}
+
+.wp-caption-dd {
+font-size:11px;
+line-height:17px;
+padding:0 4px 5px;
+margin:0;
+}
+
+.wp-caption-text {}
+
+.gallery-caption {}
+
+img.aligncenter, .aligncenter {
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+.alignleft {
+float:left;
+}
+
+.alignright {
+float:right;
+}
+
+/* Sticky */
+
+.sticky h2 { background: #ccc; padding: 10px; }
+
+/* self-clear floats */
+
+.group:after {
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+
+/* Video Press Thumbnail */
+
+.video-player {
+	padding: 0!important;
+}
+.main .video-player img {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* IE Hacks */
+
+*html #bubble {
+display:none;
+}
+
+*html #bubble p {
+display:none;
+}
+
+* html .group,
+* html #nav ul li a {
+height: 1%;
+}
+
+*:first-child+html .group {
+min-height: 1px;
+}
+
+* html #nav ul li a {
+display: inline;
+}

@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://www.artfact-online.fr/blog/blog-post/6 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>
+        
+            Quick review on Text Clustering and Text Similarity Approaches
+        
+    </title>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="./Quick review on Text Clustering and Text Similarity Approaches_files/bootstrap.css" rel="stylesheet">
+
+    <link rel="icon" href="http://www.artfact-online.fr/static/website/img/logo2.png">
+
+    <!-- Custom CSS -->
+    <link href="./Quick review on Text Clustering and Text Similarity Approaches_files/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="./Quick review on Text Clustering and Text Similarity Approaches_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="./Quick review on Text Clustering and Text Similarity Approaches_files/interactive_map.css">
+    <link rel="stylesheet" type="text/css" href="./Quick review on Text Clustering and Text Similarity Approaches_files/drop.css">
+    <!-- jQuery -->
+    <script type="text/javascript" src="./Quick review on Text Clustering and Text Similarity Approaches_files/test_b.js"></script><script type="text/javascript" async="" src="./Quick review on Text Clustering and Text Similarity Approaches_files/analytics.js"></script><script id="facebook-jssdk" src="./Quick review on Text Clustering and Text Similarity Approaches_files/sdk.js"></script><script async="" src="./Quick review on Text Clustering and Text Similarity Approaches_files/gtm.js"></script><script async="" src="./Quick review on Text Clustering and Text Similarity Approaches_files/analytics.js"></script><script src="./Quick review on Text Clustering and Text Similarity Approaches_files/jquery.js"></script>
+    <!-- website_javascripts  -->
+    <script src="./Quick review on Text Clustering and Text Similarity Approaches_files/website.js"></script>
+    <!-- D3.js -->
+    <script src="./Quick review on Text Clustering and Text Similarity Approaches_files/d3.js"></script>
+    <script src="./Quick review on Text Clustering and Text Similarity Approaches_files/bootstrap.min.js"></script>
+    <script src="./Quick review on Text Clustering and Text Similarity Approaches_files/jqBootstrapValidation.js"></script>
+    <script src="./Quick review on Text Clustering and Text Similarity Approaches_files/send_mail_demo.js"></script>
+    <script src="./Quick review on Text Clustering and Text Similarity Approaches_files/website(1).js"></script>
+    <script src="./Quick review on Text Clustering and Text Similarity Approaches_files/contact_me.js"></script>
+    <script src="./Quick review on Text Clustering and Text Similarity Approaches_files/leave_comment.js"></script>
+    <script src="./Quick review on Text Clustering and Text Similarity Approaches_files/prettify.js"></script><link rel="stylesheet" type="text/css" href="./Quick review on Text Clustering and Text Similarity Approaches_files/prettify.css">
+    
+    <!-- GOOGLE ANALYTICS -->
+    <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75861660-1', 'auto');
+          ga('send', 'pageview');
+
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-P83MW9');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<style type="text/css"></style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.mjx-chtml {display: inline-block; line-height: 0; text-indent: 0; text-align: left; text-transform: none; font-style: normal; font-weight: normal; font-size: 100%; font-size-adjust: none; letter-spacing: normal; word-wrap: normal; word-spacing: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; margin: 0; padding: 1px 0}
+.MJXc-display {display: block; text-align: center; margin: 1em 0; padding: 0}
+.mjx-chtml[tabindex]:focus, body :focus .mjx-chtml[tabindex] {display: inline-table}
+.mjx-full-width {text-align: center; display: table-cell!important; width: 10000em}
+.mjx-math {display: inline-block; border-collapse: separate; border-spacing: 0}
+.mjx-math * {display: inline-block; -webkit-box-sizing: content-box!important; -moz-box-sizing: content-box!important; box-sizing: content-box!important; text-align: left}
+.mjx-numerator {display: block; text-align: center}
+.mjx-denominator {display: block; text-align: center}
+.MJXc-stacked {height: 0; position: relative}
+.MJXc-stacked > * {position: absolute}
+.MJXc-bevelled > * {display: inline-block}
+.mjx-stack {display: inline-block}
+.mjx-op {display: block}
+.mjx-under {display: table-cell}
+.mjx-over {display: block}
+.mjx-over > * {padding-left: 0px!important; padding-right: 0px!important}
+.mjx-under > * {padding-left: 0px!important; padding-right: 0px!important}
+.mjx-stack > .mjx-sup {display: block}
+.mjx-stack > .mjx-sub {display: block}
+.mjx-prestack > .mjx-presup {display: block}
+.mjx-prestack > .mjx-presub {display: block}
+.mjx-delim-h > .mjx-char {display: inline-block}
+.mjx-surd {vertical-align: top}
+.mjx-mphantom * {visibility: hidden}
+.mjx-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 2px 3px; font-style: normal; font-size: 90%}
+.mjx-annotation-xml {line-height: normal}
+.mjx-menclose > svg {fill: none; stroke: currentColor}
+.mjx-mtr {display: table-row}
+.mjx-mlabeledtr {display: table-row}
+.mjx-mtd {display: table-cell; text-align: center}
+.mjx-label {display: table-row}
+.mjx-box {display: inline-block}
+.mjx-block {display: block}
+.mjx-span {display: inline}
+.mjx-char {display: block; white-space: pre}
+.mjx-itable {display: inline-table; width: auto}
+.mjx-row {display: table-row}
+.mjx-cell {display: table-cell}
+.mjx-table {display: table; width: 100%}
+.mjx-line {display: block; height: 0}
+.mjx-strut {width: 0; padding-top: 1em}
+.mjx-vsize {width: 0}
+.MJXc-space1 {margin-left: .167em}
+.MJXc-space2 {margin-left: .222em}
+.MJXc-space3 {margin-left: .278em}
+.mjx-chartest {display: block; visibility: hidden; position: absolute; top: 0; line-height: normal; font-size: 500%}
+.mjx-chartest .mjx-char {display: inline}
+.mjx-chartest .mjx-box {padding-top: 1000px}
+.MJXc-processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MJXc-processed {display: none}
+.mjx-test {display: block; font-style: normal; font-weight: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow: hidden; height: 1px}
+.mjx-ex-box-test {position: absolute; width: 1px; height: 60ex}
+.mjx-line-box-test {display: table!important}
+.mjx-line-box-test span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+#MathJax_CHTML_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.mjx-chtml .mjx-noError {line-height: 1.2; vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+.MJXc-TeX-unknown-R {font-family: STIXGeneral,'Cambria Math','Arial Unicode MS',serif; font-style: normal; font-weight: normal}
+.MJXc-TeX-unknown-I {font-family: STIXGeneral,'Cambria Math','Arial Unicode MS',serif; font-style: italic; font-weight: normal}
+.MJXc-TeX-unknown-B {font-family: STIXGeneral,'Cambria Math','Arial Unicode MS',serif; font-style: normal; font-weight: bold}
+.MJXc-TeX-unknown-BI {font-family: STIXGeneral,'Cambria Math','Arial Unicode MS',serif; font-style: italic; font-weight: bold}
+.MJXc-TeX-ams-R {font-family: MJXc-TeX-ams-R,MJXc-TeX-ams-Rw}
+.MJXc-TeX-cal-B {font-family: MJXc-TeX-cal-B,MJXc-TeX-cal-Bx,MJXc-TeX-cal-Bw}
+.MJXc-TeX-frak-R {font-family: MJXc-TeX-frak-R,MJXc-TeX-frak-Rw}
+.MJXc-TeX-frak-B {font-family: MJXc-TeX-frak-B,MJXc-TeX-frak-Bx,MJXc-TeX-frak-Bw}
+.MJXc-TeX-math-BI {font-family: MJXc-TeX-math-BI,MJXc-TeX-math-BIx,MJXc-TeX-math-BIw}
+.MJXc-TeX-sans-R {font-family: MJXc-TeX-sans-R,MJXc-TeX-sans-Rw}
+.MJXc-TeX-sans-B {font-family: MJXc-TeX-sans-B,MJXc-TeX-sans-Bx,MJXc-TeX-sans-Bw}
+.MJXc-TeX-sans-I {font-family: MJXc-TeX-sans-I,MJXc-TeX-sans-Ix,MJXc-TeX-sans-Iw}
+.MJXc-TeX-script-R {font-family: MJXc-TeX-script-R,MJXc-TeX-script-Rw}
+.MJXc-TeX-type-R {font-family: MJXc-TeX-type-R,MJXc-TeX-type-Rw}
+.MJXc-TeX-cal-R {font-family: MJXc-TeX-cal-R,MJXc-TeX-cal-Rw}
+.MJXc-TeX-main-B {font-family: MJXc-TeX-main-B,MJXc-TeX-main-Bx,MJXc-TeX-main-Bw}
+.MJXc-TeX-main-I {font-family: MJXc-TeX-main-I,MJXc-TeX-main-Ix,MJXc-TeX-main-Iw}
+.MJXc-TeX-main-R {font-family: MJXc-TeX-main-R,MJXc-TeX-main-Rw}
+.MJXc-TeX-math-I {font-family: MJXc-TeX-math-I,MJXc-TeX-math-Ix,MJXc-TeX-math-Iw}
+.MJXc-TeX-size1-R {font-family: MJXc-TeX-size1-R,MJXc-TeX-size1-Rw}
+.MJXc-TeX-size2-R {font-family: MJXc-TeX-size2-R,MJXc-TeX-size2-Rw}
+.MJXc-TeX-size3-R {font-family: MJXc-TeX-size3-R,MJXc-TeX-size3-Rw}
+.MJXc-TeX-size4-R {font-family: MJXc-TeX-size4-R,MJXc-TeX-size4-Rw}
+@font-face {font-family: MJXc-TeX-ams-R; src: local('MathJax_AMS'), local('MathJax_AMS-Regular')}
+@font-face {font-family: MJXc-TeX-ams-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_AMS-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_AMS-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_AMS-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-cal-B; src: local('MathJax_Caligraphic Bold'), local('MathJax_Caligraphic-Bold')}
+@font-face {font-family: MJXc-TeX-cal-Bx; src: local('MathJax_Caligraphic'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-cal-Bw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Caligraphic-Bold.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Bold.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-frak-R; src: local('MathJax_Fraktur'), local('MathJax_Fraktur-Regular')}
+@font-face {font-family: MJXc-TeX-frak-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Fraktur-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Fraktur-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Fraktur-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-frak-B; src: local('MathJax_Fraktur Bold'), local('MathJax_Fraktur-Bold')}
+@font-face {font-family: MJXc-TeX-frak-Bx; src: local('MathJax_Fraktur'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-frak-Bw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Fraktur-Bold.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Fraktur-Bold.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Fraktur-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-math-BI; src: local('MathJax_Math BoldItalic'), local('MathJax_Math-BoldItalic')}
+@font-face {font-family: MJXc-TeX-math-BIx; src: local('MathJax_Math'); font-weight: bold; font-style: italic}
+@font-face {font-family: MJXc-TeX-math-BIw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Math-BoldItalic.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Math-BoldItalic.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Math-BoldItalic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-sans-R; src: local('MathJax_SansSerif'), local('MathJax_SansSerif-Regular')}
+@font-face {font-family: MJXc-TeX-sans-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-sans-B; src: local('MathJax_SansSerif Bold'), local('MathJax_SansSerif-Bold')}
+@font-face {font-family: MJXc-TeX-sans-Bx; src: local('MathJax_SansSerif'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-sans-Bw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Bold.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Bold.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-sans-I; src: local('MathJax_SansSerif Italic'), local('MathJax_SansSerif-Italic')}
+@font-face {font-family: MJXc-TeX-sans-Ix; src: local('MathJax_SansSerif'); font-style: italic}
+@font-face {font-family: MJXc-TeX-sans-Iw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Italic.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Italic.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Italic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-script-R; src: local('MathJax_Script'), local('MathJax_Script-Regular')}
+@font-face {font-family: MJXc-TeX-script-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Script-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Script-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Script-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-type-R; src: local('MathJax_Typewriter'), local('MathJax_Typewriter-Regular')}
+@font-face {font-family: MJXc-TeX-type-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Typewriter-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Typewriter-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Typewriter-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-cal-R; src: local('MathJax_Caligraphic'), local('MathJax_Caligraphic-Regular')}
+@font-face {font-family: MJXc-TeX-cal-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Caligraphic-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-main-B; src: local('MathJax_Main Bold'), local('MathJax_Main-Bold')}
+@font-face {font-family: MJXc-TeX-main-Bx; src: local('MathJax_Main'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-main-Bw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Main-Bold.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-main-I; src: local('MathJax_Main Italic'), local('MathJax_Main-Italic')}
+@font-face {font-family: MJXc-TeX-main-Ix; src: local('MathJax_Main'); font-style: italic}
+@font-face {font-family: MJXc-TeX-main-Iw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Main-Italic.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-main-R; src: local('MathJax_Main'), local('MathJax_Main-Regular')}
+@font-face {font-family: MJXc-TeX-main-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Main-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-math-I; src: local('MathJax_Math Italic'), local('MathJax_Math-Italic')}
+@font-face {font-family: MJXc-TeX-math-Ix; src: local('MathJax_Math'); font-style: italic}
+@font-face {font-family: MJXc-TeX-math-Iw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Math-Italic.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size1-R; src: local('MathJax_Size1'), local('MathJax_Size1-Regular')}
+@font-face {font-family: MJXc-TeX-size1-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Size1-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size2-R; src: local('MathJax_Size2'), local('MathJax_Size2-Regular')}
+@font-face {font-family: MJXc-TeX-size2-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Size2-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size3-R; src: local('MathJax_Size3'), local('MathJax_Size3-Regular')}
+@font-face {font-family: MJXc-TeX-size3-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Size3-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size4-R; src: local('MathJax_Size4'), local('MathJax_Size4-Regular')}
+@font-face {font-family: MJXc-TeX-size4-Rw; src /*1*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/eot/MathJax_Size4-Regular.eot'); src /*2*/: url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff') format('woff'), url('http://cdn.mathjax.org/mathjax/2.7-latest/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf') format('opentype')}
+</style></head>
+
+<body><div style="position: fixed; margin: 0px; padding: 0px; outline: none; border: none; z-index: 999999999; overflow: visible; direction: ltr; left: auto; right: 50px; top: auto; bottom: 0px; width: 168px; height: 42px;"><span style="display: inline-block;"><span style="display: inline-block; position: relative; margin: 3px; width: 36px; height: 36px; background: rgb(255, 255, 255); border-radius: 18px;"><a class="shareButtonNetfbLink" title="Facebook" href="javascript:;" style="display: inline-block; margin: 2px; padding: 0px; width: 32px; height: 32px; vertical-align: bottom; background: url(&quot;//sharebutton.net/plugin/img/fb.png?4&quot;); border: none;"></a></span></span><span style="display: inline-block;"><span style="display: inline-block; position: relative; margin: 3px; width: 36px; height: 36px; background: rgb(255, 255, 255); border-radius: 18px;"><a class="shareButtonNetgpLink" title="Google+" href="javascript:;" style="display: inline-block; margin: 2px; padding: 0px; width: 32px; height: 32px; vertical-align: bottom; background: url(&quot;//sharebutton.net/plugin/img/gp.png?4&quot;); border: none;"></a></span></span><span style="display: inline-block;"><span style="display: inline-block; position: relative; margin: 3px; width: 36px; height: 36px; background: rgb(255, 255, 255); border-radius: 18px;"><a class="shareButtonNettwLink" title="Twitter" href="javascript:;" style="display: inline-block; margin: 2px; padding: 0px; width: 32px; height: 32px; vertical-align: bottom; background: url(&quot;//sharebutton.net/plugin/img/tw.png?4&quot;); border: none;"></a></span></span><span style="display: inline-block;"><span style="display: inline-block; position: relative; margin: 3px; width: 36px; height: 36px; background: rgb(255, 255, 255); border-radius: 18px;"><a class="shareButtonNetplusLink" title="More" href="http://sharebutton.org/?utm_source=plus&amp;utm_medium=click&amp;utm_campaign=organic" target="_blank" style="display: inline-block; margin: 2px; padding: 0px; width: 32px; height: 32px; vertical-align: bottom; background: url(&quot;//sharebutton.net/plugin/img/plus.png?4&quot;); border: none;"></a></span></span></div><div id="MathJax_Message" style="display: none;"></div>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        &lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P83MW9"
+        height="0" width="0" style="display:none;visibility:hidden"&gt;
+        &lt;/iframe&gt;
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Quick review on Text Clustering and Text Similarity Approaches_files/96nq-xsaNcg.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Quick review on Text Clustering and Text Similarity Approaches_files/96nq-xsaNcg(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="http://www.artfact-online.fr/"> <img class="logo" src="./Quick review on Text Clustering and Text Similarity Approaches_files/logo3.png" alt="logo"></a>
+                <!-- <a class="navbar-brand" href="/index.html">arTfact</a> -->
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="http://www.artfact-online.fr/"><span class="glyphicon glyphicon-home"></span></a>
+                        <!-- <a href="/index.html">Website</a> -->
+                    </li>
+
+                    
+                        <li>
+                            <a href="http://www.artfact-online.fr/blog/blog-post/6#" onclick="$(&#39;#login&#39;).modal(&#39;show&#39;);"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
+                        </li>
+                        <li>
+                            <a href="http://www.artfact-online.fr/blog/blog-post/6#" onclick="$(&#39;#signup&#39;).modal(&#39;show&#39;);"><span class="glyphicon glyphicon-user"></span> Sign up</a>
+                        </li>
+                    
+
+                    <li>
+                        <a href="http://www.artfact-online.fr/blog/home/all/"><i style="font-size: 2em;" class="fa fa-comments-o"></i></a>
+                    </li>
+
+        </ul></div>
+        <!-- /.container -->
+    </div></nav>
+    
+                <script>var sharebutton_is_horizontal = true; document.write('<script src="//cdn.front.to/libs/share7.js"></scr' + 'ipt>'); document.write("<div style='display: none'>");</script><script src="./Quick review on Text Clustering and Text Similarity Approaches_files/share7.js"></script><div style="display: none"><a href="http://sharebutton.org/">reddit share button</a><script>document.write("</div>");</script></div>
+    <!-- Page Content -->
+        
+        <!-- Sign up div -->
+            <div class="row">
+            <div class="modal fade bs-example-modal-sm" id="signup" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <!-- modeal content: you can put anything here-->
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Sign up</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="http://www.artfact-online.fr/blog/blog-post/6/" id="blog_signup" method="post" novalidate="">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="e0ySEUmPux77eEHI7SiarnmlyBGhlRRN">
+                        
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                     <label>User name </label>
+                                    <input class="form-control" id="id_user_name" maxlength="100" name="user_name" required="" data-validation-required-message="Please enter your user name." type="text">
+                                    <!-- <input type="hidden" name="form_type" value="signup"> -->
+                                    <!--  -->
+                            <div class="help-block"></div></div>
+                        </div>
+                        
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                     <label>Email address </label>
+                                    <input class="form-control" id="id_email_address" maxlength="100" name="email_address" required="" data-validation-required-message="Please enter your email address." type="email">
+                                    <!-- <input type="hidden" name="form_type" value="signup"> -->
+                                    <!--  -->
+                            <div class="help-block"></div></div>
+                        </div>
+                        
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                     <label>Password </label>
+                                    <input class="form-control" id="id_password" name="password" required="" data-validation-required-message="Please enter your password." type="password">
+                                    <!-- <input type="hidden" name="form_type" value="signup"> -->
+                                    <!--  -->
+                            <div class="help-block"></div></div>
+                        </div>
+                        
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                     <label>Password Confirmation </label>
+                                    <input class="form-control" id="id_Confirm_password" name="Confirm_password" required="" data-validation-required-message="Please confirm your password." type="password">
+                                    <!-- <input type="hidden" name="form_type" value="signup"> -->
+                                    <!--  -->
+                            <div class="help-block"></div></div>
+                        </div>
+                        
+                         
+                        <div class="modal-footer">
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- end of modeal content -->
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- end Sign up div -->
+        <!-- Log in div -->
+        <div class="row">
+            <div class="modal fade bs-example-modal-sm" id="login" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <!-- modeal content: you can put anything here-->
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Log in</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="http://www.artfact-online.fr/blog/blog-post/6/" id="blog_login" method="post" novalidate="">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="e0ySEUmPux77eEHI7SiarnmlyBGhlRRN">
+                        
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                     <label>User name </label>
+                                    <input class="form-control" id="id_user_name" maxlength="100" name="user_name" required="" data-validation-required-message="Please enter your user name." type="text">
+                            <div class="help-block"></div></div>
+                        </div>
+                        
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                     <label>Password </label>
+                                    <input class="form-control" id="id_password" name="password" required="" data-validation-required-message="Please enter your password." type="password">
+                            <div class="help-block"></div></div>
+                        </div>
+                        
+                         
+                        <div class="modal-footer">
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- end of modeal content -->
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        
+        
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Quick review on Text Clustering and Text Similarity Approaches
+                        
+                        <br>
+                        <strong>
+                            <small>by
+                                
+                                    <a target="_blank" href="http://www.artfact-online.fr/blog/author/72">Maali Mnasri </a>
+                                    <br>
+                                
+                            </small>
+                        </strong>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="http://www.artfact-online.fr/blog/home/all">Home</a>
+                        </li>
+                        <li class="active">Quick review on Text Clustering and Text Similarity Approaches</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <!-- Content Row -->
+            <div class="row">
+
+                <!-- Blog Post Content Column -->
+                <div class="col-lg-8">
+
+                    <!-- Blog Post -->
+
+                    <hr>
+                    <!-- Date/Time -->
+                    <p><i class="fa fa-clock-o"></i> Posted on June 16, 2016</p>
+
+                    <hr>
+
+                    <!-- Preview Image -->
+                    
+                        
+                            <img class="img-responsive" src="./Quick review on Text Clustering and Text Similarity Approaches_files/folders_960x370.jpg" alt="blog_head">
+                        
+                    
+
+                    <hr>
+
+                    <!-- Post Content -->
+                    <!-- <p class="lead"> -->
+                    <div style="font-family: &#39;Open Sans&#39;, sans-serif; font-size:110%">
+                        <script>var sharebutton_is_horizontal = true; document.write('<script src="//cdn.front.to/libs/share7.js"></scr' + 'ipt>');</script><script src="./Quick review on Text Clustering and Text Similarity Approaches_files/share7.js"></script>
+<script type="text/x-mathjax-config;executed=true">
+   MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+ </script>
+<script type="text/javascript" async="" src="./Quick review on Text Clustering and Text Similarity Approaches_files/MathJax.js"></script>
+<p>
+    <strong>
+
+        Text Clustering (TC) is a general term whose meaning is often reduced to document clustering which is not always the case since the text type covers documents, paragraphs, sentences and even words. Therefore, text clustering can be document level (e.g.news articles) or sentence level (e.g. tweets or SMS) etc. TC aims at regrouping similar text units within a collection of documents and it is useful in mining any text-based resource. This task is unsupervised since, unlike in text classification, we have no prior idea about the categories.
+        <br>
+        It is common to find in many sources (blogs etc) that the first step to cluster text data is to transform text units to vectors. This is not 100% true. I would say that this step depends mostly on the similarity measure and the clustering algorithm. Some of the best performing text similarity measures don't use vectors at all. This is the case of the <a href="https://github.com/ma-sultan/monolingual-word-aligner">winner system</a> in <a href="http://alt.qcri.org/semeval2014/">SemEval2014</a> sentence similarity task which uses lexical word alignment. However, vectors are more efficient to process and allow to benefit from existing clustering algorithms such as k-means.
+
+    </strong>
+</p>
+
+<br>
+
+<p style="padding-left: 30pt">
+    <i>
+        </i></p><h3><i>Sentence level or document level? </i></h3><i>
+    </i>
+<p></p>
+
+<br>
+
+<p>
+
+    Depending on the use case, one can cluster either documents or sentences. While document clustering serves to regroup documents about the same topic, sentence clustering is more fine-grained and is yet more critical to perform. Document clustering has applications in information retrieval , topic extraction, mails clustering, search engines, etc. In the latter case, the results to a given query are clustered into different categories, so the user chooses what he is looking for.
+</p>
+<p>
+    Usually sentence clustering is used to cluster sentences derived from different documents and can be considered as a transverse segmentation of the documents content. Thus, the number of clusters can exceed the number of documents. Representing each cluster with a relevant descriptor and concatenating those descriptors is one way to summarize large documents.
+
+</p>
+
+<br>
+
+<p style="padding-left: 30pt">
+    <i>
+        </i></p><h3><i>Thematic clustering or Semantic clustering? </i></h3><i>
+    </i>
+<p></p>
+
+<br>
+
+<p>
+    Sentence clusters can be qualified as thematic or semantic. Thematic clustering regroups sentences that deal with the same topic/event while semantic clusters include sentences having almost the same meaning and conveying the same information. For example, let's consider these two sentences from different news articles about Tsunami:
+    
+    <br>
+    
+    <b>Sentence 1:</b>
+    A decade ago, one of the largest earthquakes ever recorded struck off the coast of Indonesia, triggering a tsunami that swept away entire communities around the Indian Ocean. <br>
+    <i>source: http://www.bbc.com/</i>
+    
+    <br>
+    
+    <b>Sentence 2:</b>
+    Ten years ago this Boxing Day, an earthquake in Indonesia triggered multiple tsunamis in what would become one of the biggest natural disasters in history.<br>
+   <i> source: http://www.telegraph.co.uk/</i>
+    
+    <br>
+    
+    These sentences can make a perfect semantic cluster. Only, one of them is sufficient to cover the information needed to know. 
+    
+    <br>
+    
+    If we introduce this new sentence:
+    
+    <br>
+    
+    <b>sentence 3:</b>
+    The disaster was the world's deadliest tsunami, with over 230,000 people killed and half a million injured by the waves that battered the low-lying coast.<br>
+<i>    Source: http://www.ibtimes.co.uk/</i>
+    
+    <br>
+    
+    The semantic clustering should create a new cluster to include the third sentence as it hasn't the same meaning as the first two sentences. However, a thematic clustering would probably regroup all the sentences in the same thematic cluster as they are all about the same event. This means that the sentences considered similar within a thematic cluster, are likely to be fractured into smaller clusters when using semantic clusters.
+</p>
+
+<br>
+    <p style="padding-left: 30pt">
+        <i>
+            </i></p><h3><i> How do we produce thematic/semantic clusters? </i></h3><i>
+        </i>
+    <p></p>
+<br>
+
+<p>
+    To perform this task we mainly need two things: a text similarity measure and a suitable clustering algorithm. Since we are dealing with text, preprocessing is a must and it can go from shallow techniques such as splitting text into sentences and/or pruning stopwords to deeper analysis such as part-of-speech tagging, syntactic parsing, semantic role labeling, etc.
+    
+</p>
+<p>
+    
+    We should not fall in the trap of thinking that moving from thematic to semantic clustering consists of increasing the threshold beyond which two elements are considered close enough to be in the same cluster. This is not true as it depends only on the similarity measure used to quantify the distance between two sentences. A non semantic similarity measure can not detect the semantic equivalence even if we apply a high threshold as it is unable to capture semantic relations such as synonyms and antonyms for example.  
+</p>
+
+<br>
+
+<p style="padding-left: 30pt">
+    <i>
+        </i></p><h3><i> Examples of text similarity measures? </i></h3><i>
+    </i>
+<p></p>
+
+<br>
+
+<p>
+    <b>Cosine similarity of tf-idf (term frequency-inverse document frequency) vectors</b>
+    <br><br>
+    The tf-idf weight of a word <var>w</var> in a document <var>d</var> belonging to a corpus is the ratio of the number of times<var>w</var> occurs in the document <var>d</var> to the number of documents in which <var>w</var> occurs at least ones. This weight reflects the specificity and the importance of a word within a document. Using cosine distance over tf-idf vectors is, therefore, suitable to produce thematic clusters. It doesn't require deep linguistic analysis and is very fast to process as long as the corpus size is not too large as a sentence vector dimension is equal to the corpus vocabulary size. This measure is implemented in scikit-learn. We present below a basic example with default parameters:
+</p>
+
+<pre class="prettyprint prettyprinted"><span class="pln">    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">from</span><span class="pln"> sklearn</span><span class="pun">.</span><span class="pln">feature_extraction</span><span class="pun">.</span><span class="pln">text </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">TfidfVectorizer</span><span class="pln">
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> vect </span><span class="pun">=</span><span class="pln"> </span><span class="typ">TfidfVectorizer</span><span class="pun">(</span><span class="pln">min_df</span><span class="pun">=</span><span class="lit">1</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> tfidf </span><span class="pun">=</span><span class="pln"> vect</span><span class="pun">.</span><span class="pln">fit_transform</span><span class="pun">([</span><span class="str">"I prefer clustering to classification"</span><span class="pun">,</span><span class="pln">
+    </span><span class="str">"I prefer visiting my family"</span><span class="pun">,</span><span class="str">"Do you prefer clustering to classification too?"</span><span class="pun">,</span><span class="pln"> 
+    </span><span class="str">"Their family is happy"</span><span class="pun">])</span><span class="pln"> </span><span class="com">#each sentence can be replaced by a whole document</span><span class="pln">
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">tfidf </span><span class="pun">*</span><span class="pln"> tfidf</span><span class="pun">.</span><span class="pln">T</span><span class="pun">).</span><span class="pln">A </span><span class="com">#similarities matrix of sentences</span><span class="pln">
+    array</span><span class="pun">([[</span><span class="pln"> </span><span class="lit">1.</span><span class="pln">        </span><span class="pun">,</span><span class="pln">  </span><span class="lit">0.15529592</span><span class="pun">,</span><span class="pln">  </span><span class="lit">0.65648787</span><span class="pun">,</span><span class="pln">  </span><span class="lit">0.</span><span class="pln">        </span><span class="pun">],</span><span class="pln">
+           </span><span class="pun">[</span><span class="pln"> </span><span class="lit">0.15529592</span><span class="pun">,</span><span class="pln">  </span><span class="lit">1.</span><span class="pln">        </span><span class="pun">,</span><span class="pln">  </span><span class="lit">0.10194989</span><span class="pun">,</span><span class="pln">  </span><span class="lit">0.18767492</span><span class="pun">],</span><span class="pln">
+           </span><span class="pun">[</span><span class="pln"> </span><span class="lit">0.65648787</span><span class="pun">,</span><span class="pln">  </span><span class="lit">0.10194989</span><span class="pun">,</span><span class="pln">  </span><span class="lit">1.</span><span class="pln">        </span><span class="pun">,</span><span class="pln">  </span><span class="lit">0.</span><span class="pln">        </span><span class="pun">],</span><span class="pln">
+           </span><span class="pun">[</span><span class="pln"> </span><span class="lit">0.</span><span class="pln">        </span><span class="pun">,</span><span class="pln">  </span><span class="lit">0.18767492</span><span class="pun">,</span><span class="pln">  </span><span class="lit">0.</span><span class="pln">        </span><span class="pun">,</span><span class="pln">  </span><span class="lit">1.</span><span class="pln">        </span><span class="pun">]])</span></pre>
+
+<p>
+    <br>
+    <b>Knowledge-based Measures (wordNet)</b>
+    <br><br>
+    
+    Knowledge-based measures quantify semantic relatedness of words using a semantic network. Many measures have shown to work well on the WordNet large lexical database for English. The figure below shows a subgraph of WordNet.
+    
+    <br>
+
+    </p><div class="row">
+          <figure>
+             <img class="img-responsive" src="./Quick review on Text Clustering and Text Similarity Approaches_files/wordnet.jpg" alt="wordnet">
+          </figure>
+       </div>
+    
+    <br>
+<i>Source&nbsp;: (Wang &amp; al.,2015) </i><br>
+    For example, Wu and Palmer metric measures the semantic similarity of two concepts as their depth of the least common subsumer in the wordnet graph, while Resnik metric estimates the similarity as the probability of encountering the least common subsumer in a large corpus. This probability is known as the Information Content (IC). Note that a concept, here, is a synset which is a word sense (synonym) and each word has several synsets. These examples are implemented in the <a href="http://www.artfact-online.fr/blog/blog-post/module%20http://www.nltk.org/howto/wordnet.html">Python NLTK</a> module.
+<p></p>
+
+<pre class="prettyprint prettyprinted"><span class="pln">    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">from</span><span class="pln"> nltk</span><span class="pun">.</span><span class="pln">corpus </span><span class="kwd">import</span><span class="pln"> wordnet </span><span class="kwd">as</span><span class="pln"> wn
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> dog</span><span class="pun">=</span><span class="pln">wn</span><span class="pun">.</span><span class="pln">synsets</span><span class="pun">(</span><span class="str">'dog'</span><span class="pun">,</span><span class="pln"> pos</span><span class="pun">=</span><span class="pln">wn</span><span class="pun">.</span><span class="pln">NOUN</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">]</span><span class="pln"> </span><span class="com">#get the first noun synonym of the word "dog"</span><span class="pln">
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> cat</span><span class="pun">=</span><span class="pln">wn</span><span class="pun">.</span><span class="pln">synsets</span><span class="pun">(</span><span class="str">'cat'</span><span class="pun">,</span><span class="pln"> pos</span><span class="pun">=</span><span class="pln">wn</span><span class="pun">.</span><span class="pln">NOUN</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">]</span><span class="pln">
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> rose</span><span class="pun">=</span><span class="pln">wn</span><span class="pun">.</span><span class="pln">synsets</span><span class="pun">(</span><span class="str">'rose'</span><span class="pun">,</span><span class="pln"> pos</span><span class="pun">=</span><span class="pln">wn</span><span class="pun">.</span><span class="pln">NOUN</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">]</span><span class="pln">
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> flower</span><span class="pun">=</span><span class="pln">wn</span><span class="pun">.</span><span class="pln">synsets</span><span class="pun">(</span><span class="str">'flower'</span><span class="pun">,</span><span class="pln"> pos</span><span class="pun">=</span><span class="pln">wn</span><span class="pun">.</span><span class="pln">NOUN</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">]</span><span class="pln">
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">from</span><span class="pln"> nltk</span><span class="pun">.</span><span class="pln">corpus </span><span class="kwd">import</span><span class="pln"> wordnet_ic
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> brown_ic </span><span class="pun">=</span><span class="pln"> wordnet_ic</span><span class="pun">.</span><span class="pln">ic</span><span class="pun">(</span><span class="str">'ic-brown.dat'</span><span class="pun">)</span><span class="pln"> </span><span class="com">#load the brown corpus to compute the IC</span><span class="pln">
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> rose</span><span class="pun">.</span><span class="pln">res_similarity</span><span class="pun">(</span><span class="pln">flower</span><span class="pun">,</span><span class="pln"> brown_ic</span><span class="pun">)</span><span class="pln">
+    </span><span class="lit">6.0283161048744525</span><span class="pln">
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> rose</span><span class="pun">.</span><span class="pln">res_similarity</span><span class="pun">(</span><span class="pln">dog</span><span class="pun">,</span><span class="pln"> brown_ic</span><span class="pun">)</span><span class="pln">
+    </span><span class="lit">2.2241504712318556</span><span class="pln">
+    </span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> cat</span><span class="pun">.</span><span class="pln">res_similarity</span><span class="pun">(</span><span class="pln">dog</span><span class="pun">,</span><span class="pln"> brown_ic</span><span class="pun">)</span><span class="pln">
+    </span><span class="lit">7.911666509036577</span></pre>
+
+<p>
+
+    These word similarities could be used to compute sentence similarities through this formula from (Mihalcea &amp; al,2006)
+
+    <br><br>
+    </p><p style="padding-left: 30pt: font-size:50px;" align="center">
+<span class="MathJax_Preview" style="color: inherit; display: none;"></span><span id="MathJax-Element-1-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mstyle mathsize=&quot;1em&quot;&gt;&lt;mtable columnalign=&quot;right left right left right left right left right left right left&quot; rowspacing=&quot;3pt&quot; columnspacing=&quot;0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em&quot; displaystyle=&quot;true&quot;&gt;&lt;mtr&gt;&lt;mtd&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;S&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;i&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;m&lt;/mi&gt;&lt;/mrow&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/msub&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mfrac&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mfrac&gt;&lt;mrow&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mrow&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;munder&gt;&lt;mo movablelimits=&quot;false&quot;&gt;&amp;#x2211;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;&amp;#x2208;&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;/munder&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;m&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;a&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;x&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;S&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;i&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;m&lt;/mi&gt;&lt;/mrow&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;mrow&gt;&lt;munder&gt;&lt;mo movablelimits=&quot;false&quot;&gt;&amp;#x2211;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;&amp;#x2208;&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;/munder&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;munder&gt;&lt;mo movablelimits=&quot;false&quot;&gt;&amp;#x2211;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;&amp;#x2208;&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;/munder&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;m&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;a&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;x&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;S&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;i&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;m&lt;/mi&gt;&lt;/mrow&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;mrow&gt;&lt;munder&gt;&lt;mo&gt;&amp;#x2211;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;&amp;#x2208;&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;/munder&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;/mrow&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;/mtable&gt;&lt;/mstyle&gt;&lt;/math&gt;" role="presentation" style="font-size: 118%; position: relative;"><span id="MJXc-Node-1" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-2" class="mjx-mrow"><span id="MJXc-Node-3" class="mjx-mstyle"><span id="MJXc-Node-4" class="mjx-mrow"><span id="MJXc-Node-5" class="mjx-mtable" style="vertical-align: -1.914em; padding: 0px 0.167em;"><span class="mjx-table"><span id="MJXc-Node-6" class="mjx-mtr" style="height: 4.327em;"><span id="MJXc-Node-7" class="mjx-mtd" style="padding: 0px; text-align: right; width: 35.219em;"><span id="MJXc-Node-8" class="mjx-mrow"><span id="MJXc-Node-9" class="mjx-texatom"><span id="MJXc-Node-10" class="mjx-mrow"><span id="MJXc-Node-11" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.388em;">S</span></span><span id="MJXc-Node-12" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">i</span></span><span id="MJXc-Node-13" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.168em; padding-bottom: 0.333em;">m</span></span></span></span><span id="MJXc-Node-14" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">(</span></span><span id="MJXc-Node-15" class="mjx-msubsup"><span class="mjx-base" style="margin-right: -0.12em;"><span id="MJXc-Node-16" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em; padding-right: 0.12em;">T</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-17" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">1</span></span></span></span><span id="MJXc-Node-18" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.162em; padding-bottom: 0.553em;">,</span></span><span id="MJXc-Node-19" class="mjx-msubsup MJXc-space1"><span class="mjx-base" style="margin-right: -0.12em;"><span id="MJXc-Node-20" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em; padding-right: 0.12em;">T</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-21" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">2</span></span></span></span><span id="MJXc-Node-22" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">)</span></span><span id="MJXc-Node-23" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.333em;">=</span></span><span id="MJXc-Node-24" class="mjx-mfrac MJXc-space3"><span class="mjx-box MJXc-stacked" style="width: 0.7em; padding: 0px 0.12em;"><span class="mjx-numerator" style="width: 0.7em; top: -1.368em;"><span id="MJXc-Node-25" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">1</span></span></span><span class="mjx-denominator" style="width: 0.7em; bottom: -0.711em;"><span id="MJXc-Node-26" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">2</span></span></span><span class="mjx-line" style="border-bottom: 1.3px solid; top: -0.284em; width: 0.7em;"></span></span><span class="mjx-vsize" style="height: 2.078em; vertical-align: -0.711em;"></span></span><span id="MJXc-Node-27" class="mjx-mrow"><span id="MJXc-Node-28" class="mjx-mo" style="vertical-align: -1.245em;"><span class="mjx-delim-v"><span class="mjx-char MJXc-TeX-size4-R" style="padding-top: 0.938em; padding-bottom: 0.938em;">⎛</span><span class="mjx-char MJXc-TeX-size4-R" style="line-height: 0.355em; margin-bottom: -0.1em; margin-top: 0px;">⎜
+⎜</span><span class="mjx-char MJXc-TeX-size4-R" style="padding-top: 0.938em; padding-bottom: 0.938em;">⎝</span></span></span><span id="MJXc-Node-29" class="mjx-mrow"><span id="MJXc-Node-30" class="mjx-mfrac"><span class="mjx-box MJXc-stacked" style="width: 12.107em; padding: 0px 0.12em;"><span class="mjx-numerator" style="width: 12.107em; top: -2.414em;"><span id="MJXc-Node-31" class="mjx-mrow"><span id="MJXc-Node-32" class="mjx-munderover"><span class="mjx-itable"><span class="mjx-row"><span class="mjx-cell"><span class="mjx-op" style="padding-left: 0.305em;"><span id="MJXc-Node-33" class="mjx-mo"><span class="mjx-char MJXc-TeX-size1-R" style="padding-top: 0.553em; padding-bottom: 0.553em;">∑</span></span></span></span></span><span class="mjx-row"><span class="mjx-under" style="font-size: 70.7%; padding-top: 0.236em; padding-bottom: 0.141em;"><span id="MJXc-Node-34" class="mjx-texatom"><span id="MJXc-Node-35" class="mjx-mrow"><span id="MJXc-Node-36" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.223em; padding-bottom: 0.278em;">w</span></span><span id="MJXc-Node-37" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.278em; padding-bottom: 0.388em;">∈</span></span><span id="MJXc-Node-38" class="mjx-msubsup"><span class="mjx-base" style="margin-right: -0.12em;"><span id="MJXc-Node-39" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em; padding-right: 0.12em;">T</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-40" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">1</span></span></span></span></span></span></span></span></span></span><span id="MJXc-Node-41" class="mjx-texatom MJXc-space1"><span id="MJXc-Node-42" class="mjx-mrow"><span id="MJXc-Node-43" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.168em; padding-bottom: 0.333em;">m</span></span><span id="MJXc-Node-44" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.168em; padding-bottom: 0.333em;">a</span></span><span id="MJXc-Node-45" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.168em; padding-bottom: 0.333em;">x</span></span><span id="MJXc-Node-46" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.388em;">S</span></span><span id="MJXc-Node-47" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">i</span></span><span id="MJXc-Node-48" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.168em; padding-bottom: 0.333em;">m</span></span></span></span><span id="MJXc-Node-49" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">(</span></span><span id="MJXc-Node-50" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.223em; padding-bottom: 0.278em;">w</span></span><span id="MJXc-Node-51" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.162em; padding-bottom: 0.553em;">,</span></span><span id="MJXc-Node-52" class="mjx-msubsup MJXc-space1"><span class="mjx-base" style="margin-right: -0.12em;"><span id="MJXc-Node-53" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em; padding-right: 0.12em;">T</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-54" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">2</span></span></span></span><span id="MJXc-Node-55" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">)</span></span><span id="MJXc-Node-56" class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.003em; padding-bottom: 0.333em;">⋅</span></span><span id="MJXc-Node-57" class="mjx-mi MJXc-space2"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em;">i</span></span><span id="MJXc-Node-58" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.498em; padding-bottom: 0.278em; padding-right: 0.003em;">d</span></span><span id="MJXc-Node-59" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.498em; padding-bottom: 0.498em; padding-right: 0.06em;">f</span></span><span id="MJXc-Node-60" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">(</span></span><span id="MJXc-Node-61" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.223em; padding-bottom: 0.278em;">w</span></span><span id="MJXc-Node-62" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">)</span></span></span></span><span class="mjx-denominator" style="width: 12.107em; bottom: -1.914em;"><span id="MJXc-Node-63" class="mjx-mrow"><span id="MJXc-Node-64" class="mjx-munderover"><span class="mjx-itable"><span class="mjx-row"><span class="mjx-cell"><span class="mjx-op" style="padding-left: 0.305em;"><span id="MJXc-Node-65" class="mjx-mo"><span class="mjx-char MJXc-TeX-size1-R" style="padding-top: 0.553em; padding-bottom: 0.553em;">∑</span></span></span></span></span><span class="mjx-row"><span class="mjx-under" style="font-size: 70.7%; padding-top: 0.236em; padding-bottom: 0.141em;"><span id="MJXc-Node-66" class="mjx-texatom"><span id="MJXc-Node-67" class="mjx-mrow"><span id="MJXc-Node-68" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.223em; padding-bottom: 0.278em;">w</span></span><span id="MJXc-Node-69" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.278em; padding-bottom: 0.388em;">∈</span></span><span id="MJXc-Node-70" class="mjx-msubsup"><span class="mjx-base" style="margin-right: -0.12em;"><span id="MJXc-Node-71" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em; padding-right: 0.12em;">T</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-72" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">1</span></span></span></span></span></span></span></span></span></span><span id="MJXc-Node-73" class="mjx-mi MJXc-space1"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em;">i</span></span><span id="MJXc-Node-74" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.498em; padding-bottom: 0.278em; padding-right: 0.003em;">d</span></span><span id="MJXc-Node-75" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.498em; padding-bottom: 0.498em; padding-right: 0.06em;">f</span></span><span id="MJXc-Node-76" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">(</span></span><span id="MJXc-Node-77" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.223em; padding-bottom: 0.278em;">w</span></span><span id="MJXc-Node-78" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">)</span></span></span></span><span class="mjx-line" style="border-bottom: 1.3px solid; top: -0.284em; width: 12.107em;"></span></span><span class="mjx-vsize" style="height: 4.327em; vertical-align: -1.914em;"></span></span><span id="MJXc-Node-79" class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.278em; padding-bottom: 0.443em;">+</span></span><span id="MJXc-Node-80" class="mjx-mfrac MJXc-space2"><span class="mjx-box MJXc-stacked" style="width: 12.107em; padding: 0px 0.12em;"><span class="mjx-numerator" style="width: 12.107em; top: -2.414em;"><span id="MJXc-Node-81" class="mjx-mrow"><span id="MJXc-Node-82" class="mjx-munderover"><span class="mjx-itable"><span class="mjx-row"><span class="mjx-cell"><span class="mjx-op" style="padding-left: 0.305em;"><span id="MJXc-Node-83" class="mjx-mo"><span class="mjx-char MJXc-TeX-size1-R" style="padding-top: 0.553em; padding-bottom: 0.553em;">∑</span></span></span></span></span><span class="mjx-row"><span class="mjx-under" style="font-size: 70.7%; padding-top: 0.236em; padding-bottom: 0.141em;"><span id="MJXc-Node-84" class="mjx-texatom"><span id="MJXc-Node-85" class="mjx-mrow"><span id="MJXc-Node-86" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.223em; padding-bottom: 0.278em;">w</span></span><span id="MJXc-Node-87" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.278em; padding-bottom: 0.388em;">∈</span></span><span id="MJXc-Node-88" class="mjx-msubsup"><span class="mjx-base" style="margin-right: -0.12em;"><span id="MJXc-Node-89" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em; padding-right: 0.12em;">T</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-90" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">2</span></span></span></span></span></span></span></span></span></span><span id="MJXc-Node-91" class="mjx-texatom MJXc-space1"><span id="MJXc-Node-92" class="mjx-mrow"><span id="MJXc-Node-93" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.168em; padding-bottom: 0.333em;">m</span></span><span id="MJXc-Node-94" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.168em; padding-bottom: 0.333em;">a</span></span><span id="MJXc-Node-95" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.168em; padding-bottom: 0.333em;">x</span></span><span id="MJXc-Node-96" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.388em;">S</span></span><span id="MJXc-Node-97" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">i</span></span><span id="MJXc-Node-98" class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.168em; padding-bottom: 0.333em;">m</span></span></span></span><span id="MJXc-Node-99" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">(</span></span><span id="MJXc-Node-100" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.223em; padding-bottom: 0.278em;">w</span></span><span id="MJXc-Node-101" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.162em; padding-bottom: 0.553em;">,</span></span><span id="MJXc-Node-102" class="mjx-msubsup MJXc-space1"><span class="mjx-base" style="margin-right: -0.12em;"><span id="MJXc-Node-103" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em; padding-right: 0.12em;">T</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-104" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">1</span></span></span></span><span id="MJXc-Node-105" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">)</span></span><span id="MJXc-Node-106" class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.003em; padding-bottom: 0.333em;">⋅</span></span><span id="MJXc-Node-107" class="mjx-mi MJXc-space2"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em;">i</span></span><span id="MJXc-Node-108" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.498em; padding-bottom: 0.278em; padding-right: 0.003em;">d</span></span><span id="MJXc-Node-109" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.498em; padding-bottom: 0.498em; padding-right: 0.06em;">f</span></span><span id="MJXc-Node-110" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">(</span></span><span id="MJXc-Node-111" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.223em; padding-bottom: 0.278em;">w</span></span><span id="MJXc-Node-112" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">)</span></span></span></span><span class="mjx-denominator" style="width: 12.107em; bottom: -1.186em;"><span id="MJXc-Node-113" class="mjx-mrow"><span id="MJXc-Node-114" class="mjx-munderover"><span class="mjx-base"><span id="MJXc-Node-115" class="mjx-mo"><span class="mjx-char MJXc-TeX-size1-R" style="padding-top: 0.553em; padding-bottom: 0.553em;">∑</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.439em; padding-right: 0.071em;"><span id="MJXc-Node-116" class="mjx-texatom"><span id="MJXc-Node-117" class="mjx-mrow"><span id="MJXc-Node-118" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.223em; padding-bottom: 0.278em;">w</span></span><span id="MJXc-Node-119" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.278em; padding-bottom: 0.388em;">∈</span></span><span id="MJXc-Node-120" class="mjx-msubsup"><span class="mjx-base" style="margin-right: -0.12em;"><span id="MJXc-Node-121" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em; padding-right: 0.12em;">T</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-122" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.388em; padding-bottom: 0.333em;">2</span></span></span></span></span></span></span></span><span id="MJXc-Node-123" class="mjx-mi MJXc-space1"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.443em; padding-bottom: 0.278em;">i</span></span><span id="MJXc-Node-124" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.498em; padding-bottom: 0.278em; padding-right: 0.003em;">d</span></span><span id="MJXc-Node-125" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.498em; padding-bottom: 0.498em; padding-right: 0.06em;">f</span></span><span id="MJXc-Node-126" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">(</span></span><span id="MJXc-Node-127" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.223em; padding-bottom: 0.278em;">w</span></span><span id="MJXc-Node-128" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.443em; padding-bottom: 0.608em;">)</span></span></span></span><span class="mjx-line" style="border-bottom: 1.3px solid; top: -0.284em; width: 12.107em;"></span></span><span class="mjx-vsize" style="height: 3.599em; vertical-align: -1.186em;"></span></span></span><span id="MJXc-Node-129" class="mjx-mo" style="vertical-align: -1.245em;"><span class="mjx-delim-v"><span class="mjx-char MJXc-TeX-size4-R" style="padding-top: 0.938em; padding-bottom: 0.938em;">⎞</span><span class="mjx-char MJXc-TeX-size4-R" style="line-height: 0.355em; margin-bottom: -0.1em; margin-top: 0px;">⎟
+⎟</span><span class="mjx-char MJXc-TeX-size4-R" style="padding-top: 0.938em; padding-bottom: 0.938em;">⎠</span></span></span></span><span id="MJXc-Node-130" class="mjx-mo MJXc-space1"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.162em; padding-bottom: 0.553em;">,</span></span><span class="mjx-strut"></span></span></span></span></span></span></span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle mathsize="1em"><mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true"><mtr><mtd><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">S</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="false">(</mo><msub><mi>T</mi><mn>1</mn></msub><mo>,</mo><msub><mi>T</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo>(</mo><mrow><mfrac><mrow><munder><mo movablelimits="false">∑</mo><mrow class="MJX-TeXAtom-ORD"><mi>w</mi><mo>∈</mo><msub><mi>T</mi><mn>1</mn></msub></mrow></munder><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">m</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">x</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="false">(</mo><mi>w</mi><mo>,</mo><msub><mi>T</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo>⋅</mo><mi>i</mi><mi>d</mi><mi>f</mi><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mrow><munder><mo movablelimits="false">∑</mo><mrow class="MJX-TeXAtom-ORD"><mi>w</mi><mo>∈</mo><msub><mi>T</mi><mn>1</mn></msub></mrow></munder><mi>i</mi><mi>d</mi><mi>f</mi><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mfrac><mo>+</mo><mfrac><mrow><munder><mo movablelimits="false">∑</mo><mrow class="MJX-TeXAtom-ORD"><mi>w</mi><mo>∈</mo><msub><mi>T</mi><mn>2</mn></msub></mrow></munder><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">m</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">x</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="false">(</mo><mi>w</mi><mo>,</mo><msub><mi>T</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>⋅</mo><mi>i</mi><mi>d</mi><mi>f</mi><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><mrow><munder><mo>∑</mo><mrow class="MJX-TeXAtom-ORD"><mi>w</mi><mo>∈</mo><msub><mi>T</mi><mn>2</mn></msub></mrow></munder><mi>i</mi><mi>d</mi><mi>f</mi><mo stretchy="false">(</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><mo>)</mo></mrow><mo>,</mo></mtd></mtr></mtable></mstyle></math></span></span><script type="math/tex" id="MathJax-Element-1">
+\bf
+\normalsize
+\begin{align*}
+\mathrm{Sim}(T_1,T_2)=\frac{1}{2}\left(\frac{\sum\limits_{w \in T_1}\mathrm{maxSim}(w,T_2)\cdot idf(w)}{\sum\limits_{w \in T_1} idf(w)}+\frac{\sum\limits_{w \in T_2}\mathrm{maxSim}(w,T_1)\cdot idf(w)}{\sum_{w \in T_2} idf(w)}\right),
+\end{align*}
+</script>
+    </p>
+    <br>where <var>maxSim(w,T)</var> refers to the maximum value in the similarities of the word <var>w</var> to each word in the text segment <var>T</var>. Given two text units  <var>T<sub>1</sub></var> and <var>T<sub>2</sub></var>, this scoring formula combines the semantic similarities of each text unit words in turn with respect to the other text segment words.  The idf factor indicates the specificity of a word and is used to give more importance to specific words similarities than to generic ones like "get" and "bring". This scoring function can be used with any word similarity metric.
+<p></p>
+
+<p>
+    <b>Word embeddings</b>
+    <br><br>
+
+    Word embeddings are low dimensional vectors obtained by training a neural network on a large corpus to predict a word given a context (Continuous  Bag Of Words model) or to predict the context given a word (skip gram model). The context is a window of surrounding words.The most known software to produce word embeddings is <a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">Tomas Mikolov's Word2vec</a>. Pre-trained word embeddings are also available in the word2vec code.google page.
+ </p>
+
+<pre class="prettyprint prettyprinted"><span class="pln">    </span><span class="kwd">import</span><span class="pln"> sys
+    </span><span class="kwd">from</span><span class="pln"> gensim</span><span class="pun">.</span><span class="pln">models </span><span class="kwd">import</span><span class="pln"> word2vec
+
+    </span><span class="kwd">def</span><span class="pln"> w2v</span><span class="pun">(</span><span class="pln">s1</span><span class="pun">,</span><span class="pln">s2</span><span class="pun">,</span><span class="pln">wordmodel</span><span class="pun">):</span><span class="pln">
+            </span><span class="kwd">if</span><span class="pln"> s1</span><span class="pun">==</span><span class="pln">s2</span><span class="pun">:</span><span class="pln">
+                    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">1.0</span><span class="pln">
+
+            s1words</span><span class="pun">=</span><span class="pln">s1</span><span class="pun">.</span><span class="pln">split</span><span class="pun">()</span><span class="pln">
+            s2words</span><span class="pun">=</span><span class="pln">s2</span><span class="pun">.</span><span class="pln">split</span><span class="pun">()</span><span class="pln">
+            s1wordsset</span><span class="pun">=</span><span class="kwd">set</span><span class="pun">(</span><span class="pln">s1words</span><span class="pun">)</span><span class="pln">
+            s2wordsset</span><span class="pun">=</span><span class="kwd">set</span><span class="pun">(</span><span class="pln">s2words</span><span class="pun">)</span><span class="pln">
+            vocab </span><span class="pun">=</span><span class="pln"> wordmodel</span><span class="pun">.</span><span class="pln">vocab </span><span class="com">#the vocabulary considered in the word embeddings</span><span class="pln">
+            </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="pln">s1wordsset </span><span class="pun">&amp;</span><span class="pln"> s2wordsset</span><span class="pun">)==</span><span class="lit">0</span><span class="pun">:</span><span class="pln">
+                    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0.0</span><span class="pln">
+            </span><span class="kwd">for</span><span class="pln"> word </span><span class="kwd">in</span><span class="pln"> s1wordsset</span><span class="pun">.</span><span class="pln">copy</span><span class="pun">():</span><span class="pln"> </span><span class="com">#remove sentence words not found in the vocab</span><span class="pln">
+                    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">word </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> vocab</span><span class="pun">):</span><span class="pln">
+                            s1words</span><span class="pun">.</span><span class="pln">remove</span><span class="pun">(</span><span class="pln">word</span><span class="pun">)</span><span class="pln">
+            </span><span class="kwd">for</span><span class="pln"> word </span><span class="kwd">in</span><span class="pln"> s2wordsset</span><span class="pun">.</span><span class="pln">copy</span><span class="pun">():</span><span class="pln"> </span><span class="com">#idem</span><span class="pln">
+                    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">word </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> vocab</span><span class="pun">):</span><span class="pln">
+                            s2words</span><span class="pun">.</span><span class="pln">remove</span><span class="pun">(</span><span class="pln">word</span><span class="pun">)</span><span class="pln">
+            </span><span class="kwd">return</span><span class="pln"> wordmodel</span><span class="pun">.</span><span class="pln">n_similarity</span><span class="pun">(</span><span class="pln">s1words</span><span class="pun">,</span><span class="pln"> s2words</span><span class="pun">)</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pln"> __name__ </span><span class="pun">==</span><span class="pln"> </span><span class="str">'__main__'</span><span class="pun">:</span><span class="pln">
+            wordmodelfile</span><span class="pun">=</span><span class="str">"/home/maali/GoogleNews-vectors-negative300.bin.gz"</span><span class="pln">
+            wordmodel</span><span class="pun">=</span><span class="pln"> word2vec</span><span class="pun">.</span><span class="typ">Word2Vec</span><span class="pun">.</span><span class="pln">load_word2vec_format</span><span class="pun">(</span><span class="pln">wordmodelfile</span><span class="pun">,</span><span class="pln"> binary</span><span class="pun">=</span><span class="kwd">True</span><span class="pun">)</span><span class="pln">
+            s1</span><span class="pun">=</span><span class="str">"As California Bounces Back , Governor Calls For Lofty Goals"</span><span class="pln">
+            s2</span><span class="pun">=</span><span class="str">"With California Rebounding, Governor Pushes Big Projects"</span><span class="pln">
+            </span><span class="kwd">print</span><span class="pln"> </span><span class="str">"sim(s1,s2) = "</span><span class="pun">,</span><span class="pln"> w2v</span><span class="pun">(</span><span class="pln">s1</span><span class="pun">,</span><span class="pln">s2</span><span class="pun">,</span><span class="pln">wordmodel</span><span class="pun">),</span><span class="str">"/1."</span><span class="pln">
+            s3</span><span class="pun">=</span><span class="str">"Special measures for Beijing polution"</span><span class="pln">
+            s4</span><span class="pun">=</span><span class="str">"Smog cloud blankets Beijing"</span><span class="pln">
+            </span><span class="kwd">print</span><span class="pln"> </span><span class="str">"sim(s3,s4) = "</span><span class="pun">,</span><span class="pln"> w2v</span><span class="pun">(</span><span class="pln">s3</span><span class="pun">,</span><span class="pln">s4</span><span class="pun">,</span><span class="pln">wordmodel</span><span class="pun">),</span><span class="str">"/1."</span></pre>
+The sentences s1, s2, s3 and s4 are tweets from the SemEval 2013 evaluation set. The human judgment of these sentences semantic similarities is: <br>
+sim(s1,s2)= 4.2/5 ~ 0.82 (very similar) <br>
+sim(s2,s3)= 2.0/5 ~ 0.40 <br>
+Run test for w2v:
+<pre class="prettyprint prettyprinted"><span class="pln">    maali@master0</span><span class="pun">:~</span><span class="pln">$ python similarity</span><span class="pun">.</span><span class="pln">py
+    sim</span><span class="pun">(</span><span class="pln">s1</span><span class="pun">,</span><span class="pln">s2</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln">  </span><span class="lit">0.71132474653</span><span class="pln"> </span><span class="pun">/</span><span class="lit">1.</span><span class="pln">
+    sim</span><span class="pun">(</span><span class="pln">s3</span><span class="pun">,</span><span class="pln">s4</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln">  </span><span class="lit">0.478813493876</span><span class="pln"> </span><span class="pun">/</span><span class="lit">1.</span></pre>
+As you can see the results returned by w2v are consistent and very close to the human judgment.
+<p>
+    It is recommended to load the word model (embeddings) only once rather than loading it before each similarity computation. The word embedding used here are trained using word2vec on 100 million words from Google News downloadable <a href="https://code.google.com/archive/p/word2vec">here</a>.
+</p>
+
+<br>
+
+<p style="padding-left: 30pt">
+    <i>
+        </i></p><h3><i>Which clustering algorithm to use? </i></h3><i>
+    </i>
+<p></p>
+
+<br>
+
+<p k-means="" is="" a="" well="" known="" partitioning="" algorithm="" and="" many="" implementations="" are="" available.="" it="" requires="" to="" fix="" the="" number="" of="" clusters.="" <br="">
+    In the context of text data, it is suitable and fast when we have an approximation of the clusters number and when the similarity measure is not expensive in terms of computation time. Here is a simple example of k-means clustering using tf-idf vectors with the scikit-learn implementation:
+</p>
+
+<pre class="prettyprint prettyprinted"><span class="pln">    </span><span class="kwd">import</span><span class="pln"> collections
+    </span><span class="kwd">from</span><span class="pln"> nltk </span><span class="kwd">import</span><span class="pln"> word_tokenize
+    </span><span class="kwd">from</span><span class="pln"> nltk</span><span class="pun">.</span><span class="pln">corpus </span><span class="kwd">import</span><span class="pln"> stopwords
+    </span><span class="kwd">from</span><span class="pln"> nltk</span><span class="pun">.</span><span class="pln">stem </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">PorterStemmer</span><span class="pln">
+    </span><span class="kwd">from</span><span class="pln"> sklearn</span><span class="pun">.</span><span class="pln">cluster </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">KMeans</span><span class="pln">
+    </span><span class="kwd">from</span><span class="pln"> sklearn</span><span class="pun">.</span><span class="pln">feature_extraction</span><span class="pun">.</span><span class="pln">text </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">TfidfVectorizer</span><span class="pln">
+    </span><span class="kwd">from</span><span class="pln"> pprint </span><span class="kwd">import</span><span class="pln"> pprint
+
+
+    </span><span class="kwd">def</span><span class="pln"> word_tokenizer</span><span class="pun">(</span><span class="pln">text</span><span class="pun">):</span><span class="pln">
+            </span><span class="com">#tokenizes and stems the text</span><span class="pln">
+            tokens </span><span class="pun">=</span><span class="pln"> word_tokenize</span><span class="pun">(</span><span class="pln">text</span><span class="pun">)</span><span class="pln">
+            stemmer </span><span class="pun">=</span><span class="pln"> </span><span class="typ">PorterStemmer</span><span class="pun">()</span><span class="pln">
+            tokens </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="pln">stemmer</span><span class="pun">.</span><span class="pln">stem</span><span class="pun">(</span><span class="pln">t</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> t </span><span class="kwd">in</span><span class="pln"> tokens </span><span class="kwd">if</span><span class="pln"> t </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> stopwords</span><span class="pun">.</span><span class="pln">words</span><span class="pun">(</span><span class="str">'english'</span><span class="pun">)]</span><span class="pln">
+            </span><span class="kwd">return</span><span class="pln"> tokens
+
+
+    </span><span class="kwd">def</span><span class="pln"> cluster_sentences</span><span class="pun">(</span><span class="pln">sentences</span><span class="pun">,</span><span class="pln"> nb_of_clusters</span><span class="pun">=</span><span class="lit">5</span><span class="pun">):</span><span class="pln">
+            tfidf_vectorizer </span><span class="pun">=</span><span class="pln"> </span><span class="typ">TfidfVectorizer</span><span class="pun">(</span><span class="pln">tokenizer</span><span class="pun">=</span><span class="pln">word_tokenizer</span><span class="pun">,</span><span class="pln">
+                                            stop_words</span><span class="pun">=</span><span class="pln">stopwords</span><span class="pun">.</span><span class="pln">words</span><span class="pun">(</span><span class="str">'english'</span><span class="pun">),</span><span class="pln">
+                                            max_df</span><span class="pun">=</span><span class="lit">0.9</span><span class="pun">,</span><span class="pln">
+                                            min_df</span><span class="pun">=</span><span class="lit">0.1</span><span class="pun">,</span><span class="pln">
+                                            lowercase</span><span class="pun">=</span><span class="kwd">True</span><span class="pun">)</span><span class="pln">
+            </span><span class="com">#builds a tf-idf matrix for the sentences</span><span class="pln">
+            tfidf_matrix </span><span class="pun">=</span><span class="pln"> tfidf_vectorizer</span><span class="pun">.</span><span class="pln">fit_transform</span><span class="pun">(</span><span class="pln">sentences</span><span class="pun">)</span><span class="pln">
+            kmeans </span><span class="pun">=</span><span class="pln"> </span><span class="typ">KMeans</span><span class="pun">(</span><span class="pln">n_clusters</span><span class="pun">=</span><span class="pln">nb_of_clusters</span><span class="pun">)</span><span class="pln">
+            kmeans</span><span class="pun">.</span><span class="pln">fit</span><span class="pun">(</span><span class="pln">tfidf_matrix</span><span class="pun">)</span><span class="pln">
+            clusters </span><span class="pun">=</span><span class="pln"> collections</span><span class="pun">.</span><span class="pln">defaultdict</span><span class="pun">(</span><span class="pln">list</span><span class="pun">)</span><span class="pln">
+            </span><span class="kwd">for</span><span class="pln"> i</span><span class="pun">,</span><span class="pln"> label </span><span class="kwd">in</span><span class="pln"> enumerate</span><span class="pun">(</span><span class="pln">kmeans</span><span class="pun">.</span><span class="pln">labels_</span><span class="pun">):</span><span class="pln">
+                    clusters</span><span class="pun">[</span><span class="pln">label</span><span class="pun">].</span><span class="pln">append</span><span class="pun">(</span><span class="pln">i</span><span class="pun">)</span><span class="pln">
+            </span><span class="kwd">return</span><span class="pln"> dict</span><span class="pun">(</span><span class="pln">clusters</span><span class="pun">)</span><span class="pln">
+
+
+    </span><span class="kwd">if</span><span class="pln"> __name__ </span><span class="pun">==</span><span class="pln"> </span><span class="str">"__main__"</span><span class="pun">:</span><span class="pln">
+            sentences </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="str">"Nature is beautiful"</span><span class="pun">,</span><span class="str">"I like green apples"</span><span class="pun">,</span><span class="pln">
+                    </span><span class="str">"We should protect the trees"</span><span class="pun">,</span><span class="str">"Fruit trees provide fruits"</span><span class="pun">,</span><span class="pln">
+                    </span><span class="str">"Green apples are tasty"</span><span class="pun">]</span><span class="pln">
+            nclusters</span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pln">
+            clusters </span><span class="pun">=</span><span class="pln"> cluster_sentences</span><span class="pun">(</span><span class="pln">sentences</span><span class="pun">,</span><span class="pln"> nclusters</span><span class="pun">)</span><span class="pln">
+            </span><span class="kwd">for</span><span class="pln"> cluster </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="pln">nclusters</span><span class="pun">):</span><span class="pln">
+                    </span><span class="kwd">print</span><span class="pln"> </span><span class="str">"cluster "</span><span class="pun">,</span><span class="pln">cluster</span><span class="pun">,</span><span class="str">":"</span><span class="pln">
+                    </span><span class="kwd">for</span><span class="pln"> i</span><span class="pun">,</span><span class="pln">sentence </span><span class="kwd">in</span><span class="pln"> enumerate</span><span class="pun">(</span><span class="pln">clusters</span><span class="pun">[</span><span class="pln">cluster</span><span class="pun">]):</span><span class="pln">
+                            </span><span class="kwd">print</span><span class="pln"> </span><span class="str">"\tsentence "</span><span class="pun">,</span><span class="pln">i</span><span class="pun">,</span><span class="str">": "</span><span class="pun">,</span><span class="pln">sentences</span><span class="pun">[</span><span class="pln">sentence</span><span class="pun">]</span></pre>
+<pre class="prettyprint prettyprinted"><span class="pln">    maali@master0</span><span class="pun">:~</span><span class="pln">$ python kmeans</span><span class="pun">.</span><span class="pln">py
+    cluster  </span><span class="lit">0</span><span class="pln"> </span><span class="pun">:</span><span class="pln">
+    	sentence  </span><span class="lit">0</span><span class="pln"> </span><span class="pun">:</span><span class="pln">  </span><span class="typ">We</span><span class="pln"> should protect the trees
+    	sentence  </span><span class="lit">1</span><span class="pln"> </span><span class="pun">:</span><span class="pln">  </span><span class="typ">Fruit</span><span class="pln"> trees provide fruits
+    cluster  </span><span class="lit">1</span><span class="pln"> </span><span class="pun">:</span><span class="pln">
+    	sentence  </span><span class="lit">0</span><span class="pln"> </span><span class="pun">:</span><span class="pln">  I like green apples
+    	sentence  </span><span class="lit">1</span><span class="pln"> </span><span class="pun">:</span><span class="pln">  </span><span class="typ">Green</span><span class="pln"> apples are tasty
+    cluster  </span><span class="lit">2</span><span class="pln"> </span><span class="pun">:</span><span class="pln">
+    	sentence  </span><span class="lit">0</span><span class="pln"> </span><span class="pun">:</span><span class="pln">  </span><span class="typ">Nature</span><span class="pln"> </span><span class="kwd">is</span><span class="pln"> beautiful</span></pre>
+
+<p>
+    <b>Incremental clustering algorithm:</b><br>
+    As I said above the problem is that we should specify the number of clusters to perform k-means clustering. This is not a problem for Hierarchical clustering algorithms, however, they are time consuming since we should calculate a similarity matrix for the elements (sentences) and this is not very efficient when the data is voluminous. In this context, it is more convenient to use an incremental clustering algorithm which can be used also in online applications (Mnasri &amp; al. 2016). In such algorithms, sentences are processed one at a time where each new sentence is compared to each of the already formed clusters. If its similarity with the nearest cluster is low, then a new cluster is created. Otherwise, the sentence is assigned to the nearest cluster. The similarity between a sentence and a cluster is conservatively estimated as the similarity of this sentence with the further cluster element (Complete-linkage clustering). I have tested this approach and it has shown to be fast and it preserves the clusters quality at the same time.<br>
+<br>
+</p><p style="padding-left: 30pt">
+    <i>
+        </i></p><h3><i>Finally,</i></h3><i>
+    </i>
+<p></p>
+<br>
+ I'd like to point out that the list of the methods I presented, especially the similarity measures, is not exhaustive and there are many other approaches proposed by the NLP community. An absolute best method is hard to precise. Indeed, intrinsic assessment of similarities, for example, is likely to show the quality gap between different metrics. However, using these methods on simple real cases may show similar performances. In such cases, the most efficient option should be picked.
+<p></p>
+<p style="padding-left: 30pt">
+    <i>
+        </i></p><h3><i> References:  </i></h3><i>
+    </i>
+<p></p>
+
+
+<ul>
+   <li>
+    Mihalcea R. , Corley C. &amp; Strapparava C. (2006). Corpus-based and Knowledge-based Measures of Text Semantic Similarity. In Proceedings, The Twenty-First National Conference on Artificial Intelligence and the Eighteenth Innovative Applications of Artificial Intelligence Conference, July 16-20, 2006, Boston, Massachusetts, USA.
+   </li>
+    <li>
+    Wang&nbsp;S., Wang&nbsp;W., Zhuang Y. &amp; Fei X. (2015). An ontology evolution method based on folksonomy. In Journal of Applied Research and Technology. JART
+    </li>
+    <li>
+    Mnasri M., De Chalendar G. &amp; Ferret O. (2016). Intégration de la similarité entre phrases comme critère pour le résumé multi-document. In Actes de la 23e conférence sur le Traitement Automatique des Langues Naturelles, Paris, France.
+    </li>
+</ul>
+                    </div>
+                    <hr>
+                    <!-- Blog Comments -->
+
+                    <!-- Comments Form -->
+                    <div class="well">
+                            
+                            <strong><a href="http://www.artfact-online.fr/blog/blog-post/6#" onclick="$(&#39;#login&#39;).modal(&#39;show&#39;);">Log in</a></strong> or <strong><a href="http://www.artfact-online.fr/blog/blog-post/6#" onclick="$(&#39;#signup&#39;).modal(&#39;show&#39;);">Sign up</a></strong> and leave a comment.
+                            
+                    </div>
+
+                    <hr>
+
+                    <!-- Posted Comments -->
+                    
+                
+                <!-- Comment -->
+            </div>
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Blog Search Well -->
+                <div class="well">
+                    <h4>Blog Search</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                    <!-- /.input-group -->
+                </div>
+
+                <!-- Blog Categories Well -->
+                <div class="well">
+                    <h4>Blog Categories</h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul class="list-unstyled">
+                                
+                                    
+                                        <li><a href="http://www.artfact-online.fr/blog/home/Real%20Time%20Machine%20Learning">Real Time Machine Learning</a>
+                                        </li>
+                                    
+                                        <li><a href="http://www.artfact-online.fr/blog/home/All%20About%20Data">All About Data</a>
+                                        </li>
+                                    
+                                        <li><a href="http://www.artfact-online.fr/blog/home/Tools%20&amp;%20Tech">Tools &amp; Tech</a>
+                                        </li>
+                                    
+                                        <li><a href="http://www.artfact-online.fr/blog/home/Research">Research</a>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </div>
+<!--                         <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                            </ul>
+                        </div> -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <!-- Side Widget Well -->
+                <div class="well">
+                    <h4>You can also follow us on:</h4>
+                    <p>    </p>
+                <ul class="list-unstyled list-inline list-social-icons">
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/artfactonline"><i class="fa fa-facebook-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/company/artfactonline?trk=nav_account_sub_nav_company_admin"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://twitter.com/artfact64"><i class="fa fa-twitter-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a href="http://www.artfact-online.fr/blog/blog-post/6#"><i class="fa fa-google-plus-square fa-2x"></i></a>
+                    </li>
+                </ul>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                     <p>Copyright © artfact 2016</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+    
+
+    <!-- /.container -->
+
+
+
+</body></html>

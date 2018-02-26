@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)https://ustczen.gitbooks.io/keras/content/preprocessing/image.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Preprocessing, Image Preprocessing | keras</title>
+        
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.1.0">
+        <meta name="author" content="ustczen">
+        
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://ustczen.gitbooks.io/keras/content/gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="https://ustczen.gitbooks.io/keras/content/gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="./Preprocessing, Image Preprocessing _ keras_files/style.css">
+    
+    
+
+        
+    
+    
+    <link rel="next" href="https://ustczen.gitbooks.io/keras/content/utils/visualization.html">
+    
+    
+    <link rel="prev" href="https://ustczen.gitbooks.io/keras/content/preprocessing/text.html">
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book without-animation with-summary font-size-2 font-family-1" data-level="20" data-basepath=".." data-revision="Tue Jul 07 2015 10:35:24 GMT+0000 (UTC)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control">
+    </div>
+    <ul class="summary">
+        
+        
+        
+            
+            <li>
+                <a href="https://www.gitbook.com/book/ustczen/keras" target="blank" class="custom-link">keras</a>
+            </li>
+        
+        
+
+        
+        <li class="divider"></li>
+        
+
+        
+    
+        <li class="chapter  done" data-level="0" data-path="index.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="1" data-path="examples.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/examples.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        Examples
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="2" data-path="optimizers.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/optimizers.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        Optimizers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="3" data-path="objectives.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/objectives.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        Objectives
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="4" data-path="models.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/models.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        Models
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="5" data-path="activations.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/activations.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        Activations
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="6" data-path="initializations.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/initializations.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        Initializations
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="7" data-path="regularizers.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/regularizers.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.</b>
+                        
+                        Regularizers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="8" data-path="constraints.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/constraints.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.</b>
+                        
+                        Constraints
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="9" data-path="callbacks.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/callbacks.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>9.</b>
+                        
+                        Callbacks
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="10" data-path="datasets.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/datasets.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.</b>
+                        
+                        Datasets
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="11" data-path="layers/core.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.</b>
+                        
+                        Layers, Core Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="12" data-path="layers/convolutional.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/convolutional.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.</b>
+                        
+                        Layers, Convolutional Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="13" data-path="layers/recurrent.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/recurrent.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>13.</b>
+                        
+                        Layers, Recurrent Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="14" data-path="layers/advanced_activations.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/advanced_activations.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>14.</b>
+                        
+                        Layers, Advanced Activations Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="15" data-path="layers/normalization.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/normalization.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>15.</b>
+                        
+                        Layers, Normalization Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="16" data-path="layers/embeddings.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/embeddings.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>16.</b>
+                        
+                        Layers, Embedding Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="17" data-path="layers/containers.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/containers.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>17.</b>
+                        
+                        Layers, Containers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="18" data-path="preprocessing/sequence.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/sequence.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>18.</b>
+                        
+                        Preprocessing, Sequence Preprocessing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="19" data-path="preprocessing/text.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/text.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>19.</b>
+                        
+                        Preprocessing, Text Preprocessing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="20" data-path="preprocessing/image.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/image.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>20.</b>
+                        
+                        Preprocessing, Image Preprocessing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="21" data-path="utils/visualization.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/utils/visualization.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>21.</b>
+                        
+                        Utils, Visualization Utilities
+                    </a>
+                
+            
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com/" target="blank" class="gitbook-link">
+                Published with GitBook
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/image.html#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/image.html#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/image.html#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/image.html#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/image.html#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/image.html#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/image.html#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="https://ustczen.gitbooks.io/keras/content/">keras</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h2 id="imagedatagenerator">ImageDataGenerator</h2>
+<pre><code class="lang-python">keras.preprocessing.image.ImageDataGenerator(featurewise_center=<span class="hljs-keyword">True</span>,
+    samplewise_center=<span class="hljs-keyword">False</span>,
+    featurewise_std_normalization=<span class="hljs-keyword">True</span>,
+    samplewise_std_normalization=<span class="hljs-keyword">False</span>,
+    zca_whitening=<span class="hljs-keyword">False</span>,
+    rotation_range=<span class="hljs-number">0.</span>,
+    width_shift_range=<span class="hljs-number">0.</span>,
+    height_shift_range=<span class="hljs-number">0.</span>,
+    horizontal_flip=<span class="hljs-keyword">False</span>,
+    vertical_flip=<span class="hljs-keyword">False</span>)
+</code></pre>
+<p>Generate batches of tensor image data with real-time data augmentation.</p>
+<ul>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li><strong>featurewise_center</strong>: Boolean. Set input mean to 0 over the dataset.</li>
+<li><strong>samplewise_center</strong>: Boolean. Set each sample mean to 0.</li>
+<li><strong>featurewise_std_normalization</strong>: Boolean. Divide inputs by std of the dataset.</li>
+<li><strong>samplewise_std_normalization</strong>: Boolean. Divide each input by its std.</li>
+<li><strong>zca_whitening</strong>: Boolean. Apply ZCA whitening.</li>
+<li><strong>rotation_range</strong>: Int. Degree range for random rotations.</li>
+<li><strong>width_shift_range</strong>: Float (fraction of total width). Range for random horizontal shifts.</li>
+<li><strong>height_shift_range</strong>: Float (fraction of total height). Range for random vertical shifts.</li>
+<li><strong>horizontal_flip</strong>: Boolean. Randomly flip inputs horizontally.</li>
+<li><strong>vertical_flip</strong>: Boolean. Randomly flip inputs vertically.</li>
+</ul>
+</li>
+<li><p><strong>Methods</strong>:</p>
+<ul>
+<li><strong>fit(X)</strong>: Required if featurewise_center or featurewise_std_normalization or zca_whitening. Compute necessary quantities on some sample data.<ul>
+<li><strong>Arguments</strong>: <ul>
+<li><strong>X</strong>: sample data.</li>
+<li><strong>augment</strong>: Boolean (default: False). Whether to fit on randomly augmented samples.</li>
+<li><strong>rounds</strong>: int (default: 1). If augment, how many augmentation passes over the data to use.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>flow(X, y)</strong>:<ul>
+<li><strong>Arguments</strong>: <ul>
+<li><strong>X</strong>: data.</li>
+<li><strong>y</strong>: labels.</li>
+<li><strong>batch_size</strong>: int (default: 32).</li>
+<li><strong>shuffle</strong>: boolean (defaut: False).</li>
+<li><strong>save_to_dir</strong>: None or str. This allows you to optimally specify a directory to which to save the augmented pictures being generated (useful for visualizing what you are doing). </li>
+<li><strong>save_prefix</strong>: str. Prefix to use for filenames of saved pictures.</li>
+<li><strong>save_format</strong>: one of "png", jpeg". </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Example</strong>:
+```python
+(X_train, y_train), (X_test, y_test) = cifar10.load_data(test_split=0.1)
+Y_train = np_utils.to_categorical(y_train, nb_classes)
+Y_test = np_utils.to_categorical(y_test, nb_classes)</p>
+</li>
+</ul>
+<p>datagen = ImageDataGenerator(
+    featurewise_center=True,
+    featurewise_std_normalization=True,
+    rotation_range=20,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    horizontal_flip=True)</p>
+<h1 id="compute-quantities-required-for-featurewise-normalization">compute quantities required for featurewise normalization</h1>
+<h1 id="-std-mean-and-principal-components-if-zca-whitening-is-applied">(std, mean, and principal components if ZCA whitening is applied)</h1>
+<p>datagen.fit(X_train)</p>
+<p>for e in range(nb_epoch):
+    print 'Epoch', e</p>
+<pre><code># batch train with realtime data augmentation
+for X_batch, Y_batch in datagen.flow(X_train, Y_train):
+    loss = model.train(X_batch, Y_batch)
+</code></pre><p>```</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/text.html" class="navigation navigation-prev " aria-label="Previous page: Preprocessing, Text Preprocessing"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="https://ustczen.gitbooks.io/keras/content/utils/visualization.html" class="navigation navigation-next " aria-label="Next page: Utils, Visualization Utilities" style="margin-right: 0px;"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script async="" src="./Preprocessing, Image Preprocessing _ keras_files/analytics.js"></script><script src="./Preprocessing, Image Preprocessing _ keras_files/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    
+<div><script style="display: none;" type="application/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57505611-7', 'auto', {name: 'microcdn'});
+  ga('microcdn.send', 'pageview');
+
+  var _cdn_prev_loc = window.location.pathname;
+  window.setInterval(function () {
+    if (window.location.pathname !== _cdn_prev_loc) {
+      _cdn_prev_loc = window.location.pathname;
+      ga('microcdn.send', 'pageview');
+    }
+  }, 100);
+
+</script></div>
+
+    
+
+</body></html>

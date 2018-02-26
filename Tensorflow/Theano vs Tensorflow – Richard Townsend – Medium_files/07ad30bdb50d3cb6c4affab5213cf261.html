@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://medium.com/media/07ad30bdb50d3cb6c4affab5213cf261?postId=e25648c31800 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>tensorflow_example.py – Medium</title><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./6818f567dfb96823bb4e5723f716305e.js" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-9f0a4ad9c85ca776e669003688baa9d55f9db315562ce4d231d37dab2714c70a.css"><div id="gist36216647" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-tensorflow_example-py" class="file">
+    
+
+  <div itemprop="text" class="blob-wrapper data type-python">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tbody><tr>
+        <td id="file-tensorflow_example-py-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-tensorflow_example-py-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> tensorflow <span class="pl-k">as</span> tf</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-tensorflow_example-py-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> numpy <span class="pl-k">as</span> np</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-tensorflow_example-py-LC3" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-tensorflow_example-py-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Make 100 phony data points in NumPy.</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-tensorflow_example-py-LC5" class="blob-code blob-code-inner js-file-line">x_data <span class="pl-k">=</span> np.float32(np.random.rand(<span class="pl-c1">2</span>, <span class="pl-c1">100</span>)) <span class="pl-c"><span class="pl-c">#</span> Random input</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-tensorflow_example-py-LC6" class="blob-code blob-code-inner js-file-line">y_data <span class="pl-k">=</span> np.dot([<span class="pl-c1">0.100</span>, <span class="pl-c1">0.200</span>], x_data) <span class="pl-k">+</span> <span class="pl-c1">0.300</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-tensorflow_example-py-LC7" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-tensorflow_example-py-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Construct a linear model.</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-tensorflow_example-py-LC9" class="blob-code blob-code-inner js-file-line">b <span class="pl-k">=</span> tf.Variable(tf.zeros([<span class="pl-c1">1</span>]))</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-tensorflow_example-py-LC10" class="blob-code blob-code-inner js-file-line">W <span class="pl-k">=</span> tf.Variable(tf.random_uniform([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>], <span class="pl-k">-</span><span class="pl-c1">1.0</span>, <span class="pl-c1">1.0</span>))</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-tensorflow_example-py-LC11" class="blob-code blob-code-inner js-file-line">y <span class="pl-k">=</span> tf.matmul(W, x_data) <span class="pl-k">+</span> b</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-tensorflow_example-py-LC12" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-tensorflow_example-py-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Minimize the squared errors.</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-tensorflow_example-py-LC14" class="blob-code blob-code-inner js-file-line">loss <span class="pl-k">=</span> tf.reduce_mean(tf.square(y <span class="pl-k">-</span> y_data))</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-tensorflow_example-py-LC15" class="blob-code blob-code-inner js-file-line">optimizer <span class="pl-k">=</span> tf.train.GradientDescentOptimizer(<span class="pl-c1">0.5</span>)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-tensorflow_example-py-LC16" class="blob-code blob-code-inner js-file-line">train <span class="pl-k">=</span> optimizer.minimize(loss)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-tensorflow_example-py-LC17" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-tensorflow_example-py-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> For initializing the variables.</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-tensorflow_example-py-LC19" class="blob-code blob-code-inner js-file-line">init <span class="pl-k">=</span> tf.initialize_all_variables()</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-tensorflow_example-py-LC20" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-tensorflow_example-py-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Launch the graph</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-tensorflow_example-py-LC22" class="blob-code blob-code-inner js-file-line">sess <span class="pl-k">=</span> tf.Session()</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-tensorflow_example-py-LC23" class="blob-code blob-code-inner js-file-line">sess.run(init)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-tensorflow_example-py-LC24" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-tensorflow_example-py-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Fit the plane.</span></td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="file-tensorflow_example-py-LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-k">for</span> step <span class="pl-k">in</span> <span class="pl-v">xrange</span>(<span class="pl-c1">0</span>, <span class="pl-c1">201</span>):</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L27" class="blob-num js-line-number" data-line-number="27"></td>
+        <td id="file-tensorflow_example-py-LC27" class="blob-code blob-code-inner js-file-line">    sess.run(train)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L28" class="blob-num js-line-number" data-line-number="28"></td>
+        <td id="file-tensorflow_example-py-LC28" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">if</span> step <span class="pl-k">%</span> <span class="pl-c1">20</span> <span class="pl-k">==</span> <span class="pl-c1">0</span>:</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L29" class="blob-num js-line-number" data-line-number="29"></td>
+        <td id="file-tensorflow_example-py-LC29" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span> step, sess.run(W), sess.run(b)</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L30" class="blob-num js-line-number" data-line-number="30"></td>
+        <td id="file-tensorflow_example-py-LC30" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-tensorflow_example-py-L31" class="blob-num js-line-number" data-line-number="31"></td>
+        <td id="file-tensorflow_example-py-LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Learns best fit is W: [[0.100  0.200]], b: [0.300]</span></td>
+      </tr>
+</tbody></table>
+
+  </div>
+
+  </div>
+  
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Sentimentron/6818f567dfb96823bb4e5723f716305e/raw/bfedc4308295f66b713999fcd7f4bafecdb5eeee/tensorflow_example.py" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Sentimentron/6818f567dfb96823bb4e5723f716305e#file-tensorflow_example-py">tensorflow_example.py</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200;function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height); resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);}maybeResize();</script></body></html>

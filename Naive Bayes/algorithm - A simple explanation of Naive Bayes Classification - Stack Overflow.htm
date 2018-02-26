@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<!-- saved from url=(0094)http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow</title>
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com">
+    <meta property="og:type" content="website">
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="A simple explanation of Naive Bayes Classification">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I am finding it hard to understand the process of Naive Bayes, and I was wondering if someone could explain it with a simple step by step process in English. I understand it takes comparisons by ti...">
+    <meta property="og:url" content="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification">
+    <link rel="canonical" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification">
+
+    
+    
+    <script type="text/javascript" async="" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/ados"></script><script async="" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/quant.js"></script><script async="" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/beacon.js"></script><script async="" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/analytics.js"></script><script src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/jquery.min.js"></script>
+    <script src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;A simple explanation of Naive Bayes Classification&#39;" href="http://stackoverflow.com/feeds/question/10059594">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:10,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:10059594});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '10059594');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', true); });
+
+            });
+        </script>
+
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","serverTime":1493015214,"routeName":"Questions/Show","site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"enableInsertDocLinkDialog":true,"childUrl":"https://meta.stackoverflow.com","enableSocialMediaInSharePopup":true,"protocol":"http"},"user":{"fkey":"cbe153d9c8e4943557d600e50d8c5c31","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"canSeeNewHeaderDesign":true},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableNewLinkInsertDialog":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{"openGraphAPIKey":"58740831ad23540e00c58987"},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"efaa486a4fd9","js/moderator.en.js":"fb3adb7a979d","js/full-anon.en.js":"9244f7ab7a3d","js/full.en.js":"654b45b66a02","js/wmd.en.js":"d6b54102c2b9","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"153e33c56ac2","js/help.en.js":"a56fdf9b9ff2","js/tageditor.en.js":"bc3ebe71b5f1","js/tageditornew.en.js":"679b12412824","js/inline-tag-editing.en.js":"69e72a3bd91c","js/revisions.en.js":"47de10a8358f","js/review.en.js":"2c5d38e5bc96","js/tagsuggestions.en.js":"2a9fc67ea337","js/post-validation.en.js":"94b6352ae825","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"274377649215","js/keyboard-shortcuts.en.js":"936bac23a9fa","js/external-editor.en.js":"cb487078c372","js/adops.en.js":"9a6a7812a212","js/external-editor.en.js":"cb487078c372","js/snippet-javascript.en.js":"a2935e2a1a88","js/snippet-javascript-codemirror.en.js":"17cedaec0e71"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    <noscript id="noscript-css">&lt;style type="text/css"&gt;body,.so-header{margin-top:1.9em}&lt;/style&gt;</noscript>
+<script async="" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/full-anon.en.js"></script><script async="" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/snippet-javascript.en.js"></script><script async="" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/post-validation.en.js"></script><link rel="stylesheet" href="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/cp.min.css" type="text/css"><script type="text/javascript" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/adFeedback.js"></script><link rel="stylesheet" href="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/adFeedback.css"></head>
+<body class="question-page new-topbar">
+            <script>(function () { var old = $.fn.contents; $.fn.contents = function () { try { return old.apply(this, arguments); } catch (e) { return $([]); } } })()</script>
+        
+
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+<header class="so-header js-so-header _fixed">
+    <div class="-container">
+        <div class="-main">            
+            <a href="http://stackoverflow.com/" class="-logo ">
+                <span class="-img">Stack Overflow</span>
+            </a>
+
+            <nav class="navigation" role="navigation" aria-label="site navigation">
+                <ol class="-list">
+                        <li class="-item _current">
+        <a id="nav-questions" href="http://stackoverflow.com/questions" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">Questions</a>
+    </li>
+
+    <li class="-item">
+        <a id="nav-jobs" href="http://stackoverflow.com/jobs?med=site-ui&amp;ref=jobs-tab" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:6})">Jobs</a>
+    </li>
+                        <li class="-item">
+        <a id="nav-docs" href="http://stackoverflow.com/documentation" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:7})">Documentation <small class="beta-badge">beta</small></a>
+    </li>
+                        <li class="-item">
+        <a id="nav-tags" href="http://stackoverflow.com/tags" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">Tags</a>
+    </li>
+
+                        <li class="-item">
+        <a id="nav-users" href="http://stackoverflow.com/users" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">Users</a>
+    </li>
+
+                </ol>
+            </nav>
+
+            <form id="search" action="http://stackoverflow.com/search" method="get" class="searchbar" autocomplete="off" role="search">
+                <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M12.864 11.32h-.813l-.288-.277A6.66 6.66 0 0 0 13.38 6.69a6.69 6.69 0 1 0-6.69 6.69 6.66 6.66 0 0 0 4.354-1.617l.278.288v.813L16.467 18 18 16.467l-5.136-5.146zm-6.174 0a4.625 4.625 0 0 1-4.632-4.63A4.625 4.625 0 0 1 6.69 2.058a4.625 4.625 0 0 1 4.63 4.632 4.625 4.625 0 0 1-4.63 4.63z"></path></svg>
+                <input name="q" type="text" placeholder="Search..." value="" tabindex="1" autocomplete="off" maxlength="240" class="f-input js-search-field">
+                <button type="submit" class="btn js-search-submit">
+                    <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M12.864 11.32h-.813l-.288-.277A6.66 6.66 0 0 0 13.38 6.69a6.69 6.69 0 1 0-6.69 6.69 6.66 6.66 0 0 0 4.354-1.617l.278.288v.813L16.467 18 18 16.467l-5.136-5.146zm-6.174 0a4.625 4.625 0 0 1-4.632-4.63A4.625 4.625 0 0 1 6.69 2.058a4.625 4.625 0 0 1 4.63 4.632 4.625 4.625 0 0 1-4.63 4.63z"></path></svg>
+                </button>
+            </form>
+
+        </div>
+        
+
+
+<div class="-actions">
+    <nav class="secondary-nav">
+        <div class="-dialog-container js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="http://stackoverflow.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+            <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:14 })">help</a>
+                    <a href="http://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+    <a href="http://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                        
+    <a href="https://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="site.switch({ target_site:552, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f10059594%2fa-simple-explanation-of-naive-bayes-classification" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+                <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="http://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+
+        </div>
+        <ol class="-list">
+            
+    <li class="-item"><a href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#" class="-link js-help-button" title="Help Center and other resources">
+        <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M9 0a9 9 0 1 0 .001 18.001A9 9 0 0 0 9 0zm.812 13.126c-.02.716-.55 1.157-1.238 1.137-.659-.02-1.177-.49-1.157-1.209.02-.715.566-1.17 1.225-1.15.691.021 1.194.507 1.17 1.222zm1.956-5.114c-.168.237-.546.542-1.02.912l-.527.361c-.257.197-.417.43-.502.695-.044.141-.076.507-.084.752-.004.048-.032.156-.181.156H7.883c-.165 0-.185-.096-.18-.144.023-.667.12-1.218.397-1.66.374-.594 1.426-1.221 1.426-1.221.161-.12.286-.25.382-.39.177-.24.321-.51.321-.8 0-.333-.08-.65-.293-.915-.249-.31-.518-.458-1.036-.458-.51 0-.808.257-1.021.594-.213.338-.177.735-.177 1.097H5.746c0-1.366.357-2.238 1.112-2.752.51-.35 1.162-.502 1.921-.502.996 0 1.788.184 2.487.715.647.49.988 1.181.988 2.113 0 .575-.2 1.057-.486 1.447z"></path></svg>
+    </a></li>
+                <li class="-item">
+        <a href="https://stackexchange.com/" class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 167 Stack Exchange sites">
+            <svg viewBox="0 0 18 19" width="18" height="19" role="icon"><path fill-rule="evenodd" d="M0 14a2 2 0 0 0 2 2h10v3l3-3h1a2 2 0 0 0 2-2v-2H0v2zM16 0H2a2 2 0 0 0-2 2v2h18V2a2 2 0 0 0-2-2zM0 6h18v4H0V6z"></path></svg>
+        </a>
+    </li>
+
+
+        </ol>
+    </nav>
+        <div class="-ctas">
+                    <a href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f10059594%2fa-simple-explanation-of-naive-bayes-classification" class="login-link btn-clear" rel="nofollow">Log In</a>
+                        <a href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;utm_source=stackoverflow.com&amp;utm_medium=dev-story&amp;utm_campaign=signup-redirect" class="login-link btn" rel="nofollow">Sign Up</a>
+
+        </div>
+</div>
+    </div>
+</header>
+
+    <script>
+        StackExchange.ready(function () { StackExchange.topbar.init(); });
+            StackExchange.scrollPadding.setPaddingTop(60, 10);     </script>
+
+    <div class="container">
+        
+
+
+        <div id="content" class="snippet-hidden">
+
+
+
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+
+<div id="herobox" class="alternate">
+    <div class="test"></div>
+        <div id="close">
+            <a title="click to minimize"><span>x</span> Dismiss</a>
+        </div>
+    <div class="content">
+        <b>Join the Stack Overflow Community</b>
+        <div class="separator"></div>
+        <div class="blurb">
+            Stack Overflow is a community of 7.0 million programmers, just like you, helping each other.
+                <br>
+Join them; it only takes a minute:                <br>
+        </div>
+        <a href="http://stackoverflow.com/users/signup?ssrc=hero&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" id="tell-me-more" class="button">Sign up</a>
+    </div>
+</div>
+<script>
+    StackExchange.ready(function () {
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("question-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;;
+        } else if ($("body").hasClass("home-page")) {
+            location = 3;;
+        }
+        
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+        
+        $('#herobox #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+            });
+            
+            $.cookie("hero", "mini", { path: "/", expires: 365 });
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $("#herobox").fadeOut("fast", function () {
+                        $("#herobox").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+
+</script>			<div id="question-header">
+                <h1 itemprop="name"><a href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification" class="question-hyperlink">A simple explanation of Naive Bayes Classification</a></h1>
+
+            
+<div class="aside-cta" role="navigation" aria-label="ask new question">
+    <a href="http://stackoverflow.com/questions/ask" class="btn-outlined">Ask Question</a>
+</div>
+		</div>
+			<div id="mainbar" role="main" aria-label="question and answers">
+
+			
+
+<div class="question" data-questionid="10059594" id="question">
+
+    <div class="everyonelovesstackoverflow adzerk-vote" id="clc-tlb"><a href="http://engine.adzerk.net/r?e=eyJhdiI6NDIxMCwiYXQiOjQsImJ0IjowLCJjbSI6NTUyMzI1LCJjaCI6MTE3OCwiY2siOnt9LCJjciI6MjIwNjI0NSwiZGkiOiIxYjA4ZjE3Y2Q4Zjk0NTJjODI4YzA5MWViOTM2NzM5MyIsImRtIjoxLCJmYyI6MjcwODE5MywiZmwiOjI5OTc0MDYsImlwIjoiNjcuMTYxLjI2LjExMSIsImt3IjoiYWxnb3JpdGhtLG1hY2hpbmUtbGVhcm5pbmcsZGF0YXNldCxjbGFzc2lmaWNhdGlvbixuYWl2ZWJheWVzLHgtcGVyc29uYS1iaWdkYXRhIiwibWsiOiJtYWNoaW5lLWxlYXJuaW5nIiwibnciOjIyLCJwYyI6Ny42LCJlYyI6Ny42LCJwciI6NzY1LCJydCI6Miwic2IiOiJpLTBjNzU4YTY3MTdjZTMwNzJhIiwic3AiOjE1MzY0LCJzdCI6ODI3NywidWsiOiJ1ZTEtOTc0MWZiMWExNzRlNGNkNjk3ZTg4NDllMGU1ODYxOWIiLCJ6biI6NDMsInRzIjoxNDkzMDE1MjE2MDQ2LCJiZiI6dHJ1ZSwicG4iOiJjbGMtdGxiIiwidXIiOiJodHRwczovL3d3dy5rYWdnbGUuY29tL2MvaW50ZWwtbW9iaWxlb2R0LWNlcnZpY2FsLWNhbmNlci1zY3JlZW5pbmc_Y2lkPSZ1dG1fY29udGVudD1NYWNoaW5lX0xlYXJuaW5nX0VudGh1c2lhc3RzJnV0bV9tZWRpdW09QmFubmVyX0FkJnV0bV9zb3VyY2U9U3RhY2tfT3ZlcmZsb3cmdXRtX2NhbXBhaWduPUFJXzFIXzE3X1N0YWNrX092ZXJmbG93X0thZ2dsZV9Db21wZXRpdGlvbiJ9&amp;s=mcwNjj8nNYlJJ6WfYePjsPAgyV8" rel="nofollow" target="_blank" title=""><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/b86896f8c6744d1e84d0dc7ca9d05403.png" title="" alt="" border="0" width="728" height="90"></a><div class="adzerk-vote-controls" style="display: none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/i.gif"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="10059594">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">379</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#">favorite</a>
+        <div class="favoritecount"><b>352</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I am finding it hard to understand the process of Naive Bayes, and I was wondering if someone could explain it with a simple step by step process in English. I understand it takes comparisons by times occurred as a probability, but I have no idea how the training data is related to the actual dataset.</p>
+
+<p>Please give me an explanation of what role the training set plays. I am giving a very simple example for fruits here, like banana for example</p>
+
+<pre><code>training set---
+round-red
+round-orange
+oblong-yellow
+round-red
+
+dataset----
+round-red
+round-orange
+round-red
+round-orange
+oblong-yellow
+round-red
+round-orange
+oblong-yellow
+oblong-yellow
+round-red
+</code></pre>
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/algorithm" class="post-tag js-gps-track" title="show questions tagged &#39;algorithm&#39;" rel="tag">algorithm</a> <a href="http://stackoverflow.com/questions/tagged/machine-learning" class="post-tag js-gps-track" title="show questions tagged &#39;machine-learning&#39;" rel="tag">machine-learning</a> <a href="http://stackoverflow.com/questions/tagged/dataset" class="post-tag js-gps-track" title="show questions tagged &#39;dataset&#39;" rel="tag">dataset</a> <a href="http://stackoverflow.com/questions/tagged/classification" class="post-tag js-gps-track" title="show questions tagged &#39;classification&#39;" rel="tag">classification</a> <a href="http://stackoverflow.com/questions/tagged/naivebayes" class="post-tag js-gps-track" title="show questions tagged &#39;naivebayes&#39;" rel="tag">naivebayes</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/q/10059594" title="short permalink to this question" class="short-link" id="link-post-10059594">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/10059594/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/10059594/revisions" title="show all edits to this post">edited <span title="2016-12-26 00:21:41Z" class="relativetime">Dec 26 '16 at 0:21</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/395857/franck-dernoncourt"><div class="gravatar-wrapper-32"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/Z99mk.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/395857/franck-dernoncourt">Franck Dernoncourt</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 19,832" dir="ltr">19.8k</span><span title="13 gold badges"><span class="badge1"></span><span class="badgecount">13</span></span><span title="114 silver badges"><span class="badge2"></span><span class="badgecount">114</span></span><span title="235 bronze badges"><span class="badge3"></span><span class="badgecount">235</span></span>
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2012-04-08 00:56:19Z" class="relativetime">Apr 8 '12 at 0:56</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/1193867/jaggerjack"><div class="gravatar-wrapper-32"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/2bc6de86307471ee0edee2a82247605a" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/1193867/jaggerjack">Jaggerjack</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">2,010</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-10059594" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="5" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-12874725" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="warm">14</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">It's quite easy if you understand Bayes' Theorem. If you haven' read on Bayes' theorem, try this link <a href="http://yudkowsky.net/rational/bayes" rel="nofollow noreferrer">yudkowsky.net/rational/bayes</a>.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/713711/pinch" title="1,013 reputation" class="comment-user">Pinch</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment12874725_10059594"><span title="2012-04-08 03:43:31Z" class="relativetime-clean">Apr 8 '12 at 3:43</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-12879099" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="warm">12</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Here is a nice blog entry about <a href="http://bionicspirit.com/blog/2012/02/09/howto-build-naive-bayes-classifier.html" rel="nofollow noreferrer">How To Build a Naive Bayes Classifier</a>.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/979377/tobigue" title="1,519 reputation" class="comment-user">tobigue</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment12879099_10059594"><span title="2012-04-08 13:13:01Z" class="relativetime-clean">Apr 8 '12 at 13:13</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-12883218" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">4</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thanks for the link, but OMG is it long.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1193867/jaggerjack" title="2,010 reputation" class="comment-user owner">Jaggerjack</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment12883218_10059594"><span title="2012-04-08 19:11:08Z" class="relativetime-clean">Apr 8 '12 at 19:11</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-30132441" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="warm">14</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">NOTE: The accepted answer below is not a traditional example for Naïve Bayes. It's mostly a k Nearest Neighbor implementation. Read accordingly.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/349931/chmullig" title="8,473 reputation" class="comment-user">chmullig</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment30132441_10059594"><span title="2013-11-26 04:01:30Z" class="relativetime-clean">Nov 26 '13 at 4:01</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-43663348" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Well if one sees a graph with some dots that doesn't really mean that it is KNN :) How you calculate the probabilities is all up to you. Naive Bayes calculates it using prior multiplied by likelihood so that is what Yavar has shown in his answer. How to arrive at those probabilities is really not important here. The answer is absolutely correct and I see no problems in it.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1315930/avinash-shah" title="510 reputation" class="comment-user">avinash shah</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment43663348_10059594"><span title="2014-12-23 13:32:43Z" class="relativetime-clean">Dec 23 '14 at 13:32</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-10059594" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#" onclick="">show <b>5</b> more comments</a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								5 Answers
+                                <span style="display:none;" itemprop="answerCount">5</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="10062702"></a>
+<div id="answer-10062702" class="answer accepted-answer" data-answerid="10062702" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="10062702">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">564</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Your question as I understand is divided in two parts. One being you need more understanding for Naive Bayes classifier &amp; second being the confusion surrounding Training set. </p>
+
+<p>In general all of Machine Learning Algorithms need to be trained for supervised learning tasks like classification, prediction etc. or for unsupervised learning tasks like clustering.</p>
+
+<p>By training it means to train them on particular inputs so that later on we may test them for unknown inputs (which they have never seen before) for which they may classify or predict etc (in case of supervised learning) based on their learning. This is what most of the Machine Learning techniques like Neural Networks, SVM, Bayesian etc. are based upon.</p>
+
+<p>So in a general Machine Learning project basically you have to divide your input set to a Development Set (Training Set + Dev-Test Set) &amp; a Test Set (or Evaluation set). Remember your basic objective would be that your system learns and classifies new inputs which they have never seen before in either Dev set or test set.</p>
+
+<p>The test set typically has the same format as the training set. However, it is very important that the test set be distinct from the training corpus: if we simply
+reused the training set as the test set, then a model that simply memorized its input, without learning how to generalize to new examples, would receive misleadingly high scores.</p>
+
+<p>In general, for an example, 70% can be training set cases. Also remember to partition the original set into the training and test sets <em>randomly</em>.</p>
+
+<p>Now I come to your other question about Naive Bayes.</p>
+
+<p><strong>Source for example below</strong>: <a href="http://www.statsoft.com/textbook/naive-bayes-classifier" rel="noreferrer">http://www.statsoft.com/textbook/naive-bayes-classifier</a></p>
+
+<p>To demonstrate the concept of Naïve Bayes Classification, consider the example given below:</p>
+
+<p><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/Eh6HI.gif" alt="enter image description here"></p>
+
+<p>As indicated, the objects can be classified as either <code>GREEN</code> or <code>RED</code>. Our task is to classify new cases as they arrive, i.e., decide to which class label they belong, based on the currently existing objects.</p>
+
+<p>Since there are twice as many <code>GREEN</code> objects as <code>RED</code>, it is reasonable to believe that a new case (which hasn't been observed yet) is twice as likely to have membership <code>GREEN</code> rather than <code>RED</code>. In the Bayesian analysis, this belief is known as the prior probability. Prior probabilities are based on previous experience, in this case the percentage of <code>GREEN</code> and <code>RED</code> objects, and often used to predict outcomes before they actually happen.</p>
+
+<p>Thus, we can write:</p>
+
+<p><strong>Prior Probability of <code>GREEN</code></strong>: <code>number of GREEN objects / total number of objects</code></p>
+
+<p><strong>Prior Probability of <code>RED</code></strong>: <code>number of RED objects / total number of objects</code></p>
+
+<p>Since there is a total of <code>60</code> objects, <code>40</code> of which are <code>GREEN</code> and 20 <code>RED</code>, our prior probabilities for class membership are:</p>
+
+<p><strong>Prior Probability for <code>GREEN</code></strong>: <code>40 / 60</code></p>
+
+<p><strong>Prior Probability for <code>RED</code></strong>: <code>20 / 60</code></p>
+
+<p>Having formulated our prior probability, we are now ready to classify a new object (<code>WHITE</code> circle in the diagram below). Since the objects are well clustered, it is reasonable to assume that the more <code>GREEN</code> (or <code>RED</code>) objects in the vicinity of X, the more likely that the new cases belong to that particular color. To measure this likelihood, we draw a circle around X which encompasses a number (to be chosen a priori) of points irrespective of their class labels. Then we calculate the number of points in the circle belonging to each class label. From this we calculate the likelihood:</p>
+
+<p><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/gVpJF.gif" alt="enter image description here"></p>
+
+<p><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/sh1zX.gif" alt="enter image description here"></p>
+
+<p>From the illustration above, it is clear that Likelihood of <code>X</code> given <code>GREEN</code> is smaller than Likelihood of <code>X</code> given <code>RED</code>, since the circle encompasses <code>1</code> <code>GREEN</code> object and <code>3</code> <code>RED</code> ones. Thus:</p>
+
+<p><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/DLCqA.gif" alt="enter image description here"></p>
+
+<p><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/cJzst.gif" alt="enter image description here"></p>
+
+<p>Although the prior probabilities indicate that <code>X</code> may belong to <code>GREEN</code> (given that there are twice as many <code>GREEN</code> compared to <code>RED</code>) the likelihood indicates otherwise; that the class membership of <code>X</code> is <code>RED</code> (given that there are more <code>RED</code> objects in the vicinity of <code>X</code> than <code>GREEN</code>). In the Bayesian analysis, the final classification is produced by combining both sources of information, i.e., the prior and the likelihood, to form a posterior probability using the so-called Bayes' rule (named after Rev. Thomas Bayes 1702-1761).</p>
+
+<p><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/N8MPA.gif" alt="enter image description here"></p>
+
+<p>Finally, we classify X as <code>RED</code> since its class membership achieves the largest posterior probability.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/10062702" title="short permalink to this answer" class="short-link" id="link-post-10062702">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/10062702/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/10062702/revisions" title="show all edits to this post">edited <span title="2016-02-01 18:12:07Z" class="relativetime">Feb 1 '16 at 18:12</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/4486860/a-m-bittlingmayer"><div class="gravatar-wrapper-32"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/vg7mA.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/4486860/a-m-bittlingmayer">A. M. Bittlingmayer</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">270</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2012-04-08 12:13:17Z" class="relativetime">Apr 8 '12 at 12:13</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/741442/yavar"><div class="gravatar-wrapper-32"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/zwWOw.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/741442/yavar">Yavar</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">9,557</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="21 silver badges"><span class="badge2"></span><span class="badgecount">21</span></span><span title="54 bronze badges"><span class="badge3"></span><span class="badgecount">54</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-10062702" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="11" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-12892150" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="supernova">32</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thank you for taking time to put all this together! Very useful!</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/396216/murat-derya-%c3%96zen" title="1,219 reputation" class="comment-user">Murat Derya Özen</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment12892150_10062702"><span title="2012-04-09 09:35:15Z" class="relativetime-clean">Apr 9 '12 at 9:35</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-12930614" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Murat: Thanks :)</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/741442/yavar" title="9,557 reputation" class="comment-user">Yavar</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment12930614_10062702"><span title="2012-04-10 19:43:27Z" class="relativetime-clean">Apr 10 '12 at 19:43</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-24670574" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="hot">21</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">isn't this algorithm above more like k-nearest neighbors?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/125617/renaud" title="8,646 reputation" class="comment-user">Renaud</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment24670574_10062702"><span title="2013-06-12 08:46:16Z" class="relativetime-clean">Jun 12 '13 at 8:46</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-27306177" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="supernova">186</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This answer is confusing - it mixes KNN (k nearest neighbours) and naive bayes.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/619351/michal-illich" title="1,140 reputation" class="comment-user">Michal Illich</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment27306177_10062702"><span title="2013-09-01 16:39:37Z" class="relativetime-clean">Sep 1 '13 at 16:39</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-32409698" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="warm">6</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">The answer was proceeding nicely till the likelihood came up. So @Yavar has used K-nearest neighbours for calculating the likelihood. How correct is that? If it is, what are some other methods to calculate the likelihood?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1123924/wrahool" title="448 reputation" class="comment-user">wrahool</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment32409698_10062702"><span title="2014-01-31 06:24:23Z" class="relativetime-clean">Jan 31 '14 at 6:24</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-10062702" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#" onclick="">show <b>11</b> more comments</a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<div class="everyonelovesstackoverflow adzerk-vote" id="clc-mlb"><a href="http://engine.adzerk.net/r?e=eyJhdiI6MjUwMCwiYXQiOjQsImJ0IjowLCJjbSI6NTcwNTU0LCJjaCI6MTE3OCwiY2siOnt9LCJjciI6MjMwMzUxNCwiZGkiOiJhYmJiOGExNTIxOTY0MzYxOGNmM2U2YTMwODRkYjUyNyIsImRtIjoxLCJmYyI6Mjg3Mjc5MCwiZmwiOjMxNDI0MjcsImlwIjoiNjcuMTYxLjI2LjExMSIsImt3IjoiYWxnb3JpdGhtLG1hY2hpbmUtbGVhcm5pbmcsZGF0YXNldCxjbGFzc2lmaWNhdGlvbixuYWl2ZWJheWVzLHgtcGVyc29uYS1iaWdkYXRhIiwibWsiOiJtYWNoaW5lLWxlYXJuaW5nIiwibnciOjIyLCJwYyI6NS40NSwiZWMiOjUuNDUsInByIjo3NjUsInJ0IjoyLCJzYiI6ImktMGM3NThhNjcxN2NlMzA3MmEiLCJzcCI6MTUzNjQsInN0Ijo4Mjc3LCJ1ayI6InVlMS05NzQxZmIxYTE3NGU0Y2Q2OTdlODg0OWUwZTU4NjE5YiIsInpuIjo0NCwidHMiOjE0OTMwMTUyMTYwNDksImJmIjp0cnVlLCJwbiI6ImNsYy1tbGIiLCJ1ciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmFtYXpvbi5jb20vYWxleGEtdm9pY2Utc2VydmljZS93aGF0LWlzLWF2cyJ9&amp;s=BML4ea_bvl1OZKsT5W32rthKGuI" rel="nofollow" target="_blank" title=""><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/21b020d1780a4db88e80d3a0415252c1.png" title="" alt="" border="0" width="728" height="90"></a><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/i(1).gif"></div>
+  
+<a name="20556654"></a>
+<div id="answer-20556654" class="answer" data-answerid="20556654" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="20556654">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">791</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I realize that this is an old question, with an established answer. The reason I'm posting is that is the accepted answer has many elements of k-NN (<em>k</em>-nearest neighbors), a different algorithm. </p>
+
+<p>Both k-NN and NaiveBayes are classification algorithms. Conceptually, k-NN uses the idea of "nearness" to classify new entities. In k-NN 'nearness' is modeled with ideas such as Euclidean Distance or Cosine Distance. By contrast, in NaiveBayes, the concept of 'probability' is used to classify new entities. </p>
+
+<p>Since the question is about Naive Bayes, here's how I'd describe the ideas and steps to someone. I'll try to do it with as few equations and in plain English as much as possible.</p>
+
+<h3>First, Conditional Probability &amp; Bayes' Rule</h3>
+
+<p>Before someone can understand and appreciate the nuances of Naive Bayes', they need to know a couple of related concepts first, namely, the idea of Conditional Probability, and Bayes' Rule. (If you are familiar with these concepts, skip to the section titled <strong>Getting to Naive Bayes'</strong>)</p>
+
+<p><strong>Conditional Probability</strong> in plain English: What is the probability that something will happen, <em>given that something else</em> has already happened.</p>
+
+<p>Let's say that there is some Outcome O. And some Evidence E. From the way these probabilities are defined: The Probability of having <em>both</em> the Outcome O and Evidence E is:
+   (Probability of O occurring) multiplied by the (Prob of E given that O happened)</p>
+
+<p><em>One Example to understand Conditional Probability:</em></p>
+
+<p>Let say we have a collection of US Senators. Senators could be Democrats or Republicans. They are also either male or female.</p>
+
+<p>If we select one senator completely randomly, what is the probability that this person is a female Democrat? Conditional Probability can help us answer that.</p>
+
+<p>Probability of (Democrat and Female Senator)= Prob(Senator is Democrat) multiplied by Conditional Probability of Being Female given that they are a Democrat.</p>
+
+<pre><code>  P(Democrat &amp; Female) = P(Democrat) * P(Female | Democrat) 
+</code></pre>
+
+<p>We could compute the exact same thing, the reverse way:</p>
+
+<pre><code>  P(Democrat &amp; Female) = P(Female) * P(Democrat | Female) 
+</code></pre>
+
+<h3>Understanding Bayes Rule</h3>
+
+<p>Conceptually, this is a way to go from P(Evidence| Known Outcome) to P(Outcome|Known Evidence). Often, we know how frequently some particular evidence is observed, <em>given a known outcome</em>. We have to use this known fact to compute the reverse, to compute the chance of that <em>outcome happening</em>, given the evidence.</p>
+
+<p>P(Outcome given that we know some Evidence) = P(Evidence given that we know the Outcome) times Prob(Outcome), scaled by the P(Evidence)</p>
+
+<p>The classic example to understand Bayes' Rule:</p>
+
+<pre><code>Probability of Disease D given Test-positive = 
+
+               Prob(Test is positive|Disease) * P(Disease)
+     _______________________________________________________________
+     (scaled by) Prob(Testing Positive, with or without the disease)
+</code></pre>
+
+<p>Now, all this was just preamble, to get to Naive Bayes.</p>
+
+<h2>Getting to Naive Bayes'</h2>
+
+<p>So far, we have talked only about one piece of evidence. In reality, we have to predict an outcome given <strong>multiple evidence.</strong> In that case, the math gets very complicated. To get around that complication, one approach is to 'uncouple' multiple pieces of evidence, and to treat each of piece of evidence as independent. This approach is why this is called <em>naive</em> Bayes.</p>
+
+<pre><code>P(Outcome|Multiple Evidence) = 
+P(Evidence1|Outcome) * P(Evidence2|outcome) * ... * P(EvidenceN|outcome) * P(Outcome)
+scaled by P(Multiple Evidence)
+</code></pre>
+
+<p>Many people choose to remember this as:</p>
+
+<pre><code>                      P(Likelihood of Evidence) * Prior prob of outcome
+P(outcome|evidence) = _________________________________________________
+                                         P(Evidence)
+</code></pre>
+
+<p>Notice a few things about this equation:</p>
+
+<ul>
+<li>If the Prob(evidence|outcome) is 1, then we are just multiplying by 1. </li>
+<li>If the Prob(some particular evidence|outcome) is 0, then the whole prob. becomes 0. If you see contradicting evidence, we can rule out that outcome. </li>
+<li>Since we divide everything by P(Evidence), we can even get away without calculating it.</li>
+<li>The intuition behind multiplying by the <em>prior</em> is so that we give high probability to more common outcomes, and low probabilities to unlikely outcomes. These are also called <code>base rates</code> and they are a way to scale our predicted probabilities. </li>
+</ul>
+
+<h3>How to Apply NaiveBayes to Predict an Outcome?</h3>
+
+<p>Just run the formula above for each possible outcome. Since we are trying to <em>classify</em>, each outcome is called a <code>class</code> and it has a <code>class label.</code> Our job is to look at the evidence, to consider how likely it is to be this class or that class, and assign a label to each entity.
+Again, we take a very simple approach: The class that has the highest probability is declared the "winner" and that class label gets assigned to that combination of evidences.</p>
+
+<h3>Fruit Example</h3>
+
+<p>Let's try it out on an example to increase our understanding: The OP asked for a 'fruit' identification example.</p>
+
+<p>Let's say that we have data on 1000 pieces of fruit. They happen to be <strong>Banana</strong>, <strong>Orange</strong> or some <strong>Other Fruit</strong>.
+We know 3 characteristics about each fruit:</p>
+
+<ol>
+<li>Whether it is Long</li>
+<li>Whether it is Sweet and </li>
+<li>If its color is Yellow.</li>
+</ol>
+
+<p>This is our 'training set.' We will use this to predict the type of any <em>new</em> fruit we encounter.</p>
+
+<pre><code>Type           Long | Not Long || Sweet | Not Sweet || Yellow |Not Yellow|Total
+             ___________________________________________________________________
+Banana      |  400  |    100   || 350   |    150    ||  450   |  50      |  500
+Orange      |    0  |    300   || 150   |    150    ||  300   |   0      |  300
+Other Fruit |  100  |    100   || 150   |     50    ||   50   | 150      |  200
+            ____________________________________________________________________
+Total       |  500  |    500   || 650   |    350    ||  800   | 200      | 1000
+             ___________________________________________________________________
+</code></pre>
+
+<p>We can pre-compute a lot of things about our fruit collection.</p>
+
+<p>The so-called "Prior" probabilities. (If we didn't know any of the fruit attributes, this would be our guess.) These are our <code>base rates.</code></p>
+
+<pre><code> P(Banana)      = 0.5 (500/1000)
+ P(Orange)      = 0.3
+ P(Other Fruit) = 0.2
+</code></pre>
+
+<p>Probability of "Evidence"</p>
+
+<pre><code>p(Long)   = 0.5
+P(Sweet)  = 0.65
+P(Yellow) = 0.8
+</code></pre>
+
+<p>Probability of "Likelihood"</p>
+
+<pre><code>P(Long|Banana) = 0.8
+P(Long|Orange) = 0  [Oranges are never long in all the fruit we have seen.]
+ ....
+
+P(Yellow|Other Fruit)     =  50/200 = 0.25
+P(Not Yellow|Other Fruit) = 0.75
+</code></pre>
+
+<h3>Given a Fruit, how to classify it?</h3>
+
+<p>Let's say that we are given the properties of an unknown fruit, and asked to classify it. We are told that the fruit is Long, Sweet and Yellow. Is it a Banana? Is it an Orange? Or Is it some Other Fruit?</p>
+
+<p>We can simply run the numbers for each of the 3 outcomes, one by one. Then we choose the highest probability and 'classify' our unknown fruit as belonging to the class that had the highest probability based on our prior evidence (our 1000 fruit training set):</p>
+
+<pre><code>P(Banana|Long, Sweet and Yellow) 
+      P(Long|Banana) * P(Sweet|Banana) * P(Yellow|Banana) * P(banana)
+    = _______________________________________________________________
+                      P(Long) * P(Sweet) * P(Yellow)
+
+    = 0.8 * 0.7 * 0.9 * 0.5 / P(evidence)
+
+    = 0.252 / P(evidence)
+
+
+P(Orange|Long, Sweet and Yellow) = 0
+
+
+P(Other Fruit|Long, Sweet and Yellow)
+      P(Long|Other fruit) * P(Sweet|Other fruit) * P(Yellow|Other fruit) * P(Other Fruit)
+    = ____________________________________________________________________________________
+                                          P(evidence)
+
+    = (100/200 * 150/200 * 50/200 * 200/1000) / P(evidence)
+
+    = 0.01875 / P(evidence)
+</code></pre>
+
+<p>By an overwhelming margin (<code>0.252 &gt;&gt; 0.01875</code>), we classify this Sweet/Long/Yellow fruit as likely to be a Banana.</p>
+
+<h3>Why is Bayes Classifier so popular?</h3>
+
+<p>Look at what it eventually comes down to. Just some counting and multiplication. We can pre-compute all these terms, and so classifying becomes easy, quick and efficient. </p>
+
+<p><code>Let z = 1 / P(evidence).</code> Now we quickly compute the following three quantities.</p>
+
+<pre><code>P(Banana|evidence) = z * Prob(Banana) * Prob(Evidence1|Banana) * Prob(Evidence2|Banana) ...
+P(Orange|Evidence) = z * Prob(Orange) * Prob(Evidence1|Orange) * Prob(Evidence2|Orange) ...
+P(Other|Evidence)  = z * Prob(Other)  * Prob(Evidence1|Other)  * Prob(Evidence2|Other)  ...
+</code></pre>
+
+<p>Assign the class label of whichever is the highest number, and you are done.</p>
+
+<p>Despite the name, Naive Bayes turns out to be excellent in certain applications. Text classification is one area where it really shines.</p>
+
+<p>Hope that helps in understanding the concepts behind the Naive Bayes algorithm.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/20556654" title="short permalink to this answer" class="short-link" id="link-post-20556654">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/20556654/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/20556654/revisions" title="show all edits to this post">edited <span title="2016-12-25 10:53:42Z" class="relativetime">Dec 25 '16 at 10:53</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/2197181/juliend"><div class="gravatar-wrapper-32"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/b8bfa78665dc670a7cbf3982432b2bb8" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/2197181/juliend">JulienD</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">2,286</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="34 bronze badges"><span class="badge3"></span><span class="badgecount">34</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2013-12-12 23:54:43Z" class="relativetime">Dec 12 '13 at 23:54</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/918215/ram-narasimhan"><div class="gravatar-wrapper-32"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/16f5fa1320e138acc5b4bc24f3da72ac" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/918215/ram-narasimhan">Ram Narasimhan</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 15,156" dir="ltr">15.2k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="25 silver badges"><span class="badge2"></span><span class="badgecount">25</span></span><span title="41 bronze badges"><span class="badge3"></span><span class="badgecount">41</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20556654" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="35" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-30852330" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="hot">18</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Really great explanation, thank you! It was very useful and easy to understand</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/2341377/perkinsb1024" title="151 reputation" class="comment-user">PerkinsB1024</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment30852330_20556654"><span title="2013-12-16 16:40:31Z" class="relativetime-clean">Dec 16 '13 at 16:40</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-31030766" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">4</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thanks for the very clear explanation! Easily one of the better ones floating around the web. Question: since each P(outcome/evidence) is multiplied by 1 / z=p(evidence) (which in the fruit case, means each is essentially the probability based solely on previous evidence), would it be correct to say that z doesn't matter at all for Naïve Bayes? Which would thus mean that if, say, one ran into a long/sweet/yellow fruit that <b>wasn't</b> a banana, it'd be classified incorrectly.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/2564905/covariance" title="540 reputation" class="comment-user">covariance</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment31030766_20556654"><span title="2013-12-21 02:30:13Z" class="relativetime-clean">Dec 21 '13 at 2:30</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-31171413" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="supernova">32</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I think this is actually the best answer here.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/243225/fhucho" title="14,817 reputation" class="comment-user">fhucho</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment31171413_20556654"><span title="2013-12-27 01:03:11Z" class="relativetime-clean">Dec 27 '13 at 1:03</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-32410175" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="supernova">47</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This is much better than the accepted answer.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1123924/wrahool" title="448 reputation" class="comment-user">wrahool</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment32410175_20556654"><span title="2014-01-31 06:46:23Z" class="relativetime-clean">Jan 31 '14 at 6:46</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-32808301" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="warm">7</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">The 2 answers together are the even better answer.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/264052/smwikipedia" title="14,267 reputation" class="comment-user">smwikipedia</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#comment32808301_20556654"><span title="2014-02-11 10:55:42Z" class="relativetime-clean">Feb 11 '14 at 10:55</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-20556654" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#" onclick="">show <b>35</b> more comments</a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="36282738"></a>
+<div id="answer-36282738" class="answer" data-answerid="36282738" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="36282738">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">10</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Ram Narasimhan explained the concept very nicely here below is an alternative explanation through the code example of Naive Bayes in action<br>
+It uses an example problem from this <a href="https://www.google.co.in/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=data%20mining%20concepts%20and%20techniques" rel="noreferrer">book on page 351</a><br>
+This is the data set that we will be using<br> <a href="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/lKPKB.png" rel="noreferrer"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/lKPKB.png" alt="enter image description here"></a><br>
+In the above dataset if we give the hypothesis = <code>{"Age":'&lt;=30', "Income":"medium", "Student":'yes' , "Creadit_Rating":'fair'}</code> then what is the probability that he will buy or will not buy a computer.<br>
+The code below exactly answers that question.<br>
+Just create a file called named <code>new_dataset.csv</code> and paste the following content.</p>
+
+<pre><code>Age,Income,Student,Creadit_Rating,Buys_Computer
+&lt;=30,high,no,fair,no
+&lt;=30,high,no,excellent,no
+31-40,high,no,fair,yes
+&gt;40,medium,no,fair,yes
+&gt;40,low,yes,fair,yes
+&gt;40,low,yes,excellent,no
+31-40,low,yes,excellent,yes
+&lt;=30,medium,no,fair,no
+&lt;=30,low,yes,fair,yes
+&gt;40,medium,yes,fair,yes
+&lt;=30,medium,yes,excellent,yes
+31-40,medium,no,excellent,yes
+31-40,high,yes,fair,yes
+&gt;40,medium,no,excellent,no
+</code></pre>
+
+<p>Here is the code the comments explains everything we are doing here! [python]</p>
+
+<pre><code>import pandas as pd 
+import pprint 
+
+class Classifier():
+    data = None
+    class_attr = None
+    priori = {}
+    cp = {}
+    hypothesis = None
+
+
+    def __init__(self,filename=None, class_attr=None ):
+        self.data = pd.read_csv(filename, sep=',', header =(0))
+        self.class_attr = class_attr
+
+    '''
+        probability(class) =    How many  times it appears in cloumn
+                             __________________________________________
+                                  count of all class attribute
+    '''
+    def calculate_priori(self):
+        class_values = list(set(self.data[self.class_attr]))
+        class_data =  list(self.data[self.class_attr])
+        for i in class_values:
+            self.priori[i]  = class_data.count(i)/float(len(class_data))
+        print "Priori Values: ", self.priori
+
+    '''
+        Here we calculate the individual probabilites 
+        P(outcome|evidence) =   P(Likelihood of Evidence) x Prior prob of outcome
+                               ___________________________________________
+                                                    P(Evidence)
+    '''
+    def get_cp(self, attr, attr_type, class_value):
+        data_attr = list(self.data[attr])
+        class_data = list(self.data[self.class_attr])
+        total =1
+        for i in range(0, len(data_attr)):
+            if class_data[i] == class_value and data_attr[i] == attr_type:
+                total+=1
+        return total/float(class_data.count(class_value))
+
+    '''
+        Here we calculate Likelihood of Evidence and multiple all individual probabilities with priori
+        (Outcome|Multiple Evidence) = P(Evidence1|Outcome) x P(Evidence2|outcome) x ... x P(EvidenceN|outcome) x P(Outcome)
+        scaled by P(Multiple Evidence)
+    '''
+    def calculate_conditional_probabilities(self, hypothesis):
+        for i in self.priori:
+            self.cp[i] = {}
+            for j in hypothesis:
+                self.cp[i].update({ hypothesis[j]: self.get_cp(j, hypothesis[j], i)})
+        print "\nCalculated Conditional Probabilities: \n"
+        pprint.pprint(self.cp)
+
+    def classify(self):
+        print "Result: "
+        for i in self.cp:
+            print i, " ==&gt; ", reduce(lambda x, y: x*y, self.cp[i].values())*self.priori[i]
+
+if __name__ == "__main__":
+    c = Classifier(filename="new_dataset.csv", class_attr="Buys_Computer" )
+    c.calculate_priori()
+    c.hypothesis = {"Age":'&lt;=30', "Income":"medium", "Student":'yes' , "Creadit_Rating":'fair'}
+
+    c.calculate_conditional_probabilities(c.hypothesis)
+    c.classify()
+</code></pre>
+
+<p>output:</p>
+
+<pre><code>Priori Values:  {'yes': 0.6428571428571429, 'no': 0.35714285714285715}
+
+Calculated Conditional Probabilities: 
+
+{
+ 'no': {
+        '&lt;=30': 0.8,
+        'fair': 0.6, 
+        'medium': 0.6, 
+        'yes': 0.4
+        },
+'yes': {
+        '&lt;=30': 0.3333333333333333,
+        'fair': 0.7777777777777778,
+        'medium': 0.5555555555555556,
+        'yes': 0.7777777777777778
+      }
+}
+
+Result: 
+yes  ==&gt;  0.0720164609053
+no  ==&gt;  0.0411428571429
+</code></pre>
+
+<p>Hope it helps in better understanding the problem </p>
+
+<p>peace</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/36282738" title="short permalink to this answer" class="short-link" id="link-post-36282738">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/36282738/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/36282738/revisions" title="show all edits to this post">edited <span title="2016-03-29 12:00:28Z" class="relativetime">Mar 29 '16 at 12:00</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2016-03-29 11:15:23Z" class="relativetime">Mar 29 '16 at 11:15</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/2550866/sayed-zainul-abideen"><div class="gravatar-wrapper-32"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/82616b6ecfde8a8d770ce90e9a5ac053" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/2550866/sayed-zainul-abideen">Sayed Zainul Abideen</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">382</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="12 bronze badges"><span class="badge3"></span><span class="badgecount">12</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-36282738" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-36282738" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="35960103"></a>
+<div id="answer-35960103" class="answer" data-answerid="35960103" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="35960103">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">5</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I try to explain the Bayes rule with an example. </p>
+
+<p>Suppose that you know that <strong>10%</strong> of people are smokers.  You also know that <strong>90%</strong> of smokers are men and <strong>80%</strong> of them are above 20 years old.  </p>
+
+<p>Now you see someone who is a <strong>man</strong> and  <strong>15</strong> years old. You want to know the chance that he be a smoker:</p>
+
+<pre><code> X = smoker | he is a man and under 20
+</code></pre>
+
+<p>As you know 10% of people are smokers your initial guess is 10% (<em>prior probability</em>, without knowing anything about the person) but the other <strong>evidences</strong> (that he is a man and he is 15) can contribute to this probability. </p>
+
+<p>Each evidence may increase or decrease this chance. For example the fact that he is a man <strong>may</strong> increase the chance that he is a smoker, providing that this percentage (being a man) among non-smokers is lower, for example, 40%. In other words being a man must be a good indicator of being a smoker rather than a non-smoker.</p>
+
+<p>We can show this contribution in another way. For each feature, you need to compare the commonness (probability) of that feature (f) independently against its probability under the given condition. (<code>P(f) vs. P(f | x)</code>. For example, if we know that the probability of being a man is 90% in a society and 90% of smokers are also men, then knowing that someone is a man doesn't change anything <code>(10% * (90% / 90%) = 10%)</code>. But if men contribute to 40% of the society, but 90% of the smokers, then being a man increases the chance of being an smoker <code>(10% * (90% / 40%) = 22.5% )</code>. In the same way, if the probability of being a man was 95% in a population, then regardless of the fact that the percentage of men among smokers is high (90%)!, the evidence of being a man decreases the chance of being an smoker! <code>(10% * (90% / 95%) = 9.5%)</code>.</p>
+
+<p>So we have:</p>
+
+<pre><code>P(X) = 
+P(smoker)* 
+(P(being a man | smoker)/P(being a man))*
+(P(under 20 | smoker)/ P(under 20))
+</code></pre>
+
+<p>Notice in this formula we assumed that <strong>being a man</strong> and <strong>being under 20</strong> are independent features so we multiplied them, it means that knowing that someone is under 20 has no effect on guessing that he is man or woman. But it may not be true, for example maybe most adolescence  in a society are men...</p>
+
+<p><strong>To use this formula in a classifier</strong></p>
+
+<p>The classifier is given some features (man and under 20) and it must decide if he is an smoker or not. It uses the above formula to find that. To gain the needed probabilities (90%, 10%, 80%...) it uses training set. for example it counts the people in the training set that are smokers and find they contribute 10% of the sample. Then for smokers checks how many of them are men or women .... how many are above 20 or under 20....</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/35960103" title="short permalink to this answer" class="short-link" id="link-post-35960103">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/35960103/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/35960103/revisions" title="show all edits to this post">edited <span title="2016-11-11 17:04:51Z" class="relativetime">Nov 11 '16 at 17:04</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2016-03-12 16:13:48Z" class="relativetime">Mar 12 '16 at 16:13</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/2651073/ahmad"><div class="gravatar-wrapper-32"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/MtRZl.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/2651073/ahmad">Ahmad</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,783</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="21 silver badges"><span class="badge2"></span><span class="badgecount">21</span></span><span title="39 bronze badges"><span class="badge3"></span><span class="badgecount">39</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-35960103" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-35960103" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="42289174"></a>
+<div id="answer-42289174" class="answer" data-answerid="42289174" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="42289174">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">4</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p><strong>Naive Bayes :</strong>
+Naive Bayes comes under supervise machine learning which used to make classifications of data sets.
+It is used to predict things based on it's prior knowledge and independence assumptions.</p>
+
+<p>They call it <strong>naive</strong> because it’s assumptions (it assumes that all of the features in the data set are equally important and independent) are really optimistic and rarely true in most real-world applications.</p>
+
+<p>It is classification algorithm which makes decision for unknown data set. It is based on <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" rel="nofollow noreferrer">Bayes Theorem</a> which describe the probability of event based on it's prior knowledge.</p>
+
+<p>Below diagram shows how naive bayes works</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" rel="nofollow noreferrer"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/0QOII.png" alt="enter image description here"></a></p>
+
+<p><strong>Formula to predict NB:</strong></p>
+
+<p><a href="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/0QOII.png" rel="nofollow noreferrer"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/t5voX.png" alt="enter image description here"></a></p>
+
+<p><strong>How to use Naive Bayes Algorithm ?</strong></p>
+
+<p>Lets take an example of how N.B woks</p>
+
+<p>Step 1: First we find out Likelihood of table which shows probability of yes or no in below diagram.
+Step 2: Find posterior probability of each class.</p>
+
+<p><a href="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/t5voX.png" rel="nofollow noreferrer"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/ZSv4b.png" alt="enter image description here"></a></p>
+
+<pre><code>Problem : Find out the possibility of whether player play in Rainy condition ?
+
+P(Yes|Rainy) = P(Rainy|Yes) * P(Yes) / P(Rainy)
+
+P(Rainy|Yes) = 2/9 = 0.222
+P(Yes) = 9/14 = 0.64
+P(Rainy) = 5/14 = 0.36
+
+Now, P(Yes|Rainy) = 0.222*0.64/0.36 = 0.39 which is lower probability which means chances of match played is low.
+</code></pre>
+
+<p>For more reference refer these <a href="http://naivebayesintro.blogspot.in/" rel="nofollow noreferrer">blog.</a></p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/42289174" title="short permalink to this answer" class="short-link" id="link-post-42289174">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/42289174/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/42289174/revisions" title="show all edits to this post">edited <span title="2017-02-18 07:35:21Z" class="relativetime">Feb 18 at 7:35</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2017-02-17 04:02:28Z" class="relativetime">Feb 17 at 4:02</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/5106574/jitesh-mohite"><div class="gravatar-wrapper-32"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/photo.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/5106574/jitesh-mohite">jitesh mohite</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,351</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="19 bronze badges"><span class="badge3"></span><span class="badgecount">19</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-42289174" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-42289174" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+				    <div class="question-status">
+        <h2>                    <b>protected</b> by <a href="http://stackoverflow.com/users/699224/dna">DNA</a> <span dir="ltr"><span title="2014-09-15 09:56:58Z" class="relativetime">Sep 15 '14 at 9:56</span></span>
+</h2>
+        <p>
+Thank you for your interest in this question. 
+Because it has attracted low-quality or spam answers that had to be removed, posting an answer now requires 10 <a href="http://stackoverflow.com/help/whats-reputation">reputation</a> on this site (the <a href="http://stackoverflow.com/help/privileges/new-user">association bonus does not count</a>).
+<br><br>
+Would you like to answer one of these <a href="http://stackoverflow.com/unanswered?fromProtectedNotice=true">unanswered questions</a> instead?
+</p>
+    </div>
+
+
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/algorithm" class="post-tag" title="show questions tagged &#39;algorithm&#39;" rel="tag">algorithm</a> <a href="http://stackoverflow.com/questions/tagged/machine-learning" class="post-tag" title="show questions tagged &#39;machine-learning&#39;" rel="tag">machine-learning</a> <a href="http://stackoverflow.com/questions/tagged/dataset" class="post-tag" title="show questions tagged &#39;dataset&#39;" rel="tag">dataset</a> <a href="http://stackoverflow.com/questions/tagged/classification" class="post-tag" title="show questions tagged &#39;classification&#39;" rel="tag">classification</a> <a href="http://stackoverflow.com/questions/tagged/naivebayes" class="post-tag" title="show questions tagged &#39;naivebayes&#39;" rel="tag">naivebayes</a>  or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2012-04-08 00:56:19Z"><b>5 years ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>266835 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification?lastactivity" class="lastactivity-link" title="2017-02-18 07:35:21Z">2 months ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+						
+			<div class="" id="hireme"><div class="clc-cp-container"><div class="clc-cp-sb"><div class="clc-cp-sb-header blue-and-green"><a href="https://stackoverflow.com/jobs/companies/pinn" data-clc-click="https://clc.stackoverflow.com/click?an=AToAxf8K5AMs59qK1EgHGABTVQICBCcDyv7lBB8DgZwHrs0I8L0PAxMADsCXw9U5_Y8SPwCH5VsJcmQzmXEv&amp;cr=253680&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fpinn&amp;sig=qC-_a5AsbHGG7w" class="clc-cp-link" target="_blank"></a><div class="clc-cp-sb-header-image"><div class="clc-cp-sb-bgcover"><div class="clc-cp-sb-blur-and-anim" style="background-image: url(https://i.stack.imgur.com/NrVmWm.png)"></div></div><div class="clc-cp-sb-openjobs blue-and-green">We have 3 open jobs ♥</div><div class="clc-cp-sb-logo"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/g1A4R.png" alt="Pinn"></div></div><div class="clc-cp-sb-header-title"><p class="clc-cp-sb-company-name">Pinn</p><p class="clc-cp-sb-location">Redwood City, CA</p></div></div><div class="clc-cp-sb-overview"><a href="https://stackoverflow.com/jobs/companies/pinn" data-clc-click="https://clc.stackoverflow.com/click?an=AToAxf8K5AMs59qK1EgHGABTVQICBCcDyv7lBB8DgZwHrs0I8L0PAxMADsCXw9U5_Y8SPwCH5VsJcmQzmXEv&amp;cr=253680&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fpinn&amp;sig=qC-_a5AsbHGG7w" class="clc-cp-link" target="_blank"></a><div><div class="overview-icon industries"></div><div class="overview-icon company-status"></div><div class="overview-icon company-size"></div></div><div><span>Cybersecurity</span><span>Private</span><span>11-50 people</span></div></div><div class="clc-cp-sb-core"><div class="clc-cp-sb-techstack"><p>Our tech stack</p><ul><li class="clc-cp-tag highlight">python</li><li class="clc-cp-tag">machine-learning</li><li class="clc-cp-tag">numpy</li><li class="clc-cp-tag">sql</li><li class="clc-cp-tag">nlp</li><li class="clc-cp-tag">linux</li><li class="clc-cp-tag">javascript</li><li class="clc-cp-tag">amazon-web-services</li><li class="clc-cp-tag">nosql</li><li class="clc-cp-tag">unix</li><li class="clc-cp-tag">security</li><li class="clc-cp-tag">restful-architecture</li><li class="clc-cp-tag">biometrics</li><li class="clc-cp-tag">scikit-learn</li><li class="clc-cp-tag">scipy</li><li class="clc-cp-tag">speech-recognition</li><li class="clc-cp-tag">sdlc</li><li class="clc-cp-tag">docker</li><li class="clc-cp-tag">continuous-integration</li><li class="clc-cp-tag">soa</li><li class="clc-cp-tag">web-services</li><li class="clc-cp-tag">web-applications</li><li class="clc-cp-tag">client-server</li><li class="clc-cp-tag">rest</li><li class="clc-cp-tag">cross-platform</li><li class="clc-cp-tag">android</li><li class="clc-cp-tag">ios</li><li class="clc-cp-tag">saas</li></ul></div><div class="clc-cp-sb-workshere"><p>Meet our team</p><ul><li><div class="clc-cp-sb-workshere-image"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/2OyH8.png" alt="Mitchell Ong"></div><div class="clc-cp-sb-workshere-name-and-tags"><span class="clc-cp-sb-workshere-name tall">Mitchell Ong</span></div></li><li><div class="clc-cp-sb-workshere-image"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/d663db0053419a0e3e9defc77f55ae70" alt="David Westerhoff"></div><div class="clc-cp-sb-workshere-name-and-tags"><span class="clc-cp-sb-workshere-name tall">David Westerhoff</span></div></li><li><div class="clc-cp-sb-workshere-image"><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/9RYTt.jpg" alt="Rachel Westerhoff"></div><div class="clc-cp-sb-workshere-name-and-tags"><span class="clc-cp-sb-workshere-name tall">Rachel Westerhoff</span></div></li></ul></div></div><div class="clc-cp-sb-learnmore-wrap"><div class="clc-cp-sb-learnmore"><a href="https://stackoverflow.com/jobs/companies/pinn" data-clc-click="https://clc.stackoverflow.com/click?an=AToAxf8K5AMs59qK1EgHGABTVQICBCcDyv7lBB8DgZwHrs0I8L0PAxMADsCXw9U5_Y8SPwCH5VsJcmQzmXEv&amp;cr=253680&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fpinn&amp;sig=qC-_a5AsbHGG7w" class="clc-cp-sb-learnmore-button" target="_blank">Learn more</a></div></div></div><img src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/impression.gif" class="impression" style="display: none;"></div></div>
+        <script>
+window.clc_request = 'AmAa6-baitQIAAAAAEp_mQACAAAAAgAAAABQAAAAfGFsZ29yaXRobXxtYWNoaW5lLWxlYXJuaW5nfGRhdGFzZXR8Y2xhc3NpZmljYXRpb258bmFpdmViYXllc3x4LXBlcnNvbmEtYmlnZGF0YXwADjt1-dU5rawFtA';
+;(function(n){var t,u,r,i;try{if(typeof[].indexOf!="function")return;if(window.attachEvent&&!window.addEventListener)return;if(n.allowed[0]!=="*"&&n.allowed.indexOf(location.hostname)===-1)return;if(t=window,t.clc=t.clc||{},u=t.clc_request||t.clcfl_request,t.clc.init=t.clc.init||[],t.clc.init.push(function(n){return n.load()}),t.clc.options){for(r in t.clc.options)n[r]=t.clc.options[r];t.clc.options=n}else t.clc.options=n;i=document.createElement("script");i.async=!0;i.src=n.lib;document.body.appendChild(i)}catch(f){console.error("[clc] Error in loader:",f)}}).call(null, {"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=77a9386790c1","u":"https://clc.stackoverflow.com/markup.js","azw":true,"kt":2000,"tto":true,"d":{"sb":["hireme","clc-sb"],"tlb":["careers1","clc-tlb"],"mlb":["careers3","clc-mlb"]},"h":"clc.stackoverflow.com","autoload":true,"allowed":["stackoverflow.com","serverfault.com","blog.codinghorror.com","talent.stackoverflow.com"]});        </script>
+			<div class="module" id="chat-feature">
+
+    <h4><a href="http://chat.stackoverflow.com/" id="h-chat-link" title="37 users active in 26 rooms the last 60 minutes">37 People Chatting</a></h4>
+    <div class="related" id="ad502-rooms"><div class="ad502-room"><h3 class="ad502-room-h3"><span class="ad502-room-title" title="Lounge&lt;C++&gt;"><a href="http://chat.stackoverflow.com/rooms/10">Lounge&lt;C++&gt;</a></span></h3><span title="2017-04-24 03:23:32Z" class="ad502-last-message">3 hours ago - <a href="http://chat.stackoverflow.com/users/703016">Spongy Fruitcake</a></span><br><div class="ad502-users"><a href="http://chat.stackoverflow.com/users/703016"><img height="23" width="23" title="Spongy Fruitcake: 3 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/uCfiI.jpg"></a><a href="http://chat.stackoverflow.com/users/314290"><img height="23" width="23" title="Mikhail: 3 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/5ffde821f0f9670e601b19f1731a6849"></a><a href="http://chat.stackoverflow.com/users/4892076"><img height="23" width="23" title="jaggedSpire: 3 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/s6vwT.png"></a><a href="http://chat.stackoverflow.com/users/726300"><img height="23" width="23" title="Luc Danton: 3 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/ZWH6H.png"></a><a href="http://chat.stackoverflow.com/users/5991423"><img height="23" width="23" title="Aaron3468: 4 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/beK29.jpg"></a><a href="http://chat.stackoverflow.com/users/2369847"><img height="23" width="23" title="Telkitty: 4 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/P2Yey.jpg"></a><a href="http://chat.stackoverflow.com/users/6767800"><img height="23" width="23" title="ScY: 6 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/j4DiC.jpg"></a></div></div><div class="ad502-room"><h3 class="ad502-room-h3"><span class="ad502-room-title" title="SO Close Vote Reviewers"><a href="http://chat.stackoverflow.com/rooms/41570">SO Close Vote Reviewers</a></span></h3><span title="2017-04-24 03:18:08Z" class="ad502-last-message">3 hours ago - <a href="http://chat.stackoverflow.com/users/3735529">SmokeDetector</a></span><br><div class="ad502-users"><a href="http://chat.stackoverflow.com/users/3735529"><img height="23" width="23" title="SmokeDetector: 3 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/m9xyh.jpg"></a><a href="http://chat.stackoverflow.com/users/2370483"><img height="23" width="23" title="Machavity: 3 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/c11f2b4035a85ed55486ef537d546e92"></a><a href="http://chat.stackoverflow.com/users/4688119"><img height="23" width="23" title="Ashish Ahuja: 3 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/ajaGK.png"></a><a href="http://chat.stackoverflow.com/users/3476191"><img height="23" width="23" title="NobodyNada: 3 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/pJGHG.png"></a><a href="http://chat.stackoverflow.com/users/6373379"><img height="23" width="23" title="FireAlarm: 3 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/YQ7SJ.jpg"></a><a href="http://chat.stackoverflow.com/users/4424245"><img height="23" width="23" title="Closey: 3 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/3cVuq.jpg"></a><a href="http://chat.stackoverflow.com/users/3671802"><img height="23" width="23" title="FOX 9000: 5 hours ago" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/pLGbG.png"></a></div></div></div>
+    <script>
+    // <!--
+        StackExchange.ready(
+        function () {
+            var options = {
+                chatUrl: 'http://chat.stackoverflow.com',
+                reloadUrl: '/api/recent-chat',
+                preloadData: {"activeUsers":37,"activeRooms":26,"rooms":[{"name":"Lounge\u003cC++\u003e","id":10,"lastPost":1493004212,"posts":4880345,"users":[{"name":"Spongy Fruitcake","id":703016,"emailhash":"!https://i.stack.imgur.com/uCfiI.jpg?s=128\u0026g=1","lastPost":1493004212},{"name":"Mikhail","id":314290,"emailhash":"5ffde821f0f9670e601b19f1731a6849","lastPost":1493003228},{"name":"jaggedSpire","id":4892076,"emailhash":"!https://i.stack.imgur.com/s6vwT.png?s=128\u0026g=1","lastPost":1493002059},{"name":"Luc Danton","id":726300,"emailhash":"!https://i.stack.imgur.com/ZWH6H.png?s=128\u0026g=1","lastPost":1493001483},{"name":"Aaron3468","id":5991423,"emailhash":"!https://i.stack.imgur.com/beK29.jpg?s=128\u0026g=1","lastPost":1493000607},{"name":"Telkitty","id":2369847,"emailhash":"!https://i.stack.imgur.com/P2Yey.jpg?s=128\u0026g=1","lastPost":1493000504},{"name":"ScY","id":6767800,"emailhash":"!https://i.stack.imgur.com/j4DiC.jpg?s=128\u0026g=1","lastPost":1492992723}],"messages":[{"date":1493004212,"user":"Spongy Fruitcake","userid":703016}],"singleImage":false,"tags":["c++","c++11","c++14","c++17","c++-faq"]},{"name":"SO Close Vote Reviewers","id":41570,"lastPost":1493003888,"posts":698829,"users":[{"name":"SmokeDetector","id":3735529,"emailhash":"!https://i.stack.imgur.com/m9xyh.jpg?s=128\u0026g=1","lastPost":1493003888},{"name":"Machavity","id":2370483,"emailhash":"c11f2b4035a85ed55486ef537d546e92","lastPost":1493003750},{"name":"Ashish Ahuja","id":4688119,"emailhash":"!https://i.stack.imgur.com/ajaGK.png?s=128\u0026g=1","lastPost":1493002456},{"name":"NobodyNada","id":3476191,"emailhash":"!https://i.stack.imgur.com/pJGHG.png?s=128\u0026g=1","lastPost":1493002450},{"name":"FireAlarm","id":6373379,"emailhash":"!https://i.stack.imgur.com/YQ7SJ.jpg?s=128\u0026g=1","lastPost":1493002287},{"name":"Closey","id":4424245,"emailhash":"!https://i.stack.imgur.com/3cVuq.jpg?s=128\u0026g=1","lastPost":1493001056},{"name":"FOX 9000","id":3671802,"emailhash":"!https://i.stack.imgur.com/pLGbG.png?s=128\u0026g=1","lastPost":1492996530}],"messages":[{"date":1493003888,"user":"SmokeDetector","userid":3735529}],"singleImage":false,"tags":["discussion","moderation","review"]}]} 
+            };
+
+            StackExchange.chatAd.init(options);
+        });
+    // -->
+    </script>
+
+</div>
+
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/9859973?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">5</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/9859973/implement-gaussian-naive-bayes?noredirect=1&amp;lq=1" class="question-hyperlink">Implement Gaussian Naive Bayes</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/10205561?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">-1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/10205561/sentence-classification-categorization?noredirect=1&amp;lq=1" class="question-hyperlink">Sentence Classification (Categorization)</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/34518570?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/34518570/how-are-sentiment-analysis-computed-in-blob?noredirect=1&amp;lq=1" class="question-hyperlink">how are sentiment analysis computed in blob</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/18614720?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/18614720/determining-how-good-a-correlation-is-in-r?noredirect=1&amp;lq=1" class="question-hyperlink">determining how good a correlation is in R</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/39945635?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">3</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/39945635/naive-bayes-without-naive-assumption?noredirect=1&amp;lq=1" class="question-hyperlink">Naive Bayes without Naive assumption</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/28803228?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/28803228/purpose-of-test-data-in-supervised-learning?noredirect=1&amp;lq=1" class="question-hyperlink">Purpose of test data in supervised learning?</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/35658188?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">-7</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/35658188/what-does-naive-bayes-mean-in-machine-learning?noredirect=1&amp;lq=1" class="question-hyperlink">What does “Naive” Bayes mean in Machine learning?</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/42102903?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">-1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/42102903/collecting-machine-learning-training-data?noredirect=1&amp;lq=1" class="question-hyperlink">Collecting Machine learning training data</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/42856926?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/42856926/what-is-the-kind-format-of-data-set-that-is-required-for-using-naive-bayes-class?noredirect=1&amp;lq=1" class="question-hyperlink">What is the kind/format of data set that is required for using Naive Bayes classfication in R?</a>
+</div>			</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/487258?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted extra-large">3940</div></a><a href="http://stackoverflow.com/questions/487258/what-is-a-plain-english-explanation-of-big-o-notation?rq=1" class="question-hyperlink">What is a plain English explanation of “Big O” notation?</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/25959368?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/25959368/basic-concepts-naive-bayes-algorithm-for-classification?rq=1" class="question-hyperlink">Basic concepts: Naive Bayes algorithm for classification</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/27843177?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">5</div></a><a href="http://stackoverflow.com/questions/27843177/naive-bayes-text-classification-algorithm?rq=1" class="question-hyperlink">Naive Bayes Text Classification Algorithm</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/30084153?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">2</div></a><a href="http://stackoverflow.com/questions/30084153/understanding-naive-bayes-for-text-classification?rq=1" class="question-hyperlink">Understanding Naive Bayes for text classification</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/30788043?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="http://stackoverflow.com/questions/30788043/gaussian-naive-bayes-classification?rq=1" class="question-hyperlink">Gaussian Naive Bayes classification</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/35056460?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/35056460/odd-estimations-by-naive-bayes-classificator?rq=1" class="question-hyperlink">Odd estimations by Naive Bayes Classificator</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/35489544?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="http://stackoverflow.com/questions/35489544/a-simple-explanation-of-what-is-lda-classification?rq=1" class="question-hyperlink">A simple explanation of what is LDA Classification</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/36725174?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="http://stackoverflow.com/questions/36725174/accuracy-of-a-naive-bayes-classifier?rq=1" class="question-hyperlink">Accuracy of a naive bayes classifier</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/37118156?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">3</div></a><a href="http://stackoverflow.com/questions/37118156/understanding-naive-bayes?rq=1" class="question-hyperlink">Understanding Naive Bayes</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/39945635?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">3</div></a><a href="http://stackoverflow.com/questions/39945635/naive-bayes-without-naive-assumption?rq=1" class="question-hyperlink">Naive Bayes without Naive assumption</a></div>
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-stats" title="Cross Validated"></div><a href="https://stats.stackexchange.com/questions/275428/logistic-binary-or-poisson" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:65 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Logistic Binary or Poisson?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href="https://rpg.stackexchange.com/questions/98242/a-player-always-wants-to-recruit-npcs-into-the-party-how-do-i-handle-this" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    A player always wants to recruit NPCs into the party. How do I handle this?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="https://english.stackexchange.com/questions/385852/what-is-non-borrowed-english-word-meaning-calculate-compute-count" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is non-borrowed English word meaning "calculate", "compute", "count"?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="https://tex.stackexchange.com/questions/366291/can-fonts-have-patterns-instead-of-colors" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can fonts have patterns instead of colors?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-retrocomputing" title="Retrocomputing Stack Exchange"></div><a href="https://retrocomputing.stackexchange.com/questions/2749/how-does-the-amiga-chipset-rga-bus-work" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:648 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How does the Amiga chipset RGA bus work?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-softwareengineering" title="Software Engineering Stack Exchange"></div><a href="https://softwareengineering.stackexchange.com/questions/347492/is-it-bad-practice-to-use-a-c-compiler-just-for-function-overloading" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:131 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it bad practice to use a C++ compiler just for function overloading?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-chemistry" title="Chemistry Stack Exchange"></div><a href="https://chemistry.stackexchange.com/questions/73173/why-doesnt-frozen-sugar-solution-taste-sweet" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:431 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why doesn't frozen sugar solution taste sweet?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="https://codereview.stackexchange.com/questions/161501/close-to-the-metal-c-palindrome-program" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Close to the metal C++ Palindrome Program
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-cooking" title="Seasoned Advice"></div><a href="https://cooking.stackexchange.com/questions/81031/why-do-grape-flavored-foods-taste-different-than-actual-grapes" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:49 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do grape-flavored foods taste different than actual grapes?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-ux" title="User Experience Stack Exchange"></div><a href="https://ux.stackexchange.com/questions/107277/best-error-color-on-blue-color" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:102 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Best error color on blue color?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2243900/what-exactly-is-calculus" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What exactly is calculus?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="https://codereview.stackexchange.com/questions/161623/add-two-signed-integers-given-in-stdinspace-separated-in-i386-asm-linux-abi" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Add two signed integers, given in stdin(space separated) in i386 ASM Linux ABI
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2248572/solving-an-infinite-sum-using-integration-or-derivation" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Solving an infinite sum using integration or derivation
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-movies" title="Movies &amp; TV Stack Exchange"></div><a href="https://movies.stackexchange.com/questions/72110/simpsons-episode-with-1000" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:367 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Simpsons episode with $1000
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href="https://ell.stackexchange.com/questions/127502/usage-of-apparent-vs-transparent" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Usage of apparent vs transparent
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-writers" title="Writers Stack Exchange"></div><a href="https://writers.stackexchange.com/questions/27621/what-english-version-of-the-bible-should-i-quote-from" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:166 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What English version of the bible should I quote from?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-astronomy" title="Astronomy Stack Exchange"></div><a href="https://astronomy.stackexchange.com/questions/20823/shape-of-neutron-stars" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:514 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Shape of neutron stars
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="https://workplace.stackexchange.com/questions/89716/what-to-put-in-reason-when-asking-for-days-off-for-job-interview-at-another-pl" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What to put in "reason" when asking for days off for job interview at another place?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-space" title="Space Exploration Stack Exchange"></div><a href="https://space.stackexchange.com/questions/21206/is-there-a-mockup-of-the-iss-on-the-ground" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:508 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is there a mockup of the ISS on the ground?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-puzzling" title="Puzzling Stack Exchange"></div><a href="https://puzzling.stackexchange.com/questions/51265/take-note-this-is-my-favorite-thing" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:559 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Take note, this is my favorite thing
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="https://aviation.stackexchange.com/questions/37208/are-wings-any-more-efficient-at-creating-lift-versus-orienting-the-engines-thr" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Are wings any more efficient at creating lift, versus orienting the engine's thrust downwards?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/78733/an-environment-where-round-beds-are-easier-to-build-than-rectangular" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    An environment where round beds are easier to build than rectangular
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-gardening" title="Gardening &amp; Landscaping Stack Exchange"></div><a href="https://gardening.stackexchange.com/questions/32798/paver-bricks-handling-weeds-without-bad-chemicals" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:269 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Paver bricks -- handling weeds without bad chemicals
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-askubuntu" title="Ask Ubuntu"></div><a href="https://askubuntu.com/questions/908109/how-to-close-all-tabs-instantly" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:89 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to close all tabs instantly
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="http://stackoverflow.com/feeds/question/10059594" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/10059594/ivc/4d8c');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/10059594/ivc/4d8c" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div><script async="" src="./algorithm - A simple explanation of Naive Bayes Classification - Stack Overflow_files/clc.min.js"></script>
+    <div id="footer" class="categories" role="contentinfo">
+        <div class="footerwrap">            
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                    <a href="http://stackoverflow.com/company/about">about us</a>
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="https://stackoverflow.blog/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="https://data.stackexchange.com/">data</a>
+                    <a href="https://stackexchange.com/legal">legal</a>
+                    <a href="https://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackoverflow.com/company/work-here">work here</a>
+                    <a href="https://www.stackoverflowbusiness.com/advertise">advertising info</a>
+                        <a href="http://stackoverflow.com/jobs/directory/developer-jobs">developer jobs directory</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="https://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                        <li><a href="http://softwareengineering.stackexchange.com/" title="professionals, academics, and students working within the systems development life cycle who care about creating, delivering, and maintaining software responsibly">Software Engineering</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="information security professionals">Information Security</a></li>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Wolfram Mathematica">Mathematica</a></li>
+                        <li><a href="http://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="http://expressionengine.stackexchange.com/" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                        <li><a href="http://crypto.stackexchange.com/" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://codereview.stackexchange.com/" title="peer programmer code reviews">Code Review</a></li>
+                        <li><a href="http://magento.stackexchange.com/" title="users of the Magento e-Commerce platform">Magento</a></li>
+                        <li><a href="http://dsp.stackexchange.com/" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                        <li><a href="http://raspberrypi.stackexchange.com/" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                        <li><a href="http://codegolf.stackexchange.com/" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="http://movies.stackexchange.com/" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="http://music.stackexchange.com/" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="http://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="http://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (8)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://ell.stackexchange.com/" title="speakers of other languages learning English">English Language Learners</a></li>
+                        <li><a href="http://japanese.stackexchange.com/" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                        <li><a href="http://anime.stackexchange.com/" title="anime and manga fans">Anime &amp; Manga</a></li>
+                        <li><a href="http://mechanics.stackexchange.com/" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (17)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://chemistry.stackexchange.com/" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="http://biology.stackexchange.com/" title="biology researchers, academics, and students">Biology</a></li>
+                        <li><a href="http://cs.stackexchange.com/" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                        <li><a href="http://philosophy.stackexchange.com/" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (3)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="https://www.stackoverflowbusiness.com/talent">Stack Overflow Talent</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+            <div id="copyright">
+                site design / logo © 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2017.4.21.25730
+            </div>
+                </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+        <script> setTimeout(function() { $("#adzerk-user-match").remove(); }, 2000);</script>
+
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-1');
+                ga('create', 'UA-5620270-59', {name: 'pageData', sampleRate: 5 });
+                ga('set', 'dimension2', '|algorithm|machine-learning|dataset|classification|naivebayes|');
+                ga('pageData.set', 'dimension2', '|algorithm|machine-learning|dataset|classification|naivebayes|');
+                ga('send', 'pageview');
+                ga('pageData.send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i) || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') service =  2;
+                                    else if (service === 'Place') service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', function() {
+                                        StackExchange.gps.track('google_maps_places_api.call', { service: service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    
+</body></html>

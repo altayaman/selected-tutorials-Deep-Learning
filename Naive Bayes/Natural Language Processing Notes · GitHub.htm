@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)https://gist.github.com/ttezel/4138642 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+<meta content="origin-when-cross-origin" name="referrer">
+
+  <link crossorigin="anonymous" href="./Natural Language Processing Notes · GitHub_files/frameworks-d7b19415c108234b91acac0d0c02091c860993c13687a757ee345cc1ecd3a9d1.css" integrity="sha256-17GUFcEII0uRrKwNDAIJHIYJk8E2h6dX7jRcwezTqdE=" media="all" rel="stylesheet">
+  <link crossorigin="anonymous" href="./Natural Language Processing Notes · GitHub_files/github-678c6c9fa597e3eabad2135736d58fe40e2ef37d8e272589d7d39d7c1c0f9056.css" integrity="sha256-Z4xsn6WX4+q60hNXNtWP5A4u832OJyWJ19OdfBwPkFY=" media="all" rel="stylesheet">
+  
+  
+  <link crossorigin="anonymous" href="./Natural Language Processing Notes · GitHub_files/site-537c466d44a69d38c4bd60c2fd2955373ef96d051bd97b2ad30ed039acc97bff.css" integrity="sha256-U3xGbUSmnTjEvWDC/SlVNz75bQUb2Xsq0w7QOazJe/8=" media="all" rel="stylesheet">
+  
+
+  <meta name="viewport" content="width=device-width">
+  
+  <title>Natural Language Processing Notes · GitHub</title>
+  <link rel="search" type="application/opensearchdescription+xml" href="https://gist.github.com/opensearch.xml" title="GitHub">
+  <link rel="fluid-icon" href="https://gist.github.com/fluidicon.png" title="GitHub">
+  <meta property="fb:app_id" content="1401488693436528">
+
+    
+    <meta content="https://avatars3.githubusercontent.com/u/728598?v=3&amp;s=400" property="og:image"><meta content="Gist" property="og:site_name"><meta content="object" property="og:type"><meta content="Natural Language Processing Notes" property="og:title"><meta content="https://gist.github.com/ttezel/4138642" property="og:url"><meta content="Natural Language Processing Notes" property="og:description">
+
+  <link rel="assets" href="https://assets-cdn.github.com/">
+  
+  <meta name="pjax-timeout" content="1000">
+  
+  <meta name="request-id" content="CBEB:08C7:2C7BE3B:45D1FF4:58FD9AAF" data-pjax-transient="">
+  
+
+  <meta name="selected-link" value="gist_code" data-pjax-transient="">
+
+  <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+<meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
+    <meta name="google-analytics" content="UA-3769691-4">
+
+<meta content="collector.githubapp.com" name="octolytics-host"><meta content="gist" name="octolytics-app-id"><meta content="https://collector.githubapp.com/github-external/browser_event" name="octolytics-event-url"><meta content="CBEB:08C7:2C7BE3B:45D1FF4:58FD9AAF" name="octolytics-dimension-request_id">
+<meta content="/&lt;user-name&gt;/&lt;gist-id&gt;" data-pjax-transient="true" name="analytics-location">
+
+
+
+
+  <meta class="js-ga-set" name="dimension1" content="Logged Out">
+
+
+
+    <meta content="true" name="octolytics-dimension-public"><meta content="4138642" name="octolytics-dimension-gist_id"><meta content="4138642" name="octolytics-dimension-gist_name"><meta content="false" name="octolytics-dimension-anonymous"><meta content="728598" name="octolytics-dimension-owner_id"><meta content="ttezel" name="octolytics-dimension-owner_login"><meta content="false" name="octolytics-dimension-forked">
+
+  <meta class="js-ga-set" name="dimension5" content="public">
+  <meta class="js-ga-set" name="dimension6" content="owned">
+  <meta class="js-ga-set" name="dimension7" content="markdown">
+
+
+      <meta name="hostname" content="gist.github.com">
+  <meta name="user-login" content="">
+
+      <meta name="expected-hostname" content="gist.github.com">
+    <meta name="js-proxy-site-detection-payload" content="OTQzM2FmMTJmMzM2YzI5NzQyZjc0MDBmZjJiNTI1Y2U3YzE3MTk4MWQxMmExOWVlMTgxNjVmYzVjMGUyMDBjNnx7InJlbW90ZV9hZGRyZXNzIjoiNjcuMTYxLjI2LjExMSIsInJlcXVlc3RfaWQiOiJDQkVCOjA4Qzc6MkM3QkUzQjo0NUQxRkY0OjU4RkQ5QUFGIiwidGltZXN0YW1wIjoxNDkzMDE1MjE1LCJob3N0IjoiZ2l0aHViLmNvbSJ9">
+
+
+  <meta name="html-safe-nonce" content="53e7662040171a3df4280d56171c3f2c3c3da0ed">
+
+  <meta http-equiv="x-pjax-version" content="2e017d75c6ea5cb7f0c7e24d0a0382b8">
+  
+
+      <link href="https://gist.github.com/ttezel.atom" rel="alternate" title="atom" type="application/atom+xml">
+  
+  <link crossorigin="anonymous" href="./Natural Language Processing Notes · GitHub_files/gist-67dd5139d22e4e9921ef362b5458f51e5973a20db04a54c9d74116748f852917.css" integrity="sha256-Z91ROdIuTpkh7zYrVFj1Hllzog2wSlTJ10EWdI+FKRc=" media="all" rel="stylesheet">
+
+
+
+
+  <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+
+  <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+
+  <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#000000">
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+<meta name="theme-color" content="#1e2327">
+
+
+  <meta name="u2f-support" content="true">
+
+  </head>
+
+  <body class="logged-out env-production emoji-size-boost">
+    
+
+
+  <div class="position-relative js-header-wrapper ">
+    <a href="https://gist.github.com/ttezel/4138642#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+    <div id="js-pjax-loader-bar" class="pjax-loader-bar"><div class="progress"></div></div>
+
+    
+    
+    
+
+
+
+        <div class="header gist-header header-logged-out" role="banner">
+  <div class="container clearfix">
+
+    <a href="https://gist.github.com/" aria-label="Gist Homepage" class="header-logo-wordmark" data-hotkey="g d">
+      <svg aria-hidden="true" class="octicon octicon-logo-github" height="28" version="1.1" viewBox="0 0 45 16" width="78"><path fill-rule="evenodd" d="M18.53 12.03h-.02c.009 0 .015.01.024.011h.006l-.01-.01zm.004.011c-.093.001-.327.05-.574.05-.78 0-1.05-.36-1.05-.83V8.13h1.59c.09 0 .16-.08.16-.19v-1.7c0-.09-.08-.17-.16-.17h-1.59V3.96c0-.08-.05-.13-.14-.13h-2.16c-.09 0-.14.05-.14.13v2.17s-1.09.27-1.16.28c-.08.02-.13.09-.13.17v1.36c0 .11.08.19.17.19h1.11v3.28c0 2.44 1.7 2.69 2.86 2.69.53 0 1.17-.17 1.27-.22.06-.02.09-.09.09-.16v-1.5a.177.177 0 0 0-.146-.18zm23.696-2.2c0-1.81-.73-2.05-1.5-1.97-.6.04-1.08.34-1.08.34v3.52s.49.34 1.22.36c1.03.03 1.36-.34 1.36-2.25zm2.43-.16c0 3.43-1.11 4.41-3.05 4.41-1.64 0-2.52-.83-2.52-.83s-.04.46-.09.52c-.03.06-.08.08-.14.08h-1.48c-.1 0-.19-.08-.19-.17l.02-11.11c0-.09.08-.17.17-.17h2.13c.09 0 .17.08.17.17v3.77s.82-.53 2.02-.53l-.01-.02c1.2 0 2.97.45 2.97 3.88zm-8.72-3.61H33.84c-.11 0-.17.08-.17.19v5.44s-.55.39-1.3.39-.97-.34-.97-1.09V6.25c0-.09-.08-.17-.17-.17h-2.14c-.09 0-.17.08-.17.17v5.11c0 2.2 1.23 2.75 2.92 2.75 1.39 0 2.52-.77 2.52-.77s.05.39.08.45c.02.05.09.09.16.09h1.34c.11 0 .17-.08.17-.17l.02-7.47c0-.09-.08-.17-.19-.17zm-23.7-.01h-2.13c-.09 0-.17.09-.17.2v7.34c0 .2.13.27.3.27h1.92c.2 0 .25-.09.25-.27V6.23c0-.09-.08-.17-.17-.17zm-1.05-3.38c-.77 0-1.38.61-1.38 1.38 0 .77.61 1.38 1.38 1.38.75 0 1.36-.61 1.36-1.38 0-.77-.61-1.38-1.36-1.38zm16.49-.25h-2.11c-.09 0-.17.08-.17.17v4.09h-3.31V2.6c0-.09-.08-.17-.17-.17h-2.13c-.09 0-.17.08-.17.17v11.11c0 .09.09.17.17.17h2.13c.09 0 .17-.08.17-.17V8.96h3.31l-.02 4.75c0 .09.08.17.17.17h2.13c.09 0 .17-.08.17-.17V2.6c0-.09-.08-.17-.17-.17zM8.81 7.35v5.74c0 .04-.01.11-.06.13 0 0-1.25.89-3.31.89-2.49 0-5.44-.78-5.44-5.92S2.58 1.99 5.1 2c2.18 0 3.06.49 3.2.58.04.05.06.09.06.14L7.94 4.5c0 .09-.09.2-.2.17-.36-.11-.9-.33-2.17-.33-1.47 0-3.05.42-3.05 3.73s1.5 3.7 2.58 3.7c.92 0 1.25-.11 1.25-.11v-2.3H4.88c-.11 0-.19-.08-.19-.17V7.35c0-.09.08-.17.19-.17h3.74c.11 0 .19.08.19.17z"></path></svg>
+      <svg aria-hidden="true" class="octicon octicon-logo-gist" height="28" version="1.1" viewBox="0 0 25 16" width="40"><path fill-rule="evenodd" d="M4.7 8.73h2.45v4.02c-.55.27-1.64.34-2.53.34-2.56 0-3.47-2.2-3.47-5.05 0-2.85.91-5.06 3.48-5.06 1.28 0 2.06.23 3.28.73V2.66C7.27 2.33 6.25 2 4.63 2 1.13 2 0 4.69 0 8.03c0 3.34 1.11 6.03 4.63 6.03 1.64 0 2.81-.27 3.59-.64V7.73H4.7v1zm6.39 3.72V6.06h-1.05v6.28c0 1.25.58 1.72 1.72 1.72v-.89c-.48 0-.67-.16-.67-.7v-.02zm.25-8.72c0-.44-.33-.78-.78-.78s-.77.34-.77.78.33.78.77.78.78-.34.78-.78zm4.34 5.69c-1.5-.13-1.78-.48-1.78-1.17 0-.77.33-1.34 1.88-1.34 1.05 0 1.66.16 2.27.36v-.94c-.69-.3-1.52-.39-2.25-.39-2.2 0-2.92 1.2-2.92 2.31 0 1.08.47 1.88 2.73 2.08 1.55.13 1.77.63 1.77 1.34 0 .73-.44 1.42-2.06 1.42-1.11 0-1.86-.19-2.33-.36v.94c.5.2 1.58.39 2.33.39 2.38 0 3.14-1.2 3.14-2.41 0-1.28-.53-2.03-2.75-2.23h-.03zm8.58-2.47v-.86h-2.42v-2.5l-1.08.31v2.11l-1.56.44v.48h1.56v5c0 1.53 1.19 2.13 2.5 2.13.19 0 .52-.02.69-.05v-.89c-.19.03-.41.03-.61.03-.97 0-1.5-.39-1.5-1.34V6.94h2.42v.02-.01z"></path></svg>
+</a>
+    <div class="site-search js-site-search" role="search">
+        <div class="header-search" role="search">
+
+<!-- '"` --><!-- </textarea></xmp> --><form accept-charset="UTF-8" action="https://gist.github.com/search" class="position-relative" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+  <label class="header-search-wrapper form-control js-chromeless-input-container">
+    <input type="text" class="form-control js-site-search-focus header-search-input" data-hotkey="s" name="q" placeholder="Search…" tabindex="1" autocorrect="off" autocomplete="off" autocapitalize="off">
+  </label>
+
+</form></div>
+
+    </div>
+    <ul class="header-nav float-left" role="navigation">
+      <li class="header-nav-item">
+        <a href="https://gist.github.com/discover" class="header-nav-link" data-ga-click="Header, go to all gists, text:all gists">All gists</a>
+      </li>
+
+      <li class="header-nav-item">
+        <a href="https://github.com/" class="header-nav-link" data-ga-click="Header, go to GitHub, text:GitHub">GitHub</a>
+      </li>
+    </ul>
+
+      <div class="header-actions" role="navigation">
+          <a href="https://gist.github.com/join?source=header-gist" class="btn btn-primary" data-ga-click="Header, sign up">Sign up for a GitHub account</a>
+        <a href="https://gist.github.com/auth/github?return_to=gist" class="btn" data-ga-click="Header, sign in">Sign in</a>
+      </div>
+  </div>
+</div>
+
+
+
+  </div>
+
+  <div id="start-of-content" class="accessibility-aid"></div>
+
+    <div id="js-flash-container">
+</div>
+
+
+
+  <div role="main">
+        <div itemscope="" itemtype="http://schema.org/Code">
+    <div id="gist-pjax-container" class="gist-content-wrapper" data-pjax-container="">
+      
+
+
+  <div class="gist-detail-intro gist-banner">
+    <div class="container">
+      <a href="https://gist.github.com/" class="btn btn-outline float-right">Create a gist now</a>
+      <p class="lead">
+        Instantly share code, notes, and snippets.
+      </p>
+    </div>
+  </div>
+
+
+<div class="gisthead pagehead repohead instapaper_ignore readability-menu experiment-repo-nav mb-4">
+  <div class="container">
+    
+  
+<div class="container repohead-details-container">
+
+  <ul class="pagehead-actions">
+
+
+    <li>
+        <a href="https://gist.github.com/login?return_to=https%3A%2F%2Fgist.github.com%2Fttezel%2F4138642" aria-label="You must be signed in to star a gist" class="btn btn-sm btn-with-count tooltipped tooltipped-n" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
+    Star
+</a>
+  <a href="https://gist.github.com/ttezel/4138642/stargazers" aria-label="54 users starred this gist" class="social-count">
+    54
+</a>
+    </li>
+
+      <li>
+          <a href="https://gist.github.com/login?return_to=https%3A%2F%2Fgist.github.com%2Fttezel%2F4138642" aria-label="You must be signed in to fork a gist" class="btn btn-sm btn-with-count tooltipped tooltipped-n" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
+    Fork
+</a>
+  <a href="https://gist.github.com/ttezel/4138642/forks" aria-label="26 users forked this gist" class="social-count">
+    26
+</a>
+      </li>
+
+  </ul>
+
+  <h1 class="public css-truncate">
+    <img alt="@ttezel" class="avatar gist-avatar" height="26" src="./Natural Language Processing Notes · GitHub_files/728598" width="26">
+    <span class="author"><a href="https://gist.github.com/ttezel" class="url fn" rel="author"><span itemprop="author">ttezel</span></a></span><!--
+        --><span class="path-divider">/</span><!--
+        --><strong itemprop="name" class="gist-header-title css-truncate-target"><a href="https://gist.github.com/ttezel/4138642">gist:4138642</a></strong>
+
+    <div class="gist-timestamp">Last active <time-ago datetime="2017-04-21T15:29:41Z" title="Apr 21, 2017, 8:29 AM PDT">3 days ago</time-ago></div>
+  </h1>
+</div>
+
+<div class="container gist-file-navigation">
+  <div class="float-right file-navigation-options" data-multiple="">
+
+    <div class="file-navigation-option">
+  <input type="hidden" name="protocol_type" value="clone">
+
+  <div class="select-menu js-menu-container js-select-menu">
+    <div class="input-group js-select-button js-zeroclipboard-container">
+      <div class="input-group-button">
+  <button type="button" class="btn btn-sm select-menu-button js-menu-target" data-ga-click="Repository, clone Embed, location:repo overview">
+    Embed
+  </button>
+</div>
+<input type="text" class="form-control input-monospace input-sm js-zeroclipboard-target js-url-field" value="&lt;script src=&quot;https://gist.github.com/ttezel/4138642.js&quot;&gt;&lt;/script&gt;" aria-label="Clone this repository at &lt;script src=&quot;https://gist.github.com/ttezel/4138642.js&quot;&gt;&lt;/script&gt;" readonly="">
+<div class="input-group-button">
+  <button aria-label="Copy to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><svg aria-hidden="true" class="octicon octicon-clippy" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M2 13h4v1H2v-1zm5-6H2v1h5V7zm2 3V8l-3 3 3 3v-2h5v-2H9zM4.5 9H2v1h2.5V9zM2 12h2.5v-1H2v1zm9 1h1v2c-.02.28-.11.52-.3.7-.19.18-.42.28-.7.3H1c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h3c0-1.11.89-2 2-2 1.11 0 2 .89 2 2h3c.55 0 1 .45 1 1v5h-1V6H1v9h10v-2zM2 5h8c0-.55-.45-1-1-1H8c-.55 0-1-.45-1-1s-.45-1-1-1-1 .45-1 1-.45 1-1 1H3c-.55 0-1 .45-1 1z"></path></svg></button>
+</div>
+
+    </div>
+
+    <div class="select-menu-modal-holder">
+      <div class="select-menu-modal js-menu-content">
+        <div class="select-menu-header">
+          <svg aria-label="Close" class="octicon octicon-x js-menu-close" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
+          <span class="select-menu-title">What would you like to do?</span>
+        </div>
+
+        <div class="select-menu-list js-navigation-container" role="menu">
+            <div class="select-menu-item js-navigation-item selected" role="menuitem" tabindex="0">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
+              <div class="select-menu-item-text">
+                <input type="radio" name="protocol_selector" value="embed" checked="">
+                <span class="select-menu-item-heading">
+                  
+                  Embed
+                </span>
+                  <span class="description">
+                    Embed this gist in your website.
+                  </span>
+                <span class="js-select-button-text hidden-select-button-text">
+                  <div class="input-group-button">
+  <button type="button" class="btn btn-sm select-menu-button js-menu-target" data-ga-click="Repository, clone Embed, location:repo overview">
+    Embed
+  </button>
+</div>
+<input type="text" class="form-control input-monospace input-sm js-zeroclipboard-target js-url-field" value="&lt;script src=&quot;https://gist.github.com/ttezel/4138642.js&quot;&gt;&lt;/script&gt;" aria-label="Clone this repository at &lt;script src=&quot;https://gist.github.com/ttezel/4138642.js&quot;&gt;&lt;/script&gt;" readonly="">
+<div class="input-group-button">
+  <button aria-label="Copy to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><svg aria-hidden="true" class="octicon octicon-clippy" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M2 13h4v1H2v-1zm5-6H2v1h5V7zm2 3V8l-3 3 3 3v-2h5v-2H9zM4.5 9H2v1h2.5V9zM2 12h2.5v-1H2v1zm9 1h1v2c-.02.28-.11.52-.3.7-.19.18-.42.28-.7.3H1c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h3c0-1.11.89-2 2-2 1.11 0 2 .89 2 2h3c.55 0 1 .45 1 1v5h-1V6H1v9h10v-2zM2 5h8c0-.55-.45-1-1-1H8c-.55 0-1-.45-1-1s-.45-1-1-1-1 .45-1 1-.45 1-1 1H3c-.55 0-1 .45-1 1z"></path></svg></button>
+</div>
+
+                </span>
+              </div>
+            </div>
+            <div class="select-menu-item js-navigation-item " role="menuitem" tabindex="0">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
+              <div class="select-menu-item-text">
+                <input type="radio" name="protocol_selector" value="share">
+                <span class="select-menu-item-heading">
+                  
+                  Share
+                </span>
+                  <span class="description">
+                    Copy sharable URL for this gist.
+                  </span>
+                <span class="js-select-button-text hidden-select-button-text">
+                  <div class="input-group-button">
+  <button type="button" class="btn btn-sm select-menu-button js-menu-target" data-ga-click="Repository, clone Share, location:repo overview">
+    Share
+  </button>
+</div>
+<input type="text" class="form-control input-monospace input-sm js-zeroclipboard-target js-url-field" value="https://gist.github.com/ttezel/4138642" aria-label="Clone this repository at https://gist.github.com/ttezel/4138642" readonly="">
+<div class="input-group-button">
+  <button aria-label="Copy to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><svg aria-hidden="true" class="octicon octicon-clippy" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M2 13h4v1H2v-1zm5-6H2v1h5V7zm2 3V8l-3 3 3 3v-2h5v-2H9zM4.5 9H2v1h2.5V9zM2 12h2.5v-1H2v1zm9 1h1v2c-.02.28-.11.52-.3.7-.19.18-.42.28-.7.3H1c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h3c0-1.11.89-2 2-2 1.11 0 2 .89 2 2h3c.55 0 1 .45 1 1v5h-1V6H1v9h10v-2zM2 5h8c0-.55-.45-1-1-1H8c-.55 0-1-.45-1-1s-.45-1-1-1-1 .45-1 1-.45 1-1 1H3c-.55 0-1 .45-1 1z"></path></svg></button>
+</div>
+
+                </span>
+              </div>
+            </div>
+            <div class="select-menu-item js-navigation-item " role="menuitem" tabindex="0">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
+              <div class="select-menu-item-text">
+                <input type="radio" name="protocol_selector" value="http">
+                <span class="select-menu-item-heading">
+                  Clone via
+                  HTTPS
+                </span>
+                  <span class="description">
+                    Clone with Git or checkout with SVN using the repository's web address.
+                  </span>
+                <span class="js-select-button-text hidden-select-button-text">
+                  <div class="input-group-button">
+  <button type="button" class="btn btn-sm select-menu-button js-menu-target" data-ga-click="Repository, clone HTTPS, location:repo overview">
+    HTTPS
+  </button>
+</div>
+<input type="text" class="form-control input-monospace input-sm js-zeroclipboard-target js-url-field" value="https://gist.github.com/4138642.git" aria-label="Clone this repository at https://gist.github.com/4138642.git" readonly="">
+<div class="input-group-button">
+  <button aria-label="Copy to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><svg aria-hidden="true" class="octicon octicon-clippy" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M2 13h4v1H2v-1zm5-6H2v1h5V7zm2 3V8l-3 3 3 3v-2h5v-2H9zM4.5 9H2v1h2.5V9zM2 12h2.5v-1H2v1zm9 1h1v2c-.02.28-.11.52-.3.7-.19.18-.42.28-.7.3H1c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h3c0-1.11.89-2 2-2 1.11 0 2 .89 2 2h3c.55 0 1 .45 1 1v5h-1V6H1v9h10v-2zM2 5h8c0-.55-.45-1-1-1H8c-.55 0-1-.45-1-1s-.45-1-1-1-1 .45-1 1-.45 1-1 1H3c-.55 0-1 .45-1 1z"></path></svg></button>
+</div>
+
+                </span>
+              </div>
+            </div>
+        </div>
+        <div class="select-menu-list" role="menu">
+          <a class="select-menu-item select-menu-action" href="https://help.github.com/articles/which-remote-url-should-i-use" target="_blank">
+            <svg aria-hidden="true" class="octicon octicon-question select-menu-item-icon" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M6 10h2v2H6v-2zm4-3.5C10 8.64 8 9 8 9H6c0-.55.45-1 1-1h.5c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7H4c0-1.5 1.5-3 3-3s3 1 3 2.5zM7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z"></path></svg>
+            <div class="select-menu-item-text">
+              Learn more about clone URLs
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="file-navigation-option">
+    <a href="https://mac.github.com/" class="btn btn-sm tooltipped tooltipped-s tooltipped-multiline" aria-label="Save ttezel/4138642 to your computer and use it in GitHub Desktop.">
+      <svg aria-hidden="true" class="octicon octicon-desktop-download" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 6h3V0h2v6h3l-4 4-4-4zm11-4h-4v1h4v8H1V3h4V2H1c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h5.34c-.25.61-.86 1.39-2.34 2h8c-1.48-.61-2.09-1.39-2.34-2H15c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1z"></path></svg>
+    </a>
+</div>
+
+
+    <div class="file-navigation-option">
+      <a href="https://gist.github.com/ttezel/4138642/archive/cc392ce87236b8ab81c5fd2eaf0f69a8cf09fbec.zip" class="btn btn-sm" rel="nofollow" data-ga-click="Gist, download zip, location:gist overview">
+        Download ZIP
+      </a>
+    </div>
+  </div>
+
+  <div class="float-left">
+    <nav class="reponav js-repo-nav js-sidenav-container-pjax" role="navigation" data-pjax="#gist-pjax-container">
+
+  <a href="https://gist.github.com/ttezel/4138642" aria-label="Code" class="js-selected-navigation-item selected reponav-item" data-hotkey="g c" data-pjax="true" data-selected-links="gist_code /ttezel/4138642">
+    <svg aria-hidden="true" class="octicon octicon-code" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"></path></svg>
+    Code
+</a>
+    <a href="https://gist.github.com/ttezel/4138642/revisions" aria-label="Revisions" class="js-selected-navigation-item reponav-item" data-hotkey="g r" data-pjax="true" data-selected-links="gist_revisions /ttezel/4138642/revisions">
+      <svg aria-hidden="true" class="octicon octicon-git-commit" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M10.86 7c-.45-1.72-2-3-3.86-3-1.86 0-3.41 1.28-3.86 3H0v2h3.14c.45 1.72 2 3 3.86 3 1.86 0 3.41-1.28 3.86-3H14V7h-3.14zM7 10.2c-1.22 0-2.2-.98-2.2-2.2 0-1.22.98-2.2 2.2-2.2 1.22 0 2.2.98 2.2 2.2 0 1.22-.98 2.2-2.2 2.2z"></path></svg>
+      Revisions
+      <span class="Counter">15</span>
+</a>
+    <a href="https://gist.github.com/ttezel/4138642/stargazers" aria-label="Stars" class="js-selected-navigation-item reponav-item" data-hotkey="g s" data-pjax="true" data-selected-links="gist_stars /ttezel/4138642/stargazers">
+      <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
+      Stars
+      <span class="Counter">54</span>
+</a>
+    <a href="https://gist.github.com/ttezel/4138642/forks" aria-label="Forks" class="js-selected-navigation-item reponav-item" data-hotkey="g f" data-pjax="true" data-selected-links="gist_forks /ttezel/4138642/forks">
+      <svg aria-hidden="true" class="octicon octicon-git-branch" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M10 5c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v.3c-.02.52-.23.98-.63 1.38-.4.4-.86.61-1.38.63-.83.02-1.48.16-2 .45V4.72a1.993 1.993 0 0 0-1-3.72C.88 1 0 1.89 0 3a2 2 0 0 0 1 1.72v6.56c-.59.35-1 .99-1 1.72 0 1.11.89 2 2 2 1.11 0 2-.89 2-2 0-.53-.2-1-.53-1.36.09-.06.48-.41.59-.47.25-.11.56-.17.94-.17 1.05-.05 1.95-.45 2.75-1.25S8.95 7.77 9 6.73h-.02C9.59 6.37 10 5.73 10 5zM2 1.8c.66 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2C1.35 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2zm0 12.41c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm6-8c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
+      Forks
+      <span class="Counter">26</span>
+</a></nav>
+
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+<div class="container new-discussion-timeline experiment-repo-nav">
+  <div class="repository-content gist-content">
+    
+  <div>
+    <div class="repository-meta js-details-container Details">
+  <div class="repository-meta-content" itemprop="about">
+    Natural Language Processing Notes
+  </div>
+</div>
+
+
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-gistfile1-md" class="file">
+      <div class="file-header">
+        <div class="file-actions">
+
+          <a href="https://gist.github.com/ttezel/4138642/raw/cc392ce87236b8ab81c5fd2eaf0f69a8cf09fbec/gistfile1.md" class="btn btn-sm ">Raw</a>
+        </div>
+        <div class="file-info">
+          <span class="icon">
+            <svg aria-hidden="true" class="octicon octicon-gist" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.5 5L10 7.5 7.5 10l-.75-.75L8.5 7.5 6.75 5.75 7.5 5zm-3 0L2 7.5 4.5 10l.75-.75L3.5 7.5l1.75-1.75L4.5 5zM0 13V2c0-.55.45-1 1-1h10c.55 0 1 .45 1 1v11c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1zm1 0h10V2H1v11z"></path></svg>
+          </span>
+          <a class="tooltipped tooltipped-s css-truncate" aria-label="Permalink" href="https://gist.github.com/ttezel/4138642#file-gistfile1-md">
+            <strong class="user-select-contain gist-blob-name css-truncate-target">
+              gistfile1.md
+            </strong>
+          </a>
+        </div>
+      </div>
+    
+  <div id="readme" class="readme blob instapaper_body">
+    <article class="markdown-body entry-content" itemprop="text"><p>#A Collection of NLP notes</p>
+<p>##N-grams</p>
+<p>###Calculating unigram probabilities:</p>
+<p>P( w<sub>i</sub> ) = count ( w<sub>i</sub> ) ) / count ( total number of words )</p>
+<p>In english..</p>
+<p>Probability of word<sub>i</sub> =
+Frequency of word (i) in our corpus / total number of words in our corpus</p>
+<p>##Calcuting bigram probabilities:</p>
+<p>P( w<sub>i</sub> | w<sub>i-1</sub> ) = count ( w<sub>i-1</sub>, w<sub>i</sub> ) / count ( w<sub>i-1</sub> )</p>
+<p>In english..</p>
+<p>Probability that word<sub>i-1</sub> is followed by word<sub>i</sub> =
+[Num times we saw word<sub>i-1</sub> followed by word<sub>i</sub>] / [Num times we saw word<sub>i-1</sub>]</p>
+<h2><a id="user-content-example" class="anchor" href="https://gist.github.com/ttezel/4138642#example" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
+<ul>
+<li><strong>s</strong> = beginning of sentence</li>
+<li><strong>/s</strong> = end of sentence</li>
+</ul>
+<p>####Given the following corpus:</p>
+<p><strong>s</strong> I am Sam <strong>/s</strong></p>
+<p><strong>s</strong> Sam I am <strong>/s</strong></p>
+<p><strong>s</strong> I do not like green eggs and ham <strong>/s</strong></p>
+<p>We can calculate bigram probabilities as such:</p>
+<ul>
+<li>P( I | <strong>s</strong> ) = 2/3</li>
+</ul>
+<p>=&gt; Probability that an <strong>s</strong> is followed by an <code>I</code></p>
+<p>= [Num times we saw <code>I</code> follow <strong>s</strong> ] / [Num times we saw an <strong>s</strong> ]
+= 2 / 3</p>
+<ul>
+<li>P( Sam | am ) = 1/2</li>
+</ul>
+<p>=&gt; Probability that <code>am</code> is followed by <code>Sam</code></p>
+<p>= [Num times we saw <code>Sam</code> follow <code>am</code> ] / [Num times we saw <code>am</code>]
+= 1 / 2</p>
+<p>###Calculating trigram probabilities:</p>
+<p>Building off the logic in bigram probabilities,</p>
+<p>P( w<sub>i</sub> | w<sub>i-1</sub> w<sub>i-2</sub> ) = count ( w<sub>i</sub>, w<sub>i-1</sub>, w<sub>i-2</sub> ) / count ( w<sub>i-1</sub>, w<sub>i-2</sub> )</p>
+<p>In english...</p>
+<p>Probability that we saw word<sub>i-1</sub> followed by word<sub>i-2</sub> followed by word<sub>i</sub> = [Num times we saw the three words in order] / [Num times we saw word<sub>i-1</sub> followed by word<sub>i-2</sub>]</p>
+<h2><a id="user-content-example-1" class="anchor" href="https://gist.github.com/ttezel/4138642#example-1" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
+<ul>
+<li>P( Sam | I am )
+= count( Sam I am ) / count(I am)
+= 1 / 2</li>
+</ul>
+<p>###Interpolation using N-grams</p>
+<p>We can combine knowledge from each of our n-grams by using interpolation.</p>
+<p>E.g. assuming we have calculated unigram, bigram, and trigram probabilities, we can do:</p>
+<p>P ( Sam | I am ) = Θ<sub>1</sub> x P( Sam ) + Θ<sub>2</sub> x P( Sam | am ) + Θ<sub>3</sub> x P( Sam | I am )</p>
+<p>Using our corpus and assuming all lambdas = 1/3,</p>
+<p>P ( Sam | I am ) = (1/3)x(2/20) + (1/3)x(1/2) + (1/3)x(1/2)</p>
+<p>In web-scale applications, there's too much information to use interpolation effectively, so we use <strong>Stupid Backoff</strong> instead.</p>
+<p>In <strong>Stupid Backoff</strong>, we use the trigram if we have enough data points to make it seem credible, otherwise if we don't have enough of a trigram count, we back-off and use the bigram, and if there still isn't enough of a bigram count, we use the unigram probability.</p>
+<p>###Smoothing Algorithms</p>
+<p>Let's say we've calculated some n-gram probabilities, and now we're analyzing some text. What happens when we encounter a word we haven't seen before? How do we know what probability to assign to it?</p>
+<p>We use <code>smoothing</code> to give it a probability.</p>
+<p>=&gt; Use the count of things we've only seen <em>once</em> in our corpus to estimate the count of things we've <em>never seen</em>.</p>
+<p>This is the intuition used by many smoothing algorithms.</p>
+<p>###Good-Turing Smoothing</p>
+<p>Notation:</p>
+<p>N<sub>c</sub> = the count of things with frequency <code>c</code> - how many <em>things</em> occur with frequency <code>c</code> in our corpus.</p>
+<p>Good Turing modifies our:</p>
+<ul>
+<li>n-gram probability function for things we've never seen (things that have count 0)</li>
+<li>count for things we <em>have</em> seen (since all probabilites add to 1, we have to modify this count if we are introducing new probabilities for things we've never seen)</li>
+</ul>
+<p>Modified Good-Turing probability function:</p>
+<p>P<sup>*</sup> ( things with 0 count ) = N<sub>1</sub> / N</p>
+<p>=&gt; [Num things with frequency 1] / [Num things]</p>
+<p>Modified Good-Turing count:</p>
+<p>count<sup>*</sup> = [ (count + 1) x N<sub>c+1</sub> ] / [ N<sub>c</sub> ]</p>
+<h2><a id="user-content-example-2" class="anchor" href="https://gist.github.com/ttezel/4138642#example-2" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
+<p>Assuming our corpus has the following frequency count:</p>
+<p>carp:       10
+perch:      3
+whitefish:  2
+trout:      1
+salmon:     1
+eel:        1</p>
+<p>Calculating the probability of something we've never seen before:</p>
+<p>P ( catfish ) = N<sub>1</sub> / N = 3 / 18</p>
+<p>Calculating the modified count of something we've seen:</p>
+<p>count<sup>*</sup> ( trout )</p>
+<p>= [ (1 + 1) x N<sub>2</sub> ] / [ N<sub>1</sub> ]
+= [ 2 x 1 ] / [ 3 ]
+= 2 / 3</p>
+<p>Calculating the probability of something we've seen:</p>
+<p>P<sup>*</sup> ( trout ) = count ( trout ) / count ( all things ) = (2/3) / 18 = 1/27</p>
+<p>What happens if we don't have a word that occurred exactly N<sub>c+1</sub> times?</p>
+<p>=&gt; Once we have a sufficient amount of training data, we generate a best-fit curve to make sure we can calculate an estimate of N<sub>c+1</sub> for any <code>c</code>.</p>
+<p>###Kneser-Ney Smoothing</p>
+<p>A problem with Good-Turing smoothing is apparent in analyzing the following sentence, to determine what word comes next:</p>
+<pre><code>I can't see without my reading ___________
+</code></pre>
+<p>The word <code>Francisco</code> is more common than the word <code>glasses</code>, so we may end up choosing <code>Francisco</code> here, instead of the correct choice, <code>glasses</code>.</p>
+<p>The Kneser-Ney smoothing algorithm has a notion of <code>continuation probability</code> which helps with these sorts of cases. It also saves you from having to recalculate all your counts using <code>Good-Turing</code> smoothing.</p>
+<p>Here's how you calculate the K-N probabilty with bigrams:</p>
+<p>P<sub>kn</sub>( w<sub>i</sub> | w<sub>i-1</sub> ) = [ max( count( w<sub>i-1</sub>, w<sub>i</sub> ) - <code>d</code>, 0) ] / [ count( w<sub>i-1</sub> ) ] + Θ( w<sub>i-1</sub> ) x P<sub>continuation</sub>( w<sub>i</sub> )</p>
+<p>Where:</p>
+<p><strong>P<sub>continuation</sub>( w<sub>i</sub> )</strong></p>
+<p>represents the continuation probability of w<sub>i</sub>. This is the number of bigrams where w<sub>i</sub> followed w<sub>i-1</sub>, divided by the total number of bigrams that appear with a frequency &gt; 0. It gives an indication of the probability that a given word will be used as the second word in an unseen bigram (such as <code>reading ________</code>)</p>
+<p><strong>Θ( )</strong>
+This is a <code>normalizing constant</code>; since we are subtracting by a <code>discount weight</code> <strong>d</strong>, we need to re-add that probability mass we have discounted. It gives us a weighting for our P<sub>continuation</sub>.</p>
+<p>We calculate this as follows:</p>
+<p>Θ( w<sub>i-1</sub> ) = { d * [ Num words that can follow w<sub>i-1</sub> ] } / [ count( w<sub>i-1</sub> ) ]</p>
+<p>###Kneser-Ney Smoothing for N-grams</p>
+<p>The Kneser-Ney probability we discussed above showed only the bigram case.</p>
+<p>For N-grams, the probability can be generalized as follows:</p>
+<p>P<sub>kn</sub>( w<sub>i</sub> | w<sub>i-n+1</sub><sup>i-1</sup>) = [ max( count<sub>kn</sub>( w<sub>i-n+1</sub><sup>i</sup> ) - <code>d</code>, 0) ] / [ count<sub>kn</sub>( w<sub>i-n+1</sub><sup>i-1</sup> ) ] + Θ( w<sub>i-n+1</sub><sup>i-1</sup> ) x P<sub>kn</sub>( w<sub>i</sub> | w<sub>i-n+2</sub><sup>i-1</sup> )</p>
+<p>Where:</p>
+<p>c<sub>kn</sub>(•) =</p>
+<ul>
+<li>the actual count(•) for the highest order n-gram</li>
+</ul>
+<p>or</p>
+<ul>
+<li>continuation_count(•) for lower order n-gram</li>
+</ul>
+<p>=&gt; continuation_count = Number of unique single word contexts for •</p>
+<p>##Spelling Correction</p>
+<p>We can imagine a noisy channel model for this (representing the keyboard).</p>
+<p><code>original word</code> <del>Noisy Channel</del>&gt; <code>noisy word</code></p>
+<p>Our decoder receives a <code>noisy word</code>, and must try to guess what the <code>original</code> (intended) word was.</p>
+<p>So what we can do is generate <strong>N</strong> possible <code>original words</code>, and run them through our <strong>noisy channel</strong> and see which one looks most like the <code>noisy word</code> we received.</p>
+<p>The corrected word, w<sup>*</sup>, is the word in our vocabulary (<code>V</code>) that has the maximum probability of being the correct word (<code>w</code>), given the input <code>x</code> (the misspelled word).</p>
+<p>w<sup>*</sup> = argmax<sub>w∈V</sub> P( w | x )</p>
+<p>Using Bayes' Rule, we can rewrite this as:</p>
+<p>w<sup>*</sup> = argmax<sub>w∈V</sub> P( x | w ) x P( w )</p>
+<p><strong>P( x | w )</strong> is determined by our <strong>channel model</strong>.
+<strong>P( w )</strong> is determined by our <strong>language model</strong> (using N-grams).</p>
+<p>The first thing we have to do is generate candidate words to compare to the misspelled word.</p>
+<p>###Confusion Matrix</p>
+<p>This is how we model our noisy channel. A confusion matrix gives us the probabilty that a given spelling mistake (or word edit) happened at a given location in the word. We use the <strong>Damerau-Levenshtein</strong> edit types (deletion, insertion, substitution, transposition). These account for 80% of human spelling errors.</p>
+<ul>
+<li>del[a,b]: count( ab typed as a )</li>
+<li>ins[a,b]: count( a typed as ab )</li>
+<li>sub[a,b]: count( a typed as b )</li>
+<li>trans[a,b]: count( ab typed as ba )</li>
+</ul>
+<p>Our confusion matrix keeps counts of the frequencies of each of these operations for each letter in our alphabet, and from this matrix we can generate probabilities.</p>
+<p>We would need to train our confusion matrix, for example using wikipedia's list of common english word misspellings.</p>
+<p>After we've generated our confusion matrix, we can generate probabilities.</p>
+<p>Let w<sub>i</sub> denote the i<sup>th</sup> character in the word <strong>w</strong>.</p>
+<p><strong>p( x | w ) =</strong></p>
+<ul>
+<li>if deletion, [ del( w<sub>i-1</sub>, w<sub>i</sub> ) ] / [ count(w<sub>i-1</sub> w<sub>i</sub>) ]</li>
+<li>if insertion, [ ins( w<sub>i-1</sub>, x<sub>i</sub> ) ] / [ count(w<sub>i-1</sub> ]</li>
+<li>if substitution, [ sub( x<sub>i</sub>, w<sub>i</sub> ) ] / [ count(w<sub>i</sub> ]</li>
+<li>if transposition, [ trans( w<sub>i</sub>, w<sub>i+1</sub> ) ] / [ count(w<sub>i</sub> w<sub>i+1</sub> ]</li>
+</ul>
+<p>Suppose we have the misspelled word <strong>x</strong> = <strong>acress</strong></p>
+<p>We can generate our channel model for <strong>acress</strong> as follows:</p>
+<p><strong>actress</strong></p>
+<p>=&gt; Correct letter   : <code>t</code></p>
+<p>=&gt; Error letter     : <code>-</code></p>
+<p>=&gt; <strong>x | w</strong>        : <code>c</code> | <code>ct</code> (probability of deleting a <code>t</code> given the correct spelling has a <code>ct</code>)</p>
+<p>=&gt; P( x | w )       : 0.000117</p>
+<p><strong>cress</strong></p>
+<p>=&gt; Correct letter   : <code>-</code></p>
+<p>=&gt; Error letter     : <code>a</code></p>
+<p>=&gt; <strong>x | w</strong>        : <code>a</code> | <code>-</code></p>
+<p>=&gt; P( x | w )       : 0.00000144</p>
+<p><strong>caress</strong></p>
+<p>=&gt; Correct letter   : <code>ca</code></p>
+<p>=&gt; Error letter     : <code>ac</code></p>
+<p>=&gt; <strong>x | w</strong>        : <code>ac</code> | <code>ca</code></p>
+<p>=&gt; P( x | w )       : 0.00000164</p>
+<p>... and so on</p>
+<p>We would combine the information from out channel model by multiplying it by our n-gram probability.</p>
+<p>###Real-Word Spelling Correction</p>
+<p>What happens when a user misspells a word as another, <strong>valid</strong> english word?</p>
+<p>Eg. I have fifteen <strong>minuets</strong> to leave the house.</p>
+<p>We find valid english words that have an edit distance of 1 from the input word.</p>
+<p>Given a sentence w<sub>1</sub>, w<sub>2</sub>, w<sub>3</sub>, ..., w<sub>n</sub></p>
+<p>Generate a set of candidate words for each w<sub>i</sub></p>
+<ul>
+<li>Candidate( w<sub>1</sub> ) = { w<sub>1</sub>, w<sub>1</sub><sup>'</sup>, w<sub>1</sub><sup>''</sup>, ... }</li>
+<li>Candidate( w<sub>2</sub> ) = { w<sub>2</sub>, w<sub>2</sub><sup>'</sup>, w<sub>2</sub><sup>''</sup>, ... }</li>
+<li>Candidate( w<sub>n</sub> ) = { w<sub>n</sub>, w<sub>n</sub><sup>'</sup>, w<sub>n</sub><sup>''</sup>, ... }</li>
+</ul>
+<p>Note that the candidate sets include the original word itself (since it may actually be correct!)</p>
+<p>Then we choose the sequence of candidates <strong>W</strong> that has the maximal probability.</p>
+<h2><a id="user-content-example-3" class="anchor" href="https://gist.github.com/ttezel/4138642#example-3" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
+<p>Given the sentence <code>two of thew</code>, our sequences of candidates may look like:</p>
+<ul>
+<li>two of thew</li>
+<li>two of the</li>
+<li>to off threw</li>
+<li>to off the</li>
+<li>to on threw</li>
+<li>to on the</li>
+<li>to of threw</li>
+<li>to of the</li>
+<li>too of threw</li>
+<li>too of the</li>
+</ul>
+<p>Then we ask ourselves, of all possible sentences, which has the highest probability?</p>
+<p>In practice, we simplify by looking at the cases where only 1 word of the sentence was mistyped (note that above we were considering all possible cases where each word could have been mistyped). So we look at all possibilities with one word replaced at a time. This changes our run-time from O(n<sup>2</sup>) to O(n).</p>
+<p>Where do we get these probabilities?</p>
+<ul>
+<li>Our language model (unigrams, bigrams, ..., n-grams)</li>
+<li>Our Channel model (same as for non-word spelling correction)</li>
+</ul>
+<p>Our Noisy Channel model can be further improved by looking at factors like:</p>
+<ul>
+<li>The nearby keys in the keyboard</li>
+<li>Letters or word-parts that are pronounced similarly (such as <code>ant</code>-&gt;<code>ent</code>)</li>
+</ul>
+<p>##Text Classification</p>
+<p>Text Classification allows us to do things like:</p>
+<ul>
+<li>determining if an email is spam</li>
+<li>determining who is the author of some piece of text</li>
+<li>determining the likelihood that a piece of text was written by a man or a woman</li>
+<li>Perform sentiment analysis on some text</li>
+</ul>
+<p>Let's define the Task of Text Classification</p>
+<p>Given:</p>
+<ul>
+<li>a document <strong>d</strong></li>
+<li>a fixed set of classes <strong>C = { c<sub>1</sub>, c<sub>2</sub>, ... , c<sub>n</sub> }</strong></li>
+</ul>
+<p>Determine:</p>
+<ul>
+<li>the predicted class <strong>c ∈ C</strong></li>
+</ul>
+<p>Put simply, we want to take a piece of text, and assign a class to it.</p>
+<p>###Classification Methods</p>
+<p>We can use <strong>Supervised Machine Learning</strong>:</p>
+<p>Given:</p>
+<ul>
+<li>a document <strong>d</strong></li>
+<li>a fixed set of classes <strong>C = { c<sub>1</sub>, c<sub>2</sub>, ... , c<sub>n</sub> }</strong></li>
+<li>a training set of <strong>m</strong> documents that we have pre-determined to belong to a specific class</li>
+</ul>
+<p>We train our classifier using the training set, and result in a learned classifier.</p>
+<p>We can then use this learned classifier to classify new documents.</p>
+<p>Notation: we use Υ(d) = C to represent our classifier, where <strong>Υ()</strong> is the classifier, <strong>d</strong> is the document, and <strong>c</strong> is the class we assigned to the document.</p>
+<p>(Google's <code>mark as spam</code> button probably works this way).</p>
+<p>####Naive Bayes Classifier</p>
+<p>This is a simple (naive) classification method based on Bayes rule. It relies on a very simple representation of the document (called the <strong>bag of words</strong> representation)</p>
+<p>Imagine we have 2 classes ( <strong>positive</strong> and <strong>negative</strong> ), and our input is a text representing a review of a movie. We want to know whether the review was <strong>positive</strong> or <strong>negative</strong>. So we may have a bag of positive words (e.g. <code>love</code>, <code>amazing</code>, <code>hilarious</code>, <code>great</code>), and a bag of negative words (e.g. <code>hate</code>, <code>terrible</code>).</p>
+<p>We may then count the number of times each of those words appears in the document, in order to classify the document as <strong>positive</strong> or <strong>negative</strong>.</p>
+<p>This technique works well for <strong>topic</strong> classification; say we have a set of academic papers, and we want to classify them into different topics (computer science, biology, mathematics).</p>
+<p>####Bayes' Rule applied to Documents and Classes</p>
+<p>For a document <strong>d</strong> and a class <strong>c</strong>, and using Bayes' rule,</p>
+<p>P( c | d ) = [ P( d | c ) x P( c ) ] / [ P( d ) ]</p>
+<p>The class mapping for a given document is the class which has the maximum value of the above probability.</p>
+<p>Since all probabilities have P( d ) as their denominator, we can eliminate the denominator, and simply compare the different values of the numerator:</p>
+<p>P( c | d ) = P( d | c ) x P( c )</p>
+<p>Now, what do we mean by the term <strong>P( d | c )</strong> ?</p>
+<p>Let's represent the document as a set of features (words or tokens) <strong>x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, ...</strong></p>
+<p>We can then re-write <strong>P( d | c )</strong> as:</p>
+<p>P( x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, ... , x<sub>n</sub> | c )</p>
+<p>What about P( c ) ? How do we calculate it?</p>
+<p>=&gt; P( c ) is the <strong>total probability</strong> of a class.
+=&gt; How often does this class occur in total?</p>
+<p>E.g. in the case of classes <strong>positive</strong> and <strong>negative</strong>, we would be calculating the probability that any given review is <strong>positive</strong> or <strong>negative</strong>, without actually analyzing the current input document.</p>
+<p>This is calculated by counting the relative frequencies of each class in a corpus.</p>
+<p>E.g. out of 10 reviews we have seen, 3 have been classified as <strong>positive</strong>.</p>
+<p>=&gt; P ( positive ) = 3 / 10</p>
+<p>Now let's go back to the first term in the Naive Bayes equation:</p>
+<p><strong>P( d | c )</strong>, or <strong>P( x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, ... , x<sub>n</sub> | c )</strong>.</p>
+<h2><a id="user-content-how-do-we-actually-calculate-this" class="anchor" href="https://gist.github.com/ttezel/4138642#how-do-we-actually-calculate-this" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How do we actually calculate this?</h2>
+<p>We use some assumptions to simplify the computation of this probability:</p>
+<ul>
+<li>the <strong>Bag of Words assumption</strong> =&gt; assume the position of the words in the document doesn't matter.</li>
+<li><strong>Conditional Independence</strong> =&gt; Assume the feature probabilities <strong>P( x<sub>i</sub> | c<sub>j</sub> )</strong> are independent given the class <strong>c</strong>.</li>
+</ul>
+<p>It is important to note that both of these assumptions aren't actually correct - of course, the order of words matter, and they are not independent. A phrase like <code>this movie was incredibly terrible</code> shows an example of how both of these assumptions don't hold up in regular english.</p>
+<p>However, these assumptions greatly simplify the complexity of calculating the classification probability. And in practice, we can calculate probabilities with a reasonable level of accuracy given these assumptions.</p>
+<h2><a id="user-content-so" class="anchor" href="https://gist.github.com/ttezel/4138642#so" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>So..</h2>
+<p>To calculate the Naive Bayes probability, <strong>P( d | c ) x P( c )</strong>, we calculate P( x<sub>i</sub> | c ) for each x<sub>i</sub> in <strong>d</strong>, and multiply them together.</p>
+<p>Then we multiply the result by P( c ) for the current class. We do this for each of our classes, and choose the class that has the maximum overall value.</p>
+<h2><a id="user-content-how-do-we-learn-the-values-of-p--c--and-p--xi--c--" class="anchor" href="https://gist.github.com/ttezel/4138642#how-do-we-learn-the-values-of-p--c--and-p--xi--c--" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>###How do we learn the values of <strong>P ( c )</strong> and <strong>P ( x<sub>i</sub> | c )</strong> ?</h2>
+<p>=&gt; We can use <strong>Maximum Likelihood estimates</strong>.</p>
+<p>Simply put, we look at frequency counts.</p>
+<p>P ( c<sub>i</sub> ) = [ Num documents that have been classified as c<sub>i</sub> ] / [ Num documents ]</p>
+<p>In english..</p>
+<p>Out of all the documents, how many of them were in class <strong>i</strong> ?</p>
+<p>P ( w<sub>i</sub> | c<sub>j</sub> ) = [ count( w<sub>i</sub>, c<sub>j</sub> ) ] / [ Σ<sub>w∈V</sub> count ( w, c<sub>j</sub> ) ]</p>
+<p>In english...</p>
+<p>The probability of word <strong>i</strong> given class <strong>j</strong> is the count that the word occurred in documents of class <strong>j</strong>, divided by the sum of the counts of each word in our vocabulary in class <strong>j</strong>.</p>
+<p>So for the denominator, we iterate thru each word in our vocabulary, look up the frequency that it has occurred in class <strong>j</strong>, and add these up.</p>
+<p>####Problems with Maximum-Likelihood Estimate.</p>
+<p>What if we haven't seen any training documents with the word <strong>fantastic</strong> in our class <strong>positive</strong> ?</p>
+<p>In this case, P ( <strong>fantastic</strong> | <strong>positive</strong> ) = 0</p>
+<p>=&gt; This is <strong>BAD</strong></p>
+<p>Since we are calculating the overall probability of the class by multiplying individual probabilities for each word, we would end up with an overall probability of <strong>0</strong> for the <strong>positive</strong> class.</p>
+<p>So how do we fix this issue?</p>
+<p>We can use a Smoothing Algorithm, for example <strong>Add-one smoothing</strong> (or <strong>Laplace smoothing</strong>).</p>
+<p>####Laplace Smoothing</p>
+<p>We modify our conditional word probability by adding 1 to the numerator and modifying the denominator as such:</p>
+<p>P ( w<sub>i</sub> | c<sub>j</sub> ) = [ count( w<sub>i</sub>, c<sub>j</sub> ) + 1 ] / [ Σ<sub>w∈V</sub>( count ( w, c<sub>j</sub> ) + 1 ) ]</p>
+<p>This can be simplified to</p>
+<p>P ( w<sub>i</sub> | c<sub>j</sub> ) = [ count( w<sub>i</sub>, c<sub>j</sub> ) + 1 ] / [ Σ<sub>w∈V</sub>( count ( w, c<sub>j</sub> ) ) + |V| ]</p>
+<p>where |V| is our vocabulary size (we can do this since we are adding 1 for each word in the vocabulary in the previous equation).</p>
+<p>####So in Summary, to Machine-Learn your Naive-Bayes Classifier:</p>
+<p>Given:</p>
+<ul>
+<li>an input document</li>
+<li>the category that this document belongs to</li>
+</ul>
+<p>We do:</p>
+<ul>
+<li>increment the count of total documents we have learned from <strong>N</strong>.</li>
+<li>increment the count of documents that have been mapped to this category <strong>N<sub>c</sub></strong>.</li>
+<li>if we encounter new words in this document, add them to our vocabulary, and update our vocabulary size <strong>|V|</strong>.</li>
+<li>update count( w, c ) =&gt; the frequency with which each word in the document has been mapped to this category.</li>
+<li>update count ( c ) =&gt; the total count of all words that have been mapped to this class.</li>
+</ul>
+<h2><a id="user-content-so-when-we-are-confronted-with-a-new-document-we-calculate-for-each-class" class="anchor" href="https://gist.github.com/ttezel/4138642#so-when-we-are-confronted-with-a-new-document-we-calculate-for-each-class" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>So when we are confronted with a new document, we calculate for each class:</h2>
+<p><strong>P( c )</strong> = N<sub>c</sub> / N</p>
+<p>=&gt; how many documents were mapped to class <strong>c</strong>, divided by the total number of documents we have ever looked at. This is the <strong>overall</strong>, or <strong>prior</strong> probability of this class.</p>
+<p>Then we iterate thru each word in the document, and calculate:</p>
+<p><strong>P( w | c )</strong> = [ count( w, c ) + 1 ] / [ count( c ) + |V| ]</p>
+<p>=&gt; the count of how many times this word has appeared in class <strong>c</strong>, plus 1, divided by the total count of all words that have ever been mapped to class <strong>c</strong>, plus the vocabulary size.
+This uses the Laplace-Smoothing, so we don't get tripped up by words we've never seen before. This equation is used both for words we <strong>have</strong> seen, as well as words we <strong>haven't</strong> seen.</p>
+<p>=&gt; we multiply each <strong>P( w | c )</strong> for each word <strong>w</strong> in the new document, then multiply by <strong>P( c )</strong>, and the result is the <strong>probability that this document belongs to this class</strong>.</p>
+<p>####Some Ways that we can tweak our Naive Bayes Classifier</p>
+<p>Depending on the domain we are working with, we can do things like</p>
+<ul>
+<li>Collapse Part Numbers or Chemical Names into a single token</li>
+<li>Upweighting (counting a word as if it occurred twice)</li>
+<li>Feature selection (since not all words in the document are usually important in assigning it a class, we can look for specific words in the document that are good indicators of a particular class, and drop the other words - those that are viewed to be <strong>semantically empty</strong>)</li>
+</ul>
+<p>=&gt; If we have a sentence that contains a <strong>title</strong> word, we can upweight the sentence (multiply all the words in it by 2 or 3 for example), or we can upweight the <strong>title</strong> word itself (multiply it by a constant).</p>
+<p>##Sentiment Analysis</p>
+<p>###Scherer Typology of Affective States</p>
+<ul>
+<li><strong>Emotion</strong></li>
+</ul>
+<p>Brief, organically synchronized.. evaluation of a major event
+=&gt; angry, sad, joyful, fearful, ashamed, proud, elated</p>
+<ul>
+<li><strong>Mood</strong></li>
+</ul>
+<p>diffuse non-caused low-intensity long-duration change in subjective feeling
+=&gt; cheerful, gloomy, irritable, listless, depressed, buoyant</p>
+<ul>
+<li><strong>Interpersonal Stances</strong></li>
+</ul>
+<p>Affective stance towards another person in a specific interaction
+=&gt; friendly, flirtatious, distant, cold, warm, supportive, contemtuous</p>
+<ul>
+<li><strong>Attitudes</strong></li>
+</ul>
+<p>Enduring, affectively colored beliefs, disposition towards objects or persons
+=&gt; liking, loving, hating, valuing, desiring</p>
+<ul>
+<li>*<em>Personality Traits</em></li>
+</ul>
+<p>Stable personality dispositions and typical behavior tendencies
+=&gt; nervous, anxious, reckless, morose, hostile, jealous</p>
+<p><strong>Sentiment Analysis</strong> is the detection of <strong>attitudes</strong> (2nd from the bottom of the above list).</p>
+<h2><a id="user-content-we-want-to-know" class="anchor" href="https://gist.github.com/ttezel/4138642#we-want-to-know" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>We want to know:</h2>
+<ul>
+<li>
+<p>The <strong>Holder</strong> (source) of the attitude</p>
+</li>
+<li>
+<p>The <strong>Target</strong> (aspect) of the attitude</p>
+</li>
+<li>
+<p>The <strong>Type</strong> of the attitude from a set of types (like, love, hate, value, desire, etc.).
+Or, more commonly, simply the weighted polarity (positive, negative, neutral, together with <strong>strength</strong>).</p>
+</li>
+</ul>
+<p>###Baseline Algorithm for Sentiment Analysis</p>
+<p>Given a piece of text, we perform:</p>
+<ul>
+<li>Tokenization</li>
+<li>Feature Extraction</li>
+<li>Classification using different classifiers
+<ul>
+<li>Naive Bayes</li>
+<li>MaxEnt</li>
+<li>SVM</li>
+</ul>
+</li>
+</ul>
+<p>####Tokenization Issues</p>
+<p>Depending on what type of text we're dealing with, we can have the following issues:</p>
+<ul>
+<li>Dealing with HTML or XML markup</li>
+<li>Twitter Markup (names, hash tags)</li>
+<li>Capitalization</li>
+<li>Phone Numbers, dates, emoticons</li>
+</ul>
+<p>Some useful code for tokenizing:</p>
+<ul>
+<li>Christopher Potts Sentiment Tokenizer</li>
+<li>Brendan O'Connor Twitter Tokenizer</li>
+</ul>
+<p>####Classification</p>
+<p>We will have to deal with handling negation:</p>
+<p><code>I didn't like this movie</code> <strong>vs</strong> <code>I really like this movie</code></p>
+<p>####So, how do we handle negation?</p>
+<p>One way is to prepend <strong>NOT_</strong> to every word between the negation and the beginning of the next punctuation character.</p>
+<p>E.g. I didn't really like this movie, but ...</p>
+<p>=&gt; I didn't NOT_really NOT_like NOT_this NOT_movie, but ...</p>
+<p>This doubles our vocabulary, but helps in tokenizing negative sentiments and classifying them.</p>
+<p>####Hatzivassiloglou and McKeown intuition for identifying word polarity</p>
+<ul>
+<li>Adjectives conjoined by <strong>and</strong> have the same polarity</li>
+</ul>
+<p>=&gt; Fair <strong>and</strong> legitimate, corrupt <strong>and</strong> brutal</p>
+<ul>
+<li>Adjectives conjoined by <strong>but</strong> do not</li>
+</ul>
+<p>=&gt; Fair <strong>but</strong> brutal</p>
+<p>We can use this intuition to <strong>learn</strong> new adjectives.</p>
+<p>Imagine we have a set of adjectives, and we have identified the polarity of each adjective. Whenever we see a new word we haven't seen before, and it is joined to an adjective we have seen before by an <strong>and</strong>, we can assign it the same polarity.</p>
+<p>For example, say we know the poloarity of <strong>nice</strong>.</p>
+<p>When we see the phrase <code>nice and helpful</code>, we can learn that the word <strong>helpful</strong> has the same polarity as the word <strong>nice</strong>. In this way, we can learn the polarity of new words we haven't encountered before.</p>
+<p>So we can expand our <strong>seed set</strong> of adjectives using these rules. Then, as we count the frequency that <strong>but</strong> has occurred between a pair of words versus the frequency with which  <strong>and</strong> has occurred between the pair, we can start to build a ratio of <strong>but</strong>s to <strong>and</strong>s, and thus establish a degree of polarity for a given word.</p>
+<p>####What about learning the polarity of phrases?</p>
+<ul>
+<li>Take a corpus, and divide it up into phrases.</li>
+</ul>
+<p>Then run through the corpus, and extract the <strong>first two words of every phrase</strong> that matches one these rules:</p>
+<ul>
+<li>1st word is adjective, 2nd word is noun_singular or noun_plural, 3rd word is <strong>anything</strong></li>
+<li>1st word is adverb, 2nd word is adjective, 3rd word is NOT noun_singular or noun_plural</li>
+<li>1st word is adjective, 2nd word is adjective, 3rd word is NOT noun_singular or noun_plural</li>
+<li>1st word is noun_singular or noun_plural, 2nd word is adjective, 3rd word is NOT noun_singular or noun_plural</li>
+<li>1st word is adverb, 2nd word is verb, 3rd word is anything</li>
+</ul>
+<p>Note: To do this, we'd have to run each phrase through a Part-of-Speech tagger.</p>
+<p>Then, we can look at how often they co-occur with positive words.</p>
+<ul>
+<li>Positive phrases co-occur more with <strong>excellent</strong></li>
+<li>Negative phrases co-occur more with <strong>poor</strong></li>
+</ul>
+<p>But how do we measure co-occurrence?</p>
+<p>We can use Pointwise Mutual Information:</p>
+<p>How much more do events <strong>x</strong> and <strong>y</strong> occur than if they were independent?</p>
+<p>PMI( word<sub>1</sub>, word<sub>2</sub> ) = log<sub>2</sub> { [ P( word<sub>1</sub>, word<sub>2</sub> ] / [ P( word<sub>1</sub> ) x P( word<sub>2</sub> ) ] }</p>
+<p>Then we can determine the polarity of the phrase as follows:</p>
+<p><strong>Polarity( phrase )</strong> = PMI( phrase, <strong>excellent</strong> ) - PMI( phrase, <strong>poor</strong> )</p>
+<p>= log<sub>2</sub> { [ P( phrase, <strong>excellent</strong> ] / [ P( phrase ) x P( <strong>excellent</strong> ) ] } - log<sub>2</sub> { [ P( phrase, <strong>poor</strong> ] / [ P( phrase ) x P( <strong>poor</strong> ) ] }</p>
+<h2><a id="user-content-another-way-to-learn-polarity-of-words" class="anchor" href="https://gist.github.com/ttezel/4138642#another-way-to-learn-polarity-of-words" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Another way to learn polarity (of words)</h2>
+<p>Start with a seed set of <strong>positive</strong> and <strong>negative</strong> words.</p>
+<p>Then, look them up in a thesaurus, and:</p>
+<ul>
+<li>
+<p>add synonyms of each of the <strong>positive</strong> words to the <strong>positive</strong> set</p>
+</li>
+<li>
+<p>add antonyms of each of the <strong>positive</strong> words to the <strong>negative</strong> set</p>
+</li>
+<li>
+<p>add synonyms of each of the <strong>negative</strong> words to the <strong>negative</strong> set</p>
+</li>
+<li>
+<p>add antonyms of each of the <strong>negative</strong> words to the <strong>positive</strong> set</p>
+</li>
+</ul>
+<p>and.. repeat.. with the new set of words we have discovered, to build out our lexicon.</p>
+<p>###Summary on learning Lexicons</p>
+<ul>
+<li>Start with a <em>seed set</em>* of words ( <code>good</code>, <code>poor</code>, ... )</li>
+<li>Find other words that have similar polarity:
+<ul>
+<li>using <strong>and</strong> and <strong>but</strong></li>
+<li>using words that appear nearby in the same document</li>
+<li>using synonyms and antonyms</li>
+</ul>
+</li>
+</ul>
+<p>###Sentiment Aspect Analysis</p>
+<p>What happens if we get the following phrase:</p>
+<p><code>The food was great, but the service was awful.</code></p>
+<p>This phrase doesn't really have an overall sentiment; it has two separate sentiments; <strong>great food</strong> and <strong>awful service</strong>. So sometimes, instead of trying to tackle the problem of figuring out the overall sentiment of a phrase, we can instead look at finding the <strong>target</strong> of any sentiment.</p>
+<h2><a id="user-content-how-do-we-do-this" class="anchor" href="https://gist.github.com/ttezel/4138642#how-do-we-do-this" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How do we do this?</h2>
+<p>=&gt; We look at frequent phrases, and rules</p>
+<ul>
+<li>Find all <strong>highly frequent</strong> phrases across a set of reviews (e.g. <code>fish tacos</code>) =&gt; this can help identify the targets of different sentiments.</li>
+<li>Filter these highly frequent phrases by rules like <strong>occurs right after a sentiment word</strong></li>
+</ul>
+<p>=&gt; <code>... great fish tacos ...</code> means that <strong>fish tacos</strong> is a likely target of sentiment, since we know <strong>great</strong> is a sentiment word.</p>
+<p>Let's say we already know the important aspects of a piece of text. For example, if we are analyzing restaurant reviews, we know that aspects we will come across include <strong>food</strong>, <strong>decor</strong>, <strong>service</strong>, <strong>value</strong>, ...</p>
+<p>Then we can train our classifier to assign an aspect to a given sentence or phrase.</p>
+<p>"Given this sentence, is it talking about <strong>food</strong> or <strong>decor</strong> or ..."</p>
+<p>=&gt; This only applies to text where we KNOW what we will come across.</p>
+<p>So overall, our flow could look like:</p>
+<p><strong>Text (e.g. reviews)</strong> --&gt; <strong>Text extractor (extract sentences/phrases)</strong> --&gt; <strong>Sentiment Classifier (assign a sentiment to each sentence/phrase)</strong> --&gt; <strong>Aspect Extractor (assign an aspect to each sentence/phrase)</strong> --&gt; <strong>Aggregator</strong> --&gt; <strong>Final Summary</strong></p>
+<p>##Conditional Models</p>
+<p>Naive Bayes Classifiers use a joint probability model. We evaluate probabilities P( d, c ) and try to maximize this joint likelihood.</p>
+<p>=&gt; maximizing P( text, class )</p>
+<p>rather than a conditional probability model</p>
+<p>-&gt; maximizing P( class | text )</p>
+<p>If we instead try to maximize the conditional probability of P( class | text ), we can achieve higher accuracy in our classifier.</p>
+<p>A <strong>conditional</strong> model gives probabilities <strong>P( c | d )</strong>. It takes the data as given and models only the  conditional probability of the class.</p>
+<p>##MaxEnt Classifiers (Maximum Entropy Classifiers)</p>
+<p>We define a <strong>feature</strong> as an elementary piece of evidence that links aspects of what we observe ( <strong>d</strong> ), with a category ( <strong>c</strong> ) that we want to predict.</p>
+<p>So a feature is a function that maps from the space of <strong>classes</strong> and <strong>data</strong> onto a <strong>Real Number</strong> (it has a bounded, real value).</p>
+<p>ƒ: C x D --&gt; R</p>
+<p>Models will assign a <strong>weight</strong> to each feature:</p>
+<ul>
+<li>A <strong>positive</strong> weight votes that the configuration is likely correct</li>
+<li>A <strong>negative</strong> weight votes that the configuration is likely incorrect</li>
+</ul>
+<h2><a id="user-content-what-do-features-look-like" class="anchor" href="https://gist.github.com/ttezel/4138642#what-do-features-look-like" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What do features look like?</h2>
+<p>Here is an example feature:</p>
+<ul>
+<li>ƒ<sub>1</sub>(c,d) ≡ [ c = LOCATION &amp; w<sub>-1</sub>="in" &amp; isCapitalized(w) ]</li>
+</ul>
+<p>This feature picks out from the data cases where the <strong>class</strong> is <strong>LOCATION</strong>, the previous word is "in" and the current word is capitalized.</p>
+<p>This feature would match the following scenarios:</p>
+<ul>
+<li>class = LOCATION, data = "in Quebec"</li>
+<li>class = LOCATION, data = "in Arcadia"</li>
+</ul>
+<p>Another example feature:</p>
+<ul>
+<li>ƒ<sub>2</sub>(c,d) ≡ [ c = DRUG &amp; ends(w, "c") ]</li>
+</ul>
+<p>This feature picks out from the data cases where the <strong>class</strong> is <strong>DRUG</strong> and the current word ends with the letter <strong>c</strong>.</p>
+<p>This feature would match:</p>
+<ul>
+<li>class = DRUG, data = "taking Zantac"</li>
+</ul>
+<p>Features generally use both the <strong>bag of words</strong>, as we saw with the Naive-Bayes Classifier, as well as looking at adjacent words (like the example features above).</p>
+<p>###Feature-Based Linear Classifiers</p>
+<p>Feature-Based Linear Classifiers:</p>
+<ul>
+<li>
+<p>Are a linear function from feature sets {ƒ<sub>i</sub>} to classes {c}.</p>
+</li>
+<li>
+<p>Assign a weight λ<sub>i</sub> to each feature ƒ<sub>i</sub></p>
+</li>
+<li>
+<p>We consider each class for an observed datum <strong>d</strong></p>
+</li>
+<li>
+<p>For a pair <strong>(c,d)</strong>, features vote with their weights:</p>
+<p><strong>vote(c)</strong> = Σ λ<sub>i</sub>ƒ<sub>i</sub>(c,d)</p>
+</li>
+<li>
+<p>Choose the class <strong>c</strong> which maximizes <strong>vote(c)</strong></p>
+</li>
+</ul>
+<p>As you can see in the equation above, the vote is just a weighted sum of the features; each feature has its own weight. So we try to find the class that maximizes the weighted sum of all the features.</p>
+<p>MaxEnt Models make a probabilistic model from the linear combination Σ λ<sub>i</sub>ƒ<sub>i</sub>(c,d).</p>
+<p>Since the weights can be negative values, we need to convert them to positive values since we want to calculating a non-negative probability for a given class. So we use the value as such:</p>
+<p><strong>exp Σ λ<sub>i</sub>ƒ<sub>i</sub>(c,d)</strong></p>
+<p>This way we will always have a positive value.</p>
+<p>We make this value into a probability by dividing by the sum of the probabilities of all classes:</p>
+<p><strong>[ exp Σ λ<sub>i</sub>ƒ<sub>i</sub>(c,d) ] / [ Σ<sub>C</sub> exp Σ λ<sub>i</sub>ƒ<sub>i</sub>(c,d) ]</strong></p>
+<p>##Named Entity Recognition</p>
+<p><strong>Named Entity Recognition (NER)</strong> is the task of extracting entities (people, organizations, dates, etc.) from text.</p>
+<p>###Machine-Learning sequence model approach to NER</p>
+<p>####Training</p>
+<ul>
+<li>Collect a set of representative Training Documents</li>
+<li>Label each token for its entity class, or Other (O) if no match</li>
+<li>Design feature extractors appropriate to the text and classes</li>
+<li>Train a sequence classifier to predict the labels from the data</li>
+</ul>
+<p>####Testing</p>
+<ul>
+<li>Get a set of testing documents</li>
+<li>Run the model on the document to label each token</li>
+<li>Output the recognized entities</li>
+</ul>
+</article>
+  </div>
+
+  </div>
+  
+</div>
+
+
+    <a name="comments"></a>
+    <div class="discussion-timeline gist-discussion-timeline js-quote-selection-container ">
+      <div class="js-discussion js-socket-channel" data-channel="marked-as-read:gist:4138642">
+        
+
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+      <a href="https://gist.github.com/hanifa2102">
+        <img alt="@hanifa2102" class="timeline-comment-avatar" height="44" src="./Natural Language Processing Notes · GitHub_files/8768277" width="44">
+      </a>
+
+
+      
+
+<div id="gistcomment-1540683" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="43246d4490294ff1682edbfeeabc9ad7">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://gist.github.com/hanifa2102" class="author">hanifa2102</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://gist.github.com/ttezel/4138642#gistcomment-1540683" class="timestamp"><relative-time datetime="2015-08-02T10:27:57Z" title="Aug 2, 2015, 3:27 AM PDT">on Aug 2, 2015</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Nice Concise Summarization of NLP in one page.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+      <a href="https://gist.github.com/tristang">
+        <img alt="@tristang" class="timeline-comment-avatar" height="44" src="./Natural Language Processing Notes · GitHub_files/907105" width="44">
+      </a>
+
+
+      
+
+<div id="gistcomment-1794479" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="9acd98d7b7323569daa6e540a4c0ea79">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://gist.github.com/tristang" class="author">tristang</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://gist.github.com/ttezel/4138642#gistcomment-1794479" class="timestamp"><relative-time datetime="2016-06-05T15:01:46Z" title="Jun 5, 2016, 8:01 AM PDT">on Jun 5, 2016</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Thanks for the excellent notes</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <div class="timeline-comment-wrapper js-comment-container">
+
+      <a href="https://gist.github.com/nerzid">
+        <img alt="@nerzid" class="timeline-comment-avatar" height="44" src="./Natural Language Processing Notes · GitHub_files/11797282" width="44">
+      </a>
+
+
+      
+
+<div id="gistcomment-2044432" class="comment previewable-edit timeline-comment js-comment js-task-list-container
+                     " data-body-version="11ea0763ce7fe52811da86c14e662bef">
+
+  
+<div class="timeline-comment-header">
+  <div class="timeline-comment-actions">
+
+
+  </div>
+
+    
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+        <a href="https://gist.github.com/nerzid" class="author">nerzid</a>
+        
+    </strong>
+
+    commented
+
+    <a href="https://gist.github.com/ttezel/4138642#gistcomment-2044432" class="timestamp"><relative-time datetime="2017-04-02T11:21:59Z" title="Apr 2, 2017, 4:21 AM PDT">22 days ago</relative-time></a>
+
+
+  </div>
+</div>
+
+
+  <div class="edit-comment-hide">
+    <table class="d-block">
+      <tbody class="d-block">
+        <tr class="d-block">
+          <td class="d-block comment-body markdown-body  js-comment-body">
+              <p>Thank you, this is useful.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+  </div>
+
+
+
+<!-- Rendered timeline since 2017-04-21 08:29:41 -->
+<div id="partial-timeline-marker" class="js-timeline-marker js-updatable-content" data-url="/ttezel/4138642/show_partial?partial=gist%2Ftimeline_marker&amp;since=1492788581" data-last-modified="Fri, 21 Apr 2017 15:29:41 GMT">
+</div>
+
+
+        <div class="discussion-timeline-actions">
+            <div class="flash flash-warn mt-3">
+    <a href="https://gist.github.com/join?source=comment-gist" class="btn btn-primary" rel="nofollow">Sign up for free</a>
+    <strong>to join this conversation on GitHub</strong>.
+    Already have an account?
+    <a href="https://gist.github.com/login?return_to=https%3A%2F%2Fgist.github.com%2Fttezel%2F4138642" rel="nofollow">Sign in to comment</a>
+</div>
+
+        </div>
+      </div>
+    </div>
+</div>
+  </div>
+
+  <div class="modal-backdrop js-touch-events"></div>
+</div><!-- /.container -->
+
+    </div>
+  </div>
+
+  </div>
+
+      <div class="container site-footer-container">
+  <div class="site-footer" role="contentinfo">
+    <ul class="site-footer-links float-right">
+        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact GitHub</a></li>
+      <li><a href="https://developer.github.com/" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li><a href="https://training.github.com/" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li><a href="https://shop.github.com/" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+
+    </ul>
+
+    <a href="https://github.com/" aria-label="Homepage" class="site-footer-mark" title="GitHub">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+</a>
+    <ul class="site-footer-links">
+      <li>© 2017 <span title="0.13579s from github-fe-83bc574.cp1-iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+        <li><a href="https://help.github.com/" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+  
+
+  <div id="ajax-error-message" class="ajax-error-message flash flash-error">
+    <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"></path></svg>
+    <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
+    </button>
+    You can't perform that action at this time.
+  </div>
+
+
+    <script crossorigin="anonymous" integrity="sha256-ikMY/+oJoM24IUt2zykmufagztMYoxe+1BnbGSFMaQ0=" src="./Natural Language Processing Notes · GitHub_files/compat-8a4318ffea09a0cdb8214b76cf2926b9f6a0ced318a317bed419db19214c690d.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-bRCeda2EcbpBUIJybADDX7kpzquXUIJJKDXxHsqMB9k=" src="./Natural Language Processing Notes · GitHub_files/frameworks-6d109e75ad8471ba415082726c00c35fb929ceab975082492835f11eca8c07d9.js"></script>
+    <script async="async" crossorigin="anonymous" integrity="sha256-VTFrcOyetaTdXNFo+PjaTV/iDFNWRRLdWqzpiYrtcMU=" src="./Natural Language Processing Notes · GitHub_files/github-55316b70ec9eb5a4dd5cd168f8f8da4d5fe20c53564512dd5aace9898aed70c5.js"></script>
+    
+    
+    
+    
+  <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner d-none">
+    <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"></path></svg>
+    <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="https://gist.github.com/ttezel/4138642">Reload</a> to refresh your session.</span>
+    <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="https://gist.github.com/ttezel/4138642">Reload</a> to refresh your session.</span>
+  </div>
+  <div class="facebox" id="facebox" style="display:none;">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+    </div>
+    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
+    </button>
+  </div>
+</div>
+
+
+  
+
+
+</body></html>

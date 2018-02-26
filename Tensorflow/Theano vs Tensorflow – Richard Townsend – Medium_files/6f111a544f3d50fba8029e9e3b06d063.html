@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://medium.com/media/6f111a544f3d50fba8029e9e3b06d063?postId=e25648c31800 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>theano_averaging.py – Medium</title><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./cae794adcedfc9dd846dfe7e8f555870.js" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-9f0a4ad9c85ca776e669003688baa9d55f9db315562ce4d231d37dab2714c70a.css"><div id="gist36217010" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-theano_averaging-py" class="file">
+    
+
+  <div itemprop="text" class="blob-wrapper data type-python">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tbody><tr>
+        <td id="file-theano_averaging-py-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-theano_averaging-py-LC1" class="blob-code blob-code-inner js-file-line">dist <span class="pl-k">=</span> dist.dimshuffle(<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">0</span>, <span class="pl-c1">3</span>) </td>
+      </tr>
+      <tr>
+        <td id="file-theano_averaging-py-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-theano_averaging-py-LC2" class="blob-code blob-code-inner js-file-line">dist_mask <span class="pl-k">=</span> dist_mask.dimshuffle(<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">0</span>, <span class="pl-c1">3</span>) </td>
+      </tr>
+      <tr>
+        <td id="file-theano_averaging-py-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-theano_averaging-py-LC3" class="blob-code blob-code-inner js-file-line">divider <span class="pl-k">=</span> dist_mask.sum(<span class="pl-v">axis</span><span class="pl-k">=</span><span class="pl-c1">0</span>) </td>
+      </tr>
+      <tr>
+        <td id="file-theano_averaging-py-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-theano_averaging-py-LC4" class="blob-code blob-code-inner js-file-line">divider <span class="pl-k">+=</span> tensor.eq(divider, numpy_floatX(<span class="pl-c1">0.0</span>)) </td>
+      </tr>
+      <tr>
+        <td id="file-theano_averaging-py-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-theano_averaging-py-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Filter NaNs </span></td>
+      </tr>
+      <tr>
+        <td id="file-theano_averaging-py-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-theano_averaging-py-LC6" class="blob-code blob-code-inner js-file-line">dist <span class="pl-k">=</span> dist <span class="pl-k">*</span> dist_mask </td>
+      </tr>
+      <tr>
+        <td id="file-theano_averaging-py-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-theano_averaging-py-LC7" class="blob-code blob-code-inner js-file-line">tmp <span class="pl-k">=</span> dist</td>
+      </tr>
+      <tr>
+        <td id="file-theano_averaging-py-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-theano_averaging-py-LC8" class="blob-code blob-code-inner js-file-line">tmp <span class="pl-k">/=</span> divider </td>
+      </tr>
+      <tr>
+        <td id="file-theano_averaging-py-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-theano_averaging-py-LC9" class="blob-code blob-code-inner js-file-line">proj2 <span class="pl-k">=</span> tmp.dimshuffle(<span class="pl-c1">1</span>, <span class="pl-c1">0</span>, <span class="pl-c1">2</span>)</td>
+      </tr>
+</tbody></table>
+
+  </div>
+
+  </div>
+  
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Sentimentron/cae794adcedfc9dd846dfe7e8f555870/raw/b8433b84c23cc0dc5ca0b076f0b8294c3151f5c8/theano_averaging.py" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Sentimentron/cae794adcedfc9dd846dfe7e8f555870#file-theano_averaging-py">theano_averaging.py</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200;function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height); resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);}maybeResize();</script></body></html>

@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<!-- saved from url=(0090)https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/ -->
+<html lang="en" class="wf-ubuntu-n4-active wf-ubuntu-i4-active wf-ubuntu-n7-active wf-ubuntu-i7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://ireneli.eu/xmlrpc.php">
+
+<title>TensorFlow 07: Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit</title>
+<script defer="" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/beacon.js"></script><script src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/webfont.js" type="text/javascript" async=""></script><script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Ubuntu:r:latin,latin-ext","Ubuntu:r,i,b,bi:latin,latin-ext"]}};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://s1.wp.com/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active body, .wf-active button, .wf-active input, .wf-active select, .wf-active textarea{font-family:"Ubuntu",sans-serif}.wf-active pre{font-family:"Ubuntu",sans-serif}.wf-active code, .wf-active kbd, .wf-active tt, .wf-active var{font-family:"Ubuntu",sans-serif}.wf-active button, .wf-active input[type="button"], .wf-active input[type="reset"], .wf-active input[type="submit"]{font-family:"Ubuntu",sans-serif}.wf-active .entry-meta{font-family:"Ubuntu",sans-serif}.wf-active body:not(.single) .hentry .more-link{font-family:"Ubuntu",sans-serif}.wf-active body:not(.single) .format-status{font-family:"Ubuntu",sans-serif}.wf-active .entry-content .jetpack-recipe .jetpack-recipe-meta{font-family:"Ubuntu",sans-serif}.wf-active .posts-navigation .nav-next a, .wf-active .posts-navigation .nav-previous a{font-family:"Ubuntu",sans-serif}.wf-active .single #primary .author-link{font-family:"Ubuntu",sans-serif}.wf-active .post-navigation-container .post-navigation-header{font-family:"Ubuntu",sans-serif}.wf-active .page-header .taxonomy-description{font-family:"Ubuntu",sans-serif}.wf-active .rating-msg{font-family:"Ubuntu",sans-serif}.wf-active #comments .comment-metadata, .wf-active #comments .reply, .wf-active #comments .edit-link{font-family:"Ubuntu",sans-serif}.wf-active #comments .comment-navigation{font-family:"Ubuntu",sans-serif}.wf-active .comments-form-contain label{font-family:"Ubuntu",sans-serif}.wf-active .no-comments{font-family:"Ubuntu",sans-serif}.wf-active .wp-caption{font-family:"Ubuntu",sans-serif}.wf-active .wp-caption-text{font-family:"Ubuntu",sans-serif}.wf-active #infinite-handle span button, .wf-active #infinite-handle span button:focus, .wf-active #infinite-handle span button:hover{font-family:"Ubuntu",sans-serif}.wf-active .widget_calendar caption{font-family:"Ubuntu",sans-serif}.wf-active .widget_tag_cloud a, .wf-active .wp_widget_tag_cloud a{font-family:"Ubuntu",sans-serif}@media only screen and (max-width: 1200px){.wf-active #masthead .site-title{font-style:normal;font-weight:400}}.wf-active #masthead .site-title{font-weight:400;font-family:"Ubuntu",sans-serif;font-style:normal}.wf-active #masthead .site-description{font-family:"Ubuntu",sans-serif;font-style:normal;font-weight:400}.wf-active .entry-title{font-family:"Ubuntu",sans-serif;font-style:normal;font-weight:400}.wf-active body:not(.single) .format-aside .entry-header .entry-title{font-style:normal;font-weight:400}.wf-active body:not(.single) .format-audio .entry-title, .wf-active body:not(.single) .format-gallery .entry-title, .wf-active body:not(.single) .format-image .entry-title, .wf-active body:not(.single) .format-link .entry-title, .wf-active body:not(.single) .format-video .entry-title{font-family:"Ubuntu",sans-serif;font-weight:400;font-style:normal}.wf-active .entry-content h1, .wf-active .entry-content h2, .wf-active .entry-content h3, .wf-active .entry-content h4, .wf-active .entry-content h5, .wf-active .entry-content h6{font-family:"Ubuntu",sans-serif;font-style:normal;font-weight:400}.wf-active .entry-content h1{font-style:normal;font-weight:400}.wf-active .entry-content h2{font-style:normal;font-weight:400}.wf-active .entry-content h3{font-style:normal;font-weight:400}.wf-active .entry-content h4{font-style:normal;font-weight:400}.wf-active .entry-content h5{font-style:normal;font-weight:400}.wf-active .entry-content h6{font-style:normal;font-weight:400}.wf-active .single #primary article.post .tags-links .tags-header, .wf-active .single #primary article.jetpack-portfolio .tags-links .tags-header, .wf-active .single #primary article.attachment .tags-links .tags-header{font-weight:400;font-style:normal}.wf-active .single #primary .author-description h2{font-style:normal;font-weight:400}.wf-active .page-header .page-title{font-family:"Ubuntu",sans-serif;font-weight:400;font-style:normal}.wf-active #jp-post-flair h3, .wf-active div#jp-relatedposts h3.jp-relatedposts-headline{font-family:"Ubuntu",sans-serif;font-weight:400;font-style:normal}.wf-active div#jp-relatedposts h3.jp-relatedposts-headline em{font-weight:400;font-style:normal}.wf-active #comments .comments-title{font-style:normal;font-weight:400}.wf-active .widget .widget-title{font-family:"Ubuntu",sans-serif;font-weight:400;font-style:normal}@media only screen and (max-width: 1200px){.wf-active #masthead .site-description{font-style:normal;font-weight:400}}@media only screen and (max-width: 1200px){.wf-active .entry-header .entry-title{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h1{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h2{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h3{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h4{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h5{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h6{font-style:normal;font-weight:400}}@media only screen and (max-width: 600px){.wf-active .entry-content h1{font-style:normal;font-weight:400}}@media only screen and (max-width: 600px){.wf-active .entry-content h2{font-style:normal;font-weight:400}}@media only screen and (max-width: 600px){.wf-active #comments .comments-title{font-style:normal;font-weight:400}}</style>
+		<link rel="stylesheet" href="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/css" media="all"><script src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/remote-login.php" type="text/javascript"></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+			if ( 'function' === typeof WPRemoteLogin ) {
+				document.cookie = "wordpress_test_cookie=test; path=/";
+				if ( document.cookie.match( /(;|^)\s*wordpress_test_cookie\=/ ) ) {
+					WPRemoteLogin();
+				}
+			}
+		/* ]]> */
+		</script>
+		<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://irenelizihui.wordpress.com/">
+<link rel="alternate" type="application/rss+xml" title="Café, bonne nuit » Feed" href="https://ireneli.eu/feed/">
+<link rel="alternate" type="application/rss+xml" title="Café, bonne nuit » Comments Feed" href="https://ireneli.eu/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Café, bonne nuit » TensorFlow 07: Word Embeddings (2) – Loading Pre-trained Vectors Comments Feed" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1488818651h&ver=4.7.5"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="all-css-0-1" href="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/saved_resource" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/saved_resource(1)"></script>
+<link rel="stylesheet" id="all-css-0-2" href="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/style.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://irenelizihui.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Deep Learning 14 : Optimization, an Overview" href="https://ireneli.eu/2016/12/10/deep-learning-14-optimization/">
+<link rel="next" title="ML Recap Slides sharing" href="https://ireneli.eu/2017/03/12/ml-recap-slides-sharing/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/">
+<link rel="shortlink" href="http://wp.me/p6OGuT-qv">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=https%3A%2F%2Fireneli.eu%2F2017%2F01%2F17%2Ftensorflow-07-word-embeddings-2-loading-pre-trained-vectors%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=https%3A%2F%2Fireneli.eu%2F2017%2F01%2F17%2Ftensorflow-07-word-embeddings-2-loading-pre-trained-vectors%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow 07: Word Embeddings (2) – Loading Pre-trained Vectors">
+<meta property="og:url" content="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/">
+<meta property="og:description" content="A brief introduction on Word2vec please check this post. In this post, we try to load pre-trained Word2vec model, which is a huge file contains all the word vectors trained on huge corpora. Downloa…">
+<meta property="article:published_time" content="2017-01-17T17:55:18+00:00">
+<meta property="article:modified_time" content="2017-01-17T17:55:52+00:00">
+<meta property="og:site_name" content="Café, bonne nuit">
+<meta property="og:image" content="https://irenelizihui.files.wordpress.com/2017/01/image.png">
+<meta property="og:image:width" content="997">
+<meta property="og:image:height" content="287">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@Violaoreal">
+<meta name="twitter:image" content="https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png?w=240">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@Violaoreal">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/41d51fc4b66fc5438624b6c78b0dac36?s=32" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/41d51fc4b66fc5438624b6c78b0dac36?s=32" sizes="16x16">
+<link rel="apple-touch-icon-precomposed" href="https://secure.gravatar.com/blavatar/41d51fc4b66fc5438624b6c78b0dac36?s=114">
+<link rel="openid.server" href="https://irenelizihui.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://irenelizihui.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ireneli.eu/osd.xml" title="Café, bonne nuit">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+				<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Café, bonne nuit"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Have a coffee when you run any code, if it is still running, then have two…."><meta name="msapplication-task" content="name=Subscribe;action-uri=https://ireneli.eu/feed/;icon-uri=https://secure.gravatar.com/blavatar/41d51fc4b66fc5438624b6c78b0dac36?s=16"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="TensorFlow 07: Word Embeddings (2) – Loading Pre-trained Vectors | Café, bonne nuit on WordPress.com">
+<meta name="description" content="A brief introduction on Word2vec please check this post. In this post, we try to load pre-trained Word2vec model, which is a huge file contains all the word vectors trained on huge corpora. Download Download here .I downloaded the GloVe one, the vocabulary size is 4 million, dimension is 50. It is a smaller one trained…">
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-image: url("https://irenelizihui.files.wordpress.com/2016/11/vg2.jpg"); background-position: center top; background-size: auto; background-repeat: repeat; background-attachment: scroll; }
+</style>
+<link rel="amphtml" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/amp/"><link rel="stylesheet" type="text/css" href="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/shCore.css"><link rel="stylesheet" type="text/css" href="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/shThemeDefault.css"><style type="text/css" id="syntaxhighlighteranchor"></style>
+		<link rel="stylesheet" id="custom-css-css" type="text/css" href="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/saved_resource(2)">
+		<style type="text/css"></style><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/services.css"></head>
+
+<body class="post-template-default single single-post postid-1643 single-format-standard custom-background mp6 customizer-styles-applied highlander-enabled highlander-light">
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<div class="wrap">
+				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
+				<div id="primary-menu" class="menu"><ul aria-expanded="false" class=" nav-menu">
+<li class="page_item page-item-1"><a href="https://ireneli.eu/">Welcome!</a></li>
+</ul></div>
+			</div><!-- .wrap -->
+		</nav><!-- #site-navigation -->
+
+		<div class="site-branding">
+			<div class="wrap">
+
+									<p class="site-title"><a href="https://ireneli.eu/" rel="home">Café, bonne nuit</a></p>
+									<p class="site-description">Have a coffee when you run any code, if it is still running, then have two….</p>
+							</div><!-- .wrap -->
+		</div><!-- .site-branding -->
+
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content">
+		<div class="wrap">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+<article id="post-1643" class="post-1643 post type-post status-publish format-standard hentry category-python">
+	
+	<header class="entry-header">
+
+		<span class="cat-links"><span class="screen-reader-text">Posted in</span> <a href="https://ireneli.eu/category/python/" rel="category tag">Python</a></span>		<h1 class="entry-title">TensorFlow 07: Word Embeddings (2) – Loading Pre-trained&nbsp;Vectors</h1>
+		<div class="entry-meta">
+						<span class="posted-on">Posted on <a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/" rel="bookmark"><time class="entry-date published" datetime="2017-01-17T17:55:18+00:00">January 17, 2017</time><time class="updated" datetime="2017-01-17T17:55:52+00:00">January 17, 2017</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://ireneli.eu/author/irenelizihui/">Irene</a></span></span>					</div><!-- .entry-meta -->
+
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p>A brief introduction on Word2vec please check this <a href="https://ireneli.eu/2016/06/14/tensorflow-06-word-embeddings-1/">post</a>. In this post, we try to load pre-trained Word2vec model, which is a huge file contains all the word vectors trained on huge corpora.</p>
+<h3>Download</h3>
+<p>Download <a href="https://github.com/3Top/word2vec-api#where-to-get-a-pretrained-models">here</a>&nbsp;.I downloaded the GloVe one, the vocabulary size is 4 million, dimension is 50. It is a smaller one trained on a “global” corpus (from wikipedia). There are models trained on Twitter as well in the page.</p>
+<p><a href="https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png" target="_blank"><img data-attachment-id="1652" data-permalink="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/16129192_945367658932136_139793317_o/" data-orig-file="https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png?w=840" data-orig-size="1117,85" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="16129192_945367658932136_139793317_o" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png?w=840?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png?w=840?w=840" class=" size-full wp-image-1652 aligncenter" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/16129192_945367658932136_139793317_o.png" alt="16129192_945367658932136_139793317_o" srcset="https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png?w=840 840w, https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png?w=150 150w, https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png?w=300 300w, https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png?w=768 768w, https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png?w=1024 1024w, https://irenelizihui.files.wordpress.com/2017/01/16129192_945367658932136_139793317_o.png 1117w" sizes="(max-width: 840px) 100vw, 840px"></a></p>
+<p>The model is formatted as (word vector) in each line, separated by a space. Below shows a screenshot: not only the words, but also some marks like comma are included in the model.<a href="https://irenelizihui.files.wordpress.com/2017/01/image.png" target="_blank"><img data-attachment-id="1655" data-permalink="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/image-2/" data-orig-file="https://irenelizihui.files.wordpress.com/2017/01/image.png?w=840" data-orig-size="997,287" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="image" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2017/01/image.png?w=840?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2017/01/image.png?w=840?w=840" class=" size-full wp-image-1655 aligncenter" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/image.png" alt="image" srcset="https://irenelizihui.files.wordpress.com/2017/01/image.png?w=840 840w, https://irenelizihui.files.wordpress.com/2017/01/image.png?w=150 150w, https://irenelizihui.files.wordpress.com/2017/01/image.png?w=300 300w, https://irenelizihui.files.wordpress.com/2017/01/image.png?w=768 768w, https://irenelizihui.files.wordpress.com/2017/01/image.png 997w" sizes="(max-width: 840px) 100vw, 840px"></a></p>
+<h3>Loading</h3>
+<p>There is an easy way for you to load the model by reading the vector file. Here I separate the words and vectors, because the words will be fed into vocabulary.</p>
+<div><div id="highlighter_202554" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">filename = 'glove.6B.50d.txt'</code></div><div class="line number2 index1 alt1"><code class="plain plain">def loadGloVe(filename):</code></div><div class="line number3 index2 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">vocab = []</code></div><div class="line number4 index3 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">embd = []</code></div><div class="line number5 index4 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">file = open(filename,'r')</code></div><div class="line number6 index5 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">for line in file.readlines():</code></div><div class="line number7 index6 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">row = line.strip().split(' ')</code></div><div class="line number8 index7 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">vocab.append(row[0])</code></div><div class="line number9 index8 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">embd.append(row[1:])</code></div><div class="line number10 index9 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">print('Loaded GloVe!')</code></div><div class="line number11 index10 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">file.close()</code></div><div class="line number12 index11 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">return vocab,embd</code></div><div class="line number13 index12 alt2"><code class="plain plain">vocab,embd = loadGloVe(filename)</code></div><div class="line number14 index13 alt1"><code class="plain plain">vocab_size = len(vocab)</code></div><div class="line number15 index14 alt2"><code class="plain plain">embedding_dim = len(embd[0])</code></div><div class="line number16 index15 alt1"><code class="plain plain">embedding = np.asarray(embd)</code></div></div></td></tr></tbody></table></div></div>
+<p>The vocab is a list of words or marks. The <em>embedding</em> is the huge 2-d array with all the word vectors. We initialize the embedding size to be the number of column of the <em>embedding</em> array.</p>
+<h3>Embedding Layer</h3>
+<p>After loading in the vectors, we need to use them to initialize W of the embedding layer in your network.</p>
+<div><div id="highlighter_713803" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">W = tf.Variable(tf.constant(0.0, shape=[vocab_size, embedding_dim]),</code></div><div class="line number2 index1 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">trainable=False, name="W")</code></div><div class="line number3 index2 alt2"><code class="plain plain">embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, embedding_dim])</code></div><div class="line number4 index3 alt1"><code class="plain plain">embedding_init = W.assign(embedding_placeholder)</code></div></div></td></tr></tbody></table></div></div>
+<p>Here W is first built as Variables, but initialized by constant zeros. Be careful with the shape: [<em>vocab_size</em>, <em>embedding_dim</em>], where we can know after loading the model. If <em>trainable</em> is set to be False, it would not be updated during training. Change to True for a trainable setup. Then an <em>embedding_placeholder</em> is set up to receive the real values (fed from the <em>feed_dict </em>in<em> sess.run()</em>), and at last <em>W</em> is assigned.</p>
+<p>After creating a session and initialize global variables, run&nbsp;the <em>embedding_init</em> operation by feeding in the 2-D array embedding.</p>
+<div><div id="highlighter_801799" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})</code></div></div></td></tr></tbody></table></div></div>
+<h3>Vocabulary</h3>
+<p>Suppose you have raw documents, the first thing you need to do is to build a vocabulary, which will map each word into an id. TensorFlow process the following code to lookup embeddings:</p>
+<div><div id="highlighter_308722" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">tf.nn.embedding_lookup(W, input_x)</code></div></div></td></tr></tbody></table></div></div>
+<p>where <em>W</em> is the huge embedding matrix, <em>input_x</em> is a tensor with ids. In another word, it will lookup embeddings by given Ids.</p>
+<p>So we would choose the pre-trained model when we build the vocabulary: word-id maps.</p>
+<div><div id="highlighter_34823" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">from tensorflow.contrib import learn</code></div><div class="line number2 index1 alt1"><code class="plain plain">#init vocab processor</code></div><div class="line number3 index2 alt2"><code class="plain plain">vocab_processor = learn.preprocessing.VocabularyProcessor(max_document_length)</code></div><div class="line number4 index3 alt1"><code class="plain plain">#fit the vocab from glove</code></div><div class="line number5 index4 alt2"><code class="plain plain">pretrain = vocab_processor.fit(vocab)</code></div><div class="line number6 index5 alt1"><code class="plain plain">#transform inputs</code></div><div class="line number7 index6 alt2"><code class="plain plain">x = np.array(list(vocab_processor.transform(your_raw_input)))</code></div></div></td></tr></tbody></table></div></div>
+<p>First init the <em>vocab processor</em> by passing in a <em>max_document_length</em>, in default, shorter sentences would be padded by zeros. Then we fit the processor by the <em>vocab</em> list to build the word-id maps. Finally, use the processor to transform from real raw documents.</p>
+<p>Now you are ready to train your own network with pre-trained word vectors!</p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-1643" class="share-twitter sd-button share-icon" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-1643" class="share-facebook sd-button share-icon" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?share=facebook&amp;nb=1" target="_blank" title="Share on Facebook"><span>Facebook<span class="share-count">1</span></span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-1643" class="share-google-plus-1 sd-button share-icon" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?share=google-plus-1&amp;nb=1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-100737779-1643-591e08d5324f6" data-src="//widgets.wp.com/likes/#blog_id=100737779&amp;post_id=1643&amp;origin=irenelizihui.wordpress.com&amp;obj_id=100737779-1643-591e08d5324f6" data-name="like-post-frame-100737779-1643-591e08d5324f6"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-100737779-1643-591e08d5324f6" height="55px" width="100%" frameborder="0" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/saved_resource.html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="1331" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/" title="NLP 05: From Word2vec to Doc2vec: a simple example with Gensim
+
+Introduction First introduced by Mikolov [1] in 2013, the word2vec is to learn distributed representations (word embeddings) when applying neural network. It is based on the distributed hypothesis that words occur in similar contexts (neighboring words) tend to have similar meanings. Two models here: cbow ( continuous bag of words)…" rel="nofollow" data-origin="1643" data-position="0">NLP 05: From Word2vec to Doc2vec: a simple example with Gensim</a></span><span class="jp-relatedposts-post-context">In "Algorithm"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="1259" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://ireneli.eu/2016/06/14/tensorflow-06-word-embeddings-1/" title="TensorFlow 06: Word Embeddings (1)
+
+(A new learner! Leave comments if you find any mistakes please!) How do we present a word? In TensorFlow, everything, yes everything, flows into the graph, is a tensor. For example, the famous word2vec model is used for learning vector representations of words. Representation It is natural that we will…" rel="nofollow" data-origin="1643" data-position="1">TensorFlow 06: Word Embeddings (1)</a></span><span class="jp-relatedposts-post-context">In "Theory"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="705" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://ireneli.eu/2016/02/16/deep-learning-07-are-you-talking-to-a-machine/" title="Deep Learning 07: Are you talking to a machine?
+
+Recently working on a shared task job of image annotation. An interesting paper saw on NIPS’15 was proposed by Baidu Research. Find paper here . Official website. This post is the study notes. Are You Talking to a Machine? Dataset and Methods for Multilingual Image Question Answering by Baidu Research…" rel="nofollow" data-origin="1643" data-position="2">Deep Learning 07: Are you talking to a machine?</a></span><span class="jp-relatedposts-post-context">In "Deep Learning"</span></p></div></div></div>	</div><!-- .entry-content -->
+
+	
+<div class="author-info clear">
+	<div class="author-avatar">
+		<span class="avatar-container"><img alt="" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/e2f2dcbcb482924fd04c24c9af027dd6" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://2.gravatar.com/avatar/e2f2dcbcb482924fd04c24c9af027dd6?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-e2f2dcbcb482924fd04c24c9af027dd6-0"></span>	</div><!-- .author-avatar -->
+
+	<div class="author-description">
+		<h2 class="author-title">
+			<span class="author-heading">Author:</span>
+			<a href="https://ireneli.eu/author/irenelizihui/" rel="author">Irene</a>
+		</h2>
+
+		<p class="author-bio">
+			Keep calm and update blog.			<a class="author-link" href="https://ireneli.eu/author/irenelizihui/" rel="author">
+				View All Posts							</a>
+		</p><!-- .author-bio -->
+	</div><!-- .author-description -->
+</div><!-- .author-info -->
+
+	<footer class="entry-footer">
+			</footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+<div class="post-navigation-container">
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://ireneli.eu/2016/12/10/deep-learning-14-optimization/" rel="prev"><span class="post-navigation-header">Previous Post</span> Deep Learning 14 : Optimization, an&nbsp;Overview</a></div><div class="nav-next"><a href="https://ireneli.eu/2017/03/12/ml-recap-slides-sharing/" rel="next"><span class="post-navigation-header">Next Post</span> ML Recap Slides&nbsp;sharing</a></div></div>
+	</nav><svg class="little-pencil" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1013.5px" height="72.3px" viewBox="0 0 1013.5 72.3" style="enable-background:new 0 0 1013.5 72.3;" xml:space="preserve" aria-hidden="true">
+<path class="pencil-little0" d="M10,0C10,0,0,10.9,0,35.8c0,28.2,10,36.5,10,36.5h841.4V0H10z"></path>
+<path class="pencil-little1" d="M57,0c0,0-10,10.9-10,35.8c0,28.2,10,36.5,10,36.5h821.4V0L57,0z"></path>
+<path class="pencil-little2" d="M101,0c0,0-10,10.9-10,35.8c0,28.2,10,36.5,10,36.5h821.4V0L101,0z"></path>
+<rect x="92.7" y="24.3" class="pencil-little3" width="829.7" height="22.8"></rect>
+<polygon class="pencil-little4" points="92.7,49.5 101,72.3 922.4,72.3 922.4,49.5 "></polygon>
+<path class="pencil-little5" d="M1013.5,36.1l-91.2,36.1c0,0-8.4-9.8-8.4-36.1S922.4,0,922.4,0L1013.5,36.1z"></path>
+<path class="pencil-little6" d="M1013.5,36.1l-33.5,13.3c0,0-3.1-3.6-3.1-13.3s3.1-13.3,3.1-13.3L1013.5,36.1z"></path>
+<path class="pencil-little5" d="M922.4,72.3c0,0-12.7-5.4-14-10C907,57.7,914,53,914,49.4s-10-7.8-10-13.6s10-7.8,10-12.9s-5.7-8.3-5.7-13.6s14-9.3,14-9.3l11,35.8L922.4,72.3z"></path>
+</svg>
+</div>
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			5 thoughts on “<span>TensorFlow 07: Word Embeddings (2) – Loading Pre-trained&nbsp;Vectors</span>”		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-128" class="comment byuser comment-author-djargon even thread-even depth-1 parent highlander-comment">
+			<article id="div-comment-128" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/4dc1085938b6f966259505b4c851759e" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://1.gravatar.com/avatar/4dc1085938b6f966259505b4c851759e?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-4dc1085938b6f966259505b4c851759e-0"></span>						<b class="fn"><a href="http://gravatar.com/djargon" rel="external nofollow" class="url">djargon</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#comment-128">
+							<time datetime="2017-01-28T12:24:42+00:00">
+								January 28, 2017 at 12:24 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>can you provide the full source code of this tutorial please?</p>
+<p id="comment-like-128" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?like_comment=128&amp;_wpnonce=6f3af947d6" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-128" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?replytocom=128#respond" onclick="return addComment.moveForm( &quot;div-comment-128&quot;, &quot;128&quot;, &quot;respond&quot;, &quot;1643&quot; )" aria-label="Reply to djargon">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-129" class="comment byuser comment-author-irenelizihui bypostauthor odd alt depth-2 highlander-comment">
+			<article id="div-comment-129" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/e2f2dcbcb482924fd04c24c9af027dd6(1)" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://2.gravatar.com/avatar/e2f2dcbcb482924fd04c24c9af027dd6?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-e2f2dcbcb482924fd04c24c9af027dd6-1"></span>						<b class="fn"><a href="http://www.ireneli.eu/" rel="external nofollow" class="url">Irene</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#comment-129">
+							<time datetime="2017-01-29T00:25:48+00:00">
+								January 29, 2017 at 12:25 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Oh, sorry they are related to my current research. As I am still trying to improve, so I hope would upload to Github soon <img draggable="false" class="emoji" alt="😀" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/1f600.svg" scale="0"></p>
+<p id="comment-like-129" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?like_comment=129&amp;_wpnonce=4ad68235b0" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-129" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?replytocom=129#respond" onclick="return addComment.moveForm( &quot;div-comment-129&quot;, &quot;129&quot;, &quot;respond&quot;, &quot;1643&quot; )" aria-label="Reply to Irene">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-132" class="comment even thread-odd thread-alt depth-1 parent highlander-comment">
+			<article id="div-comment-132" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/ff08e4df216fe0a33b747023a32dbb57" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://0.gravatar.com/avatar/ff08e4df216fe0a33b747023a32dbb57?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-ff08e4df216fe0a33b747023a32dbb57-0"></span>						<b class="fn"><a href="http://no/" rel="external nofollow" class="url">Shilei Cao</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#comment-132">
+							<time datetime="2017-02-04T08:05:18+00:00">
+								February 4, 2017 at 8:05 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I think u don’t see the source code of VocabularyProcessor seriously. The id of the vocabulary is initialized with an ‘UNK’, whose id is 0. u can see it from <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/learn/python/learn/preprocessing/categorical_vocabulary.py" rel="nofollow">https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/learn/python/learn/preprocessing/categorical_vocabulary.py</a><br>
+. so the id ur code return will be 1 bigger than the correct one.</p>
+<p id="comment-like-132" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?like_comment=132&amp;_wpnonce=64cdd37e80" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-132" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?replytocom=132#respond" onclick="return addComment.moveForm( &quot;div-comment-132&quot;, &quot;132&quot;, &quot;respond&quot;, &quot;1643&quot; )" aria-label="Reply to Shilei Cao">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-136" class="comment byuser comment-author-irenelizihui bypostauthor odd alt depth-2 highlander-comment">
+			<article id="div-comment-136" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/e2f2dcbcb482924fd04c24c9af027dd6(1)" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://2.gravatar.com/avatar/e2f2dcbcb482924fd04c24c9af027dd6?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-e2f2dcbcb482924fd04c24c9af027dd6-2"></span>						<b class="fn"><a href="http://www.ireneli.eu/" rel="external nofollow" class="url">Irene</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#comment-136">
+							<time datetime="2017-02-16T13:56:56+00:00">
+								February 16, 2017 at 1:56 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi Shilei, thanks for the reply. But I did check my model, by using “list(model.vocab.keys())”, so it gives you a list of words that are in your vocabulary. Then for each word, you could apply “model[word]” to get access the word embeddings.</p>
+<p>Thanks.</p>
+<p id="comment-like-136" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?like_comment=136&amp;_wpnonce=3c92f72239" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-136" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?replytocom=136#respond" onclick="return addComment.moveForm( &quot;div-comment-136&quot;, &quot;136&quot;, &quot;respond&quot;, &quot;1643&quot; )" aria-label="Reply to Irene">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-137" class="comment byuser comment-author-irenelizihui bypostauthor even depth-2 highlander-comment">
+			<article id="div-comment-137" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/e2f2dcbcb482924fd04c24c9af027dd6(1)" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://2.gravatar.com/avatar/e2f2dcbcb482924fd04c24c9af027dd6?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-e2f2dcbcb482924fd04c24c9af027dd6-3"></span>						<b class="fn"><a href="http://www.ireneli.eu/" rel="external nofollow" class="url">Irene</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#comment-137">
+							<time datetime="2017-02-16T13:58:41+00:00">
+								February 16, 2017 at 1:58 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>It seems that the gensim lib excluding the “UNK” thing (in my previous reply). I will check the TF one, thanks for your reminder <img draggable="false" class="emoji" alt="😀" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/1f600.svg" scale="0"></p>
+<p id="comment-like-137" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?like_comment=137&amp;_wpnonce=0017910e7b" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-137" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/?replytocom=137#respond" onclick="return addComment.moveForm( &quot;div-comment-137&quot;, &quot;137&quot;, &quot;respond&quot;, &quot;1643&quot; )" aria-label="Reply to Irene">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+</div><!-- #comments -->
+
+	<div class="pencil-shaving-contain">
+		<svg class="pencil-shaving" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="31.5px" height="54.8px" viewBox="0 0 31.5 54.8" style="enable-background:new 0 0 31.5 54.8;" xml:space="preserve" aria-hidden="true">
+<polygon class="pencil-shaving0" points="17.8,0 25.9,13.1 23.4,14.6 18.4,10.9 22.4,15.5 20.3,18 18.3,17.8 18.7,20 20.5,24.2 25.2,25.4
+	25.3,26.5 28.6,27.4 27.6,29.6 28.6,31.2 27.1,33.4 28.9,35.6 31.5,36 27.2,51.6 23.6,54.8 23.9,50.8 19.3,51.4 18.3,47.6 15,48
+	14.6,44.1 10.1,43.6 11.8,38.5 7.3,37.6 8.1,32.8 4.3,32 6.1,28.5 2.2,26.5 4,23.7 1.8,21.2 4.7,18.4 2.3,14.8 7.1,14.1 5.4,9.6
+	9.3,9.1 9.2,4.3 13.8,4.1 13.6,0.6 "></polygon>
+<path class="pencil-shaving1" d="M27.2,51.6l-2.4,0l0.1-2.6c0-0.2-0.1-0.3-0.2-0.4c-0.1-0.1-0.3-0.1-0.5,0l-3.9,1.8l-0.4-3.6
+	c0-0.1-0.1-0.3-0.2-0.3c-0.1-0.1-0.3-0.1-0.4-0.1l-2.9,0.6l0.1-3.6c0-0.1,0-0.3-0.1-0.4c-0.1-0.1-0.2-0.1-0.4-0.1h-3.3l0.7-4.8
+	c0-0.3-0.1-0.5-0.4-0.6l-4-0.8l0.8-3.8c0-0.2-0.1-0.5-0.3-0.6L6.8,31l0.7-2.9c0.1-0.2-0.1-0.5-0.3-0.6L4.1,26l1.2-1.8
+	c0.1-0.2,0.1-0.4,0-0.6l-2-2.6l2.8-1.9c0.1-0.1,0.2-0.2,0.2-0.3c0-0.1,0-0.3-0.1-0.4l-2.2-3l3.8-0.4c0.1,0,0.3-0.1,0.4-0.2
+	c0.1-0.1,0.1-0.3,0.1-0.4l-1.2-4l3.2-0.1c0.1,0,0.3-0.1,0.4-0.2c0.1-0.1,0.1-0.2,0.1-0.4l-0.4-4.5h4.2c0.1,0,0.3-0.1,0.4-0.2
+	c0.1-0.1,0.1-0.2,0.1-0.4l-0.1-3.1L17.8,0l-5.3,0c-0.1,0-0.3,0.1-0.4,0.2s-0.1,0.2-0.1,0.4l0.3,2.4L8.6,3.3c-0.3,0-0.5,0.2-0.5,0.5
+	v4L4.5,8.2c-0.2,0-0.3,0.1-0.4,0.2C4,8.6,4,8.8,4,8.9l1.5,4.2L1.3,14c-0.2,0-0.3,0.2-0.4,0.3c-0.1,0.2,0,0.3,0.1,0.5l2.6,3.4l-3,2.6
+	c-0.1,0.1-0.2,0.2-0.2,0.4c0,0.1,0.1,0.3,0.2,0.4l2.2,2.1l-2.6,3C0,26.7,0,26.9,0,27s0.2,0.3,0.3,0.3l4.4,1.8l-2.4,3.2
+	c-0.1,0.1-0.1,0.3-0.1,0.5c0.1,0.2,0.2,0.3,0.4,0.3l4.1,0.7L4,38.5c-0.1,0.2-0.1,0.3,0,0.5c0.1,0.2,0.3,0.3,0.4,0.3h6.2
+	c0,0-2.4,5.9-2.1,6.3c0.2,0.3,5.2,0,5.2,0l0.1,3.3c0,0.3,0.2,0.5,0.5,0.5h3.4v3.8c0,0.2,0.1,0.3,0.2,0.4s0.3,0.1,0.5,0.1l4.3-1.7
+	l0.5,2.3c0,0.2,0.1,0.3,0.3,0.4c0.1,0,0.1,0,0.2,0c0.1,0,0.2,0,0.3-0.1L27.2,51.6z"></path>
+<polygon class="pencil-shaving2" points="28,16.4 23.6,9.3 23.1,10.3 24.8,13.2 24.1,13.6 25.5,16.8 26.5,16.2 26.9,16.8 "></polygon>
+<polygon class="pencil-shaving2" points="22.8,16.8 25.3,18.1 24.1,18.8 21.7,17.3 23.5,19.4 18.3,17.8 23.1,19.9 18.3,19 17.8,17.5 21.3,16.8
+	22.4,15.5 "></polygon>
+<polygon class="pencil-shaving2" points="24.1,25.6 25.5,25.4 26.5,26.8 28,26.8 30.9,26.1 29.6,28.1 28,29.2 29,30.7 29.3,31.6 27.5,33
+	29.2,34.3 29.3,35.6 31.1,35.9 28.3,35.9 28,34.7 25.9,33.7 28,31.1 26.5,29.7 28,27.9 24.9,28.7 25.3,26.5 "></polygon>
+</svg>
+	</div><!-- .pencil-shaving-contain -->
+
+
+	<div id="comments-form">
+		<div class="comments-form-contain">
+			<svg class="post-mark" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="395.7px" height="155.5px" viewBox="0 0 395.7 155.5" style="enable-background:new 0 0 395.7 155.5;" xml:space="preserve" aria-hidden="true">
+<path class="post-mark0" d="M318.4,155.5c-42.9,0-77.8-34.9-77.8-77.7S275.5,0,318.4,0s77.8,34.9,77.8,77.8S361.3,155.5,318.4,155.5z M318.4,5c-40.1,0-72.8,32.6-72.8,72.8c0,40.1,32.6,72.7,72.8,72.7s72.8-32.6,72.8-72.7C391.2,37.6,358.5,5,318.4,5z"></path>
+<path class="post-mark0" d="M318.4,136.6c-32.4,0-58.8-26.4-58.8-58.8c0-32.4,26.4-58.8,58.8-58.8s58.8,26.4,58.8,58.8C377.2,110.2,350.9,136.6,318.4,136.6z M318.4,20.9c-31.3,0-56.8,25.5-56.8,56.8s25.5,56.8,56.8,56.8s56.8-25.5,56.8-56.8S349.8,20.9,318.4,20.9z"></path>
+<path class="post-mark0" d="M247.6,32.1c0.9-1.4,1.8-2.8,2.8-4.1c-0.8-0.5-1.6-1-2.4-1.5c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4c-10.2,0-15.3,3.2-20.3,6.4C51,29.3,46.7,32,37.9,32c-8.8,0-13.1-2.7-17.6-5.6C15.3,23.3,10.2,20,0,20v5c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6C246.1,31.1,246.8,31.6,247.6,32.1z"></path>
+<path class="post-mark0" d="M240,46.7c-3.2-1.2-7.1-2.1-12.3-2.1c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4v5c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c4.5,0,7.8,0.7,10.6,1.8C238.9,49.9,239.4,48.3,240,46.7z"></path>
+<path class="post-mark0" d="M234.5,69.8c-2-0.4-4.2-0.6-6.8-0.6c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4v5c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c2.5,0,4.6,0.2,6.5,0.6C234.3,73.2,234.4,71.5,234.5,69.8z"></path>
+<path class="post-mark0" d="M235.8,94.7c-2.3-0.5-5-0.8-8.1-0.8c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4v5c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c3.9,0,6.9,0.5,9.5,1.4C236.7,98.4,236.2,96.6,235.8,94.7z"></path>
+<path class="post-mark0" d="M248.9,125.4c-0.3-0.2-0.6-0.4-0.9-0.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4v5c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6c3,1.9,6.2,3.9,10.5,5.1C253.3,131.4,251,128.5,248.9,125.4z"></path>
+</svg>
+<svg class="stamp" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="157.3px" height="186px" viewBox="0 0 157.3 186" style="enable-background:new 0 0 157.3 186;" xml:space="preserve" aria-hidden="true">
+<path class="stamp0" d="M157.3,16.4V0h-15.7c-0.4,3.3-3.3,5.9-6.7,5.9s-6.3-2.6-6.7-5.9h-9.1c-0.4,3.3-3.3,5.9-6.7,5.9s-6.3-2.6-6.7-5.9h-9.1c-0.4,3.3-3.3,5.9-6.7,5.9S83.7,3.3,83.3,0h-9.1c-0.4,3.3-3.3,5.9-6.7,5.9c-3.4,0-6.3-2.6-6.7-5.9h-9.1c-0.4,3.3-3.3,5.9-6.7,5.9c-3.4,0-6.3-2.6-6.7-5.9h-9.1c-0.4,3.3-3.3,5.9-6.7,5.9c-3.4,0-6.3-2.6-6.7-5.9H0v16.4c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8s-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8s-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8V186h15.8c0-3.7,3-6.8,6.8-6.8c3.7,0,6.8,3,6.8,6.8h9c0-3.7,3-6.8,6.8-6.8c3.7,0,6.8,3,6.8,6.8h9c0-3.7,3-6.8,6.8-6.8c3.7,0,6.8,3,6.8,6.8h9c0-3.7,3-6.8,6.8-6.8s6.8,3,6.8,6.8h9c0-3.7,3-6.8,6.8-6.8s6.8,3,6.8,6.8h9c0-3.7,3-6.8,6.8-6.8s6.8,3,6.8,6.8h15.6v-14.5c-3.7,0-6.8-3-6.8-6.8c0-3.7,3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8c0-3.7,3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8s3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8c0-3.7,3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8c0-3.7,3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8s3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8c0-3.7,3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8C150.5,19.4,153.6,16.4,157.3,16.4z"></path>
+<rect x="15.5" y="16.4" class="stamp1" width="126.3" height="153.9"></rect>
+<g>
+	<path class="stamp2" d="M124.6,66.4c1.6,3.9,2.5,8.8,2.5,14.6s-1.7,11.5-5,16.9c-3.4,5.4-7.4,9.8-12.1,13.1c-4.7,3.3-9,5-12.9,5c-2.5,0-4.5-0.8-6-2.4c-1.5-1.6-2.5-3.6-3-6c-6.3,6.3-11.6,9.5-15.9,9.5c-2.9,0-5.9-1.5-9-4.5c-3.2-3-4.7-5.9-4.7-8.5c0-2.6,0.8-5.8,2.5-9.6c1.7-3.8,3.8-7.5,6.3-11.1c2.6-3.6,5.7-6.7,9.4-9.3c3.7-2.6,7.2-3.9,10.4-3.9s6.6,1.6,9.9,4.8c3.4,3.2,5,6.6,5,10c0,1.8-0.5,3.7-1.6,5.7c0.9,1.1,1.4,2,1.4,2.8c0,0.8-0.2,2.2-0.5,4.2c-0.3,2-0.6,3.5-0.7,4.3c-0.1,0.9,0,1.5,0.3,1.9c1.1,0,2.6-0.9,4.6-2.7c2-1.8,4-4.6,5.9-8.4c1.9-3.8,2.8-7.7,2.8-11.8c0-6.8-1.7-12-5.2-15.6c-3.5-3.6-8.4-5.4-14.8-5.4c-8.1,0-15.9,2.5-23.4,7.4c-7.5,5-13.4,11.2-17.7,18.6c-4.3,7.4-6.5,14.8-6.5,22c0,13.3,6.5,19.9,19.4,19.9c6.7,0,12.7-0.8,18-2.5c4.9-1.6,7.7-2.2,8.6-1.9c0.9,0.3,1.3,1,1.3,2.2c0,2.3-1.5,4.6-4.5,6.7c-3,2.2-6.5,3.9-10.6,5.1c-4.1,1.2-7.9,1.9-11.4,1.9c-8.9,0-17-3.1-24.3-9.2c-7.3-6.1-10.9-13.4-10.9-22c0-6.7,1.6-13.6,4.7-20.7c3.1-7.1,7.3-13.7,12.6-19.6c5.3-5.9,11.9-10.8,19.8-14.6c7.9-3.8,16.4-5.7,25.7-5.7c9.2,0,16.7,2.8,22.4,8.3C120.5,58.9,123,62.5,124.6,66.4z M71.4,106.3c2.4,0,6-2,10.7-5.8c4.8-3.9,7.7-8.1,8.7-12.7c0.2-0.7,0.6-1.1,1.1-1.3c-1.1-3.3-2.5-5-4.2-5c-3.6,0-7.6,3-11.9,9c-4.4,6-6.5,10.4-6.5,13.2C69.3,105.4,70,106.3,71.4,106.3z"></path>
+</g>
+</svg>
+	<div id="respond" class="comment-respond js">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://ireneli.eu/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate="">
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="282514b40b"><input type="hidden" name="_wp_http_referer" value="/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none solid rgba(0, 0, 0, 0.7); word-spacing: 0px; text-indent: 0px; line-height: 25.2px; width: 612px;" class="autosizejs "></textarea><textarea id="comment" name="comment" title="Enter your comment here..." placeholder="Enter your comment here..." style="height: 45px; overflow: hidden; word-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+		</li></ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/ad516503a11cd5ca435acc9bb6523536" alt="Gravatar" width="25" class="no-grav" originals="25" src-orig="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" scale="2">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name</label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value=""></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/ad516503a11cd5ca435acc9bb6523536(1)" alt="WordPress.com Logo" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;wordpress&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/ad516503a11cd5ca435acc9bb6523536(1)" alt="Twitter picture" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;twitter&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/ad516503a11cd5ca435acc9bb6523536(1)" alt="Facebook photo" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;facebook&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/ad516503a11cd5ca435acc9bb6523536(1)" alt="Google+ photo" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;googleplus&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="1643" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="1b735906b3"></p>
+<input type="hidden" name="genseq" value="1495140565">
+<p style="display: none;"></p>			<input type="hidden" id="ak_js" name="ak_js" value="1495140567585"></form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>		</div><!-- .comments-form-contain -->
+	</div><!-- #comments-form -->
+
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	<aside id="secondary" class="widget-area" role="complementary">
+		<section id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://ireneli.eu/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></section><section id="blog-stats-2" class="widget widget_blog-stats"><h2 class="widget-title">Blog Stats</h2>		<ul>
+			<li>34,173 hits</li>
+		</ul>
+		</section><section id="categories-2" class="widget widget_categories"><h2 class="widget-title">I care about…</h2>		<ul>
+	<li class="cat-item cat-item-18127"><a href="https://ireneli.eu/category/algorithm/">Algorithm</a> (15)
+</li>
+	<li class="cat-item cat-item-1131271"><a href="https://ireneli.eu/category/deep-learning/">Deep Learning</a> (19)
+</li>
+	<li class="cat-item cat-item-468501899"><a href="https://ireneli.eu/category/energy-based-learning/">Energy-Based Learning</a> (2)
+</li>
+	<li class="cat-item cat-item-14253612"><a href="https://ireneli.eu/category/graph-database/">Graph Database</a> (11)
+</li>
+	<li class="cat-item cat-item-479198622"><a href="https://ireneli.eu/category/inference-models/">Inference Models</a> (2)
+</li>
+	<li class="cat-item cat-item-40978"><a href="https://ireneli.eu/category/machine-learning/">Machine Learning</a> (13)
+</li>
+	<li class="cat-item cat-item-145707"><a href="https://ireneli.eu/category/natural-language-processing/">Natural Language Processing</a> (5)
+</li>
+	<li class="cat-item cat-item-832"><a href="https://ireneli.eu/category/python/">Python</a> (15)
+</li>
+	<li class="cat-item cat-item-37653"><a href="https://ireneli.eu/category/statitics/">Statitics</a> (9)
+</li>
+	<li class="cat-item cat-item-3549"><a href="https://ireneli.eu/category/theory/">Theory</a> (15)
+</li>
+	<li class="cat-item cat-item-1"><a href="https://ireneli.eu/category/uncategorized/">Uncategorized</a> (2)
+</li>
+		</ul>
+</section><section id="gallery-3" class="widget widget-gallery">
+<h2 class="widget-title">Gallery</h2>
+<div class="widget-gallery-circle carousel">
+<div class="tiled-gallery type-circle" data-original-width="265" data-carousel-extra="{&quot;blog_id&quot;:100737779,&quot;permalink&quot;:&quot;https:\/\/ireneli.eu\/2017\/01\/17\/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors\/&quot;,&quot;likes_blog_id&quot;:100737779}">
+		<div class="gallery-row" style="width: 265px; height: 88px;" data-original-width="265" data-original-height="88">
+							<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/cath/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="1352" data-orig-file="https://irenelizihui.files.wordpress.com/2016/07/cath.jpg" data-orig-size="640,640" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="cath" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/07/cath.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/07/cath.jpg?w=640" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/cath.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="cath" alt="cath" style="width: 84px; height: 84px;" srcset="https://i2.wp.com/irenelizihui.files.wordpress.com/2016/07/cath.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/caffe/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="1351" data-orig-file="https://irenelizihui.files.wordpress.com/2016/07/caffe.jpg" data-orig-size="960,946" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="caffe" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/07/caffe.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/07/caffe.jpg?w=840" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/caffe.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="caffe" alt="caffe" style="width: 84px; height: 84px;" srcset="https://i2.wp.com/irenelizihui.files.wordpress.com/2016/07/caffe.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/fun/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="328" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/fun.jpg" data-orig-size="479,533" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="fun" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/fun.jpg?w=270" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/fun.jpg?w=479" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/fun.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="fun" alt="fun" style="width: 84px; height: 84px;" srcset="https://i2.wp.com/irenelizihui.files.wordpress.com/2016/01/fun.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+			</div>
+	<div class="gallery-row" style="width: 265px; height: 88px;" data-original-width="265" data-original-height="88">
+							<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/delivery-1/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="323" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/delivery-1.jpg" data-orig-size="1920,980" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;1&quot;}" data-image-title="Adv" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/delivery-1.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/delivery-1.jpg?w=840" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/delivery-1.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="Adv" alt="Adv" style="width: 84px; height: 84px;" srcset="https://i1.wp.com/irenelizihui.files.wordpress.com/2016/01/delivery-1.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/fresh_togo-1/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="324" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/fresh_togo-1.jpg" data-orig-size="6236,3508" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;1&quot;}" data-image-title="Adv" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/fresh_togo-1.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/fresh_togo-1.jpg?w=840" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/fresh_togo-1.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="Adv" alt="Adv" style="width: 84px; height: 84px;" srcset="https://i2.wp.com/irenelizihui.files.wordpress.com/2016/01/fresh_togo-1.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/ps/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="326" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/ps.jpg" data-orig-size="582,611" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="ps" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/ps.jpg?w=286" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/ps.jpg?w=582" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/ps.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="ps" alt="ps" style="width: 84px; height: 84px;" srcset="https://i1.wp.com/irenelizihui.files.wordpress.com/2016/01/ps.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+			</div>
+	<div class="gallery-row" style="width: 265px; height: 88px;" data-original-width="265" data-original-height="88">
+							<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/garden/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="327" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/garden.jpg" data-orig-size="589,593" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="garden" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/garden.jpg?w=298" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/garden.jpg?w=589" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/garden.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="garden" alt="garden" style="width: 84px; height: 84px;" srcset="https://i0.wp.com/irenelizihui.files.wordpress.com/2016/01/garden.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/sketch/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="331" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/sketch.jpg" data-orig-size="580,581" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="sketch" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/sketch.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/sketch.jpg?w=580" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/sketch.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="sketch" alt="sketch" style="width: 84px; height: 84px;" srcset="https://i2.wp.com/irenelizihui.files.wordpress.com/2016/01/sketch.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/sn/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="344" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/sn.jpg" data-orig-size="896,638" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="sn" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/sn.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/sn.jpg?w=840" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/sn.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="sn" alt="sn" style="width: 84px; height: 84px;" srcset="https://i1.wp.com/irenelizihui.files.wordpress.com/2016/01/sn.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+			</div>
+</div>
+
+</div>
+</section><section id="calendar-3" class="widget widget_calendar"><h2 class="widget-title">Posts</h2><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar">
+	<caption>January 2017</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="Monday">M</th>
+		<th scope="col" title="Tuesday">T</th>
+		<th scope="col" title="Wednesday">W</th>
+		<th scope="col" title="Thursday">T</th>
+		<th scope="col" title="Friday">F</th>
+		<th scope="col" title="Saturday">S</th>
+		<th scope="col" title="Sunday">S</th>
+	</tr>
+	</thead>
+
+	<tfoot>
+	<tr>
+		<td colspan="3" id="prev"><a href="https://ireneli.eu/2016/12/">« Dec</a></td>
+		<td class="pad">&nbsp;</td>
+		<td colspan="3" id="next"><a href="https://ireneli.eu/2017/03/">Mar »</a></td>
+	</tr>
+	</tfoot>
+
+	<tbody>
+	<tr>
+		<td colspan="6" class="pad">&nbsp;</td><td>1</td>
+	</tr>
+	<tr>
+		<td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+	</tr>
+	<tr>
+		<td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
+	</tr>
+	<tr>
+		<td>16</td><td><a href="https://ireneli.eu/2017/01/17/" aria-label="Posts published on January 17, 2017">17</a></td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td>
+	</tr>
+	<tr>
+		<td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td>
+	</tr>
+	<tr>
+		<td>30</td><td>31</td>
+		<td class="pad" colspan="5">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table></div></section>	</aside><!-- #secondary -->
+		</div><!-- .wrap -->
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="wrap">
+
+			
+			<div class="site-info">
+				<svg class="line" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1509.5px" height="15.6px" viewBox="0 0 1509.5 15.6" style="enable-background:new 0 0 1509.5 15.6;" xml:space="preserve" aria-hidden="true">
+<path class="line0" d="M746,8.7c1.2,0,2.5,0,3.7,0c13.9-0.1,27.8-0.3,41.7-0.4S819.1,8,833,7.8c13.9-0.1,27.8-0.3,41.7-0.4s27.8-0.3,41.7-0.4s27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c3.3,0,6.7-0.1,10-0.1c-503-3.3-1006,0.7-1508.9,12.2c13.9,0.3,27.7,0.6,41.6,0.8c13.9,0.2,27.7,0.5,41.6,0.6s27.8,0.3,41.6,0.5c13.9,0.1,27.8,0.2,41.6,0.3c13.9,0.1,27.8,0.1,41.6,0.1c13.9,0,27.8,0,41.6-0.1c13.9-0.1,27.8-0.1,41.6-0.3c13.9-0.1,27.8-0.3,41.6-0.4c13.9-0.2,27.7-0.4,41.6-0.6c13.9-0.2,27.7-0.5,41.6-0.8s27.7-0.6,41.6-1c13.9-0.4,27.7-0.8,41.6-1.2c13.7-0.4,27.5-0.3,41.3-0.4c13.9-0.1,27.8-0.3,41.7-0.4s27.8-0.3,41.7-0.4s27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4C720.7,8.9,733.3,8.8,746,8.7z"></path>
+</svg>
+				
+				<a href="https://wordpress.com/?ref=footer_custom_blog">Blog at WordPress.com</a>.
+				
+							</div><!-- .site-info -->
+		</div><!-- .wrap -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<!--  -->
+<script type="text/javascript" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-e2f2dcbcb482924fd04c24c9af027dd6">
+	</div>
+	<div class="grofile-hash-map-4dc1085938b6f966259505b4c851759e">
+	</div>
+	<div class="grofile-hash-map-e2f2dcbcb482924fd04c24c9af027dd6">
+	</div>
+	<div class="grofile-hash-map-ff08e4df216fe0a33b747023a32dbb57">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/irenelizihui.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/irenelizihui.wordpress.com\/wp-login.php?action=logout&_wpnonce=bb8ce03fc3","homeURL":"https:\/\/ireneli.eu\/","postID":"1643","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/saved_resource(3)"></script>
+
+	<div id="carousel-reblog-box">
+		<form action="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post">
+				<input type="hidden" id="carousel-reblog-blog-id" value="100737779">
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://ireneli.eu">
+				<input type="hidden" id="carousel-reblog-blog-title" value="Café, bonne nuit">
+				<input type="hidden" id="carousel-reblog-post-url" value="">
+				<input type="hidden" id="carousel-reblog-post-title" value="">
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="b62af9380d"><input type="hidden" name="_wp_http_referer" value="/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/">		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/ireneli.eu\/2017\/01\/17\/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors\/":1643};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+		<script type="text/javascript" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/form.js"></script>
+<script type="text/javascript" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/saved_resource(4)"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?m=1363304414h&amp;ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+// Infinite scroll support
+jQuery( function( $ ) {
+	$( document.body ).on( 'post-load', function() {
+		SyntaxHighlighter.highlight();
+	} );
+} );
+</script>
+<link rel="stylesheet" id="all-css-0-3" href="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/jetpack-carousel.css" type="text/css" media="all">
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="all-css-2-3" href="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/tiled-gallery.css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var comment_like_text = {"loading":"Loading..."};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"100737779","siteName":"Caf\u00e9, bonne nuit","siteURL":"https:\/\/ireneli.eu","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/41d51fc4b66fc5438624b6c78b0dac36?s=50&d=https%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/scratchpad","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/irenelizihui.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fireneli.eu%2F2017%2F01%2F17%2Ftensorflow-07-word-embeddings-2-loading-pre-trained-vectors%2F","themeURL":"https:\/\/wordpress.com\/theme\/scratchpad\/","xhrURL":"https:\/\/ireneli.eu\/wp-admin\/admin-ajax.php","nonce":"f8b4720e07","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"ef01797c1f\" \/>","referer":"https:\/\/ireneli.eu\/2017\/01\/17\/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/irenelizihui.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Firenelizihui.wordpress.com%2F2017%2F01%2F17%2Ftensorflow-07-word-embeddings-2-loading-pre-trained-vectors%2F","postID":"1643","shortlink":"http:\/\/wp.me\/p6OGuT-qv","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/ireneli.eu\/1643","statsLink":"https:\/\/wordpress.com\/stats\/post\/1643\/ireneli.eu","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Scratchpad","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in the Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 221 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/irenelizihui.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fireneli.eu%2F2017%2F01%2F17%2Ftensorflow-07-word-embeddings-2-loading-pre-trained-vectors%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/ireneli.eu\/wp-admin\/admin-ajax.php","nonce":"12e55a3aad","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"0","login_url":"https:\/\/irenelizihui.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fireneli.eu%2F2017%2F01%2F17%2Ftensorflow-07-word-embeddings-2-loading-pre-trained-vectors%2F","blog_id":"100737779","local_comments_commenting_as":"<fieldset><label for=\"email\">Email<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=100737779&v=wpcom&tz=0&user_id=0&subd=irenelizihui","is_public":"1","reblog_enabled":""};
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/ireneli.eu\/wp-admin\/admin-ajax.php","nonce":"12e55a3aad","display_exif":"1","display_geo":"1","single_image_gallery":"","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"0","login_url":"https:\/\/irenelizihui.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fireneli.eu%2F2017%2F01%2F17%2Ftensorflow-07-word-embeddings-2-loading-pre-trained-vectors%2F","blog_id":"100737779","local_comments_commenting_as":"<fieldset><label for=\"email\">Email<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=100737779&v=wpcom&tz=0&user_id=0&subd=irenelizihui","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/saved_resource(5)"></script><div id="actionbar" class="actnbr-pub-scratchpad actnbr-has-follow actnbr-hidden"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename actnbr-hidden"><a href="https://ireneli.eu/"><img alt="" src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/41d51fc4b66fc5438624b6c78b0dac36" class="avatar avatar-50" height="50" width="50" originals="50" scale="2"> Café, bonne nuit</a></li> 				   	<li class="actnbr-folded-customize actnbr-hidden"><a href="https://irenelizihui.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Firenelizihui.wordpress.com%2F2017%2F01%2F17%2Ftensorflow-07-word-embeddings-2-loading-pre-trained-vectors%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Customize<span></span></span></a></li> 				    <li class="actnbr-folded-follow actnbr-hidden"><a class="actnbr-action actnbr-actn-follow" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a></li> 					<li class="actnbr-signup actnbr-hidden"><a href="https://wordpress.com/start/">Sign up</a></li> 				    <li class="actnbr-login actnbr-hidden"><a href="https://irenelizihui.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fireneli.eu%2F2017%2F01%2F17%2Ftensorflow-07-word-embeddings-2-loading-pre-trained-vectors%2F">Log in</a></li> 				     				    <li class="actnbr-shortlink actnbr-hidden"><a href="http://wp.me/p6OGuT-qv">Copy shortlink</a></li> 				    <li class="flb-report actnbr-hidden"><a href="http://en.wordpress.com/abuse/">Report this content</a></li> 				     				     				    <li class="actnbr-subs actnbr-hidden"><a href="https://subscribe.wordpress.com/">Manage subscriptions</a></li> 				    <li class="actnbr-fold actnbr-hidden"><a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/">Collapse this bar</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>		<iframe src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			&lt;p class="robots-nocontent"&gt;&lt;img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /&gt;&lt;/p&gt;
+		</noscript><script src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'100737779','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'100737779','v':'wpcom','tz':'0','user_id':'0','post':'1643','subd':'irenelizihui'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGRVYVNrSFguN3FwSmQ5RGtNX3VQcj1yVzhiflM1THQtLGFdQ2toOXYlRzViJW5xbX5waCtlRlhkdXdlbWFwRUpYN0ZyLFpYZ1BxWEl0R3RpdV9ua2dqS2VKfDAtLDRlODJUUFZKVFR5MitjWUlPZFtIdXJ5TXZHen4vR05aX1JUWCUyQ1hWWytobSwxLHNbYy1MWjJufGRmZHh1YVtNZDMrLTFYTXwrb2NRV0NmfjNXaiVnLUFqV3FLbmdqclgraFJyQV0lUXUrTi12R3o9W2p2RkF4eCxHPzlIWVRGXXRXdEF3Nys4ZF1GSksxSmU0QXcrWWl0WnZEfHNaYyUyejVLL0hDS2RWa2JWP2s2R1dpb2s1TmRWS2x4T2lIXTVzLw=='}]);
+_stq.push([ 'clickTrackerInit', '100737779', '1643' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+
+<!--
+	generated in 0.157 seconds
+	102907 bytes batcached for 300 seconds
+-->
+<div class="comment-likes-overlay" style="display: none;"></div><img src="./TensorFlow 07_ Word Embeddings (2) – Loading Pre-trained Vectors – Café, bonne nuit_files/g.gif" alt=":)" id="wpstats" scale="0"></body></html>

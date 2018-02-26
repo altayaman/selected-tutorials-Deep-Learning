@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Monofur for Powerline';
+        src: url('/static/fonts/monofur.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+body {
+    font-family: 'Monofur for Powerline';
+    font-weight: normal;
+    font-style: normal;
+} 
+
+blockquote {
+    font-size: 16px;
+}
+
+p {
+    font-size: 16px;
+}
+
+pre {
+    font-size: 14px;
+    font-family: 'Monofur for Powerline';
+    line-height: 1em;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.no-style {
+    color: black;
+}

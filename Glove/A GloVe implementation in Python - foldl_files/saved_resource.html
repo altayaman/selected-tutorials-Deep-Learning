@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<!-- saved from url=(0421)https://disqus.com/embed/comments/?base=default&f=foldl&t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&s_o=default#version=d952d33e35a1c499438fbdfafc2ef715 -->
+<html lang="en" dir="ltr" class="js no-touch localstorage sessionstorage contenteditable use-opacity-transitions"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Disqus Comments</title>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <style>
+        .alert--warning {
+            border-radius: 3px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            background-color: #FFE070;
+            color: #A47703;
+        }
+
+        .alert--warning a,
+        .alert--warning a:hover,
+        .alert--warning strong {
+            color: #A47703;
+            font-weight: bold;
+        }
+
+        .alert--error p,
+        .alert--warning p {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        
+        </style>
+    
+    <style>
+        html {
+            overflow: hidden;
+        }
+
+        #error {
+            display: none;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        
+    </style>
+
+<script src="./cb=gapi.loaded_0" async=""></script><script crossorigin="anonymous" id="bootstrap-script" data-app="lounge" src="./lounge.load.d952d33e35a1c499438fbdfafc2ef715.js"></script><meta http-equiv="Content-Security-Policy" content="script-src https:;"><link rel="stylesheet" href="./lounge.5f04e83cf97ee6a6cf16dc8e296ed78d.css"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="lounge/main" src="./lounge.bundle.987c6346e2effb8e4f350d48ecf53d13.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="remote/config" src="./config.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ga" src="./ga.js"></script><style id="css_1493014467907"></style><!--<base target="_parent">--><base href="." target="_parent"><link rel="stylesheet" href="./discovery.ec9371c4ef39ecee074c2acf24d5e0e2.css"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="discovery/main" src="./discovery.bundle.6aa8d068ba5176f85f980f898293fefa.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="fb" src="./sdk.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="gapi" src="./api.js" gapi_processed="true"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+<body class="serif">
+    
+
+    
+    <div id="error" class="alert--error">
+        <p>We were unable to load Disqus. If you are a moderator please see our <a href="https://docs.disqus.com/help/83/"> troubleshooting guide</a>. </p>
+    </div>
+
+    
+    <script type="text/json" id="disqus-forumData">{"session":{"canModerate":false,"audienceSyncVerified":false,"mustVerify":false,"canReply":true,"mustVerifyEmail":false},"features":{},"forum":{"raw_guidelines":null,"twitterName":"","guidelines":null,"favicon":{"permalink":"https://disqus.com/api/forums/favicons/foldl.jpg","cache":"//a.disquscdn.com/1492794604/images/favicon-default.png"},"disableDisqusBranding":false,"id":"foldl","createdAt":"2012-07-15T11:18:18.231739","category":"","founder":"7695","daysAlive":0,"installCompleted":true,"pk":"1527538","channel":null,"description":"","raw_description":"","permissions":{},"name":"foldl","language":"en","settings":{"supportLevel":0,"adsDRNativeEnabled":false,"colorScheme":"auto","adsVideoEnabled":false,"adsProductVideoEnabled":false,"adsPositionTopEnabled":false,"ssoRequired":false,"unapproveLinks":false,"adsEnabled":false,"adsProductLinksThumbnailsEnabled":false,"adsProductStoriesEnabled":false,"organicDiscoveryEnabled":true,"allowMedia":true,"disable3rdPartyTrackers":false,"adsProductDisplayEnabled":false,"discoveryMax":false,"discoveryLocked":false,"moderatorText":"","linkAffiliationEnabled":false,"allowAnonPost":true,"hasCustomAvatar":false,"adultContent":false,"promotedDiscoveryEnabled":false,"allowAnonVotes":false,"mustVerify":true,"adsSettingsLocked":false,"mustVerifyEmail":true,"audienceSyncEnabled":false,"typeface":"serif","adsPositionBottomEnabled":false,"mediaembedEnabled":true,"adsProductLinksEnabled":false,"validateAllPosts":false,"discoveryThumbnailsEnabled":false,"isVIP":false,"adsPositionInthreadEnabled":false},"organizationId":3214,"url":"http://foldl.me/","daysThreadAlive":0,"avatar":{"small":{"permalink":"https://disqus.com/api/forums/avatars/foldl.jpg?size=32","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"large":{"permalink":"https://disqus.com/api/forums/avatars/foldl.jpg?size=92","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}},"signedUrl":"http://disq.us/?url=http%3A%2F%2Ffoldl.me%2F&key=rAxqDHQnV0MlKFdHOAZlZQ"}}</script>
+
+    
+    <script type="text/json" id="disqus-threadData">{"cursor":{"hasPrev":false,"prev":null,"total":15,"hasNext":false,"next":"1:0:0"},"code":0,"response":{"lastModified":1477219416,"posts":[{"dislikes":0,"numReports":0,"likes":1,"message":"\u003cp>Hi Jon, great post. Very insightful. I have one small doubt. Your gradient computation seems to be erroneous. There is a quadratic term inside sum, so from chain rule it should be differentiated first (which you did but missed the constant 2) then you missed the summation over i when differentiating with respect to wj and vice versa. Please correct me if I am wrong\u003c/p>","id":"2518302944","isHighlighted":false,"author":{"username":"disqus_w14GDPc2gp","about":"","name":"shashank gupta","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2367679999999999,"profileUrl":"https://disqus.com/by/disqus_w14GDPc2gp/","url":"","reputation":1.2367679999999999,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-02-17T06:11:22","id":"196935456","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/disqus_w14GDPc2gp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/disqus_w14GDPc2gp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/disqus_w14GDPc2gp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-02-17T06:14:25","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Hi Jon, great post. Very insightful. I have one small doubt. Your gradient computation seems to be erroneous. There is a quadratic term inside sum, so from chain rule it should be differentiated first (which you did but missed the constant 2) then you missed the summation over i when differentiating with respect to wj and vice versa. Please correct me if I am wrong","canVote":false,"thread":"3054955367","forum":"foldl","depth":0,"points":1,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":1,"message":"\u003cp>Thanks for your feedback, Shashank! #1: You're correct that I dropped the 2 constant while differentiating. Since all of the parameter gradients would have this constant, we can just absorb it into the learning rate value in the AdaGrad updates. This is the somewhat-standard lazy notation that I chose to use in the post.\u003c/p>","id":"2522040581","isHighlighted":false,"author":{"username":"jonrgauthier","about":"","name":"Jon Gauthier","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.243217,"profileUrl":"https://disqus.com/by/jonrgauthier/","url":"http://foldl.me/","reputation":1.243217,"location":"Stanford, CA","isPrivate":false,"signedUrl":"http://disq.us/?url=http%3A%2F%2Ffoldl.me%2F&key=rAxqDHQnV0MlKFdHOAZlZQ","isPrimary":true,"joinedAt":"2008-01-22T14:17:14","id":"7695","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar32.jpg?1476561479"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479","large":{"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-02-18T21:10:31","parent":2518302944,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Thanks for your feedback, Shashank! #1: You're correct that I dropped the 2 constant while differentiating. Since all of the parameter gradients would have this constant, we can just absorb it into the learning rate value in the AdaGrad updates. This is the somewhat-standard lazy notation that I chose to use in the post.","canVote":false,"thread":"3054955367","forum":"foldl","depth":1,"points":1,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>#2: There is no summation required in this gradient. The parameters w_i and w_j are vectors. Their gradient equations do include an elementwise product, which is what you may have been looking for.\u003c/p>\u003cp>(It may be helpful to explicitly write this in the equations \u2014 I think I'll do that now!)\u003c/p>","id":"2522045918","isHighlighted":false,"author":{"username":"jonrgauthier","about":"","name":"Jon Gauthier","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.243217,"profileUrl":"https://disqus.com/by/jonrgauthier/","url":"http://foldl.me/","reputation":1.243217,"location":"Stanford, CA","isPrivate":false,"signedUrl":"http://disq.us/?url=http%3A%2F%2Ffoldl.me%2F&key=rAxqDHQnV0MlKFdHOAZlZQ","isPrimary":true,"joinedAt":"2008-01-22T14:17:14","id":"7695","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar32.jpg?1476561479"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479","large":{"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-02-18T21:13:28","parent":2518302944,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"#2: There is no summation required in this gradient. The parameters w_i and w_j are vectors. Their gradient equations do include an elementwise product, which is what you may have been looking for.\n\n(It may be helpful to explicitly write this in the equations \u2014 I think I'll do that now!)","canVote":false,"thread":"3054955367","forum":"foldl","depth":1,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Thanks Jon, that clears my doubt!!\u003c/p>","id":"2528290338","isHighlighted":false,"author":{"username":"disqus_w14GDPc2gp","about":"","name":"shashank gupta","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2367679999999999,"profileUrl":"https://disqus.com/by/disqus_w14GDPc2gp/","url":"","reputation":1.2367679999999999,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-02-17T06:11:22","id":"196935456","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/disqus_w14GDPc2gp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/disqus_w14GDPc2gp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/disqus_w14GDPc2gp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-02-22T14:04:23","parent":2522045918,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Thanks Jon, that clears my doubt!!","canVote":false,"thread":"3054955367","forum":"foldl","depth":2,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Hi Jon, Thanks very much for your tutorial. I just have one question at the partial derivative:\u003cbr>f = F(X_ij)*[w_i^Tw_j + b_i + b_j - log(X_{ij}) ]^2 =&gt; df/dw_i = 2*F(X_ij)*w_j o [w_i^Tw_j + b_i + b_j - log(X_{ij})]. It is possible to ignore \"2\" without influencing the final result?\u003c/p>","id":"2758211933","isHighlighted":false,"author":{"username":"vhihiu","about":"","name":"V\u0169 H\u1ea3i Hi\u1ec7u","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.23667,"profileUrl":"https://disqus.com/by/vhihiu/","url":"","reputation":1.23667,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-06-30T09:13:38","id":"213384220","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/vhihiu.jpg","cache":"https://c.disquscdn.com/uploads/users/21338/4220/avatar32.jpg?1467645779"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/vhihiu.jpg","cache":"https://c.disquscdn.com/uploads/users/21338/4220/avatar92.jpg?1467645779","large":{"permalink":"https://disqus.com/api/users/avatars/vhihiu.jpg","cache":"https://c.disquscdn.com/uploads/users/21338/4220/avatar92.jpg?1467645779"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-06-30T09:38:23","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Hi Jon, Thanks very much for your tutorial. I just have one question at the partial derivative:\nf = F(X_ij)*[w_i^Tw_j + b_i + b_j - log(X_{ij}) ]^2 => df/dw_i = 2*F(X_ij)*w_j o [w_i^Tw_j + b_i + b_j - log(X_{ij})]. It is possible to ignore \"2\" without influencing the final result?","canVote":false,"thread":"3054955367","forum":"foldl","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>You're right, I dropped the '2' in the gradient calculation. This constant can be absorbed into the overall learning rate without any harmful effect.\u003cbr>Perhaps I should write it out for clarity, though \u2014 you're the second to ask!\u003c/p>","id":"2758844516","isHighlighted":false,"author":{"username":"jonrgauthier","about":"","name":"Jon Gauthier","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.243217,"profileUrl":"https://disqus.com/by/jonrgauthier/","url":"http://foldl.me/","reputation":1.243217,"location":"Stanford, CA","isPrivate":false,"signedUrl":"http://disq.us/?url=http%3A%2F%2Ffoldl.me%2F&key=rAxqDHQnV0MlKFdHOAZlZQ","isPrimary":true,"joinedAt":"2008-01-22T14:17:14","id":"7695","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar32.jpg?1476561479"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479","large":{"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-06-30T17:01:54","parent":2758211933,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"You're right, I dropped the '2' in the gradient calculation. This constant can be absorbed into the overall learning rate without any harmful effect.\nPerhaps I should write it out for clarity, though \u2014 you're the second to ask!","canVote":false,"thread":"3054955367","forum":"foldl","depth":1,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Hi, Thanks for your reply! it's clear to me.\u003c/p>","id":"2759904468","isHighlighted":false,"author":{"username":"vhihiu","about":"","name":"V\u0169 H\u1ea3i Hi\u1ec7u","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.23667,"profileUrl":"https://disqus.com/by/vhihiu/","url":"","reputation":1.23667,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-06-30T09:13:38","id":"213384220","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/vhihiu.jpg","cache":"https://c.disquscdn.com/uploads/users/21338/4220/avatar32.jpg?1467645779"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/vhihiu.jpg","cache":"https://c.disquscdn.com/uploads/users/21338/4220/avatar92.jpg?1467645779","large":{"permalink":"https://disqus.com/api/users/avatars/vhihiu.jpg","cache":"https://c.disquscdn.com/uploads/users/21338/4220/avatar92.jpg?1467645779"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-07-01T06:43:30","parent":2758844516,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Hi, Thanks for your reply! it's clear to me.","canVote":false,"thread":"3054955367","forum":"foldl","depth":2,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Hi Jon, a small doubt. I analyzed your equations again, from what I understood the reason for not having summations in gradient I mentioned is that you are calculating cost for individual Wi and Wi one at a time so J is just Wi*Wj + bi + b -logxij and hence gradients are as you described. Summation as I mentioned will come if you calculate gradients for full batch mode. Is my understanding correct?\u003c/p>","id":"2530694687","isHighlighted":false,"author":{"username":"disqus_w14GDPc2gp","about":"","name":"shashank gupta","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2367679999999999,"profileUrl":"https://disqus.com/by/disqus_w14GDPc2gp/","url":"","reputation":1.2367679999999999,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-02-17T06:11:22","id":"196935456","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/disqus_w14GDPc2gp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/disqus_w14GDPc2gp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/disqus_w14GDPc2gp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-02-23T14:41:14","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Hi Jon, a small doubt. I analyzed your equations again, from what I understood the reason for not having summations in gradient I mentioned is that you are calculating cost for individual Wi and Wi one at a time so J is just Wi*Wj + bi + b -logxij and hence gradients are as you described. Summation as I mentioned will come if you calculate gradients for full batch mode. Is my understanding correct?","canVote":false,"thread":"3054955367","forum":"foldl","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":1,"message":"\u003cp>I see \u2014 you're right, I currently only show the gradient w.r.t. w_i for a single w_j pair, rather than for all pairs w_j. There should be a summation in those gradients, then.\u003c/p>\u003cp>I will make the change shortly; thanks for the note!\u003c/p>","id":"2530991442","isHighlighted":false,"author":{"username":"jonrgauthier","about":"","name":"Jon Gauthier","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.243217,"profileUrl":"https://disqus.com/by/jonrgauthier/","url":"http://foldl.me/","reputation":1.243217,"location":"Stanford, CA","isPrivate":false,"signedUrl":"http://disq.us/?url=http%3A%2F%2Ffoldl.me%2F&key=rAxqDHQnV0MlKFdHOAZlZQ","isPrimary":true,"joinedAt":"2008-01-22T14:17:14","id":"7695","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar32.jpg?1476561479"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479","large":{"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-02-23T17:25:32","parent":2530694687,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"I see \u2014 you're right, I currently only show the gradient w.r.t. w_i for a single w_j pair, rather than for all pairs w_j. There should be a summation in those gradients, then.\n\nI will make the change shortly; thanks for the note!","canVote":false,"thread":"3054955367","forum":"foldl","depth":1,"points":1,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>I've started to build a sense inventory in an unsupervised way. Therefore I find this useful to build that sense inventory for my mother tongue Sinhala language. Hope this Glove implementation will be helpful.\u003c/p>","id":"2352264427","isHighlighted":false,"author":{"username":"lishanidissanayake","about":"","name":"Lishani Dissanayake","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.232124,"profileUrl":"https://disqus.com/by/lishanidissanayake/","url":"","reputation":1.232124,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-11-10T19:20:25","id":"182276120","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/lishanidissanayake.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/lishanidissanayake.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/lishanidissanayake.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2015-11-10T19:20:35","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"I've started to build a sense inventory in an unsupervised way. Therefore I find this useful to build that sense inventory for my mother tongue Sinhala language. Hope this Glove implementation will be helpful.","canVote":false,"thread":"3054955367","forum":"foldl","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Awesome post! Helps me a lot to develop C++ implementation.\u003c/p>","id":"2313520492","isHighlighted":false,"author":{"username":"dselivanov","about":"","name":"Dmitriy Selivanov","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.113333,"profileUrl":"https://disqus.com/by/dselivanov/","url":"http://dsnotes.com/","reputation":1.113333,"location":"Moscow","isPrivate":true,"signedUrl":"http://disq.us/?url=http%3A%2F%2Fdsnotes.com%2F&key=hNl2T3-MeCQ20KHB1zQ-ZQ","isPrimary":true,"joinedAt":"2013-08-06T05:21:05","id":"66005100","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/dselivanov.jpg","cache":"https://c.disquscdn.com/uploads/users/6600/5100/avatar32.jpg?1490531750"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/dselivanov.jpg","cache":"https://c.disquscdn.com/uploads/users/6600/5100/avatar92.jpg?1490531750","large":{"permalink":"https://disqus.com/api/users/avatars/dselivanov.jpg","cache":"https://c.disquscdn.com/uploads/users/6600/5100/avatar92.jpg?1490531750"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2015-10-18T14:28:22","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Awesome post! Helps me a lot to develop C++ implementation.","canVote":false,"thread":"3054955367","forum":"foldl","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Hi Jon. First of all great job been done here, thank you.\u003cbr>do you have any idea, for a corpora such as (&gt; 3 billion words) any hints regarding the threshold? (minimum co-occurrence between \u003cbr>pairs) I found that when i make the co-occurrence (&gt; 0) say 1 so the \u003cbr>rare co-occurrences are not taken into account which obviously reduces \u003cbr>the memory consumption as well as the running time. Is 1 here is \u003cbr>acceptable? is it a little big? small? Thank you.\u003c/p>","id":"2250679998","isHighlighted":false,"author":{"name":"shadi","url":"","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1492794604/images/noavatar32.png","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1492794604/images/noavatar92.png","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1492794604/images/noavatar92.png","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"},"signedUrl":"","isAnonymous":true},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2015-09-13T01:26:01","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Hi Jon. First of all great job been done here, thank you.\ndo you have any idea, for a corpora such as (> 3 billion words) any hints regarding the threshold? (minimum co-occurrence between \npairs) I found that when i make the co-occurrence (> 0) say 1 so the \nrare co-occurrences are not taken into account which obviously reduces \nthe memory consumption as well as the running time. Is 1 here is \nacceptable? is it a little big? small? Thank you.","canVote":false,"thread":"3054955367","forum":"foldl","depth":0,"points":0,"moderationLabels":["anonymous"],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Hi Jon, I really like your post about GloVe. I have one suggestion: Label distinct vectors with distinct letters or put $\\hat$ or $\\tilde$ on top of them.\u003c/p>","id":"2142312176","isHighlighted":false,"author":{"name":"P","url":"","profileUrl":"","emailHash":"","avatar":{"small":{"permalink":"//a.disquscdn.com/1492794604/images/noavatar32.png","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"large":{"permalink":"//a.disquscdn.com/1492794604/images/noavatar92.png","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"},"permalink":"//a.disquscdn.com/1492794604/images/noavatar92.png","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"},"signedUrl":"","isAnonymous":true},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2015-07-17T16:12:06","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Hi Jon, I really like your post about GloVe. I have one suggestion: Label distinct vectors with distinct letters or put $\\hat$ or $\\tilde$ on top of them.","canVote":false,"thread":"3054955367","forum":"foldl","depth":0,"points":0,"moderationLabels":["anonymous"],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Can this read the pretrained GloVe data sets  ?\u003c/p>","id":"1739981259","isHighlighted":false,"author":{"username":"charlesmartin14","about":"","name":"charlesmartin14","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.20794,"profileUrl":"https://disqus.com/by/charlesmartin14/","url":"","reputation":1.20794,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2010-01-20T19:56:55","id":"1663074","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/charlesmartin14.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/charlesmartin14.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/charlesmartin14.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2014-12-13T07:37:25","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Can this read the pretrained GloVe data sets  ?","canVote":false,"thread":"3054955367","forum":"foldl","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>No. The code was developed for pedagogical purposes, not actual use\u2014I can't guarantee any kind of reasonable performance if you use this in a real application.\u003c/p>","id":"1744567556","isHighlighted":false,"author":{"username":"jonrgauthier","about":"","name":"Jon Gauthier","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.243217,"profileUrl":"https://disqus.com/by/jonrgauthier/","url":"http://foldl.me/","reputation":1.243217,"location":"Stanford, CA","isPrivate":false,"signedUrl":"http://disq.us/?url=http%3A%2F%2Ffoldl.me%2F&key=rAxqDHQnV0MlKFdHOAZlZQ","isPrimary":true,"joinedAt":"2008-01-22T14:17:14","id":"7695","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar32.jpg?1476561479"},"isCustom":true,"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479","large":{"permalink":"https://disqus.com/api/users/avatars/jonrgauthier.jpg","cache":"https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2014-12-16T05:36:47","parent":1739981259,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"No. The code was developed for pedagogical purposes, not actual use\u2014I can't guarantee any kind of reasonable performance if you use this in a real application.","canVote":false,"thread":"3054955367","forum":"foldl","depth":1,"points":0,"moderationLabels":[],"isEdited":false}],"thread":{"feed":"https://foldl.disqus.com/a_glove_implementation_in_python_15/latest.rss","identifiers":[],"dislikes":0,"likes":4,"message":"","id":"3054955367","createdAt":"2014-09-26T05:01:26","category":"1556966","author":"7695","isSpam":false,"signedLink":"http://disq.us/?url=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&key=eMj70I90gHcSGKMv0VEMDg","isDeleted":false,"hasStreaming":false,"raw_message":"","isClosed":false,"link":"http://www.foldl.me/2014/glove-python/","slug":"a_glove_implementation_in_python_15","forum":"foldl","clean_title":"A GloVe implementation in Python","posts":15,"moderators":[7695],"title":"\n      \n        A GloVe implementation in Python\n      \n    ","highlightedPost":null}},"order":"popular"}</script>
+
+    
+
+    <div id="fixed-content"></div>
+
+
+    
+        
+<script type="text/json" id="disqus-urls">{
+    "root":"//disqus.com",
+    "next":"https://c.disquscdn.com/next/current/embed"
+}</script>
+
+        
+        <script>!function () {
+            var d = document;
+            var toH = d.head.appendChild.bind(d.head);
+
+            var v = window.location.href.match(/[#&?]version=([0-9a-f]{32})/);
+            var src = 'https://c.disquscdn.com/next/embed/lounge.load';
+            if (v)
+                src += '.' + v[1];
+            src += '.js';
+
+            var s = d.createElement('script');
+            s.crossOrigin = 'anonymous';
+            s.id = 'bootstrap-script';
+            s.setAttribute('data-app', 'lounge');
+            s.src = src;
+            toH(s);
+
+            var m = d.createElement('meta');
+            m.setAttribute('http-equiv', 'Content-Security-Policy');
+            m.setAttribute('content', "script-src https:;");
+            toH(m);
+        }();</script>
+    
+
+
+<script src="./common.bundle.08b03b11c747b79c4d4135b49e2f8725.js"></script><div id="layout" data-tracking-area="layout"><div id="onboard" data-tracking-area="onboard"><div></div></div><div id="highlighted-post" data-tracking-area="highlighted" class="highlighted-post" style="display: none;"></div><div id="global-alert"></div><header id="main-nav" data-tracking-area="main-nav"><nav class="nav nav-primary"><ul><li class="nav-tab nav-tab--primary tab-conversation active" data-role="post-count"><a class="publisher-nav-color"><span class="comment-count">15 comments</span><span class="comment-count-placeholder">Comments</span></a></li><li class="nav-tab nav-tab--primary tab-community"><a href="https://disqus.com/home/forums/foldl/" class="publisher-nav-color" data-action="community-sidebar" data-forum="foldl" id="community-tab"><span class="community-name"><strong>foldl</strong></span><strong class="community-name-placeholder">Community</strong></a></li><li class="nav-tab nav-tab--primary dropdown user-menu" data-role="logout"><a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="dropdown-toggle" data-toggle="dropdown">
+<span class="dropdown-toggle-wrapper">
+
+<span>
+Login
+</span>
+
+</span> <span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+
+
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="auth:disqus">Disqus</a>
+</li>
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="auth:facebook">Facebook</a>
+</li>
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="auth:twitter">Twitter</a>
+</li>
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="auth:google">Google</a>
+</li>
+
+
+
+</ul>
+</li><li class="nav-tab nav-tab--primary notification-menu unread" data-role="notification-menu"><a href="https://disqus.com/home/inbox/" class="notification-container" data-action="home" data-home-path="home/inbox/">
+<span class="notification-icon icon-comment" aria-hidden=""></span>
+<span class="notification-count" data-role="notification-count">1</span>
+</a>
+</li></ul></nav></header><section id="conversation" data-role="main" data-tracking-area="main"><div class="nav nav-secondary" data-tracking-area="secondary-nav"><ul><li id="recommend-button" class="nav-tab nav-tab--secondary recommend dropdown"><div class="thread-likes"><a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="recommend" title="Recommend this discussion" class="dropdown-toggle ">
+<span class="label label-default"><span class="recommend-icon icon-heart-empty"></span> Recommend</span>
+<span class="label label-recommended"><span class="recommend-icon icon-heart"></span> Recommended</span>
+<span class="label label-count">4</span>
+</a>
+<ul class="dropdown-menu dropdown-menu--coachmark">
+<li>
+<h2 class="coachmark__heading">Discussion Recommended!</h2>
+<p class="coachmark__description">Recommending means this is a discussion worth sharing. It gets shared to your followers' Disqus feeds, and gives the creator kudos!</p>
+<a href="https://disqus.com/home/?utm_source=disqus_embed&amp;utm_content=recommend_btn" class="btn btn-primary coachmark__button" target="_blank">
+ Find More Discussions 
+</a>
+</li>
+</ul>
+</div></li><li id="thread-share-menu" class="nav-tab nav-tab--secondary dropdown share-menu hidden-sm"><a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="dropdown-toggle" data-toggle="dropdown" title="Share">
+<span class="icon-export"></span>
+<span class="label">Share</span>
+</a>
+<ul class="share-menu dropdown-menu">
+<li>
+<div class="share-menu__label">Share this discussion on</div>
+<ul>
+<li class="twitter">
+<a data-action="share:twitter" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#">Twitter</a>
+</li>
+<li class="facebook">
+<a data-action="share:facebook" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#">Facebook</a>
+</li>
+</ul>
+</li>
+</ul>
+</li><li data-role="post-sort" class="nav-tab nav-tab--secondary dropdown sorting pull-right"><a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="dropdown-toggle" data-toggle="dropdown">Sort by Best<span class="caret"></span></a><ul class="dropdown-menu pull-right"><li class="selected"><a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="sort" data-sort="popular">Best<i aria-hidden="true" class="icon-checkmark"></i></a></li><li class=""><a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="sort" data-sort="desc">Newest<i aria-hidden="true" class="icon-checkmark"></i></a></li><li class=""><a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="sort" data-sort="asc">Oldest<i aria-hidden="true" class="icon-checkmark"></i></a></li></ul></li></ul></div><div id="posts"><div id="form" class="textarea-wrapper--top-level"><form class="reply"><div class="postbox">
+<div role="alert"></div>
+<div class="avatar">
+<span class="user">
+<img data-role="user-avatar" src="./noavatar92.7b2fde640943965cc88df0cdee365907.png" alt="Avatar">
+</span>
+</div>
+
+<div class="textarea-wrapper" data-role="textarea" dir="auto"><div><span class="placeholder">Join the discussion…</span><div class="textarea" tabindex="0" role="textbox" aria-multiline="true" contenteditable="PLAINTEXT-ONLY" data-role="editable" aria-label="Join the discussion…" style="overflow: auto; word-wrap: break-word; max-height: 350px;"><p><br></p></div><div style="display: none;"><ul class="user-mention__list">
+<li class="header user-mention__header">
+<h5>in this conversation</h5>
+</li>
+</ul>
+</div></div>
+<div data-role="drag-drop-placeholder" class="media-drag-hover" style="display: none">
+<div class="drag-text">
+⬇ Drag and drop your images here to upload them.
+</div>
+</div>
+<div class="media-preview empty" data-role="media-preview"><ul data-role="media-progress-list"></ul>
+<ul data-role="media-rich-list"></ul>
+<div class="media-expanded empty" data-role="media-preview-expanded">
+<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-role="media-preview-expanded-image" alt="Media preview placeholder">
+</div>
+</div>
+<div class="edit-alert" role="postbox-alert"></div>
+<div class="post-actions">
+<ul class="wysiwyg">
+<li class="wysiwyg__item" data-role="media-uploader"><a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" tabindex="-1" data-action="attach" class="attach" title="Upload Images"><span>Attach</span></a>
+<input type="file" data-role="media-upload" tabindex="-1" accept="image/*">
+</li>
+</ul>
+</div>
+</div>
+
+<div data-role="login-form"><div><section class="auth-section logged-out">
+<div class="connect">
+<h6>Log in with</h6>
+<ul data-role="login-menu" class="services login-buttons">
+
+<li class="auth-disqus">
+<button type="button" data-action="auth:disqus" title="Disqus" class="connect__button"><i class="icon-disqus"></i></button>
+</li>
+<li class="auth-facebook">
+<button type="button" data-action="auth:facebook" title="Facebook" class="connect__button"><i class="icon-facebook-circle"></i></button>
+</li>
+<li class="auth-twitter">
+<button type="button" data-action="auth:twitter" title="Twitter" class="connect__button"><i class="icon-twitter-circle"></i></button>
+</li>
+<li class="auth-google">
+<button type="button" data-action="auth:google" title="Google" class="connect__button"><i class="icon-google-plus-circle"></i></button>
+</li>
+</ul>
+</div>
+<div class="guest">
+<h6 class="guest-form-title">
+<span class="register-text"> or sign up with Disqus </span>
+<span class="guest-text"> or pick a name </span>
+</h6>
+
+<div class="help-tooltip__wrapper help-icon">
+<div id="rules" class="tooltip show help-tooltip">
+<h3 class="help-tooltip__heading">Disqus is a discussion network</h3>
+<ul class="help-tooltip__list">
+<li><span>Disqus never moderates or censors. The rules on this community are its own.</span></li>
+<li><span>Your email is safe with us. It's only used for moderation and optional notifications.</span></li>
+<li><span>Don't be a jerk or do anything illegal. Everything is easier that way.</span></li>
+</ul>
+<p class="clearfix"><a href="https://docs.disqus.com/kb/terms-and-policies/" class="btn btn-small help-tooltip__button" target="_blank">Read full terms and conditions</a></p>
+</div>
+</div>
+
+<p class="input-wrapper">
+<input dir="auto" type="text" placeholder="Name" name="display_name" id="view50_display_name" maxlength="30" class="input--text">
+</p>
+
+<div class="guest-details " data-role="guest-details">
+<p class="input-wrapper">
+<input dir="auto" type="email" placeholder="Email" name="email" id="view50_email" class="input--text">
+</p>
+
+<p class="input-wrapper">
+<input dir="auto" type="password" class="register-text input--text" placeholder="Password" name="password" id="view50_password">
+</p>
+
+<div class="acceptance-wrapper register-text">
+By signing up, you agree to the Disqus <a target="_blank" href="https://help.disqus.com/customer/portal/articles/1753105-basic-rules-for-disqus-powered-profiles-and-discussions">Basic Rules</a>, <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466260-terms-of-service">Terms of Service</a>, and <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466259-privacy-policy">Privacy Policy</a>.
+</div>
+<div class="acceptance-wrapper guest-text">
+By posting, you agree to the Disqus <a target="_blank" href="https://help.disqus.com/customer/portal/articles/1753105-basic-rules-for-disqus-powered-profiles-and-discussions">Basic Rules</a>, <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466260-terms-of-service">Terms of Service</a>, and <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466259-privacy-policy">Privacy Policy</a>.
+</div>
+
+<div class="guest-checkbox">
+<label>
+<input type="checkbox" name="author-guest">
+I'd rather post as a guest
+</label>
+</div>
+
+<div class="proceed" data-role="submit-btn-container">
+<button type="submit" class="proceed__button btn submit" aria-label="Post"><span class="icon-proceed"></span><div class="spinner"></div></button>
+<button type="submit" class="proceed__button btn next" aria-label="Next"><span class="icon-proceed"></span><div class="spinner"></div></button>
+</div>
+</div>
+</div>
+</section>
+
+</div></div>
+</div>
+</form></div><button class="alert alert--realtime" data-role="realtime-notification" style="display: none;"></button><div id="no-posts" style="display: none;"></div><ul id="post-list" class="post-list"><li class="post" id="post-2518302944"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_w14GDPc2gp/" class="user" data-action="profile" data-username="disqus_w14GDPc2gp">
+<img data-role="user-avatar" data-user="196935456" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_w14GDPc2gp/" data-action="profile" data-username="disqus_w14GDPc2gp" data-role="username">shashank gupta</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2518302944" data-role="relative-time" class="time-ago" title="Tuesday, February 16, 2016 10:14 PM">
+a year ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Hi Jon, great post. Very insightful. I have one small doubt. Your gradient computation seems to be erroneous. There is a quadratic term inside sum, so from chain rule it should be differentiated first (which you did but missed the constant 2) then you missed the summation over i when differentiating with respect to wj and vice versa. Please correct me if I am wrong</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-1" data-action="upvote" title="">
+
+<span class="updatable count" data-role="likes">1</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/15nbyzk" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2518302944">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2522040581"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/jonrgauthier/" class="user" data-action="profile" data-username="jonrgauthier">
+<img data-role="user-avatar" data-user="7695" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/jonrgauthier/" data-action="profile" data-username="jonrgauthier" data-role="username">Jon Gauthier</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://www.foldl.me/2014/glove-python/#comment-2518302944" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> shashank gupta</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2522040581" data-role="relative-time" class="time-ago" title="Thursday, February 18, 2016 1:10 PM">
+a year ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Thanks for your feedback, Shashank! #1: You're correct that I dropped the 2 constant while differentiating. Since all of the parameter gradients would have this constant, we can just absorb it into the learning rate value in the AdaGrad updates. This is the somewhat-standard lazy notation that I chose to use in the post.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-1" data-action="upvote" title="">
+
+<span class="updatable count" data-role="likes">1</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/15pk2yt" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2522040581">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li><li class="post" id="post-2522045918"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/jonrgauthier/" class="user" data-action="profile" data-username="jonrgauthier">
+<img data-role="user-avatar" data-user="7695" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/jonrgauthier/" data-action="profile" data-username="jonrgauthier" data-role="username">Jon Gauthier</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://www.foldl.me/2014/glove-python/#comment-2518302944" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> shashank gupta</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2522045918" data-role="relative-time" class="time-ago" title="Thursday, February 18, 2016 1:13 PM">
+a year ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>#2: There is no summation required in this gradient. The parameters w_i and w_j are vectors. Their gradient equations do include an elementwise product, which is what you may have been looking for.</p><p>(It may be helpful to explicitly write this in the equations — I think I'll do that now!)</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/15pk732" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2522045918">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2528290338"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_w14GDPc2gp/" class="user" data-action="profile" data-username="disqus_w14GDPc2gp">
+<img data-role="user-avatar" data-user="196935456" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_w14GDPc2gp/" data-action="profile" data-username="disqus_w14GDPc2gp" data-role="username">shashank gupta</a></span>
+
+<span><a href="http://www.foldl.me/2014/glove-python/#comment-2522045918" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Jon Gauthier</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2528290338" data-role="relative-time" class="time-ago" title="Monday, February 22, 2016 6:04 AM">
+a year ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Thanks Jon, that clears my doubt!!</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/15ta1b6" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2528290338">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li></ul>
+</li><li class="post" id="post-2758211933"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/vhihiu/" class="user" data-action="profile" data-username="vhihiu">
+<img data-role="user-avatar" data-user="213384220" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/vhihiu/" data-action="profile" data-username="vhihiu" data-role="username">Vũ Hải Hiệu</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2758211933" data-role="relative-time" class="time-ago" title="Thursday, June 30, 2016 2:38 AM">
+10 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Hi Jon, Thanks very much for your tutorial. I just have one question at the partial derivative:<br>f = F(X_ij)*[w_i^Tw_j + b_i + b_j - log(X_{ij}) ]^2 =&gt; df/dw_i = 2*F(X_ij)*w_j o [w_i^Tw_j + b_i + b_j - log(X_{ij})]. It is possible to ignore "2" without influencing the final result?</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/19m61y5" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2758211933">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2758844516"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/jonrgauthier/" class="user" data-action="profile" data-username="jonrgauthier">
+<img data-role="user-avatar" data-user="7695" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/jonrgauthier/" data-action="profile" data-username="jonrgauthier" data-role="username">Jon Gauthier</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://www.foldl.me/2014/glove-python/#comment-2758211933" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Vũ Hải Hiệu</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2758844516" data-role="relative-time" class="time-ago" title="Thursday, June 30, 2016 10:01 AM">
+10 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>You're right, I dropped the '2' in the gradient calculation. This constant can be absorbed into the overall learning rate without any harmful effect.<br>Perhaps I should write it out for clarity, though — you're the second to ask!</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/19mjm1w" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2758844516">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2759904468"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/vhihiu/" class="user" data-action="profile" data-username="vhihiu">
+<img data-role="user-avatar" data-user="213384220" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/vhihiu/" data-action="profile" data-username="vhihiu" data-role="username">Vũ Hải Hiệu</a></span>
+
+<span><a href="http://www.foldl.me/2014/glove-python/#comment-2758844516" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Jon Gauthier</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2759904468" data-role="relative-time" class="time-ago" title="Thursday, June 30, 2016 11:43 PM">
+10 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Hi, Thanks for your reply! it's clear to me.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/19n6bx0" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2759904468">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li></ul>
+</li><li class="post" id="post-2530694687"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_w14GDPc2gp/" class="user" data-action="profile" data-username="disqus_w14GDPc2gp">
+<img data-role="user-avatar" data-user="196935456" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_w14GDPc2gp/" data-action="profile" data-username="disqus_w14GDPc2gp" data-role="username">shashank gupta</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2530694687" data-role="relative-time" class="time-ago" title="Tuesday, February 23, 2016 6:41 AM">
+a year ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Hi Jon, a small doubt. I analyzed your equations again, from what I understood the reason for not having summations in gradient I mentioned is that you are calculating cost for individual Wi and Wi one at a time so J is just Wi*Wj + bi + b -logxij and hence gradients are as you described. Summation as I mentioned will come if you calculate gradients for full batch mode. Is my understanding correct?</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/15upkin" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2530694687">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2530991442"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/jonrgauthier/" class="user" data-action="profile" data-username="jonrgauthier">
+<img data-role="user-avatar" data-user="7695" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/jonrgauthier/" data-action="profile" data-username="jonrgauthier" data-role="username">Jon Gauthier</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://www.foldl.me/2014/glove-python/#comment-2530694687" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> shashank gupta</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2530991442" data-role="relative-time" class="time-ago" title="Tuesday, February 23, 2016 9:25 AM">
+a year ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>I see — you're right, I currently only show the gradient w.r.t. w_i for a single w_j pair, rather than for all pairs w_j. There should be a summation in those gradients, then.</p><p>I will make the change shortly; thanks for the note!</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-1" data-action="upvote" title="">
+
+<span class="updatable count" data-role="likes">1</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/15uvxhu" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2530991442">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li><li class="post" id="post-2352264427"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/lishanidissanayake/" class="user" data-action="profile" data-username="lishanidissanayake">
+<img data-role="user-avatar" data-user="182276120" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/lishanidissanayake/" data-action="profile" data-username="lishanidissanayake" data-role="username">Lishani Dissanayake</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2352264427" data-role="relative-time" class="time-ago" title="Tuesday, November 10, 2015 11:20 AM">
+a year ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>I've started to build a sense inventory in an unsupervised way. Therefore I find this useful to build that sense inventory for my mother tongue Sinhala language. Hope this Glove implementation will be helpful.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/12wh6uj" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2352264427">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li><li class="post" id="post-2313520492"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/dselivanov/" class="user" data-action="profile" data-username="dselivanov">
+<img data-role="user-avatar" data-user="66005100" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/dselivanov/" data-action="profile" data-username="dselivanov" data-role="username">Dmitriy Selivanov</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2313520492" data-role="relative-time" class="time-ago" title="Sunday, October 18, 2015 7:28 AM">
+2 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Awesome post! Helps me a lot to develop C++ implementation.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/129eru4" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2313520492">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li><li class="post" id="post-2250679998"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="./noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author">shadi</span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2250679998" data-role="relative-time" class="time-ago" title="Saturday, September 12, 2015 6:26 PM">
+2 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Hi Jon. First of all great job been done here, thank you.<br>do you have any idea, for a corpora such as (&gt; 3 billion words) any hints regarding the threshold? (minimum co-occurrence between <br>pairs) I found that when i make the co-occurrence (&gt; 0) say 1 so the <br>rare co-occurrences are not taken into account which obviously reduces <br>the memory consumption as well as the running time. Is 1 here is <br>acceptable? is it a little big? small? Thank you.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/117zvsu" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2250679998">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li><li class="post" id="post-2142312176"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar">
+<div class="user"><img src="./noavatar92.png" class="user" alt="Avatar"></div>
+</div>
+
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author">P</span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-2142312176" data-role="relative-time" class="time-ago" title="Friday, July 17, 2015 9:12 AM">
+2 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Hi Jon, I really like your post about GloVe. I have one suggestion: Label distinct vectors with distinct letters or put $\hat$ or $\tilde$ on top of them.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/zfh6nk" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2142312176">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li><li class="post" id="post-1739981259"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/charlesmartin14/" class="user" data-action="profile" data-username="charlesmartin14">
+<img data-role="user-avatar" data-user="1663074" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/charlesmartin14/" data-action="profile" data-username="charlesmartin14" data-role="username">charlesmartin14</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-1739981259" data-role="relative-time" class="time-ago" title="Friday, December 12, 2014 11:37 PM">
+2 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Can this read the pretrained GloVe data sets  ?</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/srxu4r" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:1739981259">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-1744567556"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/jonrgauthier/" class="user" data-action="profile" data-username="jonrgauthier">
+<img data-role="user-avatar" data-user="7695" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/jonrgauthier/" data-action="profile" data-username="jonrgauthier" data-role="username">Jon Gauthier</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://www.foldl.me/2014/glove-python/#comment-1739981259" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> charlesmartin14</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.foldl.me/2014/glove-python/#comment-1744567556" data-role="relative-time" class="time-ago" title="Monday, December 15, 2014 9:36 PM">
+2 years ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>No. The code was developed for pedagogical purposes, not actual use—I can't guarantee any kind of reasonable performance if you use this in a real application.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/suo4xw" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:1744567556">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li></ul><div class="load-more" data-role="more" style="display: none;"><a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" data-action="more-posts" class="btn load-more__button">Load more comments</a></div></div></section><div id="placement-bottom" data-tracking-area="discovery-south"><div class="post-list" style="height: auto; visibility: visible;"><div style="display: block; width: 100%;"><div id="discovery-main-c332" class="discovery-main">
+
+<section id="col-organic-c350" class="col-organic">
+<header class="discovery-col-header">
+<h2>Also on <strong>foldl</strong>
+</h2>
+</header>
+<ul class="discovery-posts" data-role="discovery-posts"><li class="discovery-post post-0" id="discovery-link-organic-2831541875">
+<a href="http://disq.us/url?url=http%3A%2F%2Ffoldl.me%2F2014%2Fnlu-world-knowledge%2F%3A9eAaCVVl9hE8d4XRD1KB8DR8vPQ&amp;imp=2oul7fv9dp4fu&amp;prev_imp=2otegn52e214&amp;forum_id=1527538&amp;forum=foldl&amp;thread_id=3054955367&amp;thread=2831541875&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=2831541875" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="Where does ice cream come from?">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="2">
+Where does ice cream come from?
+</span>
+</h3>
+
+<ul class="meta">
+<li class="comments">
+1 comment
+</li>
+<li class="time">3 years ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Ffoldl.me%2F2014%2Fnlu-world-knowledge%2F%3A9eAaCVVl9hE8d4XRD1KB8DR8vPQ&amp;imp=2oul7fv9dp4fu&amp;prev_imp=2otegn52e214&amp;forum_id=1527538&amp;forum=foldl&amp;thread_id=3054955367&amp;thread=2831541875&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=2831541875" class="top-comment" data-role="discovery-top-comment">
+<img data-src="//a.disquscdn.com/1492794604/images/noavatar92.png" alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Enyaw</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3">Great to have you back, Jon!</span></p>
+</a>
+
+</li>
+<li class="discovery-post post-1" id="discovery-link-organic-5183860348">
+<a href="http://disq.us/url?url=http%3A%2F%2Fwww.foldl.me%2F2016%2Fsituated-language-learning%2F%3AlFPwDka71Y0YV8YVbvwEO_qmlgw&amp;imp=2oul7fv9dp4fu&amp;prev_imp=2otegn52e214&amp;forum_id=1527538&amp;forum=foldl&amp;thread_id=3054955367&amp;thread=5183860348&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=5183860348" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="Situated language learning">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="2">
+Situated language learning
+</span>
+</h3>
+
+<ul class="meta">
+<li class="comments">
+3 comments
+</li>
+<li class="time">7 months ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Fwww.foldl.me%2F2016%2Fsituated-language-learning%2F%3AlFPwDka71Y0YV8YVbvwEO_qmlgw&amp;imp=2oul7fv9dp4fu&amp;prev_imp=2otegn52e214&amp;forum_id=1527538&amp;forum=foldl&amp;thread_id=3054955367&amp;thread=5183860348&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=5183860348" class="top-comment" data-role="discovery-top-comment">
+<img data-src="https://c.disquscdn.com/uploads/users/7695/avatar92.jpg?1476561479" alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Jon Gauthier</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3"> 1. This is certainly a worry, but I don't think it's time to be concerned yet. There are plenty of artificial …</span></p>
+</a>
+
+</li>
+<li class="discovery-post post-2" id="discovery-link-organic-2927184609">
+<a href="http://disq.us/url?url=http%3A%2F%2Ffoldl.me%2F2014%2Fmetacademy%2F%3Aqkp00qCLneyRgesNIAInzEczuMU&amp;imp=2oul7fv9dp4fu&amp;prev_imp=2otegn52e214&amp;forum_id=1527538&amp;forum=foldl&amp;thread_id=3054955367&amp;thread=2927184609&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=2927184609" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="On Metacademy and knowledge graphs">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="2">
+On Metacademy and knowledge graphs
+</span>
+</h3>
+
+<ul class="meta">
+<li class="comments">
+3 comments
+</li>
+<li class="time">3 years ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Ffoldl.me%2F2014%2Fmetacademy%2F%3Aqkp00qCLneyRgesNIAInzEczuMU&amp;imp=2oul7fv9dp4fu&amp;prev_imp=2otegn52e214&amp;forum_id=1527538&amp;forum=foldl&amp;thread_id=3054955367&amp;thread=2927184609&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=2927184609" class="top-comment" data-role="discovery-top-comment">
+<img data-src="https://c.disquscdn.com/uploads/users/19787/111/avatar92.jpg?1492015280" alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Ajay Prasadh</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3"> Gamification of learning. DAMN. Thats a great idea. It quantifies learning on a relative and absolute scale. …</span></p>
+</a>
+
+</li>
+<li class="discovery-post post-3" id="discovery-link-organic-2080882468">
+<a href="http://disq.us/url?url=http%3A%2F%2Ffoldl.me%2F2013%2Fbiphasic-sleep%2F%3AVwXAhbXryv7fZkHOLBRvNjoUcIk&amp;imp=2oul7fv9dp4fu&amp;prev_imp=2otegn52e214&amp;forum_id=1527538&amp;forum=foldl&amp;thread_id=3054955367&amp;thread=2080882468&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=2080882468" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="My biphasic sleep experiment">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="2">
+My biphasic sleep experiment
+</span>
+</h3>
+
+<ul class="meta">
+<li class="comments">
+5 comments
+</li>
+<li class="time">3 years ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Ffoldl.me%2F2013%2Fbiphasic-sleep%2F%3AVwXAhbXryv7fZkHOLBRvNjoUcIk&amp;imp=2oul7fv9dp4fu&amp;prev_imp=2otegn52e214&amp;forum_id=1527538&amp;forum=foldl&amp;thread_id=3054955367&amp;thread=2080882468&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=2080882468" class="top-comment" data-role="discovery-top-comment">
+<img data-src="https://c.disquscdn.com/uploads/users/5802/4199/avatar92.jpg?1410793039" alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Peter Hurford</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3"> Though one reason I can think of to *not* flip the core lengths around is if you intend to shorten your …</span></p>
+</a>
+
+</li>
+</ul>
+</section>
+
+</div>
+</div></div></div><div id="footer" data-tracking-area="footer" class="disqus-footer__wrapper"><ul class="disqus-footer"><li class="disqus-footer__logo"><a href="https://disqus.com/" rel="nofollow" title="Powered by Disqus" class="disqus-footer__link">Powered by Disqus</a></li><li id="thread-subscribe-button" class="email disqus-footer__item"><div class="default"><a href="https://disqus.com/embed/comments/?base=default&amp;f=foldl&amp;t_u=http%3A%2F%2Fwww.foldl.me%2F2014%2Fglove-python%2F&amp;t_d=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;t_t=%0A%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20A%20GloVe%20implementation%20in%20Python%0A%20%20%20%20%20%20%0A%20%20%20%20&amp;s_o=default#" rel="nofollow" data-action="subscribe" title="Subscribe and get email updates from this discussion" class="disqus-footer__link"><i aria-hidden="true" class="icon icon-mail"></i><span class="clip">Subscribe</span><i aria-hidden="true" class="icon icon-checkmark"></i></a></div><div class="form"><div class="input-wrapper"><input id="thread-subscribe-email" type="email" placeholder="yourname@email.com" class="disqus-footer__input input--text"></div></div></li><li class="install disqus-footer__item"><a href="https://publishers.disqus.com/engage?utm_source=foldl&amp;utm_medium=Disqus-Footer" rel="nofollow" target="_blank" class="disqus-footer__link"><i aria-hidden="true" class="icon icon-disqus"></i><span class="clip hidden-sm">Add Disqus to your site</span><span class="clip visible-sm hidden-xs">Add Disqus</span><span class="clip visible-xs">Add</span></a></li><li class="privacy disqus-footer__item"><a href="https://help.disqus.com/customer/portal/articles/1657951?utm_source=disqus&amp;utm_medium=embed-footer&amp;utm_content=privacy-btn" rel="nofollow" target="_blank" class="disqus-footer__link"><i aria-hidden="true" class="icon icon-lock"></i><span class="clip">Privacy</span></a></li></ul></div></div><iframe style="position: absolute; width: 1px; height: 1px; left: -9999px; display: none;" aria-hidden="true" id="ssIFrame_google" sandbox="allow-scripts allow-same-origin" src="./iframe.html"></iframe><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./96nq-xsaNcg.html" style="border: none;"></iframe></div></div></div><img src="./tpid=c5mnhdpvrsbn2d" style="display: none;"><img src="./23096" style="display: none;"><img src="./saved_resource" style="display: none;"><iframe src="./sync.html" style="display: none;"></iframe></body></html>

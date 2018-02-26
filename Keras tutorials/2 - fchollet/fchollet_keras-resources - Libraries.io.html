@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://libraries.io/github/fchollet/keras-resources -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="msvalidate.01" content="3667D2FEB238C1BF174F3CB1AE0D3C16">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script data-rocketsrc="https://pagead2.googlesyndication.com/pub-config/r20160913/ca-pub-2950082304969984.js" data-rocketoptimized="true"></script><script async="" data-rocketsrc="//www.google-analytics.com/analytics.js" data-rocketoptimized="true"></script><script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"de1001a21b5e1c2756842fd4d20c280b",petok:"49512a5c88fdf37fe4d607a095ca9b0dc3acc1e2-1493013191-1800",zone:"libraries.io",rocket:"a",apps:{}}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=85b614c0f6/cloudflare.min.js"><'+'\/script>');}}catch(e){};
+//]]>
+</script><script type="text/javascript" src="./fchollet_keras-resources - Libraries.io_files/cloudflare.min.js"></script><style type="text/css">.cf-hidden { display: none; } .cf-invisible { visibility: hidden; }</style><script data-module="cloudflare/rocket" id="cfjs_block_9677af6654" onload="CloudFlare.__cfjs_block_9677af6654_load()" onerror="CloudFlare.__cfjs_block_9677af6654_error()" onreadystatechange="CloudFlare.__cfjs_block_9677af6654_readystatechange()" type="text/javascript" src="./fchollet_keras-resources - Libraries.io_files/rocket.js"></script>
+<link rel="stylesheet" media="all" href="./fchollet_keras-resources - Libraries.io_files/application-af11459b0b74e89ee14bd04ad307b69785be68d6584ec5d162e57315710f5244.css" data-turbolinks-track="true">
+<title>fchollet/keras-resources - Libraries.io</title>
+<meta name="description" content="Directory of tutorials and open-source code repositories for working with Keras, the Python deep learning library - a repository on GitHub">
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="46NiTCwel3hQhz1zn1U3lZq2vC7NlnlBUfN1z9upRpPvSQTL1ZcUVLCbGujUh6Uz1/KZVaF7fqBOty6HmkxZrQ==">
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://libraries.io/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://libraries.io/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://libraries.io/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://libraries.io/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://libraries.io/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://libraries.io/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://libraries.io/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://libraries.io/apple-touch-icon-152x152.png">
+<meta name="application-name" content=" ">
+<meta name="msapplication-TileColor" content="#FFFFFF">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="msapplication-square70x70logo" content="/mstile-70x70.png">
+<meta name="msapplication-square150x150logo" content="/mstile-150x150.png">
+<meta name="msapplication-wide310x150logo" content="/mstile-310x150.png">
+<meta name="msapplication-square310x310logo" content="/mstile-310x310.png">
+<meta property="fb:admins" content="508462908">
+<meta name="yandex-verification" content="2a6b144b8bd37026">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Libraries.io">
+<meta property="og:url" content="https://libraries.io/github/fchollet/keras-resources">
+<meta property="og:title" content="fchollet/keras-resources on GitHub">
+<meta property="og:description" content="Directory of tutorials and open-source code repositories for working with Keras, the Python deep learning library - a repository on GitHub">
+<meta property="og:image" content="https://github.com/fchollet?size=200">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@librariesio">
+<meta name="twitter:title" content="fchollet/keras-resources on GitHub">
+<meta name="twitter:description" content="Directory of tutorials and open-source code repositories for working with Keras, the Python deep learning library - a repository on GitHub">
+<meta name="twitter:image" content="https://github.com/fchollet?size=200">
+<link href="https://libraries.io/opensearch.xml" title="Libraries.io" rel="search" type="application/opensearchdescription+xml">
+<script async="" data-rocketsrc="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-265870-38', 'auto');
+    </script>
+<script data-rocketsrc="https://cdn.polyfill.io/v2/polyfill.min.js?features=IntersectionObserver" type="text/rocketscript" data-rocketoptimized="true"></script><script type="text/javascript" src="./fchollet_keras-resources - Libraries.io_files/polyfill.min.js"></script>
+<script data-rocketsrc="https://libraries.io/assets/application-7ba7674f11916e7e022624b1fc32d11264ec7d8e28728599f0ab1c6b4d6edee4.js" data-turbolinks-track="true" integrity="sha256-e6dnTxGRbn4CJiSx/DLREmTsfY4ocoWZ8Ksca01u3uQ=" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "Libraries.io",
+      "url": "https://libraries.io/",
+      "description": "Discover open source libraries, modules and frameworks you can use in your code",
+      "license": "https://github.com/librariesio/libraries.io/blob/master/LICENSE.txt",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://libraries.io/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "Libraries.io",
+      "description": "Discover open source libraries, modules and frameworks you can use in your code",
+      "url": "https://libraries.io/",
+      "logo": "https://libraries.io/apple-touch-icon-152x152.png",
+      "email": "support@libraries.io",
+      "sameAs": [
+        "https://twitter.com/librariesio",
+        "https://www.facebook.com/libraries.io",
+        "https://github.com/librariesio",
+        "https://plus.google.com/101868076054784591044"
+      ]
+    }
+  </script>
+</head>
+<body style="">
+<div class="navbar navbar-inverse navbar-static-top">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="https://libraries.io/"><img width="116" height="22" src="./fchollet_keras-resources - Libraries.io_files/logo-ff2b4e24d68406c7bddf1bea8d15a9f3f06623bc47933cda0c7dc22828dd4a6a.svg" alt="Logo"></a>
+</div>
+<div class="navbar-collapse collapse" id="navbar-main">
+<ul class="nav navbar-nav navbar-right">
+<li>
+<a href="https://libraries.io/explore">Explore</a>
+</li>
+<li>
+<form class="navbar-form" action="https://libraries.io/search" accept-charset="UTF-8" method="get">
+<div class="input-group input-group">
+<input type="text" name="q" id="q" value="" placeholder="Search.." class="form-control" size="40">
+<span class="input-group-btn">
+<button class="btn btn-primary" type="submit">
+<i class="fa fa-search"></i>
+</button>
+</span>
+</div>
+</form> </li>
+<li>
+<div class="navbar-btn btn-group">
+<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Login <span class="caret"></span>
+</button>
+<ul class="dropdown-menu">
+<li>
+<a href="https://libraries.io/login?host_type=github&amp;return_to=https%3A%2F%2Flibraries.io%2Fgithub%2Ffchollet%2Fkeras-resources">
+<i class="fa fa-github"></i> GitHub
+</a> </li>
+<li>
+<a href="https://libraries.io/login?host_type=gitlab&amp;return_to=https%3A%2F%2Flibraries.io%2Fgithub%2Ffchollet%2Fkeras-resources">
+<i class="fa fa-gitlab"></i> GitLab
+</a> </li>
+<li>
+<a href="https://libraries.io/login?host_type=bitbucket&amp;return_to=https%3A%2F%2Flibraries.io%2Fgithub%2Ffchollet%2Fkeras-resources">
+<i class="fa fa-bitbucket"></i> Bitbucket
+</a> </li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-8">
+<h1>
+<a href="https://libraries.io/github/fchollet"><img width="50" height="50" alt="fchollet/keras-resources" src="./fchollet_keras-resources - Libraries.io_files/fchollet"></a>
+fchollet/keras-resources
+<a class="tip" title="View fchollet/keras-resources on GitHub" href="https://github.com/fchollet/keras-resources"><i class="fa fa-github"></i></a>
+</h1>
+</div>
+<div class="col-md-4">
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-md-8">
+<p>
+Directory of tutorials and open-source code repositories for working with Keras, the Python deep learning library
+</p>
+<p>
+Host: <a href="https://libraries.io/github">GitHub</a>
+</p>
+<p>
+Keywords: <a href="https://libraries.io/github/search?keywords=keras">keras</a>, <a href="https://libraries.io/github/search?keywords=learning">learning</a>, <a href="https://libraries.io/github/search?keywords=dataset">dataset</a>, <a href="https://libraries.io/github/search?keywords=deep">deep</a>, <a href="https://libraries.io/github/search?keywords=neural">neural</a>
+</p>
+<hr>
+<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-2950082304969984" data-ad-slot="1929607435" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:750px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:750px;background-color:transparent"><iframe width="750" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" src="./fchollet_keras-resources - Libraries.io_files/saved_resource.html"></iframe></ins></ins></ins>
+<script type="text/rocketscript" data-rocketoptimized="true">
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+<div class="announce instapaper_body md" data-path="README.md" id="readme"><article class="markdown-body entry-content" itemprop="text"><h1>
+<a id="user-content-keras-resources" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#keras-resources" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Keras resources</h1>
+<p>This is a directory of tutorials and open-source code repositories for working with Keras, the Python deep learning library.</p>
+<p>If you have a high-quality tutorial or project to add, please open a PR.</p>
+<h2>
+<a id="user-content-official-starter-resources" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#official-starter-resources" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Official starter resources</h2>
+<ul>
+<li>
+<a href="http://keras.io/">keras.io</a> - Keras documentation</li>
+<li><a href="http://keras.io/getting-started/sequential-model-guide/">Getting started with the Sequential model</a></li>
+<li><a href="http://keras.io/getting-started/functional-api-guide/">Getting started with the functional API</a></li>
+<li><a href="http://keras.io/getting-started/faq/">Keras FAQ</a></li>
+</ul>
+<h2>
+<a id="user-content-tutorials" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#tutorials" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tutorials</h2>
+<ul>
+<li><a href="https://github.com/fastforwardlabs/keras-hello-world/blob/master/kerashelloworld.ipynb">Quick start: the Iris dataset in Keras and scikit-learn</a></li>
+<li><a href="http://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html">Using pre-trained word embeddings in a Keras model</a></li>
+<li><a href="http://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">Building powerful image classification models using very little data</a></li>
+<li><a href="http://blog.keras.io/building-autoencoders-in-keras.html">Building Autoencoders in Keras</a></li>
+<li><a href="http://blog.keras.io/keras-as-a-simplified-interface-to-tensorflow-tutorial.html">A complete guide to using Keras as part of a TensorFlow workflow</a></li>
+<li>Introduction to Keras, from University of Waterloo: <a href="https://www.youtube.com/watch?v=Tp3SaRbql4k">video</a> - <a href="https://uwaterloo.ca/data-science/sites/ca.data-science/files/uploads/files/keras_tutorial.pdf">slides</a>
+</li>
+<li>Introduction to Deep Learning with Keras, from CERN: <a href="http://cds.cern.ch/record/2157570?ln=en">video</a> - <a href="https://indico.cern.ch/event/506145/contributions/2132944/attachments/1258124/1858154/NNinKeras_MPaganini.pdf">slides</a>
+</li>
+<li><a href="http://www.pyimagesearch.com/2016/07/18/installing-keras-for-deep-learning/">Installing Keras for deep learning</a></li>
+<li><a href="http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/">Develop Your First Neural Network in Python With Keras Step-By-Step</a></li>
+<li><a href="http://machinelearningmastery.com/understanding-stateful-lstm-recurrent-neural-networks-python-keras/">Understanding Stateful LSTM Recurrent Neural Networks in Python with Keras</a></li>
+<li><a href="http://machinelearningmastery.com/time-series-prediction-lstm-recurrent-neural-networks-python-keras/">Time Series Prediction with LSTM Recurrent Neural Networks in Python with Keras</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLFxrZqbLojdKuK7Lm6uamegEFGW2wki6P">Keras video tutorials from Dan Van Boxel</a></li>
+<li><a href="https://github.com/jocicmarko/kaggle-dsb2-keras/">Keras Deep Learning Tutorial for Kaggle 2nd Annual Data Science Bowl</a></li>
+<li><a href="http://ml4a.github.io/guides/">Collection of tutorials setting up DNNs with Keras</a></li>
+</ul>
+<h2>
+<a id="user-content-code-examples" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#code-examples" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Code examples</h2>
+<h3>
+<a id="user-content-working-with-text" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#working-with-text" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Working with text</h3>
+<ul>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/reuters_mlp.py">Reuters topic classification</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/imdb_lstm.py">LSTM on the IMDB dataset (text sentiment classification)</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/imdb_bidirectional_lstm.py">Bidirectional LSTM on the IMDB dataset</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/imdb_cnn.py">1D CNN on the IMDB dataset</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/imdb_cnn_lstm.py">1D CNN-LSTM on the IMDB dataset</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/babi_rnn.py">LSTM-based network on the bAbI dataset</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/babi_memnn.py">Memory network on the bAbI dataset (reading comprehension question answering)</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/addition_rnn.py">Sequence to sequence learning for performing additions of strings of digits</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/lstm_text_generation.py">LSTM text generation</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/pretrained_word_embeddings.py">Using pre-trained word embeddings</a></li>
+<li><a href="https://github.com/elliottd/GroundedTranslation">Monolingual and Multilingual Image Captioning</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/imdb_fasttext.py">FastText on the IMDB dataset</a></li>
+<li><a href="https://github.com/nzw0301/keras-examples/blob/master/SCRNLM.ipynb">Structurally constrained recurrent nets text generation</a></li>
+<li><a href="https://github.com/johnb30/py_crepe">Character-level convolutional neural nets for text classification</a></li>
+<li><a href="https://github.com/divamgupta/lstm-gender-predictor">LSTM to predict gender of a name</a></li>
+</ul>
+<h3>
+<a id="user-content-working-with-images" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#working-with-images" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Working with images</h3>
+<ul>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/mnist_cnn.py">Simple CNN on MNIST</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/cifar10_cnn.py">Simple CNN on CIFAR10 with data augmentation</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/inception_v3.py">Inception v3</a></li>
+<li><a href="https://gist.github.com/baraldilorenzo/07d7802847aaad0a35d3">VGG 16 (with pre-trained weights)</a></li>
+<li><a href="https://gist.github.com/baraldilorenzo/8d096f48a1be4a2d660d">VGG 19 (with pre-trained weights)</a></li>
+<li>ResNet 50 (with pre-trained weights): <a href="https://github.com/fchollet/keras/pull/3266/files">1</a> - <a href="https://github.com/raghakot/keras-resnet">2</a>
+</li>
+<li><a href="https://github.com/snf/keras-fractalnet">FractalNet</a></li>
+<li><a href="https://github.com/heuritech/convnets-keras">AlexNet, VGG 16, VGG 19, and class heatmap visualization</a></li>
+<li><a href="https://github.com/awentzonline/keras-visual-semantic-embedding">Visual-Semantic Embedding</a></li>
+<li>Variational Autoencoder: <a href="https://github.com/fchollet/keras/blob/master/examples/variational_autoencoder_deconv.py">with deconvolutions</a> - <a href="https://github.com/fchollet/keras/blob/master/examples/variational_autoencoder.py">with upsampling</a>
+</li>
+<li><a href="https://github.com/avisingh599/visual-qa">Visual question answering</a></li>
+<li><a href="https://github.com/dblN/stochastic_depth_keras">Deep Networks with Stochastic Depth</a></li>
+<li><a href="https://github.com/kylemcdonald/SmileCNN">Smile detection with a CNN</a></li>
+<li><a href="https://github.com/tdeboissiere/VGG16CAM-keras">VGG-CAM</a></li>
+<li><a href="https://github.com/ml4a/ml4a-guides/blob/master/notebooks/tsne-images.ipynb">t-SNE of image CNN fc7 activations</a></li>
+<li><a href="https://github.com/tdeboissiere/DeepLearningImplementations/tree/master/DeconvNet">VGG16 Deconvolution network</a></li>
+<li>Wide Residual Networks (with pre-trained weights): <a href="https://github.com/asmith26/wide_resnets_keras">1</a> - <a href="https://github.com/titu1994/Wide-Residual-Networks">2</a>
+</li>
+<li><a href="https://github.com/jocicmarko/ultrasound-nerve-segmentation">Ultrasound nerve segmentation</a></li>
+<li><a href="https://github.com/abbypa/NNProject_DeepMask">DeepMask object segmentation</a></li>
+<li><a href="https://github.com/tdeboissiere/DeepLearningImplementations/tree/master/DenseNet">Densely Connected Convolutional Networks</a></li>
+</ul>
+<h3>
+<a id="user-content-creative-visual-applications" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#creative-visual-applications" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creative visual applications</h3>
+<ul>
+<li><a href="https://github.com/awentzonline/keras-rtst">Real-time style transfer</a></li>
+<li>Style transfer: <a href="https://github.com/fchollet/keras/blob/master/examples/neural_style_transfer.py">1</a> - <a href="https://github.com/titu1994/Neural-Style-Transfer">2</a>
+</li>
+<li>
+<a href="https://github.com/awentzonline/image-analogies">Image analogies</a>: Generate image analogies using neural matching and blending.</li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/conv_filter_visualization.py">Visualizing the filters learned by a CNN</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/deep_dream.py">Deep dreams</a></li>
+<li>GAN / DCGAN: <a href="https://github.com/phreeza/keras-GAN">1</a> - <a href="https://github.com/jacobgil/keras-dcgan">2</a> - <a href="https://github.com/osh/KerasGAN">3</a>
+</li>
+</ul>
+<h3>
+<a id="user-content-reinforcement-learning" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#reinforcement-learning" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reinforcement learning</h3>
+<ul>
+<li><a href="https://github.com/sherjilozair/dqn">DQN</a></li>
+<li><a href="https://github.com/yanpanlau/Keras-FlappyBird">FlappyBird DQN</a></li>
+<li>
+<a href="https://github.com/coreylynch/async-rl">async-RL</a>: Tensorflow + Keras + OpenAI Gym implementation of 1-step Q Learning from "Asynchronous Methods for Deep Reinforcement Learning"</li>
+<li>
+<a href="https://github.com/matthiasplappert/keras-rl">keras-rl</a>: A library for state-of-the-art reinforcement learning. Integrates with OpenAI Gym and implements DQN, double DQN, Continuous DQN, and DDPG.</li>
+</ul>
+<h3>
+<a id="user-content-miscallenous-architecture-blueprints" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#miscallenous-architecture-blueprints" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Miscallenous architecture blueprints</h3>
+<ul>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/stateful_lstm.py">Stateful LSTM</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/mnist_siamese_graph.py">Siamese network</a></li>
+<li><a href="https://github.com/fchollet/keras/blob/master/examples/mnist_transfer_cnn.py">Pretraining on a different dataset</a></li>
+<li><a href="https://github.com/mokemokechicken/keras_npi">Neural programmer-interpreter</a></li>
+</ul>
+<h2>
+<a id="user-content-third-party-libraries" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#third-party-libraries" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Third-party libraries</h2>
+<ul>
+<li>
+<a href="https://github.com/maxpumperla/elephas">Elephas</a>: Distributed Deep Learning with Keras &amp; Spark</li>
+<li>
+<a href="https://github.com/maxpumperla/hyperas">Hyperas</a>: Hyperparameter optimization</li>
+<li>
+<a href="https://github.com/jakebian/hera">Hera</a>: in-browser metrics dashboard for Keras models</li>
+<li>
+<a href="https://github.com/osh/kerlym">Kerlym</a>: reinforcement learning with Keras and OpenAI Gym</li>
+<li>
+<a href="https://github.com/farizrahman4u/qlearning4k">Qlearning4K</a>: reinforcement learning add-on for Keras</li>
+<li>
+<a href="https://github.com/farizrahman4u/seq2seq">seq2seq</a>: Sequence to Sequence Learning with Keras</li>
+<li>
+<a href="https://github.com/EderSantana/seya">Seya</a>: Keras extras</li>
+<li>
+<a href="https://github.com/codekansas/keras-language-modeling">Keras Language Modeling</a>: Language modeling tools for Keras</li>
+<li>
+<a href="https://github.com/datalogai/recurrentshop">Recurrent Shop</a>: Framework for building complex recurrent neural networks with Keras</li>
+<li>
+<a href="https://github.com/transcranial/keras-js">Keras.js</a>: Run trained Keras models in the browser, with GPU support</li>
+</ul>
+<h2>
+<a id="user-content-projects-built-with-keras" class="anchor" href="https://libraries.io/github/fchollet/keras-resources#projects-built-with-keras" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Projects built with Keras</h2>
+<ul>
+<li>
+<a href="https://github.com/Rochester-NRT/RocAlphaGo">RocAlphaGo</a>: An independent, student-led replication of DeepMind's 2016 Nature publication, "Mastering the game of Go with deep neural networks and tree search"</li>
+<li>
+<a href="https://github.com/jisungk/deepjazz">DeepJazz</a>: Deep learning driven jazz generation using Keras</li>
+<li>
+<a href="https://github.com/brmson/dataset-sts">dataset-sts</a>: Semantic Text Similarity Dataset Hub</li>
+<li>
+<a href="https://github.com/shyamupa/snli-entailment">snli-entailment</a>: Independent implementation of attention model for textual entailment from the paper <a href="http://arxiv.org/abs/1509.06664">"Reasoning about Entailment with Neural Attention"</a>.</li>
+<li>
+<a href="https://github.com/udibr/headlines">Headline generator</a>: independent implementation of <a href="http://arxiv.org/abs/1512.01712">Generating News Headlines with Recurrent Neural Networks</a>
+</li>
+</ul>
+</article></div>
+</div>
+<div class="col-md-4">
+<ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-2950082304969984" data-ad-slot="5628437035" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:360px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:360px;background-color:transparent"><iframe width="360" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" src="./fchollet_keras-resources - Libraries.io_files/saved_resource(1).html"></iframe></ins></ins></ins>
+<script type="text/rocketscript" data-rocketoptimized="true">
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+<h4>Project Statistics</h4>
+<table class="table table-striped">
+<tbody><tr>
+<td>
+Sourcerank
+</td>
+<td>
+<strong><a href="https://libraries.io/github/fchollet/keras-resources/sourcerank">6</a></strong>
+</td>
+</tr>
+<tr>
+<td>
+Size
+</td>
+<td>
+<strong>17.6 KB</strong>
+</td>
+</tr>
+<tr>
+<td>
+Stars
+</td>
+<td>
+<strong><a href="https://github.com/fchollet/keras-resources/stargazers">743</a></strong>
+</td>
+</tr>
+<tr>
+<td>
+Forks
+</td>
+<td>
+<strong><a href="https://github.com/fchollet/keras-resources/network">160</a></strong>
+</td>
+</tr>
+<tr>
+<td>
+Watchers
+</td>
+<td>
+<strong><a href="https://github.com/fchollet/keras-resources/watchers">68</a></strong>
+</td>
+</tr>
+<tr>
+<td>
+Open issues
+</td>
+<td>
+<strong><a href="https://github.com/fchollet/keras-resources/issues">1</a></strong>
+</td>
+</tr>
+<tr>
+<td>
+Dependencies
+</td>
+<td>
+<strong>0</strong>
+</td>
+</tr>
+<tr>
+<td>
+Contributors
+</td>
+<td>
+<strong><a href="https://libraries.io/github/fchollet/keras-resources/contributors">16</a></strong>
+</td>
+</tr>
+<tr>
+<td>
+Tags
+</td>
+<td>
+<strong><a href="https://libraries.io/github/fchollet/keras-resources/tags">0</a></strong>
+</td>
+</tr>
+<tr>
+<td>
+Created
+</td>
+<td>
+<strong><time datetime="2016-07-28T21:15:05Z" title="Thu, 28 Jul 2016 21:15:05 +0000">2016-07-28</time></strong>
+</td>
+</tr>
+<tr>
+<td>
+Last updated
+</td>
+<td>
+<strong><time datetime="2017-02-19T18:36:58Z" title="Sun, 19 Feb 2017 18:36:58 +0000">2017-02-19</time></strong>
+</td>
+</tr>
+<tr>
+<td>
+Last pushed
+</td>
+<td>
+<strong><time datetime="2017-02-10T21:55:13Z" title="Fri, 10 Feb 2017 21:55:13 +0000">2017-02-10</time></strong>
+</td>
+</tr>
+</tbody></table>
+<h4>Top Contributors <small><a href="https://libraries.io/github/fchollet/keras-resources/contributors">See all</a></small></h4>
+<a href="https://libraries.io/github/fchollet"><img width="60" height="60" alt="François Chollet" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/710255"></a>
+<a href="https://libraries.io/github/farizrahman4u"><img width="60" height="60" alt="Fariz Rahman" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/11006006"></a>
+<a href="https://libraries.io/github/tdeboissiere"><img width="60" height="60" alt="Thibault de Boissière" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/7677846"></a>
+<a href="https://libraries.io/github/nzw0301"><img width="60" height="60" alt="nzw" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/7121753"></a>
+<a href="https://libraries.io/github/elliottd"><img width="60" height="60" alt="Desmond Elliott" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/1419903"></a>
+<a href="https://libraries.io/github/genekogan"><img width="60" height="60" alt="Gene Kogan" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/1335251"></a>
+<a href="https://libraries.io/github/johnb30"><img width="60" height="60" alt="John Beieler" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/1313257"></a>
+<a href="https://libraries.io/github/asmith26"><img width="60" height="60" alt="asmith26" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/6988036"></a>
+<a href="https://libraries.io/github/williamsmj"><img width="60" height="60" alt="Mike Williams" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/370930"></a>
+<a href="https://libraries.io/github/jocicmarko"><img width="60" height="60" alt="Marko Jocić" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/1452125"></a>
+<a href="https://libraries.io/github/divamgupta"><img width="60" height="60" alt="Divam Gupta" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/1890549"></a>
+<a href="https://libraries.io/github/tboquet"><img width="60" height="60" alt="Thomas Boquet" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/5553901"></a>
+<a href="https://libraries.io/github/matthiasplappert"><img width="60" height="60" alt="Matthias Plappert" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/124243"></a>
+<a href="https://libraries.io/github/titu1994"><img width="60" height="60" alt="Somshubra Majumdar" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/3048602"></a>
+<a href="https://libraries.io/github/wassname"><img width="60" height="60" alt="M Clark" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/1103714"></a>
+<a href="https://libraries.io/github/udibr"><img width="60" height="60" alt="Ehud Ben-Reuven" class="pull-left" src="./fchollet_keras-resources - Libraries.io_files/608789"></a>
+<div class="row"></div>
+<hr>
+<h4>
+Interesting Forks
+<small><a href="https://libraries.io/github/fchollet/keras-resources/forks">See all</a></small>
+</h4>
+<div class="project" style="border-color: ;">
+<h5>
+<a href="https://libraries.io/github/tdeboissiere/keras-resources">tdeboissiere/keras-resources</a>
+<small>
+<i class="fa fa-code-fork"></i>
+</small>
+</h5>
+<div>
+Directory of tutorials and open-source code repositories for working with Keras, the Python deep ...
+</div>
+<small>
+<i class="fa fa-github"></i>
+Last pushed <time datetime="2017-01-10T00:02:03Z" title="Tue, 10 Jan 2017 00:02:03 +0000">2017-01-10</time>
+- 2 stars
+- Fork
+of <a href="https://libraries.io/github/fchollet/keras-resources">fchollet/keras-resources</a>
+</small>
+</div>
+<div class="project" style="border-color: ;">
+<h5>
+<a href="https://libraries.io/github/genekogan/keras-resources">genekogan/keras-resources</a>
+<small>
+<i class="fa fa-code-fork"></i>
+</small>
+</h5>
+<div>
+Directory of tutorials and open-source code repositories for working with Keras, the Python deep ...
+</div>
+<small>
+<i class="fa fa-github"></i>
+Last pushed <time datetime="2016-07-28T21:30:42Z" title="Thu, 28 Jul 2016 21:30:42 +0000">2016-07-28</time>
+- 2 stars
+- Fork
+of <a href="https://libraries.io/github/fchollet/keras-resources">fchollet/keras-resources</a>
+</small>
+</div>
+<div class="project" style="border-color: ;">
+<h5>
+<a href="https://libraries.io/github/bxwhl/keras-resources">bxwhl/keras-resources</a>
+<small>
+<i class="fa fa-code-fork"></i>
+</small>
+</h5>
+<div>
+Directory of tutorials and open-source code repositories for working with Keras, the Python deep ...
+</div>
+<small>
+<i class="fa fa-github"></i>
+Updated <time datetime="2017-04-16T07:51:53Z" title="Sun, 16 Apr 2017 07:51:53 +0000" data-time-ago="2017-04-16T07:51:53Z">8 days ago</time>
+- 1 stars
+- Fork
+of <a href="https://libraries.io/github/fchollet/keras-resources">fchollet/keras-resources</a>
+</small>
+</div>
+<div class="project" style="border-color: ;">
+<h5>
+<a href="https://libraries.io/github/wjssx/keras-resources">wjssx/keras-resources</a>
+<small>
+<i class="fa fa-code-fork"></i>
+</small>
+</h5>
+<div>
+Directory of tutorials and open-source code repositories for working with Keras, the Python deep ...
+</div>
+<small>
+<i class="fa fa-github"></i>
+Updated <time datetime="2017-04-03T03:04:55Z" title="Mon, 03 Apr 2017 03:04:55 +0000" data-time-ago="2017-04-03T03:04:55Z">21 days ago</time>
+- 1 stars
+- Fork
+of <a href="https://libraries.io/github/fchollet/keras-resources">fchollet/keras-resources</a>
+</small>
+</div>
+<div class="project" style="border-color: ;">
+<h5>
+<a href="https://libraries.io/github/ZhaoJ9014/keras-resources">ZhaoJ9014/keras-resources</a>
+<small>
+<i class="fa fa-code-fork"></i>
+</small>
+</h5>
+<div>
+Directory of tutorials and open-source code repositories for working with Keras, the Python deep ...
+</div>
+<small>
+<i class="fa fa-github"></i>
+Updated <time datetime="2017-04-04T08:07:39Z" title="Tue, 04 Apr 2017 08:07:39 +0000" data-time-ago="2017-04-04T08:07:39Z">20 days ago</time>
+- 1 stars
+- Fork
+of <a href="https://libraries.io/github/fchollet/keras-resources">fchollet/keras-resources</a>
+</small>
+</div>
+<div class="row"></div>
+<br>
+<p>
+<i class="fa fa-question-circle"></i>
+Something wrong with this page?
+<a href="https://github.com/librariesio/libraries.io/issues/new">Make a suggestion</a>
+</p>
+<p>
+<small class="text-muted">Last synced: 2016-11-24 17:24:41 UTC</small>
+</p>
+</div>
+</div>
+</div>
+<footer data-ga-tracked-el="footer">
+<div class="container">
+<div class="row">
+<div class="col-xs-12 col-sm-6 col-md-4">
+<p>
+<a href="https://libraries.io/">Libraries</a> helps you find new open source libraries, modules and frameworks and keep track of ones you depend upon.
+</p>
+<p>
+Currently tracking <a href="https://libraries.io/search">2,240,220</a> open source projects
+from across <a href="https://libraries.io/platforms">33</a> platforms.
+</p>
+<p>
+<a href="https://twitter.com/librariesio" title="Twitter"><i class="fa fa-twitter"></i></a>&nbsp;
+<a href="https://github.com/librariesio" title="GitHub"><i class="fa fa-github"></i></a>&nbsp;
+<a href="https://www.facebook.com/libraries.io" title="Facebook"><i class="fa fa-facebook"></i></a>&nbsp;
+<a href="mailto:support@libraries.io" title="Email"><i class="fa fa-envelope"></i></a>&nbsp;
+<a href="https://slack.libraries.io/" title="Slack"><i class="fa fa-slack"></i></a>&nbsp;
+<a href="https://github.com/librariesio/libraries.io/issues/new" title="Support"><i class="fa fa-question-circle"></i></a>&nbsp;
+</p>
+<hr>
+<p>
+Sponsored by:
+</p>
+<p>
+<a href="http://www.bravenewsoftware.org/"><img width="60" src="./fchollet_keras-resources - Libraries.io_files/bns_logo-cfd8dcfe0d69d3bf204890317ff92c6d323ee21080eeb6c6cbadda758565d63c.png" alt="Bns logo"></a>
+&nbsp;
+<a href="https://safestack.io/"><img width="190" src="./fchollet_keras-resources - Libraries.io_files/safestack-79e0caac65d7e2da8b5ca5b21f8fafedec2aa2b6dd23fbf4fb750b94e8d4826a.png" alt="Safestack"></a>
+</p>
+<p class="text-muted">
+Copyright © 2017 Andrew Nesbitt<br>
+Open Source under <a href="https://github.com/librariesio/libraries.io/blob/master/LICENSE.txt">AGPLv3</a> license
+</p>
+</div>
+<div class="col-xs-12 col-md-2">
+<strong><a href="https://libraries.io/explore">Explore</a></strong>
+<ul>
+<li><a href="https://libraries.io/about">About</a></li>
+<li><a href="https://libraries.io/team">Team</a></li>
+<li><a href="https://libraries.io/api">API</a></li>
+<li><a href="https://libraries.io/platforms">Platforms</a></li>
+<li><a href="https://libraries.io/languages">Languages</a></li>
+<li><a href="https://libraries.io/licenses">Licenses</a></li>
+<li><a href="https://libraries.io/help-wanted">Help Wanted</a></li>
+<li><a href="https://libraries.io/first-pull-request">First Pull Request</a></li>
+<li><a href="https://libraries.io/bus-factor">Bus Factor</a></li>
+<li><a href="https://libraries.io/unlicensed-libraries">Unlicensed Libraries</a></li>
+<li><a href="https://libraries.io/github/trending">Trending Repositories</a></li>
+</ul>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-4">
+<form action="https://libraries.us10.list-manage.com/subscribe/post?u=15c11768c94674bc6f18d079f&amp;id=848ac04a44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="navbar-form" novalidate="">
+<p>
+Subscribe to the Libraries newsletter:
+</p>
+<input type="email" value="" name="EMAIL" size="20" placeholder="Your email..." class="form-control" id="mce-EMAIL">
+<div style="position: absolute; left: -5000px;"><input type="text" name="b_15c11768c94674bc6f18d079f_848ac04a44" tabindex="-1" value=""></div>
+<input type="submit" value="Get Updates" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary"></form></div>
+
+</div>
+</div>
+
+</footer>
+<script type="text/rocketscript" data-rocketoptimized="true">
+    if (typeof ga === 'function') { ga('send', 'pageview', location.pathname+location.search) }
+  </script>
+<script type="text/rocketscript" data-rocketoptimized="true">/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/\>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script>
+
+</body></html>

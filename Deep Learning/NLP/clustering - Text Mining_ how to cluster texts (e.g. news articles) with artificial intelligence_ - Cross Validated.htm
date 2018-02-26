@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<!-- saved from url=(0125)https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>clustering - Text Mining: how to cluster texts (e.g. news articles) with artificial intelligence? - Cross Validated</title>
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stats/img/favicon.ico?v=573163e34adf">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stats/img/apple-touch-icon.png?v=8698dcfb5c72">
+    <link rel="search" type="application/opensearchdescription+xml" title="Cross Validated" href="https://stats.stackexchange.com/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackStats">
+    <meta name="twitter:domain" content="stats.stackexchange.com">
+    <meta property="og:type" content="website">
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stats/img/apple-touch-icon@2.png?v=344f57aa10cc">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="Text Mining: how to cluster texts (e.g. news articles) with artificial intelligence?">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I have built some neural networks (MLP (fully-connected), Elman (recurrent)) for different tasks, like playing Pong, classifying handwritten digits and stuff...additionally I tried to build some fi...">
+    <meta property="og:url" content="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige">
+    <link rel="canonical" href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige">
+
+    
+    
+    <script type="text/javascript" async="" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/ados"></script><script async="" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/quant.js"></script><script async="" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/beacon.js"></script><script async="" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/analytics.js"></script><script type="text/javascript" async="" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/ados.js"></script><script src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/jquery.min.js"></script>
+    <script src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Text Mining: how to cluster texts (e.g. news articles) with artificial intelligence?&#39;" href="https://stats.stackexchange.com/feeds/question/155880">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:155880});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('65', '155880');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', false); });
+
+            });
+        </script>
+
+                <script type="text/x-mathjax-config;executed=true">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>        
+            <script src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/MathJax.js"></script>  
+
+    <script>
+        StackExchange.ready(function () {
+                        StackExchange.realtime.init('wss://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToReputationNotifications('65');
+                StackExchange.realtime.subscribeToTopBarNotifications('65');
+        });
+    </script>
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","serverTime":1493013190,"routeName":"Questions/Show","site":{"name":"Cross Validated","description":"Q&A for people interested in statistics, machine learning, data analysis, data mining, and data visualization","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","recaptchaAudioLang":"en","enableNewTagCreationWarning":false,"insertSpaceAfterNameTabCompletion":false,"id":65,"enableInsertDocLinkDialog":false,"childUrl":"https://stats.meta.stackexchange.com","enableSocialMediaInSharePopup":true,"protocol":"https"},"user":{"fkey":"cbe153d9c8e4943557d600e50d8c5c31","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true},"realtime":{"newest":true,"active":true,"tagged":true,"staleDisconnectIntervalInHours":0,"workerIframeDomain":"https://cdn.sstatic.net"},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"snippets":{"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"efaa486a4fd9","js/moderator.en.js":"fb3adb7a979d","js/full-anon.en.js":"9244f7ab7a3d","js/full.en.js":"654b45b66a02","js/wmd.en.js":"d6b54102c2b9","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"153e33c56ac2","js/help.en.js":"a56fdf9b9ff2","js/tageditor.en.js":"bc3ebe71b5f1","js/tageditornew.en.js":"679b12412824","js/inline-tag-editing.en.js":"69e72a3bd91c","js/revisions.en.js":"47de10a8358f","js/review.en.js":"2c5d38e5bc96","js/tagsuggestions.en.js":"2a9fc67ea337","js/post-validation.en.js":"94b6352ae825","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"274377649215","js/keyboard-shortcuts.en.js":"936bac23a9fa","js/external-editor.en.js":"cb487078c372","js/adops.en.js":"9a6a7812a212","js/mathjax-editing.en.js":"6a31ffe1a0d5"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    <noscript id="noscript-css">&lt;style type="text/css"&gt;body,.so-header{margin-top:1.9em}&lt;/style&gt;</noscript>
+<script async="" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/full-anon.en.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><script async="" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/post-validation.en.js"></script><script async="" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/prettify-full.en.js"></script><script async="" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/external-editor.en.js"></script><script type="text/javascript" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/adFeedback.js"></script><link rel="stylesheet" href="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/adFeedback.css"><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax:focus, body :focus .MathJax {display: inline-table}
+.MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax_LineBox {display: table!important}
+.MathJax_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Blank; src: url('about:blank')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body class="question-page new-topbar"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+    
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+
+        <div class="js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="https://stats.stackexchange.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+                    <a href="http://chat.stackexchange.com/?tab=site&amp;host=stats.stackexchange.com" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+    <a href="https://stats.stackexchange.com/" class="current-site-link site-link js-gps-track" data-id="65" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stats" title="Cross Validated"></div>
+        Cross Validated
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                        
+    <a href="https://stats.meta.stackexchange.com/" class="site-link js-gps-track" data-id="66" data-gps-track="site.switch({ target_site:66, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-statsmeta" title="Cross Validated Meta"></div>
+        Cross Validated Meta
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://stats.stackexchange.com/users/signup?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f155880%2ftext-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stats.stackexchange.com/users/login?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f155880%2ftext-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+        </div>
+
+        <div class="network-items">
+                <a href="https://stackexchange.com/" class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 167 Stack Exchange sites">
+                    <span class="hidden-text">Stack Exchange</span>
+                </a>
+
+    <a href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#" class="topbar-icon icon-inbox yes-hover js-inbox-button" title="Recent inbox messages">
+        <span class="hidden-text">Inbox</span>
+        <span class="unread-count" style="display:none"></span>
+    </a>
+    <a href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#" class="topbar-icon icon-achievements yes-hover js-achievements-button" data-unread-class="" title="Recent achievements: reputation, badges, and privileges earned">
+        <span class="hidden-text">Reputation and Badges</span>
+        <span class="unread-count" style="display:none">
+            
+        </span>
+    </a>
+        </div>
+
+        <div class="topbar-links">
+
+                <div class="links-container">
+                <span class="topbar-menu-links">
+                                    <a href="https://stats.stackexchange.com/users/signup?ssrc=head&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f155880%2ftext-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige" class="login-link" rel="nofollow">sign up</a>
+                                <a href="https://stats.stackexchange.com/users/login?ssrc=head&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f155880%2ftext-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige" class="login-link" rel="nofollow">log in</a>
+
+                            <a href="https://stats.stackexchange.com/tour">tour</a>
+        <a href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#" class="icon-help js-help-button" title="Help Center and other resources">
+            help
+            <span class="triangle"></span>
+        </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="https://stats.stackexchange.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="https://stats.stackexchange.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://stats.meta.stackexchange.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+                                            </span>
+                </div>
+
+            <div class="search-container">
+                <form id="search" action="https://stats.stackexchange.com/search" method="get" autocomplete="off" role="search">
+                        <input name="q" type="text" placeholder="Search Q&amp;A" value="" tabindex="1" autocomplete="off" maxlength="240">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+    </script>
+
+    <div class="container">
+            <div id="header">
+                <br class="cbt">
+                <div id="hlogo">
+                    <a href="https://stats.stackexchange.com/">
+                        Cross Validated
+                    </a>
+                </div>
+                <div id="hmenus">
+                        <div class="nav mainnavs" role="navigation" aria-label="site navigation">
+                            <ul>
+                                    <li class="youarehere">
+        <a id="nav-questions" href="https://stats.stackexchange.com/questions" class="js-gps-track" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">
+        Questions
+        </a>
+    </li>
+
+                                                                    <li>
+        <a id="nav-tags" href="https://stats.stackexchange.com/tags" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">
+        Tags
+        </a>
+    </li>
+
+                                    <li>
+        <a id="nav-users" href="https://stats.stackexchange.com/users" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">
+        Users
+        </a>
+    </li>
+
+                                    <li>
+        <a id="nav-badges" href="https://stats.stackexchange.com/help/badges" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:4})">
+        Badges
+        </a>
+    </li>
+
+    <li>
+        <a id="nav-unanswered" href="https://stats.stackexchange.com/unanswered" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:5})">
+        Unanswered
+        </a>
+    </li>
+                            </ul>
+                        </div>
+                    <div class="nav askquestion" role="navigation" aria-label="ask new question">
+                        <ul>
+                            <li>
+                                <a id="nav-askquestion" href="https://stats.stackexchange.com/questions/ask">Ask Question</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+
+
+        <div id="content">
+
+
+
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stats/img/apple-touch-icon.png?v=8698dcfb5c72">
+
+
+<div id="herobox">
+    <div id="hero-content">
+            <div id="close"><a title="click to minimize">_</a></div>
+        <div id="blurb">
+            Cross Validated is a question and answer site for people interested in statistics, machine learning, data analysis, data mining, and data visualization. Join them; it only takes a minute:
+            <br>
+            <br>
+            <a href="https://stats.stackexchange.com/users/signup?ssrc=hero&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f155880%2ftext-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige" id="tell-me-more" class="button">Sign up</a>
+        </div>
+        <div id="desc">
+            <b>Here's how it works:</b>
+            <ol id="hiw">
+                <li id="q">
+                    Anybody can ask a question
+                </li>
+                <li id="an">
+                    Anybody can answer
+                </li>
+                <li id="b">
+                    The best answers are voted up and rise to the top
+                </li>
+            </ol>
+        </div>
+    <div style="clear: both"></div>
+    </div>
+</div><script>
+    StackExchange.ready(function () {
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("question-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;;
+        } else if ($("body").hasClass("home-page")) {
+            location = 3;;
+        }
+        
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+        
+        $('#herobox #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+            });
+            
+            $.cookie("hero", "mini", { path: "/", expires: 365 });
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $("#herobox").fadeOut("fast", function () {
+                        $("#herobox").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+
+</script>			<div id="question-header">
+                <h1 itemprop="name"><a href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige" class="question-hyperlink">Text Mining: how to cluster texts (e.g. news articles) with artificial intelligence?</a></h1>
+
+            
+		</div>
+			<div id="mainbar" role="main" aria-label="question and answers">
+
+			
+
+<div class="question" data-questionid="155880" id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,0,"adzerk2098512030",4).enableDynamicSiteSelection().setZone(29); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk2098512030"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="155880">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">9</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#">favorite</a>
+        <div class="favoritecount"><b>20</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I have built some neural networks (MLP (fully-connected), Elman (recurrent)) for different tasks, like playing Pong, classifying handwritten digits and stuff...additionally I tried to build some first convolutional neural networks, e.g. for classifying multi-digit handwritten notes but I am completely new to analyze and cluster texts. E.g. in image recognition/clustering tasks one can rely on standardized input, like 25x25 sized images, RGB or greyscale and so on...there are plenty of pre-assumption features.</p>
+
+<p>For text mining, for instance news articles, you have an ever changing size of input (different words, different sentences, different text length, ...).</p>
+
+<p>How can one implement a modern text mining tool utilizing artificial intelligence, preferably neural networks / SOMs?</p>
+
+<p>Unfortunetaly I were unable to find simple tutorials to start-off. Complex scientific papers are hard to read and not the best option for learning a topic (as to my opinion). I already read quite some papers about MLPs, dropout techniques, convolutional neural networks and so on but I were unable to find a basic one about text mining - all I found was far too high level for my very limited text mining skills.</p>
+
+<p>Any help is highly appreciated :)</p>
+    </div>
+    <div class="post-taglist">
+        <a href="https://stats.stackexchange.com/questions/tagged/clustering" class="post-tag js-gps-track" title="show questions tagged &#39;clustering&#39;" rel="tag">clustering</a> <a href="https://stats.stackexchange.com/questions/tagged/neural-networks" class="post-tag js-gps-track" title="show questions tagged &#39;neural-networks&#39;" rel="tag">neural-networks</a> <a href="https://stats.stackexchange.com/questions/tagged/feature-selection" class="post-tag js-gps-track" title="show questions tagged &#39;feature-selection&#39;" rel="tag">feature-selection</a> <a href="https://stats.stackexchange.com/questions/tagged/text-mining" class="post-tag js-gps-track" title="show questions tagged &#39;text-mining&#39;" rel="tag">text-mining</a> <a href="https://stats.stackexchange.com/questions/tagged/self-organizing-maps" class="post-tag js-gps-track" title="show questions tagged &#39;self-organizing-maps&#39;" rel="tag">self-organizing-maps</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/q/155880" title="short permalink to this question" class="short-link" id="link-post-155880">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/155880/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2015-06-07 15:14:54Z" class="relativetime">Jun 7 '15 at 15:14</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/78553/ascenator"><div class="gravatar-wrapper-32"><img src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/2f8caa2ba6830f3743231f05da8d576b" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/78553/ascenator">ascenator</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">460</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="22 bronze badges"><span class="badge3"></span><span class="badgecount">22</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-155880" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-155880" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								4 Answers
+                                <span style="display:none;" itemprop="answerCount">4</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere" href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="155903"></a>
+<div id="answer-155903" class="answer accepted-answer" data-answerid="155903" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="155903">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">7</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Latent Dirichlet Allocation (LDA) is great, but if you want something better that uses neural networks I would strongly suggest doc2vec (<a href="https://radimrehurek.com/gensim/models/doc2vec.html">https://radimrehurek.com/gensim/models/doc2vec.html</a>).</p>
+
+<p>What it does? It works similarly to Google's word2vec but instead of a single word feature vector you get a feature vector for a paragraph. The method is based on a skip-gram model and neural networks and is considered one of the best methods to extract a feature vector for documents.</p>
+
+<p>Now given that you have this vector you can run k-means clustering (or any other preferable algorithm) and cluster the results.</p>
+
+<p>Finally, to extract the feature vectors you can do it as easy as that: </p>
+
+<pre class="lang-python prettyprint prettyprinted"><code><span class="kwd">from</span><span class="pln"> gensim</span><span class="pun">.</span><span class="pln">models </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">Doc2Vec</span><span class="pln">
+</span><span class="kwd">from</span><span class="pln"> gensim</span><span class="pun">.</span><span class="pln">models</span><span class="pun">.</span><span class="pln">doc2vec </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">LabeledSentence</span><span class="pln">
+
+</span><span class="kwd">class</span><span class="pln"> </span><span class="typ">LabeledLineSentence</span><span class="pun">(</span><span class="pln">object</span><span class="pun">):</span><span class="pln">
+    </span><span class="kwd">def</span><span class="pln"> __init__</span><span class="pun">(</span><span class="pln">self</span><span class="pun">,</span><span class="pln"> filename</span><span class="pun">):</span><span class="pln">
+        self</span><span class="pun">.</span><span class="pln">filename </span><span class="pun">=</span><span class="pln"> filename
+    </span><span class="kwd">def</span><span class="pln"> __iter__</span><span class="pun">(</span><span class="pln">self</span><span class="pun">):</span><span class="pln">
+        </span><span class="kwd">for</span><span class="pln"> uid</span><span class="pun">,</span><span class="pln"> line </span><span class="kwd">in</span><span class="pln"> enumerate</span><span class="pun">(</span><span class="pln">open</span><span class="pun">(</span><span class="pln">self</span><span class="pun">.</span><span class="pln">filename</span><span class="pun">)):</span><span class="pln">
+            </span><span class="kwd">yield</span><span class="pln"> </span><span class="typ">LabeledSentence</span><span class="pun">(</span><span class="pln">words</span><span class="pun">=</span><span class="pln">line</span><span class="pun">.</span><span class="pln">split</span><span class="pun">(),</span><span class="pln"> labels</span><span class="pun">=[</span><span class="str">'TXT_%s'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> uid</span><span class="pun">])</span><span class="pln">
+
+
+sentences </span><span class="pun">=</span><span class="pln"> </span><span class="typ">LabeledLineSentence</span><span class="pun">(</span><span class="str">'your_text.txt'</span><span class="pun">)</span><span class="pln">
+
+model </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Doc2Vec</span><span class="pun">(</span><span class="pln">alpha</span><span class="pun">=</span><span class="lit">0.025</span><span class="pun">,</span><span class="pln"> min_alpha</span><span class="pun">=</span><span class="lit">0.025</span><span class="pun">,</span><span class="pln"> size</span><span class="pun">=</span><span class="lit">50</span><span class="pun">,</span><span class="pln"> window</span><span class="pun">=</span><span class="lit">5</span><span class="pun">,</span><span class="pln"> min_count</span><span class="pun">=</span><span class="lit">5</span><span class="pun">,</span><span class="pln">
+                dm</span><span class="pun">=</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> workers</span><span class="pun">=</span><span class="lit">8</span><span class="pun">,</span><span class="pln"> sample</span><span class="pun">=</span><span class="lit">1e-5</span><span class="pun">)</span><span class="pln">
+
+model</span><span class="pun">.</span><span class="pln">build_vocab</span><span class="pun">(</span><span class="pln">sentences</span><span class="pun">)</span><span class="pln">
+
+</span><span class="kwd">for</span><span class="pln"> epoch </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">500</span><span class="pun">):</span><span class="pln">
+    </span><span class="kwd">try</span><span class="pun">:</span><span class="pln">
+        </span><span class="kwd">print</span><span class="pln"> </span><span class="str">'epoch %d'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> </span><span class="pun">(</span><span class="pln">epoch</span><span class="pun">)</span><span class="pln">
+        model</span><span class="pun">.</span><span class="pln">train</span><span class="pun">(</span><span class="pln">sentences</span><span class="pun">)</span><span class="pln">
+        model</span><span class="pun">.</span><span class="pln">alpha </span><span class="pun">*=</span><span class="pln"> </span><span class="lit">0.99</span><span class="pln">
+        model</span><span class="pun">.</span><span class="pln">min_alpha </span><span class="pun">=</span><span class="pln"> model</span><span class="pun">.</span><span class="pln">alpha
+    </span><span class="kwd">except</span><span class="pln"> </span><span class="pun">(</span><span class="typ">KeyboardInterrupt</span><span class="pun">,</span><span class="pln"> </span><span class="typ">SystemExit</span><span class="pun">):</span><span class="pln">
+        </span><span class="kwd">break</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/a/155903" title="short permalink to this answer" class="short-link" id="link-post-155903">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/155903/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://stats.stackexchange.com/posts/155903/revisions" title="show all edits to this post">edited <span title="2015-06-09 08:56:46Z" class="relativetime">Jun 9 '15 at 8:56</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2015-06-07 19:56:08Z" class="relativetime">Jun 7 '15 at 19:56</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/35288/yannis-assael"><div class="gravatar-wrapper-32"><img src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/db976d12e5531aeba7c8167fe1a9b88b" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/35288/yannis-assael">Yannis Assael</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,602</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="20 bronze badges"><span class="badge3"></span><span class="badgecount">20</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-155903" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-297242" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">It seems like in the NLP literature LDA refers to Latent Dirichlet Analysis. In this literature does Linear Discriminant Analysis find no use?</span>
+                    –&nbsp;<a href="https://stats.stackexchange.com/users/49398/sid" title="1,532 reputation" class="comment-user">Sid</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#comment297242_155903"><span title="2015-06-08 03:46:33Z" class="relativetime-clean">Jun 8 '15 at 3:46</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-297254" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Exactly, LDA is Latent Dirichlet Allocation in our case.</span>
+                    –&nbsp;<a href="https://stats.stackexchange.com/users/35288/yannis-assael" title="1,602 reputation" class="comment-user">Yannis Assael</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#comment297254_155903"><span title="2015-06-08 05:28:15Z" class="relativetime-clean">Jun 8 '15 at 5:28</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-155903" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,0,"adzerk2062272926",4).enableDynamicSiteSelection().setZone(30); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk2062272926"></div>
+  
+<a name="155891"></a>
+<div id="answer-155891" class="answer" data-answerid="155891" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="155891">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">4</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Apart from LDA you can use <a href="http://en.wikipedia.org/wiki/Latent_semantic_analysis" rel="nofollow">Latent Semantic Analysis</a> with <a href="https://en.wikipedia.org/wiki/K-means_clustering" rel="nofollow">K-Means</a>. It's not neural networks, but rather "classical" clustering, but it works quite well.</p>
+
+<p>Example in sklearn (taken from <a href="https://github.com/scikit-learn/scikit-learn/blob/master/examples/text/document_clustering.py" rel="nofollow">here</a>): </p>
+
+<pre class="lang-python prettyprint prettyprinted"><code><span class="pln">dataset </span><span class="pun">=</span><span class="pln"> fetch_20newsgroups</span><span class="pun">(</span><span class="pln">subset</span><span class="pun">=</span><span class="str">'all'</span><span class="pun">,</span><span class="pln"> shuffle</span><span class="pun">=</span><span class="kwd">True</span><span class="pun">,</span><span class="pln"> random_state</span><span class="pun">=</span><span class="lit">42</span><span class="pun">)</span><span class="pln">
+labels </span><span class="pun">=</span><span class="pln"> dataset</span><span class="pun">.</span><span class="pln">target
+true_k </span><span class="pun">=</span><span class="pln"> np</span><span class="pun">.</span><span class="pln">unique</span><span class="pun">(</span><span class="pln">labels</span><span class="pun">).</span><span class="pln">shape</span><span class="pun">[</span><span class="lit">0</span><span class="pun">]</span><span class="pln">
+
+vectorizer </span><span class="pun">=</span><span class="pln"> </span><span class="typ">TfidfTransformer</span><span class="pun">()</span><span class="pln">
+X </span><span class="pun">=</span><span class="pln"> vectorizer</span><span class="pun">.</span><span class="pln">fit_transform</span><span class="pun">(</span><span class="pln">dataset</span><span class="pun">.</span><span class="pln">data</span><span class="pun">)</span><span class="pln">
+
+svd </span><span class="pun">=</span><span class="pln"> </span><span class="typ">TruncatedSVD</span><span class="pun">(</span><span class="pln">true_k</span><span class="pun">)</span><span class="pln">
+lsa </span><span class="pun">=</span><span class="pln"> make_pipeline</span><span class="pun">(</span><span class="pln">svd</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Normalizer</span><span class="pun">(</span><span class="pln">copy</span><span class="pun">=</span><span class="kwd">False</span><span class="pun">))</span><span class="pln">
+
+X </span><span class="pun">=</span><span class="pln"> lsa</span><span class="pun">.</span><span class="pln">fit_transform</span><span class="pun">(</span><span class="pln">X</span><span class="pun">)</span><span class="pln">
+
+km </span><span class="pun">=</span><span class="pln"> </span><span class="typ">KMeans</span><span class="pun">(</span><span class="pln">n_clusters</span><span class="pun">=</span><span class="pln">true_k</span><span class="pun">,</span><span class="pln"> init</span><span class="pun">=</span><span class="str">'k-means++'</span><span class="pun">,</span><span class="pln"> max_iter</span><span class="pun">=</span><span class="lit">100</span><span class="pun">)</span><span class="pln">
+km</span><span class="pun">.</span><span class="pln">fit</span><span class="pun">(</span><span class="pln">X</span><span class="pun">)</span></code></pre>
+
+<p>Now cluster assignment labels are available in <code>km.labels_</code></p>
+
+<p>For example, these are the topics extracted from 20 newsgroups with LSA:</p>
+
+<pre><code>Cluster 0:  space  shuttle  alaska  edu  nasa  moon  launch  orbit  henry  sci
+Cluster 1:  edu  game  team  games  year  ca  university  players  hockey  baseball
+Cluster 2:  sale  00  edu  10  offer  new  distribution  subject  lines  shipping
+Cluster 3:  israel  israeli  jews  arab  jewish  arabs  edu  jake  peace  israelis
+Cluster 4:  cmu  andrew  org  com  stratus  edu  mellon  carnegie  pittsburgh  pa
+Cluster 5:  god  jesus  christian  bible  church  christ  christians  people  edu  believe
+Cluster 6:  drive  scsi  card  edu  mac  disk  ide  bus  pc  apple
+Cluster 7:  com  ca  hp  subject  edu  lines  organization  writes  article  like
+Cluster 8:  car  cars  com  edu  engine  ford  new  dealer  just  oil
+Cluster 9:  sun  monitor  com  video  edu  vga  east  card  monitors  microsystems
+Cluster 10:  nasa  gov  jpl  larc  gsfc  jsc  center  fnal  article  writes
+Cluster 11:  windows  dos  file  edu  ms  files  program  os  com  use
+Cluster 12:  netcom  com  edu  cramer  fbi  sandvik  408  writes  article  people
+Cluster 13:  armenian  turkish  armenians  armenia  serdar  argic  turks  turkey  genocide  soviet
+Cluster 14:  uiuc  cso  edu  illinois  urbana  uxa  university  writes  news  cobb
+Cluster 15:  edu  cs  university  posting  host  nntp  state  subject  organization  lines
+Cluster 16:  uk  ac  window  mit  server  lines  subject  university  com  edu
+Cluster 17:  caltech  edu  keith  gatech  technology  institute  prism  morality  sgi  livesey
+Cluster 18:  key  clipper  chip  encryption  com  keys  escrow  government  algorithm  des
+Cluster 19:  people  edu  gun  com  government  don  like  think  just  access
+</code></pre>
+
+<p>You also can apply <a href="http://en.wikipedia.org/wiki/Non-negative_matrix_factorization" rel="nofollow">Non-Negative Matrix Factorization</a>, which can be interpreted as clustering. All you need to do is to take largest component of each document in the transformed space - and use it as cluster assignment.</p>
+
+<p>In sklearn:</p>
+
+<pre class="lang-python prettyprint prettyprinted"><code><span class="pln">nmf </span><span class="pun">=</span><span class="pln"> NMF</span><span class="pun">(</span><span class="pln">n_components</span><span class="pun">=</span><span class="pln">k</span><span class="pun">,</span><span class="pln"> random_state</span><span class="pun">=</span><span class="lit">1</span><span class="pun">).</span><span class="pln">fit_transform</span><span class="pun">(</span><span class="pln">X</span><span class="pun">)</span><span class="pln">
+labels </span><span class="pun">=</span><span class="pln"> nmf</span><span class="pun">.</span><span class="pln">argmax</span><span class="pun">(</span><span class="pln">axis</span><span class="pun">=</span><span class="lit">1</span><span class="pun">)</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/a/155891" title="short permalink to this answer" class="short-link" id="link-post-155891">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/155891/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-06-07 18:50:05Z" class="relativetime">Jun 7 '15 at 18:50</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/49130/alexey-grigorev"><div class="gravatar-wrapper-32"><img src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/28ec7013c3d5b5cbd9633d12c1407eff" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/49130/alexey-grigorev">Alexey Grigorev</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">3,214</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="30 bronze badges"><span class="badge3"></span><span class="badgecount">30</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-155891" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-155891" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="155882"></a>
+<div id="answer-155882" class="answer" data-answerid="155882" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="155882">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>My favorite method is <a href="http://en.wikipedia.org/wiki/Latent_Dirichlet_allocation" rel="nofollow">LDA</a>; you can look <a href="https://radimrehurek.com/gensim/wiki.html" rel="nofollow">here</a> for a tutorial using python packages.</p>
+
+<p>You can also look at much simpler methods like <a href="http://scikit-learn.org/stable/auto_examples/applications/topics_extraction_with_nmf.html" rel="nofollow">this</a>.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/a/155882" title="short permalink to this answer" class="short-link" id="link-post-155882">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/155882/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="https://stats.stackexchange.com/posts/155882/revisions" title="show all edits to this post">edited <span title="2015-06-07 18:46:49Z" class="relativetime">Jun 7 '15 at 18:46</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/44952/chris-c"><div class="gravatar-wrapper-32"><img src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/Ev98o.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/44952/chris-c">Chris C</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,924</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="27 bronze badges"><span class="badge3"></span><span class="badgecount">27</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-06-07 15:34:11Z" class="relativetime">Jun 7 '15 at 15:34</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/79114/omerbp"><div class="gravatar-wrapper-32"><img src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/MF4xO.png" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/79114/omerbp">omerbp</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">143</span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-155882" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-155882" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="246997"></a>
+<div id="answer-246997" class="answer" data-answerid="246997" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="246997">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>LSA+KMeans works well but you have to input the amount of clusters you are expecting. Moreover the silhouette coefficient of the clusters found is usually low.</p>
+
+<p>Another method with which I get better results is to use DBSCAN <a href="http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html#example-cluster-plot-dbscan-py" rel="nofollow">example here</a>.
+It search for centers of high density and expands to make clusters. In this method it automatically finds the optimal amount of clusters. </p>
+
+<p>I've also found it very important to use a stemmer, such as Snowball for ex, which reduces the errors due to typos. 
+A good stop words list is also very important if you want to be sure to get rid of some clusters which would have no meaning because of the high occurrence of common words with no significant meaning. 
+When you build your count matrix, normalisation is also important, it allows to add weigh to a word with a low occurrence on the dataset, but with high occurrence in particular samples. These words are meaningful and you don't want to miss them. It also lowers weights of words with high occurrences in all particular samples (close to stop word but for words which can have a little meaning).
+One last thing I noticed was important is not to print the top 10 words of your clusters, but a more extended selection. Usually the quality and relevance of the keywords toward the label you would give to the cluster tend to reduce dramatically after these top 10-20 words. So an extended view of top keywords will help you to analyze if your cluster is really relevant or very polluted by noise.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stats.stackexchange.com/a/246997" title="short permalink to this answer" class="short-link" id="link-post-246997">share</a><span class="lsep">|</span><a href="https://stats.stackexchange.com/posts/246997/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://stats.stackexchange.com/posts/246997/revisions" title="show all edits to this post">edited <span title="2016-11-27 09:49:46Z" class="relativetime">Nov 27 '16 at 9:49</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2016-11-20 17:51:02Z" class="relativetime">Nov 20 '16 at 17:51</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stats.stackexchange.com/users/110659/vincent-teyssier"><div class="gravatar-wrapper-32"><img src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/qvytE.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stats.stackexchange.com/users/110659/vincent-teyssier">Vincent Teyssier</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">148</span><span title="10 bronze badges"><span class="badge3"></span><span class="badgecount">10</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-246997" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-246997" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="https://stats.stackexchange.com/questions/155880/answer/submit" method="post" class="post-form">
+						    <input type="hidden" id="post-id" value="155880">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="">
+							<h2 class="space">Your Answer</h2>
+
+        <script>
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+        
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: false,
+                reputationToPostImages: null,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="cbe153d9c8e4943557d600e50d8c5c31">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+								            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="https://stats.stackexchange.com/users/login?ssrc=question_page&amp;returnurl=https%3a%2f%2fstats.stackexchange.com%2fquestions%2f155880%2ftext-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid">
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false">
+                    <input type="hidden" name="use-google" class="use-google" value="false">
+                    <input type="button" class="submit-openid" value="Submit" style="display:none">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'https%3a%2f%2fstats.stackexchange.com%2fquestions%2f155880%2ftext-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        &lt;h3&gt;Post as a guest&lt;/h3&gt;
+    &lt;div class="form-item"&gt;
+        &lt;table&gt;
+        &lt;tr&gt;
+                    &lt;td class="vm"&gt;
+                &lt;div&gt;
+                    &lt;label for="display-name"&gt;Name&lt;/label&gt;
+                    &lt;input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="m-address"&gt;Email&lt;/label&gt;
+                    &lt;input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" /&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+            </noscript>
+
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#" class="btn-clear discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href="http://stackexchange.com/legal/privacy-policy" name="privacy" target="_blank">privacy policy</a> and <a href="http://stackexchange.com/legal/terms-of-service" name="tos" target="_blank">terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1">								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="https://stats.stackexchange.com/questions/tagged/clustering" class="post-tag" title="show questions tagged &#39;clustering&#39;" rel="tag">clustering</a> <a href="https://stats.stackexchange.com/questions/tagged/neural-networks" class="post-tag" title="show questions tagged &#39;neural-networks&#39;" rel="tag">neural-networks</a> <a href="https://stats.stackexchange.com/questions/tagged/feature-selection" class="post-tag" title="show questions tagged &#39;feature-selection&#39;" rel="tag">feature-selection</a> <a href="https://stats.stackexchange.com/questions/tagged/text-mining" class="post-tag" title="show questions tagged &#39;text-mining&#39;" rel="tag">text-mining</a> <a href="https://stats.stackexchange.com/questions/tagged/self-organizing-maps" class="post-tag" title="show questions tagged &#39;self-organizing-maps&#39;" rel="tag">self-organizing-maps</a>  or <a href="https://stats.stackexchange.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2015-06-07 15:14:54Z"><b>1 year, 10 months ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>10115 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige?lastactivity" class="lastactivity-link" title="2016-11-27 09:49:46Z">4 months ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+						
+			<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,0,"adzerk141870248",[5,17]).enableDynamicSiteSelection().setZone(56016); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk141870248"><a href="https://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6NSwiYnQiOjAsImNtIjo1MDk5OTYsImNoIjoyNjU0NywiY2siOnt9LCJjciI6MTg1MzQ4NSwiZGkiOiIxYTgzNWM2OGZhZGI0MGIwYjY4ZWYzNTQzNjJlODQ0NCIsImRtIjoxLCJmYyI6MjI4NjgxNCwiZmwiOjI3MjUyNDAsImlwIjoiNjcuMTYxLjI2LjExMSIsImt3IjoiY2x1c3RlcmluZyxuZXVyYWwtbmV0d29ya3MsZmVhdHVyZS1zZWxlY3Rpb24sdGV4dC1taW5pbmcsc2VsZi1vcmdhbml6aW5nLW1hcHMseC1ob3N0LXN0YXRzLnN0YWNrZXhjaGFuZ2UuY29tIiwibnciOjIyLCJwYyI6MCwiZWMiOjAsInByIjoxMDExODYsInJ0IjoxLCJzYiI6ImktMGRkYmJkM2Q4ZmUwOGVjZTYiLCJzcCI6MjM2NDAsInN0Ijo2NzgxMDEsInVrIjoidWUxLTk3NDFmYjFhMTc0ZTRjZDY5N2U4ODQ5ZTBlNTg2MTliIiwiem4iOjU2MDE2LCJ0cyI6MTQ5MzAxMzE5Mjc4NSwiYmYiOnRydWUsInBuIjoiYWR6ZXJrMTQxODcwMjQ4IiwidXIiOiJodHRwOi8vc3RhY2tvdmVyZmxvdy5jb20vam9icz91dG1fc291cmNlPXdlYnNpdGUmdXRtX21lZGl1bT1iYW5uZXImdXRtX2NvbnRlbnQ9bXB1XzYmdXRtX2NhbXBhaWduPWhvdXNlX2Fkc19ob3VzZV9hZHNfUk9TX1NVIn0&amp;s=YkiCkXLbyUMWsmdb9HCrVgo1bbA" rel="nofollow" target="_blank" title=""><img src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/4978d196dd0743858392d16b3d10ca09.png" title="" alt="" border="0" width="300" height="250"></a><img height="0px" width="0px" border="0" style="position:absolute;" src="./clustering - Text Mining_ how to cluster texts (e.g. news articles) with artificial intelligence_ - Cross Validated_files/i.gif"><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="https://stats.stackexchange.com/questions/155880/text-mining-how-to-cluster-texts-e-g-news-articles-with-artificial-intellige#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div></div>
+			
+
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/17472?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">5</div></a><a href="https://stats.stackexchange.com/questions/17472/how-to-plot-results-from-text-mining-e-g-classification-or-clustering?rq=1" class="question-hyperlink">How to plot results from text mining (e.g. classification or clustering)?</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/23826?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="https://stats.stackexchange.com/questions/23826/how-to-interpret-weight-position-plot-when-using-self-organizing-map-for-clust?rq=1" class="question-hyperlink">How to interpret “weight-position” plot when using self-organizing map for clustering?</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/25524?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">4</div></a><a href="https://stats.stackexchange.com/questions/25524/feature-selection-for-the-text-mining?rq=1" class="question-hyperlink">Feature selection for the text mining?</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/27292?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">2</div></a><a href="https://stats.stackexchange.com/questions/27292/feature-construction-for-text-mining?rq=1" class="question-hyperlink">Feature construction for text mining</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/55841?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="https://stats.stackexchange.com/questions/55841/how-to-identify-a-new-pattern-in-a-url-with-a-machine-learning-algorithm-text-m?rq=1" class="question-hyperlink">How to identify a new pattern in a URL with a machine learning algorithm (Text mining)</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/92300?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="https://stats.stackexchange.com/questions/92300/how-to-perform-text-mining-on-an-online-news-article?rq=1" class="question-hyperlink">How to perform text mining on an online news article?</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/140148?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">20</div></a><a href="https://stats.stackexchange.com/questions/140148/how-can-an-artificial-neural-network-ann-be-used-for-unsupervised-clustering?rq=1" class="question-hyperlink">How can an artificial neural network ANN, be used for unsupervised clustering?</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/153144?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">-2</div></a><a href="https://stats.stackexchange.com/questions/153144/how-to-do-text-clustering-for-a-set-of-around-10000-messages?rq=1" class="question-hyperlink">How to do text clustering for a set of around 10000 messages?</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/213419?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="https://stats.stackexchange.com/questions/213419/how-to-interpret-the-results-of-clustering-on-text-documents?rq=1" class="question-hyperlink">How to interpret the results of clustering on text documents</a></div><div class="spacer js-gps-track"><a href="https://stats.stackexchange.com/q/221144?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">4</div></a><a href="https://stats.stackexchange.com/questions/221144/was-it-as-valid-to-perform-k-means-on-a-distance-matrix-as-on-data-matrix-text?rq=1" class="question-hyperlink">Was it as valid to perform k-means on a distance matrix as on data matrix (text mining data)?</a></div>
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-stats" title="Cross Validated"></div><a href="https://stats.stackexchange.com/questions/275383/in-r-test-whether-coefficients-in-lm-are-different-each-to-a-given-value-other" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:65 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    In R, test whether coefficients in lm are different each to a given value (other than zero)
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/117162/create-a-paint-program" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Create a Paint program!
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-cooking" title="Seasoned Advice"></div><a href="https://cooking.stackexchange.com/questions/81031/why-do-grape-flavored-foods-taste-different-than-actual-grapes" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:49 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do grape-flavored foods taste different than actual grapes?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a href="https://mathoverflow.net/questions/267936/is-the-fundamental-group-of-any-compact-hyperbolic-3-manifold-embeddable-into-a" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is the fundamental group of any compact hyperbolic 3-manifold embeddable into a p-adic group?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/157852/does-the-crumple-horned-snorkack-exist" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Does the Crumple-Horned Snorkack exist?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-skeptics" title="Skeptics Stack Exchange"></div><a href="https://skeptics.stackexchange.com/questions/38024/did-einstein-comment-on-feeling-the-presence-of-jesus-while-reading-the-gospels" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:212 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Did Einstein comment on feeling the presence of Jesus while reading the Gospels?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-civicrm" title="CiviCRM Stack Exchange"></div><a href="https://civicrm.stackexchange.com/questions/18296/integrate-views3-with-drupal-7" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:605 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Integrate Views3 with Drupal 7
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-salesforce" title="Salesforce Stack Exchange"></div><a href="https://salesforce.stackexchange.com/questions/171207/how-to-check-a-string-is-a-url-through-apex-code" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:459 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    how to check a string is a url through apex code
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="https://english.stackexchange.com/questions/385505/what-is-it-called-when-experts-think-they-only-know-a-small-part-of-a-topic-and" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is it called when experts think they only know a small part of a topic and amateurs think they know almost all of a topic?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="https://physics.stackexchange.com/questions/328523/why-doesnt-car-fuel-energy-consumption-scale-like-the-cube-of-the-velocity" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why doesn't car fuel/energy consumption scale like the cube of the velocity?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="https://physics.stackexchange.com/questions/328494/what-is-the-relation-between-angular-and-linear-acceleration" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is the relation between angular and linear acceleration?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-movies" title="Movies &amp; TV Stack Exchange"></div><a href="https://movies.stackexchange.com/questions/72110/simpsons-episode-with-1000" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:367 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Simpsons episode with $1000
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-chemistry" title="Chemistry Stack Exchange"></div><a href="https://chemistry.stackexchange.com/questions/73173/why-doesnt-frozen-sugar-solution-taste-sweet" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:431 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why doesn't frozen sugar solution taste sweet?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-music" title="Music: Practice &amp; Theory Stack Exchange"></div><a href="https://music.stackexchange.com/questions/56647/can-music-time-signatures-really-be-irrational" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:240 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can music time signatures really be irrational?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="https://workplace.stackexchange.com/questions/89603/how-do-i-deal-with-the-30-minutes-remaining-problem" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do I deal with the "30 minutes remaining" problem?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-softwareengineering" title="Software Engineering Stack Exchange"></div><a href="https://softwareengineering.stackexchange.com/questions/347492/is-it-bad-practice-to-use-a-c-compiler-just-for-function-overloading" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:131 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it bad practice to use a C++ compiler just for function overloading?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href="https://ell.stackexchange.com/questions/127502/usage-of-apparent-vs-transparent" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Usage of apparent vs transparent
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="https://electronics.stackexchange.com/questions/301221/why-do-only-high-end-phones-support-a-lot-of-lte-bands" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do only high-end phones support a lot of LTE bands?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/78733/an-environment-where-round-beds-are-easier-to-build-than-rectangular" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    An environment where round beds are easier to build than rectangular
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-bitcoin" title="Bitcoin Stack Exchange"></div><a href="https://bitcoin.stackexchange.com/questions/52933/replaceable-transaction-or-non-replaceable-how-can-i-identify-it-from-raw-trans" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:308 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Replaceable transaction or Non-replaceable. How can I identify it from raw transaction?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="https://workplace.stackexchange.com/questions/89567/interviewer-privately-warned-me-against-taking-the-job" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Interviewer privately warned me against taking the job
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-retrocomputing" title="Retrocomputing Stack Exchange"></div><a href="https://retrocomputing.stackexchange.com/questions/2749/how-does-the-amiga-chipset-rga-bus-work" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:648 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How does the Amiga chipset RGA bus work?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/78988/what-would-be-a-realistic-militarization-level-for-forsaken-space-colony" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What would be a realistic militarization level for forsaken space colony?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-askubuntu" title="Ask Ubuntu"></div><a href="https://askubuntu.com/questions/908109/how-to-close-all-tabs-instantly" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:89 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to close all tabs instantly
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="https://stats.stackexchange.com/feeds/question/155880" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/155880/ivc/1acc');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/155880/ivc/1acc" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories" role="contentinfo">
+        <div class="footerwrap">            
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                    <a href="http://stackoverflow.com/company/about">about us</a>
+                        <a href="https://stats.stackexchange.com/tour">tour</a>
+                    <a href="https://stats.stackexchange.com/help">help</a>
+                    <a href="https://stackoverflow.blog/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com/?tab=site&amp;host=stats.stackexchange.com">chat</a>
+                    <a href="https://data.stackexchange.com/">data</a>
+                    <a href="https://stackexchange.com/legal">legal</a>
+                    <a href="https://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackoverflow.com/company/work-here">work here</a>
+                    <a href="http://stackexchange.com/mediakit">advertising info</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="https://stats.stackexchange.com/contact">contact us</a></b>
+                        <b><a href="https://stats.meta.stackexchange.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="https://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="https://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="https://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="https://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="https://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="https://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="https://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="https://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                        <li><a href="https://softwareengineering.stackexchange.com/" title="professionals, academics, and students working within the systems development life cycle who care about creating, delivering, and maintaining software responsibly">Software Engineering</a></li>
+                        <li><a href="https://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="https://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="https://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="https://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="https://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="https://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="https://security.stackexchange.com/" title="information security professionals">Information Security</a></li>
+                        <li><a href="https://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="https://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="https://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="https://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="https://mathematica.stackexchange.com/" title="users of Wolfram Mathematica">Mathematica</a></li>
+                        <li><a href="https://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="https://expressionengine.stackexchange.com/" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                        <li><a href="https://crypto.stackexchange.com/" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="https://codereview.stackexchange.com/" title="peer programmer code reviews">Code Review</a></li>
+                        <li><a href="https://magento.stackexchange.com/" title="users of the Magento e-Commerce platform">Magento</a></li>
+                        <li><a href="https://dsp.stackexchange.com/" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                        <li><a href="https://raspberrypi.stackexchange.com/" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                        <li><a href="https://codegolf.stackexchange.com/" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="https://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="https://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="https://movies.stackexchange.com/" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="https://music.stackexchange.com/" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                        <li><a href="https://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="https://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="https://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="https://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (8)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="https://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="https://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="https://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="https://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="https://ell.stackexchange.com/" title="speakers of other languages learning English">English Language Learners</a></li>
+                        <li><a href="https://japanese.stackexchange.com/" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                        <li><a href="https://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="https://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="https://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                        <li><a href="https://anime.stackexchange.com/" title="anime and manga fans">Anime &amp; Manga</a></li>
+                        <li><a href="https://mechanics.stackexchange.com/" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (17)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="https://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="https://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="https://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="https://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="https://chemistry.stackexchange.com/" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="https://biology.stackexchange.com/" title="biology researchers, academics, and students">Biology</a></li>
+                        <li><a href="https://cs.stackexchange.com/" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                        <li><a href="https://philosophy.stackexchange.com/" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (3)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="https://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="https://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="https://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="https://www.stackoverflowbusiness.com/talent">Stack Overflow Talent</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+            <div id="copyright">
+                site design / logo © 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2017.4.21.25730
+            </div>
+                </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Cross Validated works best with JavaScript enabled&lt;img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+
+<script>var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script>
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    
+    
+        
+        ados.run.push(function () {
+                ados_setKeywords('clustering,neural-networks,feature-selection,text-mining,self-organizing-maps,x-host-stats.stackexchange.com');; ados_load();
+        });   
+        
+</script>
+
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-24', {'cookieDomain': 'stackexchange.com'});
+                ga('set', 'dimension2', '|clustering|neural-networks|feature-selection|text-mining|self-organizing-maps|');
+                ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i) || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') service =  2;
+                                    else if (service === 'Place') service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', function() {
+                                        StackExchange.gps.track('google_maps_places_api.call', { service: service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: STIXSizeOneSym, sans-serif;"></div></div></body></html>

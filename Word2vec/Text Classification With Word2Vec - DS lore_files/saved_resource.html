@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<!-- saved from url=(0402)https://disqus.com/embed/comments/?base=default&f=ds-lore&t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&t_d=Text%20Classification%20With%20Word2Vec&t_t=Text%20Classification%20With%20Word2Vec&s_o=default#version=d952d33e35a1c499438fbdfafc2ef715 -->
+<html lang="en" dir="ltr" class="js no-touch localstorage sessionstorage contenteditable use-opacity-transitions"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Disqus Comments</title>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <style>
+        .alert--warning {
+            border-radius: 3px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            background-color: #FFE070;
+            color: #A47703;
+        }
+
+        .alert--warning a,
+        .alert--warning a:hover,
+        .alert--warning strong {
+            color: #A47703;
+            font-weight: bold;
+        }
+
+        .alert--error p,
+        .alert--warning p {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        
+        </style>
+    
+    <style>
+        html {
+            overflow: hidden;
+        }
+
+        #error {
+            display: none;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        
+    </style>
+
+<script src="./cb=gapi.loaded_0" async=""></script><script crossorigin="anonymous" id="bootstrap-script" data-app="lounge" src="./lounge.load.d952d33e35a1c499438fbdfafc2ef715.js"></script><meta http-equiv="Content-Security-Policy" content="script-src https:;"><link rel="stylesheet" href="./lounge.5f04e83cf97ee6a6cf16dc8e296ed78d.css"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="lounge/main" src="./lounge.bundle.987c6346e2effb8e4f350d48ecf53d13.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="remote/config" src="./config.js"></script><style id="css_1493014555107"></style><!--<base target="_parent">--><base href="." target="_parent"><link rel="stylesheet" href="./discovery.ec9371c4ef39ecee074c2acf24d5e0e2.css"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ga" src="./ga(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="discovery/main" src="./discovery.bundle.6aa8d068ba5176f85f980f898293fefa.js"></script><link rel="stylesheet" href="./highlight.3128dd90ecaebd8542ac3442033f3f00.css"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="common/vendor_extensions/highlight" src="./highlight.7f37724c445afd967f6bb7606f6263ad.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="fb" src="./sdk.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="gapi" src="./api.js" gapi_processed="true"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+<body class="serif">
+    
+
+    
+    <div id="error" class="alert--error">
+        <p>We were unable to load Disqus. If you are a moderator please see our <a href="https://docs.disqus.com/help/83/"> troubleshooting guide</a>. </p>
+    </div>
+
+    
+    <script type="text/json" id="disqus-forumData">{"session":{"canModerate":false,"audienceSyncVerified":false,"mustVerify":false,"canReply":true,"mustVerifyEmail":false},"features":{},"forum":{"raw_guidelines":null,"twitterName":null,"guidelines":null,"favicon":{"permalink":"https://disqus.com/api/forums/favicons/ds-lore.jpg","cache":"//a.disquscdn.com/1492794604/images/favicon-default.png"},"disableDisqusBranding":false,"id":"ds-lore","createdAt":"2015-07-26T17:45:30.194461","category":"Tech","founder":"156174940","daysAlive":0,"installCompleted":true,"pk":"3706253","channel":null,"description":null,"raw_description":null,"permissions":{},"name":"DS lore","language":"en","settings":{"supportLevel":0,"adsDRNativeEnabled":false,"colorScheme":"auto","adsVideoEnabled":false,"adsProductVideoEnabled":false,"adsPositionTopEnabled":false,"ssoRequired":false,"unapproveLinks":false,"adsEnabled":false,"adsProductLinksThumbnailsEnabled":false,"adsProductStoriesEnabled":false,"organicDiscoveryEnabled":true,"allowMedia":true,"disable3rdPartyTrackers":false,"adsProductDisplayEnabled":false,"discoveryMax":false,"discoveryLocked":false,"moderatorText":"","linkAffiliationEnabled":false,"allowAnonPost":false,"hasCustomAvatar":false,"adultContent":false,"promotedDiscoveryEnabled":false,"allowAnonVotes":false,"mustVerify":true,"adsSettingsLocked":false,"mustVerifyEmail":true,"audienceSyncEnabled":false,"typeface":"auto","adsPositionBottomEnabled":false,"mediaembedEnabled":true,"adsProductLinksEnabled":false,"validateAllPosts":false,"discoveryThumbnailsEnabled":false,"isVIP":false,"adsPositionInthreadEnabled":false},"organizationId":2686594,"url":"","daysThreadAlive":0,"avatar":{"small":{"permalink":"https://disqus.com/api/forums/avatars/ds-lore.jpg?size=32","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"large":{"permalink":"https://disqus.com/api/forums/avatars/ds-lore.jpg?size=92","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}},"signedUrl":""}}</script>
+
+    
+    <script type="text/json" id="disqus-threadData">{"cursor":{"hasPrev":false,"prev":null,"total":18,"hasNext":false,"next":"1:0:0"},"code":0,"response":{"lastModified":1491426939,"posts":[{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>I basically copied this verbatim, and got it to compile on Python 3.5. However when I run your example of classification it returns [b'capitals', b'capitals', b'capitals'] and regardless of the fitted data it copies the third parameter of 'y' for the output of 'predict()'. Any ideas?\u003c/p>","id":"3234280922","isHighlighted":false,"author":{"username":"trevordoll","about":"","name":"Trevor Doll","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2324929999999998,"profileUrl":"https://disqus.com/by/trevordoll/","url":"","reputation":1.2324929999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2017-04-01T01:59:14","id":"247427796","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/trevordoll.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/trevordoll.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/trevordoll.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2017-04-01T02:06:45","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"I basically copied this verbatim, and got it to compile on Python 3.5. However when I run your example of classification it returns [b'capitals', b'capitals', b'capitals'] and regardless of the fitted data it copies the third parameter of 'y' for the output of 'predict()'. Any ideas?","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Must be something wrong with the vectors or the vectorizer. I would check if the vectors make sense:\u003cbr>\u003c/p>\u003cpre>\u003ccode>\u003cbr>from scipy.spatial.distance import euclidean\u003cbr># first distance should be much smaller than second\u003cbr>euclidean(w2v['Berlin'], w2v['London']), euclidean(w2v['Berlin'], w2v['cow'])\u003cbr>\u003c/code>\u003c/pre>\u003cp>\u003c/p>\u003cp>and if vectorizer works properly:\u003cbr>\u003c/p>\u003cpre>\u003ccode>\u003cbr>d = {'Berlin': [1,1], 'London': [1.1, 1.1]}\u003cbr># should return array([[ 1.05,  1.05]])\u003cbr>MeanEmbeddingVectorizer(d).transform([['Berlin', 'London']])\u003cbr>\u003c/code>\u003c/pre>","id":"3235309193","isHighlighted":false,"author":{"username":"nadbor","about":"","name":"Nadbor Drozd","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2399909999999998,"profileUrl":"https://disqus.com/by/nadbor/","url":"","reputation":1.2399909999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-05-03T20:26:34","id":"156174940","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2017-04-01T20:32:26","parent":3234280922,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Must be something wrong with the vectors or the vectorizer. I would check if the vectors make sense:\n\u003cpre>\u003ccode>\nfrom scipy.spatial.distance import euclidean\n# first distance should be much smaller than second\neuclidean(w2v['Berlin'], w2v['London']), euclidean(w2v['Berlin'], w2v['cow'])\n\u003c/code>\u003c/pre>\n\nand if vectorizer works properly:\n\u003cpre>\u003ccode>\nd = {'Berlin': [1,1], 'London': [1.1, 1.1]}\n# should return array([[ 1.05,  1.05]])\nMeanEmbeddingVectorizer(d).transform([['Berlin', 'London']])\n\u003c/code>\u003c/pre>","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":1,"points":0,"moderationLabels":[],"isEdited":true},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>`MeanEmbeddingVectorizer(d).transform([['Berlin', 'London']])` does indeed print out `[[ 1.05  1.05]]` so the vectorization seems to be working properly but everything else is still remaining the same.\u003c/p>\u003cp>Also, don't know if this also part of the problem, when applying `fit` to a Glove model, it returns `ValueError: Found array with 0 feature(s) (shape=(3, 0)) while a minimum of 1 is required.`\u003c/p>","id":"3236141718","isHighlighted":false,"author":{"username":"trevordoll","about":"","name":"Trevor Doll","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2324929999999998,"profileUrl":"https://disqus.com/by/trevordoll/","url":"","reputation":1.2324929999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2017-04-01T01:59:14","id":"247427796","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/trevordoll.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/trevordoll.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/trevordoll.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2017-04-02T14:11:20","parent":3235309193,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"`MeanEmbeddingVectorizer(d).transform([['Berlin', 'London']])` does indeed print out `[[ 1.05  1.05]]` so the vectorization seems to be working properly but everything else is still remaining the same. \n\nAlso, don't know if this also part of the problem, when applying `fit` to a Glove model, it returns `ValueError: Found array with 0 feature(s) (shape=(3, 0)) while a minimum of 1 is required.`","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":2,"points":0,"moderationLabels":[],"isEdited":true},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Dunno what that is about. I just checked and it works under python3 (at least the silly example does), had to change only one line. \u003cbr>See:\u003cbr>\u003ca href=\"https://disq.us/url?url=https%3A%2F%2Fgithub.com%2Fnadbordrozd%2Fblog_stuff%2Fblob%2Fmaster%2Fclassification_w2v%2Fpy3_poc.py%3AfabZ1X1krfDHZD1hbjPvba_6RkU&amp;cuid=3706253\" rel=\"nofollow noopener\">https://github.com/nadbordr...\u003c/a>\u003c/p>","id":"3236597074","isHighlighted":false,"author":{"username":"nadbor","about":"","name":"Nadbor Drozd","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2399909999999998,"profileUrl":"https://disqus.com/by/nadbor/","url":"","reputation":1.2399909999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-05-03T20:26:34","id":"156174940","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2017-04-02T20:17:44","parent":3236141718,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Dunno what that is about. I just checked and it works under python3 (at least the silly example does), had to change only one line. \nSee:\nhttps://github.com/nadbordrozd/blog_stuff/blob/master/classification_w2v/py3_poc.py","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":3,"points":0,"moderationLabels":["links"],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Great post. Why is it that you have tested word2vec with extra trees only?  Is there a way to combine the word2vec model with SVM, like use the MeanEmbeddingVectorizer's output as the input for SVM? Wouldn't the results be better?\u003c/p>","id":"3233012354","isHighlighted":false,"author":{"username":"arjunpp","about":"","name":"Arjun PP","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.232124,"profileUrl":"https://disqus.com/by/arjunpp/","url":"","reputation":1.232124,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2017-03-31T10:03:14","id":"247351759","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/arjunpp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/arjunpp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/arjunpp.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2017-03-31T10:32:34","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Great post. Why is it that you have tested word2vec with extra trees only?  Is there a way to combine the word2vec model with SVM, like use the MeanEmbeddingVectorizer's output as the input for SVM? Wouldn't the results be better?","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>It's not that SVM is such a great algorithm in general, it's just particularly well suited for problems with very highly dimensional, sparse feature vectors - like text in Bag of Words representation. For typical reasonably-dimensional problems tree-based methods like ExtraTrees (today I would use XGBoost instead) are almost always superior - as evidenced by the results of dozens of Kaggle competitions. The whole point of this word2vec approach was to reduce the dimensionality of the problem so that those superior methods can be effectively used. Once the dimensionality is reduced, I don't think SVM would do all that well. At least, this is what I thought when I was writing this post. I'm not 100% sure whether I checked if it is actually the case.\u003c/p>\u003cp>Anyway, like you say, it's very easy to use SVM in place of ExtraTrees and find out: \u003cbr>\u003c/p>\u003cpre>\u003ccode>\u003cbr>from sklearn.svm import SVC\u003cbr>\u003cbr>svm_w2v = Pipeline([\u003cbr>    (\"word2vec vectorizer\", MeanEmbeddingVectorizer(w2v)),\u003cbr>    (\"SVM\", SVC())])\u003cbr>\u003c/code>\u003c/pre>","id":"3233136553","isHighlighted":false,"author":{"username":"nadbor","about":"","name":"Nadbor Drozd","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2399909999999998,"profileUrl":"https://disqus.com/by/nadbor/","url":"","reputation":1.2399909999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-05-03T20:26:34","id":"156174940","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2017-03-31T12:35:11","parent":3233012354,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"It's not that SVM is such a great algorithm in general, it's just particularly well suited for problems with very highly dimensional, sparse feature vectors - like text in Bag of Words representation. For typical reasonably-dimensional problems tree-based methods like ExtraTrees (today I would use XGBoost instead) are almost always superior - as evidenced by the results of dozens of Kaggle competitions. The whole point of this word2vec approach was to reduce the dimensionality of the problem so that those superior methods can be effectively used. Once the dimensionality is reduced, I don't think SVM would do all that well. At least, this is what I thought when I was writing this post. I'm not 100% sure whether I checked if it is actually the case. \n\nAnyway, like you say, it's very easy to use SVM in place of ExtraTrees and find out: \n\u003cpre>\u003ccode>\nfrom sklearn.svm import SVC\n\nsvm_w2v = Pipeline([\n    (\"word2vec vectorizer\", MeanEmbeddingVectorizer(w2v)),\n    (\"SVM\", SVC())])\n\u003c/code>\u003c/pre>","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":1,"points":0,"moderationLabels":[],"isEdited":true},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>BTW There was a small mistake in your benchmarking script published on GitHub (paragraph 25) - you are assigning etree_glove_big pipeline to both \"glove_big\" and to \"glove_big_tfidf\" (all_models initialisation).\u003c/p>","id":"2978969180","isHighlighted":false,"author":{"username":"yuriyfilonov","about":"","name":"Yuriy Filonov","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2363009999999999,"profileUrl":"https://disqus.com/by/yuriyfilonov/","url":"","reputation":1.2363009999999999,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-11-01T02:55:59","id":"228452660","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/yuriyfilonov.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/yuriyfilonov.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/yuriyfilonov.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-11-01T09:40:54","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"BTW There was a small mistake in your benchmarking script published on GitHub (paragraph 25) - you are assigning etree_glove_big pipeline to both \"glove_big\" and to \"glove_big_tfidf\" (all_models initialisation).","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Good catch. I think the results in this post were created without this error but I'll have to check.\u003c/p>","id":"2990899084","isHighlighted":false,"author":{"username":"nadbor","about":"","name":"Nadbor Drozd","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2399909999999998,"profileUrl":"https://disqus.com/by/nadbor/","url":"","reputation":1.2399909999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-05-03T20:26:34","id":"156174940","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-11-08T13:25:10","parent":2978969180,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Good catch. I think the results in this post were created without this error but I'll have to check.","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":1,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Thanks for sharing your results on Github. Have you found any explanations for a strange fact that word vectors trained on such a small dataset from the scratch show better results than Glove. It seems extremely strange to me.\u003c/p>","id":"2978713679","isHighlighted":false,"author":{"username":"yuriyfilonov","about":"","name":"Yuriy Filonov","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2363009999999999,"profileUrl":"https://disqus.com/by/yuriyfilonov/","url":"","reputation":1.2363009999999999,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-11-01T02:55:59","id":"228452660","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/yuriyfilonov.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/yuriyfilonov.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/yuriyfilonov.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-11-01T02:58:07","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Thanks for sharing your results on Github. Have you found any explanations for a strange fact that word vectors trained on such a small dataset from the scratch show better results than Glove. It seems extremely strange to me.","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Yes, I was surprised as well. The only explanation I have is that the vectors I got are not _universally_ better than Glove. They are only better for this specific task. Apparently the distribution of words in these benchmarks is different from the one in Glove's training set - and different in some some consistent direction - and the vectors have picked up on it. For this to be true it would be enough if for example these texts consistently used 'apple' (all the words are lowercased) to refer to the company while Glove was trained on texts where 'apple' more often than not meant the fruit. This kind of thing. But this is just speculation. Would be interesting to see if we can get even better results by using Glove vectors to initialize word2vec and run it for just a few epochs.\u003c/p>","id":"2990897470","isHighlighted":false,"author":{"username":"nadbor","about":"","name":"Nadbor Drozd","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2399909999999998,"profileUrl":"https://disqus.com/by/nadbor/","url":"","reputation":1.2399909999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-05-03T20:26:34","id":"156174940","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-11-08T13:23:51","parent":2978713679,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Yes, I was surprised as well. The only explanation I have is that the vectors I got are not _universally_ better than Glove. They are only better for this specific task. Apparently the distribution of words in these benchmarks is different from the one in Glove's training set - and different in some some consistent direction - and the vectors have picked up on it. For this to be true it would be enough if for example these texts consistently used 'apple' (all the words are lowercased) to refer to the company while Glove was trained on texts where 'apple' more often than not meant the fruit. This kind of thing. But this is just speculation. Would be interesting to see if we can get even better results by using Glove vectors to initialize word2vec and run it for just a few epochs.","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":1,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Dear Sir if we want to use a train and test set how we should  modify the above code?\u003c/p>","id":"2878820744","isHighlighted":false,"author":{"username":"mememimis","about":"","name":"meme mimis","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2363009999999999,"profileUrl":"https://disqus.com/by/mememimis/","url":"","reputation":1.2363009999999999,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-08-06T19:19:28","id":"217691753","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/mememimis.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/mememimis.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/mememimis.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-09-06T13:09:24","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Dear Sir if we want to use a train and test set how we should  modify the above code?","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>Not sure I understand. The code (full version here \u003ca href=\"https://disq.us/url?url=https%3A%2F%2Fgithub.com%2Fnadbordrozd%2Fblog_stuff%2Fblob%2Fmaster%2Fclassification_w2v%2Fbenchmarking.ipynb%3AppHrG0vxfEKF0OnRJ_4uvgwT4xs&amp;cuid=3706253\" rel=\"nofollow noopener\">https://github.com/nadbordr...\u003c/a> ) already splits the data into train and test set - see cell 27 in the link. In case you want some other train-test splitting strategy, scikit-learn has lots of alternatives available \u003ca href=\"http://disq.us/url?url=http%3A%2F%2Fscikit-learn.org%2Fstable%2Fmodules%2Fcross_validation.html%3AsKNtUSP12cQCzmCftsndmYe33cU&amp;cuid=3706253\" rel=\"nofollow noopener\">http://scikit-learn.org/sta...\u003c/a> . I tried to make the models sklearn-compatible so anything you find there should be directly applicable.\u003c/p>","id":"2879582053","isHighlighted":false,"author":{"username":"nadbor","about":"","name":"Nadbor Drozd","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2399909999999998,"profileUrl":"https://disqus.com/by/nadbor/","url":"","reputation":1.2399909999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-05-03T20:26:34","id":"156174940","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-09-06T20:56:28","parent":2878820744,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"Not sure I understand. The code (full version here https://github.com/nadbordrozd/blog_stuff/blob/master/classification_w2v/benchmarking.ipynb ) already splits the data into train and test set - see cell 27 in the link. In case you want some other train-test splitting strategy, scikit-learn has lots of alternatives available http://scikit-learn.org/stable/modules/cross_validation.html . I tried to make the models sklearn-compatible so anything you find there should be directly applicable.","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":1,"points":0,"moderationLabels":["links"],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>This is a very helpful script, but I keep getting a SyntaxError when going to calculate the scores in this line:\u003c/p>\u003cp>for name, model in all_models], \u003cbr>                key=lambda (_, x): -x)\u003c/p>\u003cp>The (_, x): -x part is where Python is telling me there's an error.\u003c/p>\u003cp>Do you have any hints or suggestions to fix this error?\u003c/p>\u003cp>Thanks!\u003c/p>","id":"2831811753","isHighlighted":false,"author":{"username":"disqus_oKvf3TZOSf","about":"","name":"Mallory","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.23667,"profileUrl":"https://disqus.com/by/disqus_oKvf3TZOSf/","url":"","reputation":1.23667,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-08-11T08:19:53","id":"218172807","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/disqus_oKvf3TZOSf.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/disqus_oKvf3TZOSf.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/disqus_oKvf3TZOSf.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-08-11T08:22:34","parent":null,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"This is a very helpful script, but I keep getting a SyntaxError when going to calculate the scores in this line:\n\nfor name, model in all_models], \n                key=lambda (_, x): -x)\n\nThe (_, x): -x part is where Python is telling me there's an error.\n\nDo you have any hints or suggestions to fix this error?\n\nThanks!","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":0,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>You must be running this with Python 3 where tuple parameter unpacking was removed. Replace `key=lambda (_, x): -x` with `key=lambda x: -x[1]` and it should work - at least this line. I didn't test any of it on Python 3, I'm surprised it worked even this far.\u003c/p>","id":"2832851242","isHighlighted":false,"author":{"username":"nadbor","about":"","name":"Nadbor Drozd","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2399909999999998,"profileUrl":"https://disqus.com/by/nadbor/","url":"","reputation":1.2399909999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-05-03T20:26:34","id":"156174940","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-08-11T20:39:27","parent":2831811753,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"You must be running this with Python 3 where tuple parameter unpacking was removed. Replace `key=lambda (_, x): -x` with `key=lambda x: -x[1]` and it should work - at least this line. I didn't test any of it on Python 3, I'm surprised it worked even this far.","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":1,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>That is still giving me a syntax error. What exactly is x in this section of code?\u003c/p>","id":"2833529522","isHighlighted":false,"author":{"username":"disqus_oKvf3TZOSf","about":"","name":"Mallory","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.23667,"profileUrl":"https://disqus.com/by/disqus_oKvf3TZOSf/","url":"","reputation":1.23667,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-08-11T08:19:53","id":"218172807","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/disqus_oKvf3TZOSf.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/disqus_oKvf3TZOSf.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/disqus_oKvf3TZOSf.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-08-12T07:25:31","parent":2832851242,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"That is still giving me a syntax error. What exactly is x in this section of code?","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":2,"points":0,"moderationLabels":[],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>That is very strange. What version of python are you using? x here is the cross validation score. This line calculates cross validation scores for every model and then sorts them. It can be split into two statements. `unsorted_scores = [(name, cross_val_score(model, X, y, cv=5).mean()) for name, model in all_models]`  and then `scores = sorted(unsorted_scores, key=lambda x: -x[1])` Let's see if it still errors when you do it this way.\u003c/p>","id":"2834854633","isHighlighted":false,"author":{"username":"nadbor","about":"","name":"Nadbor Drozd","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2399909999999998,"profileUrl":"https://disqus.com/by/nadbor/","url":"","reputation":1.2399909999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-05-03T20:26:34","id":"156174940","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-08-13T00:02:56","parent":2833529522,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"That is very strange. What version of python are you using? x here is the cross validation score. This line calculates cross validation scores for every model and then sorts them. It can be split into two statements. `unsorted_scores = [(name, cross_val_score(model, X, y, cv=5).mean()) for name, model in all_models]`  and then `scores = sorted(unsorted_scores, key=lambda x: -x[1])` Let's see if it still errors when you do it this way.","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":3,"points":0,"moderationLabels":[],"isEdited":true},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>I'm using Python 3.5 on Spyder 2.3.8.\u003c/p>\u003cp>When I ran the code you suggested, I got this error message:\u003cbr>//anaconda/lib/python3.5/site-packages/sklearn/\u003ca href=\"http://disq.us/url?url=http%3A%2F%2Fcross_validation.py%3AIunP4kuimkuHk95ba1vS-v98SiE&amp;cuid=3706253\" rel=\"nofollow noopener\">cross_validation.py\u003c/a>:516: Warning: The least populated class in y has only 1 members, which is too few. The minimum number of labels for any class cannot be less than n_folds=5.\u003cbr>  % (min_labels, self.n_folds)), Warning)\u003c/p>\u003cp>And another issue I ran into was when running the w2v and w2v-tfidf\u003c/p>\u003cp>I broke up:\u003cbr>for name, model in all_models:\u003cbr>    for n in train_sizes:\u003cbr>        table.append({'model': name, \u003cbr>                      'accuracy': benchmark(model, X, y, n), \u003cbr>                      'train_size': n})\u003c/p>\u003cp>to run on each individual algorithm because it wouldn't run with the code above, so it looks like this:\u003c/p>\u003cp># w2v\u003cbr>for n in train_sizes:\u003cbr>    blanktable.append({'model': all_models[6][0], \u003cbr>                      'precision': benchmark(all_models[6][1], X, y, n), 'train_size': n})\u003c/p>\u003cp># w2v_tfidf\u003cbr>for n in train_sizes:\u003cbr>    blanktable.append({'model': all_models[6][0], \u003cbr>                      'precision': benchmark(all_models[6][1], X, y, n), 'train_size': n})\u003c/p>\u003cp>where [6] refers to the line in the list of all models and then the [0] and [1] refer to the name and model in the 6th line, but I also get this error:\u003c/p>\u003cp>ValueError: setting an array element with a sequence.\u003c/p>\u003cp>Not quite sure how to fix it, because the only 'manipulation' of X and y is at the beginning, when they are converted to numpy arrays.\u003c/p>","id":"2835286362","isHighlighted":false,"author":{"username":"disqus_oKvf3TZOSf","about":"","name":"Mallory","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.23667,"profileUrl":"https://disqus.com/by/disqus_oKvf3TZOSf/","url":"","reputation":1.23667,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2016-08-11T08:19:53","id":"218172807","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/disqus_oKvf3TZOSf.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/disqus_oKvf3TZOSf.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/disqus_oKvf3TZOSf.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-08-13T08:33:28","parent":2834854633,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"I'm using Python 3.5 on Spyder 2.3.8.\n\nWhen I ran the code you suggested, I got this error message:\n//anaconda/lib/python3.5/site-packages/sklearn/cross_validation.py:516: Warning: The least populated class in y has only 1 members, which is too few. The minimum number of labels for any class cannot be less than n_folds=5.\n  % (min_labels, self.n_folds)), Warning)\n\nAnd another issue I ran into was when running the w2v and w2v-tfidf\n\nI broke up:\nfor name, model in all_models:\n    for n in train_sizes:\n        table.append({'model': name, \n                      'accuracy': benchmark(model, X, y, n), \n                      'train_size': n})\n\nto run on each individual algorithm because it wouldn't run with the code above, so it looks like this:\n\n# w2v\nfor n in train_sizes:\n    blanktable.append({'model': all_models[6][0], \n                      'precision': benchmark(all_models[6][1], X, y, n), 'train_size': n})\n\n# w2v_tfidf\nfor n in train_sizes:\n    blanktable.append({'model': all_models[6][0], \n                      'precision': benchmark(all_models[6][1], X, y, n), 'train_size': n})\n \nwhere [6] refers to the line in the list of all models and then the [0] and [1] refer to the name and model in the 6th line, but I also get this error:\n\nValueError: setting an array element with a sequence.\n\nNot quite sure how to fix it, because the only 'manipulation' of X and y is at the beginning, when they are converted to numpy arrays.","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":4,"points":0,"moderationLabels":["links"],"isEdited":false},{"dislikes":0,"numReports":0,"likes":0,"message":"\u003cp>The first error looks legit - not enough data in the smallest benchmark. The other one is more mysterious. I'm stumped. All I can say is - your code works with Python 2.7.8\u003c/p>","id":"2847374853","isHighlighted":false,"author":{"username":"nadbor","about":"","name":"Nadbor Drozd","disable3rdPartyTrackers":false,"isPowerContributor":false,"isAnonymous":false,"rep":1.2399909999999998,"profileUrl":"https://disqus.com/by/nadbor/","url":"","reputation":1.2399909999999998,"location":"","isPrivate":false,"signedUrl":"","isPrimary":true,"joinedAt":"2015-05-03T20:26:34","id":"156174940","reputationLabel":"Average","avatar":{"small":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar32.png"},"isCustom":false,"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png","large":{"permalink":"https://disqus.com/api/users/avatars/nadbor.jpg","cache":"//a.disquscdn.com/1492794604/images/noavatar92.png"}}},"media":[],"isSpam":false,"isDeletedByAuthor":false,"createdAt":"2016-08-19T21:26:50","parent":2835286362,"isApproved":true,"isDeleted":false,"isFlagged":false,"raw_message":"The first error looks legit - not enough data in the smallest benchmark. The other one is more mysterious. I'm stumped. All I can say is - your code works with Python 2.7.8","canVote":false,"thread":"4864088179","forum":"ds-lore","depth":5,"points":0,"moderationLabels":[],"isEdited":false}],"thread":{"feed":"https://ds-lore.disqus.com/text_classification_with_word2vec/latest.rss","identifiers":["http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/"],"dislikes":0,"likes":0,"message":"","id":"4864088179","createdAt":"2016-05-28T07:37:56","category":"3863341","author":"156174940","isSpam":false,"signedLink":"http://disq.us/?url=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&key=fuYhwXicR1-gC7DHVs7YLA","isDeleted":false,"hasStreaming":false,"raw_message":"","isClosed":false,"link":"http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/","slug":"text_classification_with_word2vec","forum":"ds-lore","clean_title":"Text Classification With Word2Vec","posts":18,"moderators":[156174940],"title":"Text Classification With Word2Vec","highlightedPost":null}},"order":"popular"}</script>
+
+    
+
+    <div id="fixed-content"></div>
+
+
+    
+        
+<script type="text/json" id="disqus-urls">{
+    "root":"//disqus.com",
+    "next":"https://c.disquscdn.com/next/current/embed"
+}</script>
+
+        
+        <script>!function () {
+            var d = document;
+            var toH = d.head.appendChild.bind(d.head);
+
+            var v = window.location.href.match(/[#&?]version=([0-9a-f]{32})/);
+            var src = 'https://c.disquscdn.com/next/embed/lounge.load';
+            if (v)
+                src += '.' + v[1];
+            src += '.js';
+
+            var s = d.createElement('script');
+            s.crossOrigin = 'anonymous';
+            s.id = 'bootstrap-script';
+            s.setAttribute('data-app', 'lounge');
+            s.src = src;
+            toH(s);
+
+            var m = d.createElement('meta');
+            m.setAttribute('http-equiv', 'Content-Security-Policy');
+            m.setAttribute('content', "script-src https:;");
+            toH(m);
+        }();</script>
+    
+
+
+<script src="./common.bundle.08b03b11c747b79c4d4135b49e2f8725.js"></script><div id="layout" data-tracking-area="layout"><div id="onboard" data-tracking-area="onboard"><div></div></div><div id="highlighted-post" data-tracking-area="highlighted" class="highlighted-post" style="display: none;"></div><div id="global-alert"></div><header id="main-nav" data-tracking-area="main-nav"><nav class="nav nav-primary"><ul><li class="nav-tab nav-tab--primary tab-conversation active" data-role="post-count"><a class="publisher-nav-color"><span class="comment-count">18 comments</span><span class="comment-count-placeholder">Comments</span></a></li><li class="nav-tab nav-tab--primary tab-community"><a href="https://disqus.com/home/forums/ds-lore/" class="publisher-nav-color" data-action="community-sidebar" data-forum="ds-lore" id="community-tab"><span class="community-name"><strong>DS lore</strong></span><strong class="community-name-placeholder">Community</strong></a></li><li class="nav-tab nav-tab--primary dropdown user-menu" data-role="logout"><a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="dropdown-toggle" data-toggle="dropdown">
+<span class="dropdown-toggle-wrapper">
+
+<span>
+Login
+</span>
+
+</span> <span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+
+
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="auth:disqus">Disqus</a>
+</li>
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="auth:facebook">Facebook</a>
+</li>
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="auth:twitter">Twitter</a>
+</li>
+<li>
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="auth:google">Google</a>
+</li>
+
+
+
+</ul>
+</li><li class="nav-tab nav-tab--primary notification-menu unread" data-role="notification-menu"><a href="https://disqus.com/home/inbox/" class="notification-container" data-action="home" data-home-path="home/inbox/">
+<span class="notification-icon icon-comment" aria-hidden=""></span>
+<span class="notification-count" data-role="notification-count">1</span>
+</a>
+</li></ul></nav></header><section id="conversation" data-role="main" data-tracking-area="main"><div class="nav nav-secondary" data-tracking-area="secondary-nav"><ul><li id="recommend-button" class="nav-tab nav-tab--secondary recommend dropdown"><div class="thread-likes"><a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="recommend" title="Recommend this discussion" class="dropdown-toggle ">
+<span class="label label-default"><span class="recommend-icon icon-heart-empty"></span> Recommend</span>
+<span class="label label-recommended"><span class="recommend-icon icon-heart"></span> Recommended</span>
+</a>
+<ul class="dropdown-menu dropdown-menu--coachmark">
+<li>
+<h2 class="coachmark__heading">Discussion Recommended!</h2>
+<p class="coachmark__description">Recommending means this is a discussion worth sharing. It gets shared to your followers' Disqus feeds, and gives the creator kudos!</p>
+<a href="https://disqus.com/home/?utm_source=disqus_embed&amp;utm_content=recommend_btn" class="btn btn-primary coachmark__button" target="_blank">
+ Find More Discussions 
+</a>
+</li>
+</ul>
+</div></li><li id="thread-share-menu" class="nav-tab nav-tab--secondary dropdown share-menu hidden-sm"><a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="dropdown-toggle" data-toggle="dropdown" title="Share">
+<span class="icon-export"></span>
+<span class="label">Share</span>
+</a>
+<ul class="share-menu dropdown-menu">
+<li>
+<div class="share-menu__label">Share this discussion on</div>
+<ul>
+<li class="twitter">
+<a data-action="share:twitter" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#">Twitter</a>
+</li>
+<li class="facebook">
+<a data-action="share:facebook" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#">Facebook</a>
+</li>
+</ul>
+</li>
+</ul>
+</li><li data-role="post-sort" class="nav-tab nav-tab--secondary dropdown sorting pull-right"><a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="dropdown-toggle" data-toggle="dropdown">Sort by Best<span class="caret"></span></a><ul class="dropdown-menu pull-right"><li class="selected"><a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="sort" data-sort="popular">Best<i aria-hidden="true" class="icon-checkmark"></i></a></li><li class=""><a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="sort" data-sort="desc">Newest<i aria-hidden="true" class="icon-checkmark"></i></a></li><li class=""><a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="sort" data-sort="asc">Oldest<i aria-hidden="true" class="icon-checkmark"></i></a></li></ul></li></ul></div><div id="posts"><div id="form" class="textarea-wrapper--top-level"><form class="reply"><div class="postbox">
+<div role="alert"></div>
+<div class="avatar">
+<span class="user">
+<img data-role="user-avatar" src="./noavatar92.7b2fde640943965cc88df0cdee365907.png" alt="Avatar">
+</span>
+</div>
+
+<div class="textarea-wrapper" data-role="textarea" dir="auto"><div><span class="placeholder">Join the discussion…</span><div class="textarea" tabindex="0" role="textbox" aria-multiline="true" contenteditable="PLAINTEXT-ONLY" data-role="editable" aria-label="Join the discussion…" style="overflow: auto; word-wrap: break-word; max-height: 350px;"><p><br></p></div><div style="display: none;"><ul class="user-mention__list">
+<li class="header user-mention__header">
+<h5>in this conversation</h5>
+</li>
+</ul>
+</div></div>
+<div data-role="drag-drop-placeholder" class="media-drag-hover" style="display: none">
+<div class="drag-text">
+⬇ Drag and drop your images here to upload them.
+</div>
+</div>
+<div class="media-preview empty" data-role="media-preview"><ul data-role="media-progress-list"></ul>
+<ul data-role="media-rich-list"></ul>
+<div class="media-expanded empty" data-role="media-preview-expanded">
+<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-role="media-preview-expanded-image" alt="Media preview placeholder">
+</div>
+</div>
+<div class="edit-alert" role="postbox-alert"></div>
+<div class="post-actions">
+<ul class="wysiwyg">
+<li class="wysiwyg__item" data-role="media-uploader"><a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" tabindex="-1" data-action="attach" class="attach" title="Upload Images"><span>Attach</span></a>
+<input type="file" data-role="media-upload" tabindex="-1" accept="image/*">
+</li>
+</ul>
+</div>
+</div>
+
+<div data-role="login-form"><div><section class="auth-section logged-out">
+<div class="connect">
+<h6>Log in with</h6>
+<ul data-role="login-menu" class="services login-buttons">
+
+<li class="auth-disqus">
+<button type="button" data-action="auth:disqus" title="Disqus" class="connect__button"><i class="icon-disqus"></i></button>
+</li>
+<li class="auth-facebook">
+<button type="button" data-action="auth:facebook" title="Facebook" class="connect__button"><i class="icon-facebook-circle"></i></button>
+</li>
+<li class="auth-twitter">
+<button type="button" data-action="auth:twitter" title="Twitter" class="connect__button"><i class="icon-twitter-circle"></i></button>
+</li>
+<li class="auth-google">
+<button type="button" data-action="auth:google" title="Google" class="connect__button"><i class="icon-google-plus-circle"></i></button>
+</li>
+</ul>
+</div>
+<div class="guest">
+<h6 class="guest-form-title">
+<span class="register-text"> or sign up with Disqus </span>
+<span class="guest-text"> or pick a name </span>
+</h6>
+
+<div class="help-tooltip__wrapper help-icon">
+<div id="rules" class="tooltip show help-tooltip">
+<h3 class="help-tooltip__heading">Disqus is a discussion network</h3>
+<ul class="help-tooltip__list">
+<li><span>Disqus never moderates or censors. The rules on this community are its own.</span></li>
+<li><span>Your email is safe with us. It's only used for moderation and optional notifications.</span></li>
+<li><span>Don't be a jerk or do anything illegal. Everything is easier that way.</span></li>
+</ul>
+<p class="clearfix"><a href="https://docs.disqus.com/kb/terms-and-policies/" class="btn btn-small help-tooltip__button" target="_blank">Read full terms and conditions</a></p>
+</div>
+</div>
+
+<p class="input-wrapper">
+<input dir="auto" type="text" placeholder="Name" name="display_name" id="view51_display_name" maxlength="30" class="input--text">
+</p>
+
+<div class="guest-details " data-role="guest-details">
+<p class="input-wrapper">
+<input dir="auto" type="email" placeholder="Email" name="email" id="view51_email" class="input--text">
+</p>
+
+<p class="input-wrapper">
+<input dir="auto" type="password" class="register-text input--text" placeholder="Password" name="password" id="view51_password">
+</p>
+
+<div class="acceptance-wrapper register-text">
+By signing up, you agree to the Disqus <a target="_blank" href="https://help.disqus.com/customer/portal/articles/1753105-basic-rules-for-disqus-powered-profiles-and-discussions">Basic Rules</a>, <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466260-terms-of-service">Terms of Service</a>, and <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466259-privacy-policy">Privacy Policy</a>.
+</div>
+<div class="acceptance-wrapper guest-text">
+By posting, you agree to the Disqus <a target="_blank" href="https://help.disqus.com/customer/portal/articles/1753105-basic-rules-for-disqus-powered-profiles-and-discussions">Basic Rules</a>, <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466260-terms-of-service">Terms of Service</a>, and <a target="_blank" href="https://help.disqus.com/customer/portal/articles/466259-privacy-policy">Privacy Policy</a>.
+</div>
+
+<input type="checkbox" name="author-guest" style="display:none">
+
+<div class="proceed" data-role="submit-btn-container">
+<button type="submit" class="proceed__button btn submit" aria-label="Next"><span class="icon-proceed"></span><div class="spinner"></div></button>
+</div>
+</div>
+</div>
+</section>
+
+</div></div>
+</div>
+</form></div><button class="alert alert--realtime" data-role="realtime-notification" style="display: none;"></button><div id="no-posts" style="display: none;"></div><ul id="post-list" class="post-list"><li class="post" id="post-3234280922"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/trevordoll/" class="user" data-action="profile" data-username="trevordoll">
+<img data-role="user-avatar" data-user="247427796" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/trevordoll/" data-action="profile" data-username="trevordoll" data-role="username">Trevor Doll</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-3234280922" data-role="relative-time" class="time-ago" title="Friday, March 31, 2017 7:06 PM">
+23 days ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>I basically copied this verbatim, and got it to compile on Python 3.5. However when I run your example of classification it returns [b'capitals', b'capitals', b'capitals'] and regardless of the fitted data it copies the third parameter of 'y' for the output of 'predict()'. Any ideas?</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1hhlv4q" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:3234280922">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-3235309193"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/nadbor/" class="user" data-action="profile" data-username="nadbor">
+<img data-role="user-avatar" data-user="156174940" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/nadbor/" data-action="profile" data-username="nadbor" data-role="username">Nadbor Drozd</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-3234280922" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Trevor Doll</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-3235309193" data-role="relative-time" class="time-ago" title="Saturday, April 1, 2017 1:32 PM">
+22 days ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Must be something wrong with the vectors or the vectorizer. I would check if the vectors make sense:<br></p><pre><code class="hljs css"><span class="hljs-selector-tag">from</span> <span class="hljs-selector-tag">scipy</span><span class="hljs-selector-class">.spatial</span><span class="hljs-selector-class">.distance</span> <span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">euclidean</span><br># <span class="hljs-selector-tag">first</span> <span class="hljs-selector-tag">distance</span> <span class="hljs-selector-tag">should</span> <span class="hljs-selector-tag">be</span> <span class="hljs-selector-tag">much</span> <span class="hljs-selector-tag">smaller</span> <span class="hljs-selector-tag">than</span> <span class="hljs-selector-tag">second</span><br><span class="hljs-selector-tag">euclidean</span>(<span class="hljs-selector-tag">w2v</span><span class="hljs-selector-attr">['Berlin']</span>, <span class="hljs-selector-tag">w2v</span><span class="hljs-selector-attr">['London']</span>), <span class="hljs-selector-tag">euclidean</span>(<span class="hljs-selector-tag">w2v</span><span class="hljs-selector-attr">['Berlin']</span>, <span class="hljs-selector-tag">w2v</span><span class="hljs-selector-attr">['cow']</span>)<br></code></pre><p></p><p>and if vectorizer works properly:<br></p><pre><code><br>d = {'Berlin': [1,1], 'London': [1.1, 1.1]}<br># should return array([[ 1.05,  1.05]])<br>MeanEmbeddingVectorizer(d).transform([['Berlin', 'London']])<br></code></pre>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1hi7wjt" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:3235309193">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-3236141718"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/trevordoll/" class="user" data-action="profile" data-username="trevordoll">
+<img data-role="user-avatar" data-user="247427796" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/trevordoll/" data-action="profile" data-username="trevordoll" data-role="username">Trevor Doll</a></span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-3235309193" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Nadbor Drozd</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-3236141718" data-role="relative-time" class="time-ago" title="Sunday, April 2, 2017 7:11 AM">
+22 days ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>`MeanEmbeddingVectorizer(d).transform([['Berlin', 'London']])` does indeed print out `[[ 1.05  1.05]]` so the vectorization seems to be working properly but everything else is still remaining the same.</p><p>Also, don't know if this also part of the problem, when applying `fit` to a Glove model, it returns `ValueError: Found array with 0 feature(s) (shape=(3, 0)) while a minimum of 1 is required.`</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1hipqxi" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:3236141718">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-3236597074"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/nadbor/" class="user" data-action="profile" data-username="nadbor">
+<img data-role="user-avatar" data-user="156174940" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/nadbor/" data-action="profile" data-username="nadbor" data-role="username">Nadbor Drozd</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-3236141718" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Trevor Doll</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-3236597074" data-role="relative-time" class="time-ago" title="Sunday, April 2, 2017 1:17 PM">
+21 days ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Dunno what that is about. I just checked and it works under python3 (at least the silly example does), had to change only one line. <br>See:<br><a href="https://disq.us/url?url=https%3A%2F%2Fgithub.com%2Fnadbordrozd%2Fblog_stuff%2Fblob%2Fmaster%2Fclassification_w2v%2Fpy3_poc.py%3AfabZ1X1krfDHZD1hbjPvba_6RkU&amp;cuid=3706253" rel="nofollow noopener">https://github.com/nadbordr...</a></p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1hiziaa" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:3236597074">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li><li class="post" id="post-3233012354"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/arjunpp/" class="user" data-action="profile" data-username="arjunpp">
+<img data-role="user-avatar" data-user="247351759" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/arjunpp/" data-action="profile" data-username="arjunpp" data-role="username">Arjun PP</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-3233012354" data-role="relative-time" class="time-ago" title="Friday, March 31, 2017 3:32 AM">
+24 days ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Great post. Why is it that you have tested word2vec with extra trees only?  Is there a way to combine the word2vec model with SVM, like use the MeanEmbeddingVectorizer's output as the input for SVM? Wouldn't the results be better?</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1hguoaq" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:3233012354">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-3233136553"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/nadbor/" class="user" data-action="profile" data-username="nadbor">
+<img data-role="user-avatar" data-user="156174940" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/nadbor/" data-action="profile" data-username="nadbor" data-role="username">Nadbor Drozd</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-3233012354" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Arjun PP</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-3233136553" data-role="relative-time" class="time-ago" title="Friday, March 31, 2017 5:35 AM">
+24 days ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>It's not that SVM is such a great algorithm in general, it's just particularly well suited for problems with very highly dimensional, sparse feature vectors - like text in Bag of Words representation. For typical reasonably-dimensional problems tree-based methods like ExtraTrees (today I would use XGBoost instead) are almost always superior - as evidenced by the results of dozens of Kaggle competitions. The whole point of this word2vec approach was to reduce the dimensionality of the problem so that those superior methods can be effectively used. Once the dimensionality is reduced, I don't think SVM would do all that well. At least, this is what I thought when I was writing this post. I'm not 100% sure whether I checked if it is actually the case.</p><p>Anyway, like you say, it's very easy to use SVM in place of ExtraTrees and find out: <br></p><pre><code><br>from sklearn.svm import SVC<br><br>svm_w2v = Pipeline([<br>    ("word2vec vectorizer", MeanEmbeddingVectorizer(w2v)),<br>    ("SVM", SVC())])<br></code></pre>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1hgxc4p" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:3233136553">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li><li class="post" id="post-2978969180"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/yuriyfilonov/" class="user" data-action="profile" data-username="yuriyfilonov">
+<img data-role="user-avatar" data-user="228452660" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/yuriyfilonov/" data-action="profile" data-username="yuriyfilonov" data-role="username">Yuriy Filonov</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2978969180" data-role="relative-time" class="time-ago" title="Tuesday, November 1, 2016 2:40 AM">
+6 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>BTW There was a small mistake in your benchmarking script published on GitHub (paragraph 25) - you are assigning etree_glove_big pipeline to both "glove_big" and to "glove_big_tfidf" (all_models initialisation).</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1d9lnbw" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2978969180">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2990899084"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/nadbor/" class="user" data-action="profile" data-username="nadbor">
+<img data-role="user-avatar" data-user="156174940" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/nadbor/" data-action="profile" data-username="nadbor" data-role="username">Nadbor Drozd</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2978969180" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Yuriy Filonov</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2990899084" data-role="relative-time" class="time-ago" title="Tuesday, November 8, 2016 5:25 AM">
+6 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Good catch. I think the results in this post were created without this error but I'll have to check.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1dgpci4" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2990899084">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li><li class="post" id="post-2978713679"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/yuriyfilonov/" class="user" data-action="profile" data-username="yuriyfilonov">
+<img data-role="user-avatar" data-user="228452660" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/yuriyfilonov/" data-action="profile" data-username="yuriyfilonov" data-role="username">Yuriy Filonov</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2978713679" data-role="relative-time" class="time-ago" title="Monday, October 31, 2016 7:58 PM">
+6 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Thanks for sharing your results on Github. Have you found any explanations for a strange fact that word vectors trained on such a small dataset from the scratch show better results than Glove. It seems extremely strange to me.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1d9g66n" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2978713679">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2990897470"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/nadbor/" class="user" data-action="profile" data-username="nadbor">
+<img data-role="user-avatar" data-user="156174940" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/nadbor/" data-action="profile" data-username="nadbor" data-role="username">Nadbor Drozd</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2978713679" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Yuriy Filonov</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2990897470" data-role="relative-time" class="time-ago" title="Tuesday, November 8, 2016 5:23 AM">
+6 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Yes, I was surprised as well. The only explanation I have is that the vectors I got are not _universally_ better than Glove. They are only better for this specific task. Apparently the distribution of words in these benchmarks is different from the one in Glove's training set - and different in some some consistent direction - and the vectors have picked up on it. For this to be true it would be enough if for example these texts consistently used 'apple' (all the words are lowercased) to refer to the company while Glove was trained on texts where 'apple' more often than not meant the fruit. This kind of thing. But this is just speculation. Would be interesting to see if we can get even better results by using Glove vectors to initialize word2vec and run it for just a few epochs.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1dgpb9a" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2990897470">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li><li class="post" id="post-2878820744"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/mememimis/" class="user" data-action="profile" data-username="mememimis">
+<img data-role="user-avatar" data-user="217691753" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/mememimis/" data-action="profile" data-username="mememimis" data-role="username">meme mimis</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2878820744" data-role="relative-time" class="time-ago" title="Tuesday, September 6, 2016 6:09 AM">
+8 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Dear Sir if we want to use a train and test set how we should  modify the above code?</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1blz4aw" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2878820744">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2879582053"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/nadbor/" class="user" data-action="profile" data-username="nadbor">
+<img data-role="user-avatar" data-user="156174940" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/nadbor/" data-action="profile" data-username="nadbor" data-role="username">Nadbor Drozd</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2878820744" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> meme mimis</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2879582053" data-role="relative-time" class="time-ago" title="Tuesday, September 6, 2016 1:56 PM">
+8 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>Not sure I understand. The code (full version here <a href="https://disq.us/url?url=https%3A%2F%2Fgithub.com%2Fnadbordrozd%2Fblog_stuff%2Fblob%2Fmaster%2Fclassification_w2v%2Fbenchmarking.ipynb%3AppHrG0vxfEKF0OnRJ_4uvgwT4xs&amp;cuid=3706253" rel="nofollow noopener">https://github.com/nadbordr...</a> ) already splits the data into train and test set - see cell 27 in the link. In case you want some other train-test splitting strategy, scikit-learn has lots of alternatives available <a href="http://disq.us/url?url=http%3A%2F%2Fscikit-learn.org%2Fstable%2Fmodules%2Fcross_validation.html%3AsKNtUSP12cQCzmCftsndmYe33cU&amp;cuid=3706253" rel="nofollow noopener">http://scikit-learn.org/sta...</a> . I tried to make the models sklearn-compatible so anything you find there should be directly applicable.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1bmffqd" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2879582053">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li><li class="post" id="post-2831811753"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_oKvf3TZOSf/" class="user" data-action="profile" data-username="disqus_oKvf3TZOSf">
+<img data-role="user-avatar" data-user="218172807" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_oKvf3TZOSf/" data-action="profile" data-username="disqus_oKvf3TZOSf" data-role="username">Mallory</a></span>
+
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2831811753" data-role="relative-time" class="time-ago" title="Thursday, August 11, 2016 1:22 AM">
+8 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>This is a very helpful script, but I keep getting a SyntaxError when going to calculate the scores in this line:</p><p>for name, model in all_models], <br>                key=lambda (_, x): -x)</p><p>The (_, x): -x part is where Python is telling me there's an error.</p><p>Do you have any hints or suggestions to fix this error?</p><p>Thanks!</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1atzjxl" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2831811753">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2832851242"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/nadbor/" class="user" data-action="profile" data-username="nadbor">
+<img data-role="user-avatar" data-user="156174940" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/nadbor/" data-action="profile" data-username="nadbor" data-role="username">Nadbor Drozd</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2831811753" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Mallory</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2832851242" data-role="relative-time" class="time-ago" title="Thursday, August 11, 2016 1:39 PM">
+8 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>You must be running this with Python 3 where tuple parameter unpacking was removed. Replace `key=lambda (_, x): -x` with `key=lambda x: -x[1]` and it should work - at least this line. I didn't test any of it on Python 3, I'm surprised it worked even this far.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1aulu0a" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2832851242">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2833529522"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_oKvf3TZOSf/" class="user" data-action="profile" data-username="disqus_oKvf3TZOSf">
+<img data-role="user-avatar" data-user="218172807" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_oKvf3TZOSf/" data-action="profile" data-username="disqus_oKvf3TZOSf" data-role="username">Mallory</a></span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2832851242" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Nadbor Drozd</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2833529522" data-role="relative-time" class="time-ago" title="Friday, August 12, 2016 12:25 AM">
+8 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>That is still giving me a syntax error. What exactly is x in this section of code?</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1av0dde" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2833529522">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2834854633"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/nadbor/" class="user" data-action="profile" data-username="nadbor">
+<img data-role="user-avatar" data-user="156174940" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/nadbor/" data-action="profile" data-username="nadbor" data-role="username">Nadbor Drozd</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2833529522" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Mallory</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2834854633" data-role="relative-time" class="time-ago" title="Friday, August 12, 2016 5:02 PM">
+8 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>That is very strange. What version of python are you using? x here is the cross validation score. This line calculates cross validation scores for every model and then sorts them. It can be split into two statements. `unsorted_scores = [(name, cross_val_score(model, X, y, cv=5).mean()) for name, model in all_models]`  and then `scores = sorted(unsorted_scores, key=lambda x: -x[1])` Let's see if it still errors when you do it this way.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1avsru1" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2834854633">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2835286362"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/disqus_oKvf3TZOSf/" class="user" data-action="profile" data-username="disqus_oKvf3TZOSf">
+<img data-role="user-avatar" data-user="218172807" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/disqus_oKvf3TZOSf/" data-action="profile" data-username="disqus_oKvf3TZOSf" data-role="username">Mallory</a></span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2834854633" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Nadbor Drozd</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2835286362" data-role="relative-time" class="time-ago" title="Saturday, August 13, 2016 1:33 AM">
+8 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container" style="height: 374px;">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>I'm using Python 3.5 on Spyder 2.3.8.</p><p>When I ran the code you suggested, I got this error message:<br>//anaconda/lib/python3.5/site-packages/sklearn/<a href="http://disq.us/url?url=http%3A%2F%2Fcross_validation.py%3AIunP4kuimkuHk95ba1vS-v98SiE&amp;cuid=3706253" rel="nofollow noopener">cross_validation.py</a>:516: Warning: The least populated class in y has only 1 members, which is too few. The minimum number of labels for any class cannot be less than n_folds=5.<br>  % (min_labels, self.n_folds)), Warning)</p><p>And another issue I ran into was when running the w2v and w2v-tfidf</p><p>I broke up:<br>for name, model in all_models:<br>    for n in train_sizes:<br>        table.append({'model': name, <br>                      'accuracy': benchmark(model, X, y, n), <br>                      'train_size': n})</p><p>to run on each individual algorithm because it wouldn't run with the code above, so it looks like this:</p><p># w2v<br>for n in train_sizes:<br>    blanktable.append({'model': all_models[6][0], <br>                      'precision': benchmark(all_models[6][1], X, y, n), 'train_size': n})</p><p># w2v_tfidf<br>for n in train_sizes:<br>    blanktable.append({'model': all_models[6][0], <br>                      'precision': benchmark(all_models[6][1], X, y, n), 'train_size': n})</p><p>where [6] refers to the line in the list of all models and then the [0] and [1] refer to the name and model in the 6th line, but I also get this error:</p><p>ValueError: setting an array element with a sequence.</p><p>Not quite sure how to fix it, because the only 'manipulation' of X and y is at the beginning, when they are converted to numpy arrays.</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1aw20yi" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2835286362">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"><li class="post" id="post-2847374853"><div role="alert"></div>
+<div data-role="post-content" class="post-content">
+<ul class="post-menu dropdown" data-role="menu">
+<li class="collapse">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Collapse"><span>−</span></a>
+</li>
+<li class="expand">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="collapse" title="Expand"><span>+</span></a>
+</li>
+
+<li class="" role="menu">
+<a class="dropdown-toggle" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="flag" data-role="flag" title="Flag as inappropriate">
+<i aria-hidden="true" class="icon icon-flag"></i>
+</a>
+</li>
+</ul>
+
+<div class="indicator"></div>
+
+<div class="avatar hovercard">
+<a href="https://disqus.com/by/nadbor/" class="user" data-action="profile" data-username="nadbor">
+<img data-role="user-avatar" data-user="156174940" src="./noavatar92.png" alt="Avatar">
+</a>
+</div>
+<div class="post-body">
+<header class="comment__header">
+<span class="post-byline">
+<span class="author publisher-anchor-color"><a href="https://disqus.com/by/nadbor/" data-action="profile" data-username="nadbor" data-role="username">Nadbor Drozd</a></span>
+<span class="badge moderator">Mod</span>
+
+<span><a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2835286362" class="parent-link" data-role="parent-link"><i aria-hidden="true" class="icon-forward" title="in reply to"></i> Mallory</a></span>
+</span>
+
+<span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://nadbordrozd.github.io/blog/2016/05/20/text-classification-with-word2vec/#comment-2847374853" data-role="relative-time" class="time-ago" title="Friday, August 19, 2016 2:26 PM">
+8 months ago
+</a>
+</span>
+
+</header>
+
+<div class="post-body-inner">
+<div class="post-message-container" data-role="message-container">
+<div class="publisher-anchor-color" data-role="message-content">
+<div class="post-message " data-role="message" dir="auto">
+<p>The first error looks legit - not enough data in the smallest benchmark. The other one is more mysterious. I'm stumped. All I can say is - your code works with Python 2.7.8</p>
+</div>
+
+<span class="post-media"><ul data-role="post-media-list"></ul></span>
+</div>
+</div>
+<a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+</div>
+
+<footer class="comment__footer"><menu class="comment-footer__menu">
+<li class="voting" data-role="voting">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="vote-up  count-0" data-action="upvote" title="Vote up">
+
+<span class="updatable count" data-role="likes">0</span>
+<span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+</a>
+<span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+</li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="reply" data-role="reply-link">
+<a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="reply">
+<span class="text">Reply</span></a></li>
+<li class="bullet" aria-hidden="true">•</li>
+
+
+<li class="comment__share">
+<a class="toggle"><span class="text">Share ›</span></a>
+<ul class="comment-share__buttons">
+<li class="twitter">
+<button class="share__button" data-action="share:twitter">Twitter</button>
+</li>
+<li class="facebook">
+<button class="share__button" data-action="share:facebook">Facebook</button>
+</li>
+<li class="link">
+<input class="share__button" value="http://disq.us/p/1b394hx" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+</li>
+</ul>
+</li>
+
+<li class="realtime" data-role="realtime-notification:2847374853">
+<span style="display:none;" class="realtime-replies"></span>
+<a style="display:none;" href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" class="realtime-button"></a>
+</li>
+
+</menu>
+</footer>
+</div>
+
+<div data-role="blacklist-form"></div>
+<div class="reply-form-container" data-role="reply-form"></div>
+</div>
+
+<ul data-role="children" class="children"></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul><div class="load-more" data-role="more" style="display: none;"><a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" data-action="more-posts" class="btn load-more__button">Load more comments</a></div></div></section><div id="placement-bottom" data-tracking-area="discovery-south"><div class="post-list" style="height: auto; visibility: visible;"><div style="display: block; width: 100%;"><div id="discovery-main-c214" class="discovery-main">
+
+<section id="col-organic-c401" class="col-organic">
+<header class="discovery-col-header">
+<h2>Also on <strong>DS lore</strong>
+</h2>
+</header>
+<ul class="discovery-posts" data-role="discovery-posts"><li class="discovery-post post-0" id="discovery-link-organic-4299003656">
+<a href="http://disq.us/url?url=http%3A%2F%2Fnadbordrozd.github.io%2Finterviews%2Findex.html%3AJ4Nb_do_aGn8SOjRUpfwKLbioMo&amp;imp=2ounsdic8m650&amp;prev_imp=2ounq3b1cjtqi8&amp;forum_id=3706253&amp;forum=ds-lore&amp;thread_id=4864088179&amp;thread=4299003656&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=4299003656" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="Interviews">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="2">
+Interviews
+</span>
+</h3>
+
+<ul class="meta">
+<li class="comments">
+2 comments
+</li>
+<li class="time">a year ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Fnadbordrozd.github.io%2Finterviews%2Findex.html%3AJ4Nb_do_aGn8SOjRUpfwKLbioMo&amp;imp=2ounsdic8m650&amp;prev_imp=2ounq3b1cjtqi8&amp;forum_id=3706253&amp;forum=ds-lore&amp;thread_id=4864088179&amp;thread=4299003656&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=4299003656" class="top-comment" data-role="discovery-top-comment">
+<img data-src="//a.disquscdn.com/1492794604/images/noavatar92.png" alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Nadbor Drozd</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3">Appreciated!</span></p>
+</a>
+
+</li>
+<li class="discovery-post post-1" id="discovery-link-organic-4898603397">
+<a href="http://disq.us/url?url=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F22%2Fone-weird-trick-that-will-fix-your-pyspark-schemas%2F%3AH5F1ykQhVEljHGHp4Wp0NiOsNWU&amp;imp=2ounsdic8m650&amp;prev_imp=2ounq3b1cjtqi8&amp;forum_id=3706253&amp;forum=ds-lore&amp;thread_id=4864088179&amp;thread=4898603397&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=4898603397" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="Data Engineers Will Hate You - One Weird Trick to Fix Your Pyspark Schemas">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="2">
+Data Engineers Will Hate You - One Weird Trick to Fix Your Pyspark Schemas
+</span>
+</h3>
+
+<ul class="meta">
+<li class="comments">
+3 comments
+</li>
+<li class="time">10 months ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F22%2Fone-weird-trick-that-will-fix-your-pyspark-schemas%2F%3AH5F1ykQhVEljHGHp4Wp0NiOsNWU&amp;imp=2ounsdic8m650&amp;prev_imp=2ounq3b1cjtqi8&amp;forum_id=3706253&amp;forum=ds-lore&amp;thread_id=4864088179&amp;thread=4898603397&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=4898603397" class="top-comment" data-role="discovery-top-comment">
+<img data-src="https://c.disquscdn.com/uploads/users/17743/2745/avatar92.jpg?1483740564" alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Joshua Lickteig</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3">Wow. This is a good write-up. Thank you for the level of detail and insight.</span></p>
+</a>
+
+</li>
+<li class="discovery-post post-2" id="discovery-link-organic-3973781602">
+<a href="http://disq.us/url?url=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2015%2F07%2F26%2Ftest-post%2F%3Aw9NPwOUmQIHZAkpW-SLjlqHzNWo&amp;imp=2ounsdic8m650&amp;prev_imp=2ounq3b1cjtqi8&amp;forum_id=3706253&amp;forum=ds-lore&amp;thread_id=4864088179&amp;thread=3973781602&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=3973781602" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="Test Post - My Octopress Blog">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="2">
+Test Post - My Octopress Blog
+</span>
+</h3>
+
+<ul class="meta">
+<li class="comments">
+2 comments
+</li>
+<li class="time">2 years ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2015%2F07%2F26%2Ftest-post%2F%3Aw9NPwOUmQIHZAkpW-SLjlqHzNWo&amp;imp=2ounsdic8m650&amp;prev_imp=2ounq3b1cjtqi8&amp;forum_id=3706253&amp;forum=ds-lore&amp;thread_id=4864088179&amp;thread=3973781602&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=3973781602" class="top-comment" data-role="discovery-top-comment">
+<img data-src="//a.disquscdn.com/1492794604/images/noavatar92.png" alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Ola</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3">Test on comments</span></p>
+</a>
+
+</li>
+<li class="discovery-post post-3" id="discovery-link-organic-5007518987">
+<a href="http://disq.us/url?url=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F07%2F22%2Fdatamatching-part-2-spark-pipeline%2F%3AVNtCNjOItv1-Pj9BPAK78lgZkmM&amp;imp=2ounsdic8m650&amp;prev_imp=2ounq3b1cjtqi8&amp;forum_id=3706253&amp;forum=ds-lore&amp;thread_id=4864088179&amp;thread=5007518987&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=5007518987" class="publisher-anchor-color">
+
+<header class="discovery-post-header">
+<h3 title="Datamatching Part 2: Spark Pipeline">
+<span data-role="discovery-thread-title" class="title line-truncate" data-line-truncate="2">
+Datamatching Part 2: Spark Pipeline
+</span>
+</h3>
+
+<ul class="meta">
+<li class="comments">
+2 comments
+</li>
+<li class="time">9 months ago</li>
+</ul>
+</header>
+
+</a><a href="http://disq.us/url?url=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F07%2F22%2Fdatamatching-part-2-spark-pipeline%2F%3AVNtCNjOItv1-Pj9BPAK78lgZkmM&amp;imp=2ounsdic8m650&amp;prev_imp=2ounq3b1cjtqi8&amp;forum_id=3706253&amp;forum=ds-lore&amp;thread_id=4864088179&amp;thread=5007518987&amp;zone=thread&amp;area=bottom&amp;object_type=thread&amp;object_id=5007518987" class="top-comment" data-role="discovery-top-comment">
+<img data-src="https://c.disquscdn.com/uploads/users/393/7217/avatar92.jpg?1475263486" alt="Avatar" data-role="discovery-avatar">
+<p><span class="user" data-role="discovery-top-comment-author">Dennis Golomazov</span> — <span data-role="discovery-top-comment-snippet" class="line-truncate" data-line-truncate="3">My only suggestion is to add some pyspark boilerplate code, e.g. define `sc`, so it would be helpful for people not familiar with pySpark.</span></p>
+</a>
+
+</li>
+</ul>
+</section>
+
+</div>
+</div></div></div><div id="footer" data-tracking-area="footer" class="disqus-footer__wrapper"><ul class="disqus-footer"><li class="disqus-footer__logo"><a href="https://disqus.com/" rel="nofollow" title="Powered by Disqus" class="disqus-footer__link">Powered by Disqus</a></li><li id="thread-subscribe-button" class="email disqus-footer__item"><div class="default"><a href="https://disqus.com/embed/comments/?base=default&amp;f=ds-lore&amp;t_i=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_u=http%3A%2F%2Fnadbordrozd.github.io%2Fblog%2F2016%2F05%2F20%2Ftext-classification-with-word2vec%2F&amp;t_d=Text%20Classification%20With%20Word2Vec&amp;t_t=Text%20Classification%20With%20Word2Vec&amp;s_o=default#" rel="nofollow" data-action="subscribe" title="Subscribe and get email updates from this discussion" class="disqus-footer__link"><i aria-hidden="true" class="icon icon-mail"></i><span class="clip">Subscribe</span><i aria-hidden="true" class="icon icon-checkmark"></i></a></div><div class="form"><div class="input-wrapper"><input id="thread-subscribe-email" type="email" placeholder="yourname@email.com" class="disqus-footer__input input--text"></div></div></li><li class="install disqus-footer__item"><a href="https://publishers.disqus.com/engage?utm_source=ds-lore&amp;utm_medium=Disqus-Footer" rel="nofollow" target="_blank" class="disqus-footer__link"><i aria-hidden="true" class="icon icon-disqus"></i><span class="clip hidden-sm">Add Disqus to your site</span><span class="clip visible-sm hidden-xs">Add Disqus</span><span class="clip visible-xs">Add</span></a></li><li class="privacy disqus-footer__item"><a href="https://help.disqus.com/customer/portal/articles/1657951?utm_source=disqus&amp;utm_medium=embed-footer&amp;utm_content=privacy-btn" rel="nofollow" target="_blank" class="disqus-footer__link"><i aria-hidden="true" class="icon icon-lock"></i><span class="clip">Privacy</span></a></li></ul></div></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./96nq-xsaNcg(2).html" style="border: none;"></iframe></div></div></div><iframe style="position: absolute; width: 1px; height: 1px; left: -9999px; display: none;" aria-hidden="true" id="ssIFrame_google" sandbox="allow-scripts allow-same-origin" src="./iframe.html"></iframe><img src="./tpid=c5mnhdpvrsbn2d" style="display: none;"><img src="./23096" style="display: none;"><img src="./saved_resource" style="display: none;"><iframe src="./sync.html" style="display: none;"></iframe></body></html>

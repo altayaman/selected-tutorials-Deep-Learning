@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)http://blog.schlerp.net/2016/7/neural-networks-in-python-3-keras/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="This is how we get ants... A blog by schlerp about things including, Python, PCB&#39;s, Archlinux, Guitars, Amps, Effects Pedals, Volleyball and whatever else is tickling my pickle.">
+        <meta name="author" content="schlerp">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="robots" content="index, follow">
+        <meta name="revisit-after" content="7 days">
+        <meta name="keywords" content="Python, PCB, Arch, Archlinux, Guitars, Effects Pedals, FX Pedals, Volleyball, Volley Ball, Mountain Biking, DIY, Guitar Amps, Amps, Amplifiers, Cherrypy, Bootstrap, Web, Developer">
+
+        <title>This is how we get ants...</title>
+        <link href="./This is how we get ants..._files/bootstrap.min.css" rel="stylesheet">
+        <link href="./This is how we get ants..._files/blog.css" rel="stylesheet">
+        <link href="./This is how we get ants..._files/pygments.css" rel="stylesheet">
+        <link href="./This is how we get ants..._files/font.css" rel="stylesheet">
+    <script async="" src="./This is how we get ants..._files/analytics.js"></script><script type="text/javascript" async="" src="./This is how we get ants..._files/embed.js"></script><link rel="preload" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.5f04e83cf97ee6a6cf16dc8e296ed78d.css"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.08b03b11c747b79c4d4135b49e2f8725.js"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.987c6346e2effb8e4f350d48ecf53d13.js"><link rel="preload" as="script" href="https://disqus.com/next/config.js"></head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 blog-main">
+                    
+                    <div class="blog-header">
+                        <h1 class="blog-title"><a href="http://blog.schlerp.net/" class="no-style">This is how we get ants...</a></h1>
+                        <p class="lead blog-description">A blog by schlerp about stuff</p>
+                        <hr>
+                    </div>
+                    
+                </div>
+                
+            <div class="col-sm-12 blog-main">
+                <div class="post col-md-12">
+                    <h1>Neural networks in python (3) - keras</h1>
+                    <h3>July 13, 2016, 6:47 a.m.</h3>
+                    <p>Now lets implement an Artificial Neural Network in python with a beautifully simple library called <a href="http://keras.io/">Keras</a>!</p>
+<p>So far in this series we have been implementing the low level functions ourselves but lets look at what some higher level libraries can do! Keras keeps all that crap in the background and lets us focus on crafting the actual architecture using pre made layers and training functions! </p>
+<p>Another advantage is that it can run ontop of both Tensorflow and Theano! I havent actually tested the Tensorflow backend however the theano backend work's great for running networks on your GPU! This give absolutely spectacular speed improvements over using the CPU alone.</p>
+<p>Check out how to use Theano with the GPU <a href="http://deeplearning.net/software/theano/tutorial/using_gpu.html">here</a>. I use the CUDA backend with CUDNN because I have an NVidia card, it also works spectacularly well!</p>
+<p>Ok, lets implement a simple ANN in Keras! We will be using another library called <a href="https://github.com/dribnet/kerosene">kerosene</a> to allow us easy access to the <a href="https://archive.ics.uci.edu/ml/datasets/Iris">Iris</a> dataset, you dont need to down load the data set, Kerosene will do that for us. Install kerosene using <code>pip install kerosene</code>.</p>
+<div class="codehilite"><pre><span></span><span class="sd">'''</span>
+<span class="sd">an artificial neural network to tackle the iris data set</span>
+<span class="sd">'''</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">kerosene.datasets</span> <span class="kn">import</span> <span class="n">iris</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span> <span class="c1"># import model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Flatten</span> <span class="c1"># import core layers</span>
+<span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">np_utils</span> <span class="c1"># import helper funcs</span>
+<span class="kn">from</span> <span class="nn">keras.regularizers</span> <span class="kn">import</span> <span class="n">WeightRegularizer</span><span class="p">,</span> <span class="n">l2</span> <span class="c1"># import l2 regularizer</span>
+<span class="kn">from</span> <span class="nn">keras.layers.advanced_activations</span> <span class="kn">import</span> <span class="n">SReLU</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">nb_classes</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">nb_epoch</span> <span class="o">=</span> <span class="mi">300</span>
+
+
+<span class="c1"># the data, shuffled and split between train and test sets</span>
+<span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+
+<span class="c1"># convert class vectors to binary class matrices</span>
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">np_utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">nb_classes</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">input_size</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="n">input_size</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="c1">#model.add(Dense(5))#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="c1">#model.add(SReLU())</span>
+<span class="c1">##model.add(Dropout(0.25))</span>
+
+<span class="c1">#model.add(Dense(4))#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="c1">#model.add(SReLU())</span>
+<span class="c1">##model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">nb_classes</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">'softmax'</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">'categorical_crossentropy'</span><span class="p">,</span> <span class="c1">#loss='sparse_categorical_crossentropy',</span>
+              <span class="n">optimizer</span><span class="o">=</span><span class="s1">'adadelta'</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">'accuracy'</span><span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">nb_epoch</span><span class="o">=</span><span class="n">nb_epoch</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">keras.utils.visualize_util</span> <span class="kn">import</span> <span class="n">plot</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="s1">'model_iris.png'</span><span class="p">,</span> <span class="n">show_layer_names</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>How easy is that! We just implemented an Artificial Neural Network, trained on our GPU achieving a high accuracy aswell!</p>
+<p>Let's have a shot at a Convolutional Neural Network tackling the good old MNIST data set! We dont need to use Kerosene for this one as its already included in the native Keras datasets.</p>
+<div class="codehilite"><pre><span></span><span class="sd">'''</span>
+<span class="sd">a convolutional neural network to tackle the mnist data set</span>
+<span class="sd">'''</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span> <span class="c1"># mnist # import data set</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span> <span class="c1"># import model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Flatten</span> <span class="c1"># import core layers</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Convolution2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span> <span class="c1"># import convolutional layers</span>
+<span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">np_utils</span> <span class="c1"># import helper funcs</span>
+<span class="kn">from</span> <span class="nn">keras.regularizers</span> <span class="kn">import</span> <span class="n">WeightRegularizer</span><span class="p">,</span> <span class="n">l2</span> <span class="c1"># import l2 regularizer</span>
+<span class="kn">from</span> <span class="nn">keras.layers.noise</span> <span class="kn">import</span> <span class="n">GaussianNoise</span>
+<span class="kn">from</span> <span class="nn">keras.layers.advanced_activations</span> <span class="kn">import</span> <span class="n">SReLU</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="n">nb_classes</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">nb_epoch</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># input image dimensions</span>
+<span class="n">img_chan</span><span class="p">,</span> <span class="n">img_rows</span><span class="p">,</span> <span class="n">img_cols</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span>
+<span class="c1"># number of convolutional filters to use</span>
+<span class="n">nb_filters</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="c1"># size of pooling area for max pooling</span>
+<span class="n">nb_pool</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="c1"># convolution kernel size</span>
+<span class="n">nb_conv</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># the data, shuffled and split between train and test sets</span>
+<span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img_chan</span><span class="p">,</span> <span class="n">img_rows</span><span class="p">,</span> <span class="n">img_cols</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img_chan</span><span class="p">,</span> <span class="n">img_rows</span><span class="p">,</span> <span class="n">img_cols</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">/=</span> <span class="mi">255</span>
+<span class="n">X_test</span> <span class="o">/=</span> <span class="mi">255</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'X_train shape:'</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'train samples'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'test samples'</span><span class="p">)</span>
+
+<span class="c1"># convert class vectors to binary class matrices</span>
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">np_utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">nb_classes</span><span class="p">)</span>
+<span class="n">Y_test</span> <span class="o">=</span> <span class="n">np_utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">nb_classes</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="c1"># noise input</span>
+<span class="n">percent_noise</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mi">255</span><span class="p">)</span> <span class="o">*</span> <span class="n">percent_noise</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GaussianNoise</span><span class="p">(</span><span class="n">noise</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">img_chan</span><span class="p">,</span> <span class="n">img_rows</span><span class="p">,</span> <span class="n">img_cols</span><span class="p">)))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Convolution2D</span><span class="p">(</span><span class="n">nb_filters</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">,</span> <span class="n">border_mode</span><span class="o">=</span><span class="s1">'valid'</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Convolution2D</span><span class="p">(</span><span class="n">nb_filters</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="n">nb_pool</span><span class="p">,</span> <span class="n">nb_pool</span><span class="p">,</span> <span class="n">nb_pool</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.15</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Convolution2D</span><span class="p">(</span><span class="n">nb_filters</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Convolution2D</span><span class="p">(</span><span class="n">nb_filters</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="n">nb_pool</span><span class="p">,</span> <span class="n">nb_pool</span><span class="p">,</span> <span class="n">nb_pool</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.15</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span><span class="c1">#, W_regularizer=WeightRegularizer(l1=0.001, l2=0.001)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">nb_classes</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">'softmax'</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">'categorical_crossentropy'</span><span class="p">,</span> <span class="c1">#loss='sparse_categorical_crossentropy',</span>
+              <span class="n">optimizer</span><span class="o">=</span><span class="s1">'adadelta'</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">'accuracy'</span><span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">nb_epoch</span><span class="o">=</span><span class="n">nb_epoch</span><span class="p">,</span>
+          <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">))</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Test score:'</span><span class="p">,</span> <span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Test accuracy:'</span><span class="p">,</span> <span class="n">score</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="kn">from</span> <span class="nn">keras.utils.visualize_util</span> <span class="kn">import</span> <span class="n">plot</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="s1">'model.png'</span><span class="p">,</span> <span class="n">show_layer_names</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Now there are a couple of new concepts here. Firstly can you see the input layer? its actually a Gaussian Noise layer. This will slightly distort the input signals to give us a variance on the dataset. This has the effect of mitigating over fitting by increasing the effective sample size!</p>
+<p>Secondly can you see the convolutional layers? we are using a Kernel size of 3x3 and 25 filters per convolutional layer.</p>
+<p>We then add a Maxpool layer to reduce the amount of space the data takes up with only a minimal effect on the actual information contained there in. This is the beauty of convolutional networks, we can take massive inputs and reduce them down to much smaller arrays, which are still very rich in information.</p>
+<p>After this we flatten the output and feed it into a standard Artificial Neural Network.</p>
+<p>Another interesting choice here is the use of S-shaped Rectified Linear Units. These are a special type of activation function that build upon the original idea of a Rectified Linear unit in the sense that they don't saturate like standard Sigmoid neurons.</p>
+<p>How about we try a dataset that consists of colour images? Let's build another netowork but this time use the cifar-10 dataset.</p>
+<div class="codehilite"><pre><span></span><span class="sd">'''</span>
+<span class="sd">a convolutional neural network to tackle the CIFAR-10 data set</span>
+<span class="sd">'''</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">keras.datasets</span> <span class="kn">import</span> <span class="n">cifar10</span> <span class="c1"># import data set</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span> <span class="c1"># import model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Flatten</span> <span class="c1"># import core layers</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Convolution2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span> <span class="c1"># import convolutional layers</span>
+<span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">np_utils</span> <span class="c1"># import helper funcs</span>
+<span class="kn">from</span> <span class="nn">keras.layers.noise</span> <span class="kn">import</span> <span class="n">GaussianNoise</span>
+<span class="kn">from</span> <span class="nn">keras.layers.advanced_activations</span> <span class="kn">import</span> <span class="n">SReLU</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">nb_classes</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">nb_epoch</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># input image dimensions</span>
+<span class="n">img_chan</span><span class="p">,</span> <span class="n">img_rows</span><span class="p">,</span> <span class="n">img_cols</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span>
+<span class="c1"># number of convolutional filters to use</span>
+<span class="n">nb_filters</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="c1"># size of pooling area for max pooling</span>
+<span class="n">nb_pool</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="c1"># convolution kernel size</span>
+<span class="n">nb_conv</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># the data, shuffled and split between train and test sets</span>
+<span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">cifar10</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img_chan</span><span class="p">,</span> <span class="n">img_rows</span><span class="p">,</span> <span class="n">img_cols</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img_chan</span><span class="p">,</span> <span class="n">img_rows</span><span class="p">,</span> <span class="n">img_cols</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">/=</span> <span class="mi">255</span>
+<span class="n">X_test</span> <span class="o">/=</span> <span class="mi">255</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'X_train shape:'</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'train samples'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'test samples'</span><span class="p">)</span>
+
+<span class="c1"># convert class vectors to binary class matrices</span>
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">np_utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">nb_classes</span><span class="p">)</span>
+<span class="n">Y_test</span> <span class="o">=</span> <span class="n">np_utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">nb_classes</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="c1"># noise input</span>
+<span class="n">percent_noise</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mi">255</span><span class="p">)</span> <span class="o">*</span> <span class="n">percent_noise</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GaussianNoise</span><span class="p">(</span><span class="n">noise</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">img_chan</span><span class="p">,</span> <span class="n">img_rows</span><span class="p">,</span> <span class="n">img_cols</span><span class="p">)))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Convolution2D</span><span class="p">(</span><span class="n">nb_filters</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Convolution2D</span><span class="p">(</span><span class="n">nb_filters</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Convolution2D</span><span class="p">(</span><span class="n">nb_filters</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Convolution2D</span><span class="p">(</span><span class="n">nb_filters</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">,</span> <span class="n">nb_conv</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="n">nb_pool</span><span class="p">,</span> <span class="n">nb_pool</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.15</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+
+<span class="c1">#99.51 0.0, 0.0</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1024</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SReLU</span><span class="p">())</span>
+<span class="c1">#model.add(Dropout(0.25))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">nb_classes</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">'softmax'</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">'categorical_crossentropy'</span><span class="p">,</span> 
+              <span class="n">optimizer</span><span class="o">=</span><span class="s1">'adadelta'</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">'accuracy'</span><span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">nb_epoch</span><span class="o">=</span><span class="n">nb_epoch</span><span class="p">,</span>
+          <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">))</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Test score:'</span><span class="p">,</span> <span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Test accuracy:'</span><span class="p">,</span> <span class="n">score</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="kn">from</span> <span class="nn">keras.utils.visualize_util</span> <span class="kn">import</span> <span class="n">plot</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="s1">'model.png'</span><span class="p">,</span> <span class="n">show_layer_names</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>So simple!</p>
+<p>Now you can see how easy it is to actually use keras, i highly recommend that you get acquainted with it!</p>
+                </div>
+            </div>
+            
+            
+            <div class="col-sm-12">
+                <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./This is how we get ants..._files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 320px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+<script type="text/javascript">
+/* <![CDATA[ */
+
+	var disqus_shortname = 'schlerpblog';
+
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+/* ]]> */
+</script>
+<noscript>Please enable JavaScript to view the &lt;a href="//disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+
+            </div>
+            
+                
+        </div><!-- /.row -->
+
+        <footer class="blog-footer">
+          <p>Blog template built for <a href="http://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+          <p>With custom edits/djangofication by <a href="http://blog.schlerp.net/">schlerp</a>.</p>
+          <p>
+            <a href="http://blog.schlerp.net/">Back to Home...</a>
+          </p>
+        </footer>        
+        <script type="text/javascript" src="./This is how we get ants..._files/jquery-2.1.4.min.js"></script>        
+        <script type="text/javascript" src="./This is how we get ants..._files/bootstrap.min.js"></script>
+        
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ 
+            ga('create', 'UA-96142951-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    
+
+</div><iframe style="display: none;" src="./This is how we get ants..._files/saved_resource(1).html"></iframe></body></html>

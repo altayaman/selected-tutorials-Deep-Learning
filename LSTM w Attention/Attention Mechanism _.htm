@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://blog.heuritech.com/2016/01/20/attention-mechanism/ -->
+<html lang="fr-FR"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Attention Mechanism | </title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://blog.heuritech.com/xmlrpc.php">
+<!--[if lt IE 9]>
+<script src="https://s0.wp.com/wp-content/themes/pub/oxygen/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+		<script defer="" src="./Attention Mechanism __files/beacon.js"></script><script id="twitter-wjs" src="./Attention Mechanism __files/widgets.js"></script><script src="./Attention Mechanism __files/remote-login.php" type="text/javascript"></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+			if ( 'function' === typeof WPRemoteLogin ) {
+				document.cookie = "wordpress_test_cookie=test; path=/";
+				if ( document.cookie.match( /(;|^)\s*wordpress_test_cookie\=/ ) ) {
+					WPRemoteLogin();
+				}
+			}
+		/* ]]> */
+		</script>
+		<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://heuritech.wordpress.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="alternate" type="application/rss+xml" title=" » Flux" href="https://blog.heuritech.com/feed/">
+<link rel="alternate" type="application/rss+xml" title=" » Flux des commentaires" href="https://blog.heuritech.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title=" » Attention Mechanism Flux des commentaires" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1488818651h&ver=4.7.4"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Attention Mechanism __files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="all-css-0-1" href="./Attention Mechanism __files/saved_resource" type="text/css" media="all">
+<link rel="stylesheet" id="screen-css-1-1" href="./Attention Mechanism __files/style.css" type="text/css" media="screen">
+<link rel="stylesheet" id="font-abel-css" href="./Attention Mechanism __files/css" type="text/css" media="all">
+<link rel="stylesheet" id="all-css-4-1" href="./Attention Mechanism __files/saved_resource(1)" type="text/css" media="all">
+<link rel="stylesheet" id="print-css-5-1" href="./Attention Mechanism __files/global-print.css" type="text/css" media="print">
+<link rel="stylesheet" id="all-css-6-1" href="./Attention Mechanism __files/saved_resource(2)" type="text/css" media="all">
+<script type="text/javascript" src="./Attention Mechanism __files/saved_resource(3)"></script>
+<link rel="stylesheet" id="all-css-0-2" href="./Attention Mechanism __files/style(1).css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://heuritech.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Learning to link images with their descriptions" href="https://blog.heuritech.com/2015/12/01/learning-to-link-images-with-their-descriptions/">
+<link rel="next" title="An introduction to deep learning at Corps des Mines" href="https://blog.heuritech.com/2016/02/08/an-introduction-to-deep-learning-at-corps-des-mines/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/">
+<link rel="shortlink" href="http://wp.me/p5LD8W-nn">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=https%3A%2F%2Fblog.heuritech.com%2F2016%2F01%2F20%2Fattention-mechanism%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=https%3A%2F%2Fblog.heuritech.com%2F2016%2F01%2F20%2Fattention-mechanism%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Attention Mechanism">
+<meta property="og:url" content="https://blog.heuritech.com/2016/01/20/attention-mechanism/">
+<meta property="og:description" content="Following the Deep Learning and AI advances in 2015, many researchers have been interested in artificial « Attention Mechanism » in neural networks. This post aims at giving a…">
+<meta property="article:published_time" content="2016-01-20T14:02:04+00:00">
+<meta property="article:modified_time" content="2016-01-20T14:26:37+00:00">
+<meta property="og:image" content="https://heuritech.files.wordpress.com/2016/01/capture-du-2016-01-20-144835.png">
+<meta property="og:image:width" content="470">
+<meta property="og:image:height" content="181">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:site" content="@heuritechdata">
+<meta name="twitter:image:src" content="https://heuritech.files.wordpress.com/2016/01/capture-du-2016-01-20-144835.png?w=640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@heuritechdata">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="https://s0.wp.com/i/webclip.png">
+<link rel="openid.server" href="https://heuritech.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://heuritech.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://blog.heuritech.com/osd.xml" title="">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+	<style type="text/css">
+		#page {
+			background-color: #ffffff		}
+	</style>
+	<style>
+		html {
+			font-size: 16px;
+		}
+		h1, h2, h3, h4, h5, h6, dl dt, blockquote, blockquote blockquote blockquote, .site-title, .main-navigation a, .widget_calendar caption {
+			font-family: 'Abel', sans-serif;
+		}
+		.error, .entry-title a, .entry-content a, entry-summary a, .main-navigation > div > ul > li > a, .widget a, .post-navigation a, #image-navigation a, .pingback a, .logged-in-as a, .more-articles .entry-title a:hover, .widget_flickr #flickr_badge_uber_wrapper a {
+			color: #1e84a4;
+		}
+		a:hover, .comment-meta a, .comment-meta a:visited {
+			border-color: #1e84a4;
+		}
+		a.read-more, a.read-more:visited, .pagination a:hover, .comment-navigation a:hover, button, html input[type="button"], input[type="reset"], input[type="submit"], #infinite-handle span {
+			background-color: #1e84a4;
+		}
+	</style>
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="WordPress.com"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-task" content="name=S&#39;abonner;action-uri=https://blog.heuritech.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Inscrivez-vous pour un blog gratuit;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Soutien WordPress.com;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Forums WordPress.com;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="Attention Mechanism |  sur WordPress.com">
+<meta name="description" content="Following the Deep Learning and AI advances in 2015, many researchers have been interested in artificial &quot;Attention Mechanism&quot; in neural networks. This post aims at giving a high level explanation of what Deep Learning Attention Mechanism is, as well as detailing a few technical steps in the computation of attention. If you&#39;re looking for more…">
+	<style type="text/css">
+			.site-title,
+		.site-description {
+			position: absolute;
+			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+			clip: rect(1px, 1px, 1px, 1px);
+		}
+		</style>
+	<link rel="amphtml" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/amp/"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<style type="text/css" id="custom-colors-css">.menu-secondary li a:hover{background-color:#000}.menu-secondary li a:hover{background-color:rgba(0,0,0,.2)}.menu-secondary li{border-color:#252525}.menu-secondary li{border-color:rgba(37,37,37,.1)}.menu-secondary li a,.menu-secondary li.current-menu-item li a,.menu-secondary li.current-page-item li a{color:#ccc}.menu-secondary li li a{color:#888}.menu-secondary li.current-menu-item a,.menu-secondary li.current-page-item a{color:#7f7f7f}.menu-secondary li.current-menu-item li a:hover,.menu-secondary li.current-page-item li a:hover{color:#fff}body{background-color:#f4f4f4}.error,.entry-title a,.entry-content a,entry-summary a,.main-navigation>div>ul>li>a,.widget a,.post-navigation a,#image-navigation a,.pingback a,.logged-in-as a,.more-articles .entry-title a:hover,.widget_flickr #flickr_badge_uber_wrapper a{color:#026f90}a:hover,.comment-meta a,.comment-meta a:visited{border-color:#026f90}a.read-more,a.read-more:visited,.pagination a:hover,.comment-navigation a:hover,button,html input[type="button"],input[type="reset"],input[type="submit"],#infinite-handle span{background-color:#026f90}.entry-title a:hover,.entry-meta a:hover,.page-links a:hover,.comment-meta a:hover,.widget ul li a:hover,.widget_flickr #flickr_badge_uber_wrapper a:hover{color:#000}.menu-secondary,.menu-secondary li,.menu-secondary li a{background-color:#111}</style>
+<style type="text/css"></style><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./Attention Mechanism __files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./Attention Mechanism __files/services.css"><script type="text/javascript" charset="utf-8" async="" src="./Attention Mechanism __files/timeline.9d3a88fb5aef75c60edbbe5208a9b931.js"></script></head>
+
+<body class="post-template-default single single-post postid-1449 single-format-standard custom-background mp6 customizer-styles-applied group-blog has-site-logo highlander-enabled highlander-light custom-colors">
+<div id="page" class="hfeed site">
+		<header id="masthead" class="site-header" role="banner">
+		<hgroup>
+			<a href="https://blog.heuritech.com/" class="site-logo-link" rel="home"><img width="470" height="55" src="./Attention Mechanism __files/logo-heuritech-le-blog.png" class="site-logo attachment-oxygen-logo" alt="" data-size="oxygen-logo" srcset="https://heuritech.files.wordpress.com/2017/01/logo-heuritech-le-blog.png?w=470 470w, https://heuritech.files.wordpress.com/2017/01/logo-heuritech-le-blog.png?w=940 940w, https://heuritech.files.wordpress.com/2017/01/logo-heuritech-le-blog.png?w=150 150w, https://heuritech.files.wordpress.com/2017/01/logo-heuritech-le-blog.png?w=300 300w, https://heuritech.files.wordpress.com/2017/01/logo-heuritech-le-blog.png?w=768 768w" sizes="(max-width: 470px) 100vw, 470px" data-attachment-id="4668" data-permalink="https://blog.heuritech.com/logo-heuritech-le-blog/" data-orig-file="https://heuritech.files.wordpress.com/2017/01/logo-heuritech-le-blog.png" data-orig-size="2844,331" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="logo-heuritech-le-blog" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2017/01/logo-heuritech-le-blog.png?w=300" data-large-file="https://heuritech.files.wordpress.com/2017/01/logo-heuritech-le-blog.png?w=470"></a>			<h1 class="site-title"><a href="https://blog.heuritech.com/" title="" rel="home"></a></h1>
+			<h2 class="site-description"></h2>
+		</hgroup>
+
+		
+		
+			<a href="https://blog.heuritech.com/" title="" rel="home">
+				<img src="./Attention Mechanism __files/cropped-slider-social-networks-jpg.png" width="1500" height="400" alt="" class="custom-header" scale="0">
+			</a>
+
+		
+		<nav role="navigation" class="site-navigation main-navigation clear-fix">
+			<h1 class="assistive-text">Menu principal</h1>
+			<div class="assistive-text skip-link"><a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#content" title="Accéder au contenu principal">Accéder au contenu principal</a></div>
+
+			<div class="menu-menu-1-container"><ul id="menu-menu-1" class="menu"><li id="menu-item-619" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-619"><a title="Rendez-vous sur le site d’Heuritech" href="http://www.heuritech.com/">heuritech.com</a></li>
+<li id="menu-item-745" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-745"><a title="Rendez-vous sur la chaîne youtube d’Heuritech" href="https://www.youtube.com/channel/UCF65w-sGTJfDI3WarFwTpwg">la chaîne heuritech</a></li>
+<li id="menu-item-747" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-747"><a title="Rendez-vous sur le compte twitter d’Heuritech" href="https://twitter.com/heuritechdata">encore + d’actu</a></li>
+</ul></div>		</nav>
+	</header><!-- #masthead .site-header -->
+
+	<div id="main" class="clear-fix">
+		<div id="primary" class="site-content">
+			<div id="content" role="main">
+
+			
+				
+<article id="post-1449" class="clear-fix post-1449 post type-post status-publish format-standard has-post-thumbnail hentry category-machine-learning category-rd tag-artificial-intelligence tag-attention-model tag-deep-learning tag-image-captioning">
+	<header class="entry-header">
+		<h1 class="entry-title">Attention Mechanism</h1>
+
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/" title="15 h 02 min" rel="bookmark"><time class="entry-date" datetime="2016-01-20T15:02:04+00:00" pubdate="">20 janvier 2016</time></a></span>			<span class="sep">·</span>
+			<span class="byline">par <span class="author vcard"><a class="url fn n" href="https://blog.heuritech.com/author/leonardblier/" title="Voir tous les articles par leonardblier" rel="author">leonardblier</a></span></span>			<span class="sep">·</span>
+			dans <a href="https://blog.heuritech.com/category/machine-learning/" rel="category tag">Machine Learning</a>, <a href="https://blog.heuritech.com/category/rd/" rel="category tag">R&amp;D</a>.			<span class="sep">·</span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+	<div class="entry-content clear-fix">
+		<p>Following the Deep Learning and AI advances in 2015, many researchers have been interested in artificial «&nbsp;Attention Mechanism&nbsp;» in neural networks. This post aims at giving a high level explanation of what Deep Learning Attention Mechanism is, as well as detailing a few technical steps in the computation of attention. If you’re looking for more equations or examples, the references give a large amount of details, in particular the recent review by <span class="reference-text">Cho</span> et al [3]. Unfortunately, these models are not always straightforward to implement by yourself and only a few open source implementations have been released up to now.</p>
+<h2>Attention</h2>
+<p>Neural processes involving attention have been largely studied in Neuroscience and Computational Neuroscience [1, 2]. A particularly studied aspect is visual attention: many animals focus on specific parts of their visual inputs to compute the adequate responses. This principle has a large impact on neural computation as we need to select the most pertinent piece of information, rather than using all available information, a large part of it being irrelevant to compute the neural response.<br>
+A similar idea -focusing on specific parts of the input- has been applied in Deep Learning, for speech recognition, translation, reasoning, and visual identification of objects.</p>
+<h3>Attention for Image Captioning</h3>
+<p>Let’s introduce an example to explain attention mechanism. The task we want to achieve is image captioning: we want to generate a caption for a given image.</p>
+<p>A «&nbsp;classic&nbsp;» image captioning system would encode the image, using a pre-trained Convolutional Neural Network that would produce a hidden state <img src="./Attention Mechanism __files/latex.php" alt="h" title="h" class="latex" width="9" height="11" srcset="https://s0.wp.com/latex.php?latex=h&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. Then, it would decode this hidden state by using a Recurrent Neural Network (RNN), and generate recursively each word of the caption. Such a method has been applied by several groups, including [11] (see image below):</p>
+<div data-shortcode="caption" id="attachment_1757" style="width: 487px" class="wp-caption aligncenter"><img data-attachment-id="1757" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/caption_basic-2/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/caption_basic1.png?w=477&amp;h=549" data-orig-size="1805,2075" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="caption_basic" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/caption_basic1.png?w=477&amp;h=549?w=261" data-large-file="https://heuritech.files.wordpress.com/2016/01/caption_basic1.png?w=477&amp;h=549?w=470" class=" wp-image-1757 aligncenter" src="./Attention Mechanism __files/caption_basic1.png" alt="caption_basic.png" width="477" height="549" srcset="https://heuritech.files.wordpress.com/2016/01/caption_basic1.png?w=477&amp;h=549 477w, https://heuritech.files.wordpress.com/2016/01/caption_basic1.png?w=954&amp;h=1098 954w, https://heuritech.files.wordpress.com/2016/01/caption_basic1.png?w=130&amp;h=150 130w, https://heuritech.files.wordpress.com/2016/01/caption_basic1.png?w=261&amp;h=300 261w, https://heuritech.files.wordpress.com/2016/01/caption_basic1.png?w=768&amp;h=883 768w, https://heuritech.files.wordpress.com/2016/01/caption_basic1.png?w=891&amp;h=1024 891w" sizes="(max-width: 477px) 100vw, 477px"><p class="wp-caption-text">Entrer une légende</p></div>
+<p>&nbsp;</p>
+<p>The problem with this method is that, when the model is trying to generate the next word of the caption, this word is usually describing only a part of the image. Using the whole representation of the image <img src="./Attention Mechanism __files/latex.php" alt="h" title="h" class="latex" width="9" height="11" srcset="https://s0.wp.com/latex.php?latex=h&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> to condition the generation of each word cannot efficiently produce different words for different parts of the image. This is exactly where an attention mechanism is helpful.</p>
+<p>With an attention mechanism, the image is first divided into <img src="./Attention Mechanism __files/latex(1).php" alt="n" title="n" class="latex" width="10" height="7" srcset="https://s0.wp.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> parts, and we compute with a Convolutional Neural Network (CNN) representations of each part <img src="./Attention Mechanism __files/latex(2).php" alt="h_1, ..., h_n" title="h_1, ..., h_n" class="latex" width="60" height="15" srcset="https://s0.wp.com/latex.php?latex=h_1%2C+...%2C+h_n&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. When the RNN is generating a new word, the attention mechanism is focusing on the relevant part of the image, so the decoder only uses specific parts of the image.</p>
+<p>On the figure below (upper row), we can see for each word of the caption what part of the image (in white) is used to generate it.</p>
+<p></p><div data-shortcode="caption" id="attachment_1506" style="width: 849px" class="wp-caption aligncenter"><img data-attachment-id="1506" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/attention_bird/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/attention_bird.png?w=470" data-orig-size="839,214" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="attention_bird" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/attention_bird.png?w=470?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/attention_bird.png?w=470?w=470" class="size-full wp-image-1506 aligncenter" src="./Attention Mechanism __files/attention_bird.png" alt="attention_bird.png" srcset="https://heuritech.files.wordpress.com/2016/01/attention_bird.png?w=470 470w, https://heuritech.files.wordpress.com/2016/01/attention_bird.png?w=150 150w, https://heuritech.files.wordpress.com/2016/01/attention_bird.png?w=300 300w, https://heuritech.files.wordpress.com/2016/01/attention_bird.png?w=768 768w, https://heuritech.files.wordpress.com/2016/01/attention_bird.png 839w" sizes="(max-width: 470px) 100vw, 470px"><p class="wp-caption-text">Attention over time during an image captioning. (Taken from [11])</p></div>For more examples, we can look at the «&nbsp;relevant&nbsp;» part of these images to generate the underlined words.<p></p>
+<p></p><div data-shortcode="caption" id="attachment_1515" style="width: 830px" class="wp-caption aligncenter"><img data-attachment-id="1515" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/attention_captions/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/attention_captions.png?w=470" data-orig-size="820,317" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="attention_captions" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/attention_captions.png?w=470?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/attention_captions.png?w=470?w=470" class=" size-full wp-image-1515 aligncenter" src="./Attention Mechanism __files/attention_captions.png" alt="attention_captions.png" srcset="https://heuritech.files.wordpress.com/2016/01/attention_captions.png?w=470 470w, https://heuritech.files.wordpress.com/2016/01/attention_captions.png?w=150 150w, https://heuritech.files.wordpress.com/2016/01/attention_captions.png?w=300 300w, https://heuritech.files.wordpress.com/2016/01/attention_captions.png?w=768 768w, https://heuritech.files.wordpress.com/2016/01/attention_captions.png 820w" sizes="(max-width: 470px) 100vw, 470px"><p class="wp-caption-text">Examples of attending the correct object. (Taken from [11])</p></div>We are now going to explain how an attention model works, in a general setting. A<span class="reference-text"> comprehensive review of attention models applications [3] details t<span class="reference-text">he implementation of an attention based Encoder-Decoder Network</span>.</span><p></p>
+<h3>What is an attention model ?</h3>
+<p>What is an attention model, in a general setting ?</p>
+<p><img data-attachment-id="1519" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/high_attentionmodel-svg/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/high_attentionmodel-svg.png?w=389&amp;h=259" data-orig-size="363,242" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="high_attentionmodel.svg" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/high_attentionmodel-svg.png?w=389&amp;h=259?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/high_attentionmodel-svg.png?w=389&amp;h=259?w=363" class=" wp-image-1519 aligncenter" src="./Attention Mechanism __files/high_attentionmodel-svg.png" alt="high_attentionmodel.svg.png" width="389" height="259" srcset="https://heuritech.files.wordpress.com/2016/01/high_attentionmodel-svg.png 363w, https://heuritech.files.wordpress.com/2016/01/high_attentionmodel-svg.png?w=150&amp;h=100 150w, https://heuritech.files.wordpress.com/2016/01/high_attentionmodel-svg.png?w=300&amp;h=200 300w" sizes="(max-width: 389px) 100vw, 389px"></p>
+<p>An attention model is a method that takes <img src="./Attention Mechanism __files/latex(1).php" alt="n" title="n" class="latex" width="10" height="7" srcset="https://s0.wp.com/latex.php?latex=n&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> arguments <img src="./Attention Mechanism __files/latex(3).php" alt="y_1, ..., y_n" title="y_1, ..., y_n" class="latex" width="58" height="11" srcset="https://s0.wp.com/latex.php?latex=y_1%2C+...%2C+y_n&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> (in the precedent examples, the <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> would be the <img src="./Attention Mechanism __files/latex(5).php" alt="h_i" title="h_i" class="latex" width="13" height="14" srcset="https://s0.wp.com/latex.php?latex=h_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">), and a context <img src="./Attention Mechanism __files/latex(6).php" alt="c" title="c" class="latex" width="7" height="7" srcset="https://s0.wp.com/latex.php?latex=c&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. It return a vector <img src="./Attention Mechanism __files/latex(7).php" alt="z" title="z" class="latex" width="8" height="7" srcset="https://s0.wp.com/latex.php?latex=z&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> which is supposed to be the «&nbsp;summary&nbsp;» of the <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">, focusing on information linked to the context <img src="./Attention Mechanism __files/latex(6).php" alt="c" title="c" class="latex" width="7" height="7" srcset="https://s0.wp.com/latex.php?latex=c&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. More formally, it returns a weighted arithmetic mean of the <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">, and the weights are chosen according the relevance of each <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> given the context <img src="./Attention Mechanism __files/latex(6).php" alt="c" title="c" class="latex" width="7" height="7" srcset="https://s0.wp.com/latex.php?latex=c&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">.</p>
+<p>In the example presented before, the context is the beginning of the generated sentence, the <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> are the representations of the parts of the image (<img src="./Attention Mechanism __files/latex(5).php" alt="h_i" title="h_i" class="latex" width="13" height="14" srcset="https://s0.wp.com/latex.php?latex=h_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">), and the output is a representation of the filtered image, with a filter putting the focus of the interesting part for the word currently generated.</p>
+<p>One interesting feature of attention model is that the weight of the arithmetic means are accessible and can be plotted. This is exactly the figures we were showing before, a pixel is whiter if the weight of this image is high.</p>
+<p>&nbsp;</p>
+<p>But what is exactly this black box doing ? A figure for the whole attention model would be this one :</p>
+<p><img data-attachment-id="1668" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/detail_attentionmodel-2/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel1.png?w=470" data-orig-size="1207,844" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="detail_attentionmodel" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel1.png?w=470?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel1.png?w=470?w=470" class="alignnone size-full wp-image-1668" src="./Attention Mechanism __files/detail_attentionmodel1.png" alt="detail_attentionmodel" srcset="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel1.png?w=470 470w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel1.png?w=940 940w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel1.png?w=150 150w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel1.png?w=300 300w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel1.png?w=768 768w" sizes="(max-width: 470px) 100vw, 470px"></p>
+<p>&nbsp;</p>
+<p>This network could seem to be complicated, but we are going to explain it step by step.</p>
+<p>First, we recognize the input. <img src="./Attention Mechanism __files/latex(6).php" alt="c" title="c" class="latex" width="7" height="7" srcset="https://s0.wp.com/latex.php?latex=c&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> is the context, and the <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> are the «&nbsp;part of the data&nbsp;» we are looking at.</p>
+<p><img data-attachment-id="1669" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/detail_attentionmodel_step0-2/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step01.png?w=470" data-orig-size="1998,1397" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="detail_attentionmodel_step0" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step01.png?w=470?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step01.png?w=470?w=470" class="alignnone size-full wp-image-1669" src="./Attention Mechanism __files/detail_attentionmodel_step01.png" alt="detail_attentionmodel_step0" srcset="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step01.png?w=470 470w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step01.png?w=940 940w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step01.png?w=150 150w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step01.png?w=300 300w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step01.png?w=768 768w" sizes="(max-width: 470px) 100vw, 470px"></p>
+<p>&nbsp;</p>
+<p>At the next step, the network computes <img src="./Attention Mechanism __files/latex(8).php" alt="m_1" title="m_1" class="latex" width="19" height="11" srcset="https://s0.wp.com/latex.php?latex=m_1&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">, … <img src="./Attention Mechanism __files/latex(9).php" alt="m_n" title="m_n" class="latex" width="21" height="10" srcset="https://s0.wp.com/latex.php?latex=m_n&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> with a <img src="./Attention Mechanism __files/latex(10).php" alt="\tanh" title="\tanh" class="latex" width="32" height="14" srcset="https://s0.wp.com/latex.php?latex=%5Ctanh&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> layer. It means that we compute an «&nbsp;aggregation&nbsp;» of the values of <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> and <img src="./Attention Mechanism __files/latex(6).php" alt="c" title="c" class="latex" width="7" height="7" srcset="https://s0.wp.com/latex.php?latex=c&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. An important remark here is that each <img src="./Attention Mechanism __files/latex(11).php" alt="m_i" title="m_i" class="latex" width="18" height="10" srcset="https://s0.wp.com/latex.php?latex=m_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> is computed without looking at the other <img src="./Attention Mechanism __files/latex(12).php" alt="y_j" title="y_j" class="latex" width="13" height="12" srcset="https://s0.wp.com/latex.php?latex=y_j&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> for <img src="./Attention Mechanism __files/latex(13).php" alt="j \neq i" title="j \neq i" class="latex" width="35" height="16" srcset="https://s0.wp.com/latex.php?latex=j+%5Cneq+i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. They are computed independently.</p>
+<p><img data-attachment-id="1667" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/detail_attentionmodel_step1-3/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step12.png?w=470" data-orig-size="1244,870" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="detail_attentionmodel_step1" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step12.png?w=470?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step12.png?w=470?w=470" class="alignnone size-full wp-image-1667" src="./Attention Mechanism __files/detail_attentionmodel_step12.png" alt="detail_attentionmodel_step1" srcset="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step12.png?w=470 470w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step12.png?w=940 940w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step12.png?w=150 150w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step12.png?w=300 300w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step12.png?w=768 768w" sizes="(max-width: 470px) 100vw, 470px"></p>
+<p style="text-align:center;"><img src="./Attention Mechanism __files/latex(14).php" alt="m_i = \tanh\left(W_{cm}c + W_{ym}y_i\right)" title="m_i = \tanh\left(W_{cm}c + W_{ym}y_i\right)" class="latex" width="191" height="19" srcset="https://s0.wp.com/latex.php?latex=m_i+%3D+%5Ctanh%5Cleft%28W_%7Bcm%7Dc+%2B+W_%7Bym%7Dy_i%5Cright%29&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"></p>
+<p>Then, we compute each weight using a softmax. The softmax, as it name says, behaves almost like a argmax, but is differentiable. Let’s say that we have an argma$ function such that <img src="./Attention Mechanism __files/latex(15).php" alt="argmax(x_1, ..., x_n) = (0, ..., 0, 1, 0, ..., 0)" title="argmax(x_1, ..., x_n) = (0, ..., 0, 1, 0, ..., 0)" class="latex" width="275" height="18" srcset="https://s0.wp.com/latex.php?latex=argmax%28x_1%2C+...%2C+x_n%29+%3D+%280%2C+...%2C+0%2C+1%2C+0%2C+...%2C+0%29&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> where the only 1 in the output is telling which input is the max. Then, the softmax is defined by <img src="./Attention Mechanism __files/latex(16).php" alt="softmax(x_1, ..., x_n) = (\frac{e^{x_i}}{\sum_j e^{x_j}})_i" title="softmax(x_1, ..., x_n) = (\frac{e^{x_i}}{\sum_j e^{x_j}})_i" class="latex" width="215" height="26" srcset="https://s0.wp.com/latex.php?latex=softmax%28x_1%2C+...%2C+x_n%29+%3D+%28%5Cfrac%7Be%5E%7Bx_i%7D%7D%7B%5Csum_j+e%5E%7Bx_j%7D%7D%29_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. If one of the <img src="./Attention Mechanism __files/latex(17).php" alt="x_i" title="x_i" class="latex" width="13" height="10" srcset="https://s0.wp.com/latex.php?latex=x_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> is bigger than the other, then <img src="./Attention Mechanism __files/latex(18).php" alt="softmax(x_1, ..., x_n)" title="softmax(x_1, ..., x_n)" class="latex" width="135" height="18" srcset="https://s0.wp.com/latex.php?latex=softmax%28x_1%2C+...%2C+x_n%29&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> will be very close to <img src="./Attention Mechanism __files/latex(19).php" alt="argmax(x_1, ..., x_n)" title="argmax(x_1, ..., x_n)" class="latex" width="129" height="18" srcset="https://s0.wp.com/latex.php?latex=argmax%28x_1%2C+...%2C+x_n%29&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">.</p>
+<p><img data-attachment-id="1665" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/detail_attentionmodel_step2-3/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step22.png?w=470" data-orig-size="1300,909" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="detail_attentionmodel_step2" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step22.png?w=470?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step22.png?w=470?w=470" class="alignnone size-full wp-image-1665" src="./Attention Mechanism __files/detail_attentionmodel_step22.png" alt="detail_attentionmodel_step2" srcset="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step22.png?w=470 470w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step22.png?w=940 940w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step22.png?w=150 150w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step22.png?w=300 300w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step22.png?w=768 768w" sizes="(max-width: 470px) 100vw, 470px"></p>
+<p style="text-align:center;"><img src="./Attention Mechanism __files/latex(20).php" alt="s_i \propto \exp\left(\left&lt;w_m,m_i \right&gt;\right)" title="s_i \propto \exp\left(\left&lt;w_m,m_i \right&gt;\right)" class="latex" width="135" height="19" srcset="https://s0.wp.com/latex.php?latex=s_i+%5Cpropto+%5Cexp%5Cleft%28%5Cleft%3Cw_m%2Cm_i+%5Cright%3E%5Cright%29&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"></p>
+<p style="text-align:center;"><img src="./Attention Mechanism __files/latex(21).php" alt="\sum_i s_i = 1" title="\sum_i s_i = 1" class="latex" width="66" height="17" srcset="https://s0.wp.com/latex.php?latex=%5Csum_i+s_i+%3D+1&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"></p>
+<p>Here, the <img src="./Attention Mechanism __files/latex(22).php" alt="s_i" title="s_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=s_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> are the softmax of the <img src="./Attention Mechanism __files/latex(11).php" alt="m_i" title="m_i" class="latex" width="18" height="10" srcset="https://s0.wp.com/latex.php?latex=m_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> projected&nbsp; on a learned direction. So the softmax can be thought as the max of the «&nbsp;relevance&nbsp;» of the variables, according to the context.</p>
+<p>The output <img src="./Attention Mechanism __files/latex(7).php" alt="z" title="z" class="latex" width="8" height="7" srcset="https://s0.wp.com/latex.php?latex=z&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> is the weighted arithmetic mean of all the <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">, where the weight represent the relevance for each variable according the context <img src="./Attention Mechanism __files/latex(6).php" alt="c" title="c" class="latex" width="7" height="7" srcset="https://s0.wp.com/latex.php?latex=c&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">.</p>
+<p><img data-attachment-id="1666" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/detail_attentionmodel_step3-3/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step32.png?w=470" data-orig-size="1102,771" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="detail_attentionmodel_step3" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step32.png?w=470?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step32.png?w=470?w=470" class="alignnone size-full wp-image-1666" src="./Attention Mechanism __files/detail_attentionmodel_step32.png" alt="detail_attentionmodel_step3" srcset="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step32.png?w=470 470w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step32.png?w=940 940w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step32.png?w=150 150w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step32.png?w=300 300w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_step32.png?w=768 768w" sizes="(max-width: 470px) 100vw, 470px"></p>
+<p style="text-align:center;"><img src="./Attention Mechanism __files/latex(23).php" alt="z = \sum_i s_iy_i" title="z = \sum_i s_iy_i" class="latex" width="79" height="17" srcset="https://s0.wp.com/latex.php?latex=z+%3D+%5Csum_i+s_iy_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"></p>
+<h3></h3>
+<h3>An other computation of «&nbsp;relevance&nbsp;»</h3>
+<p>The model presented above of an attentive model can be modified. First, the <img src="./Attention Mechanism __files/latex(10).php" alt="\tanh" title="\tanh" class="latex" width="32" height="14" srcset="https://s0.wp.com/latex.php?latex=%5Ctanh&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> layer can be replaced by any other network. The only important thing is that this function mixes up <img src="./Attention Mechanism __files/latex(6).php" alt="c" title="c" class="latex" width="7" height="7" srcset="https://s0.wp.com/latex.php?latex=c&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> and <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. A version used is to compute only a dot product between <img src="./Attention Mechanism __files/latex(6).php" alt="c" title="c" class="latex" width="7" height="7" srcset="https://s0.wp.com/latex.php?latex=c&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> and <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">.</p>
+<div data-shortcode="caption" id="attachment_1678" style="width: 2008px" class="wp-caption alignnone"><img data-attachment-id="1678" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/detail_attentionmodel_dotproduct-2/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_dotproduct1.png?w=1998&amp;h=1397" data-orig-size="1998,1397" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="detail_attentionmodel_dotproduct" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_dotproduct1.png?w=1998&amp;h=1397?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_dotproduct1.png?w=1998&amp;h=1397?w=470" class="alignnone wp-image-1678" src="./Attention Mechanism __files/detail_attentionmodel_dotproduct1.png" alt="detail_attentionmodel_dotproduct" width="1998" height="1397" srcset="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_dotproduct1.png 1998w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_dotproduct1.png?w=150&amp;h=105 150w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_dotproduct1.png?w=300&amp;h=210 300w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_dotproduct1.png?w=768&amp;h=537 768w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_dotproduct1.png?w=1024&amp;h=716 1024w" sizes="(max-width: 1998px) 100vw, 1998px"><p class="wp-caption-text"></p>
+<p>Attention Model with an other computation method for relevance.</p>
+<p></p></div>
+<p>This version is even easier to understand. The attention model is «&nbsp;softly-choosing&nbsp;» the variable the most correlated with&nbsp; the context. As far as we know, both systems seem to produce comparable results.</p>
+<p>An other important modification is hard attention.</p>
+<h3>Soft Attention and Hard Attention</h3>
+<p>The mechanism we described previously is called «&nbsp;Soft attention&nbsp;» because it is a fully differentiable deterministic mechanism that can be plugged into an existing system, and the gradients are propagated through the attention mechanism at the same time they are propagated through the rest of the network.</p>
+<p>Hard attention is a stochastic process: instead of using all the hidden states as an input for the decoding, the system samples a hidden state <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> with the probabilities <img src="./Attention Mechanism __files/latex(22).php" alt="s_i" title="s_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=s_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. In order to propagate a gradient through this process, we estimate the gradient by Monte Carlo sampling.</p>
+<div data-shortcode="caption" id="attachment_1639" style="width: 691px" class="wp-caption aligncenter"><img data-attachment-id="1639" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/detail_attentionmodel_hardattention/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_hardattention.png?w=681&amp;h=476" data-orig-size="2000,1398" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="detail_attentionmodel_hardattention" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_hardattention.png?w=681&amp;h=476?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_hardattention.png?w=681&amp;h=476?w=470" class=" wp-image-1639 aligncenter" src="./Attention Mechanism __files/detail_attentionmodel_hardattention.png" alt="detail_attentionmodel_hardattention.png" width="681" height="476" srcset="https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_hardattention.png?w=681&amp;h=476 681w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_hardattention.png?w=1362&amp;h=952 1362w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_hardattention.png?w=150&amp;h=105 150w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_hardattention.png?w=300&amp;h=210 300w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_hardattention.png?w=768&amp;h=537 768w, https://heuritech.files.wordpress.com/2016/01/detail_attentionmodel_hardattention.png?w=1024&amp;h=716 1024w" sizes="(max-width: 681px) 100vw, 681px"><p class="wp-caption-text">A Hard Attention model. The output is a random choice of one of the <img src="./Attention Mechanism __files/latex(4).php" alt="y_i" title="y_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=y_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">, with probability <img src="./Attention Mechanism __files/latex(22).php" alt="s_i" title="s_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=s_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">.</p></div>
+<p>Both system have their pros and cons, but the trend is to focus on soft attention mechanism as the gradient can directly be computed instead of estimated through a stochastic process.</p>
+<h3>Return to the image captioning</h3>
+<p>Now, we are able to understand how the image captioning system presented before is working.</p>
+<div data-shortcode="caption" id="attachment_1760" style="width: 2139px" class="wp-caption alignnone"><img data-attachment-id="1760" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/caption_attention-2/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/caption_attention1.png?w=470" data-orig-size="2129,2075" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="caption_attention" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/caption_attention1.png?w=470?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/caption_attention1.png?w=470?w=470" class="alignnone size-full wp-image-1760" src="./Attention Mechanism __files/caption_attention1.png" alt="caption_attention" srcset="https://heuritech.files.wordpress.com/2016/01/caption_attention1.png?w=470 470w, https://heuritech.files.wordpress.com/2016/01/caption_attention1.png?w=940 940w, https://heuritech.files.wordpress.com/2016/01/caption_attention1.png?w=150 150w, https://heuritech.files.wordpress.com/2016/01/caption_attention1.png?w=300 300w, https://heuritech.files.wordpress.com/2016/01/caption_attention1.png?w=768 768w" sizes="(max-width: 470px) 100vw, 470px"><p class="wp-caption-text">Attention model for image captioning</p></div>
+<p>We can recognise the figure of the «&nbsp;classic&nbsp;» model for image captioning, but with a new layer of attention model. What is happening when we want to predict the new word of the caption ? If we have predicted <img src="./Attention Mechanism __files/latex(24).php" alt="i" title="i" class="latex" width="5" height="12" srcset="https://s0.wp.com/latex.php?latex=i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> words, the hidden state of the LSTM is <img src="./Attention Mechanism __files/latex(5).php" alt="h_i" title="h_i" class="latex" width="13" height="14" srcset="https://s0.wp.com/latex.php?latex=h_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. We select the «&nbsp;relevant&nbsp;» part of the image by using <img src="./Attention Mechanism __files/latex(5).php" alt="h_i" title="h_i" class="latex" width="13" height="14" srcset="https://s0.wp.com/latex.php?latex=h_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> as the context. Then, the output of the attention model <img src="./Attention Mechanism __files/latex(25).php" alt="z_i" title="z_i" class="latex" width="12" height="10" srcset="https://s0.wp.com/latex.php?latex=z_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">, which is the representation of the image filtered such that only the relevant parts of the image remains, is used as an input for the LSTM. Then, the LSTM predict a new word, and returns a new hidden state <img src="./Attention Mechanism __files/latex(26).php" alt="h_{i+1}" title="h_{i+1}" class="latex" width="27" height="15" srcset="https://s0.wp.com/latex.php?latex=h_%7Bi%2B1%7D&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">.</p>
+<p>&nbsp;</p>
+<h3>Learning to Align in Machine Translation</h3>
+<p>The work by Bahdanau, et al [5] proposed a neural translation model which learns to translate sentences from one language to another and introduces an attention mechanism.</p>
+<p>Before explaining the attention mechanism, the vanilla neural translation model using an encoder-decoder works. The encoder is fed a sentence in English&nbsp;using Recurrent Neural Networks (RNN, usually GRU or LSTM) and produces a hidden state <img src="./Attention Mechanism __files/latex.php" alt="h" title="h" class="latex" width="9" height="11" srcset="https://s0.wp.com/latex.php?latex=h&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. This hidden state <img src="./Attention Mechanism __files/latex.php" alt="h" title="h" class="latex" width="9" height="11" srcset="https://s0.wp.com/latex.php?latex=h&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> conditions the decoder RNN to produce the right output sentence in French.</p>
+<div data-shortcode="caption" id="attachment_1767" style="width: 531px" class="wp-caption aligncenter"><img data-attachment-id="1767" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/trad_basic-3/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/trad_basic2.png?w=521&amp;h=672" data-orig-size="1633,2106" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="trad_basic" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/trad_basic2.png?w=521&amp;h=672?w=233" data-large-file="https://heuritech.files.wordpress.com/2016/01/trad_basic2.png?w=521&amp;h=672?w=470" class=" wp-image-1767 aligncenter" src="./Attention Mechanism __files/trad_basic2.png" alt="trad_basic.png" width="521" height="672" srcset="https://heuritech.files.wordpress.com/2016/01/trad_basic2.png?w=521&amp;h=672 521w, https://heuritech.files.wordpress.com/2016/01/trad_basic2.png?w=1042&amp;h=1344 1042w, https://heuritech.files.wordpress.com/2016/01/trad_basic2.png?w=116&amp;h=150 116w, https://heuritech.files.wordpress.com/2016/01/trad_basic2.png?w=233&amp;h=300 233w, https://heuritech.files.wordpress.com/2016/01/trad_basic2.png?w=768&amp;h=990 768w, https://heuritech.files.wordpress.com/2016/01/trad_basic2.png?w=794&amp;h=1024 794w" sizes="(max-width: 521px) 100vw, 521px"><p class="wp-caption-text">A model for translation without attention.</p></div>
+<p>For translation, we have the same intuition than for image captioning. When we are generating a new word, we are usually translating a single word of the original language. An attention model allows, for each new word, to focus on a part of the original text.</p>
+<p>The only difference between this model and the model of image captioning is that the <img src="./Attention Mechanism __files/latex(5).php" alt="h_i" title="h_i" class="latex" width="13" height="14" srcset="https://s0.wp.com/latex.php?latex=h_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> are the successive hidden layers of a RNN.</p>
+<div data-shortcode="caption" id="attachment_1762" style="width: 2045px" class="wp-caption alignnone"><img data-attachment-id="1762" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/trad_attention-2/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/trad_attention1.png?w=470" data-orig-size="2035,2047" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="trad_attention" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/trad_attention1.png?w=470?w=298" data-large-file="https://heuritech.files.wordpress.com/2016/01/trad_attention1.png?w=470?w=470" class="alignnone size-full wp-image-1762" src="./Attention Mechanism __files/trad_attention1.png" alt="trad_attention.png" srcset="https://heuritech.files.wordpress.com/2016/01/trad_attention1.png?w=470 470w, https://heuritech.files.wordpress.com/2016/01/trad_attention1.png?w=940 940w, https://heuritech.files.wordpress.com/2016/01/trad_attention1.png?w=150 150w, https://heuritech.files.wordpress.com/2016/01/trad_attention1.png?w=298 298w, https://heuritech.files.wordpress.com/2016/01/trad_attention1.png?w=768 768w" sizes="(max-width: 470px) 100vw, 470px"><p class="wp-caption-text">Attention model for Translation.</p></div>
+<p>Instead of producing just a single hidden state corresponding to the whole sentence, the encoder produces T <img src="./Attention Mechanism __files/latex(27).php" alt="h_j" title="h_j" class="latex" width="14" height="16" srcset="https://s0.wp.com/latex.php?latex=h_j&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> hidden states each corresponding to a word. Each time the decoder RNN produces a word, it determines the contribution of each hidden states to take as input, usually a single one (see figure below). The contribution computed using a softmax: this means that attention weights <img src="./Attention Mechanism __files/latex(28).php" alt="a_j" title="a_j" class="latex" width="14" height="12" srcset="https://s0.wp.com/latex.php?latex=a_j&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> are computed such that <img src="./Attention Mechanism __files/latex(29).php" alt="sum a_j = 1" title="sum a_j = 1" class="latex" width="75" height="17" srcset="https://s0.wp.com/latex.php?latex=sum+a_j+%3D+1&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">, and all hidden states <img src="./Attention Mechanism __files/latex(27).php" alt="h_j" title="h_j" class="latex" width="14" height="16" srcset="https://s0.wp.com/latex.php?latex=h_j&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> contribute to the decoding with weight <img src="./Attention Mechanism __files/latex(28).php" alt="a_j" title="a_j" class="latex" width="14" height="12" srcset="https://s0.wp.com/latex.php?latex=a_j&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">.</p>
+<p>In our case, the attention mechanism is fully differentiable, and does not require any additional supervision, it is simply added on top of an existing Encoder-Decoder.</p>
+<p>This process can be seen as an alignment, because the network usually learns to focus on a single input word each time it produces an output word. This means that most of the attention weights are 0 (black) while a single one is activated (white). The image below shows the attention weights during the translation process, which reveals the alignment and makes it possible to interpret what the network has learnt (and this is usually a problem with RNNs!)</p>
+<p>&nbsp;</p>
+<div data-shortcode="caption" id="attachment_1477" style="width: 480px" class="wp-caption aligncenter"><a href="https://heuritech.files.wordpress.com/2016/01/alignment_badhanau.png" rel="attachment wp-att-1477"><img data-attachment-id="1477" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/alignment_badhanau/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/alignment_badhanau.png" data-orig-size="546,584" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="alignment_badhanau" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/alignment_badhanau.png?w=280" data-large-file="https://heuritech.files.wordpress.com/2016/01/alignment_badhanau.png?w=470&amp;h=503" class="size-large wp-image-1477 aligncenter" src="./Attention Mechanism __files/alignment_badhanau.png" alt="alignment_badhanau" width="470" height="503" srcset="https://heuritech.files.wordpress.com/2016/01/alignment_badhanau.png?w=470&amp;h=503 470w, https://heuritech.files.wordpress.com/2016/01/alignment_badhanau.png?w=140&amp;h=150 140w, https://heuritech.files.wordpress.com/2016/01/alignment_badhanau.png?w=280&amp;h=300 280w, https://heuritech.files.wordpress.com/2016/01/alignment_badhanau.png 546w" sizes="(max-width: 470px) 100vw, 470px"></a><p class="wp-caption-text">Word alignment in translation with an attention model. (Taken from [5])</p></div>
+<p>&nbsp;</p>
+<h3>Attention without Recurrent Neural Networks</h3>
+<p>Up to now, we only described attention models in an encoder-decoder framework (i.e. with RNNs). However, when the order of input does not matter, it is possible to consider independant hidden states <img src="./Attention Mechanism __files/latex(27).php" alt="h_j" title="h_j" class="latex" width="14" height="16" srcset="https://s0.wp.com/latex.php?latex=h_j&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. This is the case for instance in Raffel et Al [10], where the attention model is fully feed-forward. The same applies to the simple case of Memory Networks [6] (see next section).</p>
+<p>&nbsp;</p>
+<h3>From Attention to Memory Addressing</h3>
+<p>NIPS 2015 hosted a very interesting (and packed!) workshop called <a href="http://www.thespermwhale.com/jaseweston/ram/">RAM</a> for Reasoning, Attention and Memory. It included works on attention, but also the Memory Networks [6], Neural Turing Machines [7] or Differentiable Stack RNNs [8] and many others. These models all have in common that they use a form of external memory in which they can read (eventually write).</p>
+<p>Comparing and explaining these models is out of the scope of this post, but the the link between attention mechanism and memory is interesting. In Memory Networks for instance, we consider an external memory – a set of facts or sentences <img src="./Attention Mechanism __files/latex(17).php" alt="x_i" title="x_i" class="latex" width="13" height="10" srcset="https://s0.wp.com/latex.php?latex=x_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> – and an input <img src="./Attention Mechanism __files/latex(30).php" alt="q" title="q" class="latex" width="8" height="10" srcset="https://s0.wp.com/latex.php?latex=q&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2">. The network learns to address the memory, this means to select which fact <img src="./Attention Mechanism __files/latex(17).php" alt="x_i" title="x_i" class="latex" width="13" height="10" srcset="https://s0.wp.com/latex.php?latex=x_i&amp;bg=ffffff&amp;fg=444444&amp;s=0&amp;zoom=2 2x" scale="2"> to focus on to produce the answer. This corresponds exactly to an attention mechanism over the external memory. In Memory Networks, the only difference is that the soft selection of the facts (blue Embedding A in the image below) is decorrelated from the weighted sum of the embeddings of the facts (pink embedding C in the image). In Neural Turing Machine, and many very recent memory based QA models, a soft attention mechanism is used. These models will be the object of a following post.</p>
+<p>&nbsp;</p>
+<div data-shortcode="caption" id="attachment_1478" style="width: 534px" class="wp-caption aligncenter"><a href="https://heuritech.files.wordpress.com/2016/01/memnn.png" rel="attachment wp-att-1478"><img data-attachment-id="1478" data-permalink="https://blog.heuritech.com/2016/01/20/attention-mechanism/memnn/#main" data-orig-file="https://heuritech.files.wordpress.com/2016/01/memnn.png" data-orig-size="1644,917" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="memNN" data-image-description="" data-medium-file="https://heuritech.files.wordpress.com/2016/01/memnn.png?w=300" data-large-file="https://heuritech.files.wordpress.com/2016/01/memnn.png?w=524&amp;h=292" class=" wp-image-1478 aligncenter" src="./Attention Mechanism __files/memnn.png" alt="memNN" width="524" height="292" srcset="https://heuritech.files.wordpress.com/2016/01/memnn.png?w=524&amp;h=292 524w, https://heuritech.files.wordpress.com/2016/01/memnn.png?w=1048&amp;h=584 1048w, https://heuritech.files.wordpress.com/2016/01/memnn.png?w=150&amp;h=84 150w, https://heuritech.files.wordpress.com/2016/01/memnn.png?w=300&amp;h=167 300w, https://heuritech.files.wordpress.com/2016/01/memnn.png?w=768&amp;h=428 768w, https://heuritech.files.wordpress.com/2016/01/memnn.png?w=1024&amp;h=571 1024w" sizes="(max-width: 524px) 100vw, 524px"></a><p class="wp-caption-text">Memory Network. (Taken from [6])</p></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>Final Word</h3>
+<p>Attention mechanism and other fully differentiable addressable memory systems are extensively studied by many researchers right now. Even though they are still young and not implemented in real world systems, they showed that they can be used to beat the state-of-the-art in many problems where the encoder-decoder framework detained the previous record.</p>
+<p>At Heuritech, we became interested in attention mechanism a few month ago and organised a <a href="http://www.meetup.com/Deep-Learning-Paris-Meetup/events/226810046/">workshop</a> to get our hands dirty and code encoder-decoder with attention mechanism. While we do not use attention mechanism in production yet, we envision it to have an important role in advanced text understanding where some reasoning is necessary, in a similar manner as the recent work by Hermann et al [9].</p>
+<p>In a separate blog post, I will elaborate on what we’ve learnt during the workshop and the recent advances that were presented at the RAM workshop.</p>
+<p style="text-align:right;">
+</p><p style="text-align:right;">Léonard Blier et Charles Ollion</p>
+<h3>Acknowledgments</h3>
+<p>We thank Mickael Eickenberg and Olivier Grisel for their helpful remarks.</p>
+<p>&nbsp;</p>
+<h3>Bibliography</h3>
+<p>[1] Itti, Laurent, Christof Koch, and Ernst Niebur. «&nbsp;A model of saliency-based visual attention for rapid scene analysis.&nbsp;» <i>IEEE Transactions on Pattern Analysis &amp; Machine Intelligence</i> 11 (1998): 1254-1259.</p>
+<p>[2] Desimone, Robert, and John Duncan. «&nbsp;Neural mechanisms of selective visual attention.&nbsp;» <i>Annual review of neuroscience</i> 18.1 (1995): 193-222.</p>
+<p>[3] <span class="reference-text">Cho, Kyunghyun, Aaron Courville, and Yoshua Bengio. «&nbsp;Describing Multimedia Content using Attention-based Encoder–Decoder Networks.&nbsp;» arXiv preprint arXiv:1507.01053 (2015)</span></p>
+<p>[4] Xu, Kelvin, et al. «&nbsp;Show, attend and tell: Neural image caption generation with visual attention.&nbsp;» <i>arXiv preprint arXiv:1502.03044</i> (2015).</p>
+<p>[5] Bahdanau, Dzmitry, Kyunghyun Cho, and Yoshua Bengio. «&nbsp;Neural machine translation by jointly learning to align and translate.&nbsp;» <i>arXiv preprint arXiv:1409.0473</i> (2014).</p>
+<p>[6] Sukhbaatar, Sainbayar, Jason Weston, and Rob Fergus. «&nbsp;End-to-end memory networks.&nbsp;» <i>Advances in Neural Information Processing Systems</i>. (2015).</p>
+<p>[7] Graves, Alex, Greg Wayne, and Ivo Danihelka. «&nbsp;Neural Turing Machines.&nbsp;» <i>arXiv preprint arXiv:1410.5401</i> (2014).</p>
+<p>[8] Joulin, Armand, and Tomas Mikolov. «&nbsp;Inferring Algorithmic Patterns with Stack-Augmented Recurrent Nets.&nbsp;» <i>arXiv preprint arXiv:1503.01007</i> (2015).</p>
+<p>[9] Hermann, Karl Moritz, et al. «&nbsp;Teaching machines to read and comprehend.&nbsp;» <i>Advances in Neural Information Processing Systems</i>. 2015.</p>
+<p>[10] Raffel, Colin, and Daniel PW Ellis. «&nbsp;Feed-Forward Networks with Attention Can Solve Some Long-Term Memory Problems.&nbsp;» <i>arXiv preprint arXiv:1512.08756</i> (2015).</p>
+<div id="gs_cit0" class="gs_citr">[11] Vinyals, Oriol, et al. «&nbsp;Show and tell: A neural image caption generator.&nbsp;» <i>arXiv preprint arXiv:1411.4555</i> (2014).</div>
+<div class="gs_citr"></div>
+<div class="gs_citr"></div>
+<p>&nbsp;</p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Partager&nbsp;:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-1449" class="share-twitter sd-button share-icon no-text" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?share=twitter&amp;nb=1" target="_blank" title="Partager sur Twitter"><span></span><span class="sharing-screen-reader-text">Partager sur Twitter(ouvre dans une nouvelle fenêtre)</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-1449" class="share-facebook sd-button share-icon no-text" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?share=facebook&amp;nb=1" target="_blank" title="Partager sur Facebook"><span><span class="share-count">22</span></span><span class="sharing-screen-reader-text">Partager sur Facebook(ouvre dans une nouvelle fenêtre)<span class="share-count">22</span></span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-1449" class="share-linkedin sd-button share-icon no-text" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?share=linkedin&amp;nb=1" target="_blank" title="Cliquez pour partager sur LinkedIn"><span></span><span class="sharing-screen-reader-text">Cliquez pour partager sur LinkedIn(ouvre dans une nouvelle fenêtre)</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-1449" class="share-google-plus-1 sd-button share-icon no-text" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?share=google-plus-1&amp;nb=1" target="_blank" title="Cliquez pour partager sur Google+"><span></span><span class="sharing-screen-reader-text">Cliquez pour partager sur Google+(ouvre dans une nouvelle fenêtre)</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon no-text" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?share=reddit&amp;nb=1" target="_blank" title="Partager sur Reddit"><span></span><span class="sharing-screen-reader-text">Partager sur Reddit(ouvre dans une nouvelle fenêtre)</span></a></li><li class="share-tumblr"><a rel="nofollow" data-shared="" class="share-tumblr sd-button share-icon no-text" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?share=tumblr&amp;nb=1" target="_blank" title="Cliquer pour partager sur Tumblr"><span></span><span class="sharing-screen-reader-text">Cliquer pour partager sur Tumblr(ouvre dans une nouvelle fenêtre)</span></a></li><li class="share-pinterest"><a rel="nofollow" data-shared="sharing-pinterest-1449" class="share-pinterest sd-button share-icon no-text" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?share=pinterest&amp;nb=1" target="_blank" title="Cliquez pour partager sur Pinterest"><span></span><span class="sharing-screen-reader-text">Cliquez pour partager sur Pinterest(ouvre dans une nouvelle fenêtre)</span></a></li><li class="share-email share-service-visible"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon no-text" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?share=email&amp;nb=1" target="_blank" title="Click to email"><span></span><span class="sharing-screen-reader-text">Click to email(ouvre dans une nouvelle fenêtre)</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon no-text" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#print" target="_blank" title="Cliquer pour imprimer"><span></span><span class="sharing-screen-reader-text">Cliquer pour imprimer(ouvre dans une nouvelle fenêtre)</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-85233566-1449-58fd904555459" data-src="//widgets.wp.com/likes/#blog_id=85233566&amp;post_id=1449&amp;origin=heuritech.wordpress.com&amp;obj_id=85233566-1449-58fd904555459" data-name="like-post-frame-85233566-1449-58fd904555459"><h3 class="sd-title">WordPress:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>J'aime</span></span> <span class="loading">chargement…</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-85233566-1449-58fd904555459" height="55px" width="100%" frameborder="0" src="./Attention Mechanism __files/saved_resource.html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Sur le même thème</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-visual"><div class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-thumbs" data-post-id="2621" data-post-format="false"><a class="jp-relatedposts-post-a" href="https://blog.heuritech.com/2016/04/15/knowledge-extraction-from-unstructured-texts/" title="Knowledge extraction from unstructured texts
+
+Foreword There is an unreasonable amount of information that can be extracted from what people publicly say on the internet. At Heuritech we use this information to better understand what people want, which products they like and why. This post explains from a scientific point of view what is Knowledge…" rel="nofollow" data-origin="1449" data-position="0"><img class="jp-relatedposts-post-img" src="./Attention Mechanism __files/graph.png" width="350" alt="Knowledge extraction from unstructured texts" scale="0"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://blog.heuritech.com/2016/04/15/knowledge-extraction-from-unstructured-texts/" title="Knowledge extraction from unstructured texts
+
+Foreword There is an unreasonable amount of information that can be extracted from what people publicly say on the internet. At Heuritech we use this information to better understand what people want, which products they like and why. This post explains from a scientific point of view what is Knowledge…" rel="nofollow" data-origin="1449" data-position="0">Knowledge extraction from unstructured texts</a></h4><p class="jp-relatedposts-post-excerpt">Foreword There is an unreasonable amount of information that can be extracted from what people publicly say on the internet. At Heuritech we use this information to better understand what people want, which products they like and why. This post explains from a scientific point of view what is Knowledge…</p><p class="jp-relatedposts-post-context">Dans "Machine Learning"</p></div><div class="jp-relatedposts-post jp-relatedposts-post1 jp-relatedposts-post-thumbs" data-post-id="1396" data-post-format="false"><a class="jp-relatedposts-post-a" href="https://blog.heuritech.com/2015/12/01/learning-to-link-images-with-their-descriptions/" title="Learning to link images with their descriptions
+
+In this blog post, we will present an introduction to recent advances in multimodal information retrieval and conditional language models. In other words, it will be about machine learning, dealing with both image and textual data. Everything written here is the ground and absolute truth, gated by the understanding of…" rel="nofollow" data-origin="1449" data-position="1"><img class="jp-relatedposts-post-img" src="./Attention Mechanism __files/img5.png" width="350" alt="Learning to link images with their descriptions" scale="0"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://blog.heuritech.com/2015/12/01/learning-to-link-images-with-their-descriptions/" title="Learning to link images with their descriptions
+
+In this blog post, we will present an introduction to recent advances in multimodal information retrieval and conditional language models. In other words, it will be about machine learning, dealing with both image and textual data. Everything written here is the ground and absolute truth, gated by the understanding of…" rel="nofollow" data-origin="1449" data-position="1">Learning to link images with their descriptions</a></h4><p class="jp-relatedposts-post-excerpt">In this blog post, we will present an introduction to recent advances in multimodal information retrieval and conditional language models. In other words, it will be about machine learning, dealing with both image and textual data. Everything written here is the ground and absolute truth, gated by the understanding of…</p><p class="jp-relatedposts-post-context">Dans "Machine Learning"</p></div><div class="jp-relatedposts-post jp-relatedposts-post2 jp-relatedposts-post-thumbs" data-post-id="2325" data-post-format="false"><a class="jp-relatedposts-post-a" href="https://blog.heuritech.com/2016/03/02/yann-lecun-lectures-at-the-college-de-france-n3/" title="Yann Lecun lectures at the Collège de France n°3
+
+Last week, Heuritech&#39;s team was again attending Yann Lecun&#39;s lecture at the Collège de France.  It was followed by a talk of Yann Ollivier about optimization of neural networks. You can find a report of the course n°2 at : blog.heuritech.com/2016/02/24/yann-lecun-in-the-college-de-france-n2/ Architectures for Neural Networks : Yann Lecun Last week,…" rel="nofollow" data-origin="1449" data-position="2"><img class="jp-relatedposts-post-img" src="./Attention Mechanism __files/dscf0146.jpg" width="350" alt="Yann Lecun lectures at the Collège de France n°3" scale="0"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://blog.heuritech.com/2016/03/02/yann-lecun-lectures-at-the-college-de-france-n3/" title="Yann Lecun lectures at the Collège de France n°3
+
+Last week, Heuritech&#39;s team was again attending Yann Lecun&#39;s lecture at the Collège de France.  It was followed by a talk of Yann Ollivier about optimization of neural networks. You can find a report of the course n°2 at : blog.heuritech.com/2016/02/24/yann-lecun-in-the-college-de-france-n2/ Architectures for Neural Networks : Yann Lecun Last week,…" rel="nofollow" data-origin="1449" data-position="2">Yann Lecun lectures at the Collège de France n°3</a></h4><p class="jp-relatedposts-post-excerpt">Last week, Heuritech's team was again attending Yann Lecun's lecture at the Collège de France.&nbsp; It was followed by a talk of Yann Ollivier about optimization of neural networks. You can find a report of the course n°2 at : blog.heuritech.com/2016/02/24/yann-lecun-in-the-college-de-france-n2/ Architectures for Neural Networks : Yann Lecun Last week,…</p><p class="jp-relatedposts-post-context">Dans "Heuritech événements"</p></div></div></div></div>			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">Étiquettes&nbsp;: <a href="https://blog.heuritech.com/tag/artificial-intelligence/" rel="tag">artificial intelligence</a>, <a href="https://blog.heuritech.com/tag/attention-model/" rel="tag">attention model</a>, <a href="https://blog.heuritech.com/tag/deep-learning/" rel="tag">deep learning</a>, <a href="https://blog.heuritech.com/tag/image-captioning/" rel="tag">image captioning</a></footer></article><!-- #post-1449 -->
+
+				
+					<nav role="navigation" id="nav-below" class="site-navigation post-navigation clear-fix">
+		<h1 class="assistive-text">Navigation des articles</h1>
+
+	
+		<div class="nav-previous"><a href="https://blog.heuritech.com/2015/12/01/learning-to-link-images-with-their-descriptions/" rel="prev"><span class="meta-nav">←</span> Learning to link images with their descriptions</a></div>		<div class="nav-next"><a href="https://blog.heuritech.com/2016/02/08/an-introduction-to-deep-learning-at-corps-des-mines/" rel="next">An introduction to deep learning at Corps des Mines <span class="meta-nav">→</span></a></div>
+	
+	</nav><!-- #nav-below -->
+	
+				
+	
+	<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			 8 réponses à “<span>Attention Mechanism</span>”		</h2>
+
+		<ol class="commentlist">
+				<li class="post pingback">
+		<p>Pingback:  <a href="http://blog.themusio.com/2016/03/25/attentionmemory-in-deep-learning/" rel="external nofollow" class="url">Attention/Memory in Deep Learning | Musio Blog</a><span class="sep">·</span></p>
+	</li><!-- #comment-## -->
+	<li class="comment byuser comment-author-asceticfool even thread-even depth-1 highlander-comment" id="li-comment-2400">
+		<article id="comment-2400" class="comment">
+			<footer>
+				<div class="comment-meta commentmetadata">
+					<img alt="" src="./Attention Mechanism __files/d10585c8007c9b4c945f89d8d52c5c07" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" originals="40" src-orig="https://1.gravatar.com/avatar/d10585c8007c9b4c945f89d8d52c5c07?s=40&amp;d=retro&amp;r=G" scale="2" id="grav-d10585c8007c9b4c945f89d8d52c5c07-0">
+					<span class="comment-author vcard">
+						<cite class="fn">chaser999</cite>					</span>
+
+					<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#comment-2400" class="comment-date"><time pubdate="" datetime="2016-06-07T20:37:02+00:00">7 juin 2016 à 20 h 37 min</time></a>
+					<span class="sep">·</span>
+										<span class="sep">·</span>
+					<a rel="nofollow" class="comment-reply-link" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?replytocom=2400#respond" onclick="return addComment.moveForm( &quot;comment-2400&quot;, &quot;2400&quot;, &quot;respond&quot;, &quot;1449&quot; )" aria-label="Répondre à chaser999">Répondre</a> →				</div><!-- .comment-meta .commentmetadata -->
+							</footer>
+			<div class="comment-content"><p>excellent explaination!</p>
+<p id="comment-like-2400" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?like_comment=2400&amp;_wpnonce=4058a7bd1d" class="comment-like-link needs-login" rel="nofollow" data-blog="85233566"><span>J'aime</span></a><span id="comment-like-count-2400" class="comment-like-feedback">J'aime</span></p>
+</div>
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="post pingback">
+		<p>Pingback:  <a href="https://badripatro.wordpress.com/2016/07/31/visual-question-answer/" rel="external nofollow" class="url">Visual Question Answer – badripatro</a><span class="sep">·</span></p>
+	</li><!-- #comment-## -->
+	<li class="post pingback">
+		<p>Pingback:  <a href="http://www.ccri.com/2016/11/10/explainable-artificial-intelligence-xai/" rel="external nofollow" class="url">Explainable Artificial Intelligence (XAI) - CCRi</a><span class="sep">·</span></p>
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-3215">
+		<article id="comment-3215" class="comment">
+			<footer>
+				<div class="comment-meta commentmetadata">
+					<img alt="" src="./Attention Mechanism __files/72cf61db8b41eb0cc7adbb32ec450b46" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" originals="40" src-orig="https://1.gravatar.com/avatar/72cf61db8b41eb0cc7adbb32ec450b46?s=40&amp;d=retro&amp;r=G" scale="2" id="grav-72cf61db8b41eb0cc7adbb32ec450b46-0">
+					<span class="comment-author vcard">
+						<cite class="fn">Léo Vetter</cite>					</span>
+
+					<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#comment-3215" class="comment-date"><time pubdate="" datetime="2016-11-16T11:34:33+00:00">16 novembre 2016 à 11 h 34 min</time></a>
+					<span class="sep">·</span>
+										<span class="sep">·</span>
+					<a rel="nofollow" class="comment-reply-link" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?replytocom=3215#respond" onclick="return addComment.moveForm( &quot;comment-3215&quot;, &quot;3215&quot;, &quot;respond&quot;, &quot;1449&quot; )" aria-label="Répondre à Léo Vetter">Répondre</a> →				</div><!-- .comment-meta .commentmetadata -->
+							</footer>
+			<div class="comment-content"><p>nice tuto ! thanks</p>
+<p id="comment-like-3215" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/?like_comment=3215&amp;_wpnonce=6dcbc46e06" class="comment-like-link needs-login" rel="nofollow" data-blog="85233566"><span>J'aime</span></a><span id="comment-like-count-3215" class="comment-like-feedback">J'aime</span></p>
+</div>
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="post pingback">
+		<p>Pingback:  <a href="https://badripatro.wordpress.com/2016/08/20/word-embedding/" rel="external nofollow" class="url">Word Embedding – badripatro</a><span class="sep">·</span></p>
+	</li><!-- #comment-## -->
+	<li class="post pingback">
+		<p>Pingback:  <a href="http://dasuma.es/es/make-language-translator-intro-deep-learning/" rel="external nofollow" class="url">How to Make a Language Translator - Intro to Deep Learning - Data Super Market</a><span class="sep">·</span></p>
+	</li><!-- #comment-## -->
+	<li class="post pingback">
+		<p>Pingback:  <a href="http://woodenguild.com/how-to-make-a-language-translator-intro-to-deep-learning-11/" rel="external nofollow" class="url">| How to Make a Language Translator – Intro to Deep Learning #11</a><span class="sep">·</span></p>
+	</li><!-- #comment-## -->
+		</ol>
+
+		
+	
+	
+		<div id="respond" class="comment-respond js">
+		<h3 id="reply-title" class="comment-reply-title">Laisser un commentaire <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#respond" style="display:none;">Annuler la réponse.</a></small></h3>			<form action="https://blog.heuritech.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="ca9da9d4aa"><input type="hidden" name="_wp_http_referer" value="/2016/01/20/attention-mechanism/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none solid rgba(0, 0, 0, 0.701961); word-spacing: 0px; text-indent: 0px; line-height: 24.5px; width: 448px;" class="autosizejs "></textarea><textarea id="comment" name="comment" title="Entrez votre commentaire..." placeholder="Entrez votre commentaire..." style="height: 44px; overflow: hidden; word-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+
+	<div id="comment-form-nascar">
+		<p>Entrez vos coordonnées ci-dessous ou cliquez sur une icône pour vous connecter:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#comment-form-guest" id="postas-guest" title="Visiteur">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+		</li></ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="./Attention Mechanism __files/ad516503a11cd5ca435acc9bb6523536" alt="Gravatar" width="25" class="no-grav" originals="25" src-orig="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=retro&amp;forcedefault=y&amp;r=G" scale="2">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Adresse de messagerie <span class="required">(obligatoire)</span> <span class="nopublish">(adresse strictement confidentielle)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Nom <span class="required">(obligatoire)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Site web</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value=""></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Attention Mechanism __files/ad516503a11cd5ca435acc9bb6523536(1)" alt="Logo WordPress.com" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> Vous commentez à l'aide de votre compte WordPress.com. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;wordpress&#39; );">Déconnexion</a>&nbsp;/&nbsp;<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Changer</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Attention Mechanism __files/ad516503a11cd5ca435acc9bb6523536(1)" alt="Image Twitter" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> Vous commentez à l'aide de votre compte Twitter. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;twitter&#39; );">Déconnexion</a>&nbsp;/&nbsp;<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Changer</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Attention Mechanism __files/ad516503a11cd5ca435acc9bb6523536(1)" alt="Photo Facebook" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> Vous commentez à l'aide de votre compte Facebook. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;facebook&#39; );">Déconnexion</a>&nbsp;/&nbsp;<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Changer</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Attention Mechanism __files/ad516503a11cd5ca435acc9bb6523536(1)" alt="Photo Google+" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> Vous commentez à l'aide de votre compte Google+. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;googleplus&#39; );">Déconnexion</a>&nbsp;/&nbsp;<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Changer</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Annuler</a></div>
+		<p>Connexion à %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Avertissez-moi par email des nouveaux commentaires.</label></p><p class="post-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto;"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog" style="display: inline;">Avertissez-moi par email des nouveaux articles.</label></p></div>
+
+
+
+
+<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Laisser un commentaire"> <input type="hidden" name="comment_post_ID" value="1449" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="5add98ea1a"></p>
+<input type="hidden" name="genseq" value="1493012549">
+<p style="display: none;"></p>			<input type="hidden" id="ak_js" name="ak_js" value="1493012551182"></form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>
+</div><!-- #comments .comments-area -->
+			
+			</div><!-- #content -->
+		</div><!-- #primary .site-content -->
+
+<div id="secondary" class="clear-fix" role="complementary">
+
+
+	<div class="widget-area" role="complementary">
+
+	
+	<aside id="search-4" class="widget widget_search">	<form method="get" id="searchform" action="https://blog.heuritech.com/" role="search">
+		<label for="s" class="assistive-text">Recherche</label>
+		<input type="text" class="field" name="s" id="s" placeholder="Recherche …">
+		<input type="submit" class="submit" name="submit" id="searchsubmit" value="Recherche">
+	</form></aside><aside id="blog_subscription-2" class="widget widget_blog_subscription"><h1 class="widgettitle"><label for="subscribe-field">S'abonner au blog</label></h1>
+				<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="subscribe-blog">
+											<p>Entrez votre adresse mail pour suivre ce blog et être notifié par email des nouvelles publications.</p>
+<p>Rejoignez 168 autres abonnés</p>
+						<p><input type="text" name="email" style="width: 95%; padding: 1px 2px" placeholder="Entrez votre adresse e-mail" value="" id="subscribe-field"></p>
+					
+					<p>
+						<input type="hidden" name="action" value="subscribe">
+						<input type="hidden" name="blog_id" value="85233566">
+						<input type="hidden" name="source" value="https://blog.heuritech.com/2016/01/20/attention-mechanism/">
+						<input type="hidden" name="sub-type" value="widget">
+						<input type="hidden" name="redirect_fragment" value="blog_subscription-2">
+						<input type="hidden" id="_wpnonce" name="_wpnonce" value="faf91e125c">						<input type="submit" value="Suivre">
+					</p>
+				</form>
+			
+</aside><aside id="linkcat-1356" class="widget widget_links"><h1 class="widgettitle">Liens</h1>
+	<ul class="xoxo blogroll">
+<li><a href="https://www.youtube.com/channel/UCF65w-sGTJfDI3WarFwTpwg" title="Retrouvez toutes les videos de nos meetup, workshop…" target="_blank">Notre chaîne Youtube</a></li>
+<li><a href="https://www.facebook.com/heuritech" title="Venez rejoindre les Likeurs de notre page Facebook !" target="_blank">Notre page Facebook</a></li>
+<li><a href="https://twitter.com/heuritechdata" title="Pour plus d’actu et pour nous retwitter !" target="_blank">Notre page Twitter</a></li>
+<li><a href="http://www.heuritech.com/" target="_blank">Notre site corporate</a></li>
+
+	</ul>
+</aside>
+<aside id="categories-4" class="widget widget_categories"><h1 class="widgettitle">Catégories</h1>		<ul>
+	<li class="cat-item cat-item-2075170"><a href="https://blog.heuritech.com/category/big-data/">Big Data</a>
+</li>
+	<li class="cat-item cat-item-333092824"><a href="https://blog.heuritech.com/category/heuritech-evenements/">Heuritech événements</a>
+</li>
+	<li class="cat-item cat-item-333092847"><a href="https://blog.heuritech.com/category/heuritech-inside/">Heuritech inside</a>
+</li>
+	<li class="cat-item cat-item-333092863"><a href="https://blog.heuritech.com/category/heuritech-news/">Heuritech news</a>
+</li>
+	<li class="cat-item cat-item-333092935"><a href="https://blog.heuritech.com/category/heuritech-temoignages/">Heuritech témoignages</a>
+</li>
+	<li class="cat-item cat-item-40978"><a href="https://blog.heuritech.com/category/machine-learning/">Machine Learning</a>
+</li>
+	<li class="cat-item cat-item-6325"><a href="https://blog.heuritech.com/category/non-classe/">Non classé</a>
+</li>
+	<li class="cat-item cat-item-249014"><a href="https://blog.heuritech.com/category/open-data/">Open Data</a>
+</li>
+	<li class="cat-item cat-item-26024"><a href="https://blog.heuritech.com/category/rd/">R&amp;D</a>
+</li>
+	<li class="cat-item cat-item-19502"><a href="https://blog.heuritech.com/category/techno/">Techno</a>
+</li>
+	<li class="cat-item cat-item-333092735"><a href="https://blog.heuritech.com/category/tests-et-benchmark/">Tests et benchmark</a>
+</li>
+	<li class="cat-item cat-item-333221771"><a href="https://blog.heuritech.com/category/tuto-et-rex/">Tuto et REX</a>
+</li>
+		</ul>
+</aside><aside id="wp_tag_cloud-2" class="widget wp_widget_tag_cloud"><h1 class="widgettitle">Mots-clés</h1><div style="overflow:hidden"><a href="https://blog.heuritech.com/tag/accelerator/" class="tag-link-264453 tag-link-position-1" title="2 sujets" style="font-size: 9.7260273972603pt;">accelerator</a>
+<a href="https://blog.heuritech.com/tag/algorithmes-genetiques/" class="tag-link-137342255 tag-link-position-2" title="1 sujet" style="font-size: 8pt;">algorithmes génétiques</a>
+<a href="https://blog.heuritech.com/tag/amazon/" class="tag-link-6602 tag-link-position-3" title="2 sujets" style="font-size: 9.7260273972603pt;">amazon</a>
+<a href="https://blog.heuritech.com/tag/analyse-predictive/" class="tag-link-32650690 tag-link-position-4" title="1 sujet" style="font-size: 8pt;">analyse prédictive</a>
+<a href="https://blog.heuritech.com/tag/analytics/" class="tag-link-11453 tag-link-position-5" title="2 sujets" style="font-size: 9.7260273972603pt;">analytics</a>
+<a href="https://blog.heuritech.com/tag/apache/" class="tag-link-3768 tag-link-position-6" title="2 sujets" style="font-size: 9.7260273972603pt;">apache</a>
+<a href="https://blog.heuritech.com/tag/artificial-intelligence/" class="tag-link-12374 tag-link-position-7" title="9 sujets" style="font-size: 14.712328767123pt;">artificial intelligence</a>
+<a href="https://blog.heuritech.com/tag/attention-model/" class="tag-link-393254000 tag-link-position-8" title="1 sujet" style="font-size: 8pt;">attention model</a>
+<a href="https://blog.heuritech.com/tag/aws/" class="tag-link-144203 tag-link-position-9" title="3 sujets" style="font-size: 10.876712328767pt;">AWS</a>
+<a href="https://blog.heuritech.com/tag/beauty/" class="tag-link-1885 tag-link-position-10" title="2 sujets" style="font-size: 9.7260273972603pt;">beauty</a>
+<a href="https://blog.heuritech.com/tag/benchmark/" class="tag-link-31419 tag-link-position-11" title="1 sujet" style="font-size: 8pt;">benchmark</a>
+<a href="https://blog.heuritech.com/tag/big-data-2/" class="tag-link-46197788 tag-link-position-12" title="23 sujets" style="font-size: 18.356164383562pt;">big data</a>
+<a href="https://blog.heuritech.com/tag/bnp/" class="tag-link-163291 tag-link-position-13" title="2 sujets" style="font-size: 9.7260273972603pt;">bnp</a>
+<a href="https://blog.heuritech.com/tag/c/" class="tag-link-2426 tag-link-position-14" title="1 sujet" style="font-size: 8pt;">c++</a>
+<a href="https://blog.heuritech.com/tag/cassandra/" class="tag-link-566348 tag-link-position-15" title="2 sujets" style="font-size: 9.7260273972603pt;">cassandra</a>
+<a href="https://blog.heuritech.com/tag/centos/" class="tag-link-134600 tag-link-position-16" title="1 sujet" style="font-size: 8pt;">centos</a>
+<a href="https://blog.heuritech.com/tag/certification/" class="tag-link-11198 tag-link-position-17" title="1 sujet" style="font-size: 8pt;">certification</a>
+<a href="https://blog.heuritech.com/tag/challenge/" class="tag-link-19867 tag-link-position-18" title="1 sujet" style="font-size: 8pt;">challenge</a>
+<a href="https://blog.heuritech.com/tag/cloud/" class="tag-link-69816 tag-link-position-19" title="1 sujet" style="font-size: 8pt;">cloud</a>
+<a href="https://blog.heuritech.com/tag/cluster/" class="tag-link-9868 tag-link-position-20" title="1 sujet" style="font-size: 8pt;">cluster</a>
+<a href="https://blog.heuritech.com/tag/common-crawl/" class="tag-link-74756516 tag-link-position-21" title="1 sujet" style="font-size: 8pt;">common crawl</a>
+<a href="https://blog.heuritech.com/tag/convolutional-nets/" class="tag-link-341165110 tag-link-position-22" title="1 sujet" style="font-size: 8pt;">convolutional nets</a>
+<a href="https://blog.heuritech.com/tag/convolutional-neural-network/" class="tag-link-125262826 tag-link-position-23" title="4 sujets" style="font-size: 11.835616438356pt;">convolutional neural network</a>
+<a href="https://blog.heuritech.com/tag/crawling/" class="tag-link-109404 tag-link-position-24" title="1 sujet" style="font-size: 8pt;">crawling</a>
+<a href="https://blog.heuritech.com/tag/data-intelligence-platform/" class="tag-link-395749749 tag-link-position-25" title="1 sujet" style="font-size: 8pt;">data intelligence platform</a>
+<a href="https://blog.heuritech.com/tag/data-management-platform/" class="tag-link-53119392 tag-link-position-26" title="1 sujet" style="font-size: 8pt;">data management platform</a>
+<a href="https://blog.heuritech.com/tag/datamining/" class="tag-link-60423 tag-link-position-27" title="1 sujet" style="font-size: 8pt;">datamining</a>
+<a href="https://blog.heuritech.com/tag/data-science/" class="tag-link-21818323 tag-link-position-28" title="1 sujet" style="font-size: 8pt;">data science</a>
+<a href="https://blog.heuritech.com/tag/dataset/" class="tag-link-17799 tag-link-position-29" title="1 sujet" style="font-size: 8pt;">dataset</a>
+<a href="https://blog.heuritech.com/tag/deep-learning/" class="tag-link-1131271 tag-link-position-30" title="35 sujets" style="font-size: 20.082191780822pt;">deep learning</a>
+<a href="https://blog.heuritech.com/tag/dip/" class="tag-link-203126 tag-link-position-31" title="1 sujet" style="font-size: 8pt;">DIP</a>
+<a href="https://blog.heuritech.com/tag/dmp/" class="tag-link-542895 tag-link-position-32" title="3 sujets" style="font-size: 10.876712328767pt;">dmp</a>
+<a href="https://blog.heuritech.com/tag/ebg/" class="tag-link-1458665 tag-link-position-33" title="1 sujet" style="font-size: 8pt;">ebg</a>
+<a href="https://blog.heuritech.com/tag/eclipse/" class="tag-link-18466 tag-link-position-34" title="1 sujet" style="font-size: 8pt;">eclipse</a>
+<a href="https://blog.heuritech.com/tag/epitech/" class="tag-link-5317099 tag-link-position-35" title="1 sujet" style="font-size: 8pt;">epitech</a>
+<a href="https://blog.heuritech.com/tag/facebook/" class="tag-link-81819 tag-link-position-36" title="1 sujet" style="font-size: 8pt;">facebook</a>
+<a href="https://blog.heuritech.com/tag/fashion/" class="tag-link-3737 tag-link-position-37" title="3 sujets" style="font-size: 10.876712328767pt;">fashion</a>
+<a href="https://blog.heuritech.com/tag/films/" class="tag-link-1186 tag-link-position-38" title="1 sujet" style="font-size: 8pt;">films</a>
+<a href="https://blog.heuritech.com/tag/gpu/" class="tag-link-112287 tag-link-position-39" title="1 sujet" style="font-size: 8pt;">GPU</a>
+<a href="https://blog.heuritech.com/tag/grand-compte/" class="tag-link-23057667 tag-link-position-40" title="1 sujet" style="font-size: 8pt;">grand compte</a>
+<a href="https://blog.heuritech.com/tag/grand-groupe/" class="tag-link-20598553 tag-link-position-41" title="1 sujet" style="font-size: 8pt;">grand groupe</a>
+<a href="https://blog.heuritech.com/tag/groupe-la-poste/" class="tag-link-12035507 tag-link-position-42" title="8 sujets" style="font-size: 14.232876712329pt;">groupe la poste</a>
+<a href="https://blog.heuritech.com/tag/hackathon/" class="tag-link-99959 tag-link-position-43" title="2 sujets" style="font-size: 9.7260273972603pt;">hackathon</a>
+<a href="https://blog.heuritech.com/tag/hadoop/" class="tag-link-3251196 tag-link-position-44" title="1 sujet" style="font-size: 8pt;">hadoop</a>
+<a href="https://blog.heuritech.com/tag/heuritech/" class="tag-link-332293525 tag-link-position-45" title="57 sujets" style="font-size: 22pt;">heuritech</a>
+<a href="https://blog.heuritech.com/tag/heuritechapi/" class="tag-link-398002953 tag-link-position-46" title="1 sujet" style="font-size: 8pt;">heuritechapi</a>
+<a href="https://blog.heuritech.com/tag/heuritechdip/" class="tag-link-395749735 tag-link-position-47" title="2 sujets" style="font-size: 9.7260273972603pt;">HeuritechDIP</a>
+<a href="https://blog.heuritech.com/tag/icml/" class="tag-link-1712812 tag-link-position-48" title="1 sujet" style="font-size: 8pt;">ICML</a>
+<a href="https://blog.heuritech.com/tag/image-captioning/" class="tag-link-3077639 tag-link-position-49" title="1 sujet" style="font-size: 8pt;">image captioning</a>
+<a href="https://blog.heuritech.com/tag/image-classification/" class="tag-link-8155030 tag-link-position-50" title="2 sujets" style="font-size: 9.7260273972603pt;">image classification</a>
+<a href="https://blog.heuritech.com/tag/innovation/" class="tag-link-186 tag-link-position-51" title="1 sujet" style="font-size: 8pt;">innovation</a>
+<a href="https://blog.heuritech.com/tag/inria/" class="tag-link-118337 tag-link-position-52" title="4 sujets" style="font-size: 11.835616438356pt;">inria</a>
+<a href="https://blog.heuritech.com/tag/intelligence-artificielle/" class="tag-link-134004 tag-link-position-53" title="1 sujet" style="font-size: 8pt;">intelligence artificielle</a>
+<a href="https://blog.heuritech.com/tag/ipython-notebook/" class="tag-link-85077607 tag-link-position-54" title="2 sujets" style="font-size: 9.7260273972603pt;">IPython notebook</a>
+<a href="https://blog.heuritech.com/tag/lecun/" class="tag-link-68570677 tag-link-position-55" title="2 sujets" style="font-size: 9.7260273972603pt;">lecun</a>
+<a href="https://blog.heuritech.com/tag/lip6/" class="tag-link-25451386 tag-link-position-56" title="2 sujets" style="font-size: 9.7260273972603pt;">lip6</a>
+<a href="https://blog.heuritech.com/tag/louisvuitton/" class="tag-link-2265964 tag-link-position-57" title="1 sujet" style="font-size: 8pt;">louisvuitton</a>
+<a href="https://blog.heuritech.com/tag/machine-learning-2/" class="tag-link-34964372 tag-link-position-58" title="22 sujets" style="font-size: 18.164383561644pt;">machine learning</a>
+<a href="https://blog.heuritech.com/tag/map-reduce/" class="tag-link-2536815 tag-link-position-59" title="1 sujet" style="font-size: 8pt;">map Reduce</a>
+<a href="https://blog.heuritech.com/tag/marketing/" class="tag-link-175 tag-link-position-60" title="1 sujet" style="font-size: 8pt;">marketing</a>
+<a href="https://blog.heuritech.com/tag/matthieu-cord/" class="tag-link-146465055 tag-link-position-61" title="2 sujets" style="font-size: 9.7260273972603pt;">matthieu cord</a>
+<a href="https://blog.heuritech.com/tag/meetup/" class="tag-link-27138 tag-link-position-62" title="20 sujets" style="font-size: 17.780821917808pt;">meetup</a>
+<a href="https://blog.heuritech.com/tag/mongodb/" class="tag-link-21954763 tag-link-position-63" title="1 sujet" style="font-size: 8pt;">mongodb</a>
+<a href="https://blog.heuritech.com/tag/multimodal-embadding/" class="tag-link-425166751 tag-link-position-64" title="1 sujet" style="font-size: 8pt;">multimodal embadding</a>
+<a href="https://blog.heuritech.com/tag/mysql/" class="tag-link-4419 tag-link-position-65" title="1 sujet" style="font-size: 8pt;">mysql</a>
+<a href="https://blog.heuritech.com/tag/neural-network/" class="tag-link-61428 tag-link-position-66" title="2 sujets" style="font-size: 9.7260273972603pt;">neural network</a>
+<a href="https://blog.heuritech.com/tag/nlp/" class="tag-link-47433 tag-link-position-67" title="1 sujet" style="font-size: 8pt;">nlp</a>
+<a href="https://blog.heuritech.com/tag/nutch/" class="tag-link-233771 tag-link-position-68" title="2 sujets" style="font-size: 9.7260273972603pt;">nutch</a>
+<a href="https://blog.heuritech.com/tag/plotting/" class="tag-link-51966 tag-link-position-69" title="1 sujet" style="font-size: 8pt;">plotting</a>
+<a href="https://blog.heuritech.com/tag/predictive-model/" class="tag-link-12974348 tag-link-position-70" title="1 sujet" style="font-size: 8pt;">predictive model</a>
+<a href="https://blog.heuritech.com/tag/ramp/" class="tag-link-169938 tag-link-position-71" title="1 sujet" style="font-size: 8pt;">RAMP</a>
+<a href="https://blog.heuritech.com/tag/representation-learning/" class="tag-link-121288655 tag-link-position-72" title="2 sujets" style="font-size: 9.7260273972603pt;">representation learning</a>
+<a href="https://blog.heuritech.com/tag/research/" class="tag-link-668 tag-link-position-73" title="2 sujets" style="font-size: 9.7260273972603pt;">research</a>
+<a href="https://blog.heuritech.com/tag/retail/" class="tag-link-13879 tag-link-position-74" title="1 sujet" style="font-size: 8pt;">retail</a>
+<a href="https://blog.heuritech.com/tag/rex/" class="tag-link-431312 tag-link-position-75" title="2 sujets" style="font-size: 9.7260273972603pt;">rex</a>
+<a href="https://blog.heuritech.com/tag/running/" class="tag-link-1675 tag-link-position-76" title="6 sujets" style="font-size: 13.27397260274pt;">running</a>
+<a href="https://blog.heuritech.com/tag/salt/" class="tag-link-157421 tag-link-position-77" title="4 sujets" style="font-size: 11.835616438356pt;">salt</a>
+<a href="https://blog.heuritech.com/tag/sbt/" class="tag-link-130460 tag-link-position-78" title="1 sujet" style="font-size: 8pt;">SBT</a>
+<a href="https://blog.heuritech.com/tag/scala/" class="tag-link-312256 tag-link-position-79" title="5 sujets" style="font-size: 12.602739726027pt;">scala</a>
+<a href="https://blog.heuritech.com/tag/scrapy/" class="tag-link-9130163 tag-link-position-80" title="1 sujet" style="font-size: 8pt;">scrapy</a>
+<a href="https://blog.heuritech.com/tag/semantic/" class="tag-link-5655 tag-link-position-81" title="1 sujet" style="font-size: 8pt;">semantic</a>
+<a href="https://blog.heuritech.com/tag/spark/" class="tag-link-63429 tag-link-position-82" title="7 sujets" style="font-size: 13.753424657534pt;">spark</a>
+<a href="https://blog.heuritech.com/tag/sport/" class="tag-link-825 tag-link-position-83" title="7 sujets" style="font-size: 13.753424657534pt;">sport</a>
+<a href="https://blog.heuritech.com/tag/startinpost/" class="tag-link-252091338 tag-link-position-84" title="19 sujets" style="font-size: 17.58904109589pt;">start'inpost</a>
+<a href="https://blog.heuritech.com/tag/startup/" class="tag-link-4621 tag-link-position-85" title="29 sujets" style="font-size: 19.315068493151pt;">startup</a>
+<a href="https://blog.heuritech.com/tag/stn/" class="tag-link-101233 tag-link-position-86" title="1 sujet" style="font-size: 8pt;">stn</a>
+<a href="https://blog.heuritech.com/tag/semantique/" class="tag-link-557023 tag-link-position-87" title="1 sujet" style="font-size: 8pt;">sémantique</a>
+<a href="https://blog.heuritech.com/tag/team/" class="tag-link-8071 tag-link-position-88" title="8 sujets" style="font-size: 14.232876712329pt;">team</a>
+<a href="https://blog.heuritech.com/tag/techrun/" class="tag-link-2168175 tag-link-position-89" title="1 sujet" style="font-size: 8pt;">techrun</a>
+<a href="https://blog.heuritech.com/tag/theano/" class="tag-link-24787269 tag-link-position-90" title="1 sujet" style="font-size: 8pt;">theano</a>
+<a href="https://blog.heuritech.com/tag/top100/" class="tag-link-395905 tag-link-position-91" title="1 sujet" style="font-size: 8pt;">top100</a>
+<a href="https://blog.heuritech.com/tag/torch/" class="tag-link-44250 tag-link-position-92" title="1 sujet" style="font-size: 8pt;">torch</a>
+<a href="https://blog.heuritech.com/tag/training-sprint/" class="tag-link-197425673 tag-link-position-93" title="1 sujet" style="font-size: 8pt;">training sprint</a>
+<a href="https://blog.heuritech.com/tag/tutorial/" class="tag-link-2932 tag-link-position-94" title="6 sujets" style="font-size: 13.27397260274pt;">tutorial</a>
+<a href="https://blog.heuritech.com/tag/web-crawling/" class="tag-link-315710 tag-link-position-95" title="1 sujet" style="font-size: 8pt;">web crawling</a>
+<a href="https://blog.heuritech.com/tag/word2vec/" class="tag-link-191453409 tag-link-position-96" title="1 sujet" style="font-size: 8pt;">word2vec</a>
+<a href="https://blog.heuritech.com/tag/word-embeddings/" class="tag-link-228427683 tag-link-position-97" title="1 sujet" style="font-size: 8pt;">word embeddings</a>
+<a href="https://blog.heuritech.com/tag/workshop/" class="tag-link-19557 tag-link-position-98" title="3 sujets" style="font-size: 10.876712328767pt;">workshop</a>
+<a href="https://blog.heuritech.com/tag/worshop/" class="tag-link-1261418 tag-link-position-99" title="1 sujet" style="font-size: 8pt;">worshop</a>
+<a href="https://blog.heuritech.com/tag/yann-lecun/" class="tag-link-30706809 tag-link-position-100" title="5 sujets" style="font-size: 12.602739726027pt;">yann lecun</a></div></aside>
+	</div><!-- .widget-area -->
+
+</div><!-- #secondary --><div id="tertiary" class="widget-area" role="complementary">
+
+	
+	<aside id="top-posts-2" class="widget widget_top-posts"><h1 class="widgettitle">Articles Phares</h1><ul>				<li>
+										<a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/" class="bump-view" data-bump-view="tp">
+						Attention Mechanism					</a>
+									</li>
+							<li>
+										<a href="https://blog.heuritech.com/2017/04/11/began-state-of-the-art-generation-of-faces-with-generative-adversarial-networks/" class="bump-view" data-bump-view="tp">
+						BEGAN: State of the art generation of faces with Generative Adversarial Networks					</a>
+									</li>
+							<li>
+										<a href="https://blog.heuritech.com/2016/04/15/knowledge-extraction-from-unstructured-texts/" class="bump-view" data-bump-view="tp">
+						Knowledge extraction from unstructured texts					</a>
+									</li>
+							<li>
+										<a href="https://blog.heuritech.com/2015/05/22/choosing-a-web-crawler/" class="bump-view" data-bump-view="tp">
+						Choosing a web crawler					</a>
+									</li>
+							<li>
+										<a href="https://blog.heuritech.com/2016/02/29/a-brief-report-of-the-heuritech-deep-learning-meetup-5/" class="bump-view" data-bump-view="tp">
+						A brief report of the Heuritech Deep Learning Meetup #5					</a>
+									</li>
+							<li>
+										<a href="https://blog.heuritech.com/2016/04/26/pre-trained-convnets-and-object-localisation-in-keras/" class="bump-view" data-bump-view="tp">
+						Pre-trained Convnets and object localisation in Keras					</a>
+									</li>
+							<li>
+										<a href="https://blog.heuritech.com/2015/06/25/how-to-install-nutch-on-an-aws-ec2-cluster/" class="bump-view" data-bump-view="tp">
+						How to install Nutch on an AWS EC2 Cluster					</a>
+									</li>
+							<li>
+										<a href="https://blog.heuritech.com/2016/04/11/report-of-the-heuritech-deep-learning-meetup-6-with-yann-lecun/" class="bump-view" data-bump-view="tp">
+						Report of the Heuritech Deep Learning Meetup #6 with Yann LeCun					</a>
+									</li>
+							<li>
+										<a href="https://blog.heuritech.com/2014/11/14/big-data-apres-le-machine-learning-ne-ratons-pas-le-coche-du-deep-learning/" class="bump-view" data-bump-view="tp">
+						Big Data : après le Machine Learning, ne ratons pas le coche du Deep Learning					</a>
+									</li>
+			</ul></aside><aside id="twitter_timeline-2" class="widget widget_twitter_timeline"><h1 class="widgettitle">Suivez-nous sur Twitter</h1><iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-timeline twitter-timeline-rendered" style="position: static; visibility: visible; display: inline-block; width: 520px; height: 1000px; padding: 0px; border: none; max-width: 100%; min-width: 180px; margin-top: 0px; margin-bottom: 0px; min-height: 200px;" data-widget-id="571449260990685184" title="Twitter Timeline" src="./Attention Mechanism __files/saved_resource(8).html"></iframe></aside>
+</div><!-- #secondary .widget-area -->
+	</div><!-- #main -->
+
+	<div id="supplementary" class="clear-fix three">
+		<div id="footer-sidebar-one" class="widget-area" role="complementary">
+		<aside id="image-2" class="widget widget_image"><div style="overflow:hidden;"><img src="./Attention Mechanism __files/logo-heuritech.png" class="alignleft" width="250" height="57" scale="0"></div>
+</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><p>75 rue de la Roquette<br>
+75011 PARIS<br>
+01 83 56 01 15<br>
+info@heuritech.com<br>
+heuritech.com<br>
+RCS Paris B 794 196 055 </p>
+</div>
+		</aside><aside id="author_grid-2" class="widget widget_author_grid"><h1 class="widgettitle">Auteurs</h1><ul><li><a href="https://blog.heuritech.com/author/apriami/"> <img alt="" src="./Attention Mechanism __files/9021e743246c8c188389d1e0aa497b96" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://0.gravatar.com/avatar/9021e743246c8c188389d1e0aa497b96?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-9021e743246c8c188389d1e0aa497b96-0"></a></li><li><a href="https://blog.heuritech.com/author/ardparant/"> <img alt="" src="./Attention Mechanism __files/1f6b7e59d106ffcb8d5c44f327a6e107" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://1.gravatar.com/avatar/1f6b7e59d106ffcb8d5c44f327a6e107?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-1f6b7e59d106ffcb8d5c44f327a6e107-0"></a></li><li><a href="https://blog.heuritech.com/author/collion/"> <img alt="" src="./Attention Mechanism __files/a7e879261fe358b85ff0179c0efd6e24" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://1.gravatar.com/avatar/a7e879261fe358b85ff0179c0efd6e24?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-a7e879261fe358b85ff0179c0efd6e24-0"></a></li><li><a href="https://blog.heuritech.com/author/dmarin86/"> <img alt="" src="./Attention Mechanism __files/33219d852e0ddba702e891aa2507cb05" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://0.gravatar.com/avatar/33219d852e0ddba702e891aa2507cb05?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-33219d852e0ddba702e891aa2507cb05-0"></a></li><li><a href="https://blog.heuritech.com/author/felardosloris/"> <img alt="" src="./Attention Mechanism __files/5432112617a252e5fc76f1bfdafb2112" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://2.gravatar.com/avatar/5432112617a252e5fc76f1bfdafb2112?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-5432112617a252e5fc76f1bfdafb2112-0"></a></li><li><a href="https://blog.heuritech.com/author/hediby/"> <img alt="" src="./Attention Mechanism __files/8936536400cd5fca8319b325515f222e" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://2.gravatar.com/avatar/8936536400cd5fca8319b325515f222e?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-8936536400cd5fca8319b325515f222e-0"></a></li><li><a href="https://blog.heuritech.com/author/heuritech/"> <img alt="" src="./Attention Mechanism __files/937d9315e13c6884694d0b1d401f6236" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://0.gravatar.com/avatar/937d9315e13c6884694d0b1d401f6236?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-937d9315e13c6884694d0b1d401f6236-0"></a></li><li><a href="https://blog.heuritech.com/author/marinajems/"> <img alt="" src="./Attention Mechanism __files/08bf42786e25c25a819d85f3035c0320" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://0.gravatar.com/avatar/08bf42786e25c25a819d85f3035c0320?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-08bf42786e25c25a819d85f3035c0320-0"></a></li><li><a href="https://blog.heuritech.com/author/ramealex/"> <img alt="" src="./Attention Mechanism __files/4e74f20aefb083bbb285da39e114f90c" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://1.gravatar.com/avatar/4e74f20aefb083bbb285da39e114f90c?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-4e74f20aefb083bbb285da39e114f90c-0"></a></li><li><a href="https://blog.heuritech.com/author/tonelli2015/"> <img alt="" src="./Attention Mechanism __files/81a1bb58910e4fd9dcb7f05b9d6a0e62" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://2.gravatar.com/avatar/81a1bb58910e4fd9dcb7f05b9d6a0e62?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-81a1bb58910e4fd9dcb7f05b9d6a0e62-0"></a></li><li><a href="https://blog.heuritech.com/author/tpinville/"> <img alt="" src="./Attention Mechanism __files/9b4f5310236106cc22ad97da390e9769" class="avatar avatar-32 grav-hashed" height="32" width="32" originals="32" src-orig="https://0.gravatar.com/avatar/9b4f5310236106cc22ad97da390e9769?s=32&amp;d=retro&amp;r=G" scale="2" id="grav-9b4f5310236106cc22ad97da390e9769-0"></a></li></ul></aside><aside id="blog_subscription-3" class="widget widget_blog_subscription"><h1 class="widgettitle"><label for="subscribe-field-2">S'abonner au blog</label></h1>
+				<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="subscribe-blog-2">
+											<p>Entrez votre adresse mail pour suivre ce blog et être notifié par email des nouvelles publications.</p>
+<p>Rejoignez 168 autres abonnés</p>
+						<p><input type="text" name="email" style="width: 95%; padding: 1px 2px" placeholder="Entrez votre adresse e-mail" value="" id="subscribe-field-2"></p>
+					
+					<p>
+						<input type="hidden" name="action" value="subscribe">
+						<input type="hidden" name="blog_id" value="85233566">
+						<input type="hidden" name="source" value="https://blog.heuritech.com/2016/01/20/attention-mechanism/">
+						<input type="hidden" name="sub-type" value="widget">
+						<input type="hidden" name="redirect_fragment" value="blog_subscription-3">
+						<input type="hidden" id="_wpnonce" name="_wpnonce" value="faf91e125c">						<input type="submit" value="Suivre">
+					</p>
+				</form>
+			
+</aside><aside id="text-3" class="widget widget_text"><h1 class="widgettitle">CREDITS</h1>			<div class="textwidget">Photos : ©Ursine Schmitt ©Jaimy Corcos ©123RF</div>
+		</aside>	</div><!-- #first .widget-area -->
+	
+		<div id="footer-sidebar-two" class="widget-area" role="complementary">
+				<aside id="recent-posts-4" class="widget widget_recent_entries">		<h1 class="widgettitle">Articles récents</h1>		<ul>
+					<li>
+				<a href="https://blog.heuritech.com/2017/04/11/began-state-of-the-art-generation-of-faces-with-generative-adversarial-networks/">BEGAN: State of the art generation of faces with Generative Adversarial Networks</a>
+							<span class="post-date">11 avril 2017</span>
+						</li>
+					<li>
+				<a href="https://blog.heuritech.com/2017/02/08/heuritech-deep-learning-meetup-8-book-your-seats/">Heuritech Deep Learning Meetup #8, book your seats!</a>
+							<span class="post-date">8 février 2017</span>
+						</li>
+					<li>
+				<a href="https://blog.heuritech.com/2017/01/17/heuritech-deep-learning-expert-rises-11me-from-serena-capital-ba/">Heuritech, deep learning expert, raises 1,1M€ from Serena Capital &amp; BA</a>
+							<span class="post-date">17 janvier 2017</span>
+						</li>
+					<li>
+				<a href="https://blog.heuritech.com/2017/01/16/heuritech-launches-an-ai-solution-for-fashion-beauty/">Heuritech launches an Ai solution for Fashion &amp; Beauty!</a>
+							<span class="post-date">16 janvier 2017</span>
+						</li>
+					<li>
+				<a href="https://blog.heuritech.com/2017/01/05/lia-pour-detecter-les-tendances-de-demain-linterview-de-tony-pinville-sur-milkshakevalley/">L’iA pour détecter les tendances de demain: l’interview de Tony Pinville sur MilkshakeValley</a>
+							<span class="post-date">5 janvier 2017</span>
+						</li>
+					<li>
+				<a href="https://blog.heuritech.com/2016/11/03/heuritech-deep-learning-meetup-7-more-than-100-attendees-for-convolutionnal-neural-networks/">Heuritech Deep Learning Meetup #7: more than 100 attendees for convolutionnal neural networks</a>
+							<span class="post-date">3 novembre 2016</span>
+						</li>
+					<li>
+				<a href="https://blog.heuritech.com/2016/04/26/pre-trained-convnets-and-object-localisation-in-keras/">Pre-trained Convnets and object localisation in Keras</a>
+							<span class="post-date">26 avril 2016</span>
+						</li>
+					<li>
+				<a href="https://blog.heuritech.com/2016/04/19/start-up-francaises-en-ia-heuritech-sappuie-sur-force-machine-et-deep-learning-par-frenchweb/">Start-up françaises en iA : Heuritech s’appuie sur force machine et deep learning ! Par FrenchWeb</a>
+							<span class="post-date">19 avril 2016</span>
+						</li>
+					<li>
+				<a href="https://blog.heuritech.com/2016/04/15/knowledge-extraction-from-unstructured-texts/">Knowledge extraction from unstructured texts</a>
+							<span class="post-date">15 avril 2016</span>
+						</li>
+					<li>
+				<a href="https://blog.heuritech.com/2016/04/12/heuritech-deep-learning-meetup-6-all-the-talks-are-on-line/">Heuritech Deep Learning Meetup #6: all the talks are on line</a>
+							<span class="post-date">12 avril 2016</span>
+						</li>
+				</ul>
+		</aside>			</div><!-- #second .widget-area -->
+	
+		<div id="footer-sidebar-three" class="widget-area" role="complementary">
+		<aside id="rss_links-2" class="widget widget_rss_links"><h1 class="widgettitle">Flus RSS</h1><ul><li><a href="https://blog.heuritech.com/feed/" title="S’abonner à Articles">RSS - Articles</a></li><li><a href="https://blog.heuritech.com/comments/feed/" title="S’abonner à Commentaires">RSS - Commentaires</a></li></ul>
+</aside><aside id="archives-4" class="widget widget_archive"><h1 class="widgettitle">Archives</h1>		<ul>
+			<li><a href="https://blog.heuritech.com/2017/04/">avril 2017</a></li>
+	<li><a href="https://blog.heuritech.com/2017/02/">février 2017</a></li>
+	<li><a href="https://blog.heuritech.com/2017/01/">janvier 2017</a></li>
+	<li><a href="https://blog.heuritech.com/2016/11/">novembre 2016</a></li>
+	<li><a href="https://blog.heuritech.com/2016/04/">avril 2016</a></li>
+	<li><a href="https://blog.heuritech.com/2016/03/">mars 2016</a></li>
+	<li><a href="https://blog.heuritech.com/2016/02/">février 2016</a></li>
+	<li><a href="https://blog.heuritech.com/2016/01/">janvier 2016</a></li>
+	<li><a href="https://blog.heuritech.com/2015/12/">décembre 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/11/">novembre 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/10/">octobre 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/09/">septembre 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/08/">août 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/07/">juillet 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/06/">juin 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/05/">mai 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/04/">avril 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/03/">mars 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/02/">février 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2015/01/">janvier 2015</a></li>
+	<li><a href="https://blog.heuritech.com/2014/12/">décembre 2014</a></li>
+	<li><a href="https://blog.heuritech.com/2014/11/">novembre 2014</a></li>
+	<li><a href="https://blog.heuritech.com/2014/10/">octobre 2014</a></li>
+	<li><a href="https://blog.heuritech.com/2014/09/">septembre 2014</a></li>
+	<li><a href="https://blog.heuritech.com/2014/07/">juillet 2014</a></li>
+	<li><a href="https://blog.heuritech.com/2013/11/">novembre 2013</a></li>
+	<li><a href="https://blog.heuritech.com/2013/09/">septembre 2013</a></li>
+		</ul>
+		</aside>	</div><!-- #third .widget-area -->
+	
+	</div><!-- #supplementary -->
+	<footer id="colophon" class="site-footer clear-fix" role="contentinfo">
+		<div class="site-info">
+						<a href="https://wordpress.com/?ref=footer_custom_svg" title="Créez un site ou un blog sur WordPress.com"><svg style="fill: currentColor; position: relative; top: 1px;" width="14px" height="15px" viewBox="0 0 14 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-labelledby="title" role="img">
+				<title id="title">Créez un site ou un blog sur WordPress.com</title>
+				<path d="M12.5225848,4.97949746 C13.0138466,5.87586309 13.2934037,6.90452431 13.2934037,7.99874074 C13.2934037,10.3205803 12.0351007,12.3476807 10.1640538,13.4385638 L12.0862862,7.88081544 C12.4453251,6.98296834 12.5648813,6.26504621 12.5648813,5.62667922 C12.5648813,5.39497674 12.549622,5.17994084 12.5225848,4.97949746 L12.5225848,4.97949746 Z M7.86730089,5.04801561 C8.24619178,5.02808979 8.58760099,4.98823815 8.58760099,4.98823815 C8.9267139,4.94809022 8.88671369,4.44972248 8.54745263,4.46957423 C8.54745263,4.46957423 7.52803983,4.54957381 6.86996227,4.54957381 C6.25158863,4.54957381 5.21247202,4.46957423 5.21247202,4.46957423 C4.87306282,4.44972248 4.83328483,4.96816418 5.17254589,4.98823815 C5.17254589,4.98823815 5.49358462,5.02808979 5.83269753,5.04801561 L6.81314716,7.73459399 L5.43565839,11.8651647 L3.14394256,5.04801561 C3.52312975,5.02808979 3.86416859,4.98823815 3.86416859,4.98823815 C4.20305928,4.94809022 4.16305906,4.44972248 3.82394616,4.46957423 C3.82394616,4.46957423 2.80475558,4.54957381 2.14660395,4.54957381 C2.02852925,4.54957381 1.88934333,4.54668493 1.74156477,4.54194422 C2.86690406,2.83350881 4.80113651,1.70529256 6.99996296,1.70529256 C8.638342,1.70529256 10.1302017,2.33173369 11.2498373,3.35765419 C11.222726,3.35602457 11.1962815,3.35261718 11.1683554,3.35261718 C10.5501299,3.35261718 10.1114609,3.89113285 10.1114609,4.46957423 C10.1114609,4.98823815 10.4107217,5.42705065 10.7296864,5.94564049 C10.969021,6.36482346 11.248578,6.90326506 11.248578,7.68133501 C11.248578,8.21992476 11.0413918,8.84503256 10.7696866,9.71584277 L10.1417574,11.8132391 L7.86730089,5.04801561 Z M6.99996296,14.2927074 C6.38218192,14.2927074 5.78595654,14.2021153 5.22195356,14.0362644 L7.11048207,8.54925635 L9.04486267,13.8491542 C9.05760348,13.8802652 9.07323319,13.9089317 9.08989995,13.9358945 C8.43574834,14.1661896 7.73285573,14.2927074 6.99996296,14.2927074 L6.99996296,14.2927074 Z M0.706448182,7.99874074 C0.706448182,7.08630113 0.902152921,6.22015756 1.25141403,5.43749503 L4.25357806,13.6627848 C2.15393732,12.6427902 0.706448182,10.4898387 0.706448182,7.99874074 L0.706448182,7.99874074 Z M6.99996296,0.999 C3.14016476,0.999 0,4.13905746 0,7.99874074 C0,11.8585722 3.14016476,14.999 6.99996296,14.999 C10.8596871,14.999 14,11.8585722 14,7.99874074 C14,4.13905746 10.8596871,0.999 6.99996296,0.999 L6.99996296,0.999 Z" id="wordpress-logo-simplified-cmyk" stroke="none" fill="“currentColor”" fill-rule="evenodd"></path>
+			</svg></a>
+			
+					</div><!-- .site-info -->
+			</footer><!-- .site-footer .site-footer -->
+</div><!-- #page .hfeed .site -->
+
+<!--  -->
+<script type="text/javascript" src="./Attention Mechanism __files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Attention Mechanism __files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-d10585c8007c9b4c945f89d8d52c5c07">
+	</div>
+	<div class="grofile-hash-map-72cf61db8b41eb0cc7adbb32ec450b46">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Connexion\u2026","submittingText":"Publication d'un Commentaire\u2026","postCommentText":"Laisser un commentaire","connectingToText":"Connexion \u00e0 %s","commentingAsText":"%1$s: Vous commentez \u00e0 l'aide de votre compte %2$s.","logoutText":"Se d\u00e9connecter","loginText":"Se connecter","connectURL":"https:\/\/heuritech.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/heuritech.wordpress.com\/wp-login.php?action=logout&_wpnonce=ae029cd718","homeURL":"https:\/\/blog.heuritech.com\/","postID":"1449","gravDefault":"retro","enterACommentError":"Entrez un commentaire","enterEmailError":"Veuillez entrer votre adresse mail","invalidEmailError":"Adresse email invalide","enterAuthorError":"Veuillez entrer votre nom","gravatarFromEmail":"L\u2019image s\u2019affiche lorsque vous postez un commentaire. Cliquez pour personnaliser.","logInToExternalAccount":"Connectez-vous pour utiliser les informations li\u00e9es \u00e0 un de ces comptes:","change":"Changer","changeAccount":"Changer de compte","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Attention Mechanism __files/saved_resource(4)"></script>
+
+	<div id="carousel-reblog-box">
+		<form action="https://blog.heuritech.com/2016/01/20/attention-mechanism/#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Ajoutez votre grain de sel personnel... (facultatif)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Publier sur</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#" class="cancel">Annuler</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Article">
+				<input type="hidden" id="carousel-reblog-blog-id" value="85233566">
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://blog.heuritech.com">
+				<input type="hidden" id="carousel-reblog-blog-title" value="">
+				<input type="hidden" id="carousel-reblog-post-url" value="">
+				<input type="hidden" id="carousel-reblog-post-title" value="">
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="541edfd4bd"><input type="hidden" name="_wp_http_referer" value="/2016/01/20/attention-mechanism/">		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/blog.heuritech.com\/2016\/01\/20\/attention-mechanism\/":1449};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-tumblr' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+		});
+		</script>
+							<script type="text/javascript">
+				jQuery(document).on('ready', function(){
+					jQuery('body').on('click', 'a.share-pinterest', function(e){
+						e.preventDefault();
+						// Load Pinterest Bookmarklet code
+						var s = document.createElement("script");
+						s.type = "text/javascript";
+						s.src = window.location.protocol + "//assets.pinterest.com/js/pinmarklet.js?r=" + ( Math.random() * 99999999 );
+						var x = document.getElementsByTagName("script")[0];
+						x.parentNode.insertBefore(s, x);
+						// Trigger Stats
+						var s = document.createElement("script");
+						s.type = "text/javascript";
+						s.src = this + ( this.toString().indexOf( '?' ) ? '&' : '?' ) + 'js_only=1';
+						var x = document.getElementsByTagName("script")[0];
+						x.parentNode.insertBefore(s, x);
+					});
+				});
+			</script>
+			
+<script type="text/javascript" src="./Attention Mechanism __files/form.js"></script>
+<link rel="stylesheet" id="all-css-0-3" href="./Attention Mechanism __files/saved_resource(5)" type="text/css" media="all">
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type="text/javascript">
+/* <![CDATA[ */
+var comment_like_text = {"loading":"chargement\u2026"};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"85233566","siteName":"blog.heuritech.com","siteURL":"https:\/\/blog.heuritech.com","icon":"<img alt='' src='https:\/\/s1.wp.com\/i\/logo\/wpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/oxygen","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/heuritech.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fblog.heuritech.com%2F2016%2F01%2F20%2Fattention-mechanism%2F","themeURL":"https:\/\/wordpress.com\/theme\/oxygen\/","xhrURL":"https:\/\/blog.heuritech.com\/wp-admin\/admin-ajax.php","nonce":"bae4e94e82","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"faf91e125c\" \/>","referer":"https:\/\/blog.heuritech.com\/2016\/01\/20\/attention-mechanism\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/heuritech.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fheuritech.wordpress.com%2F2016%2F01%2F20%2Fattention-mechanism%2F","postID":"1449","shortlink":"http:\/\/wp.me\/p5LD8W-nn","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/blog.heuritech.com\/1449","statsLink":"https:\/\/wordpress.com\/stats\/post\/1449\/blog.heuritech.com","i18n":{"view":"Afficher le site","follow":"Suivre","following":"Abonn\u00e9","edit":"Modifier","login":"Connexion","signup":"S'inscrire","customize":"Personnaliser","report":"Signaler ce contenu","themeInfo":"Obtenir le th\u00e8me: Oxygen","shortlink":"Copier shortlink","copied":"Copi\u00e9","followedText":"Les nouveaux articles de ce site appara\u00eetront d\u00e9sormais dans votre <a href=\"https:\/\/wordpress.com\/\">lecteur<\/a>","foldBar":"R\u00e9duire cette barre","unfoldBar":"\u00c9tendre cette barre","editSubs":"G\u00e9rer les abonnements","viewReader":"Voir le site dans le Lecteur","subscribe":"Inscrivez-moi","enterEmail":"Entrez votre adresse e-mail","followers":"Rejoignez 168 autres abonn\u00e9s","alreadyUser":"Vous disposez d\u00e9j\u00e0 d\u02bcun compte WordPress ? <a href=\"https:\/\/heuritech.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fblog.heuritech.com%2F2016%2F01%2F20%2Fattention-mechanism%2F\">Connectez-vous maintenant.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"fr","ajaxurl":"https:\/\/blog.heuritech.com\/wp-admin\/admin-ajax.php","nonce":"83f595c410","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Commentaire","post_comment":"Laisser un commentaire","write_comment":"\u00c9crire un commentaire...","loading_comments":"Chargement des commentaires\u2026","download_original":"Afficher dans sa taille r\u00e9elle <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>.","no_comment_text":"Veuillez ajouter du contenu \u00e0 votre commentaire.","no_comment_email":"Merci de renseigner une adresse email.","no_comment_author":"Merci de renseigner votre nom.","comment_post_error":"Une erreur s'est produite \u00e0 la publication de votre commentaire. Veuillez nous en excuser, et r\u00e9essayer dans quelques instants.","comment_approved":"Votre commentaire a \u00e9t\u00e9 approuv\u00e9.","comment_unapproved":"Votre commentaire est en attente de validation.","camera":"Appareil photo","aperture":"Ouverture","shutter_speed":"Vitesse d'obturation","focal_length":"Focale","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/heuritech.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fblog.heuritech.com%2F2016%2F01%2F20%2Fattention-mechanism%2F","blog_id":"85233566","local_comments_commenting_as":"<fieldset><label for=\"email\">Adresse de messagerie (Requis)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Nom (Requis)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Site web<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogu\u00e9","reblog_add_thoughts":"Ajoutez votre grain de sel personnel... (facultatif)","reblogging":"Reblogging...","post_reblog":"Relais d'article","stats_query_args":"blog=85233566&v=wpcom&tz=1&user_id=0&subd=heuritech","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"fr","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Attention Mechanism __files/saved_resource(6)"></script><div id="actionbar" class="actnbr-pub-oxygen actnbr-has-follow"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Suivre</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename actnbr-hidden"><a href="https://blog.heuritech.com/"><img alt="" src="./Attention Mechanism __files/wpcom-gray-white.png" class="avatar avatar-50" height="50" width="50" scale="0"> blog.heuritech.com</a></li> 				   	<li class="actnbr-folded-customize actnbr-hidden"><a href="https://heuritech.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Fheuritech.wordpress.com%2F2016%2F01%2F20%2Fattention-mechanism%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Personnaliser<span></span></span></a></li> 				    <li class="actnbr-folded-follow actnbr-hidden"><a class="actnbr-action actnbr-actn-follow" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Suivre</span></a></li> 					<li class="actnbr-signup actnbr-hidden"><a href="https://wordpress.com/start/">S'inscrire</a></li> 				    <li class="actnbr-login actnbr-hidden"><a href="https://heuritech.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fblog.heuritech.com%2F2016%2F01%2F20%2Fattention-mechanism%2F">Connexion</a></li> 				     				    <li class="actnbr-shortlink actnbr-hidden"><a href="http://wp.me/p5LD8W-nn">Copier shortlink</a></li> 				    <li class="flb-report actnbr-hidden"><a href="http://en.wordpress.com/abuse/">Signaler ce contenu</a></li> 				     				     				    <li class="actnbr-subs actnbr-hidden"><a href="https://subscribe.wordpress.com/">Gérer les abonnements</a></li> 				    <li class="actnbr-fold actnbr-hidden"><a href="https://blog.heuritech.com/2016/01/20/attention-mechanism/">Réduire cette barre</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>		<iframe src="./Attention Mechanism __files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> blogueurs aiment cette page :</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			&lt;p class="robots-nocontent"&gt;&lt;img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /&gt;&lt;/p&gt;
+		</noscript><script src="./Attention Mechanism __files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'85233566','blog_tz':'1','user_lang':'fr','blog_lang':'fr','user_id':'0'}]);
+_stq.push(['view', {'blog':'85233566','v':'wpcom','tz':'1','user_id':'0','post':'1449','subd':'heuritech'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGRVYVNrSFguN3FwSmQ5RGtNX3VQcj1yVzhiflM1THQtLGFdQ2toOXYlMTR8YWhVMTJzai53TTdvfkcyPzNNMy1sL25JfF1lYVElNC4zVGh5WCxZeUVmeSZNLn5kVWE2bT0mdFUrNnpuP2JQXywuMWs1aHdKTDRCRi5vWXUuQkNBY2N8ZFFkOEg5WmR1OFpSWDhaUT9+YXxBWm1wbXEuSnVRY3FhRGNEV1RadiV1VF0vS1ZNd1VrdWlsRkcxQkssJldVbEZCdz1xRGktcWlhM1I/P0JTdFBkfE4xZXQ2cF1Nd0s5c2R0c10wazlSS2tlR05lX2hCPXNRWVplSFVJcy5KTSVZUWFmLS0xQnJGcVRLTFlybl80cSVMaVJtQlNHMU0saGcxNGwuLzlvNWVGYnFqdTFFMEo='}]);
+_stq.push([ 'clickTrackerInit', '85233566', '1449' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<div class="comment-likes-overlay" style="display: none;"></div><div id="sharing_email" style="display: none;">
+		<form action="https://blog.heuritech.com/2016/01/20/attention-mechanism/" method="post">
+			<label for="target_email">Envoyer à l'adresse email</label>
+			<input type="email" name="target_email" id="target_email" value="">
+
+			
+				<label for="source_name">Votre nom</label>
+				<input type="text" name="source_name" id="source_name" value="">
+
+				<label for="source_email">Votre adresse e-mail</label>
+				<input type="email" name="source_email" id="source_email" value="">
+
+						<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off">
+			<script> document.getElementById('jetpack-source_f_name').value = ''; </script>
+			<div class="recaptcha" id="sharing_recaptcha"></div><input type="hidden" name="recaptcha_public_key" id="recaptcha_public_key" value="6LcYW8MSAAAAADBAuEH9yaPcF7lWh11Iq62ZKtoo">
+			<img style="float: right; display: none" class="loading" src="./Attention Mechanism __files/loading.gif" alt="loading" width="16" height="16" scale="0">
+			<input type="submit" value="Envoyer un e-mail" class="sharing_send">
+			<a rel="nofollow" href="https://blog.heuritech.com/2016/01/20/attention-mechanism/#cancel" class="sharing_cancel">Annuler</a>
+
+			<div class="errors errors-1" style="display: none;">
+				L'article n'a pas été envoyé - Vérifiez vos adresses email !			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				La vérification e-mail a échoué, veuillez réessayer			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Impossible de partager les articles de votre blog par email.			</div>
+		</form>
+	</div><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./Attention Mechanism __files/saved_resource(9).html"></iframe><img src="./Attention Mechanism __files/g.gif" alt=":)" id="wpstats" scale="0"></body></html>

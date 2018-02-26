@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://ustczen.gitbooks.io/keras/content/datasets.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Datasets | keras</title>
+        
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.1.0">
+        <meta name="author" content="ustczen">
+        
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://ustczen.gitbooks.io/keras/content/gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="https://ustczen.gitbooks.io/keras/content/gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="./Datasets _ keras_files/style.css">
+    
+    
+
+        
+    
+    
+    <link rel="next" href="https://ustczen.gitbooks.io/keras/content/layers/core.html">
+    
+    
+    <link rel="prev" href="https://ustczen.gitbooks.io/keras/content/callbacks.html">
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book without-animation with-summary font-size-2 font-family-1" data-level="10" data-basepath="." data-revision="Tue Jul 07 2015 10:35:24 GMT+0000 (UTC)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control">
+    </div>
+    <ul class="summary">
+        
+        
+        
+            
+            <li>
+                <a href="https://www.gitbook.com/book/ustczen/keras" target="blank" class="custom-link">keras</a>
+            </li>
+        
+        
+
+        
+        <li class="divider"></li>
+        
+
+        
+    
+        <li class="chapter  done" data-level="0" data-path="index.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="1" data-path="examples.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/examples.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        Examples
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="2" data-path="optimizers.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/optimizers.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        Optimizers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="3" data-path="objectives.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/objectives.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        Objectives
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="4" data-path="models.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/models.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        Models
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="5" data-path="activations.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/activations.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        Activations
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="6" data-path="initializations.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/initializations.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        Initializations
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="7" data-path="regularizers.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/regularizers.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.</b>
+                        
+                        Regularizers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="8" data-path="constraints.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/constraints.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.</b>
+                        
+                        Constraints
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="9" data-path="callbacks.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/callbacks.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>9.</b>
+                        
+                        Callbacks
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="10" data-path="datasets.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/datasets.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.</b>
+                        
+                        Datasets
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="11" data-path="layers/core.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.</b>
+                        
+                        Layers, Core Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="12" data-path="layers/convolutional.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/convolutional.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.</b>
+                        
+                        Layers, Convolutional Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="13" data-path="layers/recurrent.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/recurrent.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>13.</b>
+                        
+                        Layers, Recurrent Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="14" data-path="layers/advanced_activations.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/advanced_activations.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>14.</b>
+                        
+                        Layers, Advanced Activations Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="15" data-path="layers/normalization.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/normalization.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>15.</b>
+                        
+                        Layers, Normalization Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="16" data-path="layers/embeddings.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/embeddings.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>16.</b>
+                        
+                        Layers, Embedding Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="17" data-path="layers/containers.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/containers.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>17.</b>
+                        
+                        Layers, Containers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="18" data-path="preprocessing/sequence.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/sequence.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>18.</b>
+                        
+                        Preprocessing, Sequence Preprocessing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="19" data-path="preprocessing/text.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/text.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>19.</b>
+                        
+                        Preprocessing, Text Preprocessing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="20" data-path="preprocessing/image.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/image.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>20.</b>
+                        
+                        Preprocessing, Image Preprocessing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="21" data-path="utils/visualization.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/utils/visualization.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>21.</b>
+                        
+                        Utils, Visualization Utilities
+                    </a>
+                
+            
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com/" target="blank" class="gitbook-link">
+                Published with GitBook
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="https://ustczen.gitbooks.io/keras/content/datasets.html#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="https://ustczen.gitbooks.io/keras/content/datasets.html#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="https://ustczen.gitbooks.io/keras/content/datasets.html#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="https://ustczen.gitbooks.io/keras/content/datasets.html#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="https://ustczen.gitbooks.io/keras/content/datasets.html#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="https://ustczen.gitbooks.io/keras/content/datasets.html#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="https://ustczen.gitbooks.io/keras/content/datasets.html#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="https://ustczen.gitbooks.io/keras/content/">keras</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="datasets">Datasets</h1>
+<h2 id="cifar10-small-image-classification">CIFAR10 small image classification</h2>
+<p><code>keras.datasets.cifar10</code></p>
+<p>Dataset of 50,000 32x32 color training images, labeled over 10 categories, and 10,000 test images.</p>
+<h3 id="usage">Usage:</h3>
+<pre><code class="lang-python">(X_train, y_train), (X_test, y_test) = cifar10.load_data()
+</code></pre>
+<ul>
+<li><strong>Return:</strong><ul>
+<li>2 tuples:<ul>
+<li><strong>X_train, X_test</strong>: uint8 array of RGB image data with shape (nb_samples, 3, 32, 32).</li>
+<li><strong>y_train, y_test</strong>: uint8 array of category labels (integers in range 0-9) with shape (nb_samples,).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="cifar100-small-image-classification">CIFAR100 small image classification</h2>
+<p><code>keras.datasets.cifar100</code></p>
+<p>Dataset of 50,000 32x32 color training images, labeled over 100 categories, and 10,000 test images.</p>
+<h3 id="usage">Usage:</h3>
+<pre><code class="lang-python">(X_train, y_train), (X_test, y_test) = cifar100.load_data(label_mode=<span class="hljs-string">'fine'</span>)
+</code></pre>
+<ul>
+<li><p><strong>Return:</strong></p>
+<ul>
+<li>2 tuples:<ul>
+<li><strong>X_train, X_test</strong>: uint8 array of RGB image data with shape (nb_samples, 3, 32, 32).</li>
+<li><strong>y_train, y_test</strong>: uint8 array of category labels with shape (nb_samples,).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Arguments:</strong></p>
+<ul>
+<li><strong>label_mode</strong>: "fine" or "coarse".</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="imdb-movie-reviews-sentiment-classification">IMDB Movie reviews sentiment classification</h2>
+<p><code>keras.datasets.imdb</code></p>
+<p>Dataset of 25,000 movies reviews from IMDB, labeled by sentiment (positive/negative). Reviews have been preprocessed, and each review is encoded as a <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/sequence.html">sequence</a> of word indexes (integers). For convenience, words are indexed by overall frequency in the dataset, so that for instance the integer "3" encodes the 3rd most frequent word in the data. This allows for quick filtering operations such as: "only consider the top 10,000 most common words, but eliminate the top 20 most common words".</p>
+<p>As a convention, "0" does not stand for a specific word, but instead is used to encode any unknown word.</p>
+<h3 id="usage">Usage:</h3>
+<pre><code class="lang-python">(X_train, y_train), (X_test, y_test) = imdb.load_data(path=<span class="hljs-string">"imdb.pkl"</span>, \
+nb_words=<span class="hljs-keyword">None</span>, skip_top=<span class="hljs-number">0</span>, maxlen=<span class="hljs-keyword">None</span>, test_split=<span class="hljs-number">0.1</span>, seed=<span class="hljs-number">113</span>)
+</code></pre>
+<ul>
+<li><p><strong>Return:</strong></p>
+<ul>
+<li>2 tuples:<ul>
+<li><strong>X_train, X_test</strong>: list of sequences, which are lists of indexes (integers). If the nb_words argument was specific, the maximum possible index value is nb_words-1. If the maxlen argument was specified, the largest possible sequence length is maxlen.</li>
+<li><strong>y_train, y_test</strong>: list of integer labels (1 or 0). </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Arguments:</strong></p>
+<ul>
+<li><strong>path</strong>: if you do have the data locally (at <code>'~/.keras/datasets/' + path</code>), if will be downloaded to this location (in cPickle format).</li>
+<li><strong>nb_words</strong>: integer or None. Top most frequent words to consider. Any less frequent word will appear as 0 in the sequence data.</li>
+<li><strong>skip_top</strong>: integer. Top most frequent words to ignore (they will appear as 0s in the sequence data).</li>
+<li><strong>maxlen</strong>: int. Maximum sequence length. Any longer sequence will be truncated.</li>
+<li><strong>test_split</strong>: float. Fraction of the dataset to be used as test data.</li>
+<li><strong>seed</strong>: int. Seed for reproducible data shuffling.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="reuters-newswire-topics-classification">Reuters newswire topics classification</h2>
+<p><code>keras.datasets.reuters</code></p>
+<p>Dataset of 11,228 newswires from Reuters, labeled over 46 topics. As with the IMDB dataset, each wire is encoded as a sequence of word indexes (same conventions).</p>
+<h3 id="usage">Usage:</h3>
+<pre><code class="lang-python">(X_train, y_train), (X_test, y_test) = reuters.load_data(path=<span class="hljs-string">"reuters.pkl"</span>, \
+nb_words=<span class="hljs-keyword">None</span>, skip_top=<span class="hljs-number">0</span>, maxlen=<span class="hljs-keyword">None</span>, test_split=<span class="hljs-number">0.1</span>, seed=<span class="hljs-number">113</span>)
+</code></pre>
+<p>The specifications are the same as that of the IMDB dataset.</p>
+<p>This dataset also makes available the word index used for encoding the sequences:</p>
+<pre><code class="lang-python">word_index = reuters.get_word_index(path=<span class="hljs-string">"reuters_word_index.pkl"</span>)
+</code></pre>
+<ul>
+<li><p><strong>Return:</strong> A dictionary where key are words (str) and values are indexes (integer). eg. <code>word_index["giraffe"]</code> might return <code>1234</code>. </p>
+</li>
+<li><p><strong>Arguments:</strong></p>
+<ul>
+<li><strong>path</strong>: if you do have the index file locally (at <code>'~/.keras/datasets/' + path</code>), if will be downloaded to this location (in cPickle format).</li>
+</ul>
+</li>
+</ul>
+<h2 id="mnist-database-of-handwritten-digits">MNIST database of handwritten digits</h2>
+<p><code>keras.datasets.mnist</code></p>
+<p>Dataset of 60,000 28x28 grayscale images of the 10 digits, along with a test set of 10,000 images.</p>
+<h3 id="usage">Usage:</h3>
+<pre><code class="lang-python">(X_train, y_train), (X_test, y_test) = mnist.load_data()
+</code></pre>
+<ul>
+<li><p><strong>Return:</strong></p>
+<ul>
+<li>2 tuples:<ul>
+<li><strong>X_train, X_test</strong>: uint8 array of grayscale image data with shape (nb_samples, 28, 28).</li>
+<li><strong>y_train, y_test</strong>: uint8 array of digit labels (integers in range 0-9) with shape (nb_samples,).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Arguments:</strong></p>
+<ul>
+<li><strong>path</strong>: if you do have the index file locally (at <code>'~/.keras/datasets/' + path</code>), if will be downloaded to this location (in cPickle format).</li>
+</ul>
+</li>
+</ul>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="https://ustczen.gitbooks.io/keras/content/callbacks.html" class="navigation navigation-prev " aria-label="Previous page: Callbacks"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html" class="navigation navigation-next " aria-label="Next page: Layers, Core Layers" style="margin-right: 0px;"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script async="" src="./Datasets _ keras_files/analytics.js"></script><script src="./Datasets _ keras_files/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    
+<div><script style="display: none;" type="application/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57505611-7', 'auto', {name: 'microcdn'});
+  ga('microcdn.send', 'pageview');
+
+  var _cdn_prev_loc = window.location.pathname;
+  window.setInterval(function () {
+    if (window.location.pathname !== _cdn_prev_loc) {
+      _cdn_prev_loc = window.location.pathname;
+      ga('microcdn.send', 'pageview');
+    }
+  }, 100);
+
+</script></div>
+
+    
+
+</body></html>

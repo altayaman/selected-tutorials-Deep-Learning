@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://blog.hartleybrody.com/scrape-amazon/ -->
+<html ⚡="" lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script id="facebook-jssdk" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/sdk.js"></script><script type="text/javascript" async="" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/ga.js"></script><script async="" custom-element="amp-youtube" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/amp-youtube-0.1.js"></script>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>How to Scrape Amazon.com: 19 Lessons I Learned While Crawling 1MM+ Product Listings</title>
+  <meta name="description" content="In its simplest form, web scraping is about making requests and extracting data from the response. For a small web scraping project, your code can be simple....">
+
+  <meta property="fb:app_id" content="225565217845173">
+
+  <link rel="canonical" href="https://blog.hartleybrody.com/scrape-amazon/">
+  <link rel="alternate" type="application/rss+xml" title="Hartley Brody" href="https://blog.hartleybrody.com/feed.xml">
+  <link rel="icon" type="image/jpeg" href="https://www.gravatar.com/avatar/0b3ac738e74f7fbda25fca0f754b0aad?s=64">
+
+  <script type="application/ld+json">
+  
+{
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": "https://blog.hartleybrody.com/scrape-amazon/",
+  "headline": "How to Scrape Amazon.com: 19 Lessons I Learned While Crawling 1MM+ Product Listings",
+  "datePublished": "2016-08-03T00:00:00-04:00",
+  "dateModified": "2016-08-03T00:00:00-04:00",
+  "description": "In its simplest form, web scraping is about making requests and extracting data from the response. For a small web scraping project, your code can be simple....",
+  "author": {
+    "@type": "Person",
+    "name": "Hartley Brody"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hartley Brody",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://blog.hartleybrody.com",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://blog.hartleybrody.com",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+
+  <link rel="stylesheet" href="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/styles.css">
+
+  <!-- Google Analytics-->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-9472773-3']);
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['_trackPageLoadTime']);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+  <!--sumome-->
+  <script src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/saved_resource" data-sumo-site-id="95a56d848849343e0f7ae71b38a33ba5a367a4f01ca9b464b31075f4bf35aaf0" async="async"></script>
+
+<style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="674d3d92-3a9f-4620-99f6-ff856d18423d/service" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/service.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="9e8a4d2a-6f8c-415e-851b-bdfe4c01d5c1/service" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/service(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="156085c5-0017-4150-b225-a731ad248f38/service" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/service(2).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="4802de2d-b003-4fc4-8d07-901abb51e683/service" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/service(3).js"></script><style>@-webkit-keyframes insQ_100 {  from {  outline: 1px solid transparent  } to {  outline: 0px solid transparent }  }
+#menufication-top { animation-duration: 0.001s; animation-name: insQ_100; -webkit-animation-duration: 0.001s; -webkit-animation-name: insQ_100;  } </style><link type="text/css" rel="stylesheet" href="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/sumome-welcome-popup.css"><link type="text/css" rel="stylesheet" href="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/listbuilder-popup.css"><link type="text/css" rel="stylesheet" href="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/sumome-share-client.css"></head>
+
+  <body style="padding-top: 8px !important; margin-top: 0px !important;">
+
+
+    <div class="container">
+        <div class="full-col">
+            <header>
+    <section>
+        <h1>
+            <a href="https://blog.hartleybrody.com/">
+                Hartley Brody
+            </a>
+        </h1>
+    </section>
+</header>
+
+        </div>
+
+        <div class="left-col">
+            <article itemscope="" itemtype="http://schema.org/BlogPosting" role="article">
+
+  <h2 itemprop="name">How to Scrape Amazon.com: 19 Lessons I Learned While Crawling 1MM+ Product Listings</h2>
+
+  <div class="post-meta">
+    
+      <time datetime="August 3, 2016">August 3, 2016</time>
+    
+  </div>
+
+  <section>
+    <p>In its simplest form, <a href="https://blog.hartleybrody.com/web-scraping/">web scraping is about making requests and extracting data from the response</a>. For a small web scraping project, your code can be simple. You just need to find a few patterns in the URLs and in the HTML response and you’re in business.</p>
+
+<p>But everything changes when you’re trying to <strong>pull over 1,000,000 products from the largest ecommerce website on the planet.</strong></p>
+
+<p><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/2kKKyvv.jpg" alt="Amazon Crawling" class="aligncenter" width="500"></p>
+
+<p>When crawling a sufficiently large website, the actual web scraping (making requests and parsing HTML) becomes a very minor part of your program. Instead, you spend a lot of time figuring out how to keep the entire crawl running smoothly and efficiently.</p>
+
+<p>This was my first time doing a scrape of this magnitude. I made some mistakes along the way, and learned a lot in the process. It took several days (and quite a few false starts) to finally crawl the millionth product. If I had to do it again, knowing what I now know, it would take just a few hours.</p>
+
+<p>In this article, I’ll walk you through the high-level challenges of pulling off a crawl like this, and then run through all of the lessons I learned. At the end, I’ll show you the code I used to <strong>successfully pull 1MM+ items from amazon.com.</strong></p>
+
+<p>I’ve broken it up as follows:</p>
+
+<ol>
+<li><a href="https://blog.hartleybrody.com/scrape-amazon/#challenges">High-Level Challenges I Ran Into</a></li>
+<li><a href="https://blog.hartleybrody.com/scrape-amazon/#crawl-lessons">Crawling At Scale Lessons Learned</a></li>
+<li><a href="https://blog.hartleybrody.com/scrape-amazon/#amazon-lessons">Site-Specific Lessons I Learned About Amazon.com</a></li>
+<li><a href="https://blog.hartleybrody.com/scrape-amazon/#code">How My Finished, Final Code Works</a></li>
+</ol>
+<!--more-->
+
+<hr>
+<h3 id="challenges">High-Level Challenges I Ran Into</h3>
+<p>There were a few challenges I ran into that you’ll see on any large-scale crawl of more than a few hundred pages. These apply to crawling any site or running a sufficiently large crawling operation across multiple sites.</p>
+
+<h4>High-Performance is a Must</h4>
+<p><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/uWe4o9u.jpg" alt="Now that is high-throughput" class="aligncenter" width="500"></p>
+
+<p>In a simple web scraping program, you make requests in a loop – one after the other. If a site takes 2-3 seconds to respond, then you’re looking at making 20-30 requests a minute. At this rate, your crawler would have to run for a month, non-stop before you made your millionth request.</p>
+
+<p>Not only is this very slow, it’s also wasteful. The crawling machine is sitting there idly for those 2-3 seconds, waiting for the network to return before it can really do anything or start processing the next request. That’s a lot of dead time and wasted resources.</p>
+
+<p>When thinking about crawling anything more than a few hundred pages, you really have to think about putting the pedal to the metal and pushing your program until it hits the bottleneck of some resources – most likely network or disk IO.</p>
+
+<p>I didn’t need to do this for my purposeses (more later), but you can also think about ways to scale a single crawl across multiple machines, so that you can even start to push past single-machine limits.</p>
+
+<h4>Avoiding Bot Detection</h4>
+<p><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/0gvAqwn.jpg" alt="Battling with Bots" class="aligncenter" width="500"></p>
+
+<p>Any site that has a vested interest in protecting its data will usually have some basic anti-scraping measures in place. Amazon.com is certainly no exception.</p>
+
+<p>You have to have a few strategies up your sleeve to make sure that individual HTTP requests – as well as the larger pattern of requests in general – don’t appear to be coming from one centralized bot.</p>
+
+<p>For this crawl, I made sure to:</p>
+
+<ol>
+<li>Spoof headers to make requests seem to be coming from a browser, not a script</li>
+<li>Rotate IPs using a list of over 500 proxy servers I had access to</li>
+<li>Strip "tracking" query params from the URLs to remove identifiers linking requests together</li>
+</ol>
+<p>More on all of these in a bit.</p>
+
+<h4>The Crawler Needed to be Resilient</h4>
+<p><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/TKZrEyX.jpg" alt="Just Keep Swimming" class="aligncenter" width="500"></p>
+
+<p>The crawler needs to be able to operate smoothly, even when faced with common issues like network errors or unexpected responses.</p>
+
+<p>You also need to be able to pause and continue the crawl, updating code along the way, without going back to “square one”. This allows you to update parsing or crawling logic to fix small bugs, without needing to rescrape everything you did in the past few hours.</p>
+
+<p>I didn’t have this functionality initially and I regretted it, wasting tons of hours hitting the same URLs again and again whenever I need to make updates to fix small bugs affecting only a few pages.</p>
+
+<hr>
+
+<h3 id="crawl-lessons">Crawling At Scale Lessons Learned</h3>
+<p>From the simple beginnings to the <a href="https://blog.hartleybrody.com/scrape-amazon/#code">hundreds of lines of python I ended up with</a>, I learned a lot in the process of running this project. All of these mistakes cost me time in some fashion, and learning the lessons I present here will make your amazon.com crawl much faster from start to finish.</p>
+
+<h4>1. Do the Back of the Napkin Math</h4>
+<p>When I did a sample crawl to test my parsing logic, I used a simple loop and made requests one at a time. After 30 minutes, I had pulled down about 1000 items.</p>
+
+<p>Initially, I was pretty stoked. “Yay, my crawler <em>works</em>!” But when I turned it loose on a the full data set, I quickly realized it wasn’t feasible to run the crawl like this at full scale.</p>
+
+<p>Doing the back of the napkin math, I realized I needed to be doing dozens of requests every second for the crawl to complete in a reasonable time (my goal was 4 hours).</p>
+
+<p>This required me to go back to the drawing board.</p>
+
+<h4>2. Performance is Key, Need to be Multi-Threaded</h4>
+<p>In order to speed things up and not wait for each request, you’ll need to make your crawler multi-threaded. This allows the CPU to stay busy working on one response or another, even when each request is taking several seconds to complete.</p>
+
+<p>You can’t rely on single-threaded, network blocking operations if you’re trying to do things quickly. I was able to get 200 threads running concurrently on my crawling machine, giving me a <strong>200x speed improvement</strong> without hitting any resource bottlenecks.</p>
+
+<h4>3. Know Your Bottlenecks</h4>
+<p>You need to keep an eye on the four key resources of your crawling machine (CPU, memory, disk IO and network IO) and make sure you know which one you’re bumping up against.</p>
+
+<p>What is keeping your program from making 1MM requests all at once?</p>
+
+<p>The most likely resource you’ll use up is your network IO – the machine simply won’t be capable of writing to the network (making HTTP requests) or reading from the network (getting responses) fast enough, and this is what your program will be limited by.</p>
+
+<p><em>Note that it’ll likely take hundreds of simultaneous requests before you get to this point.</em> You should look at performance metrics before you assume your program is being limited by the network.</p>
+
+<p>Depending on the size of your average requests and how complex your parsing logic, you also could run into CPU, memory or disk IO as a bottleneck.</p>
+
+<p>You also might find bottlenecks before you hit any resource limits, like if your crawler gets blocked or throttled for making requests too quickly.</p>
+
+<p>This can be avoided by properly disguising your request patterns, as I discuss below.</p>
+
+<h4>4. Use the Cloud</h4>
+<p>I used a single beefy EC2 cloud server from Amazon to run the crawl. This allowed me to spin up a very high-performance machine that I could use for a few hours at a time, without spending a ton of money.</p>
+
+<p>It also meant that the crawl wasn’t running from my computer, burning my laptop’s resources and my local ISP’s network pipes.</p>
+
+<h4>5. Don’t Forget About Your Instances</h4>
+<p>The day after I completed the crawl, I woke up and realized I had left an m4.10xlarge running idly overnight. My reaction:</p>
+
+<p><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/Cr88uSY.gif" class="aligncenter"></p>
+
+<p>I probably wasted an extra $50 in EC2 fees for no reason. Make sure you stop your instances when you’re done with them!</p>
+
+<h4>6. Use a Proxy Service</h4>
+<p>This one is a bit of a no-brainer, since 1MM requests all coming from the same IP will definitely look suspicious to a site like amazon that can track crawlers.</p>
+
+<p>I’ve found that it’s much easier (and cheaper) to let someone else orchestrate all of the proxy server setup and maintenance for hundreds of machines, instead of doing it yourself.</p>
+
+<p>This allowed me to use one high-performance EC2 server for orchestration, and then rent bandwidth on hundreds of other machines for proxying out the requests.</p>
+
+<p>I used <a href="https://proxybonanza.com/?aff_id=629" target="_blank">ProxyBonanza</a> and found it to be quick and simple to get access to hundreds of machines.</p>
+
+<h4>7. Don’t Keep Much in Runtime Memory</h4>
+<p>If you keep big lists or dictionaries in memory, you’re asking for trouble. What happens when you accidentally hit Ctrl-C when 3 hours into the scrape (as I did at one point)? Back to the beginning for you!</p>
+
+<p>Make sure that the important progress information is stored somewhere more permanent.</p>
+
+<h4>8. Use a Database for Storing Product Information</h4>
+<p>Store each product that you crawl as a row in a database table. Definitely don’t keep them floating in memory or try to write them to a file yourself.</p>
+
+<p>Databases will let you perform basic querying, exporting and deduping, and they also <a href="https://blog.hartleybrody.com/databases-intro/">have lots of other great features</a>. Just get in a good habit of using them for storing your crawl’s data.</p>
+
+<h4>9. Use Redis for Storing a Queue of URLs to Scrape</h4>
+<p>Store the “frontier” of URLs that you’re waiting to crawl in an in-memory cache like redis. This allows you to pause and continue your crawl without losing your place.</p>
+
+<p>If the cache is accessible over the network, it also allows you to spin up multiple crawling machines and have them all pulling from the same backlog of URLs to crawl.</p>
+
+<h4>10. Log to a File, Not <code class="highlighter-rouge">stdout</code></h4>
+<p>While it’s temptingly easy to simply <code>print</code> all of your output to the console via stdout, it’s much better to pipe everything into a log file. You can still view the log lines coming in, in real-time by running <code>tail -f</code> on the logfile.</p>
+
+<p>Having the logs stored in a file makes it much easier to go back and look for issues. You can log things like network errors, missing data or other exceptional conditions.</p>
+
+<p>I also found it helpful to log the current URL that was being crawled, so I could easily hop in, grab the current URL that was being crawled and see how deep it was in any category. I could also watch the logs fly by to get a sense of how fast requests were being made.</p>
+
+<h4>11. Use <code class="highlighter-rouge">screen</code> to Manage the Crawl Process instead of your SSH Client</h4>
+<p>If you SSH into the server and start your crawler with <code>python crawler.py</code>, what happens if the SSH connection closes? Maybe you close your laptop or the wifi connection drops. You don’t want that process to get orphaned and potentially die.</p>
+
+<p>Using the built-in Unix <code>screen</code> command allows you to disconnect from your crawling process without worrying that it’ll go away. You can close your laptop and simple SSH back in later, reconnect to the screen, and you’ll see your crawling process still humming along.</p>
+
+<h4>12. Handle Exceptions Gracefully</h4>
+<p>You don’t want to start your crawler, go work on other stuff for 3 hours and then come back, only to find that it crashed 5 minutes after you started it.</p>
+
+<p>Any time you run into an exceptional condition, simply log that it happened and continue. It makes sense to add exception handling around any code that interacts with the network or the HTML response.</p>
+
+<p>Be especially aware of non-ascii characters breaking your logging.</p>
+
+<hr>
+
+<h3 id="amazon-lessons">Site-Specific Lessons I Learned About Amazon.com</h3>
+<p>Every site presents its own web scraping challenges. Part of any project is getting to know which patterns you can leverage, and which ones to avoid.</p>
+
+<p>Here’s what I found.</p>
+
+<h4>13. Spoof Headers</h4>
+<p>Besides using proxies, the other classic obfuscation technique in web scraping is to spoof the headers of each request. For this crawl, I just grabbed the User Agent that my browser was sending as I visited the site.</p>
+
+<p>If you don’t spoof the User Agent, you’ll get a generic anti-crawling response for every request Amazon.</p>
+
+<p>In my experience, there was no need to spoof other headers or keep track of session cookies. Just make a GET request to the right URL – through a proxy server – and spoof the User Agent and that’s it – you’re past their defenses.</p>
+
+<h4>14. Strip Unnecessary Query Parameters from the URL</h4>
+<p>One thing I did out of an abundance of caution was to strip out unnecessary tracking parameters from the URL. I noticed that clicking around the site seemed to append random IDs to the URL that weren’t necessary to load the product page.</p>
+
+<p>I was a bit worried that they could be used to tie requests to each other, even if they were coming from different machines, so I made sure my program stripped down URLs to only their core parts before making the request.</p>
+
+<h4>15. Amazon’s Pagination Doesn’t Go Very Deep</h4>
+<p>While some categories of products claim to contain tens of thousands of items, Amazon will only let you page through about 400 pages per category.</p>
+
+<p>This is a common limit on many big sites, including Google search results. Humans don’t usually click past the first few pages of results, so the sites don’t bother to support that much pagination. It also means that going too deep into results can start to look a bit fishy.</p>
+
+<p>If you want to pull in more than a few thousand products per category, you need to start with a list of lots of smaller subcategories and paginate through each of those. But keep in mind that many products are listed in multiple subcategories, so there may be a lot of duplication to watch out for.</p>
+
+<h4>16. Products Don’t Have Unique URLs</h4>
+<p>The same product can live at many different URLs, even after you strip off tracking URL query params. To dedupe products, you’ll have to use something more specific than the product URL.</p>
+
+<p>How to dedupe depends on your application. It’s entirely possible for the exact same product to be sold by multiple sellers. You might look for ISBN or SKU for some kinds of products, or something like the primary product image URL or a hash of the primary image.</p>
+
+<h4>17. Avoid Loading Detail Pages</h4>
+<p>This realization helped me <strong>make the crawler 10-12x faster</strong>, and much simpler. I realized that I could grab all of the product information I needed from the subcategory listing view, and didn’t need to load the full URL to each of the products’ detail page.</p>
+
+<p>I was able to grab 10-12 products with one request, including each of their titles, URLs, prices, ratings, categories and images – instead of needing to make a request to load each product’s detail page separately.</p>
+
+<p>Whether you need to load the detail page to find more information like the description or related products will depend on your application. But if you can get by without it, you’ll get a pretty nice performance improvement.</p>
+
+<h4>18. Cloudfront has no Rate Limiting for Amazon.com Product Images</h4>
+<p>While I was using a list of 500 proxy servers to request the product listing URLs, I wanted to avoid downloading the product images through the proxies since it would chew up all my bandwidth allocation.</p>
+
+<p>Fortunately, the product images are served using Amazon’s CloudFront CDN, which doesn’t appear to have any rate limiting. I was able to download over 100,000 images with no problems – until my EC2 instance ran out of disk space.</p>
+
+<p>Then I broke out the image downloading into its own little python script and simply had the crawler store the URL to the product’s primary image, for later retrieval.</p>
+
+<h4>19. Store Placeholder Values</h4>
+<p>There are lots of different types of product pages on Amazon. Even within one category, there can be several different styles of HTML markup on individual product pages, and it might take you a while to discover them all.</p>
+
+<p>If you’re not able to find a piece of information in the page with the extractors you built, store a placeholder value like “&lt;No Image Detected&gt;” in your database.</p>
+
+<p>This allows you to periodically query for products with missing data, visit their product URLs in your browser and find the new patterns. Then you can pause your crawler, update the code and then start it back up again, recognizing the new pattern that you had initially missed.</p>
+
+<hr>
+
+<h3 id="code">How My Finished, Final Code Works</h3>
+<p><em><strong>TL;DR:</strong> Here’s <a href="https://github.com/hartleybrody/public-amazon-crawler" target="_blank">a link to my code on github</a>. It has a readme for getting you setup and started on your own amazon.com crawler.</em></p>
+
+<p>Once you get the code downloaded, the libraries installed and the connection information stored in the settings file, you’re ready to start running the crawler!</p>
+
+<p>If you run it with the “start” command, it looks at the list of category URLs you’re interested in, and then goes through each of those to find all of the subcategory URLs that are listed on those page, since paginating through each category is limited (see lesson #15, above).</p>
+
+<p>It puts all of those subcategory URLs into a redis queue, and then spins up a number of threads (based on <code>settings.max_threads</code>) to process the subcategory URLs. Each thread pops a subcategory URL off the queue, visits it, pulls in the information about the 10-12 products on the page, and then puts the “next page” URL back into the queue.</p>
+
+<p>The process continues until the queue is empty or <code>settings.max_requests</code> has been reached.</p>
+
+<p>Note that the crawler does not currently visit each individual product page since I didn’t need anything that wasn’t visible on the subcategory listing pages, but you could easily add another queue for those URLs and a new function for processing those pages.</p>
+
+<hr>
+
+<p>Hope that helps you get a better sense of how you can conduct a large scrape of amazon.com or a similar ecommerce website.</p>
+
+<p>If you’re interested in learning more about web scraping, <a href="https://scrapethissite.com/lessons/sign-up/">I have an online course that covers the basics and teaches you how to get your own web scrapers running in 15 minutes</a>.</p>
+
+
+  </section>
+
+  <div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/96nq-xsaNcg.html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=225565217845173";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <div class="fb-comments fb_iframe_widget" data-href="https://blog.hartleybrody.com/scrape-amazon/" data-width="750" data-numposts="5" fb-xfbml-state="rendered"><span style="height: 2092px; width: 750px;"><iframe id="f18bdb618607dfc" name="f3d2a45e788749c" scrolling="no" title="Facebook Social Plugin" class="fb_ltr" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/comments.html" style="border: none; overflow: hidden; height: 2092px; width: 750px;"></iframe></span></div>
+
+</article>
+
+        </div>
+        <div class="right-col">
+            <div id="sidebar">
+    <div class="sidebar-item" id="bio">
+        <a href="http://www.hartleybrody.com/">
+            <img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/0b3ac738e74f7fbda25fca0f754b0aad" id="bioimg">
+        </a>
+        <p>I'm a full-stack web developer and tech lead with 6 years of experience across many modern tech stacks.</p>
+        <p>I'm always looking to talk to new clients and contribute to cool projects. <a href="https://blog.hartleybrody.com/contact-me/">Contact me</a> or <a href="https://blog.hartleybrody.com/projects/">check out my side projects</a>.
+        </p>
+    </div>
+
+
+    <div class="non-amp">
+    <div class="sidebar-item" id="subscribe">
+        <h3>Get Email Updates</h3>
+        <p>One or two emails a month about the latest technology I'm hacking on.</p>
+        <form action="https://tinyletter.com/hb-tech" method="post" target="popupwindow" onsubmit="window.open(&#39;https://tinyletter.com/hb-tech&#39;, &#39;popupwindow&#39;, &#39;scrollbars=yes,width=800,height=600&#39;);return true">
+        <input type="email" name="email" placeholder="email address..." id="subscribe-email">
+        <input type="hidden" value="1" name="embed">
+        <input type="submit" value="Join »" name="subscribe" id="subscribe-button">
+        </form>
+    </div>
+    </div>
+
+
+    <div class="sidebar-item" id="scraping-book">
+        <a href="https://blog.hartleybrody.com/guide-to-web-scraping/">
+            <img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/web-scraping-ebook.png">
+        </a>
+    </div>
+
+    <div class="sidebar-item" id="popular">
+        <h3>Popular Posts</h3>
+        <ul>
+            <li><a href="https://blog.hartleybrody.com/web-scraping/">I Don’t Need No Stinking API: Web Scraping For Fun and Profit</a></li>
+            <li><a href="https://blog.hartleybrody.com/fb-messenger-bot/">Facebook Messenger Bot Tutorial: Step-by-Step Instructions for Building a Basic Facebook Chat Bot</a></li>
+            <li><a href="https://blog.hartleybrody.com/https-certificates/">How HTTPS Secures Connections: What Every Web Dev Should Know</a></li>
+            <li><a href="https://blog.hartleybrody.com/google-python/">Google’s Python Lessons are Awesome</a></li>
+            <li><a href="https://blog.hartleybrody.com/python-serialize/">Lightning Fast Data Serialization in Python</a></li>
+            <li><a href="https://blog.hartleybrody.com/static-site-s3/">Moving a Static Site to S3 Before My Girlfriend Got Out of the Shower</a></li>
+            <li><a href="https://blog.hartleybrody.com/scrape-amazon/">How to Scrape Amazon.com: 19 Lessons I Learned While Crawling 1MM+ Product Listings</a></li>
+            <li><a href="https://blog.hartleybrody.com/chrome-extension/">So You Want to Build a Chrome Extension?</a></li>
+            <li><a href="https://blog.hartleybrody.com/scale-load/">Scaling Your Web App 101: Lessons in Architecture Under Load</a></li>
+            <li><a href="https://blog.hartleybrody.com/serverless-stack/">Look Ma, No Servers! How Javascript is Changing the Modern Web Stack</a></li>
+            <li><a href="https://blog.hartleybrody.com/learning-to-code/">How I Learned to Code in Only 6 Years: And You Can Too!</a></li>
+            <li><a href="https://blog.hartleybrody.com/git-small-teams/">Minimum Viable Git Best Practices for Small Teams</a></li>
+        </ul>
+    </div>
+
+    <div class="sidebar-item" id="links">
+        <h3>More Info</h3>
+        <ul>
+            <li><a href="https://blog.hartleybrody.com/contact-me/">Contact Me</a></li>
+            <li><a href="https://blog.hartleybrody.com/press/">Press Mentions</a></li>
+            <li><a href="https://blog.hartleybrody.com/projects/">Recent Projects</a></li>
+            <li><a href="https://blog.hartleybrody.com/subscribe/">Subscribe To My Blog</a></li>
+        </ul>
+    </div>
+
+
+
+</div><!--#sidebar-->
+
+        </div>
+
+        <div class="full-col">
+            <footer class="site-footer">
+   <section class="copyright">All content © 2017 •  <a href="https://blog.hartleybrody.com/contact-me/">Hartley Brody</a> </section>
+</footer>
+
+        </div>
+    </div>
+
+  
+
+<iframe id="sumome-jquery-iframe" style="display: none;" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/saved_resource.html"></iframe><a href="javascript:void(0);" title="Sumo" style="background-color: rgb(0, 115, 183); border-radius: 3px 0px 0px 3px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 10px; position: fixed; z-index: 2147483647; padding: 0px; width: 44px; height: 40px; text-indent: -10000px; opacity: 1; display: block !important; top: 40px; right: -40px;"><span style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; margin-left: 4px; margin-right: 0px; border-radius: 3px 0px 0px 3px;">Sumo</span><span style="display: block; width: 40px; height: 40px; background: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxZDQ2MjI4YS03NWY2LTRkZTQtOGJjYy1hODc1NjRkMjYxYTUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RDQ3MUVFMDFFMjVDMTFFNjlFQjhBRjdGODU5MDJBMDUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RDQ3MUVFMDBFMjVDMTFFNjlFQjhBRjdGODU5MDJBMDUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxZDQ2MjI4YS03NWY2LTRkZTQtOGJjYy1hODc1NjRkMjYxYTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MWQ0NjIyOGEtNzVmNi00ZGU0LThiY2MtYTg3NTY0ZDI2MWE1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+8JtvywAAAKhQTFRFzOPxSJvLA3W4Mo7FBna5w97u8vj7EHy8a67VhbzdsdTpVaLPh73d9/v9C3m6QZfJbq/WXKbR3u32JIfB3ez1KorDir/eBHW4+/3+rtPoZarUG4K/LIvDDnu7ocvkf7nbdrTY9fr8E328WKPQO5PITJ3MPpXJstXptdbq+Pv9cbHXaq3VU6HOkMLgnMnjDHq62uv1/P3+6/T53Oz1cLDX/f7+AHO3////ptOZ5QAAADh0Uk5T/////////////////////////////////////////////////////////////////////////wA7XBHKAAAAmUlEQVR42sSRRxLCMAxFRSq9907ovebr/jdDMWYGxmZL3sIqbyFbJv4B/VlkVlerKALTD3G46Mx3AOR1UZ/TsDxW6W0gfYRNVfTCFu2AWpAMgMItMW+zQJU2UjWI29D0+e5KWNPMk+A9Om+B/UgOJyCuwMJCrpuziYkIsglfRByZ/XM3eXnBFEu1kpMpjq9dxQYp/OAXTwEGAB7Rc1xVnPemAAAAAElFTkSuQmCC&quot;) 8px 8px no-repeat white; margin-left: 4px; border-radius: 3px 0px 0px 3px; margin-right: 0px;"></span></a><iframe style="display: none;" src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/saved_resource(5).html"></iframe><div style="position: fixed; top: 0px; left: 0px; overflow: hidden;"><label for="focus_retriever" style="position:absolute;left:-1000px;">Focus Retriever</label><input style="position:absolute;left:-1000px;" type="text" name="focus_retriever" value="" id="focus_retriever" readonly="true"></div><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/saved_resource(1)" alt="" style="display: none;"><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/saved_resource(2)" alt="" style="display: none;"><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/saved_resource(3)" alt="" style="display: none;"><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/saved_resource(4)" alt="" style="display: none;"><div class="sumome-share-client-wrapper sumome-share-client-wrapper-left-page sumome-share-client-counts sumome-share-client-light sumome-share-client-medium" style="top: 189.5px;"><div class="sumome-share-client-show"><span></span></div><div data-sumome-share-pos="lp" class="sumome-share-client sumome-share-client-left-page sumome-share-client-counts sumome-share-client-light sumome-share-client-medium"><div class="sumome-share-client-animated sumome-share-client-share sumome-share-client-share-share sumome-share-client-count" data-sumome-share="share" style="background: rgb(255, 255, 255); color: black;"><span style="bottom: auto; top: 11px;"><strong>41</strong><br>Shares</span></div><a title="LinkedIn" class="sumome-share-client-animated sumome-share-client-share sumome-share-client-count" data-sumome-share="linkedin" href="javascript:void(0);" style="background: rgb(0, 123, 182); color: rgb(255, 255, 255);"><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/linkedin-white-60.png" alt="LinkedIn"><span>14</span></a><a title="Buffer" class="sumome-share-client-animated sumome-share-client-share sumome-share-client-count" data-sumome-share="buffer" href="javascript:void(0);" style="background: rgb(36, 36, 36); color: rgb(255, 255, 255);"><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/buffer-white-60.png" alt="Buffer"><span>10</span></a><a title="Google+" class="sumome-share-client-animated sumome-share-client-share" data-sumome-share="googleplus" href="javascript:void(0);" style="background: rgb(221, 75, 57); color: rgb(255, 255, 255);"><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/googleplus-white-60.png" alt="Google+"></a><a title="Twitter" class="sumome-share-client-animated sumome-share-client-share" data-sumome-share="twitter" href="javascript:void(0);" style="background: rgb(0, 172, 237); color: rgb(255, 255, 255);"><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/twitter-white-60.png" alt="Twitter"></a><a title="Email" class="sumome-share-client-animated sumome-share-client-share" data-sumome-share="email" href="javascript:void(0);" style="background: rgb(170, 170, 170); color: rgb(255, 255, 255);"><img src="./How to Scrape Amazon.com_ 19 Lessons I Learned While Crawling 1MM+ Product Listings_files/email-white-60.png" alt="Email"></a></div><div class="sumome-share-client-hide"><span></span></div></div></body></html>

@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<!-- saved from url=(0091)https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/ -->
+<html lang="en" class="wf-ubuntu-n4-active wf-ubuntu-i4-active wf-ubuntu-n7-active wf-ubuntu-i7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://ireneli.eu/xmlrpc.php">
+
+<title>NLP 05: From Word2vec to Doc2vec: a simple example with Gensim – Café, bonne nuit</title>
+<script defer="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/beacon.js"></script><script src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/webfont.js" type="text/javascript" async=""></script><script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Ubuntu:r:latin,latin-ext","Ubuntu:r,i,b,bi:latin,latin-ext"]}};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://s1.wp.com/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active body, .wf-active button, .wf-active input, .wf-active select, .wf-active textarea{font-family:"Ubuntu",sans-serif}.wf-active pre{font-family:"Ubuntu",sans-serif}.wf-active code, .wf-active kbd, .wf-active tt, .wf-active var{font-family:"Ubuntu",sans-serif}.wf-active button, .wf-active input[type="button"], .wf-active input[type="reset"], .wf-active input[type="submit"]{font-family:"Ubuntu",sans-serif}.wf-active .entry-meta{font-family:"Ubuntu",sans-serif}.wf-active body:not(.single) .hentry .more-link{font-family:"Ubuntu",sans-serif}.wf-active body:not(.single) .format-status{font-family:"Ubuntu",sans-serif}.wf-active .entry-content .jetpack-recipe .jetpack-recipe-meta{font-family:"Ubuntu",sans-serif}.wf-active .posts-navigation .nav-next a, .wf-active .posts-navigation .nav-previous a{font-family:"Ubuntu",sans-serif}.wf-active .single #primary .author-link{font-family:"Ubuntu",sans-serif}.wf-active .post-navigation-container .post-navigation-header{font-family:"Ubuntu",sans-serif}.wf-active .page-header .taxonomy-description{font-family:"Ubuntu",sans-serif}.wf-active .rating-msg{font-family:"Ubuntu",sans-serif}.wf-active #comments .comment-metadata, .wf-active #comments .reply, .wf-active #comments .edit-link{font-family:"Ubuntu",sans-serif}.wf-active #comments .comment-navigation{font-family:"Ubuntu",sans-serif}.wf-active .comments-form-contain label{font-family:"Ubuntu",sans-serif}.wf-active .no-comments{font-family:"Ubuntu",sans-serif}.wf-active .wp-caption{font-family:"Ubuntu",sans-serif}.wf-active .wp-caption-text{font-family:"Ubuntu",sans-serif}.wf-active #infinite-handle span button, .wf-active #infinite-handle span button:focus, .wf-active #infinite-handle span button:hover{font-family:"Ubuntu",sans-serif}.wf-active .widget_calendar caption{font-family:"Ubuntu",sans-serif}.wf-active .widget_tag_cloud a, .wf-active .wp_widget_tag_cloud a{font-family:"Ubuntu",sans-serif}@media only screen and (max-width: 1200px){.wf-active #masthead .site-title{font-style:normal;font-weight:400}}.wf-active #masthead .site-title{font-weight:400;font-family:"Ubuntu",sans-serif;font-style:normal}.wf-active #masthead .site-description{font-family:"Ubuntu",sans-serif;font-style:normal;font-weight:400}.wf-active .entry-title{font-family:"Ubuntu",sans-serif;font-style:normal;font-weight:400}.wf-active body:not(.single) .format-aside .entry-header .entry-title{font-style:normal;font-weight:400}.wf-active body:not(.single) .format-audio .entry-title, .wf-active body:not(.single) .format-gallery .entry-title, .wf-active body:not(.single) .format-image .entry-title, .wf-active body:not(.single) .format-link .entry-title, .wf-active body:not(.single) .format-video .entry-title{font-family:"Ubuntu",sans-serif;font-weight:400;font-style:normal}.wf-active .entry-content h1, .wf-active .entry-content h2, .wf-active .entry-content h3, .wf-active .entry-content h4, .wf-active .entry-content h5, .wf-active .entry-content h6{font-family:"Ubuntu",sans-serif;font-style:normal;font-weight:400}.wf-active .entry-content h1{font-style:normal;font-weight:400}.wf-active .entry-content h2{font-style:normal;font-weight:400}.wf-active .entry-content h3{font-style:normal;font-weight:400}.wf-active .entry-content h4{font-style:normal;font-weight:400}.wf-active .entry-content h5{font-style:normal;font-weight:400}.wf-active .entry-content h6{font-style:normal;font-weight:400}.wf-active .single #primary article.post .tags-links .tags-header, .wf-active .single #primary article.jetpack-portfolio .tags-links .tags-header, .wf-active .single #primary article.attachment .tags-links .tags-header{font-weight:400;font-style:normal}.wf-active .single #primary .author-description h2{font-style:normal;font-weight:400}.wf-active .page-header .page-title{font-family:"Ubuntu",sans-serif;font-weight:400;font-style:normal}.wf-active #jp-post-flair h3, .wf-active div#jp-relatedposts h3.jp-relatedposts-headline{font-family:"Ubuntu",sans-serif;font-weight:400;font-style:normal}.wf-active div#jp-relatedposts h3.jp-relatedposts-headline em{font-weight:400;font-style:normal}.wf-active #comments .comments-title{font-style:normal;font-weight:400}.wf-active .widget .widget-title{font-family:"Ubuntu",sans-serif;font-weight:400;font-style:normal}@media only screen and (max-width: 1200px){.wf-active #masthead .site-description{font-style:normal;font-weight:400}}@media only screen and (max-width: 1200px){.wf-active .entry-header .entry-title{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h1{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h2{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h3{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h4{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h5{font-style:normal;font-weight:400}}@media only screen and (max-width: 800px){.wf-active .entry-content h6{font-style:normal;font-weight:400}}@media only screen and (max-width: 600px){.wf-active .entry-content h1{font-style:normal;font-weight:400}}@media only screen and (max-width: 600px){.wf-active .entry-content h2{font-style:normal;font-weight:400}}@media only screen and (max-width: 600px){.wf-active #comments .comments-title{font-style:normal;font-weight:400}}</style>
+		<script src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/remote-login.php" type="text/javascript"></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+			if ( 'function' === typeof WPRemoteLogin ) {
+				document.cookie = "wordpress_test_cookie=test; path=/";
+				if ( document.cookie.match( /(;|^)\s*wordpress_test_cookie\=/ ) ) {
+					WPRemoteLogin();
+				}
+			}
+		/* ]]> */
+		</script>
+		<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://irenelizihui.wordpress.com/">
+<link rel="alternate" type="application/rss+xml" title="Café, bonne nuit » Feed" href="https://ireneli.eu/feed/">
+<link rel="alternate" type="application/rss+xml" title="Café, bonne nuit » Comments Feed" href="https://ireneli.eu/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Café, bonne nuit » NLP 05: From Word2vec to Doc2vec: a simple example with Gensim Comments Feed" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1488818651h&ver=4.7.4"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="all-css-0-1" href="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/saved_resource" type="text/css" media="all">
+<script type="text/javascript" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/saved_resource(1)"></script>
+<link rel="stylesheet" id="all-css-0-2" href="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/style.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://irenelizihui.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Deep Learning 12: Energy-Based Learning (2)–Regularization &amp; Loss Functions" href="https://ireneli.eu/2016/07/07/deep-learning-12-energy-based-learning-2-regularization-loss-functions/">
+<link rel="next" title="Two sample problem(1): Parzen Windows, Maximum Mean Discrepancy" href="https://ireneli.eu/2016/08/03/two-sample-problem-parzen-windows/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/">
+<link rel="shortlink" href="http://wp.me/p6OGuT-lt">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=https%3A%2F%2Fireneli.eu%2F2016%2F07%2F27%2Fnlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=https%3A%2F%2Fireneli.eu%2F2016%2F07%2F27%2Fnlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLP 05: From Word2vec to Doc2vec: a simple example with Gensim">
+<meta property="og:url" content="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/">
+<meta property="og:description" content="Introduction First introduced by Mikolov [1] in 2013, the word2vec is to learn distributed representations (word embeddings) when applying neural network. It is based on the distributed hypothesis …">
+<meta property="article:published_time" content="2016-07-27T14:16:04+00:00">
+<meta property="article:modified_time" content="2017-01-19T11:26:11+00:00">
+<meta property="og:site_name" content="Café, bonne nuit">
+<meta property="og:image" content="https://irenelizihui.files.wordpress.com/2016/07/13866917_837560083046228_2061635949_n.jpg">
+<meta property="og:image:width" content="608">
+<meta property="og:image:height" content="386">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@Violaoreal">
+<meta name="twitter:image" content="https://irenelizihui.files.wordpress.com/2016/07/13866917_837560083046228_2061635949_n.jpg?w=240">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@Violaoreal">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/41d51fc4b66fc5438624b6c78b0dac36?s=32" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/41d51fc4b66fc5438624b6c78b0dac36?s=32" sizes="16x16">
+<link rel="apple-touch-icon-precomposed" href="https://secure.gravatar.com/blavatar/41d51fc4b66fc5438624b6c78b0dac36?s=114">
+<link rel="openid.server" href="https://irenelizihui.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://irenelizihui.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ireneli.eu/osd.xml" title="Café, bonne nuit">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+				<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Café, bonne nuit"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Have a coffee when you run any code, if it is still running, then have two…."><meta name="msapplication-task" content="name=Subscribe;action-uri=https://ireneli.eu/feed/;icon-uri=https://secure.gravatar.com/blavatar/41d51fc4b66fc5438624b6c78b0dac36?s=16"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="NLP 05: From Word2vec to Doc2vec: a simple example with Gensim | Café, bonne nuit on WordPress.com">
+<meta name="description" content="Introduction First introduced by Mikolov [1] in 2013, the word2vec is to learn distributed representations (word embeddings) when applying neural network. It is based on the distributed hypothesis that words occur in similar contexts (neighboring words) tend to have similar meanings. Two models here: cbow ( continuous bag of words) where we use a bag…">
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-image: url("https://irenelizihui.files.wordpress.com/2016/11/vg2.jpg"); background-position: center top; background-size: auto; background-repeat: repeat; background-attachment: scroll; }
+</style>
+<link rel="amphtml" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/amp/"><link rel="stylesheet" type="text/css" href="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/shCore.css"><link rel="stylesheet" type="text/css" href="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/shThemeDefault.css"><style type="text/css" id="syntaxhighlighteranchor"></style>
+		<link rel="stylesheet" id="custom-css-css" type="text/css" href="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/saved_resource(2)"><link rel="stylesheet" href="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/css" media="all">
+		<style type="text/css"></style><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/services.css"></head>
+
+<body class="post-template-default single single-post postid-1331 single-format-standard custom-background mp6 customizer-styles-applied highlander-enabled highlander-light">
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<div class="wrap">
+				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
+				<div id="primary-menu" class="menu"><ul aria-expanded="false" class=" nav-menu">
+<li class="page_item page-item-1"><a href="https://ireneli.eu/">Welcome!</a></li>
+</ul></div>
+			</div><!-- .wrap -->
+		</nav><!-- #site-navigation -->
+
+		<div class="site-branding">
+			<div class="wrap">
+
+									<p class="site-title"><a href="https://ireneli.eu/" rel="home">Café, bonne nuit</a></p>
+									<p class="site-description">Have a coffee when you run any code, if it is still running, then have two….</p>
+							</div><!-- .wrap -->
+		</div><!-- .site-branding -->
+
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content">
+		<div class="wrap">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+<article id="post-1331" class="post-1331 post type-post status-publish format-standard hentry category-algorithm category-natural-language-processing category-python category-theory">
+	
+	<header class="entry-header">
+
+		<span class="cat-links"><span class="screen-reader-text">Posted in</span> <a href="https://ireneli.eu/category/algorithm/" rel="category tag">Algorithm</a>, <a href="https://ireneli.eu/category/natural-language-processing/" rel="category tag">Natural Language Processing</a>, <a href="https://ireneli.eu/category/python/" rel="category tag">Python</a>, <a href="https://ireneli.eu/category/theory/" rel="category tag">Theory</a></span>		<h1 class="entry-title">NLP 05: From Word2vec to Doc2vec: a simple example with&nbsp;Gensim</h1>
+		<div class="entry-meta">
+						<span class="posted-on">Posted on <a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/" rel="bookmark"><time class="entry-date published" datetime="2016-07-27T14:16:04+00:00">July 27, 2016</time><time class="updated" datetime="2017-01-19T11:26:11+00:00">January 19, 2017</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://ireneli.eu/author/irenelizihui/">Irene</a></span></span>					</div><!-- .entry-meta -->
+
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<h4>Introduction</h4>
+<p>First introduced by Mikolov [1] in 2013, the word2vec is to learn distributed representations (word embeddings) when applying neural network. It is based on the distributed hypothesis that words occur in similar contexts (neighboring words) tend to have similar meanings. Two models here: cbow ( continuous bag of words) where we use a bag of words to predict a target word and skip-gram where we use one word to predict its neighbors. For more, although not highly recommended, have a look at TensorFlow tutorial <a href="https://www.tensorflow.org/versions/r0.9/tutorials/word2vec/index.html#vector-representations-of-words">here</a>.<span id="more-1331"></span></p>
+<p>After this idea is proved to be effective and helpful, say, you can easily cluster and find similar words in a huge corpus, people then began thinking further: is it possible to have a higher level of representation on sentences, paragraphs or even documents.</p>
+<p>One idea is we can first use the word embeddings to represent each word in a sentence, then apply a simple average pooling approach where the generated document vector is actually a centroid of all words in the space [2]. The popular idea is we following the similar idea on traning the word2vec to learn distributed representations for pieces of texts as an unsupervised method [3,4].</p>
+<h4>Models</h4>
+<p>Similarly, there are two models in doc2vec: dbow and dm.<br>
+<strong><em>dbow (distributed bag of words)</em></strong><br>
+It is a simpler model that ignores word order and training stage is quicker. The model uses no-local context/neighboring words in predictions. You see it is not considering the order of the words. From the paper [4], the figure below shows dbow.</p>
+<p><a href="https://irenelizihui.files.wordpress.com/2016/07/13866917_837560083046228_2061635949_n.jpg" target="_blank"><img data-attachment-id="1339" data-permalink="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/13866917_837560083046228_2061635949_n/" data-orig-file="https://irenelizihui.files.wordpress.com/2016/07/13866917_837560083046228_2061635949_n.jpg?w=840" data-orig-size="608,386" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="13866917_837560083046228_2061635949_n" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/07/13866917_837560083046228_2061635949_n.jpg?w=840?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/07/13866917_837560083046228_2061635949_n.jpg?w=840?w=608" class=" size-full wp-image-1339 aligncenter" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/13866917_837560083046228_2061635949_n.jpg" alt="13866917_837560083046228_2061635949_n" srcset="https://irenelizihui.files.wordpress.com/2016/07/13866917_837560083046228_2061635949_n.jpg 608w, https://irenelizihui.files.wordpress.com/2016/07/13866917_837560083046228_2061635949_n.jpg?w=150 150w, https://irenelizihui.files.wordpress.com/2016/07/13866917_837560083046228_2061635949_n.jpg?w=300 300w" sizes="(max-width: 608px) 100vw, 608px"></a></p>
+<p>In Gensim, you will code like this:</p>
+<div><div id="highlighter_81970" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">model = gensim.models.Doc2Vec(documents,dm = 0, alpha=0.1, size= 20, min_alpha=0.025)</code></div></div></td></tr></tbody></table></div></div>
+<p>Set dm to be 0. If you print out word embeddings at each epoch, you will notice they are not updating. From the graph above, we may guess that we have only paragraph embeddings updated during backpropagation.<br>
+<strong><em>dm (distributed memory)</em></strong><br>
+We treat the paragraph as an extra word. Then it is concatenated/averaged with local context word vectors when making predictions. During training, both paragraph and word embeddings are updated. It calls for more computation and complexity.<br>
+<a href="https://irenelizihui.files.wordpress.com/2016/07/13871742_837560163046220_343227247_n.jpg" target="_blank"><img data-attachment-id="1342" data-permalink="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/13871742_837560163046220_343227247_n/" data-orig-file="https://irenelizihui.files.wordpress.com/2016/07/13871742_837560163046220_343227247_n.jpg?w=840" data-orig-size="585,311" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="13871742_837560163046220_343227247_n" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/07/13871742_837560163046220_343227247_n.jpg?w=840?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/07/13871742_837560163046220_343227247_n.jpg?w=840?w=585" class=" size-full wp-image-1342 aligncenter" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/13871742_837560163046220_343227247_n.jpg" alt="13871742_837560163046220_343227247_n" srcset="https://irenelizihui.files.wordpress.com/2016/07/13871742_837560163046220_343227247_n.jpg 585w, https://irenelizihui.files.wordpress.com/2016/07/13871742_837560163046220_343227247_n.jpg?w=150 150w, https://irenelizihui.files.wordpress.com/2016/07/13871742_837560163046220_343227247_n.jpg?w=300 300w" sizes="(max-width: 585px) 100vw, 585px"></a><br>
+In Gensim, set the dm to be 1(by default):</p>
+<div><div id="highlighter_954803" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">model = gensim.models.Doc2Vec(documents,dm = 1, alpha=0.1, size= 20, min_alpha=0.025)</code></div></div></td></tr></tbody></table></div></div>
+<p>Print out word embeddings at each epoch, you will notice they are updating.</p>
+<p>More detailed: we treat each document as an extra word; doc ID/ paragraph ID is represented as one-hot vector; documents are also embedded into continuous vector space.</p>
+<h4>Example with Gensim</h4>
+<p><a href="https://radimrehurek.com/gensim/">Gensim</a> provides lots of models like LDA, word2vec and doc2vec. While I found some of the example codes on a tutorial is based on long and huge projects (like they trained on English Wiki corpus lol), here I give few lines of codes to show how to start playing with doc2vec.</p>
+<p>First, you need is a list of txt files that you want to try the simple code on. I have a list of txt files under the folder named docs. Two .py files in total: load.py for reading and cleaning data and doc2vectest.py for running doc2vec model.</p>
+<p>load.py</p>
+<div><div id="highlighter_428639" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div><div class="line number32 index31 alt1">32</div><div class="line number33 index32 alt2">33</div><div class="line number34 index33 alt1">34</div><div class="line number35 index34 alt2">35</div><div class="line number36 index35 alt1">36</div><div class="line number37 index36 alt2">37</div><div class="line number38 index37 alt1">38</div><div class="line number39 index38 alt2">39</div><div class="line number40 index39 alt1">40</div><div class="line number41 index40 alt2">41</div><div class="line number42 index41 alt1">42</div><div class="line number43 index42 alt2">43</div><div class="line number44 index43 alt1">44</div><div class="line number45 index44 alt2">45</div><div class="line number46 index45 alt1">46</div><div class="line number47 index46 alt2">47</div><div class="line number48 index47 alt1">48</div><div class="line number49 index48 alt2">49</div><div class="line number50 index49 alt1">50</div><div class="line number51 index50 alt2">51</div><div class="line number52 index51 alt1">52</div><div class="line number53 index52 alt2">53</div><div class="line number54 index53 alt1">54</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">import gensim</code></div><div class="line number2 index1 alt1"><code class="plain plain">import os</code></div><div class="line number3 index2 alt2"><code class="plain plain">import re</code></div><div class="line number4 index3 alt1"><code class="plain plain">from nltk.tokenize import RegexpTokenizer</code></div><div class="line number5 index4 alt2"><code class="plain plain">from stop_words import get_stop_words</code></div><div class="line number6 index5 alt1"><code class="plain plain">from nltk.stem.porter import PorterStemmer</code></div><div class="line number7 index6 alt2"><code class="plain plain">from gensim.models.doc2vec import TaggedDocument</code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="plain plain">def get_doc_list(folder_name):</code></div><div class="line number10 index9 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">doc_list = []</code></div><div class="line number11 index10 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">file_list = [folder_name+'/'+name for name in os.listdir(folder_name) if name.endswith('txt')]</code></div><div class="line number12 index11 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">for file in file_list:</code></div><div class="line number13 index12 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">st = open(file,'r').read()</code></div><div class="line number14 index13 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">doc_list.append(st)</code></div><div class="line number15 index14 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">print ('Found %s documents under the dir %s .....'%(len(file_list),folder_name))</code></div><div class="line number16 index15 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">return doc_list</code></div><div class="line number17 index16 alt2">&nbsp;</div><div class="line number18 index17 alt1"><code class="plain plain">def get_doc(folder_name):</code></div><div class="line number19 index18 alt2">&nbsp;</div><div class="line number20 index19 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">doc_list = get_doc_list(folder_name)</code></div><div class="line number21 index20 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">tokenizer = RegexpTokenizer(r'\w+')</code></div><div class="line number22 index21 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">en_stop = get_stop_words('en')</code></div><div class="line number23 index22 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">p_stemmer = PorterStemmer()</code></div><div class="line number24 index23 alt1">&nbsp;</div><div class="line number25 index24 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">taggeddoc = []</code></div><div class="line number26 index25 alt1">&nbsp;</div><div class="line number27 index26 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">texts = []</code></div><div class="line number28 index27 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">for index,i in enumerate(doc_list):</code></div><div class="line number29 index28 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># for tagged doc</code></div><div class="line number30 index29 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">wordslist = []</code></div><div class="line number31 index30 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">tagslist = []</code></div><div class="line number32 index31 alt1">&nbsp;</div><div class="line number33 index32 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># clean and tokenize document string</code></div><div class="line number34 index33 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">raw = i.lower()</code></div><div class="line number35 index34 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">tokens = tokenizer.tokenize(raw)</code></div><div class="line number36 index35 alt1">&nbsp;</div><div class="line number37 index36 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># remove stop words from tokens</code></div><div class="line number38 index37 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">stopped_tokens = [i for i in tokens if not i in en_stop]</code></div><div class="line number39 index38 alt2">&nbsp;</div><div class="line number40 index39 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># remove numbers</code></div><div class="line number41 index40 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">number_tokens = [re.sub(r'[\d]', ' ', i) for i in stopped_tokens]</code></div><div class="line number42 index41 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">number_tokens = ' '.join(number_tokens).split()</code></div><div class="line number43 index42 alt2">&nbsp;</div><div class="line number44 index43 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># stem tokens</code></div><div class="line number45 index44 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">stemmed_tokens = [p_stemmer.stem(i) for i in number_tokens]</code></div><div class="line number46 index45 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># remove empty</code></div><div class="line number47 index46 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">length_tokens = [i for i in stemmed_tokens if len(i) &gt; 1]</code></div><div class="line number48 index47 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># add tokens to list</code></div><div class="line number49 index48 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">texts.append(length_tokens)</code></div><div class="line number50 index49 alt1">&nbsp;</div><div class="line number51 index50 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">td = TaggedDocument(gensim.utils.to_unicode(str.encode(' '.join(stemmed_tokens))).split(),str(index))</code></div><div class="line number52 index51 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">taggeddoc.append(td)</code></div><div class="line number53 index52 alt2">&nbsp;</div><div class="line number54 index53 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">return taggeddoc</code></div></div></td></tr></tbody></table></div></div>
+<p>The method <em>get_doc_list</em> is used for loading all txt files under a directory, it returns a list of strings. If you have 4 txts, then the length of the list will be 4.<br>
+The method <em>get_doc</em> is mainly for cleaning strings then port the data into some format that doc2vec can use. After we get the long string for each txt, we preprocess it by tokenizing, removing stopwords and numbers, stemming(that is if you have “supply” and “supplies”, then they will convert to “suppli”). You can change and add more filters in this step.<br>
+From the tutorial given by Radim [5], The <em>TaggedDocument</em> (used to be <em>LabeledSentence</em>) is like this:</p>
+<div><div id="highlighter_275234" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">sentence = TaggedDocument(words=[u'some', u'words', u'here'], tags=[u'SENT_1'])</code></div></div></td></tr></tbody></table></div></div>
+<p>You need to pass in a Unicode format list of words and the tags of the document (we agree here a document is a collection of words). Normally we give one tag for each document, but you can still assign more than one. In my experiment, I just give a unique id to each doc as their tag.I tried with int but got an error! The <em>str.encode(somestringhere)</em> method helps you convert a string to the unicode-format. Method <em>get_doc</em> returns a list of <em>TaggedDocument</em> objects.</p>
+<p>doc2vectest.py</p>
+<div><div id="highlighter_69282" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">import gensim</code></div><div class="line number2 index1 alt1"><code class="plain plain">import load</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="plain plain">documents = load.get_doc('docs')</code></div><div class="line number5 index4 alt2"><code class="plain plain">print ('Data Loading finished')</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="plain plain">print (len(documents),type(documents))</code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="plain plain"># build the model</code></div><div class="line number10 index9 alt1"><code class="plain plain">model = gensim.models.Doc2Vec(documents, dm = 0, alpha=0.025, size= 20, min_alpha=0.025, min_count=0)</code></div><div class="line number11 index10 alt2">&nbsp;</div><div class="line number12 index11 alt1"><code class="plain plain"># start training</code></div><div class="line number13 index12 alt2"><code class="plain plain">for epoch in range(200):</code></div><div class="line number14 index13 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">if epoch % 20 == 0:</code></div><div class="line number15 index14 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">print ('Now training epoch %s'%epoch)</code></div><div class="line number16 index15 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">model.train(documents)</code></div><div class="line number17 index16 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">model.alpha -= 0.002&nbsp; # decrease the learning rate</code></div><div class="line number18 index17 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">model.min_alpha = model.alpha&nbsp; # fix the learning rate, no decay</code></div><div class="line number19 index18 alt2">&nbsp;</div><div class="line number20 index19 alt1"><code class="plain plain"># shows the similar words</code></div><div class="line number21 index20 alt2"><code class="plain plain">print (model.most_similar('suppli'))</code></div><div class="line number22 index21 alt1">&nbsp;</div><div class="line number23 index22 alt2"><code class="plain plain"># shows the learnt embedding</code></div><div class="line number24 index23 alt1"><code class="plain plain">print (model['suppli'])</code></div><div class="line number25 index24 alt2">&nbsp;</div><div class="line number26 index25 alt1"><code class="plain plain"># shows the similar docs with id = 2</code></div><div class="line number27 index26 alt2"><code class="plain plain">print (model.docvecs.most_similar(str(2)))</code></div></div></td></tr></tbody></table></div></div>
+<p>After loading the documents, we are able to build a doc2vec model. Yes, just one line.<br>
+We are able to pass in documents and assign hyper-parameters. You can find a full version about the methods here [6]. If the dm = 0, then we are training a dbow model. The size = 20 defines the dimension of doc vectors. If we initialize by passing in documents here, then we do not need to build vocabulary, it is done by itself.<br>
+You can train it for a number of epochs by changing the learning rate (alpha).</p>
+<p>After some time, let’s print some results. Do remember when we train doc2vec, we can get word embeddings and also document similarities, and even label representations!<br>
+Here I printed most similar words of “suppli”:</p>
+<div><div id="highlighter_723477" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">&gt;&gt;model.most_similar('suppli')</code></div><div class="line number2 index1 alt1"><code class="plain plain">[('gorski', 0.7319533824920654), ('ensur', 0.7222224473953247), ('beyond', 0.718737006187439), ('d', 0.6974059343338013), ('sociedad', 0.6583201885223389), ('particularli', 0.6544623374938965), ('lvg', 0.644609808921814), ('sal', 0.6434764862060547), ('measur', 0.6433277130126953), ('livneh', 0.6426206827163696)].</code></div></div></td></tr></tbody></table></div></div>
+<p>And let’s see how the word “suppli” is represented (a 20-d vector):</p>
+<div><div id="highlighter_343818" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">&gt;&gt;model['suppli']</code></div><div class="line number2 index1 alt1"><code class="plain plain">[ 0.00780776 -0.02093589 -0.00954595 0.01870585 -0.0185861 0.0023135</code></div><div class="line number3 index2 alt2"><code class="plain plain">0.00341994 0.00175795 0.01479601 0.01020735 0.02441289 0.01075038</code></div><div class="line number4 index3 alt1"><code class="plain plain">0.00807728 0.0213691 0.01130075 0.01297983 0.01369582 -0.01174711</code></div><div class="line number5 index4 alt2"><code class="plain plain">-0.00518298 -0.00057144]</code></div></div></td></tr></tbody></table></div></div>
+<p>Then the similarity/ distance between the document with ID 2 and the rest:</p>
+<div><div id="highlighter_626738" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">&gt;&gt;model.docvecs.most_similar(str(2))</code></div><div class="line number2 index1 alt1"><code class="plain plain">[('1', 0.44029974937438965), ('0', -0.044562749564647675), ('3', -0.048865705728530884), ('6', -0.08216284960508347), ('9', -0.15016411244869232), ('5', -0.16429446637630463), ('4', -0.1840556114912033), ('8', -0.21571332216262817), ('7', -0.23153537511825562)]</code></div></div></td></tr></tbody></table></div></div>
+<p>You can save both word embeddings and document/paragraph embeddings:</p>
+<div><div id="highlighter_463154" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">model.save('save/trained.model')</code></div><div class="line number2 index1 alt1"><code class="plain plain">model.save_word2vec_format('save/trained.word2vec')</code></div></div></td></tr></tbody></table></div></div>
+<p>When you want to use the model:</p>
+<div><div id="highlighter_183119" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># load the word2vec</code></div><div class="line number2 index1 alt1"><code class="plain plain">word2vec = gensim.models.Doc2Vec.load_word2vec_format('save/trained.word2vec')</code></div><div class="line number3 index2 alt2"><code class="plain plain">print (word2vec['good'])</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="plain plain"># load the doc2vec</code></div><div class="line number6 index5 alt1"><code class="plain plain">model = gensim.models.Doc2Vec.load('save/trained.model')</code></div><div class="line number7 index6 alt2"><code class="plain plain">docvecs = model.docvecs</code></div><div class="line number8 index7 alt1"><code class="plain plain"># print (docvecs[str(3)])</code></div></div></td></tr></tbody></table></div></div>
+<p>They will print out the vectors for you.</p>
+<p>Plot<br>
+We can simply get those word embeddings, and plot them (as done in the word2vec). Here a simple PCA() method was used first, then we take some of the words to plot. After PCA(), we reduced dimension of a word to 2.</p>
+<div><div id="highlighter_259448" class="syntaxhighlighter  plain"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">def plotWords():</code></div><div class="line number2 index1 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">#get model, we use w2v only</code></div><div class="line number3 index2 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">w2v,d2v=useModel()</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">words_np = []</code></div><div class="line number6 index5 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">#a list of labels (words)</code></div><div class="line number7 index6 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">words_label = []</code></div><div class="line number8 index7 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">for word in w2v.vocab.keys():</code></div><div class="line number9 index8 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">words_np.append(w2v[word])</code></div><div class="line number10 index9 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">words_label.append(word)</code></div><div class="line number11 index10 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">print('Added %s words. Shape %s'%(len(words_np),np.shape(words_np)))</code></div><div class="line number12 index11 alt1">&nbsp;</div><div class="line number13 index12 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">pca = decomposition.PCA(n_components=2)</code></div><div class="line number14 index13 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">pca.fit(words_np)</code></div><div class="line number15 index14 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">reduced= pca.transform(words_np)</code></div><div class="line number16 index15 alt1">&nbsp;</div><div class="line number17 index16 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># plt.plot(pca.explained_variance_ratio_)</code></div><div class="line number18 index17 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">for index,vec in enumerate(reduced):</code></div><div class="line number19 index18 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># print ('%s %s'%(words_label[index],vec))</code></div><div class="line number20 index19 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">if index &lt;100:</code></div><div class="line number21 index20 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">x,y=vec[0],vec[1]</code></div><div class="line number22 index21 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">plt.scatter(x,y)</code></div><div class="line number23 index22 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">plt.annotate(words_label[index],xy=(x,y))</code></div><div class="line number24 index23 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">plt.show()</code></div></div></td></tr></tbody></table></div></div>
+<p>We will plot something like this:</p>
+<p><a href="https://irenelizihui.files.wordpress.com/2016/07/13950777_843664199102483_1888567216_o.jpg" target="_blank"><img data-attachment-id="1392" data-permalink="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/13950777_843664199102483_1888567216_o/" data-orig-file="https://irenelizihui.files.wordpress.com/2016/07/13950777_843664199102483_1888567216_o.jpg?w=840" data-orig-size="1064,664" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="13950777_843664199102483_1888567216_o" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/07/13950777_843664199102483_1888567216_o.jpg?w=840?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/07/13950777_843664199102483_1888567216_o.jpg?w=840?w=840" class=" size-full wp-image-1392 aligncenter" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/13950777_843664199102483_1888567216_o.jpg" alt="13950777_843664199102483_1888567216_o" srcset="https://irenelizihui.files.wordpress.com/2016/07/13950777_843664199102483_1888567216_o.jpg?w=840 840w, https://irenelizihui.files.wordpress.com/2016/07/13950777_843664199102483_1888567216_o.jpg?w=150 150w, https://irenelizihui.files.wordpress.com/2016/07/13950777_843664199102483_1888567216_o.jpg?w=300 300w, https://irenelizihui.files.wordpress.com/2016/07/13950777_843664199102483_1888567216_o.jpg?w=768 768w, https://irenelizihui.files.wordpress.com/2016/07/13950777_843664199102483_1888567216_o.jpg?w=1024 1024w, https://irenelizihui.files.wordpress.com/2016/07/13950777_843664199102483_1888567216_o.jpg 1064w" sizes="(max-width: 840px) 100vw, 840px"></a></p>
+<hr>
+<p>References:<br>
+[1]: <a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf" rel="nofollow">https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf</a><br>
+[2]: <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=7041633" rel="nofollow">http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=7041633</a><br>
+[3]: <a href="https://cs.stanford.edu/~quocle/paragraph_vector.pdf" rel="nofollow">https://cs.stanford.edu/~quocle/paragraph_vector.pdf</a><br>
+[4]: <a href="http://arxiv.org/pdf/1507.07998v1.pdf" rel="nofollow">http://arxiv.org/pdf/1507.07998v1.pdf</a><br>
+[5]: <a href="http://rare-technologies.com/doc2vec-tutorial/" rel="nofollow">http://rare-technologies.com/doc2vec-tutorial/</a><br>
+[6]: <a href="https://radimrehurek.com/gensim/models/doc2vec.html" rel="nofollow">https://radimrehurek.com/gensim/models/doc2vec.html</a></p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-1331" class="share-twitter sd-button share-icon" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-1331" class="share-facebook sd-button share-icon" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?share=facebook&amp;nb=1" target="_blank" title="Share on Facebook"><span>Facebook<span class="share-count">1</span></span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-1331" class="share-google-plus-1 sd-button share-icon" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?share=google-plus-1&amp;nb=1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-100737779-1331-58fd9878af5dd" data-src="//widgets.wp.com/likes/#blog_id=100737779&amp;post_id=1331&amp;origin=irenelizihui.wordpress.com&amp;obj_id=100737779-1331-58fd9878af5dd" data-name="like-post-frame-100737779-1331-58fd9878af5dd"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-100737779-1331-58fd9878af5dd" height="55px" width="100%" frameborder="0" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/saved_resource.html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="1259" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://ireneli.eu/2016/06/14/tensorflow-06-word-embeddings-1/" title="TensorFlow 06: Word Embeddings (1)
+
+(A new learner! Leave comments if you find any mistakes please!) How do we present a word? In TensorFlow, everything, yes everything, flows into the graph, is a tensor. For example, the famous word2vec model is used for learning vector representations of words. Representation It is natural that we will…" rel="nofollow" data-origin="1331" data-position="0">TensorFlow 06: Word Embeddings (1)</a></span><span class="jp-relatedposts-post-context">In "Theory"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="1643" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/" title="TensorFlow 07: Word Embeddings (2) - Loading Pre-trained Vectors
+
+A brief introduction on Word2vec please check this post. In this post, we try to load pre-trained Word2vec model, which is a huge file contains all the word vectors trained on huge corpora. Download Download here .I downloaded the GloVe one, the vocabulary size is 4 million, dimension is 50. It…" rel="nofollow" data-origin="1331" data-position="1">TensorFlow 07: Word Embeddings (2) - Loading Pre-trained Vectors</a></span><span class="jp-relatedposts-post-context">In "Python"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="705" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://ireneli.eu/2016/02/16/deep-learning-07-are-you-talking-to-a-machine/" title="Deep Learning 07: Are you talking to a machine?
+
+Recently working on a shared task job of image annotation. An interesting paper saw on NIPS’15 was proposed by Baidu Research. Find paper here . Official website. This post is the study notes. Are You Talking to a Machine? Dataset and Methods for Multilingual Image Question Answering by Baidu Research…" rel="nofollow" data-origin="1331" data-position="2">Deep Learning 07: Are you talking to a machine?</a></span><span class="jp-relatedposts-post-context">In "Deep Learning"</span></p></div></div></div>	</div><!-- .entry-content -->
+
+	
+<div class="author-info clear">
+	<div class="author-avatar">
+		<span class="avatar-container"><img alt="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/e2f2dcbcb482924fd04c24c9af027dd6" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://2.gravatar.com/avatar/e2f2dcbcb482924fd04c24c9af027dd6?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-e2f2dcbcb482924fd04c24c9af027dd6-0"></span>	</div><!-- .author-avatar -->
+
+	<div class="author-description">
+		<h2 class="author-title">
+			<span class="author-heading">Author:</span>
+			<a href="https://ireneli.eu/author/irenelizihui/" rel="author">Irene</a>
+		</h2>
+
+		<p class="author-bio">
+			Keep calm and update blog.			<a class="author-link" href="https://ireneli.eu/author/irenelizihui/" rel="author">
+				View All Posts							</a>
+		</p><!-- .author-bio -->
+	</div><!-- .author-description -->
+</div><!-- .author-info -->
+
+	<footer class="entry-footer">
+			</footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+<div class="post-navigation-container">
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://ireneli.eu/2016/07/07/deep-learning-12-energy-based-learning-2-regularization-loss-functions/" rel="prev"><span class="post-navigation-header">Previous Post</span> Deep Learning 12: Energy-Based Learning (2)–Regularization &amp; Loss&nbsp;Functions</a></div><div class="nav-next"><a href="https://ireneli.eu/2016/08/03/two-sample-problem-parzen-windows/" rel="next"><span class="post-navigation-header">Next Post</span> Two sample problem(1): Parzen Windows, Maximum Mean&nbsp;Discrepancy</a></div></div>
+	</nav><svg class="little-pencil" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1013.5px" height="72.3px" viewBox="0 0 1013.5 72.3" style="enable-background:new 0 0 1013.5 72.3;" xml:space="preserve" aria-hidden="true">
+<path class="pencil-little0" d="M10,0C10,0,0,10.9,0,35.8c0,28.2,10,36.5,10,36.5h841.4V0H10z"></path>
+<path class="pencil-little1" d="M57,0c0,0-10,10.9-10,35.8c0,28.2,10,36.5,10,36.5h821.4V0L57,0z"></path>
+<path class="pencil-little2" d="M101,0c0,0-10,10.9-10,35.8c0,28.2,10,36.5,10,36.5h821.4V0L101,0z"></path>
+<rect x="92.7" y="24.3" class="pencil-little3" width="829.7" height="22.8"></rect>
+<polygon class="pencil-little4" points="92.7,49.5 101,72.3 922.4,72.3 922.4,49.5 "></polygon>
+<path class="pencil-little5" d="M1013.5,36.1l-91.2,36.1c0,0-8.4-9.8-8.4-36.1S922.4,0,922.4,0L1013.5,36.1z"></path>
+<path class="pencil-little6" d="M1013.5,36.1l-33.5,13.3c0,0-3.1-3.6-3.1-13.3s3.1-13.3,3.1-13.3L1013.5,36.1z"></path>
+<path class="pencil-little5" d="M922.4,72.3c0,0-12.7-5.4-14-10C907,57.7,914,53,914,49.4s-10-7.8-10-13.6s10-7.8,10-12.9s-5.7-8.3-5.7-13.6s14-9.3,14-9.3l11,35.8L922.4,72.3z"></path>
+</svg>
+</div>
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			9 thoughts on “<span>NLP 05: From Word2vec to Doc2vec: a simple example with&nbsp;Gensim</span>”		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-110" class="pingback even thread-even depth-1 highlander-comment">
+			<div class="comment-body">
+				Pingback: <a href="https://amsterdam.luminis.eu/2017/01/16/googling-doc2vec/" rel="external nofollow" class="url">Googling doc2vec - Luminis Amsterdam : Luminis Amsterdam</a> 			</div>
+</li><!-- #comment-## -->
+		<li id="comment-116" class="comment odd alt thread-odd thread-alt depth-1 parent highlander-comment">
+			<article id="div-comment-116" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/53c29276ab991ef64fd9a93c9b288fa9" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://2.gravatar.com/avatar/53c29276ab991ef64fd9a93c9b288fa9?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-53c29276ab991ef64fd9a93c9b288fa9-0"></span>						<b class="fn">Anonymous</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-116">
+							<time datetime="2017-01-19T10:27:00+00:00">
+								January 19, 2017 at 10:27 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hello. I use your load.py script. But I got an error.<br>
+length_tokens = [i for i in stemmed_tokens if len(i) &amp;amp;gt;1]<br>
+Python show that invalid syntax “len(i) &amp;amp;gt;1”<br>
+How can I solve?<br>
+Thanks</p>
+<p id="comment-like-116" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?like_comment=116&amp;_wpnonce=090bbf86cc" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-116" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?replytocom=116#respond" onclick="return addComment.moveForm( &quot;div-comment-116&quot;, &quot;116&quot;, &quot;respond&quot;, &quot;1331&quot; )" aria-label="Reply to ">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-117" class="comment byuser comment-author-irenelizihui bypostauthor even depth-2 parent highlander-comment">
+			<article id="div-comment-117" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/e2f2dcbcb482924fd04c24c9af027dd6(1)" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://2.gravatar.com/avatar/e2f2dcbcb482924fd04c24c9af027dd6?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-e2f2dcbcb482924fd04c24c9af027dd6-1"></span>						<b class="fn"><a href="http://www.ireneli.eu/" rel="external nofollow" class="url">Irene</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-117">
+							<time datetime="2017-01-19T11:28:29+00:00">
+								January 19, 2017 at 11:28 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi,</p>
+<p>This part “len(i) &amp;gt;1” should be “len(i) &gt; 1”. I’ve updated. Because every time I copy the code to wordpress, some characters would be changed, I need to revise manually. wow</p>
+<p id="comment-like-117" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?like_comment=117&amp;_wpnonce=dff8e89818" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-117" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?replytocom=117#respond" onclick="return addComment.moveForm( &quot;div-comment-117&quot;, &quot;117&quot;, &quot;respond&quot;, &quot;1331&quot; )" aria-label="Reply to Irene">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-123" class="comment odd alt depth-3 highlander-comment">
+			<article id="div-comment-123" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/53c29276ab991ef64fd9a93c9b288fa9(1)" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://2.gravatar.com/avatar/53c29276ab991ef64fd9a93c9b288fa9?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-53c29276ab991ef64fd9a93c9b288fa9-1"></span>						<b class="fn">Anonymous</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-123">
+							<time datetime="2017-01-20T14:40:42+00:00">
+								January 20, 2017 at 2:40 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks</p>
+<p id="comment-like-123" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?like_comment=123&amp;_wpnonce=18a0a6672a" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-123" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-138" class="comment even thread-even depth-1 parent highlander-comment">
+			<article id="div-comment-138" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/02bdb0d8ccbb17de17c57d4036c44000" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://0.gravatar.com/avatar/02bdb0d8ccbb17de17c57d4036c44000?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-02bdb0d8ccbb17de17c57d4036c44000-0"></span>						<b class="fn">Adrian</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-138">
+							<time datetime="2017-02-16T23:52:31+00:00">
+								February 16, 2017 at 11:52 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Could you comment on the pros and cons of applying the word stemmer in this case, what is the tradeoff?<br>
+– Thanks for this article, is a great starting point for learning to apply embeddings.</p>
+<p id="comment-like-138" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?like_comment=138&amp;_wpnonce=568a78258f" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-138" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?replytocom=138#respond" onclick="return addComment.moveForm( &quot;div-comment-138&quot;, &quot;138&quot;, &quot;respond&quot;, &quot;1331&quot; )" aria-label="Reply to Adrian">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-141" class="comment byuser comment-author-irenelizihui bypostauthor odd alt depth-2 highlander-comment">
+			<article id="div-comment-141" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/e2f2dcbcb482924fd04c24c9af027dd6(1)" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://2.gravatar.com/avatar/e2f2dcbcb482924fd04c24c9af027dd6?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-e2f2dcbcb482924fd04c24c9af027dd6-2"></span>						<b class="fn"><a href="http://www.ireneli.eu/" rel="external nofollow" class="url">Irene</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-141">
+							<time datetime="2017-03-12T15:23:48+00:00">
+								March 12, 2017 at 3:23 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi Adrian, according to my experiments, if applying stemming, the average accuracy would go lower. The reason is we are losing too much infomation, for example, in these two cases “a study shows…” (a noun), “he studied …”(a verb) , both of the keywords will become “studi”, a same word embedding. But generally, a noun and a verb should not be the same in our embeddings.</p>
+<p id="comment-like-141" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?like_comment=141&amp;_wpnonce=9132ec2c55" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-141" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?replytocom=141#respond" onclick="return addComment.moveForm( &quot;div-comment-141&quot;, &quot;141&quot;, &quot;respond&quot;, &quot;1331&quot; )" aria-label="Reply to Irene">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-140" class="comment even thread-odd thread-alt depth-1 parent highlander-comment">
+			<article id="div-comment-140" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/9a15ea83cb56155c1b1d748926971583" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://0.gravatar.com/avatar/9a15ea83cb56155c1b1d748926971583?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-9a15ea83cb56155c1b1d748926971583-0"></span>						<b class="fn">Anonymous</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-140">
+							<time datetime="2017-03-12T15:07:35+00:00">
+								March 12, 2017 at 3:07 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi Irene, i love this post about doc2vec because it helped me to progess. However,  i am wondering how to update a pre-trained model on which I did look for an answer and found that after loading the model i have to set the parameter update in build_vocab to true and in the fro loop when training is being in progress. But which method should i call train or infer_vector, and should is also call update_weights because i did and it did sound logic to me.</p>
+<p id="comment-like-140" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?like_comment=140&amp;_wpnonce=b3a425d74c" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-140" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?replytocom=140#respond" onclick="return addComment.moveForm( &quot;div-comment-140&quot;, &quot;140&quot;, &quot;respond&quot;, &quot;1331&quot; )" aria-label="Reply to ">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-142" class="comment byuser comment-author-irenelizihui bypostauthor odd alt depth-2 highlander-comment">
+			<article id="div-comment-142" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/e2f2dcbcb482924fd04c24c9af027dd6(1)" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://2.gravatar.com/avatar/e2f2dcbcb482924fd04c24c9af027dd6?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-e2f2dcbcb482924fd04c24c9af027dd6-3"></span>						<b class="fn"><a href="http://www.ireneli.eu/" rel="external nofollow" class="url">Irene</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-142">
+							<time datetime="2017-03-12T15:29:01+00:00">
+								March 12, 2017 at 3:29 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi there, sorry I did not try to load pre-trained embeddings with Gensim. If the pretrained embeddings were by Gensim, then it is easy. Because I always using Gensim to pre-train, then I load them by TensorFlow and update the weights. You might want to have a look of this post:<a href="https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/" rel="nofollow">https://ireneli.eu/2017/01/17/tensorflow-07-word-embeddings-2-loading-pre-trained-vectors/</a></p>
+<p id="comment-like-142" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?like_comment=142&amp;_wpnonce=6cc35e44ee" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-142" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?replytocom=142#respond" onclick="return addComment.moveForm( &quot;div-comment-142&quot;, &quot;142&quot;, &quot;respond&quot;, &quot;1331&quot; )" aria-label="Reply to Irene">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-146" class="comment byuser comment-author-boobywomack even thread-even depth-1 highlander-comment">
+			<article id="div-comment-146" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<span class="avatar-container"><img alt="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/c88dda0965a2ed9fdd8aed77ef8605e8" class="avatar avatar-100 grav-hashed grav-hijack" height="100" width="100" originals="100" src-orig="https://0.gravatar.com/avatar/c88dda0965a2ed9fdd8aed77ef8605e8?s=100&amp;d=identicon&amp;r=G" scale="2" id="grav-c88dda0965a2ed9fdd8aed77ef8605e8-0"></span>						<b class="fn"><a href="http://phonescc.wordpress.com/" rel="external nofollow" class="url">Phones Chess Club Glasgow</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-146">
+							<time datetime="2017-03-23T18:52:27+00:00">
+								March 23, 2017 at 6:52 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi I was wondering if all the code was here (or is it on github?). I am not sure where the referecne to useModel() is in the plot of PCA. Nice description of doc2vec, clearly explained.</p>
+<p id="comment-like-146" data-liked="comment-not-liked" class="comment-likes comment-not-liked"><a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?like_comment=146&amp;_wpnonce=791c7d1cb5" class="comment-like-link needs-login" rel="nofollow" data-blog="100737779"><span>Like</span></a><span id="comment-like-count-146" class="comment-like-feedback">Like</span></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/?replytocom=146#respond" onclick="return addComment.moveForm( &quot;div-comment-146&quot;, &quot;146&quot;, &quot;respond&quot;, &quot;1331&quot; )" aria-label="Reply to Phones Chess Club Glasgow">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+</div><!-- #comments -->
+
+	<div class="pencil-shaving-contain">
+		<svg class="pencil-shaving" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="31.5px" height="54.8px" viewBox="0 0 31.5 54.8" style="enable-background:new 0 0 31.5 54.8;" xml:space="preserve" aria-hidden="true">
+<polygon class="pencil-shaving0" points="17.8,0 25.9,13.1 23.4,14.6 18.4,10.9 22.4,15.5 20.3,18 18.3,17.8 18.7,20 20.5,24.2 25.2,25.4
+	25.3,26.5 28.6,27.4 27.6,29.6 28.6,31.2 27.1,33.4 28.9,35.6 31.5,36 27.2,51.6 23.6,54.8 23.9,50.8 19.3,51.4 18.3,47.6 15,48
+	14.6,44.1 10.1,43.6 11.8,38.5 7.3,37.6 8.1,32.8 4.3,32 6.1,28.5 2.2,26.5 4,23.7 1.8,21.2 4.7,18.4 2.3,14.8 7.1,14.1 5.4,9.6
+	9.3,9.1 9.2,4.3 13.8,4.1 13.6,0.6 "></polygon>
+<path class="pencil-shaving1" d="M27.2,51.6l-2.4,0l0.1-2.6c0-0.2-0.1-0.3-0.2-0.4c-0.1-0.1-0.3-0.1-0.5,0l-3.9,1.8l-0.4-3.6
+	c0-0.1-0.1-0.3-0.2-0.3c-0.1-0.1-0.3-0.1-0.4-0.1l-2.9,0.6l0.1-3.6c0-0.1,0-0.3-0.1-0.4c-0.1-0.1-0.2-0.1-0.4-0.1h-3.3l0.7-4.8
+	c0-0.3-0.1-0.5-0.4-0.6l-4-0.8l0.8-3.8c0-0.2-0.1-0.5-0.3-0.6L6.8,31l0.7-2.9c0.1-0.2-0.1-0.5-0.3-0.6L4.1,26l1.2-1.8
+	c0.1-0.2,0.1-0.4,0-0.6l-2-2.6l2.8-1.9c0.1-0.1,0.2-0.2,0.2-0.3c0-0.1,0-0.3-0.1-0.4l-2.2-3l3.8-0.4c0.1,0,0.3-0.1,0.4-0.2
+	c0.1-0.1,0.1-0.3,0.1-0.4l-1.2-4l3.2-0.1c0.1,0,0.3-0.1,0.4-0.2c0.1-0.1,0.1-0.2,0.1-0.4l-0.4-4.5h4.2c0.1,0,0.3-0.1,0.4-0.2
+	c0.1-0.1,0.1-0.2,0.1-0.4l-0.1-3.1L17.8,0l-5.3,0c-0.1,0-0.3,0.1-0.4,0.2s-0.1,0.2-0.1,0.4l0.3,2.4L8.6,3.3c-0.3,0-0.5,0.2-0.5,0.5
+	v4L4.5,8.2c-0.2,0-0.3,0.1-0.4,0.2C4,8.6,4,8.8,4,8.9l1.5,4.2L1.3,14c-0.2,0-0.3,0.2-0.4,0.3c-0.1,0.2,0,0.3,0.1,0.5l2.6,3.4l-3,2.6
+	c-0.1,0.1-0.2,0.2-0.2,0.4c0,0.1,0.1,0.3,0.2,0.4l2.2,2.1l-2.6,3C0,26.7,0,26.9,0,27s0.2,0.3,0.3,0.3l4.4,1.8l-2.4,3.2
+	c-0.1,0.1-0.1,0.3-0.1,0.5c0.1,0.2,0.2,0.3,0.4,0.3l4.1,0.7L4,38.5c-0.1,0.2-0.1,0.3,0,0.5c0.1,0.2,0.3,0.3,0.4,0.3h6.2
+	c0,0-2.4,5.9-2.1,6.3c0.2,0.3,5.2,0,5.2,0l0.1,3.3c0,0.3,0.2,0.5,0.5,0.5h3.4v3.8c0,0.2,0.1,0.3,0.2,0.4s0.3,0.1,0.5,0.1l4.3-1.7
+	l0.5,2.3c0,0.2,0.1,0.3,0.3,0.4c0.1,0,0.1,0,0.2,0c0.1,0,0.2,0,0.3-0.1L27.2,51.6z"></path>
+<polygon class="pencil-shaving2" points="28,16.4 23.6,9.3 23.1,10.3 24.8,13.2 24.1,13.6 25.5,16.8 26.5,16.2 26.9,16.8 "></polygon>
+<polygon class="pencil-shaving2" points="22.8,16.8 25.3,18.1 24.1,18.8 21.7,17.3 23.5,19.4 18.3,17.8 23.1,19.9 18.3,19 17.8,17.5 21.3,16.8
+	22.4,15.5 "></polygon>
+<polygon class="pencil-shaving2" points="24.1,25.6 25.5,25.4 26.5,26.8 28,26.8 30.9,26.1 29.6,28.1 28,29.2 29,30.7 29.3,31.6 27.5,33
+	29.2,34.3 29.3,35.6 31.1,35.9 28.3,35.9 28,34.7 25.9,33.7 28,31.1 26.5,29.7 28,27.9 24.9,28.7 25.3,26.5 "></polygon>
+</svg>
+	</div><!-- .pencil-shaving-contain -->
+
+
+	<div id="comments-form">
+		<div class="comments-form-contain">
+			<svg class="post-mark" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="395.7px" height="155.5px" viewBox="0 0 395.7 155.5" style="enable-background:new 0 0 395.7 155.5;" xml:space="preserve" aria-hidden="true">
+<path class="post-mark0" d="M318.4,155.5c-42.9,0-77.8-34.9-77.8-77.7S275.5,0,318.4,0s77.8,34.9,77.8,77.8S361.3,155.5,318.4,155.5z M318.4,5c-40.1,0-72.8,32.6-72.8,72.8c0,40.1,32.6,72.7,72.8,72.7s72.8-32.6,72.8-72.7C391.2,37.6,358.5,5,318.4,5z"></path>
+<path class="post-mark0" d="M318.4,136.6c-32.4,0-58.8-26.4-58.8-58.8c0-32.4,26.4-58.8,58.8-58.8s58.8,26.4,58.8,58.8C377.2,110.2,350.9,136.6,318.4,136.6z M318.4,20.9c-31.3,0-56.8,25.5-56.8,56.8s25.5,56.8,56.8,56.8s56.8-25.5,56.8-56.8S349.8,20.9,318.4,20.9z"></path>
+<path class="post-mark0" d="M247.6,32.1c0.9-1.4,1.8-2.8,2.8-4.1c-0.8-0.5-1.6-1-2.4-1.5c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4c-10.2,0-15.3,3.2-20.3,6.4C51,29.3,46.7,32,37.9,32c-8.8,0-13.1-2.7-17.6-5.6C15.3,23.3,10.2,20,0,20v5c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6C246.1,31.1,246.8,31.6,247.6,32.1z"></path>
+<path class="post-mark0" d="M240,46.7c-3.2-1.2-7.1-2.1-12.3-2.1c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4v5c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c4.5,0,7.8,0.7,10.6,1.8C238.9,49.9,239.4,48.3,240,46.7z"></path>
+<path class="post-mark0" d="M234.5,69.8c-2-0.4-4.2-0.6-6.8-0.6c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4v5c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c2.5,0,4.6,0.2,6.5,0.6C234.3,73.2,234.4,71.5,234.5,69.8z"></path>
+<path class="post-mark0" d="M235.8,94.7c-2.3-0.5-5-0.8-8.1-0.8c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4v5c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c3.9,0,6.9,0.5,9.5,1.4C236.7,98.4,236.2,96.6,235.8,94.7z"></path>
+<path class="post-mark0" d="M248.9,125.4c-0.3-0.2-0.6-0.4-0.9-0.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4s-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4c-10.2,0-15.3,3.2-20.3,6.4c-4.6,2.9-8.9,5.6-17.6,5.6c-8.8,0-13.1-2.7-17.6-5.6c-5-3.1-10.1-6.4-20.3-6.4v5c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6c8.8,0,13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6c5,3.1,10.1,6.4,20.3,6.4c10.2,0,15.3-3.2,20.3-6.4c4.6-2.9,8.9-5.6,17.6-5.6s13.1,2.7,17.6,5.6c3,1.9,6.2,3.9,10.5,5.1C253.3,131.4,251,128.5,248.9,125.4z"></path>
+</svg>
+<svg class="stamp" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="157.3px" height="186px" viewBox="0 0 157.3 186" style="enable-background:new 0 0 157.3 186;" xml:space="preserve" aria-hidden="true">
+<path class="stamp0" d="M157.3,16.4V0h-15.7c-0.4,3.3-3.3,5.9-6.7,5.9s-6.3-2.6-6.7-5.9h-9.1c-0.4,3.3-3.3,5.9-6.7,5.9s-6.3-2.6-6.7-5.9h-9.1c-0.4,3.3-3.3,5.9-6.7,5.9S83.7,3.3,83.3,0h-9.1c-0.4,3.3-3.3,5.9-6.7,5.9c-3.4,0-6.3-2.6-6.7-5.9h-9.1c-0.4,3.3-3.3,5.9-6.7,5.9c-3.4,0-6.3-2.6-6.7-5.9h-9.1c-0.4,3.3-3.3,5.9-6.7,5.9c-3.4,0-6.3-2.6-6.7-5.9H0v16.4c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8s-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8s-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8v6.7c3.7,0,6.8,3,6.8,6.8c0,3.7-3,6.8-6.8,6.8V186h15.8c0-3.7,3-6.8,6.8-6.8c3.7,0,6.8,3,6.8,6.8h9c0-3.7,3-6.8,6.8-6.8c3.7,0,6.8,3,6.8,6.8h9c0-3.7,3-6.8,6.8-6.8c3.7,0,6.8,3,6.8,6.8h9c0-3.7,3-6.8,6.8-6.8s6.8,3,6.8,6.8h9c0-3.7,3-6.8,6.8-6.8s6.8,3,6.8,6.8h9c0-3.7,3-6.8,6.8-6.8s6.8,3,6.8,6.8h15.6v-14.5c-3.7,0-6.8-3-6.8-6.8c0-3.7,3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8c0-3.7,3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8s3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8c0-3.7,3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8c0-3.7,3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8s3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8c0-3.7,3-6.8,6.8-6.8v-6.7c-3.7,0-6.8-3-6.8-6.8C150.5,19.4,153.6,16.4,157.3,16.4z"></path>
+<rect x="15.5" y="16.4" class="stamp1" width="126.3" height="153.9"></rect>
+<g>
+	<path class="stamp2" d="M124.6,66.4c1.6,3.9,2.5,8.8,2.5,14.6s-1.7,11.5-5,16.9c-3.4,5.4-7.4,9.8-12.1,13.1c-4.7,3.3-9,5-12.9,5c-2.5,0-4.5-0.8-6-2.4c-1.5-1.6-2.5-3.6-3-6c-6.3,6.3-11.6,9.5-15.9,9.5c-2.9,0-5.9-1.5-9-4.5c-3.2-3-4.7-5.9-4.7-8.5c0-2.6,0.8-5.8,2.5-9.6c1.7-3.8,3.8-7.5,6.3-11.1c2.6-3.6,5.7-6.7,9.4-9.3c3.7-2.6,7.2-3.9,10.4-3.9s6.6,1.6,9.9,4.8c3.4,3.2,5,6.6,5,10c0,1.8-0.5,3.7-1.6,5.7c0.9,1.1,1.4,2,1.4,2.8c0,0.8-0.2,2.2-0.5,4.2c-0.3,2-0.6,3.5-0.7,4.3c-0.1,0.9,0,1.5,0.3,1.9c1.1,0,2.6-0.9,4.6-2.7c2-1.8,4-4.6,5.9-8.4c1.9-3.8,2.8-7.7,2.8-11.8c0-6.8-1.7-12-5.2-15.6c-3.5-3.6-8.4-5.4-14.8-5.4c-8.1,0-15.9,2.5-23.4,7.4c-7.5,5-13.4,11.2-17.7,18.6c-4.3,7.4-6.5,14.8-6.5,22c0,13.3,6.5,19.9,19.4,19.9c6.7,0,12.7-0.8,18-2.5c4.9-1.6,7.7-2.2,8.6-1.9c0.9,0.3,1.3,1,1.3,2.2c0,2.3-1.5,4.6-4.5,6.7c-3,2.2-6.5,3.9-10.6,5.1c-4.1,1.2-7.9,1.9-11.4,1.9c-8.9,0-17-3.1-24.3-9.2c-7.3-6.1-10.9-13.4-10.9-22c0-6.7,1.6-13.6,4.7-20.7c3.1-7.1,7.3-13.7,12.6-19.6c5.3-5.9,11.9-10.8,19.8-14.6c7.9-3.8,16.4-5.7,25.7-5.7c9.2,0,16.7,2.8,22.4,8.3C120.5,58.9,123,62.5,124.6,66.4z M71.4,106.3c2.4,0,6-2,10.7-5.8c4.8-3.9,7.7-8.1,8.7-12.7c0.2-0.7,0.6-1.1,1.1-1.3c-1.1-3.3-2.5-5-4.2-5c-3.6,0-7.6,3-11.9,9c-4.4,6-6.5,10.4-6.5,13.2C69.3,105.4,70,106.3,71.4,106.3z"></path>
+</g>
+</svg>
+	<div id="respond" class="comment-respond js">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://ireneli.eu/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate="">
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="ca9da9d4aa"><input type="hidden" name="_wp_http_referer" value="/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none solid rgba(0, 0, 0, 0.701961); word-spacing: 0px; text-indent: 0px; line-height: 25.2px; width: 612px;" class="autosizejs "></textarea><textarea id="comment" name="comment" title="Enter your comment here..." placeholder="Enter your comment here..." style="height: 45px; overflow: hidden; word-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+		</li></ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/ad516503a11cd5ca435acc9bb6523536" alt="Gravatar" width="25" class="no-grav" originals="25" src-orig="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" scale="2">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name</label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value=""></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/ad516503a11cd5ca435acc9bb6523536(1)" alt="WordPress.com Logo" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;wordpress&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/ad516503a11cd5ca435acc9bb6523536(1)" alt="Twitter picture" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;twitter&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/ad516503a11cd5ca435acc9bb6523536(1)" alt="Facebook photo" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;facebook&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/ad516503a11cd5ca435acc9bb6523536(1)" alt="Google+ photo" width="25" class="no-grav" originals="25" scale="2">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;googleplus&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="1331" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="2cb20c9d65"></p>
+<input type="hidden" name="genseq" value="1493014648">
+<p style="display: none;"></p>			<input type="hidden" id="ak_js" name="ak_js" value="1493014650065"></form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>		</div><!-- .comments-form-contain -->
+	</div><!-- #comments-form -->
+
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	<aside id="secondary" class="widget-area" role="complementary">
+		<section id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://ireneli.eu/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></section><section id="blog-stats-2" class="widget widget_blog-stats"><h2 class="widget-title">Blog Stats</h2>		<ul>
+			<li>31,496 hits</li>
+		</ul>
+		</section><section id="categories-2" class="widget widget_categories"><h2 class="widget-title">I care about…</h2>		<ul>
+	<li class="cat-item cat-item-18127"><a href="https://ireneli.eu/category/algorithm/">Algorithm</a> (15)
+</li>
+	<li class="cat-item cat-item-1131271"><a href="https://ireneli.eu/category/deep-learning/">Deep Learning</a> (19)
+</li>
+	<li class="cat-item cat-item-468501899"><a href="https://ireneli.eu/category/energy-based-learning/">Energy-Based Learning</a> (2)
+</li>
+	<li class="cat-item cat-item-14253612"><a href="https://ireneli.eu/category/graph-database/">Graph Database</a> (11)
+</li>
+	<li class="cat-item cat-item-479198622"><a href="https://ireneli.eu/category/inference-models/">Inference Models</a> (2)
+</li>
+	<li class="cat-item cat-item-40978"><a href="https://ireneli.eu/category/machine-learning/">Machine Learning</a> (13)
+</li>
+	<li class="cat-item cat-item-145707"><a href="https://ireneli.eu/category/natural-language-processing/">Natural Language Processing</a> (5)
+</li>
+	<li class="cat-item cat-item-832"><a href="https://ireneli.eu/category/python/">Python</a> (15)
+</li>
+	<li class="cat-item cat-item-37653"><a href="https://ireneli.eu/category/statitics/">Statitics</a> (9)
+</li>
+	<li class="cat-item cat-item-3549"><a href="https://ireneli.eu/category/theory/">Theory</a> (15)
+</li>
+	<li class="cat-item cat-item-1"><a href="https://ireneli.eu/category/uncategorized/">Uncategorized</a> (2)
+</li>
+		</ul>
+</section><section id="gallery-3" class="widget widget-gallery">
+<h2 class="widget-title">Gallery</h2>
+<div class="widget-gallery-circle carousel">
+<div class="tiled-gallery type-circle" data-original-width="265" data-carousel-extra="{&quot;blog_id&quot;:100737779,&quot;permalink&quot;:&quot;https:\/\/ireneli.eu\/2016\/07\/27\/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim\/&quot;,&quot;likes_blog_id&quot;:100737779}">
+		<div class="gallery-row" style="width: 265px; height: 88px;" data-original-width="265" data-original-height="88">
+							<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/cath/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="1352" data-orig-file="https://irenelizihui.files.wordpress.com/2016/07/cath.jpg" data-orig-size="640,640" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="cath" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/07/cath.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/07/cath.jpg?w=640" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/cath.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="cath" alt="cath" style="width: 84px; height: 84px;" srcset="https://i2.wp.com/irenelizihui.files.wordpress.com/2016/07/cath.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/caffe/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="1351" data-orig-file="https://irenelizihui.files.wordpress.com/2016/07/caffe.jpg" data-orig-size="960,946" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="caffe" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/07/caffe.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/07/caffe.jpg?w=840" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/caffe.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="caffe" alt="caffe" style="width: 84px; height: 84px;" srcset="https://i2.wp.com/irenelizihui.files.wordpress.com/2016/07/caffe.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/fun/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="328" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/fun.jpg" data-orig-size="479,533" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="fun" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/fun.jpg?w=270" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/fun.jpg?w=479" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/fun.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="fun" alt="fun" style="width: 84px; height: 84px;" srcset="https://i2.wp.com/irenelizihui.files.wordpress.com/2016/01/fun.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+			</div>
+	<div class="gallery-row" style="width: 265px; height: 88px;" data-original-width="265" data-original-height="88">
+							<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/delivery-1/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="323" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/delivery-1.jpg" data-orig-size="1920,980" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;1&quot;}" data-image-title="Adv" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/delivery-1.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/delivery-1.jpg?w=840" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/delivery-1.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="Adv" alt="Adv" style="width: 84px; height: 84px;" srcset="https://i1.wp.com/irenelizihui.files.wordpress.com/2016/01/delivery-1.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/fresh_togo-1/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="324" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/fresh_togo-1.jpg" data-orig-size="6236,3508" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;1&quot;}" data-image-title="Adv" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/fresh_togo-1.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/fresh_togo-1.jpg?w=840" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/fresh_togo-1.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="Adv" alt="Adv" style="width: 84px; height: 84px;" srcset="https://i2.wp.com/irenelizihui.files.wordpress.com/2016/01/fresh_togo-1.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/ps/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="326" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/ps.jpg" data-orig-size="582,611" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="ps" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/ps.jpg?w=286" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/ps.jpg?w=582" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/ps.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="ps" alt="ps" style="width: 84px; height: 84px;" srcset="https://i1.wp.com/irenelizihui.files.wordpress.com/2016/01/ps.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+			</div>
+	<div class="gallery-row" style="width: 265px; height: 88px;" data-original-width="265" data-original-height="88">
+							<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/garden/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="327" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/garden.jpg" data-orig-size="589,593" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="garden" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/garden.jpg?w=298" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/garden.jpg?w=589" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/garden.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="garden" alt="garden" style="width: 84px; height: 84px;" srcset="https://i0.wp.com/irenelizihui.files.wordpress.com/2016/01/garden.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/sketch/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="331" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/sketch.jpg" data-orig-size="580,581" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="sketch" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/sketch.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/sketch.jpg?w=580" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/sketch.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="sketch" alt="sketch" style="width: 84px; height: 84px;" srcset="https://i2.wp.com/irenelizihui.files.wordpress.com/2016/01/sketch.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+					<div class="gallery-group" style="width: 88px; height: 88px;" data-original-width="88" data-original-height="88">
+				<div class="tiled-gallery-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
+		<a href="https://ireneli.eu/sn/" border="0" itemprop="url">
+			<meta itemprop="width" content="84">
+		<meta itemprop="height" content="84">
+		<img data-attachment-id="344" data-orig-file="https://irenelizihui.files.wordpress.com/2016/01/sn.jpg" data-orig-size="896,638" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="sn" data-image-description="" data-medium-file="https://irenelizihui.files.wordpress.com/2016/01/sn.jpg?w=300" data-large-file="https://irenelizihui.files.wordpress.com/2016/01/sn.jpg?w=840" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/sn.jpg" width="84" height="84" data-original-width="84" data-original-height="84" itemprop="http://schema.org/image" title="sn" alt="sn" style="width: 84px; height: 84px;" srcset="https://i1.wp.com/irenelizihui.files.wordpress.com/2016/01/sn.jpg?w=84&amp;h=84&amp;crop=1&amp;ssl=1&amp;zoom=2 2x" scale="2">
+		</a>
+	
+	
+	</div>
+			</div>
+			</div>
+</div>
+
+</div>
+</section><section id="calendar-3" class="widget widget_calendar"><h2 class="widget-title">Posts</h2><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar">
+	<caption>July 2016</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="Monday">M</th>
+		<th scope="col" title="Tuesday">T</th>
+		<th scope="col" title="Wednesday">W</th>
+		<th scope="col" title="Thursday">T</th>
+		<th scope="col" title="Friday">F</th>
+		<th scope="col" title="Saturday">S</th>
+		<th scope="col" title="Sunday">S</th>
+	</tr>
+	</thead>
+
+	<tfoot>
+	<tr>
+		<td colspan="3" id="prev"><a href="https://ireneli.eu/2016/06/">« Jun</a></td>
+		<td class="pad">&nbsp;</td>
+		<td colspan="3" id="next"><a href="https://ireneli.eu/2016/08/">Aug »</a></td>
+	</tr>
+	</tfoot>
+
+	<tbody>
+	<tr>
+		<td colspan="4" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td>
+	</tr>
+	<tr>
+		<td>4</td><td><a href="https://ireneli.eu/2016/07/05/" aria-label="Posts published on July 5, 2016">5</a></td><td>6</td><td><a href="https://ireneli.eu/2016/07/07/" aria-label="Posts published on July 7, 2016">7</a></td><td>8</td><td>9</td><td>10</td>
+	</tr>
+	<tr>
+		<td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td>
+	</tr>
+	<tr>
+		<td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td>
+	</tr>
+	<tr>
+		<td>25</td><td>26</td><td><a href="https://ireneli.eu/2016/07/27/" aria-label="Posts published on July 27, 2016">27</a></td><td>28</td><td>29</td><td>30</td><td>31</td>
+	</tr>
+	</tbody>
+	</table></div></section>	</aside><!-- #secondary -->
+		</div><!-- .wrap -->
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="wrap">
+
+			
+			<div class="site-info">
+				<svg class="line" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1509.5px" height="15.6px" viewBox="0 0 1509.5 15.6" style="enable-background:new 0 0 1509.5 15.6;" xml:space="preserve" aria-hidden="true">
+<path class="line0" d="M746,8.7c1.2,0,2.5,0,3.7,0c13.9-0.1,27.8-0.3,41.7-0.4S819.1,8,833,7.8c13.9-0.1,27.8-0.3,41.7-0.4s27.8-0.3,41.7-0.4s27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4c3.3,0,6.7-0.1,10-0.1c-503-3.3-1006,0.7-1508.9,12.2c13.9,0.3,27.7,0.6,41.6,0.8c13.9,0.2,27.7,0.5,41.6,0.6s27.8,0.3,41.6,0.5c13.9,0.1,27.8,0.2,41.6,0.3c13.9,0.1,27.8,0.1,41.6,0.1c13.9,0,27.8,0,41.6-0.1c13.9-0.1,27.8-0.1,41.6-0.3c13.9-0.1,27.8-0.3,41.6-0.4c13.9-0.2,27.7-0.4,41.6-0.6c13.9-0.2,27.7-0.5,41.6-0.8s27.7-0.6,41.6-1c13.9-0.4,27.7-0.8,41.6-1.2c13.7-0.4,27.5-0.3,41.3-0.4c13.9-0.1,27.8-0.3,41.7-0.4s27.8-0.3,41.7-0.4s27.8-0.3,41.7-0.4c13.9-0.1,27.8-0.3,41.7-0.4C720.7,8.9,733.3,8.8,746,8.7z"></path>
+</svg>
+				
+				<a href="https://wordpress.com/?ref=footer_custom_blog">Blog at WordPress.com</a>.
+				
+							</div><!-- .site-info -->
+		</div><!-- .wrap -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<!--  -->
+<script type="text/javascript" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-e2f2dcbcb482924fd04c24c9af027dd6">
+	</div>
+	<div class="grofile-hash-map-53c29276ab991ef64fd9a93c9b288fa9">
+	</div>
+	<div class="grofile-hash-map-e2f2dcbcb482924fd04c24c9af027dd6">
+	</div>
+	<div class="grofile-hash-map-02bdb0d8ccbb17de17c57d4036c44000">
+	</div>
+	<div class="grofile-hash-map-9a15ea83cb56155c1b1d748926971583">
+	</div>
+	<div class="grofile-hash-map-c88dda0965a2ed9fdd8aed77ef8605e8">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/irenelizihui.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/irenelizihui.wordpress.com\/wp-login.php?action=logout&_wpnonce=ae029cd718","homeURL":"https:\/\/ireneli.eu\/","postID":"1331","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/saved_resource(3)"></script>
+
+	<div id="carousel-reblog-box">
+		<form action="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post">
+				<input type="hidden" id="carousel-reblog-blog-id" value="100737779">
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://ireneli.eu">
+				<input type="hidden" id="carousel-reblog-blog-title" value="Café, bonne nuit">
+				<input type="hidden" id="carousel-reblog-post-url" value="">
+				<input type="hidden" id="carousel-reblog-post-title" value="">
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="541edfd4bd"><input type="hidden" name="_wp_http_referer" value="/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/">		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/ireneli.eu\/2016\/07\/27\/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim\/":1331};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+		<script type="text/javascript" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/form.js"></script>
+<script type="text/javascript" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/saved_resource(4)"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?m=1363304414h&amp;ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+// Infinite scroll support
+jQuery( function( $ ) {
+	$( document.body ).on( 'post-load', function() {
+		SyntaxHighlighter.highlight();
+	} );
+} );
+</script>
+<link rel="stylesheet" id="all-css-0-3" href="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/jetpack-carousel.css" type="text/css" media="all">
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="all-css-2-3" href="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/tiled-gallery.css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var comment_like_text = {"loading":"Loading..."};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"100737779","siteName":"Caf\u00e9, bonne nuit","siteURL":"https:\/\/ireneli.eu","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/41d51fc4b66fc5438624b6c78b0dac36?s=50&d=https%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/scratchpad","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/irenelizihui.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fireneli.eu%2F2016%2F07%2F27%2Fnlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim%2F","themeURL":"https:\/\/wordpress.com\/theme\/scratchpad\/","xhrURL":"https:\/\/ireneli.eu\/wp-admin\/admin-ajax.php","nonce":"bae4e94e82","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"5784029427\" \/>","referer":"https:\/\/ireneli.eu\/2016\/07\/27\/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/irenelizihui.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Firenelizihui.wordpress.com%2F2016%2F07%2F27%2Fnlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim%2F","postID":"1331","shortlink":"http:\/\/wp.me\/p6OGuT-lt","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/ireneli.eu\/1331","statsLink":"https:\/\/wordpress.com\/stats\/post\/1331\/ireneli.eu","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Scratchpad","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in the Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 221 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/irenelizihui.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fireneli.eu%2F2016%2F07%2F27%2Fnlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/ireneli.eu\/wp-admin\/admin-ajax.php","nonce":"83f595c410","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"0","login_url":"https:\/\/irenelizihui.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fireneli.eu%2F2016%2F07%2F27%2Fnlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim%2F","blog_id":"100737779","local_comments_commenting_as":"<fieldset><label for=\"email\">Email<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=100737779&v=wpcom&tz=0&user_id=0&subd=irenelizihui","is_public":"1","reblog_enabled":""};
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/ireneli.eu\/wp-admin\/admin-ajax.php","nonce":"83f595c410","display_exif":"1","display_geo":"1","single_image_gallery":"","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"0","login_url":"https:\/\/irenelizihui.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fireneli.eu%2F2016%2F07%2F27%2Fnlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim%2F","blog_id":"100737779","local_comments_commenting_as":"<fieldset><label for=\"email\">Email<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=100737779&v=wpcom&tz=0&user_id=0&subd=irenelizihui","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/saved_resource(5)"></script><div id="actionbar" class="actnbr-pub-scratchpad actnbr-has-follow"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename"><a href="https://ireneli.eu/"><img alt="" src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/41d51fc4b66fc5438624b6c78b0dac36" class="avatar avatar-50" height="50" width="50" originals="50" scale="2"> Café, bonne nuit</a></li> 				   	<li class="actnbr-folded-customize"><a href="https://irenelizihui.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Firenelizihui.wordpress.com%2F2016%2F07%2F27%2Fnlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Customize<span></span></span></a></li> 				    <li class="actnbr-folded-follow"><a class="actnbr-action actnbr-actn-follow" href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a></li> 					<li class="actnbr-signup"><a href="https://wordpress.com/start/">Sign up</a></li> 				    <li class="actnbr-login"><a href="https://irenelizihui.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fireneli.eu%2F2016%2F07%2F27%2Fnlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim%2F">Log in</a></li> 				     				    <li class="actnbr-shortlink"><a href="http://wp.me/p6OGuT-lt">Copy shortlink</a></li> 				    <li class="flb-report"><a href="http://en.wordpress.com/abuse/">Report this content</a></li> 				     				     				    <li class="actnbr-subs"><a href="https://subscribe.wordpress.com/">Manage subscriptions</a></li> 				    <li class="actnbr-fold"><a href="https://ireneli.eu/2016/07/27/nlp-05-from-word2vec-to-doc2vec-a-simple-example-with-gensim/">Collapse this bar</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>		<iframe src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			&lt;p class="robots-nocontent"&gt;&lt;img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /&gt;&lt;/p&gt;
+		</noscript><script src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'100737779','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'100737779','v':'wpcom','tz':'0','user_id':'0','post':'1331','subd':'irenelizihui'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGRVYVNrSFguN3FwSmQ5RGtNX3VQcj1yVzhiflM1THQtLGFdQ2toOXYlRzViJW5xbX5waCtlRlhkdXdlbWFwRUpYN0ZyLFpYZ1BxWEl0R3RpdV9ua2dqS2VKfDAtLDRlODJUUFZyfngvOV1FLjFQSzRGLjJkVm9JR2Z2cXFtcXFCMTIzfHwrNlQzVDJ8Njd+SFMwNyxjX1gzYixQUDNUTnhWaUdiK2xpU0ZtdWQydywuY0FhaVtnalhDUG41Zk5aNmJrflYzVGM3SXYvTktyNi5dbmtya0xSR1YudFNwLWpwZzBBWi9+TlYuWXkmZ3R+PTR2Sk1wby1vQzdtSHJmQ1BDVmVVJnFtJUNRXywybEhUWkFFZFgrJjBzaEJpT3hhQQ=='}]);
+_stq.push([ 'clickTrackerInit', '100737779', '1331' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+
+<div class="comment-likes-overlay" style="display: none;"></div><img src="./NLP 05_ From Word2vec to Doc2vec_ a simple example with Gensim – Café, bonne nuit_files/g.gif" alt=":)" id="wpstats" scale="0"></body></html>

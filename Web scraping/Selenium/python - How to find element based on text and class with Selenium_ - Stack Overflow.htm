@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<!-- saved from url=(0102)https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>python - How to find element based on text and class with Selenium? - Stack Overflow</title>
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="https://stackoverflow.com/opensearch.xml">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:domain" content="stackoverflow.com">
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="How to find element based on text and class with Selenium?">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I have an html table, and I want to find the td element in tbody based on the text  and if it doesn&#39;t contain a certain class. It should ignore anything in thead even if the text is present.
+
+...
+
+...">
+    <meta property="og:url" content="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium">
+    <link rel="canonical" href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium">
+
+    
+    
+    <script type="text/javascript" async="" src="https://engine.adzerk.net/ados?t=1502005875747&amp;request={%22Placements%22:[{%22A%22:22,%22S%22:8277,%22D%22:%22adzerk634412918%22,%22AT%22:4,%22Z%22:[43]},{%22A%22:22,%22S%22:8277,%22D%22:%22adzerk589020928%22,%22ATA%22:[5,17,2221,1129,43],%22Z%22:[45]}],%22Keywords%22:%22python%2Cpython-2.7%2Cselenium%2Cxpath%2Cselenium-webdriver%22,%22Referrer%22:%22https%3A%2F%2Fwww.google.com%2F%22,%22IsAsync%22:true}"></script><script async="" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/quant.js"></script><script async="" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/beacon.js"></script><script async="" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/analytics.js"></script><script type="text/javascript" async="" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/ados.js"></script><script src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/jquery.min.js"></script>
+    <script src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;How to find element based on text and class with Selenium?&#39;" href="https://stackoverflow.com/feeds/question/38537223">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:38537223});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '38537223');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', true); });
+
+            });
+        </script>
+
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","serverTime":1502005875,"routeName":"Questions/Show","site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"enableInsertDocLinkDialog":true,"childUrl":"https://meta.stackoverflow.com","enableSocialMediaInSharePopup":true,"protocol":"https"},"user":{"fkey":"af0888404221f0b08cbe989c78620bae","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"canSeeNewHeaderDesign":true,"ab":{"inline_signup_hero":{"v":"b","g":1}}},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableNewLinkInsertDialog":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{"openGraphAPIKey":"58740831ad23540e00c58987"},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"a6e2394c9fc7","js/moderator.en.js":"fa5aac63c4be","js/full-anon.en.js":"3c336f60da8e","js/full.en.js":"7c29dbc99b70","js/wmd.en.js":"0a8af01eb481","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"e72442bfeec7","js/help.en.js":"a56fdf9b9ff2","js/tageditor.en.js":"894b82c51bb6","js/tageditornew.en.js":"95d9f3d0dc05","js/inline-tag-editing.en.js":"3e63a01fd39b","js/revisions.en.js":"8f22ba768cac","js/review.en.js":"8ef76835d23c","js/tagsuggestions.en.js":"b278f9a0b23b","js/post-validation.en.js":"58e99a5eb637","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"0bd6bf0bed8f","js/keyboard-shortcuts.en.js":"d2e9335fb689","js/external-editor.en.js":"3e5baf662544","js/adops.en.js":"9a6a7812a212","js/external-editor.en.js":"3e5baf662544","js/snippet-javascript.en.js":"ca40b13b0854","js/snippet-javascript-codemirror.en.js":"2f67e13c56e8"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    <noscript id="noscript-css">&lt;style type="text/css"&gt;body,.so-header{margin-top:1.9em}&lt;/style&gt;</noscript>
+<script async="" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/full-anon.en.js"></script><script async="" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/snippet-javascript.en.js"></script><script async="" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/post-validation.en.js"></script><script async="" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/prettify-full.en.js"></script><script async="" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/external-editor.en.js"></script><script type="text/javascript" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/adFeedback.js"></script><link rel="stylesheet" href="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/adFeedback.css"><link rel="stylesheet" href="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/cp.min.css" type="text/css"></head>
+<body class="question-page new-topbar">
+            <script>(function () { var old = $.fn.contents; $.fn.contents = function () { try { return old.apply(this, arguments); } catch (e) { return $([]); } } })()</script>
+        
+
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+<header class="so-header js-so-header _fixed">
+    <div class="-container">
+        <div class="-main">            
+            <a href="https://stackoverflow.com/" class="-logo js-gps-track " data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+
+                <span class="-img">Stack Overflow</span>
+            </a>
+
+            <nav class="navigation" role="navigation" aria-label="site navigation">
+                <ol class="-list">
+                        <li class="-item _current">
+        <a id="nav-questions" href="https://stackoverflow.com/questions" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">Questions</a>
+    </li>
+
+    <li class="-item">
+        <a id="nav-jobs" href="https://stackoverflow.com/jobs?med=site-ui&amp;ref=jobs-tab" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:6})">Developer Jobs</a>
+    </li>
+                        <li class="-item">
+        <a id="nav-docs" href="https://stackoverflow.com/documentation" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:7})">Documentation <small class="beta-badge">beta</small></a>
+    </li>
+                        <li class="-item">
+        <a id="nav-tags" href="https://stackoverflow.com/tags" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">Tags</a>
+    </li>
+
+                        <li class="-item">
+        <a id="nav-users" href="https://stackoverflow.com/users" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">Users</a>
+    </li>
+
+                </ol>
+            </nav>
+
+                <form id="search" action="https://stackoverflow.com/search" method="get" class="searchbar" autocomplete="off" role="search">
+                    <svg role="icon" class="svg-icon iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M12.86 11.32L18 16.5 16.5 18l-5.18-5.14v-.35a7 7 0 1 1 1.19-1.19h.35zM7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"></path></svg>
+                    <input name="q" type="text" placeholder="Search..." value="" tabindex="1" autocomplete="off" maxlength="240" class="f-input js-search-field">
+                    <button type="submit" class="btn js-search-submit">
+                        <svg role="icon" class="svg-icon iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M12.86 11.32L18 16.5 16.5 18l-5.18-5.14v-.35a7 7 0 1 1 1.19-1.19h.35zM7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"></path></svg>
+                    </button>
+                </form>
+
+        </div>
+        
+
+
+    
+
+<div class="-actions">
+    <nav class="secondary-nav">
+        <div class="-dialog-container js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="https://stackoverflow.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+            <a href="https://stackoverflow.com/help" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:14 })">help</a>
+                    <a href="https://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+    <a href="https://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                        
+    <a href="https://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="site.switch({ target_site:552, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f38537223%2fhow-to-find-element-based-on-text-and-class-with-selenium" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+                <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="https://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="https://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+
+        </div>
+        <ol class="-list">
+
+
+    <li class="-item"><a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" class="-link js-help-button" title="Help Center and other resources">
+        <svg role="icon" class="svg-icon iconHelp" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zm.81 12.13c-.02.71-.55 1.15-1.24 1.13-.66-.02-1.17-.49-1.15-1.2.02-.72.56-1.18 1.22-1.16.7.03 1.2.51 1.17 1.23zM11.77 8a5.8 5.8 0 0 1-1.02.91l-.53.37c-.26.2-.42.43-.5.69a4 4 0 0 0-.09.75c0 .05-.03.16-.18.16H7.88c-.16 0-.18-.1-.18-.15.03-.66.12-1.21.4-1.66a5.29 5.29 0 0 1 1.43-1.22c.16-.12.28-.25.38-.39a1.34 1.34 0 0 0 .02-1.71c-.24-.31-.51-.46-1.03-.46-.51 0-.8.26-1.02.6-.21.33-.18.73-.18 1.1H5.75c0-1.38.35-2.25 1.1-2.76.52-.35 1.17-.5 1.93-.5 1 0 1.79.18 2.49.71.64.5.98 1.18.98 2.12 0 .57-.2 1.05-.48 1.44z"></path></svg>
+    </a></li>
+                <li class="-item">
+        <a href="https://stackexchange.com/" class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 170 Stack Exchange sites">
+            <svg role="icon" class="svg-icon iconStackExchange" width="18" height="18" viewBox="0 0 18 18"><path d="M1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2zM15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2zM1 6h16v4H1V6z"></path></svg>
+        </a>
+    </li>
+
+
+        </ol>
+    </nav>
+        <div class="-ctas">
+                <a href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f38537223%2fhow-to-find-element-based-on-text-and-class-with-selenium" class="login-link btn-clear" rel="nofollow">Log In</a>
+                    <a href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;utm_source=stackoverflow.com&amp;utm_medium=dev-story&amp;utm_campaign=signup-redirect" class="login-link btn" rel="nofollow">Sign Up</a>
+
+        </div>
+</div>
+    </div>
+</header>
+
+    <script>
+        StackExchange.ready(function () { StackExchange.topbar.init(); });
+            StackExchange.scrollPadding.setPaddingTop(60, 10);     </script>
+
+    <div class="container  ">
+        
+
+
+        <div id="content" class="snippet-hidden">
+
+
+
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+                <a href="https://stackoverflow.com/users/signup?ssrc=hero&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" id="tell-me-more" class="button">Sign up</a>
+            <span id="close"><a title="click to dismiss">×</a></span>
+        </span>
+        <div id="blurb">
+            Stack Overflow is a community of 7.5 million programmers, just like you, helping each other. Join them; it only takes a minute:
+        </div>        
+    </div>
+    <script>
+        StackExchange.ready(function() {
+            var clickSource = $("body").attr("class") + '-mini';
+            var location = 0;
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+                location = 2;
+            } else if ($("body").hasClass("question-page")) {
+                clickSource = 'questionpagemini';
+                location = 2;
+            } else if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+                location = 4;
+            }
+
+            $('#tell-me-more').click(function () {
+                StackExchange.using("gps", function () {
+                    StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+                });
+            });
+            $('#herobox-mini #close').click(function () {
+                StackExchange.using("gps", function () {
+                    StackExchange.gps.track("hero.action", { hero_action_type: "close", location: location }, true);
+                });
+                $.cookie("hero", "none", { path: "/", expires: 365 });
+                var $hero = $("#herobox-mini");
+                $hero.slideUp('fast', function () { $hero.remove(); });
+                return false;
+            });
+        });
+    </script>
+</div>
+    <div class="inner-content">
+        <div id="question-header">
+                <h1 itemprop="name"><a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium" class="question-hyperlink">How to find element based on text and class with Selenium?</a></h1>
+
+            
+<div class="aside-cta" role="navigation" aria-label="ask new question">
+    <a href="https://stackoverflow.com/questions/ask" class="btn-outlined">Ask Question</a>
+</div>
+        </div>
+            <div id="mainbar" role="main" aria-label="question and answers">
+
+            
+
+<div class="question" data-questionid="38537223" id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk634412918",4).setZone(43); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk634412918"><iframe id="ados_frame_adzerk634412918_6210320" frameborder="0" scrolling="no" height="90" width="728" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/saved_resource.html"></iframe><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position: absolute; display: none !important;" src="https://engine.adzerk.net/i.gif?e=eyJhdiI6NDM3LCJhdCI6NCwiYnQiOjAsImNtIjo2MDc0MDEsImNoIjoxMTc4LCJjayI6e30sImNyIjozNTM3MTM1LCJkaSI6ImViZDQ3NTdmOGVjYTRkNmU5NmFjNDBlYzRiYjQ0MjI0IiwiZG0iOjEsImZjIjo2MTExNDcxLCJmbCI6NjIxMDMyMCwiaXAiOiI3Ni4yMS43OS4xNzIiLCJrdyI6InB5dGhvbixweXRob24tMi43LHNlbGVuaXVtLHhwYXRoLHNlbGVuaXVtLXdlYmRyaXZlciIsIm53IjoyMiwicGMiOjMuMywiZWMiOjMuMywicHIiOjk1NjA0LCJydCI6MiwicmYiOiJodHRwczovL3d3dy5nb29nbGUuY29tLyIsInNhIjoiMyIsInNiIjoiaS0wMGU5Njc1NDU2MzkxZGNhYiIsInNwIjozMTA1NCwic3QiOjgyNzcsInVrIjoidWUxLWI0NmM3YzI3NDgxMjQ0N2Q4OWJlMzUxYWMwZjA0YTQ1Iiwiem4iOjQzLCJ0cyI6MTUwMjAwNTg3NjAzMSwiYmYiOnRydWUsInBuIjoiYWR6ZXJrNjM0NDEyOTE4IiwiYmEiOjQsImZxIjowfQ&amp;s=1-XMgY60ZF94ufRQ9LCt7yKAJgg"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="38537223">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#">favorite</a>
+        <div class="favoritecount"><b></b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I have an html table, and I want to find the <code>td</code> element in <code>tbody</code> based on the text  and if it doesn't contain a certain class. It should ignore anything in <code>thead</code> even if the text is present.</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="pun">...</span><span class="pln">
+
+</span><span class="pun">&lt;</span><span class="pln">div id</span><span class="pun">=</span><span class="str">"mytable"</span><span class="pun">&gt;</span><span class="pln">
+    </span><span class="str">&lt;div&gt;</span><span class="pln">
+        </span><span class="str">&lt;table&gt;</span><span class="pln">
+            </span><span class="str">&lt;thead&gt;</span><span class="pln">
+              </span><span class="str">&lt;tr&gt;</span><span class="pun">....&lt;/</span><span class="pln">tr</span><span class="pun">&gt;</span><span class="pln">
+              </span><span class="pun">...</span><span class="pln">
+            </span><span class="pun">&lt;/</span><span class="pln">thead</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="str">&lt;tbody&gt;</span><span class="pln">
+                </span><span class="str">&lt;tr&gt;</span><span class="pln">
+                    </span><span class="pun">&lt;</span><span class="pln">td </span><span class="kwd">class</span><span class="pun">=</span><span class="str">"inactive"</span><span class="pun">&gt;</span><span class="lit">3</span><span class="pun">&lt;/</span><span class="pln">td</span><span class="pun">&gt;</span><span class="pln">
+                    </span><span class="str">&lt;td&gt;</span><span class="lit">4</span><span class="pun">&lt;/</span><span class="pln">td</span><span class="pun">&gt;</span><span class="pln">
+                </span><span class="pun">&lt;/</span><span class="pln">tr</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="pun">&lt;/</span><span class="pln">tbody</span><span class="pun">&gt;</span><span class="pln">
+        </span><span class="pun">&lt;/</span><span class="pln">table</span><span class="pun">&gt;</span><span class="pln">
+    </span><span class="pun">&lt;/</span><span class="pln">div</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">div</span><span class="pun">&gt;</span><span class="pln">
+
+</span><span class="pun">...</span></code></pre>
+
+<p>Here is the code:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="kwd">def</span><span class="pln"> do_click</span><span class="pun">(</span><span class="pln">user_input</span><span class="pun">):</span><span class="pln">
+    browser </span><span class="pun">=</span><span class="pln"> webdriver</span><span class="pun">.</span><span class="typ">Firefox</span><span class="pun">()</span><span class="pln">
+    browser</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">(</span><span class="pln">url</span><span class="pun">)</span><span class="pln">
+
+    mytable_div </span><span class="pun">=</span><span class="pln"> browser</span><span class="pun">.</span><span class="pln">find_element_by_id</span><span class="pun">(</span><span class="str">"mytable"</span><span class="pun">)</span><span class="pln">
+    element </span><span class="pun">=</span><span class="pln"> mytable_div</span><span class="pun">.</span><span class="pln">find_element_by_xpath</span><span class="pun">(</span><span class="str">"//div/table/tbody/td[contains(text()='%s')]"</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> user_input</span><span class="pun">)</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pln"> element</span><span class="pun">:</span><span class="pln">
+        element</span><span class="pun">.</span><span class="pln">click</span><span class="pun">()</span></code></pre>
+
+<p>So if the <code>user_input = 3</code>, the table element <strong>should NOT</strong> be clicked because it has the class <code>inactive</code> even though the text is present.</p>
+
+<p>If the <code>user_input = 4</code>, then the table element <strong>should</strong> be clicked since it does not have a inactive class and the text is present.</p>
+
+<p>Currently the code doesn't work because my xpath expression is invalid, but I'm not sure what the correct way to check for both the class and the text would be.</p>
+    </div>
+    <div class="post-taglist">
+        <a href="https://stackoverflow.com/questions/tagged/python" class="post-tag js-gps-track" title="show questions tagged &#39;python&#39;" rel="tag">python</a> <a href="https://stackoverflow.com/questions/tagged/python-2.7" class="post-tag js-gps-track" title="show questions tagged &#39;python-2.7&#39;" rel="tag">python-2.7</a> <a href="https://stackoverflow.com/questions/tagged/selenium" class="post-tag js-gps-track" title="show questions tagged &#39;selenium&#39;" rel="tag">selenium</a> <a href="https://stackoverflow.com/questions/tagged/xpath" class="post-tag js-gps-track" title="show questions tagged &#39;xpath&#39;" rel="tag">xpath</a> <a href="https://stackoverflow.com/questions/tagged/selenium-webdriver" class="post-tag js-gps-track" title="show questions tagged &#39;selenium-webdriver&#39;" rel="tag">selenium-webdriver</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/q/38537223" title="short permalink to this question" class="short-link" id="link-post-38537223">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/38537223/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2016-07-23 01:17:10Z" class="relativetime">Jul 23 '16 at 1:17</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/6278173/warchest"><div class="gravatar-wrapper-32"><img src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/c92bb6f735b9034e3999c6ca62c8d71d" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/6278173/warchest">warchest</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">42</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-38537223" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-38537223" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+            <div id="answers">
+
+                <a name="tab-top"></a>
+                <div id="answers-header">
+                    <div class="subheader answers-subheader">
+                        <h2>
+                                1 Answer
+                                <span style="display:none;" itemprop="answerCount">1</span>
+                        </h2>
+                        <div>
+                            <div id="tabs">
+        <a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere" href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+</div>
+                        </div>
+                    </div>    
+                </div>    
+
+
+
+
+  
+<a name="38537246"></a>
+<div id="answer-38537246" class="answer accepted-answer" data-answerid="38537246" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="38537246">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>You are on the right track. <a href="https://developer.mozilla.org/en-US/docs/Web/XPath/Functions/contains" rel="nofollow"><code>contains()</code></a> is a function and expects 2 arguments to be passed in - a string where to look and a substring - what to look. Fix your expression:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="str">"//div/table/tbody//td[contains(text(), '%s')]"</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> user_input</span></code></pre>
+
+<p>You can also use a dot instead of <code>text()</code> in this case.</p>
+
+<p>And, to also check for the class being not <code>inactive</code>, add "not contains" check:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="str">"//div/table/tbody//td[contains(., '%s')][not(contains(@class, 'inactive'))]"</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> user_input</span></code></pre>
+
+<p>As for the logic, handle the <a href="http://selenium-python.readthedocs.io/api.html#selenium.common.exceptions.NoSuchElementException" rel="nofollow"><code>NoSuchElementException</code></a> exception which, if raised, would mean the element was not found, click the element if no exception was raised:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="kwd">from</span><span class="pln"> selenium</span><span class="pun">.</span><span class="pln">common</span><span class="pun">.</span><span class="pln">exceptions </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">NoSuchElementException</span><span class="pln">
+
+</span><span class="kwd">try</span><span class="pun">:</span><span class="pln">
+    element </span><span class="pun">=</span><span class="pln"> mytable_div</span><span class="pun">.</span><span class="pln">find_element_by_xpath</span><span class="pun">(</span><span class="str">"//div/table/tbody//td[contains(., '%s')][not(contains(@class, 'inactive'))]"</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> user_input</span><span class="pun">)</span><span class="pln">
+    element</span><span class="pun">.</span><span class="pln">click</span><span class="pun">()</span><span class="pln">
+</span><span class="kwd">except</span><span class="pln"> </span><span class="typ">NoSuchElementException</span><span class="pun">:</span><span class="pln">
+    </span><span class="kwd">print</span><span class="pun">(</span><span class="str">"Element not found"</span><span class="pun">)</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/a/38537246" title="short permalink to this answer" class="short-link" id="link-post-38537246">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/38537246/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://stackoverflow.com/posts/38537246/revisions" title="show all edits to this post">edited <span title="2016-07-23 02:12:38Z" class="relativetime">Jul 23 '16 at 2:12</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2016-07-23 01:20:51Z" class="relativetime">Jul 23 '16 at 1:20</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/771848/alecxe"><div class="gravatar-wrapper-32"><img src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/2DTBv.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/771848/alecxe">alecxe</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 261,865" dir="ltr">262k</span><span title="43 gold badges"><span class="badge1"></span><span class="badgecount">43</span></span><span title="375 silver badges"><span class="badge2"></span><span class="badgecount">375</span></span><span title="573 bronze badges"><span class="badge3"></span><span class="badgecount">573</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-38537246" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-64467954" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">How do I prevent clicking if the <code>td</code> element has the class <code>inactive</code>?</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/6278173/warchest" title="42 reputation" class="comment-user owner">warchest</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#comment64467954_38537246"><span title="2016-07-23 01:34:28Z" class="relativetime-clean">Jul 23 '16 at 1:34</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-64468037" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@warchest ah, of course, updated.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/771848/alecxe" title="261,865 reputation" class="comment-user">alecxe</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#comment64468037_38537246"><span title="2016-07-23 01:45:47Z" class="relativetime-clean">Jul 23 '16 at 1:45</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-64468154" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thanks, but for some reason the xpath returns an error: <code>Message: no such element: Unable to locate element: {"method":"xpath","selector":"//div/table/tbody/td[contains(‌​., '4')][not(contains(@class, 'inactive'))]"}</code>. <b>However</b>, I am able to find and click it directly with <code>//div/table/tbody/tr[1]/td[2]</code>. It seems like the element is definitely there, but the xpath isn't picking up on it.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/6278173/warchest" title="42 reputation" class="comment-user owner">warchest</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#comment64468154_38537246"><span title="2016-07-23 01:57:45Z" class="relativetime-clean">Jul 23 '16 at 1:57</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-38537246" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+                                    <a name="new-answer"></a>
+                        <form id="post-form" action="https://stackoverflow.com/questions/38537223/answer/submit" method="post" class="post-form">
+                            <input type="hidden" id="post-id" value="38537223">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.com/">
+                            <h2 class="space">Your Answer</h2>
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;"> 
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="af0888404221f0b08cbe989c78620bae">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+
+                            <div style="position: relative;">
+                                
+                                            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="https://stackoverflow.com/users/login?ssrc=question_page&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f38537223%2fhow-to-find-element-based-on-text-and-class-with-selenium%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                                    
+                                var $window = $(window),
+                                    onScroll = function(e) {
+                                        var $elem = $('.new-login-left'),
+                                            docViewTop = $window.scrollTop(),
+                                            docViewBottom = docViewTop + $window.height(),
+                                            elemTop = $elem.offset().top,
+                                            elemBottom = elemTop + $elem.height();							
+                                        if ((docViewTop < elemTop) && (docViewBottom > elemBottom))  {
+                                            StackExchange.using('gps', function() { StackExchange.gps.track('embedded_signup_form.view', { location: 'question_page' }); });
+                                            $window.unbind('scroll', onScroll);
+                                        }
+                                    };
+                                $window.on('scroll', onScroll);
+                                    
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid">
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false">
+                    <input type="hidden" name="use-google" class="use-google" value="false">
+                    <input type="button" class="submit-openid" value="Submit" style="display:none">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'https%3a%2f%2fstackoverflow.com%2fquestions%2f38537223%2fhow-to-find-element-based-on-text-and-class-with-selenium%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        &lt;h3&gt;Post as a guest&lt;/h3&gt;
+    &lt;div class="form-item"&gt;
+        &lt;table&gt;
+        &lt;tr&gt;
+                    &lt;td class="vm"&gt;
+                &lt;div&gt;
+                    &lt;label for="display-name"&gt;Name&lt;/label&gt;
+                    &lt;input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="m-address"&gt;Email&lt;/label&gt;
+                    &lt;input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" /&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+            </noscript>
+
+                            </div>
+           
+                                                            <div class="form-submit cbt">
+                                    <input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+                                    <a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" class="btn-clear discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href="https://stackexchange.com/legal/privacy-policy" name="privacy" target="_blank">privacy policy</a> and <a href="https://stackexchange.com/legal/terms-of-service" name="tos" target="_blank">terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1">                                </div>
+                        </form>
+
+
+
+                        <h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?                            Browse other questions tagged <a href="https://stackoverflow.com/questions/tagged/python" class="post-tag" title="show questions tagged &#39;python&#39;" rel="tag">python</a> <a href="https://stackoverflow.com/questions/tagged/python-2.7" class="post-tag" title="show questions tagged &#39;python-2.7&#39;" rel="tag">python-2.7</a> <a href="https://stackoverflow.com/questions/tagged/selenium" class="post-tag" title="show questions tagged &#39;selenium&#39;" rel="tag">selenium</a> <a href="https://stackoverflow.com/questions/tagged/xpath" class="post-tag" title="show questions tagged &#39;xpath&#39;" rel="tag">xpath</a> <a href="https://stackoverflow.com/questions/tagged/selenium-webdriver" class="post-tag" title="show questions tagged &#39;selenium-webdriver&#39;" rel="tag">selenium-webdriver</a>  or <a href="https://stackoverflow.com/questions/ask">ask your own question</a>.                        </h2>
+            </div>
+        </div>
+                <div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+                            <div class="module question-stats">
+                    <table id="qinfo">
+                        <tbody><tr>
+                            <td>
+                                <p class="label-key">asked</p>
+                            </td>
+                            <td style="padding-left: 10px">
+                                <p class="label-key" title="2016-07-23 01:17:10Z"><b>1 year ago</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="label-key">viewed</p>
+                            </td>
+
+                            <td style="padding-left: 10px">
+                                <p class="label-key">
+                                    <b>181 times</b>
+                                </p>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td>
+                                    <p class="label-key">active</p>
+                                </td>
+                                <td style="padding-left: 10px">
+                                    <p class="label-key"><b><a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium?lastactivity" class="lastactivity-link" title="2016-07-23 02:19:15Z">1 year ago</a></b></p>
+                                </td>
+                            </tr>
+                    </tbody></table>
+                </div>
+                        
+            <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk589020928",[5,17,2221,1129,43]).setZone(45); });
+            </script>
+            <div class="tex2jax_ignore clc-cp-container" id="adzerk589020928"><div class="clc-cp-sb--short _benefits has-image"><div class="-wrapper g-column"><div class="g-col g-column -header"><div class="-bg-image" style="background-image: url(https://i.stack.imgur.com/ArSCam.jpg)"></div><div class="g-col g-center fl-none -logo"><img src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/SPvok.jpg" alt="Pandora Media, Inc"></div><div class="g-col g-column -company-info"><h2 class="g-col fl-none -company">Pandora Media, Inc</h2><span class="g-col fl-none -meta-info _muted">Media</span></div></div><div class="g-column -content"><a href="https://stackoverflow.com/jobs/companies/pandora-media-inc" data-clc-click="https://clc.stackoverflow.com/click?an=AToAxf8K-fEtzKDc1EgHRwNTVQICCCcDh5CwEh8DtdEHv5IJt9YQAxIAKMCBvtY5_10vPwBRmai8Swu4z8BG&amp;cr=273207&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fpandora-media-inc%3Fmed=clc&amp;sig=LcMZsPfpcn7RBw" class="clc-cp-link" target="_blank"></a><h2 class="g-col jc-center -headline">We have great benefits!</h2><ul class="g-col g-column -list"><li class="g-row -item"><i class="g-col fl-none g-center -icon benefit-icon star" alt="PERGS - Pandora Employee Resource Groups to fuel interests &amp; hobbies"></i><span class="g-col ai-center -label">PERGS - Pandora Employee Resource Groups to fuel interests &amp; hobbies</span></li><li class="g-row -item"><i class="g-col fl-none g-center -icon benefit-icon star" alt="12 weeks paid leave for new parents"></i><span class="g-col ai-center -label">12 weeks paid leave for new parents</span></li><li class="g-row -item"><i class="g-col fl-none g-center -icon benefit-icon star" alt="Robust Community Groups - Pandora Women, Pandora Pride, &amp; Mixtape"></i><span class="g-col ai-center -label">Robust Community Groups - Pandora Women, Pandora Pride, &amp; Mixtape</span></li><li class="g-row -item"><i class="g-col fl-none g-center -icon benefit-icon star" alt="40 hrs per year of VTO (Volunteer Time Off)"></i><span class="g-col ai-center -label">40 hrs per year of VTO (Volunteer Time Off)</span></li><li class="g-row -item -more-link">+ 1 other benfit</li></ul></div><div class="g-col g-row -footer"><a href="https://stackoverflow.com/jobs/companies/pandora-media-inc" data-clc-click="https://clc.stackoverflow.com/click?an=AToAxf8K-fEtzKDc1EgHRwNTVQICCCcDh5CwEh8DtdEHv5IJt9YQAxIAKMCBvtY5_10vPwBRmai8Swu4z8BG&amp;cr=273207&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fpandora-media-inc%3Fmed=clc&amp;sig=LcMZsPfpcn7RBw" class="g-center btn-secondary -learn-more" target="_blank">Learn more</a></div></div></div><img src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/impression.gif" class="impression" style="display: none;"></div>
+        <div id="hireme" class="tex2jax_ignore clc-cp-container"><div class="clc-cp-sb--short _jobs has-image"><div class="-wrapper g-column"><div class="g-col g-column -header"><a href="https://stackoverflow.com/jobs/companies/quora" data-clc-click="https://clc.stackoverflow.com/click?an=4xKU1Duz4M4VD3Z35uBQJiYBdeb2CRuE7JkfHWef08Z59J4AswgD1wGH328tr9uo2TMz397AwXx3HRBv4GDIZXxhXXswyWbXSQA&amp;cr=274245&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fquora%3Fmed=clc&amp;sig=J3smjLEXsceYwA" class="clc-cp-link" target="_blank"></a><div class="-bg-image" style="background-image: url(https://i.stack.imgur.com/FO2yZm.png)"></div><div class="g-col g-center fl-none -logo"><img src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/fNnC0.png" alt="Quora"></div><div class="g-col g-column -company-info"><h2 class="g-col fl-none -company">Quora</h2><span class="g-col fl-none -meta-info _muted">Social Media</span></div></div><div class="g-column -content"><ul class="g-col g-column -list"><li class="-item"><a class="-link" target="_blank" href="https://stackoverflow.com/jobs/137307/software-engineer-platform-frameworks-quora" data-clc-click="https://clc.stackoverflow.com/click?an=4xKU1Duz4M4VD3Z35uBQJiYBdeb2CRuE7JkfHWef08Z59J4AswgD1wGH328tr9uo2TMz397AwXx3HRBv4GDIZXxhXXswyWbXSQA&amp;cr=274245&amp;ct=3&amp;ctid=137307&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F137307%2Fsoftware-engineer-platform-frameworks-quora%3Fmed=clc&amp;sig=Tn9ccPLbq4vD4g"> <div class="-title"><strong>Software Engineer - Platform: Frameworks</strong></div><div class="-job-items"><span class="-info">Mountain View, CA</span><span class="-info _visa">Visa sponsor</span></div><div class="g-row _gutters -tags"><span class="g-col fl-none clc-cp-tag highlight">python</span><span class="g-col fl-none clc-cp-tag">javascript</span></div></a> </li><li class="-item"><a class="-link" target="_blank" href="https://stackoverflow.com/jobs/137053/software-engineer-android-quora" data-clc-click="https://clc.stackoverflow.com/click?an=4xKU1Duz4M4VD3Z35uBQJiYBdeb2CRuE7JkfHWef08Z59J4AswgD1wGH328tr9uo2TMz397AwXx3HRBv4GDIZXxhXXswyWbXSQA&amp;cr=274245&amp;ct=3&amp;ctid=137053&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F137053%2Fsoftware-engineer-android-quora%3Fmed=clc&amp;sig=7bKIP61d4TemGQ"> <div class="-title"><strong>Software Engineer- Android</strong></div><div class="-job-items"><span class="-info">Mountain View, CA</span><span class="-info _visa">Visa sponsor</span></div><div class="g-row _gutters -tags"><span class="g-col fl-none clc-cp-tag">java</span><span class="g-col fl-none clc-cp-tag">android</span></div></a> </li><li class="-item"><a class="-link" target="_blank" href="https://stackoverflow.com/jobs/137309/software-engineer-machine-learning-quora" data-clc-click="https://clc.stackoverflow.com/click?an=4xKU1Duz4M4VD3Z35uBQJiYBdeb2CRuE7JkfHWef08Z59J4AswgD1wGH328tr9uo2TMz397AwXx3HRBv4GDIZXxhXXswyWbXSQA&amp;cr=274245&amp;ct=3&amp;ctid=137309&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F137309%2Fsoftware-engineer-machine-learning-quora%3Fmed=clc&amp;sig=FOKRa_-yh6OLBw"> <div class="-title"><strong>Software Engineer - Machine Learning</strong></div><div class="-job-items"><span class="-info">Mountain View, CA</span><span class="-info _visa">Visa sponsor</span></div><div class="g-row _gutters -tags"><span class="g-col fl-none clc-cp-tag highlight">python</span><span class="g-col fl-none clc-cp-tag">algorithm</span></div></a> </li></ul></div><div class="g-col g-row -footer"><a href="https://stackoverflow.com/jobs/companies/quora" data-clc-click="https://clc.stackoverflow.com/click?an=4xKU1Duz4M4VD3Z35uBQJiYBdeb2CRuE7JkfHWef08Z59J4AswgD1wGH328tr9uo2TMz397AwXx3HRBv4GDIZXxhXXswyWbXSQA&amp;cr=274245&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2Fquora%3Fmed=clc&amp;sig=J3smjLEXsceYwA" class="g-center btn-secondary -learn-more" target="_blank">View all 3 job openings!</a></div></div></div><img src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/impression(1).gif" class="impression" style="display: none;"></div>
+        <script>
+window.clc_request = 'At0pSuqf3NQIAAAAAAcITAICAAAAAgAAAAA1AAAAfHB5dGhvbnxweXRob24tMi43fHNlbGVuaXVtfHhwYXRofHNlbGVuaXVtLXdlYmRyaXZlcnwA8fEZzBWZ5Zfb3A';;!function i(n){try{if("function"!=typeof[].indexOf)return;if(!window.addEventListener)return;if(!n.allowed)return;if(!RegExp(n.allowed).test(location.hostname))return;var t=window,e=t.document,c=n.wv;if(e.hidden&&c)return void e.addEventListener("visibilitychange",function t(){e.hidden||(i(n),e.removeEventListener("visibilitychange",t))});if(t.clc=t.clc||{},t.clc.init=t.clc.init||[],n.autoload&&t.clc.init.push(function(i){return i.load()}),t.clc.options){for(var o in t.clc.options)n[o]=t.clc.options[o];t.clc.options=n}else t.clc.options=n;var r=e.createElement("script");r.async=!0,r.src=n.lib,e.body.appendChild(r)}catch(i){}}.call(null, {"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=f578dd45e065","u":"https://clc.stackoverflow.com/markup.js","azw":true,"kt":2000,"tto":true,"h":"clc.stackoverflow.com","autoload":true,"allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$","wv":true});        </script>
+            
+
+            
+
+                <div class="module sidebar-related">
+                    <h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/23847260?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="https://stackoverflow.com/questions/23847260/make-selenium-click-consecutive-elements-with-same-class-for-n-times?rq=1" class="question-hyperlink">Make selenium click Consecutive Elements with same class for n times</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/24920781?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="https://stackoverflow.com/questions/24920781/using-an-xpath-in-selenium-python?rq=1" class="question-hyperlink">using an xpath in selenium python</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/30155822?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="https://stackoverflow.com/questions/30155822/how-to-get-xpath-of-an-image-that-i-found-earlier-using-its-class?rq=1" class="question-hyperlink">How to get xpath of an image that I found earlier using its class?</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/31812537?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">4</div></a><a href="https://stackoverflow.com/questions/31812537/python-selenium-webdriver-how-can-i-loop-through-a-table-and-print-out-the-value?rq=1" class="question-hyperlink">Python Selenium Webdriver how can i loop through a table and print out the value from the 2nd column</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/32584059?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">-1</div></a><a href="https://stackoverflow.com/questions/32584059/find-element-by-xpath-in-selenium?rq=1" class="question-hyperlink">Find element by xpath in selenium</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/36062532?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="https://stackoverflow.com/questions/36062532/selenium-python-how-do-i-find-the-right-checkbox-element-from-a-html-table-withi?rq=1" class="question-hyperlink">Selenium Python how do i find the right checkbox element from a HTML table within a table using XPath</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/36220132?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">2</div></a><a href="https://stackoverflow.com/questions/36220132/selenium-python-xpath-webelement-object-is-not-callable-cannot-find-element-to-c?rq=1" class="question-hyperlink">Selenium Python Xpath Webelement object is not callable cannot find element to click</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/36898124?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">4</div></a><a href="https://stackoverflow.com/questions/36898124/how-to-find-element-by-multiple-text-strings?rq=1" class="question-hyperlink">How to find element by multiple text strings?</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/36928363?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="https://stackoverflow.com/questions/36928363/how-do-i-click-a-button-in-a-form-using-selenium-and-python-2-7?rq=1" class="question-hyperlink">How do I click a button in a form using Selenium and Python 2.7?</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/38553512?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="https://stackoverflow.com/questions/38553512/org-openqa-selenium-invalidselectorexception-object-text-it-should-be-an-el?rq=1" class="question-hyperlink">org.openqa.selenium.InvalidSelectorException - [object Text]. It should be an element</a></div>
+                    </div>
+                </div>
+            
+
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="https://electronics.stackexchange.com/questions/322073/how-does-windows-know-its-on-battery-power" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How does Windows know it's on battery power?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/94008/using-nonstandard-gender-neutral-pronouns-to-refer-to-myself-in-academic-writing" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Using nonstandard gender-neutral pronouns to refer to myself in academic writing
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2383751/how-is-a-doubly-twisted-cylinder-different-from-a-cylinder" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How is a doubly twisted cylinder different from a cylinder?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/137549/dropsort-it-like-its-hot" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    DropSort it like it's hot
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-retrocomputing" title="Retrocomputing Stack Exchange"></div><a href="https://retrocomputing.stackexchange.com/questions/4416/how-did-commodores-anti-microsoft-easter-egg-work" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:648 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How did Commodore's anti-Microsoft Easter Egg work?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-sqa" title="Software Quality Assurance &amp; Testing Stack Exchange"></div><a href="https://sqa.stackexchange.com/questions/28926/actual-data-for-why-developers-shouldnt-test-their-own-code" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:244 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Actual data for why developers shouldn't test their own code?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-sitecore" title="Sitecore Stack Exchange"></div><a href="https://sitecore.stackexchange.com/questions/6928/templates-and-rich-text-editor-properties" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:664 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Templates and Rich Text Editor properties
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a href="https://mathoverflow.net/questions/278053/fixed-point-of-a-group-action" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Fixed point of a group action
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/88002/can-a-human-survive-from-0-km-h-to-310-km-h-to-0-km-h-in-500-meter" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can a human survive from 0&nbsp;km/h to 310&nbsp;km/h to 0&nbsp;km/h in 500 meter?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="https://mathematica.stackexchange.com/questions/153176/generate-a-block-matrix" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    generate a block matrix
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-gamedev" title="Game Development Stack Exchange"></div><a href="https://gamedev.stackexchange.com/questions/146711/licensing-or-similar-for-my-fan-game" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:53 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Licensing (or similar) for my fan-game?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="https://workplace.stackexchange.com/questions/96335/should-i-decline-a-gift-from-my-boss-the-new-owner-of-the-company" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Should I decline a gift from my boss (the new owner of the company)?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-interpersonal" title="Interpersonal Skills Stack Exchange"></div><a href="https://interpersonal.stackexchange.com/questions/1307/how-can-i-remind-someone-to-do-a-task-when-reminding-them-makes-them-less-likely" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:680 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How can I remind someone to do a task when reminding them makes them less likely to do it?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="https://physics.stackexchange.com/questions/350404/is-the-angular-momentum-of-the-ceiling-fan-quantized" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is the angular momentum of the ceiling fan quantized?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2383739/i-need-to-figure-out-why-wouldnt-a-limit-exist-if-we-got-the-same-value-on-each" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    I need to figure out Why wouldn't a limit exist if we got the SAME value on each path?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-politics" title="Politics Stack Exchange"></div><a href="https://politics.stackexchange.com/questions/23393/why-didnt-the-number-of-government-employees-go-down-by-a-significant-margin-af" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:475 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why didn't the number of government employees go down by a significant margin after computers and the Internet were introduced?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="https://aviation.stackexchange.com/questions/42689/what-model-of-aircraft-is-this" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What model of aircraft is this?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="https://codereview.stackexchange.com/questions/172170/ascii-text-based-rpg-game-in-c" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    ASCII text-based RPG game in C++
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-ux" title="User Experience Stack Exchange"></div><a href="https://ux.stackexchange.com/questions/110600/using-two-different-fonts-on-a-mobile-application" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:102 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Using two different fonts on a mobile application
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/94227/u-s-humanities-professors-can-you-get-back-into-academia-if-you-leave" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    U.S. humanities professors: Can you get back into academia if you leave?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-interpersonal" title="Interpersonal Skills Stack Exchange"></div><a href="https://interpersonal.stackexchange.com/questions/1272/how-to-respond-to-trivial-obvious-questions" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:680 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to respond to trivial, obvious questions?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-apple" title="Ask Different"></div><a href="https://apple.stackexchange.com/questions/294266/downloading-32-bit-ios-apps-for-32-bit-iphones-after-ios-11-is-released" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:118 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Downloading 32 bit iOS Apps for 32 bit iPhones after iOS 11 is released
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-money" title="Personal Finance &amp; Money Stack Exchange"></div><a href="https://money.stackexchange.com/questions/83574/is-amazons-offer-of-a-50-gift-card-a-scam" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is Amazon's offer of a $50 gift card a scam?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="https://physics.stackexchange.com/questions/350302/is-fermats-principle-only-an-approximation" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is Fermat's principle only an approximation?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+        </div>
+    
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="https://stackoverflow.com/feeds/question/38537223" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>    </div>
+<script>
+StackExchange.ready(function(){$.get('/posts/38537223/ivc/09b3');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/38537223/ivc/09b3" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+
+        </div>
+    </div>
+
+    <footer id="footer" class="s-footer js-footer" role="contentinfo">
+        <div class="-container">
+            <div class="g-row js-sp-between">
+                    <div class="-logo">
+                        <a href="https://stackoverflow.com/"><svg role="icon" class="svg-icon iconLogo" width="150" height="30" viewBox="0 0 150 30"><g><path d="M33.9 18.6l-1.7-.2c-1.3-.1-1.9-.6-1.9-1.6 0-1.1.8-1.8 2.4-1.8 1.1 0 2.1.3 2.8.8l1-1c-1-.8-2.3-1.1-3.8-1.1-2.3 0-3.9 1.2-3.9 3.1 0 1.8 1.1 2.7 3.2 2.9l1.8.2c1.2.1 1.8.6 1.8 1.6 0 1.3-1.1 1.9-2.8 1.9-1.3 0-2.5-.3-3.3-1.2l-1 1c1.2 1.1 2.6 1.5 4.4 1.5 2.6 0 4.3-1.2 4.3-3.2-.2-2-1.5-2.7-3.3-2.9zm13.3-4.8c-1.7 0-2.8.3-3.7 1.5l1 1c.6-.9 1.3-1.2 2.7-1.2 1.9 0 2.7.8 2.7 2.3v1h-3.2c-2.4 0-3.7 1.2-3.7 3.1 0 .8.3 1.6.8 2.2.7.7 1.5 1 3 1 1.4 0 2.2-.3 3.1-1.1v1h1.6v-7.2c-.1-2.4-1.5-3.6-4.3-3.6zm2.7 7c0 .9-.2 1.5-.5 1.8-.7.6-1.5.7-2.4.7-1.7 0-2.4-.6-2.4-1.8 0-1.2.8-1.9 2.4-1.9h3l-.1 1.2zm7.6-5.6c1 0 1.6.3 2.4 1.2l1-1c-1.1-1.2-2-1.6-3.5-1.6-2.7 0-4.7 1.8-4.7 5.5 0 3.6 2 5.5 4.7 5.5 1.5 0 2.4-.4 3.5-1.6l-1.1-1c-.8.9-1.4 1.2-2.4 1.2s-1.9-.4-2.5-1.2c-.5-.7-.7-1.5-.7-2.9 0-1.3.2-2.2.7-2.9.7-.8 1.6-1.2 2.6-1.2zm13.4-1.3H69l-4.8 4.7V9.1h-1.6v15.4h1.6v-3.9l1.9-1.9 3.6 5.8h1.9l-4.4-6.9 3.7-3.7zm7.3-.33c-1.6 0-2.7.6-3.4 1.4-1 1-1.3 2.3-1.3 4.3s.3 3.3 1.3 4.3c.7.7 1.8 1.4 3.4 1.4 1.6 0 2.8-.6 3.4-1.4 1-1 1.3-2.3 1.3-4.3s-.3-3.3-1.3-4.3c-.6-.8-1.7-1.4-3.4-1.4zm1.3 8.3c-.3.3-.7.5-1.3.5-.6 0-1-.2-1.3-.5-.6-.6-.6-1.6-.6-2.7 0-1.2.1-2.1.6-2.7.3-.3.7-.5 1.3-.5.6 0 1 .2 1.3.5.6.6.6 1.5.6 2.7.1 1.2 0 2.2-.6 2.7zm10.8-8.2l-2.2 6.9-2.3-6.9h-2.9l4.1 11.1h2.2l4.1-11.1h-3zm7.6-.1c-2.9 0-4.8 2-4.8 5.7 0 4.5 2.5 5.7 5.1 5.7 2 0 3.1-.6 4.2-1.7l-1.7-1.6c-.7.7-1.3 1-2.5 1-1.6 0-2.4-1-2.4-2.5h6.9v-1.2c0-3.2-1.7-5.4-4.8-5.4zm-2.1 4.6c0-.5.1-.8.3-1.2.3-.7.9-1.2 1.9-1.2.9 0 1.6.5 1.9 1.2.2.4.2.7.3 1.2h-4.4zm11-3.4v-1.1h-2.7v11.1h2.8v-6.7c0-1.4.9-2 1.8-2 .7 0 1 .2 1.5.7l2.1-2.1c-.8-.8-1.5-1-2.6-1-1.3-.1-2.3.4-2.9 1.1zm6.3-2.3v12.3h2.8v-8.8h2v-2.1h-2v-1.2c0-.6.3-1 1-1h1.1v-2.3h-1.6c-2.3 0-3.3 1.6-3.3 3.1zm16.2 1.1c-1.6 0-2.7.6-3.4 1.4-1 1-1.3 2.3-1.3 4.3s.3 3.3 1.3 4.3c.7.7 1.8 1.4 3.4 1.4 1.6 0 2.8-.6 3.4-1.4 1-1 1.3-2.3 1.3-4.3s-.3-3.3-1.3-4.3c-.6-.8-1.8-1.4-3.4-1.4zm1.3 8.3c-.3.3-.7.5-1.3.5-.6 0-1-.2-1.3-.5-.6-.6-.6-1.6-.6-2.7 0-1.2.1-2.1.6-2.7.3-.3.7-.5 1.3-.5.6 0 1 .2 1.3.5.6.6.6 1.5.6 2.7 0 1.2 0 2.2-.6 2.7zm16.5-8.2l-1.8 6.9-2.3-6.9h-2l-2.3 6.9-1.8-6.9H134l3.4 11.1h2.3l2.3-7 2.3 7h2.3l3.4-11.1h-2.9zm-25.1 7.7V9.27h-2.8v12.3c0 1.6 1 3.2 3.2 3.2h1.6v-2.3h-1c-.7 0-1-.4-1-1.1zM41.3 15.6l1.4-1.4h-3v-3.5h-1.6v11.1c0 1.6.9 2.9 2.7 2.9h1.1v-1.3h-.8c-1 0-1.5-.6-1.5-1.6v-6.1h1.7v-.1z" fill="#222426"></path><path fill="#BCBBBB" d="M21 27v-8h3v11H0V19h3v8z"></path><path d="M5.4 19.1l13.56 1.96.17-2.38-13.26-2.55-.47 2.97zm1.8-6.8l12 5.6 1.1-2.4-12-5.6-1.1 2.4zm3.4-5.9l10.2 8.5 1.7-2-10.2-8.5-1.7 2zM17.1.2L15 1.8l7.9 10.6 2.1-1.6L17.1.2zM5 25h14v-3H5v3z" fill="#F48024"></path></g></svg></a>
+                    </div>
+                
+                    <nav class="-nav js-category _visible" data-name="default">
+                        <h5 class="-title"><a href="https://stackoverflow.com/" class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 15})">Stack Overflow</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="https://stackoverflow.com/questions" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 16})">Questions</a></li>
+                                <li class="-item"><a href="https://stackoverflow.com/jobs" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 17})">Jobs</a></li>
+                                <li class="-item"><a href="https://stackoverflow.com/jobs/directory/developer-jobs" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 11})">Developer Jobs Directory</a></li>
+                                                            <li class="-item"><a href="https://stackoverflow.com/documentation" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 18})">Documentation</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/help" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 3 })">Help</a></li>
+                            <li class="-item"><a onclick="StackExchange.switchMobile(&quot;on&quot;)" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 12 })">Mobile</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="-nav js-category _visible" data-name="default">
+                        <h5 class="-title"><a href="https://www.stackoverflowbusiness.com/?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation" class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 19 })">Stack Overflow<br> Business</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/talent?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 20 })">Talent</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/advertise?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 21 })">Ads</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/enterprise?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 22 })">Enterprise</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/insights?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 23 })">Insights</a></li>
+                        </ul>
+                    </nav>
+                <nav class="-nav js-category _visible" data-name="default">
+                    <h5 class="-title"><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">Company</a></h5>
+                    <ul class="-list">
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">About</a></li>
+                                                <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 27 })" href="https://stackoverflow.com/company/press">Press</a></li>
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 9 })" href="https://stackoverflow.com/company/work-here">Work Here</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 7 })" href="https://stackexchange.com/legal">Legal</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 8 })" href="https://stackexchange.com/legal/privacy-policy">Privacy Policy</a></li>
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 13 })" href="https://stackoverflow.com/company/contact">Contact Us</a></li>
+                    </ul>
+                </nav>
+                <div class="-network g-row">
+                    <a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" class="-back-trigger js-back"><svg role="icon" class="svg-icon iconArrowLeftAlt" width="18" height="18" viewBox="0 0 18 18"><path d="M10.58 16L12 14.59 6.4 9 12 3.41 10.57 2l-7 7z"></path></svg></a>
+                    <div>
+                        <h5 class="-title"><a href="https://stackexchange.com/">Stack Exchange<br> Network</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Technology">Technology</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Life / Arts">Life / Arts</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Culture / Recreation">Culture / Recreation</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Science">Science</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/38537223/how-to-find-element-based-on-text-and-class-with-selenium#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Other">Other</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <nav class="-nav js-category" data-name="Technology">
+        <ul class="-list">
+                <li class="-item"><a href="https://stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                <li class="-item"><a href="https://serverfault.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="system and network administrators">Server Fault</a></li>
+                <li class="-item"><a href="https://superuser.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="computer enthusiasts and power users">Super User</a></li>
+                <li class="-item"><a href="https://webapps.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="power users of web applications">Web Applications</a></li>
+                <li class="-item"><a href="https://askubuntu.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                <li class="-item"><a href="https://webmasters.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="pro webmasters">Webmasters</a></li>
+                <li class="-item"><a href="https://gamedev.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and independent game developers">Game Development</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://tex.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                <li class="-item"><a href="https://softwareengineering.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professionals, academics, and students working within the systems development life cycle">Software Engineering</a></li>
+                <li class="-item"><a href="https://unix.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                <li class="-item"><a href="https://apple.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                <li class="-item"><a href="https://wordpress.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="WordPress developers and administrators">WordPress Development</a></li>
+                <li class="-item"><a href="https://gis.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                <li class="-item"><a href="https://electronics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://android.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                <li class="-item"><a href="https://security.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="information security professionals">Information Security</a></li>
+                <li class="-item"><a href="https://dba.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                <li class="-item"><a href="https://drupal.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Drupal developers and administrators">Drupal Answers</a></li>
+                <li class="-item"><a href="https://sharepoint.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="SharePoint enthusiasts">SharePoint</a></li>
+                <li class="-item"><a href="https://ux.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="user experience researchers and experts">User Experience</a></li>
+                <li class="-item"><a href="https://mathematica.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Wolfram Mathematica">Mathematica</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://salesforce.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                <li class="-item"><a href="https://expressionengine.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                <li class="-item"><a href="https://blender.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who use Blender to create 3D graphics, animations, or games">Blender</a></li>
+                <li class="-item"><a href="https://networkengineering.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="network engineers">Network Engineering</a></li>
+                <li class="-item"><a href="https://crypto.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                <li class="-item"><a href="https://codereview.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="peer programmer code reviews">Code Review</a></li>
+                <li class="-item"><a href="https://magento.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of the Magento e-Commerce platform">Magento</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://softwarerecs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people seeking specific software recommendations">Software Recommendations</a></li>
+                <li class="-item"><a href="https://dsp.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                <li class="-item"><a href="https://emacs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those using, extending or developing Emacs">Emacs</a></li>
+                <li class="-item"><a href="https://raspberrypi.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                <li class="-item"><a href="https://codegolf.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                <li class="-item"><a href="https://ethereum.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Ethereum, the decentralized application platform and smart contract enabled blockchain">Ethereum</a></li>
+                <li class="-item"><a href="https://datascience.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Data science professionals, Machine Learning specialists, and those interested in learning more about the field">Data Science</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://arduino.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="developers of open-source hardware and software that is compatible with Arduino">Arduino</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#technology" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (26)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Life / Arts">
+        <ul class="-list">
+                <li class="-item"><a href="https://photo.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                <li class="-item"><a href="https://scifi.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                <li class="-item"><a href="https://graphicdesign.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                <li class="-item"><a href="https://movies.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                <li class="-item"><a href="https://music.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                <li class="-item"><a href="https://worldbuilding.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="writers/artists using science, geography and culture to construct imaginary worlds and settings">Worldbuilding</a></li>
+                <li class="-item"><a href="https://cooking.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Life / Arts"><ul class="-list">
+                <li class="-item"><a href="https://diy.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="contractors and serious DIYers">Home Improvement</a></li>
+                <li class="-item"><a href="https://money.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                <li class="-item"><a href="https://academia.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="academics and those enrolled in higher education">Academia</a></li>
+                <li class="-item"><a href="https://law.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="legal professionals, students, and others with experience or interest in law">Law</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#lifearts" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (17)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Culture / Recreation">
+        <ul class="-list">
+                <li class="-item"><a href="https://english.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                <li class="-item"><a href="https://skeptics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="scientific skepticism">Skeptics</a></li>
+                <li class="-item"><a href="https://judaism.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                <li class="-item"><a href="https://travel.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="road warriors and seasoned travelers">Travel</a></li>
+                <li class="-item"><a href="https://christianity.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                <li class="-item"><a href="https://ell.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="speakers of other languages learning English">English Language Learners</a></li>
+                <li class="-item"><a href="https://japanese.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Culture / Recreation"><ul class="-list">
+                <li class="-item"><a href="https://gaming.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                <li class="-item"><a href="https://bicycles.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                <li class="-item"><a href="https://rpg.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                <li class="-item"><a href="https://anime.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="anime and manga fans">Anime &amp; Manga</a></li>
+                <li class="-item"><a href="https://puzzling.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those who create, solve, and study puzzles">Puzzling</a></li>
+                <li class="-item"><a href="https://mechanics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#culturerecreation" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (32)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Science">
+        <ul class="-list">
+                <li class="-item"><a href="https://mathoverflow.net/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional mathematicians">MathOverflow</a></li>
+                <li class="-item"><a href="https://math.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                <li class="-item"><a href="https://stats.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                <li class="-item"><a href="https://cstheory.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                <li class="-item"><a href="https://physics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="active researchers, academics and students of physics">Physics</a></li>
+                <li class="-item"><a href="https://chemistry.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="scientists, academics, teachers and students">Chemistry</a></li>
+                <li class="-item"><a href="https://biology.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="biology researchers, academics, and students">Biology</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Science"><ul class="-list">
+                <li class="-item"><a href="https://cs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                <li class="-item"><a href="https://philosophy.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#science" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (10)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Other">
+        <ul class="-list">
+                <li class="-item"><a href="https://meta.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                <li class="-item"><a href="https://stackapps.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                <li class="-item"><a href="https://api.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programmatic interaction with Stack Exchange sites">API</a></li>
+                <li class="-item"><a href="https://data.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="querying Stack Exchange data using SQL">Data</a></li>
+                <li class="-item"><a href="https://area51.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                    </ul>
+    </nav>
+                <div class="-copyright text-right">
+                    <div class="g-column jc-sp-between">
+                        <ul class="-list">
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link:4 })" href="https://stackoverflow.blog/?blb=1">Blog</a></li>
+                            <li class="-item"><a href="https://www.facebook.com/officialstackoverflow/" class="-link">Facebook</a></li>
+                            <li class="-item"><a href="https://twitter.com/stackoverflow" class="-link">Twitter</a></li>
+                            <li class="-item"><a href="https://linkedin.com/company/stack-overflow" class="-link">LinkedIn</a></li>
+                        </ul>
+
+                        <div>
+                            <p>
+                                site design / logo © 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license" class="-link">cc by-sa 3.0</a>
+                                with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" rel="license" class="-link">attribution required</a>.
+                                <span id="svnrev">rev 2017.8.4.26704</span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    </div>
+    </footer>
+
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled
+            &lt;img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;
+        &lt;/div&gt;
+    </noscript>
+<script>var z=document.createElement("script");z.type="text/javascript",z.async=!0,z.src="https://static.adzerk.net/ados.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(z,s);</script>
+<script>
+var ados = ados || {};
+ados.run = ados.run || [];
+
+
+ados.run.push(function () {
+    setTimeout(function () { $("#adzerk-user-match").remove(); }, window.AUMIframeDone ? 0 : 2000);
+    ados_setKeywords('python,python-2.7,selenium,xpath,selenium-webdriver');; ados_load();
+});   
+
+</script>
+
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-1');
+                ga('create', 'UA-5620270-59', {name: 'pageData', sampleRate: 5 });
+                ga('set', 'dimension2', '|python|python-2.7|selenium|xpath|selenium-webdriver|');
+                ga('pageData.set', 'dimension2', '|python|python-2.7|selenium|xpath|selenium-webdriver|');
+                ga('send', 'pageview');
+                ga('pageData.send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i) || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') service =  2;
+                                    else if (service === 'Place') service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', function() {
+                                        StackExchange.gps.track('google_maps_places_api.call', { service: service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    
+
+<script async="" src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/clc.min.js"></script><img src="./python - How to find element based on text and class with Selenium_ - Stack Overflow_files/timeout.gif" style="display: none;"></body></html>

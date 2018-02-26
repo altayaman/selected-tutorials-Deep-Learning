@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<!-- saved from url=(0095)http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/ -->
+<html lang="en-AU" prefix="og: http://ogp.me/ns#" class="csstransforms csstransforms3d csstransitions js no-touch"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="author" content="PredictBench and Software Engineering Blog">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<title>Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog</title>
+<link rel="pingback" href="http://www.picnet.com.au/blogs/guido/xmlrpc.php">
+<link rel="shortcut icon" href="http://www.picnet.com.au/wp-content/uploads/2017/02/picnet-avatar.png">
+
+
+    <!--[if lt IE 9]>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+   <![endif]-->
+	
+	<!--[if IE]>
+		<link rel="stylesheet" href="http://www.picnet.com.au/blogs/guido/wp-content/themes/dikka-installable/assets/css/ie.css" media="screen" type="text/css" />
+    	<![endif]-->
+
+    
+<!-- This site is optimized with the Yoast SEO plugin v4.3 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="These posts aim to take practical / a non-theoretical approach whereby we use code samples to demonstrate real usages of the Keras layers being investigated">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog">
+<meta property="og:description" content="These posts aim to take practical / a non-theoretical approach whereby we use code samples to demonstrate real usages of the Keras layers being investigated">
+<meta property="og:url" content="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/">
+<meta property="og:site_name" content="PredictBench and Software Engineering Blog">
+<meta property="article:publisher" content="https://www.facebook.com/PicNetIT">
+<meta property="article:section" content="Software Engineering">
+<meta property="article:published_time" content="2016-05-16T03:44:58+00:00">
+<meta property="og:image" content="http://www.picnet.com.au/blogs/guido/files/2016/05/tbl1.png">
+<meta property="og:image" content="http://www.picnet.com.au/blogs/guido/files/2016/05/tbl2.png">
+<meta property="og:image" content="http://www.picnet.com.au/blogs/guido/files/2016/05/tbl3.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="These posts aim to take practical / a non-theoretical approach whereby we use code samples to demonstrate real usages of the Keras layers being investigated">
+<meta name="twitter:title" content="Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog">
+<meta name="twitter:site" content="@PicNetIT">
+<meta name="twitter:image" content="http://www.picnet.com.au/blogs/guido/files/2016/05/tbl1.png">
+<meta name="twitter:creator" content="@PicNetIT">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="http://s0.wp.com/">
+<link rel="dns-prefetch" href="http://ajax.googleapis.com/">
+<link rel="dns-prefetch" href="http://s.gravatar.com/">
+<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="PredictBench and Software Engineering Blog » Feed" href="http://www.picnet.com.au/blogs/guido/feed/">
+<link rel="alternate" type="application/rss+xml" title="PredictBench and Software Engineering Blog » Comments Feed" href="http://www.picnet.com.au/blogs/guido/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="PredictBench and Software Engineering Blog » Review of Keras (Deep Learning) Core Layers Comments Feed" href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/feed/">
+		<div class="fit-vids-style" id="fit-vids-style" style="display: none;">­<style>.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></div><script async="" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/analytics.js"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.picnet.com.au\/blogs\/guido\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.4"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="contact-form-7-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="rs-plugin-settings-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/settings.css" type="text/css" media="all">
+<style id="rs-plugin-settings-inline-css" type="text/css">
+.tp-caption a{color:#ff7302;text-shadow:none;-webkit-transition:all 0.2s ease-out;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;-ms-transition:all 0.2s ease-out}.tp-caption a:hover{color:#ffa902}.tp-caption a{color:#ff7302;text-shadow:none;-webkit-transition:all 0.2s ease-out;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;-ms-transition:all 0.2s ease-out}.tp-caption a:hover{color:#ffa902}.tp-caption a{color:#ff7302;text-shadow:none;-webkit-transition:all 0.2s ease-out;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;-ms-transition:all 0.2s ease-out}.tp-caption a:hover{color:#ffa902}.tp-caption a{color:#ff7302;text-shadow:none;-webkit-transition:all 0.2s ease-out;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;-ms-transition:all 0.2s ease-out}.tp-caption a:hover{color:#ffa902}.tp-caption a{color:#ff7302;text-shadow:none;-webkit-transition:all 0.2s ease-out;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;-ms-transition:all 0.2s ease-out}.tp-caption a:hover{color:#ffa902}
+</style>
+<link rel="stylesheet" id="forms-for-campaign-monitor-custom_cm_monitor_css-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/app.css" type="text/css" media="all">
+<link rel="stylesheet" id="googlefont-raleway-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="googlefont-opensans-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/css(1)" type="text/css" media="all">
+<link rel="stylesheet" id="bootstrap-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="YTPlayer-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/YTPlayer.css" type="text/css" media="all">
+<link rel="stylesheet" id="woocm-uxqode-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/woocommerce-ux.css" type="text/css" media="all">
+<link rel="stylesheet" id="woo-layout-ux-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/woo-layout-ux.css" type="text/css" media="all">
+<link rel="stylesheet" id="main-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="resize-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/resize.css" type="text/css" media="all">
+<link rel="stylesheet" id="retina-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/retina.css" type="text/css" media="all">
+<link rel="stylesheet" id="nivo-lightbox-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/nivo-lightbox.css" type="text/css" media="all">
+<link rel="stylesheet" id="nivolightbox-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/default.css" type="text/css" media="all">
+<link rel="stylesheet" id="owl.carousel-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/owl.carousel.css" type="text/css" media="all">
+<link rel="stylesheet" id="animate-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/animate.css" type="text/css" media="all">
+<link rel="stylesheet" id="dikka-style-css-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/red.css" type="text/css" media="all">
+<style id="dikka-style-css-inline-css" type="text/css">
+
+    .navbar-default.style1 .navbar-nav > .open > a, .navbar-default.style1 .navbar-nav > .open > a:hover, .navbar-default.style1 .navbar-nav > .open > a:focus{color: #fff;}
+a, .pageXofY .pageX, .pricing .bestprice .name, .filter li a:hover, .widget ul li a:hover, #contacts a:hover, .title-color, .ms-staff-carousel .ms-staff-info h4, .filter li a:hover, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > li > a:hover, .widget_nav_menu li a:hover, .navbar-default .navbar-nav > li > a:focus, a.go-about:hover, .text_color, .navbar-nav .dropdown-menu a:hover, .profile .profile-name, #elements h4, #contact li a:hover, #agency-slider h5, .ms-showcase1 .product-tt h3, .filter li a.active, .contacts li i, .big-icon i, .navbar-default.dark .navbar-brand:hover,.navbar-default.dark .navbar-brand:focus, a.p-button.border:hover, a.social:hover:before, .symbol.colored i, .icon-nofill, .slidecontent-bi .project-title-bi p a:hover, .grid .figcaption a.thumb-link:hover, .tp-caption a:hover, .btn-1d:hover, .btn-1d:active, #contacts .tweet_text a, #contacts .tweet_time a, .social-font-awesome li a:hover, h2.post-title a:hover, .tags a:hover, .category a:hover, .btn-color span, #contacts .form-success p, .center-icon i, .social-icomoon a:hover, .team-details .team-position, .blog-nav a:hover, a:hover .text-inner, .btn-color, .navbar-default .navbar-nav > li > a.selected, .navbar-default .navbar-nav li a:hover, .metas .post-type i, .list-body i, .social-icomoon li a:hover i{
+  color: #0079c1;
+}
+.collapse-group .collapse-heading h4 a, .collapse-group .collapse-heading h4 a .toggle-icon i{
+    color: #0079c1 !important;
+}
+.collapse-group .collapse-heading h4 a .toggle-icon i{
+    color: #0079c1;
+}
+.collapse-group .collapse-heading h4 a.collapsed .toggle-icon i{color: #676767 !important;}
+.slight .navbar-nav a.current-menu-item, .slight.navbar-default.default .navbar-nav > .open > a, .slight.navbar-default.default .navbar-nav > .open > a > .open > a, .slight ul.cart_list li a:hover, .woocommerce ul.cart_list li a:hover, .slight .navbar-nav a:hover, .sdark .navbar-nav a.current-menu-item, .sdark.navbar-default.default .navbar-nav > .open > a, .sdark.navbar-default.default .navbar-nav > .open > a > .open > a, .sdark ul.cart_list li a:hover, .woocommerce ul.cart_list li a:hover, .sdark .navbar-nav a:hover, .tLight .navbar-nav a.current-menu-item, .tLight.navbar-default.default .navbar-nav > .open > a, .tLight.navbar-default.default .navbar-nav > .open > a > .open > a, .tLight ul.cart_list li a:hover, .woocommerce ul.cart_list li a:hover, .tLight .navbar-nav a:hover, .navbar-default.default.slight .nav a.current-menu-ancestor{color: #0079c1 !important;opacity: 1;}
+
+a.sf-button.hide-icon, .tabs li.current, .readmore:hover, a.p-button:hover, a.p-button.colored, .navbar-default.style1 .navbar-nav > li > a.selected, .light #contacts a.p-button, .tagcloud a:hover, .rounded.fill, .colored-section, .pricing .bestprice .price, .pricing .bestprice .signup, .signup:hover, .divider.colored, .services-graph li span, .hi-icon-effect-1b .hi-icon:hover, .no-touch .hi-icon-effect-1b .hi-icon:hover, .symbol.colored .line-left, .symbol.colored .line-right, .projects-overlay #projects-loader, .panel-group .panel.active .panel-heading, .mail-box, .double-bounce1, .double-bounce2, .btn-color-1d:after, .container1 > div, .container2 > div, .container3 > div, .btn-color:hover, .collapse-group .collapse-heading h4 a:hover .toggle-icon, .collapse-group .collapse-heading h4 a .toggle-icon, .blog-nav span, #back-top a:hover, .btn-color-fill, .team-div .overlaycolor{
+    background-color:#0079c1;
+}
+.cbp-l-project-details-visit, .cbp-l-inline-view, .light .divider.colored, .origin-widget-title.text-lightest .divider.colored, .mc4wp-form button, .mc4wp-form input[type=button], .mc4wp-form input[type=submit], .origin-widget-price-box.featured h4, .navbar-default.default .nav li a.border-menu-item{
+    background-color:#0079c1 !important;
+}
+
+/* Woocommerce */
+.woocommerce span.onsale,.woocommerce-page span.onsale, .woocommerce .widget_price_filter .ui-slider .ui-slider-range, .woocommerce-page .widget_price_filter .ui-slider .ui-slider-range, .woocommerce #content input.button:hover, .woocommerce #respond input#submit:hover, .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover, .woocommerce-page #content input.button:hover, .woocommerce-page #respond input#submit:hover, .woocommerce-page a.button:hover, .woocommerce-page button.button:hover, .woocommerce-page input.button:hover, .woocommerce #content input.button.alt:hover, .woocommerce #respond input#submit.alt:hover, .woocommerce a.button.alt:hover, .woocommerce button.button.alt:hover, .woocommerce input.button.alt:hover, .woocommerce-page #content input.button.alt:hover, .woocommerce-page #respond input#submit.alt:hover, .woocommerce-page a.button.alt:hover, .woocommerce-page button.button.alt:hover, .woocommerce-page input.button.alt:hover, .woocommerce #payment #place_order, .woocommerce-page #payment #place_order{
+    background: #0079c1 !important;
+}
+.woocommerce ul.products li.product .price, .woocommerce-page ul.products li.product .price{
+    color: #0079c1;
+}
+.woocommerce .widget_price_filter .ui-slider .ui-slider-handle, .woocommerce-page .widget_price_filter .ui-slider .ui-slider-handle{border: 1px solid #d44646 !important;background: #d44646 !important;}
+.blog-nav span, .blog-nav a:hover{border: 1px solid #0079c1;}
+.hi-icon-effect-1 .hi-icon:after{box-shadow: 0 0 0 4px #0079c1;}
+.colored-section:after {border: 20px solid #0079c1;}
+.filter li a.active, .filter li a:hover, .panel-group .panel.active .panel-heading{border:1px solid #0079c1}
+a.p-button.colored:hover{background-color: #cb4646;}
+.navbar-default.default.border .navbar-nav > li > a.selected:before, .navbar-default.default.border .navbar-nav > li > a.selected:hover, .navbar-default.default.border .navbar-nav > li > a.selected, .mc4wp-form button, .mc4wp-form input[type=button], .mc4wp-form input[type=submit]{
+    border-bottom: 1px solid #0079c1;
+}
+.bs-callout-theme-color {
+    background-color: #d3ecfd;
+    border-color: #0079c1;
+}
+.overlay-color{
+    background-color: rgba(0,121,193, 0.9);
+}
+.overlay-color.medium, .skill-bar-percent, .post-content .featured-image a:hover .hover-image-blog{ background-color: rgba(0,121,193, 0.80);
+}
+.triangle{border-left-color: #0079c1 !important;}
+.overlay-color.soft{
+    background-color: rgba(0,121,193, 0.25);
+}
+.navbar-default.default.slight ul.dropdown-menu, .slight .dikka_minicart, .navbar-default.default.sdark ul.dropdown-menu, .sdark .dikka_minicart{
+    border-top: 2px solid #0079c1 !important;
+}
+.btn-color, a:hover .text-inner{
+    border: 1px solid #0079c1;
+}
+.appdesign .app-service:hover .icon-container .icon {
+    background: #0079c1;
+    color: #ffffff;  
+}
+.appdesign .app-service .icon-container .icon {
+    border: 1px solid #0079c1;
+    color: #0079c1;
+}
+.navbar-default .navbar-nav > li:hover > a::before, .navbar-default .navbar-nav > li.active > a::before {
+    border-bottom-color: #0079c1;
+}
+.loading-css, .nivo-lightbox-theme-default .nivo-lightbox-content.nivo-lightbox-loading{
+    border-right: 6px solid #0079c1;
+    border-top: 6px solid #0079c1;
+}
+.tp-caption a.slider-link{
+    color: #0079c1 !important;
+    font-weight: 800 !important;
+}
+
+    
+
+        #load .loader-container {
+        margin-top:-50px;
+        }                                            
+
+        #load .loader-container {
+        margin-top:-50px;
+        }                                            .top-bar {background-color: rgba(30,115,190,0.5);}
+
+        #load .loader-container {
+        margin-top:-50px;
+        }                                            .top-bar {background-color: rgba(30,115,190,0.5);}.navbar .social-icons-fa a, .navbar .phone-mail, .navbar .phone-mail a {color: #ffffff !important;}
+</style>
+<link rel="stylesheet" id="googlefont-custom-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/css(2)" type="text/css" media="all">
+<link rel="stylesheet" id="googlefont-h1-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/css(2)" type="text/css" media="all">
+<link rel="stylesheet" id="googlefont-h2-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/css(2)" type="text/css" media="all">
+<link rel="stylesheet" id="googlefont-h3-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/css(2)" type="text/css" media="all">
+<link rel="stylesheet" id="googlefont-h4-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/css(2)" type="text/css" media="all">
+<link rel="stylesheet" id="googlefont-h5-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/css(2)" type="text/css" media="all">
+<link rel="stylesheet" id="googlefont-h6-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/css(2)" type="text/css" media="all">
+<link rel="stylesheet" id="redux-google-fonts-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/css(3)" type="text/css" media="all">
+<link rel="stylesheet" id="social-logos-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/social-logos.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jquery.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jquery-migrate.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/related-posts.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jquery.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var ajax_request = {"ajax_url":"http:\/\/www.picnet.com.au\/blogs\/guido\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/app.js"></script>
+<link rel="https://api.w.org/" href="http://www.picnet.com.au/blogs/guido/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.picnet.com.au/blogs/guido/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.picnet.com.au/blogs/guido/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 4.7.4">
+<link rel="shortlink" href="http://wp.me/p8qH2g-4Z">
+<link rel="alternate" type="application/json+oembed" href="http://www.picnet.com.au/blogs/guido/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.picnet.com.au%2Fblogs%2Fguido%2Fpost%2F2016%2F05%2F16%2Freview-of-keras-deep-learning-core-layers%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://www.picnet.com.au/blogs/guido/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.picnet.com.au%2Fblogs%2Fguido%2Fpost%2F2016%2F05%2F16%2Freview-of-keras-deep-learning-core-layers%2F&amp;format=xml">
+<script type="text/javascript">
+(function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('//www.picnet.com.au/blogs/guido/?wordfence_logHuman=1&hid=E8AA2881955235643A81429F1CAEAEFE');
+</script>
+<link rel="dns-prefetch" href="http://v0.wordpress.com/">
+<link rel="dns-prefetch" href="http://i0.wp.com/">
+<link rel="dns-prefetch" href="http://i1.wp.com/">
+<link rel="dns-prefetch" href="http://i2.wp.com/">
+<link rel="dns-prefetch" href="http://widgets.wp.com/">
+<link rel="dns-prefetch" href="http://s0.wp.com/">
+<link rel="dns-prefetch" href="http://0.gravatar.com/">
+<link rel="dns-prefetch" href="http://1.gravatar.com/">
+<link rel="dns-prefetch" href="http://2.gravatar.com/">
+<style type="text/css">img#wpstats{display:none}</style><script type="text/javascript">if (typeof ajaxurl === "undefined") {var ajaxurl = "http://www.picnet.com.au/blogs/guido/wp-admin/admin-ajax.php"}</script><style type="text/css" title="dynamic-css" class="options-output">.footer{background-color:#e0e0e0;}body{font-family:Open Sans;text-align:left;line-height:21px;font-weight:400;font-style:normal;color:#676767;font-size:14px;}.navbar .nav li a{font-family:Ubuntu;line-height:13px;font-weight:500;font-style:normal;font-size:13px;}H1{font-family:Open Sans;line-height:38px;font-weight:300;font-style:normal;color:#0079c1;font-size:36px;}H2{font-family:Open Sans;line-height:36px;font-weight:600;font-style:normal;color:#383838;font-size:30px;}h3{font-family:Open Sans;text-align:left;line-height:30px;font-weight:700;font-style:normal;color:#444444;font-size:24px;}h4{font-family:Open Sans;text-align:left;line-height:30px;font-weight:600;font-style:normal;color:#444444;font-size:18px;}h5{font-family:Open Sans;line-height:16px;font-weight:300;font-style:normal;color:#0079c1;font-size:16px;}h6{font-family:Open Sans;line-height:23px;font-weight:400;font-style:normal;color:#0079c1;font-size:20px;}.light-text .section-title h1{font-family:Open Sans;line-height:32px;font-weight:700;font-style:normal;color:#f4f4f4;font-size:28px;}.pagetitle{background-color:transparent;background-size:contain;background-attachment:fixed;background-image:url('http://www.picnet.com.au/wp-content/uploads/2015/01/texture-bg3.jpg');}</style>	<script async="" type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/captcha.js"></script>
+<meta name="google-site-verification" content="7ep1hJJdUS-Isk7eszatVu6eTNpoZRUqrWrtS_WQ3H4">
+<style type="text/css"></style><script type="text/javascript" async="" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/saved_resource"></script><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/services.css"></head> 
+<!-- BEGIN BODY -->
+<body class="post-template-default single single-post postid-309 single-format-standard siteorigin-panels multipage">
+<!-- GOOGLE ANALYTICS CODE -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ 
+  ga('create', 'UA-226280-2', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+<script>
+jQuery(document).ready(function(){
+    jQuery(".menu-toggle").click(function(){
+    	// alert('test');
+    	jQuery(".navbar-nav>li:nth-child(5)").toggleClass("open");
+    });
+});
+</script>
+ 
+
+  	
+<!-- BEGIN: FULL CONTENT DIV -->
+<div class="full-content"> 
+
+
+
+<div class="navbar  navbar-default default navbar-fixed-top navbar-shrink tdark" role="navigation">
+            
+             
+            <!-- BEGIN: NAV-CONTAINER -->
+            <div class="nav-container container">
+                <div class="navbar-header">
+                	
+                    <!-- BEGIN: TOGGLE BUTTON (RESPONSIVE)-->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- BEGIN: LOGO -->
+
+         
+        
+            <a class="navbar-brand nav-to logo" href="http://www.picnet.com.au/blogs/guido" title="PredictBench and Software Engineering Blog">
+            <img src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/picnet-logo-retina-footer.png" data-at2x="http://www.picnet.com.au/wp-content/uploads/2015/01/picnet-logo-retina-footer.png" alt="PredictBench and Software Engineering Blog" scale="0" width="150" height="37">
+            </a>
+            
+                     
+		
+       <!-- BEGIN: WPML MENU -->     
+        
+                    
+                  
+                </div>
+        <div class="icons-style-mobile">
+                       
+            
+                             
+          
+        </div>
+               
+                <div class="menu-menu-1-container"><div class="collapse navbar-collapse "><ul class="nav navbar-nav navbar-right sm" data-smartmenus-id="14930130835993538"><li><a class="nav-to  menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/">Home</a></li>
+<li><a class="nav-to  menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-submenu" href="http://www.picnet.com.au/services/">Services<span class="sub-arrow"></span></a>
+<ul class="dropdown-menu ">
+	<li><a class=" menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/business-it-support/">IT Support and Managed Services</a></li>
+	<li><a class=" menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/project-management/">IT Consulting</a></li>
+	<li><a class=" menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/software-engineering/">Software Development &amp; Predictive Analytics</a></li>
+</ul>
+</li>
+<li><a class="nav-to  menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/our-products/">Products</a></li>
+<li><a class="nav-to  menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/clients-and-industries/">Clients &amp; Industries</a></li>
+<li><a class="nav-to  menu-toggle menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-submenu">News<span class="sub-arrow"></span></a>
+<ul class="dropdown-menu ">
+	<li><a class=" menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/blogs/guido/">Software Development &amp; Predictive Analytics</a></li>
+	<li><a class=" menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/blogs/david/">IT Consulting</a></li>
+	<li><a class=" menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/blogs/marco/">IT Support and Managed Services</a></li>
+</ul>
+</li>
+<li><a class="nav-to  menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/about-us/">About Us</a></li>
+<li><a class="nav-to  menu-item menu-item-type-custom menu-item-object-custom" href="http://www.picnet.com.au/contact-us/">Contact Us</a></li>
+</ul></div></div>               
+               
+                <!-- END: MENU -->
+            </div>
+            
+          
+		    
+            <!--END: NAV-CONTAINER -->
+        </div>
+
+
+
+
+<div class="pagetitle black-section light-text align-left ">
+            
+            <div class="title" style="padding-top:80px;padding-bottom:40px;">
+                <div class="section-title container light">
+                    
+                                
+                                        <h1>Review of Keras (Deep Learning) Core Layers</h1>
+                                        
+                </div>
+            </div>
+        </div>
+ 
+
+<section id="blog-normal" class="light-section nopaddingbottom blog-normal">
+            
+            <!-- BEGIN BLOG WIDTH | OPTION: "big", "medium" container -->
+            <div class="container"> 
+                
+                <!-- BEGIN BLOG POSTS -->       
+                <div class="journal col-xs-12 col-sm-12 col-md-9">
+                     
+                        
+                            <div class="blog-normal">
+
+                    <div id="post-309" class="journal-post post-309 post type-post status-publish format-standard hentry category-software-engineering">
+                        <div class="post-content fadeInUpBig">
+
+                              
+                                                             <!-- Featured image -->
+                            
+
+                                 
+                                                                 
+                                  
+
+                          
+                            
+                            <h2 class="post-title"><a href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/">Review of Keras (Deep Learning) Core Layers</a></h2>
+    
+                            <div class="post-summary">
+                                <p>   
+                                </p><h2>Introduction:</h2>
+<p>This is the first part in a planned series of posts which aims to explore the core layers in the <a href="http://keras.io/">Keras</a> source code.&nbsp; These posts aim to take practical / a non-theoretical approach whereby we use code samples to demonstrate real usages of the Keras layers being investigated.</p>
+<h2>Debug</h2>
+<p>All the code in this post requires the following imports and debug functions:</p>
+<pre>from keras.layers.core import *
+from keras import backend as K
+
+def call_f(inp, method, input_data):
+&nbsp; f = K.function([inp], [method])
+&nbsp; return f([input_data])[0]
+
+def print_out(layer, input_data, train=True):
+&nbsp; if hasattr(layer, 'previous'):
+&nbsp;&nbsp;&nbsp; print call_f(layer.previous.input,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; layer.get_output(train=train), input_data)
+&nbsp; else:
+&nbsp;&nbsp;&nbsp; print call_f(layer.input, layer.get_output(train=train), input_data)</pre>
+<h2>Masking</h2>
+<p>The masking layer sets output values to 0 when the entire last dimension of the input is equal to the mask_value (default value 0).&nbsp; This layers expects a 3 dimensional input tensor with the shape: (samples, timesteps, features).</p>
+<p>For example let’s call a Masking layer with a 3D tensor with two rows of data:</p>
+<pre>print_out(Masking(mask_value=1), [[[1, 1, 0], [1, 1, 1]]])
+# [[[ 1.&nbsp; 1.&nbsp; 0.], [ 0.&nbsp; 0.&nbsp; 0.]]]</pre>
+<p>Notice how only the last row gets masked as this was the only row with its entire content matching the mask_value of 1.</p>
+<p>Masking is the simplest implementation of MaskedLayer, which is the abstract base class which Masking layers can implement to inherit some boiler plate code.&nbsp; The Masking layer itself can also be extended to support more advanced masking.&nbsp; For instance let’s create a masking layer that masks value above a certain value.</p>
+<pre>class CustomMasking(Masking):&nbsp;&nbsp;&nbsp;
+&nbsp; def get_output_mask(self, train=False):
+&nbsp;&nbsp;&nbsp; X = self.get_input(train)
+&nbsp;&nbsp;&nbsp; return K.any(K.ones_like(X) * (1. -
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; K.equal(K.minimum(X, self.mask_value), 
+        self.mask_value)), axis=-1)
+
+&nbsp; def get_output(self, train=False):
+&nbsp;&nbsp;&nbsp; X = self.get_input(train)
+&nbsp;&nbsp;&nbsp; return X * K.any((1. - K.equal(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; K.minimum(X, self.mask_value), 
+        self.mask_value)), axis=-1, keepdims=True)
+
+print_out(CustomMasking(mask_value=5), 
+  [[[3, 4, 5], [5, 6, 7], [5, 5, 5]]])
+# [[[ 3.&nbsp; 4.&nbsp; 5.], [ 0.&nbsp; 0.&nbsp; 0.], [ 0.&nbsp; 0.&nbsp; 0.]]]</pre>
+<p>&nbsp;</p>
+<h2>Dropout</h2>
+<p>Dropout layers are used to reduce overfitting by randomly turning off inputs.&nbsp; It is important to note that Dropout only occurs during training.&nbsp; During the test phase we do not turn off inputs.&nbsp; It is also very important to note that output values propagated forward (i.e. not turned off) must increase in value to compensate for the nodes being turned off.&nbsp; This means that the output value of the layer is the same with or without dropout.&nbsp; The following simple example shows this a little bit more intuitively:</p>
+<pre>print_out(Dropout(.3), [1, 2, 3, 4, 5])
+# [0,0,0,5.71428585,7.14285755]</pre>
+<p>So with 30% dropout we see that 3 output nodes were turned off (set to 0).&nbsp; To compensate for the output value of the layer all the other values were increased accordingly (probabilistically so they may not exactly match the output).</p>
+<p>To tune dropout layers <a href="http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf">Hinton suggests</a> training without dropout until a good layer settings are found.&nbsp; Then slowly increase dropout until optimal validation score is found after the layer.</p>
+<h2>Activation</h2>
+<p>An activation function is a function that produces the layer output values by applying an arbitrary function to the input values of the layer.&nbsp; This function should have a useful derivative as this is used during the optimisation (backward) step of training.&nbsp; There are many standard activation functions used in NN a great visual summary of these common activation functions can be found at the bottom of the <a href="https://en.wikipedia.org/wiki/Activation_function">Activation Function Wikipedia page</a>. Partially reproduced here for convenience:</p>
+<p><a href="https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl1.png" rel="attachment wp-att-312"><img data-attachment-id="312" data-permalink="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/tbl1/" data-orig-file="https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl1.png?fit=798%2C509" data-orig-size="798,509" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="tbl1" data-image-description="" data-medium-file="https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl1.png?fit=300%2C191" data-large-file="https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl1.png?fit=720%2C459" class="alignnone size-full wp-image-312" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/tbl1.png" alt="tbl1" srcset="https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl1.png?w=798 798w, https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl1.png?resize=300%2C191 300w, https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl1.png?resize=768%2C490 768w, https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl1.png?resize=470%2C300 470w" sizes="(max-width: 720px) 100vw, 720px" width="720" height="459"></a><a href="https://i2.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl2.png" rel="attachment wp-att-310"><img data-attachment-id="310" data-permalink="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/tbl2/" data-orig-file="https://i2.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl2.png?fit=796%2C459" data-orig-size="796,459" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="tbl2" data-image-description="" data-medium-file="https://i2.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl2.png?fit=300%2C173" data-large-file="https://i2.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl2.png?fit=720%2C415" class="alignnone size-full wp-image-310" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/tbl2.png" alt="tbl2" srcset="https://i2.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl2.png?w=796 796w, https://i2.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl2.png?resize=300%2C173 300w, https://i2.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl2.png?resize=768%2C443 768w, https://i2.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl2.png?resize=500%2C288 500w" sizes="(max-width: 720px) 100vw, 720px" width="720" height="415"></a> <a href="https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl3.png" rel="attachment wp-att-311"><img data-attachment-id="311" data-permalink="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/tbl3/" data-orig-file="https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl3.png?fit=797%2C177" data-orig-size="797,177" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="tbl3" data-image-description="" data-medium-file="https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl3.png?fit=300%2C67" data-large-file="https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl3.png?fit=720%2C160" class="alignnone size-full wp-image-311" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/tbl3.png" alt="tbl3" srcset="https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl3.png?w=797 797w, https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl3.png?resize=300%2C67 300w, https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl3.png?resize=768%2C171 768w, https://i0.wp.com/www.picnet.com.au/blogs/guido/files/2016/05/tbl3.png?resize=500%2C111 500w" sizes="(max-width: 720px) 100vw, 720px" width="720" height="160"></a></p>
+<p>The activation function specified in this layer is applied to each input element individually (element wise) so input data dimensions can be arbitrary.</p>
+<pre>print_out(Activation('tanh'), [.5, 1, 2, 3])
+# [0.46211714,0.76159418,0.96402758,0.99505478]
+print_out(Activation('softplus'), [.5, 1, 2, 3])
+# [ 0.97407699&nbsp; 1.31326163&nbsp; 2.12692809&nbsp; 3.04858732]
+print_out(Activation('relu'), [-2, -1, 0, 1, 2])
+# [ 0.&nbsp; 0.&nbsp; 0.&nbsp; 1.&nbsp; 2.]
+print_out(Activation('sigmoid'), [.5, 1, 2, 3])
+# [ 0.62245935&nbsp; 0.7310586&nbsp;&nbsp; 0.88079709&nbsp; 0.95257413]
+print_out(Activation('hard_sigmoid'), [.5, 1, 2, 3])
+# [ 0.60000002&nbsp; 0.69999999&nbsp; 0.89999998&nbsp; 1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ]
+print_out(Activation('linear'), [.5, 1, 2, 3])
+# [ 0.5&nbsp; 1.&nbsp;&nbsp; 2.&nbsp;&nbsp; 3. ] – no weights set</pre>
+<p>&nbsp;</p>
+<h2>Reshape</h2>
+<p>The reshape layer reshapes input to a new shape.&nbsp; The number of dimensions however&nbsp; must remain the same.</p>
+<pre>print_out(Reshape(dims=(2,-1)), [[1, 2, 3, 4, 5, 6]])
+# [[[ 1.&nbsp; 2.&nbsp; 3.], [ 4.&nbsp; 5.&nbsp; 6.]]]
+print_out(Reshape(dims=(3,-1)), [[1, 2, 3, 4, 5, 6]])
+# [[[ 1.&nbsp; 2.],[ 3.&nbsp; 4.],[ 5.&nbsp; 6.]]]</pre>
+<p>&nbsp;</p>
+<h2>Permute</h2>
+<p>To permute dimensions of a tensor means rearranging the dimensions.&nbsp; So let’s say we wanted to pivot a matrix we would do something like:</p>
+<pre>print_out(Permute(dims=(2,1)), [[[1, 2, 3],[4, 5, 6]]])
+# [[[ 1.&nbsp; 4.], [ 2.&nbsp; 5.], [ 3.&nbsp; 6.]]]</pre>
+<p>&nbsp;</p>
+<h2>Flatten</h2>
+<p>Flattens rows of a 3D matrix:</p>
+<pre>print_out(Flatten(), [[[1, 2, 3],[4, 5, 6]]])
+# [[ 1.&nbsp; 2.&nbsp; 3.&nbsp; 4.&nbsp; 5.&nbsp; 6.]]</pre>
+<h2></h2>
+<h2>RepeatVector</h2>
+<p>Copies a 2D input matrix into a 3D matrix n times.</p>
+<pre>print_out(RepeatVector(2), [[1, 2, 3]])
+# [[[ 1.&nbsp; 2.&nbsp; 3.], [ 1.&nbsp; 2.&nbsp; 3.]]]</pre>
+<p>&nbsp;</p>
+<h2>Dense</h2>
+<p>A dense layer is a standard fully connected NN layer, let’s start with some sample source code:</p>
+<pre>d = Dense(3, init='uniform', activation='linear', input_dim=3)
+d.set_weights([np.array([[.1, .2, .5], [.1, .2, .5], [.1, .2, .5]]), 
+  np.array([0, 0, 0])])
+print_out(d, [[10, 20, 30]])
+# [[&nbsp; 6.&nbsp; 12.&nbsp; 30.]]</pre>
+<p>&nbsp;</p>
+<p>We see that the input [10,20,30] got converted to [6, 12,30] using a linear activation layer and the weights [.1, .2, .5] for each input row.&nbsp; So taking the last output node which all weights are 0.5 we get the output (30) by calculating: 10*.5 + 20*.5 + 30*.5. This can be visualised as follows:</p>
+<p>Where orange, blue and green arrows are weights of 10%, 20% and 50% respectively.</p>
+<h2>TimeDistributedDense</h2>
+<p>A very similar layer to the standard Dense layer with the exception that we are now working with an additional time dimension.&nbsp; So the input and output are in the shape: (nb_sample, time_dimension, input_dim).&nbsp; So reproducing the Dense example we get the following:</p>
+<pre>d = TimeDistributedDense(3, init='uniform', 
+  activation='linear', input_dim=3)
+d.set_weights([np.array([[.1, .2, .5], [.1, .2, .5], 
+  [.1, .2, .5]]), np.array([0, 0, 0])])
+print_out(d, [[[10, 20, 30]]])
+# [[[&nbsp; 6.&nbsp; 12.&nbsp; 30.]]]</pre>
+<p>&nbsp;</p>
+<h2>Merge</h2>
+<p>Merges the output of multiple layers.&nbsp; This is used when a Graph model needs to recombine branches into a single trunk.&nbsp; Or when multiple models need to be combined into one. The following strategies are supported: sum, mul, concat, ave, dot.</p>
+<p>No concise code example could be produced.</p>
+<p>&nbsp;</p>
+<h2>TimeDistributedMerge</h2>
+<p>Converts a 3D TimeDistributed layer output into a 2D output with time steps merged using one of the following strategies: sum, mul, ave.</p>
+<pre>print_out(TimeDistributedMerge(mode='sum'), [[[1, 2, 3], [1, 2, 3]]])
+# [[ 2.&nbsp; 4.&nbsp; 6.]]
+print_out(TimeDistributedMerge(mode='mul'), [[[1, 2, 3], [1, 2, 3]]])
+# [[ 1.&nbsp; 4.&nbsp; 9.]]
+print_out(TimeDistributedMerge(mode='ave'), [[[1, 2, 3], [1, 2, 3]]])
+# [[ 1.&nbsp; 2.&nbsp; 3.]]</pre>
+<p>&nbsp;</p>
+<h2>ActivityRegularization</h2>
+<p>ActivityRegularization is simply a wrapper around keras. Regularizers.ActivityRegularizer which applies regularisation to a loss function.&nbsp; We will briefly explore this here as regularization will be the subject of another post in the near future.</p>
+<pre>r = ActivityRegularizer(l1=.01)
+r.layer = Layer()
+r.layer.input = np.array([1, 2, 3, 4, 5])
+K.eval(r(0.))
+# array(0.029999999329447746)
+
+r = ActivityRegularizer(l2=.01)
+r.layer = Layer()
+r.layer.input = np.array([1, 2, 3, 4, 5])
+K.eval(r(0.))
+# array(0.1099999975413084)
+
+r = ActivityRegularizer(l1=.01, l2=.01)
+r.layer = Layer()
+r.layer.input = np.array([1, 2, 3, 4, 5])
+K.eval(r(0.))
+# array(0.13999999687075615)</pre>
+<p>&nbsp;</p>
+<h2>AutoEncoder</h2>
+<p>An Auto Encoder is an unsupervised neural net that aims to produce data that is similar to the input data.&nbsp; This allows the net to learn features about the data and regularisation parameters without using labels.&nbsp; This means the output of the last layer is the same size as the input of the first input layer.&nbsp; Scoring becomes simple as the row in the input can be used to measure similarity of the produced output.</p>
+<p>The Aautoencoder has 2 logical parts, the encoder which is the layers of the net that creates a hidden representation of the input data. And the decoder which is the layers of the net that takes the produced representation from the encoder and creates the output which should match the input data to the encoder.&nbsp; A benefit of using Auto Encoders is that if the hidden representation of the data is smaller than the input data then we have basically compressed the data (dimensionality reduction).</p>
+<p>No concise and descriptive code sample possible.</p>
+<h2>Lambda</h2>
+<p>Creates a layer that performs an python arbitrary function over the layer’s input data:</p>
+<pre>print_out(Lambda(lambda x: x*x), [1, 2, 3])
+# [ 1.&nbsp; 4.&nbsp; 9.]</pre>
+<h2>Siamese</h2>
+<p>A Siamese layer is very similar to a Merge layer with one difference.&nbsp; That is; a Siamese layer can merge output from multiple layers in a net and not just joining branches.</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-309" class="share-twitter sd-button share-icon no-text" href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-press-this"><a rel="nofollow" data-shared="" class="share-press-this sd-button share-icon no-text" href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/?share=press-this&amp;nb=1" target="_blank" title="Click to Press This!"><span></span><span class="sharing-screen-reader-text">Click to Press This! (Opens in new window)</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-309" class="share-linkedin sd-button share-icon no-text" href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/?share=linkedin&amp;nb=1" target="_blank" title="Click to share on LinkedIn"><span></span><span class="sharing-screen-reader-text">Click to share on LinkedIn (Opens in new window)</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-309" class="share-google-plus-1 sd-button share-icon no-text" href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/?share=google-plus-1&amp;nb=1" target="_blank" title="Click to share on Google+"><span></span><span class="sharing-screen-reader-text">Click to share on Google+ (Opens in new window)</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon no-text" href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/#print" target="_blank" title="Click to print"><span></span><span class="sharing-screen-reader-text">Click to print (Opens in new window)</span></a></li><li class="share-email share-service-visible"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon no-text" href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/?share=email&amp;nb=1" target="_blank" title="Click to email this to a friend"><span></span><span class="sharing-screen-reader-text">Click to email this to a friend (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-124572648-309-58fd925865f24" data-src="//widgets.wp.com/likes/#blog_id=124572648&amp;post_id=309&amp;origin=www.picnet.com.au&amp;obj_id=124572648-309-58fd925865f24" data-name="like-post-frame-124572648-309-58fd925865f24"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-124572648-309-58fd925865f24" height="55px" width="100%" frameborder="0" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/saved_resource.html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal jp-relatedposts-grid "><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="318" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="http://www.picnet.com.au/blogs/guido/post/2016/05/23/angular-2-forms-wrapper-clean-forms/" title="Angular 2 Forms Wrapper - Clean forms
+
+Angular 2 forms are very powerful, the custom validation support is extremely flexible and easy to use.  However, this power and flexibility comes at a cost; and that is boiler plate.  To nicely integrate validations into the user interface you need a lot of ugly boilerplate template code.  This makes…" rel="nofollow" data-origin="309" data-position="0">Angular 2 Forms Wrapper - Clean forms</a></span><span class="jp-relatedposts-post-date">May 23, 2016</span><span class="jp-relatedposts-post-context">In "Software Engineering"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="26" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="http://www.picnet.com.au/blogs/guido/post/2009/12/10/javascript-runtime-compilation-using-asp-net-and-googles-closure-compiler/" title="Javascript runtime compilation using Asp.Net and Google&#39;s Closure Compiler
+
+Overview Working on complex javascript projects usually means working with lots of javascript files. When it comes time to deploy this to production it can be be very tedious and sometimes dangerous to do this manually. This solution compiles all the javascript files in a directory to a single minified…" rel="nofollow" data-origin="309" data-position="1">Javascript runtime compilation using Asp.Net and Google's Closure Compiler</a></span><span class="jp-relatedposts-post-date">December 10, 2009</span><span class="jp-relatedposts-post-context">In "Software Engineering"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="198" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="http://www.picnet.com.au/blogs/guido/post/2012/06/20/solid-principles-part-two-open-closed-principle/" title="Solid Principles: Part Two - Open Closed Principle
+
+&#39;Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.&#39; [R. Martin] The OCP is a set of strategies based on inheritance and polymorphism that aims to make code more extensible with fewer side effects when extending. The way side effects are controlled is by adding…" rel="nofollow" data-origin="309" data-position="2">Solid Principles: Part Two - Open Closed Principle</a></span><span class="jp-relatedposts-post-date">June 20, 2012</span><span class="jp-relatedposts-post-context">In "Software Engineering"</span></p></div></div><p></p>
+                            </div>
+                            
+                                                                     
+                            <!-- Begin Metas -->
+                            <div class="metas">
+                                <div class="metas-left">
+	                                
+	                                <div class="post-type-div">
+		                                <div class="post-type no-readmore">
+		                                    		                                    <i class="fa fa-pencil"></i>
+		                                    		
+		
+		                                </div>
+	                                </div>
+
+	                                <div class="metas-box">
+		                                <div class="date">
+		                                    <p><i class="fa fa-calendar"></i> May, 16, 2016</p>
+		                                </div>
+		                                <div class="tags">
+		                                      		                                </div>
+		                                 <div class="category">
+		                                      		                                        <i class="fa fa-pencil"></i>&nbsp;
+		                                        <a href="http://www.picnet.com.au/blogs/guido/post/category/software-engineering/" rel="category tag">Software Engineering</a>		                                </div>
+		                                <div class="comments">
+		                                    <p><i class="fa fa-comment"></i> 0</p>
+		                                </div>
+	                                </div>
+	                                
+                                </div>
+                                
+                                <!--  div class="metas-right">
+	                            
+	                                <div class="posts-shares">
+		                                <h3>SHARE THIS</h3>
+			                            <div class="cbp-l-project-social-wrapper" style="display: inline-block;width: 90px;height: 20px;overflow: hidden;">
+					                        <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" height="20"></iframe>
+					                    </div>
+					
+					                    <div class="cbp-l-project-social-wrapper" style="display: inline-block;width: 90px;height: 20px;overflow: hidden;">
+					                        <iframe src="https://platform.twitter.com/widgets/tweet_button.html?url=http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/&text=Check%20out%20this%20site" height="20" title="Twitter Tweet Button" style="border: 0; overflow: hidden;"></iframe>
+					                    </div>
+					
+					                    <div class="cbp-l-project-social-wrapper" style="width: 71px;display: inline-block;height: 20px;overflow: hidden;">
+					                        <iframe src="https://plusone.google.com/_/+1/fastbutton?bsv&amp;size=medium&amp;hl=en-US&amp;url=http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/" allowtransparency="true" frameborder="0" scrolling="no" title="+1" height="20" style="border: 0; overflow: hidden;"></iframe>
+					                    </div>
+		                            </div>
+                                </div>
+                            </div>
+                            <!-- end metas -->
+                                                                        </div>
+                    </div><!-- #post -->
+                </div>                            
+
+
+       <div class="prev-next-btn">
+
+                                <a href="http://www.picnet.com.au/blogs/guido/post/2016/05/10/upgrading-from-angular-2-beta-17-to-angular-2-rc1/" class="previous-post"><i class="fa fa-arrow-circle-left"> </i>Previous Post </a>
+                
+
+                                <a href="http://www.picnet.com.au/blogs/guido/post/2016/05/20/my-experience-so-far-with-angular-2/" class="next-post"> Next Post <i class="fa fa-arrow-circle-right"></i></a>
+                
+        </div>
+ 
+
+
+                              <h4>About the Author</h4>
+<div class="about-author">
+					    
+    <div class="img-container">
+	    
+	     <img alt="identicon" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/Guido.jpg" class="avatar avatar-80 photo" height="80" width="80" srcset="https://i1.wp.com/www.picnet.com.au/blogs/guido/files/2016/08/Guido.jpg?zoom=2&amp;resize=80%2C80" src-orig="https://i1.wp.com/www.picnet.com.au/blogs/guido/files/2016/08/Guido.jpg?resize=150%2C150" scale="2">    </div>
+    <h5> Guido Tapia</h5>
+    <p></p><p>Over the last 2 years Guido has been involved in building 2 predictive analytics libraries for both the .Net platform and the Python language. These libraries and Guido's machine learning experience have placed PicNet at the forefront of predictive analytics services in Australia.
+
+
+</p><p>For the last 10 years Guido has been the Software and Data Manager at PicNet and in that time Guido has delivered hundreds of successful software and data projects. An experience architect and all round 'software guy' Guido has been responsible for giving PicNet its 'quality software provider' reputation.
+
+
+</p><p>Prior to PicNet, Guido was in the gaming space working on advanced graphics engines, sound (digital signal processing) engines, AI players and other great technologies.
+
+
+</p><p>Email: <a href="mailto:guido.tapia@picnet.com.au">guido.tapia@picnet.com.au</a><br>
+Phone: <a href="tel:+61284377902">+61 2 8437 7902</a>
+
+
+
+</p><p>Interesting Links:<br>
+
+<a href="http://www.picnet.com.au/aboutus/GuidoTapia.aspx" title="Guido Tapia Profile">Profile</a><br>
+<a href="https://www.kaggle.com/users/78083/guido-tapia">Kaggle Master Profile</a><br>
+<a href="https://github.com/gatapia" title="Guido Tapia GitHub Account">GitHub</a><br>
+<a href="http://www.picnet.com.au/AboutUs/News.aspx" title="Guido Tapia Speaking Engagements and Conferences">Speaking Engagements and Conferences</a><br>
+<a href="http://www.picnet.com.au/downloads/PicNet%20Predictive%20Analytics%20Flyer.pdf" title="PicNet Predictive Analytics Services">PicNet Predictive Analytics Services</a><br></p>
+</div>
+
+
+
+
+
+                            
+<div class="space"></div>
+    <section id="comments" class="well well-sm">
+
+        
+        
+        <div class="clearfix"></div><br>
+
+        	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="http://www.picnet.com.au/blogs/guido/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><div class="message"><span>Comment</span><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></div><button class="btn-color btn-color-1 btn-color-1d" type="submit" id="submit"><span>Post Comment</span></button><div class="name"><span>*Name</span> 
+<input id="author" name="author" type="text" value="" size="30" aria-required="true"></div>
+<div class="email"><span>*Email</span> 
+<input id="email" name="email" type="email" value="" size="30" aria-required="true"></div>
+<!-- 137,055 Spam Comments Blocked so far by Spam Free Wordpress version 2.2.6 located at https://www.toddlahman.com/shop/simple-comments/ -->
+<p><input type="text" value="Qm2YdiU4Ub5N" onclick="this.select()" size="20">
+		<b>* Copy This Password *</b></p><p><input type="text" name="passthis" id="passthis" value="" size="20">
+		<b>* Type Or Paste Password Here *</b></p><p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="309" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="59c3fda12a"></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p><p style="display: none;"></p>			<input type="hidden" id="ak_js" name="ak_js" value="1493013082480"><input class="form-hp-company" type="text" style="position:relative;left:-10000px;" value=""></form>
+			</div><!-- #respond -->
+	
+    </section>
+
+
+                        
+                        
+                      
+                </div>
+                <!-- END journal -->
+                
+                
+                
+                
+                <!-- START SIDEBAR -->
+                <div class="col-xs-12 col-sm-12 col-md-3 blog-sidebar">
+                    
+                <div id="search-2" class="well well-sm widget widget_search">
+<form class="form-search" method="post" id="searchform" action="http://www.picnet.com.au/blogs/guido/">
+        <input type="search" name="s" id="s" placeholder="Search">
+         <button id="searchsubmit" type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+  
+<input class="form-hp-company" type="text" style="position:relative;left:-10000px;" value=""></form></div><div id="text-2" class="well well-sm widget widget_text"><h2 class="widgettitle">NEED Custom Software Development?</h2>
+			<div class="textwidget">Visit our <a href="http://www.picnet.com.au/software-engineering/">Custom Software Development</a> page and find out how PicNet can help you today.</div>
+		</div><div id="linkcat-2" class="well well-sm widget widget_links"><h2 class="widgettitle">Blogroll</h2>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://www.picnet.com.au/blogs/marco/" rel="colleague" target="_blank">IT Consulting</a></li>
+<li><a href="http://www.picnet.com.au/blogs/david/" rel="colleague" target="_blank">IT Support</a></li>
+<li><a href="http://www.picnet.com.au/blogs/guido/">Software Development</a></li>
+
+	</ul>
+</div>
+		<div id="recent-posts-2" class="well well-sm widget widget_recent_entries">		<h2 class="widgettitle">Recent Posts</h2>
+		<ul>
+					<li>
+				<a href="http://www.picnet.com.au/blogs/guido/post/2016/12/06/introducing-xgboost-net-net-wrappers-for-the-awesome-xgboost-library/">Introducing XGBoost.Net – .Net wrappers for the awesome XGBoost library</a>
+						</li>
+					<li>
+				<a href="http://www.picnet.com.au/blogs/guido/post/2016/09/22/xgboost-windows-x64-binaries-for-download/">Download XGBoost Windows x64 Binaries and Executables</a>
+						</li>
+					<li>
+				<a href="http://www.picnet.com.au/blogs/guido/post/2016/09/22/how-to-build-xgboost-on-windows/">How to build XGBoost on Windows – Now with GPU support</a>
+						</li>
+				</ul>
+		</div>		<div id="archives-2" class="well well-sm widget widget_archive"><h2 class="widgettitle">Archives</h2>
+		<label class="screen-reader-text" for="archives-dropdown-2">Archives</label>
+		<select id="archives-dropdown-2" name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;">
+			
+			<option value="">Select Month</option>
+				<option value="http://www.picnet.com.au/blogs/guido/post/2016/12/"> December 2016 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2016/09/"> September 2016 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2016/07/"> July 2016 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2016/06/"> June 2016 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2016/05/"> May 2016 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2015/06/"> June 2015 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2015/04/"> April 2015 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2014/11/"> November 2014 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2014/09/"> September 2014 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2014/08/"> August 2014 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2012/07/"> July 2012 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2012/06/"> June 2012 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2012/05/"> May 2012 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2011/05/"> May 2011 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2011/03/"> March 2011 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2011/01/"> January 2011 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2010/10/"> October 2010 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2010/08/"> August 2010 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2010/06/"> June 2010 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2010/05/"> May 2010 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2010/04/"> April 2010 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2010/03/"> March 2010 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2010/02/"> February 2010 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2010/01/"> January 2010 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2009/12/"> December 2009 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2009/11/"> November 2009 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2009/10/"> October 2009 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2009/09/"> September 2009 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2009/08/"> August 2009 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2009/07/"> July 2009 </option>
+	<option value="http://www.picnet.com.au/blogs/guido/post/2009/06/"> June 2009 </option>
+
+		</select>
+		</div>                   
+                </div>
+                
+        
+            </div>  
+            <!-- END: BLOG CONTAINER -->
+        </div></section>
+
+
+
+
+        </div>
+     
+       <div class="footer">
+            <!-- BEGIN BOTTOM FOOTER -->
+            <div class="container">
+                
+       <div class="row">
+                    
+
+
+                     
+                                                 <div class="col-sm-6">
+                                                                                                      
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div id="text-3" class="widget widget_text"><h2 class="widgettitle">PicNet is an Information Technology Company</h2>
+			<div class="textwidget">We specialise in IT Support. <br>
+Consulting &amp; Project management<br>
+Custom Software development &amp;<br>
+Predictive Analytics. 
+
+<p>Contact us today to discuss your needs, and find out how Picnet can improve your productivity</p></div>
+		</div>                            </div>
+                     
+                    
+                    
+                     
+
+                      
+                     
+                      
+
+                     
+                    
+
+                </div>
+                        
+            </div>
+
+            <p id="back-top" style="display: none;"><a href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/#home"><i class="fa fa-angle-up"></i></a></p>       
+       </div>
+       
+       <div id="bottom-footer" class="text-center" style="display:none;">
+                                  
+       		<div class="container">
+	             
+	            <!-- BEGIN: LOGO FOOTER -->
+	            <div class="logo-footer">
+	                 <img src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/picnet-logo-retina-footer.png" data-at2x="http://www.picnet.com.au/wp-content/uploads/2015/01/picnet-logo-retina-footer.png" alt="PredictBench and Software Engineering Blog" width="0" height="0">
+	                 
+	                 <ul class="contacts-footer">
+	                     
+	                 	<li><i class="fa fa-envelope-o"></i> picnet@picnet.com.au</li> 
+	                    	                     
+	                 	<li><i class="fa fa-phone"></i> +61 2 8437 7977</li>
+	                    	                 
+	                 </ul>
+	                 
+	            </div>
+	            	              	            <!-- BEGIN: ICONS FOOTER -->
+	            <div class="socialdiv colored">
+	                <ul>
+	                    	                    <li><a class="facebook" href="https://www.facebook.com/PicNetIT/" target="_blank" data-original-title="" title=""></a></li>
+	                    	                    <li><a class="twitter" href="http://www.twitter.com/PicNetIT" target="_blank" data-original-title="" title=""></a></li>
+	                    	                    <li><a title="" class="google" href="https://plus.google.com/b/103041026200896196425/+PicnetAu" target="_blank" data-original-title="Picnet on Google+"></a></li>
+	                    	                    <li><a class="youtube" href="http://www.youtube.com/user/PicNetTV" target="_blank" data-original-title="" title=""></a></li>
+	                    	                    <li><a class="linkedin" href="http://www.linkedin.com/company/picnet-pty-ltd?trk=fc_badge" target="_blank" data-original-title="" title=""></a></li>
+	                    	                </ul>   
+	            </div>  
+	                 
+	             
+	            <!-- BEGIN: COPYRIGHTS -->
+	            <div class="b-text">
+	                <p>© 2016 PicNet Pty Ltd. All Rights Reserved. | <a title="Contact Us" href="http://www.picnet.com.au/contact-us/">Contact Us</a> - <a href="http://www.picnet.com.au/newsletter/">Newsletter</a></p>
+	            </div>
+	            	        </div>
+	        <!-- END CONTAINER -->
+	    </div><!-- END BOTTOM FOOTER test -->
+	    
+        
+    <script type="text/javascript">
+var client = new XMLHttpRequest();
+client.open('GET', 'http://api.picnet.com.au/visitor/' + encodeURIComponent(document.location.pathname.replace(/\//g, '$')));
+client.send();
+</script>
+	<!-- Don't forget analytics -->
+   <div id="footer-analytics">
+		  
+			<div style="display:none">
+	<div class="grofile-hash-map-5b82092e6f15d81994573427d8865e47">
+	</div>
+	</div>
+
+<!-- font handler -->
+    
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/www.picnet.com.au\/blogs\/guido\/post\/2016\/05\/16\/review-of-keras-deep-learning-core-layers\/":309};
+	</script>
+	
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/form.js"></script>
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='http://www.picnet.com.au/blogs/guido/wp-content/plugins/jetpack/modules/carousel/jetpack-carousel-ie8fix.css?ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/photon.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/devicepx-jetpack.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jquery.form.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var _wpcf7 = {"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/scripts.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/wpgroho.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/isotope-min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/retina.min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/queryloader.min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/bootstrap.min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/smartmenus.min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/ytplayer.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/wow.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var UtilParam = {"url":"http:\/\/www.picnet.com.au\/blogs\/guido\/wp-content\/themes\/dikka-installable"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/utils.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var MainParam = {"twitter_username":"PicNetIT","twitter_count":"5"};
+var main = {"home_url":"http:\/\/www.picnet.com.au\/blogs\/guido","template_active":"non-builder"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/main.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/SmoothScroll.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/owl.carousel.min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/nivo-lightbox.min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/comment-reply.min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/wp-embed.min.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/spin.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jquery.spin.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"http:\/\/www.picnet.com.au\/blogs\/guido\/wp-admin\/admin-ajax.php","nonce":"6f497922c6","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"1","login_url":"http:\/\/www.picnet.com.au\/blogs\/guido\/wp-login.php?redirect_to=http%3A%2F%2Fwww.picnet.com.au%2Fblogs%2Fguido%2Fpost%2F2016%2F05%2F16%2Freview-of-keras-deep-learning-core-layers%2F","blog_id":"3","local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jetpack-carousel.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/postmessage.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jquery.jetpack-resize.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/jquery.inview.js"></script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/queuehandler.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/sharing.js"></script>
+<script type="text/javascript">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-google-plus-1', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+</script>
+		<iframe src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/e-201717.js" async="" defer=""></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:4.6',blog:'124572648',post:'309',tz:'11',srv:'www.picnet.com.au'} ]);
+	_stq.push([ 'clickTrackerInit', '124572648', '309' ]);
+</script>
+	<!-- Google Code for Remarketing Tag --><!--------------------------------------------------Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup---------------------------------------------------><script type="text/javascript">/* <![CDATA[ */var google_conversion_id = 1071628828;var google_custom_params = window.google_tag_params;var google_remarketing_only = true;/* ]]> */</script><script type="text/javascript" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/conversion.js"></script><iframe name="google_conversion_frame" title="Google conversion frame" width="300" height="13" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/saved_resource(2).html" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no"></iframe><noscript>&lt;div style="display:inline;"&gt;&lt;img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1071628828/?value=0&amp;amp;guid=ON&amp;amp;script=0"/&gt;&lt;/div&gt;</noscript>
+	</div>
+    
+<div id="sharing_email" style="display: none;">
+		<form action="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input type="email" name="target_email" id="target_email" value="">
+
+			
+				<label for="source_name">Your Name</label>
+				<input type="text" name="source_name" id="source_name" value="">
+
+				<label for="source_email">Your Email Address</label>
+				<input type="email" name="source_email" id="source_email" value="">
+
+						<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off">
+			<script>jQuery( document ).ready( function(){ document.getElementById('jetpack-source_f_name').value = '' });</script>
+			
+			<img style="float: right; display: none" class="loading" src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/loading.gif" alt="loading" width="16" height="16" scale="0">
+			<input type="submit" value="Send Email" class="sharing_send">
+			<a rel="nofollow" href="http://www.picnet.com.au/blogs/guido/post/2016/05/16/review-of-keras-deep-learning-core-layers/#cancel" class="sharing_cancel">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		<input class="form-hp-company" type="text" style="position:relative;left:-10000px;" value=""></form>
+	</div><img src="./Review of Keras (Deep Learning) Core Layers - PredictBench and Software Engineering Blog_files/g.gif" alt=":)" width="6" height="5" id="wpstats" scale="0"></body></html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/ -->
+<html lang="en-GB" prefix="og: http://ogp.me/ns#" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://blog.lateral.io/xmlrpc.php">
+<link href="./Lateral Blog - A fastText-based hybrid recommender_files/css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="./Lateral Blog - A fastText-based hybrid recommender_files/font-awesome.min.css">
+<link rel="icon" href="https://assets.lateral.io/favicon.png">
+<script async="" src="./Lateral Blog - A fastText-based hybrid recommender_files/analytics.js"></script><script async="" src="./Lateral Blog - A fastText-based hybrid recommender_files/analytics.js"></script><script src="./Lateral Blog - A fastText-based hybrid recommender_files/modernizr.min.js"></script>
+
+<title>Lateral Blog - A fastText-based hybrid recommender</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v4.0.2 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Facebook new fastText library can learn the meaning of metadata from the text it labels. We used fastText to hack together a “hybrid recommender” system.">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lateral Blog - A fastText-based hybrid recommender">
+<meta property="og:description" content="Facebook new fastText library can learn the meaning of metadata from the text it labels. We used fastText to hack together a “hybrid recommender” system.">
+<meta property="og:url" content="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/">
+<meta property="og:site_name" content="Lateral">
+<meta property="article:section" content="Machine Learning">
+<meta property="article:published_time" content="2016-09-27T16:49:24+02:00">
+<meta property="article:modified_time" content="2016-10-20T19:12:17+02:00">
+<meta property="og:updated_time" content="2016-10-20T19:12:17+02:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="Facebook new fastText library can learn the meaning of metadata from the text it labels. We used fastText to hack together a “hybrid recommender” system.">
+<meta name="twitter:title" content="Lateral Blog - A fastText-based hybrid recommender">
+<meta name="twitter:site" content="@uselateral">
+<meta name="twitter:creator" content="@uselateral">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Lateral » Feed" href="https://blog.lateral.io/feed/">
+<link rel="alternate" type="application/rss+xml" title="Lateral » Comments Feed" href="https://blog.lateral.io/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Lateral » A fastText-based hybrid recommender Comments Feed" href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/blog.lateral.io\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.4"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Lateral Blog - A fastText-based hybrid recommender_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="cresta-social-crestafont-css" href="./Lateral Blog - A fastText-based hybrid recommender_files/csscfont.css" type="text/css" media="all">
+<link rel="stylesheet" id="cresta-social-wp-style-css" href="./Lateral Blog - A fastText-based hybrid recommender_files/cresta-wp-css.css" type="text/css" media="all">
+<link rel="stylesheet" id="cresta-social-googlefonts-css" href="./Lateral Blog - A fastText-based hybrid recommender_files/css(1)" type="text/css" media="all">
+<link rel="stylesheet" id="main-css" href="./Lateral Blog - A fastText-based hybrid recommender_files/main.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-gfm-css" href="./Lateral Blog - A fastText-based hybrid recommender_files/markdown.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-featherlight-css" href="./Lateral Blog - A fastText-based hybrid recommender_files/wp-featherlight.min.css" type="text/css" media="all">
+<!-- This site uses the Google Analytics by MonsterInsights plugin v5.5.4 - Universal enabled - https://www.monsterinsights.com/ -->
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-45843453-4', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type="text/javascript" src="./Lateral Blog - A fastText-based hybrid recommender_files/jquery.js"></script>
+<script type="text/javascript" src="./Lateral Blog - A fastText-based hybrid recommender_files/jquery-migrate.min.js"></script>
+<link rel="https://api.w.org/" href="https://blog.lateral.io/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blog.lateral.io/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://blog.lateral.io/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 4.7.4">
+<link rel="shortlink" href="https://blog.lateral.io/?p=1055">
+<link rel="alternate" type="application/json+oembed" href="https://blog.lateral.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://blog.lateral.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;format=xml">
+<style type="text/css">
+			@media (max-width : 640px) {
+				#crestashareicon {
+					display:none !important;
+				}
+			}
+		#crestashareicon {position:fixed; top:40%; right:30px; float:left;z-index:99;}
+
+		#crestashareicon .sbutton {clear:both;}
+		#crestashareicon .sbutton {float:right;}.cresta-share-icon.second_style .cresta-the-count {left: -11px;}#crestashareiconincontent {float: left;}</style><style type="text/css" id="syntaxhighlighteranchor"></style>
+
+<script type="text/javascript" async="" src="./Lateral Blog - A fastText-based hybrid recommender_files/embed.js"></script><style type="text/css">@media(max-width:780px){body,html{-webkit-overflow-scrolling:touch!important}}#boxzilla-overlay{position:fixed;background:rgba(0,0,0,.65);width:100%;height:100%;left:0;top:0;z-index:99999}.boxzilla-center-container{position:fixed;top:0;left:0;right:0;height:0;text-align:center;z-index:999999;line-height:0}.boxzilla-center-container .boxzilla{display:inline-block;text-align:left;position:relative;line-height:normal}.boxzilla{position:fixed;z-index:999999;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;background:#fff;padding:25px}.boxzilla.boxzilla-top-left{top:0;left:0}.boxzilla.boxzilla-top-right{top:0;right:0}.boxzilla.boxzilla-bottom-left{bottom:0;left:0}.boxzilla.boxzilla-bottom-right{bottom:0;right:0}.boxzilla-content>:first-child{margin-top:0;padding-top:0}.boxzilla-content>:last-child{margin-bottom:0;padding-bottom:0}.boxzilla-close-icon{position:absolute;right:0;top:0;text-align:center;padding:6px;cursor:pointer;-webkit-appearance:none;font-size:28px;font-weight:700;line-height:20px;color:#000;opacity:.5}.boxzilla-close-icon:focus,.boxzilla-close-icon:hover{opacity:.8}</style><link rel="preload" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.5f04e83cf97ee6a6cf16dc8e296ed78d.css"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.08b03b11c747b79c4d4135b49e2f8725.js"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.987c6346e2effb8e4f350d48ecf53d13.js"><link rel="preload" as="script" href="https://disqus.com/next/config.js"></head>
+
+<body class="post-template-default single single-post postid-1055 single-format-standard wp-featherlight-captions group-blog">
+<div id="page" class="hfeed site">
+
+	<a class="skip-link screen-reader-text" href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+			<h2 class="site-description">Blog</h2>
+			<h1 class="site-title"><a href="https://blog.lateral.io/" rel="home">Lateral</a></h1>
+			<div "site-header"="">
+				
+				<div class="lateral-header">
+
+					<a href="https://lateral.io/" id="logo">
+            <span id="logo-icon"></span><span id="logo-text"></span>
+          </a>
+
+					<ul>
+            <li class="get-access"><a href="https://blog.lateral.io/" class="get-access-button">Newsletter</a></li>
+						<li class="active-li"><a href="https://blog.lateral.io/">Blog</a></li>
+						<li><a href="https://lateral.io/faq">FAQ</a></li>
+						<li><a href="https://lateral.io/docs">Docs</a></li>
+						<li><a href="https://lateral.io/labs">Labs</a></li>
+						<li><a href="https://lateral.io/publishing">Publishers</a></li>
+						<li><a href="https://lateral.io/">Enterprise</a></li>
+					</ul>
+          
+				</div>
+
+        <div class="lateral-blog-header">
+
+          <div class="blog-header-wrapper">  
+          
+            <a href="https://blog.lateral.io/" class="blog-title">The Lateral Blog</a>
+
+            <div class="search-icon"><i class="fa fa-search search-icon-show" aria-hidden="true"></i><i class="fa fa-times search-icon-hide" aria-hidden="true"></i></div>
+
+            <div class="menu-icon">
+            	<div class="menu-icon-show"><i class="fa fa-bars" aria-hidden="true"></i></div>
+            	<div class="menu-icon-hide"><i class="fa fa-times menu-icon-hide" aria-hidden="true"></i></div>
+            </div>
+
+            <ul>              
+              <li class="cat-all"><a href="https://blog.lateral.io/">All</a></li>
+              <li class="cat-data"><a href="https://blog.lateral.io/category/data">Data</a></li>
+              <li class="cat-demos"><a href="https://blog.lateral.io/category/demos">Demos</a></li>
+              <li class="cat-dev"><a href="https://blog.lateral.io/category/development">Development</a></li>
+              <li class="cat-ml"><a href="https://blog.lateral.io/category/ml">Machine Learning</a></li>
+              <li class="cat-ux"><a href="https://blog.lateral.io/category/ux">UX</a></li>
+              <li class="newsletter-mobile"><a href="https://blog.lateral.io/">Newsletter</a></li>
+            </ul>
+
+            <div class="search-box"><form role="search" method="get" id="searchform" class="searchform" action="https://blog.lateral.io/">
+    <div>
+        <label class="screen-reader-text" for="s"></label>
+        <input type="text" value="" name="s" id="s" autocomplete="off" placeholder="Search">
+        <input type="submit" id="searchsubmit" value="Search">
+    </div>
+</form>
+</div>
+
+          </div>
+        </div> 
+
+			</div>
+		</div><!-- .site-branding -->
+	</header><!-- #masthead -->
+	
+<!-- 	<div class="hiring" id="hiring-banner">
+		<div class="hiring-wrapper">
+		<span id="close" onclick="document.getElementById('hiring-banner').remove();"><i class="fa fa-times"></i></span>
+		<a href="http://lateral.io/jobs" target="_blank">We are hiring, join us!</a>
+		</div>
+	</div> -->
+
+	<div id="content" class="site-content">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-1055" class="post-1055 post type-post status-publish format-standard hentry category-ml">
+
+	<!-- <div class="go-back">
+		<a href="https://blog.lateral.io">
+			<div class="go-back-icon"></div>
+			<div class="go-back-text">Home</div>
+		</a>
+	</div> -->
+	<header class="entry-header">
+
+		<div class="entry-title-single-page"><h1 class="entry-title">A fastText-based hybrid&nbsp;recommender</h1></div>
+
+		<div class="entry-meta">
+			<span class="posted-on"><a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/" rel="bookmark"><time class="entry-date published" datetime="2016-09-27T16:49:24+00:00">27th September 2016</time><time class="updated" datetime="2016-10-20T19:12:17+00:00">20th October 2016</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://blog.lateral.io/author/stephen/">Stephen</a></span></span>		</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+<!-- 	<a class="thumbnail-single-page"></a> -->
+
+	<div class="entry-content">
+		<h2>Introduction</h2>
+<p>Using Facebook Research’s new <a href="https://github.com/facebookresearch/fastText" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;https://github.com/facebookresearch/fastText&#39;, &#39;fastText library&#39;);">fastText library</a>&nbsp;in supervised mode, I trained a hybrid recommender system, to recommend articles to users, given as training data both the text in the articles and the user/article interaction matrix. The labels attached to a document were both its id, and the ids of all users who viewed it. I’ve not finished testing it, but early signs are that it learns quite well. This post is a short progress report, perhaps of interest to&nbsp;others building hybrid&nbsp;recommenders.</p>
+<h2>About fastText</h2>
+<h3>What is it?</h3>
+<p>Recently, Facebook Research released the C++ <a href="https://github.com/facebookresearch/fastText" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;https://github.com/facebookresearch/fastText&#39;, &#39;source code&#39;);">source code</a> for fastText,&nbsp;a software library for learning word embeddings using a shallow neural network. It&nbsp;can learn either unsupervised, training on&nbsp;unstructured&nbsp;text,&nbsp;or in&nbsp;a&nbsp;supervised manner, from a series of labelled documents.&nbsp;The code is accompanied by&nbsp;two research&nbsp;preprints:</p>
+<ol>
+<li><a href="https://arxiv.org/pdf/1607.04606v1.pdf" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;download&#39;, &#39;https://arxiv.org/pdf/1607.04606v1.pdf&#39;);">Enriching Word Vectors with Subword Information</a> (unsupervised)</li>
+<li><a href="https://arxiv.org/pdf/1607.01759v2.pdf" onclick="__gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;download&#39;, &#39;https://arxiv.org/pdf/1607.01759v2.pdf&#39;);">Bag of Tricks for Efficient Text Classification</a> (supervised),</li>
+</ol>
+<p>explaining fastText’s workings and performance on benchmark datasets&nbsp;in each case. The authors&nbsp;state its performance is comparable with much more complex “deep learning” algorithms, but&nbsp;the training time is significantly&nbsp;lower.</p>
+<h3>How does it&nbsp;work?</h3>
+<p>In unsupervised mode, fastText&nbsp;trains by&nbsp;sliding a window over the input&nbsp;text and either learning the centre word from the remaining context (“continuous bag of words” or “CBOW”), or all the context words from the centre word (“Skipgram”), and learning can be viewed as a series of updates to a neural network with two layers of weights and&nbsp;three tiers of neurons,&nbsp;in which the two outer tiers&nbsp;each have one&nbsp;neuron&nbsp;for each word in the vocabulary, and&nbsp;the&nbsp;middle tier&nbsp;has as many neurons as there are&nbsp;dimensions in the&nbsp;embedding space. In this way, it is similar to word2vec (in fact, one of the fastText coauthors, Tomas Mikolov, is the creator of word2vec). Unlike word2vec, however, fastText can also&nbsp;learn vectors for sub-parts of words &nbsp;— so-called character n-grams&nbsp;—&nbsp;ensuring e.g. that the words “supervised”, “supervise” and “supervisor” all have similar vectorisations, even if they tend to appear in different&nbsp;contexts. This feature enhances learning on&nbsp;heavily inflected languages, according to the&nbsp;authors.</p>
+<p>In supervised mode, the first two neuron&nbsp;tiers&nbsp;of the network are the same, but the neurons in the output tier&nbsp;are in bijection with the&nbsp;labels, rather than the words in the vocabulary.&nbsp;The&nbsp;learning&nbsp;task on a given&nbsp;window is to predict the labels attached to the current document, given the words in the&nbsp;window.</p>
+<h2>Training a&nbsp;hybrid&nbsp;recommender</h2>
+<h3>Defining the model</h3>
+<p>Supervised fastText trains on a text file in which each line is a series of space-separated labels, followed by the text of single document. The labels are prepended by a crib, by default “__label__”, so they can be differentiated from words in the&nbsp;text.</p>
+<p>In my case, each line of the training file contained one document, with no repetitions. The labels attached to a document were its document id, and the ids of all users who had interacted with it. Here’s a fictitious&nbsp;example:</p>
+<p style="padding-left: 30px;"><code>__label__doc_id_21231 __label__user_id_aadsf89asdf __label__user_id_87sdfsdf __label__user_id_45jfkasf novak djokovic won yet another tennis match last friday ...</code></p>
+<p>After training, the <em>score</em> associated to a user/document pair is the cosine similarity of their associated vectors. (Note that the vectors learned by fastText are not of unit length, so computing cosine similarity means normalising.)&nbsp;The document yielding the highest score is&nbsp;defined to be the&nbsp;recommendation.</p>
+<h3>Data preparation and hyperparameters</h3>
+<p>After throwing out&nbsp;users and documents with too few interactions, my training set consisted of&nbsp;around 22k documents&nbsp;and 85k users, with 1 million interactions, and my test set consisted of 30,000 user/document interaction pairs. The training set was 56MB in size.&nbsp;Here are the hyperparameters I specified for the best-performing model (all others were default):<code><br>
+</code></p>
+<p style="padding-left: 30px;"><code>-dim 100<br>
+-loss ns<br>
+-thread 32<br>
+-minCount 5<br>
+-neg 10<br>
+-ws 20<br>
+-epoch 100000<br>
+-lr 0.075<br>
+</code></p>
+<p>The training took around 5 hours on a 32-core, 120 GB AWS instance. Varying the window size, dimension and minCount made&nbsp;little difference to model quality. Increasing&nbsp;“neg” — the number of negative samples — improved the quality of the model uniformly in the range I checked: values from 5 to 50 in intervals of 5. (The downside is that more negative samples means training takes longer.)&nbsp;Varying learning rate affected the model unpredictably: larger values seemed better when the number of epochs was small, but I can’t see a consistent pattern. Using a very large learning rate with very many epochs lead to segfault errors, perhaps because of arithmetic overflow. Increasing the number of epochs steadily improved model quality. I&nbsp;stopped at 100,000 epochs because the improvements were becoming marginal, and my patience ran&nbsp;out.</p>
+<h3>A small “gotcha”</h3>
+<p>In the version of the code I downloaded in late August, the documentation stated the default value for the “loss” hyperparameter was “ns”, meaning negative sampling. However, this was not true at the time: reading the code revealed&nbsp;the true default value was “softmax”, which perhaps leads to a better model, but is <em>much</em> slower to train. This meant that my first attempts to train a model were&nbsp;unsuccessful, because fixing a large enough value of “epoch”&nbsp;to ensure the model learned something would’ve meant waiting days or weeks for the model to train. After a few days’ frustration, I read the code and noticed the error in the documentation. Happily, fastText coauthor Edouard Grave was extremely helpful, responding immediately&nbsp;to my bug report, and fixing the problem within a day. He was also kind enough to suggest I use hierarchical softmax instead of negative sampling for the “loss” parameter, since&nbsp;it is, apparently, faster still to train. I haven’t yet experimented with&nbsp;hierarchical softmax systematically. A big thank you to Edouard for his&nbsp;help!</p>
+<h3>Rationale: why should this work?</h3>
+<p>The first layer of weights in the network encodes the word vectors; the second layer the label vectors. During training, at any given text window, each word vector is moved closer to a randomly chosen label vector for the current document. Each document id label is seen only once per training epoch, but if we train over many epochs,&nbsp;then:</p>
+<ol>
+<li>We expect the label vector associated to a document id&nbsp;to be pushed closer to the average of the word vectors this&nbsp;document&nbsp;contains, and</li>
+<li>We expect the vector associated to a user id&nbsp;to be pushed closer to the average of the vectors of all words mentioned in each document seen by that user.</li>
+</ol>
+<p>If both the above hold, then label vectors of document ids and label vectors of user ids will be tend to be&nbsp;moved closer to one another, provided the given document has been seen by the given user. For the same reason,&nbsp;it will also be the case that any two users with similar reading tastes, and any two documents attracting users with similar reading tastes, will have similar&nbsp;vectorisations.</p>
+<h3>Results</h3>
+<p>We measured the performance of the model as&nbsp;follows:</p>
+<ol>
+<li>For each user_id/doc_id pair(u, d) in the test set, compute the cosine similarity of vec(u) with vec(d’), where d’ varies across all documents in the test set; this is by definition the score s(u, d’) of (u, d’).</li>
+<li>Write these scores s(u, d’) in descending order in a list L, and record the position in which s(u, d) occurs.</li>
+<li>Now compute the “decimal percentile” of s(u, d) in L: if it is in first place, assign it a score of 0.0, if it is in last place, give it 1.0; in the middle is 0.5. Call this number the “percentile rank” pr(u, d) of the pair (u, d).</li>
+<li>We measure the performance of the model as&nbsp;the mean of pr(u, d) across all 30,000 pairs (u, d).</li>
+</ol>
+<p>The&nbsp;best model trained in this way achieved a score of around 0.093.&nbsp;A model that understood nothing would achieve a score of 0.5 — meaning that the score s(u, d) would be half-way down the list of test scores on average — so this is significantly better than random. However, this result&nbsp;is not as good&nbsp;as&nbsp;our current&nbsp;state-of-the-art model (CSOA), which achieves a score of less than 0.01. However, the CSOA is also trained on around 100 times more&nbsp;data. The next step is to train a fastText model on this larger data set. The experiment&nbsp;continues!</p>
+<!--www.crestaproject.com Social Button in Content Start--><div id="crestashareiconincontent" class="cresta-share-icon second_style"><div class="sbutton  facebook-cresta-share" id="facebook-cresta-c"><a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t=A+fastText-based+hybrid%C2%A0recommender" rel="nofollow" title="Share to Facebook" onclick="window.open(this.href,&#39;targetWindow&#39;,&#39;toolbars=0,location=0,status=0,menubar=0,scrollbars=1,resizable=1,width=640,height=320,left=200,top=200&#39;);return false; __gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;https://www.facebook.com/sharer.php?u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t=A+fastText-based+hybrid%C2%A0recommender&#39;, &#39;&#39;);"><i class="cs c-icon-cresta-facebook"></i></a></div><div class="sbutton  twitter-cresta-share" id="twitter-cresta-c"><a href="https://twitter.com/share?text=A+fastText-based+hybrid%C2%A0recommender&amp;url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;via=uselateral" rel="nofollow" title="Share to Twitter" onclick="window.open(this.href,&#39;targetWindow&#39;,&#39;toolbars=0,location=0,status=0,menubar=0,scrollbars=1,resizable=1,width=640,height=320,left=200,top=200&#39;);return false; __gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;https://twitter.com/share?text=A+fastText-based+hybrid%C2%A0recommender&amp;url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;via=uselateral&#39;, &#39;&#39;);"><i class="cs c-icon-cresta-twitter"></i></a></div><div class="sbutton  googleplus-cresta-share" id="googleplus-cresta-c"><a href="https://plus.google.com/share?url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F" rel="nofollow" title="Share to Google Plus" onclick="window.open(this.href,&#39;targetWindow&#39;,&#39;toolbars=0,location=0,status=0,menubar=0,scrollbars=1,resizable=1,width=640,height=320,left=200,top=200&#39;);return false; __gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;https://plus.google.com/share?url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&#39;, &#39;&#39;);"><i class="cs c-icon-cresta-gplus"></i></a></div><div class="sbutton  linkedin-cresta-share" id="linkedin-cresta-c"><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;title=A+fastText-based+hybrid%C2%A0recommender&amp;source=https://blog.lateral.io/" rel="nofollow" title="Share to LinkedIn" onclick="window.open(this.href,&#39;targetWindow&#39;,&#39;toolbars=0,location=0,status=0,menubar=0,scrollbars=1,resizable=1,width=640,height=320,left=200,top=200&#39;);return false; __gaTracker(&#39;send&#39;, &#39;event&#39;, &#39;outbound-article&#39;, &#39;https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;title=A+fastText-based+hybrid%C2%A0recommender&amp;source=https://blog.lateral.io/&#39;, &#39;&#39;);"><i class="cs c-icon-cresta-linkedin"></i></a></div><div style="clear: both;"></div></div><div style="clear: both;"></div><!--www.crestaproject.com Social Button in Content End-->
+		<footer class="entry-footer-single">
+			<span class="category-text">Category:</span><a href="https://blog.lateral.io/category/ml/" class="category-link category-ml">Machine Learning</a>		</footer><!-- .entry-footer -->
+
+		<div class="divider-content-single"></div>
+		<div class="the-author">The Author</div>
+		<div class="author-about">
+			<div class="author-avatar"><a href="https://blog.lateral.io/author/stephen/"><img alt="" src="./Lateral Blog - A fastText-based hybrid recommender_files/f8b1bfa3e4e43fbe436818512e65b362" srcset="https://secure.gravatar.com/avatar/f8b1bfa3e4e43fbe436818512e65b362?s=200&amp;d=mm&amp;r=g 2x" class="avatar avatar-100 photo" height="100" width="100"></a></div>
+			<div class="author-name"><a href="https://blog.lateral.io/author/stephen/" title="Posts by Stephen" rel="author">Stephen</a></div>
+			<div class="author-social"><a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/"></a></div>
+			<div class="author-bio">I'm a data scientist at Lateral.</div>
+		</div>
+
+    <div class="divider-content-single"></div>
+    <div class="the-comments">Comments</div>
+
+    <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Lateral Blog - A fastText-based hybrid recommender_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 1416px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'lateralblog';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript" rel="nofollow"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+			</div><!-- .entry-content -->
+
+</article><!-- #post-## -->
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+			<div class="read-next">
+			<div class="read-next-wrapper">
+				<div class="next-article-label">Previous Post</div>
+				<div class="next-article">
+					<div class="next-article-link">
+						<a href="https://blog.lateral.io/2016/05/similar-pages-wikipedia/" rel="prev">Similar pages for&nbsp;Wikipedia</a>					</div>
+          <div class="next-article-excerpt">
+						Wikipedia is one of the most widely used websites globally. We built a simple extension to that displays similar pages at the top of every Wikipedia page!					</div>
+				</div>
+			</div>
+			<a class="divLink" href="https://blog.lateral.io/2016/05/similar-pages-wikipedia/">Next Post</a>
+		</div>
+		<!-- <a href="http://lateral.io" class="lateral-info"><img src="https://blog.lateral.io/wp-content/themes/lateral/images/logo-text-small.svg" class="logo-small"><h2><span class="first-state">The ultimate API for recommending your content</span><span class="second-state">Lateral.io - Try it now</span></h2></a> -->
+	
+
+<div id="secondary" class="widget-area" role="complementary">
+	</div><!-- #secondary -->
+
+<footer id="site-footer">
+
+  <a href="https://blog.lateral.io/2016/09/fasttext-based-hybrid-recommender/#top" id="back-to-top"></a>
+
+  <div class="links">
+    <section>
+      <h4>Developers</h4>
+      <ul>
+        <li><a href="https://lateral.io/docs" target="_blank">Get API Key</a></li>
+        <li><a href="https://lateral.io/docs">Documentation</a></li>
+        <li><a href="https://marketplace.atlassian.com/plugins/io.lateral.atlassian-connect-3/cloud/overview">Confluence add-on</a></li>
+        <li><a href="https://lateral.io/jobs">Jobs</a></li>
+        <li><a href="https://lateral.io/labs">Labs</a></li>
+      </ul>
+    </section>
+    <section>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="https://lateral.io/about" target="_blank">About</a></li>
+        <li><a href="mailto:hello@lateral.io">Contact</a></li>
+        <li><a href="https://lateral.io/cookie-policy">Cookies Policy</a></li>
+        <li><a href="https://lateral.io/imprint" target="_blank">Imprint</a></li>
+        <li><a href="https://lateral.io/privacy-policy">Privacy Policy</a></li>
+        <li><a href="https://lateral.io/terms-of-use">Terms of Use</a></li>
+      </ul>
+    </section>
+    <section class="channels">
+      <h4>Channels</h4>
+      <a href="https://twitter.com/uselateral" class="twitter" target="_blank">Twitter</a>
+      <a href="https://medium.com/@uselateral" class="medium" target="_blank">Medium</a>
+      <a href="https://github.com/lateral" class="github" target="_blank">GitHub</a>
+    </section>
+    <section class="nsltr-footer">
+      <h4>Newsletter</h4>
+      <form id="subForm" action="https://lateral1.createsend.com/t/t/s/mtthyh/" method="post">
+      <input id="fieldEmail" name="cm-mtthyh-mtthyh" required="" type="email" placeholder="Email">
+      <input id="fieldName" name="cm-name" type="text" placeholder="Name (optional)">
+      <button type="submit" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;CTAs&#39;, &#39;click&#39;, &#39;newsletter-subscribe&#39;);">Subscribe</button>
+      </form>
+    </section>
+  </div>
+
+  <div id="footer-logo"><a href="http://lateral.io/"><img src="./Lateral Blog - A fastText-based hybrid recommender_files/logo-footer.png"></a></div>
+  <small>© Lateral 2017. All rights reserved.</small>
+</footer>
+
+<script src="./Lateral Blog - A fastText-based hybrid recommender_files/jquery.min.js"></script>
+<!--www.crestaproject.com Social Button Floating Start--><div id="crestashareicon" class="cresta-share-icon sameColors second_style show-count-active"><div class="sbutton  facebook-cresta-share float" id="facebook-cresta"><a rel="nofollow" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;t=A+fastText-based+hybrid%C2%A0recommender" title="Share to Facebook" onclick="window.open(this.href,&#39;targetWindow&#39;,&#39;toolbars=0,location=0,status=0,menubar=0,scrollbars=1,resizable=1,width=640,height=320,left=200,top=200&#39;);return false;"><i class="cs c-icon-cresta-facebook"></i></a><span class="cresta-the-count" id="facebook-count">3</span></div><div class="sbutton  twitter-cresta-share float withCount" id="twitter-cresta"><a rel="nofollow" href="https://twitter.com/share?text=A+fastText-based+hybrid%C2%A0recommender&amp;url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;via=uselateral" title="Share to Twitter" onclick="window.open(this.href,&#39;targetWindow&#39;,&#39;toolbars=0,location=0,status=0,menubar=0,scrollbars=1,resizable=1,width=640,height=320,left=200,top=200&#39;);return false;"><i class="cs c-icon-cresta-twitter"></i></a><span class="cresta-the-count" id="twitter-count">26</span></div><div class="sbutton  googleplus-cresta-share float" id="googleplus-cresta"><a rel="nofollow" href="https://plus.google.com/share?url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F" title="Share to Google Plus" onclick="window.open(this.href,&#39;targetWindow&#39;,&#39;toolbars=0,location=0,status=0,menubar=0,scrollbars=1,resizable=1,width=640,height=320,left=200,top=200&#39;);return false;"><i class="cs c-icon-cresta-gplus"></i></a><span class="cresta-the-count" id="googleplus-count">1</span></div><div class="sbutton  linkedin-cresta-share float" id="linkedin-cresta"><a rel="nofollow" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.lateral.io%2F2016%2F09%2Ffasttext-based-hybrid-recommender%2F&amp;title=A+fastText-based+hybrid%C2%A0recommender&amp;source=https://blog.lateral.io/" title="Share to LinkedIn" onclick="window.open(this.href,&#39;targetWindow&#39;,&#39;toolbars=0,location=0,status=0,menubar=0,scrollbars=1,resizable=1,width=640,height=320,left=200,top=200&#39;);return false;"><i class="cs c-icon-cresta-linkedin"></i></a><span class="cresta-the-count" id="linkedin-count">5</span></div><div class="sbutton" id="total-shares" data-pinterestshares="0" data-linkedinshares="5" data-twittershares="26" data-facebookshares="3" data-googleplusshares="1"><span class="cresta-the-total-count" id="total-count">35</span><span class="cresta-the-total-text">Shares</span></div><div style="clear: both;"></div></div>
+
+<!--www.crestaproject.com Social Button Floating End-->
+<script type="text/javascript">
+/* <![CDATA[ */
+var crestaShareSSS = {"FacebookCount":"nope"};
+var crestaShareSS = {"LinkedinCount":"5"};
+var crestaPermalink = {"thePermalink":"https:\/\/blog.lateral.io\/2016\/09\/fasttext-based-hybrid-recommender\/","themorezero":"nomore"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Lateral Blog - A fastText-based hybrid recommender_files/jquery.cresta-social-share-counter.js"></script>
+<script type="text/javascript" src="./Lateral Blog - A fastText-based hybrid recommender_files/jquery.cresta-social-effect.js"></script>
+<script type="text/javascript" src="./Lateral Blog - A fastText-based hybrid recommender_files/header.js"></script>
+<script type="text/javascript" src="./Lateral Blog - A fastText-based hybrid recommender_files/wpFeatherlight.pkgd.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var boxzilla_options = {"testMode":"","boxes":[{"id":302,"icon":"&times;","content":"<div class=\"envelope\"><i class=\"fa fa-envelope-o\" aria-hidden=\"true\"><\/i><\/div>\n<h3>Join our newsletter!<\/h3>\n<p>Enjoying reading this article? Sign-up to stay up to date on our latest posts and demos.<\/p>\n<form id=\"subForm\" action=\"https:\/\/lateral1.createsend.com\/t\/t\/s\/mtthyh\/\" method=\"post\">\n<p><input id=\"fieldEmail\" name=\"cm-mtthyh-mtthyh\" required=\"\" type=\"email\" placeholder=\"Email\"\/><\/p>\n<p><input id=\"fieldName\" name=\"cm-name\" type=\"text\" placeholder=\"Name (optional)\"\/><\/p>\n<p><input id=\"listutdyjy\" name=\"cm-ol-utdyjy\" type=\"checkbox\" \/> <label for=\"listutdyjy\">New post notifications<\/label>\n    <\/p>\n<p><button type=\"submit\">Subscribe<\/button><\/p>\n<\/form>\n","css":{"background_color":"#2c9ae5","color":"#ffffff","width":280,"position":"bottom-right"},"trigger":{"method":"percentage","value":60},"animation":"fade","cookie":{"triggered":0,"dismissed":24},"rehide":true,"position":"bottom-right","minimumScreenWidth":0,"closable":true}]};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Lateral Blog - A fastText-based hybrid recommender_files/script.min.js"></script>
+<script type="text/javascript" src="./Lateral Blog - A fastText-based hybrid recommender_files/wp-embed.min.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45843453-4', 'auto');
+  ga('send', 'pageview');
+</script>
+<script>
+  $('a[href=\'#top\']').click(function() {
+    return $('html, body').animate({
+      scrollTop: 0
+    }, 'slow');
+  });
+</script>
+
+
+</div></div><div id="boxzilla-overlay" style="display: none;"></div><div class="boxzilla-container boxzilla-bottom-right-container"><div id="boxzilla-302" class="boxzilla boxzilla-302 boxzilla-bottom-right" style="background: rgb(44, 154, 229); color: rgb(255, 255, 255); max-width: 280px; overflow-y: auto; max-height: none; display: none;"><div class="boxzilla-content"><div class="envelope first-child"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+<h3>Join our newsletter!</h3>
+<p>Enjoying reading this article? Sign-up to stay up to date on our latest posts and demos.</p>
+<form id="subForm" action="https://lateral1.createsend.com/t/t/s/mtthyh/" method="post">
+<p><input id="fieldEmail" name="cm-mtthyh-mtthyh" required="" type="email" placeholder="Email"></p>
+<p><input id="fieldName" name="cm-name" type="text" placeholder="Name (optional)"></p>
+<p><input id="listutdyjy" name="cm-ol-utdyjy" type="checkbox"> <label for="listutdyjy">New post notifications</label>
+    </p>
+<p><button type="submit">Subscribe</button></p>
+</form>
+</div><span class="boxzilla-close-icon">×</span></div></div><iframe style="display: none;" src="./Lateral Blog - A fastText-based hybrid recommender_files/saved_resource(1).html"></iframe></body></html>

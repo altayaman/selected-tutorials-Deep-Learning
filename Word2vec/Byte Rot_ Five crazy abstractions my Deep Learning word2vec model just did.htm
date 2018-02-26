@@ -1,0 +1,2505 @@
+<!DOCTYPE html>
+<!-- saved from url=(0116)http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html -->
+<html class="v2" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="width=1100" name="viewport">
+
+<meta content="blogger" name="generator">
+<link href="http://byterot.blogspot.com/favicon.ico" rel="icon" type="image/x-icon">
+<link href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Byte Rot - Atom" href="http://byterot.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Byte Rot - RSS" href="http://byterot.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Byte Rot - Atom" href="https://www.blogger.com/feeds/2889416825250254881/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Byte Rot - Atom" href="http://byterot.blogspot.com/feeds/2072781516592907992/comments/default">
+<!--[if IE]><script type="text/javascript" src="https://www.blogger.com/static/v1/jsbin/1575677651-ieretrofit.js"></script>
+<![endif]-->
+<link href="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/Singularity_Dance+%281%29.png" rel="image_src">
+<meta content="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html" property="og:url">
+<meta content="Five crazy abstractions my Deep Learning word2vec model just did" property="og:title">
+<meta content="A blog on programming C#, REST, WCF, ASP.NET Web API and software architecture" property="og:description">
+<meta content="http://4.bp.blogspot.com/-o6QmaB5arZI/VX1qOexFIjI/AAAAAAAAI9s/R5dfzns6e5o/w1200-h630-p-k-no-nu/Singularity_Dance%2B%25281%2529.png" property="og:image">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Byte Rot: Five crazy abstractions my Deep Learning word2vec model just did</title>
+<link href="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/css" rel="stylesheet" type="text/css"><link type="text/css" rel="stylesheet" href="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/1691512649-css_bundle_v2.css">
+<style id="page-skin-1" type="text/css"><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Awesome Inc.
+Designer: Tina Chen
+URL:      tinachen.org
+----------------------------------------------- */
+
+/* Content
+----------------------------------------------- */
+body {
+font: normal normal 18px Open Sans;
+color: #3c5039;
+background: #ffffff url(//themes.googleusercontent.com/image?id=0BwVBOzw_-hbMMzAxZTkzM2EtZDc5ZS00YzJhLTgwMjAtYzIzNTMwMmZkYTI5) no-repeat scroll top center /* Credit: claylib (http://www.istockphoto.com/googleimages.php?id=2257912&platform=blogger) */;
+}
+html body .content-outer {
+min-width: 0;
+max-width: 100%;
+width: 100%;
+}
+a:link {
+text-decoration: none;
+color: #6aa84f;
+}
+a:visited {
+text-decoration: none;
+color: #6aa84f;
+}
+a:hover {
+text-decoration: underline;
+color: #ff9900;
+}
+.body-fauxcolumn-outer .cap-top {
+position: absolute;
+z-index: 1;
+height: 276px;
+width: 100%;
+background: transparent none repeat-x scroll top left;
+_background-image: none;
+}
+/* Columns
+----------------------------------------------- */
+.content-inner {
+padding: 0;
+}
+.header-inner .section {
+margin: 0 16px;
+}
+.tabs-inner .section {
+margin: 0 16px;
+}
+.main-inner {
+padding-top: 30px;
+}
+.main-inner .column-center-inner,
+.main-inner .column-left-inner,
+.main-inner .column-right-inner {
+padding: 0 5px;
+}
+*+html body .main-inner .column-center-inner {
+margin-top: -30px;
+}
+#layout .main-inner .column-center-inner {
+margin-top: 0;
+}
+/* Header
+----------------------------------------------- */
+.header-outer {
+margin: 0 0 0 0;
+background: transparent none repeat scroll 0 0;
+}
+.Header h1 {
+font: normal normal 50px Homemade Apple;
+color: #e67500;
+text-shadow: 0 0 -1px #000000;
+}
+.Header h1 a {
+color: #e67500;
+}
+.Header .description {
+font: normal normal 18px Calligraffitti;
+color: #e3c927;
+}
+.header-inner .Header .titlewrapper,
+.header-inner .Header .descriptionwrapper {
+padding-left: 0;
+padding-right: 0;
+margin-bottom: 0;
+}
+.header-inner .Header .titlewrapper {
+padding-top: 22px;
+}
+/* Tabs
+----------------------------------------------- */
+.tabs-outer {
+overflow: hidden;
+position: relative;
+background: #141414 none repeat scroll 0 0;
+}
+#layout .tabs-outer {
+overflow: visible;
+}
+.tabs-cap-top, .tabs-cap-bottom {
+position: absolute;
+width: 100%;
+border-top: 1px solid #eeeeee;
+}
+.tabs-cap-bottom {
+bottom: 0;
+}
+.tabs-inner .widget li a {
+display: inline-block;
+margin: 0;
+padding: .6em 1.5em;
+font: normal bold 14px Arvo;
+color: #444444;
+border-top: 1px solid #eeeeee;
+border-bottom: 1px solid #eeeeee;
+border-left: 1px solid #eeeeee;
+height: 16px;
+line-height: 16px;
+}
+.tabs-inner .widget li:last-child a {
+border-right: 1px solid #eeeeee;
+}
+.tabs-inner .widget li.selected a, .tabs-inner .widget li a:hover {
+background: #444444 none repeat-x scroll 0 -100px;
+color: #d266e3;
+}
+/* Headings
+----------------------------------------------- */
+h2 {
+font: normal bold 14px Arvo;
+color: #999999;
+}
+/* Widgets
+----------------------------------------------- */
+.main-inner .section {
+margin: 0 27px;
+padding: 0;
+}
+.main-inner .column-left-outer,
+.main-inner .column-right-outer {
+margin-top: 0;
+}
+#layout .main-inner .column-left-outer,
+#layout .main-inner .column-right-outer {
+margin-top: 0;
+}
+.main-inner .column-left-inner,
+.main-inner .column-right-inner {
+background: transparent none repeat 0 0;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-goog-ms-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-moz-border-radius: 0;
+-webkit-border-radius: 0;
+-goog-ms-border-radius: 0;
+border-radius: 0;
+}
+#layout .main-inner .column-left-inner,
+#layout .main-inner .column-right-inner {
+margin-top: 0;
+}
+.sidebar .widget {
+font: normal normal 14px Arvo;
+color: #ffa03e;
+}
+.sidebar .widget a:link {
+color: #ffa03e;
+}
+.sidebar .widget a:visited {
+color: #e3d266;
+}
+.sidebar .widget a:hover {
+color: #ff8300;
+}
+.sidebar .widget h2 {
+text-shadow: 0 0 -1px #000000;
+}
+.main-inner .widget {
+background-color: #141414;
+border: 1px solid #222222;
+padding: 0 15px 15px;
+margin: 20px -16px;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-goog-ms-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-moz-border-radius: 0;
+-webkit-border-radius: 0;
+-goog-ms-border-radius: 0;
+border-radius: 0;
+}
+.main-inner .widget h2 {
+margin: 0 -15px;
+padding: .6em 15px .5em;
+border-bottom: 1px solid #000000;
+}
+.footer-inner .widget h2 {
+padding: 0 0 .4em;
+border-bottom: 1px solid #000000;
+}
+.main-inner .widget h2 + div, .footer-inner .widget h2 + div {
+border-top: 1px solid #222222;
+padding-top: 8px;
+}
+.main-inner .widget .widget-content {
+margin: 0 -15px;
+padding: 7px 15px 0;
+}
+.main-inner .widget ul, .main-inner .widget #ArchiveList ul.flat {
+margin: -8px -15px 0;
+padding: 0;
+list-style: none;
+}
+.main-inner .widget #ArchiveList {
+margin: -8px 0 0;
+}
+.main-inner .widget ul li, .main-inner .widget #ArchiveList ul.flat li {
+padding: .5em 15px;
+text-indent: 0;
+color: #666666;
+border-top: 1px solid #222222;
+border-bottom: 1px solid #000000;
+}
+.main-inner .widget #ArchiveList ul li {
+padding-top: .25em;
+padding-bottom: .25em;
+}
+.main-inner .widget ul li:first-child, .main-inner .widget #ArchiveList ul.flat li:first-child {
+border-top: none;
+}
+.main-inner .widget ul li:last-child, .main-inner .widget #ArchiveList ul.flat li:last-child {
+border-bottom: none;
+}
+.post-body {
+position: relative;
+}
+.main-inner .widget .post-body ul {
+padding: 0 2.5em;
+margin: .5em 0;
+list-style: disc;
+}
+.main-inner .widget .post-body ul li {
+padding: 0.25em 0;
+margin-bottom: .25em;
+color: #3c5039;
+border: none;
+}
+.footer-inner .widget ul {
+padding: 0;
+list-style: none;
+}
+.widget .zippy {
+color: #666666;
+}
+/* Posts
+----------------------------------------------- */
+body .main-inner .Blog {
+padding: 0;
+margin-bottom: 1em;
+background-color: transparent;
+border: none;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+-goog-ms-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+.main-inner .section:last-child .Blog:last-child {
+padding: 0;
+margin-bottom: 1em;
+}
+.main-inner .widget h2.date-header {
+margin: 0 -15px 1px;
+padding: 0 0 0 0;
+font: normal normal 14px Arvo;
+color: #999999;
+background: transparent none no-repeat scroll top left;
+border-top: 0 solid #6fa8dc;
+border-bottom: 1px solid #000000;
+-moz-border-radius-topleft: 0;
+-moz-border-radius-topright: 0;
+-webkit-border-top-left-radius: 0;
+-webkit-border-top-right-radius: 0;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+position: static;
+bottom: 100%;
+right: 15px;
+text-shadow: 0 0 -1px #000000;
+}
+.main-inner .widget h2.date-header span {
+font: normal normal 14px Arvo;
+display: block;
+padding: .5em 15px;
+border-left: 0 solid #6fa8dc;
+border-right: 0 solid #6fa8dc;
+}
+.date-outer {
+position: relative;
+margin: 30px 0 20px;
+padding: 0 15px;
+background-color: #f3f3f3;
+border: 1px solid #cccccc;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-goog-ms-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-moz-border-radius: 0;
+-webkit-border-radius: 0;
+-goog-ms-border-radius: 0;
+border-radius: 0;
+}
+.date-outer:first-child {
+margin-top: 0;
+}
+.date-outer:last-child {
+margin-bottom: 20px;
+-moz-border-radius-bottomleft: 0;
+-moz-border-radius-bottomright: 0;
+-webkit-border-bottom-left-radius: 0;
+-webkit-border-bottom-right-radius: 0;
+-goog-ms-border-bottom-left-radius: 0;
+-goog-ms-border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
+border-bottom-right-radius: 0;
+}
+.date-posts {
+margin: 0 -15px;
+padding: 0 15px;
+clear: both;
+}
+.post-outer, .inline-ad {
+border-top: 1px solid #999999;
+margin: 0 -15px;
+padding: 15px 15px;
+}
+.post-outer {
+padding-bottom: 10px;
+}
+.post-outer:first-child {
+padding-top: 0;
+border-top: none;
+}
+.post-outer:last-child, .inline-ad:last-child {
+border-bottom: none;
+}
+.post-body {
+position: relative;
+}
+.post-body img {
+padding: 8px;
+background: transparent;
+border: 1px solid transparent;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-moz-border-radius: 0;
+-webkit-border-radius: 0;
+border-radius: 0;
+}
+h3.post-title, h4 {
+font: normal normal 30px Oswald;
+color: #ff8200;
+}
+h3.post-title a {
+font: normal normal 30px Oswald;
+color: #ff8200;
+}
+h3.post-title a:hover {
+color: #ff9900;
+text-decoration: underline;
+}
+.post-header {
+margin: 0 0 1em;
+}
+.post-body {
+line-height: 1.4;
+}
+.post-outer h2 {
+color: #3c5039;
+}
+.post-footer {
+margin: 1.5em 0 0;
+}
+#blog-pager {
+padding: 15px;
+font-size: 120%;
+background-color: #f3f3f3;
+border: 1px solid #222222;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-goog-ms-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-moz-border-radius: 0;
+-webkit-border-radius: 0;
+-goog-ms-border-radius: 0;
+border-radius: 0;
+-moz-border-radius-topleft: 0;
+-moz-border-radius-topright: 0;
+-webkit-border-top-left-radius: 0;
+-webkit-border-top-right-radius: 0;
+-goog-ms-border-top-left-radius: 0;
+-goog-ms-border-top-right-radius: 0;
+border-top-left-radius: 0;
+border-top-right-radius-topright: 0;
+margin-top: 1em;
+}
+.blog-feeds, .post-feeds {
+margin: 1em 0;
+text-align: center;
+color: #444444;
+}
+.blog-feeds a, .post-feeds a {
+color: #e3d266;
+}
+.blog-feeds a:visited, .post-feeds a:visited {
+color: #e3d266;
+}
+.blog-feeds a:hover, .post-feeds a:hover {
+color: #ff8300;
+}
+.post-outer .comments {
+margin-top: 2em;
+}
+/* Comments
+----------------------------------------------- */
+.comments .comments-content .icon.blog-author {
+background-repeat: no-repeat;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB9sLFwMeCjjhcOMAAAD+SURBVDjLtZSvTgNBEIe/WRRnm3U8RC1neQdsm1zSBIU9VVF1FkUguQQsD9ITmD7ECZIJSE4OZo9stoVjC/zc7ky+zH9hXwVwDpTAWWLrgS3QAe8AZgaAJI5zYAmc8r0G4AHYHQKVwII8PZrZFsBFkeRCABYiMh9BRUhnSkPTNCtVXYXURi1FpBDgArj8QU1eVXUzfnjv7yP7kwu1mYrkWlU33vs1QNu2qU8pwN0UpKoqokjWwCztrMuBhEhmh8bD5UDqur75asbcX0BGUB9/HAMB+r32hznJgXy2v0sGLBcyAJ1EK3LFcbo1s91JeLwAbwGYu7TP/3ZGfnXYPgAVNngtqatUNgAAAABJRU5ErkJggg==);
+}
+.comments .comments-content .loadmore a {
+border-top: 1px solid #eeeeee;
+border-bottom: 1px solid #eeeeee;
+}
+.comments .continue {
+border-top: 2px solid #eeeeee;
+}
+/* Footer
+----------------------------------------------- */
+.footer-outer {
+margin: -0 0 -1px;
+padding: 0 0 0;
+color: #444444;
+overflow: hidden;
+}
+.footer-fauxborder-left {
+border-top: 1px solid #222222;
+background: #141414 none repeat scroll 0 0;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+-goog-ms-box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+box-shadow: 0 0 0 rgba(0, 0, 0, .2);
+margin: 0 -0;
+}
+/* Mobile
+----------------------------------------------- */
+body.mobile {
+background-size: auto;
+}
+.mobile .body-fauxcolumn-outer {
+background: transparent none repeat scroll top left;
+}
+*+html body.mobile .main-inner .column-center-inner {
+margin-top: 0;
+}
+.mobile .main-inner .widget {
+padding: 0 0 15px;
+}
+.mobile .main-inner .widget h2 + div,
+.mobile .footer-inner .widget h2 + div {
+border-top: none;
+padding-top: 0;
+}
+.mobile .footer-inner .widget h2 {
+padding: 0.5em 0;
+border-bottom: none;
+}
+.mobile .main-inner .widget .widget-content {
+margin: 0;
+padding: 7px 0 0;
+}
+.mobile .main-inner .widget ul,
+.mobile .main-inner .widget #ArchiveList ul.flat {
+margin: 0 -15px 0;
+}
+.mobile .main-inner .widget h2.date-header {
+right: 0;
+}
+.mobile .date-header span {
+padding: 0.4em 0;
+}
+.mobile .date-outer:first-child {
+margin-bottom: 0;
+border: 1px solid #cccccc;
+-moz-border-radius-topleft: 0;
+-moz-border-radius-topright: 0;
+-webkit-border-top-left-radius: 0;
+-webkit-border-top-right-radius: 0;
+-goog-ms-border-top-left-radius: 0;
+-goog-ms-border-top-right-radius: 0;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+}
+.mobile .date-outer {
+border-color: #cccccc;
+border-width: 0 1px 1px;
+}
+.mobile .date-outer:last-child {
+margin-bottom: 0;
+}
+.mobile .main-inner {
+padding: 0;
+}
+.mobile .header-inner .section {
+margin: 0;
+}
+.mobile .post-outer, .mobile .inline-ad {
+padding: 5px 0;
+}
+.mobile .tabs-inner .section {
+margin: 0 10px;
+}
+.mobile .main-inner .widget h2 {
+margin: 0;
+padding: 0;
+}
+.mobile .main-inner .widget h2.date-header span {
+padding: 0;
+}
+.mobile .main-inner .widget .widget-content {
+margin: 0;
+padding: 7px 0 0;
+}
+.mobile #blog-pager {
+border: 1px solid transparent;
+background: #141414 none repeat scroll 0 0;
+}
+.mobile .main-inner .column-left-inner,
+.mobile .main-inner .column-right-inner {
+background: transparent none repeat 0 0;
+-moz-box-shadow: none;
+-webkit-box-shadow: none;
+-goog-ms-box-shadow: none;
+box-shadow: none;
+}
+.mobile .date-posts {
+margin: 0;
+padding: 0;
+}
+.mobile .footer-fauxborder-left {
+margin: 0;
+border-top: inherit;
+}
+.mobile .main-inner .section:last-child .Blog:last-child {
+margin-bottom: 0;
+}
+.mobile-index-contents {
+color: #3c5039;
+}
+.mobile .mobile-link-button {
+background: #6aa84f none repeat scroll 0 0;
+}
+.mobile-link-button a:link, .mobile-link-button a:visited {
+color: #ffffff;
+}
+.mobile .tabs-inner .PageList .widget-content {
+background: transparent;
+border-top: 1px solid;
+border-color: #eeeeee;
+color: #444444;
+}
+.mobile .tabs-inner .PageList .widget-content .pagelist-arrow {
+border-left: 1px solid #eeeeee;
+}
+code, pre
+{
+font-size:13p, important!;
+color: #707570
+}
+PRE.http
+{
+font-size:12px;
+}
+H2
+{
+color:#E69138 !important;
+font-size:24px !important;
+border: 0 !important;
+}
+H3
+{
+color:#E69138;
+font-size:18px;
+}
+H4
+{
+color:#E69138;
+font-size:16px;
+font-weight: bold;
+}
+blockquote
+{
+background-color:#eee;
+padding: 10px;
+color: #406038;
+}
+/**
+* SyntaxHighlighter
+* http://alexgorbatchev.com/SyntaxHighlighter
+*
+* SyntaxHighlighter is donationware. If you are using it, please donate.
+* http://alexgorbatchev.com/SyntaxHighlighter/donate.html
+*
+* @version
+* 3.0.83 (July 02 2010)
+*
+* @copyright
+* Copyright (C) 2004-2010 Alex Gorbatchev.
+*
+* @license
+* Dual licensed under the MIT and GPL licenses.
+*/
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+-moz-border-radius: 0 0 0 0 !important;
+-webkit-border-radius: 0 0 0 0 !important;
+background: none !important;
+border: 0 !important;
+bottom: auto !important;
+float: none !important;
+height: auto !important;
+left: auto !important;
+line-height: 1.1em !important;
+margin: 0 !important;
+outline: 0 !important;
+overflow: visible !important;
+padding: 0 !important;
+position: static !important;
+right: auto !important;
+text-align: left !important;
+top: auto !important;
+vertical-align: baseline !important;
+width: auto !important;
+box-sizing: content-box !important;
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important;
+font-weight: normal !important;
+font-style: normal !important;
+font-size: 1em !important;
+min-height: inherit !important;
+min-height: auto !important;
+}
+.syntaxhighlighter {
+width: 100% !important;
+margin: 1em 0 1em 0 !important;
+position: relative !important;
+overflow: auto !important;
+font-size: 1em !important;
+}
+.syntaxhighlighter.source {
+overflow: hidden !important;
+}
+.syntaxhighlighter .bold {
+font-weight: bold !important;
+}
+.syntaxhighlighter .italic {
+font-style: italic !important;
+}
+.syntaxhighlighter .line {
+white-space: pre !important;
+}
+.syntaxhighlighter table {
+width: 100% !important;
+}
+.syntaxhighlighter table caption {
+text-align: left !important;
+padding: .5em 0 0.5em 1em !important;
+}
+.syntaxhighlighter table td.code {
+width: 100% !important;
+}
+.syntaxhighlighter table td.code .container {
+position: relative !important;
+}
+.syntaxhighlighter table td.code .container textarea {
+box-sizing: border-box !important;
+position: absolute !important;
+left: 0 !important;
+top: 0 !important;
+width: 100% !important;
+height: 100% !important;
+border: none !important;
+background: white !important;
+padding-left: 1em !important;
+overflow: hidden !important;
+white-space: pre !important;
+}
+.syntaxhighlighter table td.gutter .line {
+text-align: right !important;
+padding: 0 0.5em 0 1em !important;
+}
+.syntaxhighlighter table td.code .line {
+padding: 0 1em !important;
+}
+.syntaxhighlighter.nogutter td.code .container textarea, .syntaxhighlighter.nogutter td.code .line {
+padding-left: 0em !important;
+}
+.syntaxhighlighter.show {
+display: block !important;
+}
+.syntaxhighlighter.collapsed table {
+display: none !important;
+}
+.syntaxhighlighter.collapsed .toolbar {
+padding: 0.1em 0.8em 0em 0.8em !important;
+font-size: 1em !important;
+position: static !important;
+width: auto !important;
+height: auto !important;
+}
+.syntaxhighlighter.collapsed .toolbar span {
+display: inline !important;
+margin-right: 1em !important;
+}
+.syntaxhighlighter.collapsed .toolbar span a {
+padding: 0 !important;
+display: none !important;
+}
+.syntaxhighlighter.collapsed .toolbar span a.expandSource {
+display: inline !important;
+}
+.syntaxhighlighter .toolbar {
+position: absolute !important;
+right: 1px !important;
+top: 1px !important;
+width: 11px !important;
+height: 11px !important;
+font-size: 10px !important;
+z-index: 10 !important;
+}
+.syntaxhighlighter .toolbar span.title {
+display: inline !important;
+}
+.syntaxhighlighter .toolbar a {
+display: block !important;
+text-align: center !important;
+text-decoration: none !important;
+padding-top: 1px !important;
+}
+.syntaxhighlighter .toolbar a.expandSource {
+display: none !important;
+}
+.syntaxhighlighter.ie {
+font-size: .9em !important;
+padding: 1px 0 1px 0 !important;
+}
+.syntaxhighlighter.ie .toolbar {
+line-height: 8px !important;
+}
+.syntaxhighlighter.ie .toolbar a {
+padding-top: 0px !important;
+}
+.syntaxhighlighter.printing .line.alt1 .content,
+.syntaxhighlighter.printing .line.alt2 .content,
+.syntaxhighlighter.printing .line.highlighted .number,
+.syntaxhighlighter.printing .line.highlighted.alt1 .content,
+.syntaxhighlighter.printing .line.highlighted.alt2 .content {
+background: none !important;
+}
+.syntaxhighlighter.printing .line .number {
+color: #bbbbbb !important;
+}
+.syntaxhighlighter.printing .line .content {
+color: black !important;
+}
+.syntaxhighlighter.printing .toolbar {
+display: none !important;
+}
+.syntaxhighlighter.printing a {
+text-decoration: none !important;
+}
+.syntaxhighlighter.printing .plain, .syntaxhighlighter.printing .plain a {
+color: black !important;
+}
+.syntaxhighlighter.printing .comments, .syntaxhighlighter.printing .comments a {
+color: #008200 !important;
+}
+.syntaxhighlighter.printing .string, .syntaxhighlighter.printing .string a {
+color: blue !important;
+}
+.syntaxhighlighter.printing .keyword {
+color: #006699 !important;
+font-weight: bold !important;
+}
+.syntaxhighlighter.printing .preprocessor {
+color: gray !important;
+}
+.syntaxhighlighter.printing .variable {
+color: #aa7700 !important;
+}
+.syntaxhighlighter.printing .value {
+color: #009900 !important;
+}
+.syntaxhighlighter.printing .functions {
+color: #ff1493 !important;
+}
+.syntaxhighlighter.printing .constants {
+color: #0066cc !important;
+}
+.syntaxhighlighter.printing .script {
+font-weight: bold !important;
+}
+.syntaxhighlighter.printing .color1, .syntaxhighlighter.printing .color1 a {
+color: gray !important;
+}
+.syntaxhighlighter.printing .color2, .syntaxhighlighter.printing .color2 a {
+color: #ff1493 !important;
+}
+.syntaxhighlighter.printing .color3, .syntaxhighlighter.printing .color3 a {
+color: red !important;
+}
+.syntaxhighlighter.printing .break, .syntaxhighlighter.printing .break a {
+color: black !important;
+}
+.syntaxhighlighter {
+background-color: white !important;
+}
+.syntaxhighlighter .line.alt1 {
+background-color: white !important;
+}
+.syntaxhighlighter .line.alt2 {
+background-color: white !important;
+}
+.syntaxhighlighter .line.highlighted.alt1, .syntaxhighlighter .line.highlighted.alt2 {
+background-color: #e0e0e0 !important;
+}
+.syntaxhighlighter .line.highlighted.number {
+color: black !important;
+}
+.syntaxhighlighter table caption {
+color: black !important;
+}
+.syntaxhighlighter .gutter {
+color: #afafaf !important;
+}
+.syntaxhighlighter .gutter .line {
+border-right: 3px solid #6ce26c !important;
+}
+.syntaxhighlighter .gutter .line.highlighted {
+background-color: #6ce26c !important;
+color: white !important;
+}
+.syntaxhighlighter.printing .line .content {
+border: none !important;
+}
+.syntaxhighlighter.collapsed {
+overflow: visible !important;
+}
+.syntaxhighlighter.collapsed .toolbar {
+color: blue !important;
+background: white !important;
+border: 1px solid #6ce26c !important;
+}
+.syntaxhighlighter.collapsed .toolbar a {
+color: blue !important;
+}
+.syntaxhighlighter.collapsed .toolbar a:hover {
+color: red !important;
+}
+.syntaxhighlighter .toolbar {
+color: white !important;
+background: #6ce26c !important;
+border: none !important;
+}
+.syntaxhighlighter .toolbar a {
+color: white !important;
+}
+.syntaxhighlighter .toolbar a:hover {
+color: black !important;
+}
+.syntaxhighlighter .plain, .syntaxhighlighter .plain a {
+color: black !important;
+}
+.syntaxhighlighter .comments, .syntaxhighlighter .comments a {
+color: #008200 !important;
+}
+.syntaxhighlighter .string, .syntaxhighlighter .string a {
+color: blue !important;
+}
+.syntaxhighlighter .keyword {
+color: #006699 !important;
+}
+.syntaxhighlighter .preprocessor {
+color: gray !important;
+}
+.syntaxhighlighter .variable {
+color: #aa7700 !important;
+}
+.syntaxhighlighter .value {
+color: #009900 !important;
+}
+.syntaxhighlighter .functions {
+color: #ff1493 !important;
+}
+.syntaxhighlighter .constants {
+color: #0066cc !important;
+}
+.syntaxhighlighter .script {
+font-weight: bold !important;
+color: #006699 !important;
+background-color: none !important;
+}
+.syntaxhighlighter .color1, .syntaxhighlighter .color1 a {
+color: gray !important;
+}
+.syntaxhighlighter .color2, .syntaxhighlighter .color2 a {
+color: #ff1493 !important;
+}
+.syntaxhighlighter .color3, .syntaxhighlighter .color3 a {
+color: red !important;
+}
+.syntaxhighlighter .keyword {
+font-weight: bold !important;
+}
+--></style>
+<style id="template-skin-1" type="text/css"><!--
+body {
+min-width: 1080px;
+}
+.content-outer, .content-fauxcolumn-outer, .region-inner {
+min-width: 1080px;
+max-width: 1080px;
+_width: 1080px;
+}
+.main-inner .columns {
+padding-left: 0px;
+padding-right: 300px;
+}
+.main-inner .fauxcolumn-center-outer {
+left: 0px;
+right: 300px;
+/* IE6 does not respect left and right together */
+_width: expression(this.parentNode.offsetWidth -
+parseInt("0px") -
+parseInt("300px") + 'px');
+}
+.main-inner .fauxcolumn-left-outer {
+width: 0px;
+}
+.main-inner .fauxcolumn-right-outer {
+width: 300px;
+}
+.main-inner .column-left-outer {
+width: 0px;
+right: 100%;
+margin-left: -0px;
+}
+.main-inner .column-right-outer {
+width: 300px;
+margin-right: -300px;
+}
+#layout {
+min-width: 0;
+}
+#layout .content-outer {
+min-width: 0;
+width: 800px;
+}
+#layout .region-inner {
+min-width: 0;
+width: auto;
+}
+body#layout div.add_widget {
+padding: 8px;
+}
+body#layout div.add_widget a {
+margin-left: 32px;
+}
+--></style>
+<style>
+    body {background-image:url(\/\/themes.googleusercontent.com\/image?id=0BwVBOzw_-hbMMzAxZTkzM2EtZDc5ZS00YzJhLTgwMjAtYzIzNTMwMmZkYTI5);}
+    
+@media (max-width: 200px) { body {background-image:url(\/\/themes.googleusercontent.com\/image?id=0BwVBOzw_-hbMMzAxZTkzM2EtZDc5ZS00YzJhLTgwMjAtYzIzNTMwMmZkYTI5&options=w200);}}
+@media (max-width: 400px) and (min-width: 201px) { body {background-image:url(\/\/themes.googleusercontent.com\/image?id=0BwVBOzw_-hbMMzAxZTkzM2EtZDc5ZS00YzJhLTgwMjAtYzIzNTMwMmZkYTI5&options=w400);}}
+@media (max-width: 800px) and (min-width: 401px) { body {background-image:url(\/\/themes.googleusercontent.com\/image?id=0BwVBOzw_-hbMMzAxZTkzM2EtZDc5ZS00YzJhLTgwMjAtYzIzNTMwMmZkYTI5&options=w800);}}
+@media (max-width: 1200px) and (min-width: 801px) { body {background-image:url(\/\/themes.googleusercontent.com\/image?id=0BwVBOzw_-hbMMzAxZTkzM2EtZDc5ZS00YzJhLTgwMjAtYzIzNTMwMmZkYTI5&options=w1200);}}
+/* Last tag covers anything over one higher than the previous max-size cap. */
+@media (min-width: 1201px) { body {background-image:url(\/\/themes.googleusercontent.com\/image?id=0BwVBOzw_-hbMMzAxZTkzM2EtZDc5ZS00YzJhLTgwMjAtYzIzNTMwMmZkYTI5&options=w1600);}}
+  </style>
+<link type="text/css" rel="stylesheet" href="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/authorization.css">
+<script src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/cb=gapi.loaded_4" async=""></script><script src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/cb=gapi.loaded_3" async=""></script><script src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/cb=gapi.loaded_2" async=""></script><script type="text/javascript" async="" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/dc.js"></script><script type="text/javascript" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/google_top_exp.js"></script><style>.gc-bubbleDefault{background-color:transparent !important;text-align:left;padding:0 !important;margin:0 !important;border:0 !important;table-layout:auto !important}.gc-reset{background-color:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;text-align:left}.pls-bubbleTop{border-bottom:1px solid #ccc !important}.pls-topTail,.pls-vertShimLeft,.pls-contentLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif) !important}.pls-topTail{background-repeat:repeat-x !important;background-position:bottom !important}.pls-vertShim{background-color:#fff !important;text-align:right}.tbl-grey .pls-vertShim{background-color:#f5f5f5 !important}.pls-vertShimLeft{background-repeat:repeat-y !important;background-position:right !important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2 !important}.pls-contentWrap{background-color:#fff !important;position:relative !important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:right;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png) !important;background-repeat:repeat-y !important;vertical-align:top}.pls-vert,.pls-tailleft,.pls-dropTR .pls-dropBR,.pls-dropBL,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png) !important;background-repeat:repeat-x !important;width:100%;vertical-align:top}.pls-topLeft{background:inherit !important;text-align:right;vertical-align:bottom}.pls-topRight{background:inherit !important;text-align:left;vertical-align:bottom}.pls-bottomLeft{background:inherit !important;text-align:right}.pls-bottomRight{background:inherit !important;text-align:left;vertical-align:top}.pls-tailtop,.pls-tailright,.pls-tailbottom,.pls-tailleft{display:none;position:relative}.pls-tailbottom,.pls-tailtop,.pls-tailright,.pls-tailleft,.pls-dropTR,.pls-dropBR,.pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png) !important;background-repeat:no-repeat}.tbl-grey .pls-tailbottom,.tbl-grey .pls-tailtop,.tbl-grey .pls-tailright,.tbl-grey .pls-tailleft,.tbl-grey .pls-dropTR,.tbl-grey .pls-dropBR,.tbl-grey .pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite-grey.png) !important}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-topLeft img,.pls-topRight img,.pls-tailbottom{vertical-align:bottom}.pls-bottomLeft img,.bubbleDropTR,.pls-dropBottomL img,.pls-dropBottom img,.pls-dropBottomR img,.pls-bottomLeft{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacertop,.pls-spacerright,.pls-spacerbottom,.pls-spacerleft{position:static !important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0} </style></head>
+<body class=" variant-dark">
+<div class="navbar section" id="navbar" name="Navbar"><div class="widget Navbar" data-version="1" id="Navbar1"><script src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/cb=gapi.loaded_1" async=""></script><script src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="" tabindex="0" vspace="0" width="100%" id="navbar-iframe" name="navbar-iframe" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/navbar.html"></iframe></div>
+<script type="text/javascript" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/plusone.js" gapi_processed="true"></script>
+<script type="text/javascript">
+      gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+        if (gapi.iframes && gapi.iframes.getContext) {
+          gapi.iframes.getContext().openChild({
+              url: 'https://www.blogger.com/navbar.g?targetBlogID\x3d2889416825250254881\x26blogName\x3dByte+Rot\x26publishMode\x3dPUBLISH_MODE_BLOGSPOT\x26navbarType\x3dLIGHT\x26layoutType\x3dLAYOUTS\x26searchRoot\x3dhttp://byterot.blogspot.com/search\x26blogLocale\x3den_GB\x26v\x3d2\x26homepageUrl\x3dhttp://byterot.blogspot.com/\x26targetPostID\x3d2072781516592907992\x26blogPostOrPageUrl\x3dhttp://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html\x26vt\x3d-9098390418546119049',
+              where: document.getElementById("navbar-iframe-container"),
+              id: "navbar-iframe"
+          });
+        }
+      });
+    </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<div class="body-fauxcolumns">
+<div class="fauxcolumn-outer body-fauxcolumn-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<div class="content">
+<div class="content-fauxcolumns">
+<div class="fauxcolumn-outer content-fauxcolumn-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<div class="content-outer">
+<div class="content-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left content-fauxborder-left">
+<div class="fauxborder-right content-fauxborder-right"></div>
+<div class="content-inner">
+<header>
+<div class="header-outer">
+<div class="header-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left header-fauxborder-left">
+<div class="fauxborder-right header-fauxborder-right"></div>
+<div class="region-inner header-inner">
+<div class="header section" id="header" name="Header"><div class="widget Header" data-version="1" id="Header1">
+<div id="header-inner">
+<div class="titlewrapper">
+<h1 class="title">
+<a href="http://byterot.blogspot.com/">Byte Rot</a>
+</h1>
+</div>
+<div class="descriptionwrapper">
+<p class="description"><span>Overly Ambitious to lead a humble life</span></p>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class="header-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</header>
+<div class="tabs-outer">
+<div class="tabs-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left tabs-fauxborder-left">
+<div class="fauxborder-right tabs-fauxborder-right"></div>
+<div class="region-inner tabs-inner">
+<div class="tabs no-items section" id="crosscol" name="Cross-column"></div>
+<div class="tabs no-items section" id="crosscol-overflow" name="Cross-Column 2"></div>
+</div>
+</div>
+<div class="tabs-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="main-outer">
+<div class="main-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left main-fauxborder-left">
+<div class="fauxborder-right main-fauxborder-right"></div>
+<div class="region-inner main-inner">
+<div class="columns fauxcolumns">
+<div class="fauxcolumn-outer fauxcolumn-center-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-left-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-right-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<!-- corrects IE6 width calculation -->
+<div class="columns-inner">
+<div class="column-center-outer">
+<div class="column-center-inner">
+<div class="main section" id="main" name="Main"><div class="widget Blog" data-version="1" id="Blog1">
+<div class="blog-posts hfeed">
+
+          <div class="date-outer">
+        
+<h2 class="date-header"><span>Sunday, 14 June 2015</span></h2>
+
+          <div class="date-posts">
+        
+<div class="post-outer">
+<div class="post hentry uncustomized-post-template" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+<meta content="http://4.bp.blogspot.com/-o6QmaB5arZI/VX1qOexFIjI/AAAAAAAAI9s/R5dfzns6e5o/s640/Singularity_Dance%2B%25281%2529.png" itemprop="image_url">
+<meta content="2889416825250254881" itemprop="blogId">
+<meta content="2072781516592907992" itemprop="postId">
+<a name="2072781516592907992"></a>
+<h3 class="post-title entry-title" itemprop="name">
+Five crazy abstractions my Deep Learning word2vec model just did
+</h3>
+<div class="post-header">
+<div class="post-header-line-1"></div>
+</div>
+<div class="post-body entry-content" id="post-body-2072781516592907992" itemprop="description articleBody">
+<script src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/_ga.js" type="text/javascript">
+</script><i>Seeing is believing.&nbsp;</i><br>
+<br>
+Of course, there is a whole host of Machine Learning techniques available, thanks to the researchers, and to Open Source developers for turning them into libraries. And I am not quite a complete stranger to this field, I have been, on and off, working on Machine Learning over the last 8 years. But, nothing, absolutely nothing for me has ever come close to what blew my mind recently with word2vec: so effortless yet you feel <b>like</b> the model knows so much that it has obtained&nbsp;<i>cognitive coherence of the vocabulary</i>. Until neuroscientists nail cognition, I am happy to <i>foolishly</i> take that as some early form of machine cognition.<br>
+<br>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><a href="http://4.bp.blogspot.com/-o6QmaB5arZI/VX1qOexFIjI/AAAAAAAAI9s/R5dfzns6e5o/s1600/Singularity_Dance%2B%25281%2529.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="593" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/Singularity_Dance+%281%29.png" width="640"></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;"><span style="font-family: Helvetica Neue, Arial, Helvetica, sans-serif;">Singularity Dance - Wiki</span></td></tr>
+</tbody></table>
+<br>
+But, no, don't take my word for it! If you have a corpus of 100s of thousand documents (or even 10s of thousands), feed it and see it for yourselves. What language? Doesn't really matter! My money is on that you will get results that equally blow your tops off.<br>
+<br>
+<h2>
+What is word2vec?</h2>
+word2vec is a Deep Learning technique first <a href="http://arxiv.org/pdf/1301.3781v3.pdf" target="_blank">described</a> by Tomas Mikolov only 2 years ago but due to its simplicity of algorithm and yet surprising robustness of the results, it has been widely <a href="https://radimrehurek.com/gensim/models/word2vec.html" target="_blank">implemented</a> and adopted. This technique basically trains a model based on a neighborhood window of words in a corpus and then projects the result onto [an arbitrary number of]&nbsp;<i>n</i> dimensions where each word is a vector in the&nbsp;<i>n</i> dimensional space. Then the words can be compared using the <a href="https://en.wikipedia.org/wiki/Cosine_similarity" target="_blank">cosine similarity</a>&nbsp;of their vectors. And what is much more interesting is the <b>arithmetics</b>: vectors can be added or subtracted for example vector of <span style="font-family: Courier New, Courier, monospace;">Queen</span> is almost equal to <span style="font-family: Courier New, Courier, monospace;">King</span> + <span style="font-family: Courier New, Courier, monospace;">Woman</span> - <span style="font-family: Courier New, Courier, monospace;">Man</span>. In other words, if you remove Man from the King and add Woman to it, <i>logically</i> you get Queen and but this model is able to represent it&nbsp;<i>mathematically</i>.<br>
+<br>
+LeCun recently <a href="http://arxiv.org/abs/1502.01710" target="_blank">proposed</a> a variant of this approach in which he uses characters and not words. Altogether this is a fast moving space and likely to bring about significant change in the state of the art in Natural Language Processing.<br>
+<br>
+<h2>
+Enough of this, show us ze resultz!</h2>
+OK, sure. For those interested, I have brought the methods after the results.
+
+<br>
+<br>
+<h3>
+1) Human - Animal = Ethics</h3>
+Yeah, as if it knows! So if you remove the animal traits from human, what remains is Ethics. And in word2vec terms, subtracting the vector of <span style="font-family: Courier New, Courier, monospace;">Human</span> by the vector of <span style="font-family: Courier New, Courier, monospace;">Animal</span> results in a vector which is closest to <span style="font-family: Courier New, Courier, monospace;">Ethics</span> (0.51). The other similar words to the <span style="font-family: Courier New, Courier, monospace;">Human - Animal</span> vector are the words below: <span style="font-family: Courier New, Courier, monospace;">spirituality</span>, &nbsp;<span style="font-family: Courier New, Courier, monospace;">knowledge</span> and <span style="font-family: Courier New, Courier, monospace;">piety</span>. Interesting, huh?<br>
+<br>
+<h3>
+2) Stock Market&nbsp;≈ Thermometer</h3>
+In my model the word Thermometer has a similarity of 0.72 to the Stock Market vector and the 6th similar word to it - most of closer words were other names for the stock market. It is not 100% clear to me how it was able to make such abstraction but perhaps proximity of Thermometer to the words increase/decrease or up/down, etc could have resulted in the similarity. In any case, likening Stock Market to Thermometer is a higher level abstraction.<br>
+<br>
+<h3>
+3) Library - Books = Hall</h3>
+What remains of a library if you were to remove the books? word2vec to the rescue. The similarity is 0.49 and next words are: <span style="font-family: Courier New, Courier, monospace;">Building</span> and <span style="font-family: Courier New, Courier, monospace;">Dorm</span>. &nbsp;<span style="font-family: Courier New, Courier, monospace;">Hall</span><span style="font-family: Times, Times New Roman, serif;">'s</span> vector is already similar to that of <span style="font-family: Courier New, Courier, monospace;">Library</span>&nbsp;(so the subtraction's effect could be incidental) but <span style="font-family: Courier New, Courier, monospace;">Building</span> and <span style="font-family: Courier New, Courier, monospace;">Dorm</span> are not. Now <span style="font-family: Courier New, Courier, monospace;">Library - Book</span>&nbsp;(and not <span style="font-family: Courier New, Courier, monospace;">Books</span>) is closest to <span style="font-family: Courier New, Courier, monospace;">Dorm</span> with 0.51 similarity.<br>
+<br>
+<h3>
+4) Obama + Russia - USA = Putin</h3>
+This is a classic case similar to <span style="font-family: Courier New, Courier, monospace;">King+Woman-Man</span> but it was interesting to see that it works. In fact finding leaders of most countries was successful using this method. For example, <span style="font-family: Courier New, Courier, monospace;">Obama + Britain - USA</span> finds <span style="font-family: Courier New, Courier, monospace;">David Cameron</span> (0.71).<br>
+<br>
+<h3>
+5) Iraq - Violence = Jordan</h3>
+So a country that is most similar to Iraq after taking its violence is Jordan, its neighbour. Iraq's vector itself is most similar to that of Syria - for obvious reasons. After Jordan, next vectors are <span style="font-family: Courier New, Courier, monospace;">Lebanon</span>, <span style="font-family: Courier New, Courier, monospace;">Oman</span> and <span style="font-family: Courier New, Courier, monospace;">Turkey</span>.<br>
+<br>
+Not enough? Hmm there you go with another two...<br>
+<br>
+<h3>
+Bonus) President - Power = Prime Minister</h3>
+Kinda obvious, isn't it? But of course we know it depends which one is Putin which one is Medvedev :)<br>
+<br>
+<h3>
+Bonus 2) Politics - Lies = Germans??</h3>
+OK, I admit I don't know what this one really means but according to my model, German politicians do not lie!<br>
+<div>
+<br></div>
+Now the <i>boring stuff</i>...<br>
+<br>
+<h2>
+Methods</h2>
+I used a corpus of publicly available online news and articles. Articles extracted from a number of different Farsi online websites and on average they contained ~ 8KB of text. The topics ranged from local and global Politics, Sports, Arts and Culture, Science and Technologies, Humanities and Religion, Health, etc.<br>
+<br>
+The processing pipeline is illustrated below:<br>
+<br>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><a href="http://4.bp.blogspot.com/-OIOAvbgCFUU/VX1omPNG3GI/AAAAAAAAI9g/2Xz8JroEVDc/s1600/word2vec%2Bpipeline%2B-%2Bcrop.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="258" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/word2vec+pipeline+-+crop.png" width="640"></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;">Figure 1 - Processing Pipeline</td></tr>
+</tbody></table>
+For word segmentation, an approach was used to join named entities using a dictionary of ~ 40K multi-part words and named entities.<br>
+<br>
+Gensim's <a href="https://radimrehurek.com/gensim/models/word2vec.html" target="_blank">word2vec</a> implementation was used to train the model. The default <i><span style="font-family: Courier New, Courier, monospace;">n=100</span></i>&nbsp;and <i><span style="font-family: Courier New, Courier, monospace;">window=5</span></i> worked very well but to find the optimum values, another study needs to be conducted.<br>
+<br>
+In order to generate the results presented in this post, <span style="font-family: Courier New, Courier, monospace;">most_similar</span> method was used. No significant difference between using <span style="font-family: Courier New, Courier, monospace;">most_similar</span> and <span style="font-family: Courier New, Courier, monospace;">most_similar_cosmul</span>&nbsp;was found.<br>
+<br>
+A significant problem was discovered where words with spelling mistake in the corpus or infrequent words generate sparse vectors which result in a very high score of similar with some words. I used frequency of the word in the corpus to filter out such occasions.<br>
+<br>
+<h2>
+Conclusion</h2>
+<div>
+word2vec is relatively simple algorithm with surprisingly remarkable performance. Its implementation are available in a variety of Open Source libraries, including Python's Gensim. Based on the preliminary results, it appears that word2vec is able to make higher levels abstractions which nudges towards cognitive abilities.</div>
+<div>
+<br></div>
+Despite its remarkable it is not quite clear how this ability can be used in an application, although in its current form, it can be readily used in finding antonym/synonym, spelling correction and stemming.<br>
+<br>
+<div style="clear: both;"></div>
+</div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1">
+<span class="post-author vcard">
+Posted by
+<span class="fn" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+<meta content="https://www.blogger.com/profile/05695786967974402749" itemprop="url">
+<a class="g-profile" href="https://www.blogger.com/profile/05695786967974402749" rel="author" title="author profile" data-gapiscan="true" data-onload="true" data-gapiattached="true">
+<span itemprop="name">aliostad</span>
+</a>
+</span>
+</span>
+<span class="post-timestamp">
+at
+<meta content="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html" itemprop="url">
+<a class="timestamp-link" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html" rel="bookmark" title="permanent link"><abbr class="published" itemprop="datePublished" title="2015-06-14T13:46:00+01:00">13:46</abbr></a>
+</span>
+<span class="reaction-buttons">
+</span>
+<span class="post-comment-link">
+</span>
+<span class="post-backlinks post-comment-link">
+</span>
+<span class="post-icons">
+<span class="item-control blog-admin pid-1154654817">
+<a href="https://www.blogger.com/post-edit.g?blogID=2889416825250254881&amp;postID=2072781516592907992&amp;from=pencil" title="Edit Post">
+<img alt="" class="icon-action" height="18" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/icon18_edit_allbkg.gif" width="18">
+</a>
+</span>
+</span>
+<div class="post-share-buttons goog-inline-block">
+<a class="goog-inline-block share-button sb-email" href="https://www.blogger.com/share-post.g?blogID=2889416825250254881&amp;postID=2072781516592907992&amp;target=email" target="_blank" title="Email This"><span class="share-button-link-text">Email This</span></a><a class="goog-inline-block share-button sb-blog" href="https://www.blogger.com/share-post.g?blogID=2889416825250254881&amp;postID=2072781516592907992&amp;target=blog" onclick="window.open(this.href, &quot;_blank&quot;, &quot;height=270,width=475&quot;); return false;" target="_blank" title="BlogThis!"><span class="share-button-link-text">BlogThis!</span></a><a class="goog-inline-block share-button sb-twitter" href="https://www.blogger.com/share-post.g?blogID=2889416825250254881&amp;postID=2072781516592907992&amp;target=twitter" target="_blank" title="Share to Twitter"><span class="share-button-link-text">Share to Twitter</span></a><a class="goog-inline-block share-button sb-facebook" href="https://www.blogger.com/share-post.g?blogID=2889416825250254881&amp;postID=2072781516592907992&amp;target=facebook" onclick="window.open(this.href, &quot;_blank&quot;, &quot;height=430,width=640&quot;); return false;" target="_blank" title="Share to Facebook"><span class="share-button-link-text">Share to Facebook</span></a><a class="goog-inline-block share-button sb-pinterest" href="https://www.blogger.com/share-post.g?blogID=2889416825250254881&amp;postID=2072781516592907992&amp;target=pinterest" target="_blank" title="Share to Pinterest"><span class="share-button-link-text">Share to Pinterest</span></a><div class="goog-inline-block google-plus-share-container"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 300px; height: 20px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 300px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1493014554187" name="I0_1493014554187" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div></div>
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2">
+<span class="post-labels">
+Labels:
+<a href="http://byterot.blogspot.com/search/label/Cognition" rel="tag">Cognition</a>,
+<a href="http://byterot.blogspot.com/search/label/Deep%20Learning" rel="tag">Deep Learning</a>,
+<a href="http://byterot.blogspot.com/search/label/Gensim" rel="tag">Gensim</a>,
+<a href="http://byterot.blogspot.com/search/label/Machine%20Learning" rel="tag">Machine Learning</a>,
+<a href="http://byterot.blogspot.com/search/label/Natural%20Language%20Processing" rel="tag">Natural Language Processing</a>,
+<a href="http://byterot.blogspot.com/search/label/NLP" rel="tag">NLP</a>,
+<a href="http://byterot.blogspot.com/search/label/Python" rel="tag">Python</a>,
+<a href="http://byterot.blogspot.com/search/label/word2vec" rel="tag">word2vec</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3">
+<span class="post-location">
+</span>
+</div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>14 comments:</h4>
+<div class="comments-content">
+<script async="async" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/comments.js" type="text/javascript"></script>
+<script type="text/javascript">
+    (function() {
+      var items = [{'id': '4915941558822683097', 'body': 'Is there a chance to find your code on github or similar websites?', 'timestamp': '1434310235308', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1434310235308#c4915941558822683097', 'author': {'name': 'Vladimir G', 'avatarUrl': '//lh3.googleusercontent.com/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA\x3ds35', 'profileUrl': 'https://www.blogger.com/profile/05092613018831617483'}, 'displayTime': '14 June 2015 at 20:30', 'deleteclass': 'item-control blog-admin pid-1542038143'}, {'id': '8379281370663562456', 'parentId': '4915941558822683097', 'body': 'There is nothing magic about the code I have written. The word2vec part is around 10-20 lines of codes similar to what you find here https://radimrehurek.com/gensim/models/word2vec.html\x3cbr /\x3e\x3cbr /\x3eThe key is to have a corpus. You can try some freely available corpora that are part of NLTK.', 'timestamp': '1434310682912', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1434310682912#c8379281370663562456', 'author': {'name': 'aliostad', 'avatarUrl': '//3.bp.blogspot.com/-IDIPVbzlrP8/T_GTZFRrIYI/AAAAAAAADHE/1Elbmpfnr-A/s35/18a68c153bd688028d9873ce9a11a13d.jpeg', 'profileUrl': 'https://www.blogger.com/profile/05695786967974402749'}, 'displayTime': '14 June 2015 at 20:38', 'deleteclass': 'item-control blog-admin pid-1154654817'}, {'id': '1249517821919440361', 'parentId': '4915941558822683097', 'body': 'God damnit, \x26quot;it\x26#39;s very easy\x26quot;, \x26quot;nothing magic about it\x26quot;, \x26quot;so simple\x26quot;... cut the crap and release the source, preferably on GitHub. A .zip-file does the job also, for the case you don\x26#39;t know anything about git.', 'timestamp': '1434316313183', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1434316313183#c1249517821919440361', 'author': {'name': 'Gruena Kung', 'avatarUrl': '//lh3.googleusercontent.com/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA\x3ds35', 'profileUrl': 'https://www.blogger.com/profile/09085248537138809861'}, 'displayTime': '14 June 2015 at 22:11', 'deleteclass': 'item-control blog-admin pid-1308187949'}, {'id': '9200879135969431759', 'parentId': '4915941558822683097', 'body': 'Was it really necessary to be so hostile? You can get similar results from the word2vec website', 'timestamp': '1434338793597', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1434338793597#c9200879135969431759', 'author': {'name': 'David', 'avatarUrl': '//lh3.googleusercontent.com/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA\x3ds35', 'profileUrl': 'https://www.blogger.com/profile/02046478502079301192'}, 'displayTime': '15 June 2015 at 04:26', 'deleteclass': 'item-control blog-admin pid-826297141'}, {'id': '8354423753259164215', 'body': 'How do you calculate vector for a bigram ? \x3cbr /\x3eLike you gave an example of a stock market . Did you average the vector for staock and market ?\x3cbr /\x3eI ask because gensim take only unigrams and so in the end I have vectors only for unigrams', 'timestamp': '1434548991036', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1434548991036#c8354423753259164215', 'author': {'name': 'Unknown', 'avatarUrl': '//lh3.googleusercontent.com/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA\x3ds35', 'profileUrl': 'https://www.blogger.com/profile/16561604461063330032'}, 'displayTime': '17 June 2015 at 14:49', 'deleteclass': 'item-control blog-admin pid-1680802962'}, {'id': '2725196006956301506', 'parentId': '8354423753259164215', 'body': 'Gensim does not care, you provide a vector of segmented words to it - rather a list or iterable to it.\x3cbr /\x3e\x3cbr /\x3eThat happens at the segmentation phase. Basically at the segmentation, I first segment the document to sentences. Then I segment the sentence to words, which uses a dictionary of named entities and phrases which are to be treated as a single token. I believe this is very important but all examples I have seen use a simple tokenisation. So this way Barack Obama is a single token.\x3cbr /\x3e', 'timestamp': '1434549565898', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1434549565898#c2725196006956301506', 'author': {'name': 'aliostad', 'avatarUrl': '//3.bp.blogspot.com/-IDIPVbzlrP8/T_GTZFRrIYI/AAAAAAAADHE/1Elbmpfnr-A/s35/18a68c153bd688028d9873ce9a11a13d.jpeg', 'profileUrl': 'https://www.blogger.com/profile/05695786967974402749'}, 'displayTime': '17 June 2015 at 14:59', 'deleteclass': 'item-control blog-admin pid-1154654817'}, {'id': '8643943253061843036', 'body': 'Thanks.', 'timestamp': '1434550712022', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1434550712022#c8643943253061843036', 'author': {'name': 'Unknown', 'avatarUrl': '//lh3.googleusercontent.com/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA\x3ds35', 'profileUrl': 'https://www.blogger.com/profile/16561604461063330032'}, 'displayTime': '17 June 2015 at 15:18', 'deleteclass': 'item-control blog-admin pid-1680802962'}, {'id': '7772479577283902766', 'body': 'Dear Rot,\x3cbr /\x3e\x3cbr /\x3eExcellent blog! I find your posts very interesting, especially the ones regarding Machine Learning. \x3cbr /\x3e\x3cbr /\x3eI am one of the executive editors at .NET Code Geeks (www.dotnetcodegeeks.com), a sister site to Java Code Geeks (www.javacodegeeks.com). We have the NCG program, a program that aims to build partnerships between .NET Code Geeks and community bloggers (see http://www.dotnetcodegeeks.com/join-us/ncg/), that I think you&#8217;d be perfect for.\x3cbr /\x3e\x3cbr /\x3eIf you&#8217;re interested, send me an email to nikos[dot]souris[at]dotnetcodegeeks[dot]com and we can discuss further.\x3cbr /\x3e\x3cbr /\x3eBest regards,\x3cbr /\x3eNikos Souris', 'timestamp': '1437133846456', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1437133846456#c7772479577283902766', 'author': {'name': 'Nikos Souris', 'avatarUrl': '//lh5.googleusercontent.com/-I_B1oYcq_jg/AAAAAAAAAAI/AAAAAAAAABg/mQwuOCcjFJU/s35-c/photo.jpg', 'profileUrl': 'https://www.blogger.com/profile/12997908024250013570'}, 'displayTime': '17 July 2015 at 12:50', 'deleteclass': 'item-control blog-admin pid-1832575956'}, {'id': '1877775428688473647', 'body': 'word2vec is great, but none of your results correspond to gensim results on the Google New corpus, except almost #4. Here are my top 3 results for your examples, and the code that generated it. I would add a test for \x26quot;stock market\x26quot; ~ \x26quot;thermometer\x26quot;, but the \x26quot;stock_market\x26quot; token does not appear in the corpus.\x3cbr /\x3e\x3cbr /\x3e+ human - animal \x3d mankind humankind humanity\x3cbr /\x3e+ library - books \x3d Library Terraceview_Lodge rec_center\x3cbr /\x3e+ Obama + Russia - USA \x3d Medvedev Putin Kremlin\x3cbr /\x3e+ Iraq - violence \x3d Kuwait Iraqi Chalabi\x3cbr /\x3e+ President - power \x3d president Vice_President Presdient\x3cbr /\x3e+ politics - lies \x3d partisan_politics Politics political\x3cbr /\x3e\x3cbr /\x3efrom gensim.models import Word2Vec\x3cbr /\x3emodel \x3d Word2Vec.load_word2vec_format(\x26quot;GoogleNews-vectors-negative300.bin\x26quot;, binary\x3dTrue)\x3cbr /\x3edef similar(positive, negative):\x3cbr /\x3e    results \x3d model.most_similar(positive\x3dpositive, negative\x3dnegative, topn\x3d3)\x3cbr /\x3e    print \x26#39; \x26#39;.join([\x26#39;+ \x26#39; + x for x in positive] +\x3cbr /\x3e                   [\x26#39;- \x26#39; + x for x in negative] + [\x26#39;\x3d\x26#39;] +\x3cbr /\x3e                   [result[0] for result in results])\x3cbr /\x3esimilar([\x26#39;human\x26#39;], [\x26#39;animal\x26#39;])\x3cbr /\x3esimilar([\x26#39;library\x26#39;], [\x26#39;books\x26#39;])\x3cbr /\x3esimilar([\x26#39;Obama\x26#39;, \x26#39;Russia\x26#39;], [\x26#39;USA\x26#39;])\x3cbr /\x3esimilar([\x26#39;Iraq\x26#39;], [\x26#39;violence\x26#39;])\x3cbr /\x3esimilar([\x26#39;President\x26#39;], [\x26#39;power\x26#39;])\x3cbr /\x3esimilar([\x26#39;politics\x26#39;], [\x26#39;lies\x26#39;])', 'timestamp': '1452508562392', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1452508562392#c1877775428688473647', 'author': {'name': 'Kyle McDonald', 'avatarUrl': '//lh5.googleusercontent.com/-xt1i8pQwwPU/AAAAAAAAAAI/AAAAAAAAAYs/NoHCvTs9gTg/s35-c/photo.jpg', 'profileUrl': 'https://www.blogger.com/profile/17427077588637523185'}, 'displayTime': '11 January 2016 at 10:36', 'deleteclass': 'item-control blog-admin pid-1839862465'}, {'id': '6990355339781225842', 'parentId': '1877775428688473647', 'body': 'Well in fact the results pretty good. One problem is that you would need to normalise the data, the casing throws it off. \x3cbr /\x3e\x3cbr /\x3e+ human - animal was in the Persian corpus I had which had many spiritual content. So I guess that was why.\x3cbr /\x3e\x3cbr /\x3e+ library - books: result is strange, what is traceview lodge anyway?!\x3cbr /\x3e\x3cbr /\x3e+ Obama + Russia - USA: Strange Medvedov is first but well, Putin is second.\x3cbr /\x3e\x3cbr /\x3e+ Iraq - violence: This works\x3cbr /\x3e\x3cbr /\x3e+ President - power: This also worked, if casing is normalised\x3cbr /\x3e\x3cbr /\x3e+ politics - lies: again, the corpus was Persian. But also interesting that comes up with partisan politics.\x3cbr /\x3e\x3cbr /\x3e\x3cbr /\x3e\x3cbr /\x3e\x3cbr /\x3e', 'timestamp': '1452515272255', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1452515272255#c6990355339781225842', 'author': {'name': 'aliostad', 'avatarUrl': '//3.bp.blogspot.com/-IDIPVbzlrP8/T_GTZFRrIYI/AAAAAAAADHE/1Elbmpfnr-A/s35/18a68c153bd688028d9873ce9a11a13d.jpeg', 'profileUrl': 'https://www.blogger.com/profile/05695786967974402749'}, 'displayTime': '11 January 2016 at 12:27', 'deleteclass': 'item-control blog-admin pid-1154654817'}, {'id': '269316586729367867', 'body': 'Thx for your article,\x3cbr /\x3eI work with word2vec on the 200 years corpus. In this curpus they are a lot of scan mistakes and the accuracy of the model is quite low.\x3cbr /\x3eYou wrote about this problem just before the conclusion. Could you develop a little bit more. Did you fix this issue ?', 'timestamp': '1464711518384', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1464711518384#c269316586729367867', 'author': {'name': 'Unknown', 'avatarUrl': '//lh3.googleusercontent.com/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA\x3ds35', 'profileUrl': 'https://www.blogger.com/profile/09474702770390677227'}, 'displayTime': '31 May 2016 at 17:18', 'deleteclass': 'item-control blog-admin pid-1086498333'}, {'id': '7817183979035520670', 'parentId': '269316586729367867', 'body': 'I never had this issue since I worked with the text extracted from web documents. I guess you can use word2vec itself to fix a lot of scan errors: use a dictionary and if it does not match, see which word it is mostly connected to. But the problem is these words do not have a lot of occurrence I suppose.\x3cbr /\x3e\x3cbr /\x3eI would consult the literature to look for methods, I am sure you are not the only one having this problem. But I am afraid I do not have any experience in this kind of problem.', 'timestamp': '1464727875199', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1464727875199#c7817183979035520670', 'author': {'name': 'aliostad', 'avatarUrl': '//3.bp.blogspot.com/-IDIPVbzlrP8/T_GTZFRrIYI/AAAAAAAADHE/1Elbmpfnr-A/s35/18a68c153bd688028d9873ce9a11a13d.jpeg', 'profileUrl': 'https://www.blogger.com/profile/05695786967974402749'}, 'displayTime': '31 May 2016 at 21:51', 'deleteclass': 'item-control blog-admin pid-1154654817'}, {'id': '1827701814428402471', 'body': 'I am interested to implement Word2vec for Urdu language. Can I use gensim, and how can use  my corpus in iy', 'timestamp': '1480584625048', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1480584625048#c1827701814428402471', 'author': {'name': 'Ali Saeed', 'avatarUrl': '//lh3.googleusercontent.com/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA\x3ds35', 'profileUrl': 'https://www.blogger.com/profile/11730242554153654820'}, 'displayTime': '1 December 2016 at 09:30', 'deleteclass': 'item-control blog-admin pid-1091974655'}, {'id': '67556895262092132', 'body': 'Can anyone send me little code Gensim for Word2vec with small corpus', 'timestamp': '1480584706585', 'permalink': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment\x3d1480584706585#c67556895262092132', 'author': {'name': 'Ali Saeed', 'avatarUrl': '//lh3.googleusercontent.com/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA\x3ds35', 'profileUrl': 'https://www.blogger.com/profile/11730242554153654820'}, 'displayTime': '1 December 2016 at 09:31', 'deleteclass': 'item-control blog-admin pid-1091974655'}];
+      var msgs = {'loadMore': 'Load more...', 'loading': 'Loading...', 'loaded': 'No more.', 'addComment': 'Add comment', 'reply': 'Reply', 'delete': 'Delete'};
+      var config = {'blogId': '2889416825250254881', 'postId': '2072781516592907992', 'feed': 'http://byterot.blogspot.com/feeds/2072781516592907992/comments/default', 'authorName': 'aliostad', 'authorUrl': 'https://www.blogger.com/profile/05695786967974402749', 'baseUri': 'https://www.blogger.com', 'maxThreadDepth': 2};
+
+// <![CDATA[
+      var cursor = null;
+      if (items && items.length > 0) {
+        cursor = parseInt(items[items.length - 1].timestamp) + 1;
+      }
+
+      var bodyFromEntry = function(entry) {
+        if (entry.gd$extendedProperty) {
+          for (var k in entry.gd$extendedProperty) {
+            if (entry.gd$extendedProperty[k].name == 'blogger.contentRemoved') {
+              return '<span class="deleted-comment">' + entry.content.$t + '</span>';
+            }
+          }
+        }
+        return entry.content.$t;
+      }
+
+      var parse = function(data) {
+        cursor = null;
+        var comments = [];
+        if (data && data.feed && data.feed.entry) {
+          for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
+            var comment = {};
+            // comment ID, parsed out of the original id format
+            var id = /blog-(\d+).post-(\d+)/.exec(entry.id.$t);
+            comment.id = id ? id[2] : null;
+            comment.body = bodyFromEntry(entry);
+            comment.timestamp = Date.parse(entry.published.$t) + '';
+            if (entry.author && entry.author.constructor === Array) {
+              var auth = entry.author[0];
+              if (auth) {
+                comment.author = {
+                  name: (auth.name ? auth.name.$t : undefined),
+                  profileUrl: (auth.uri ? auth.uri.$t : undefined),
+                  avatarUrl: (auth.gd$image ? auth.gd$image.src : undefined)
+                };
+              }
+            }
+            if (entry.link) {
+              if (entry.link[2]) {
+                comment.link = comment.permalink = entry.link[2].href;
+              }
+              if (entry.link[3]) {
+                var pid = /.*comments\/default\/(\d+)\?.*/.exec(entry.link[3].href);
+                if (pid && pid[1]) {
+                  comment.parentId = pid[1];
+                }
+              }
+            }
+            comment.deleteclass = 'item-control blog-admin';
+            if (entry.gd$extendedProperty) {
+              for (var k in entry.gd$extendedProperty) {
+                if (entry.gd$extendedProperty[k].name == 'blogger.itemClass') {
+                  comment.deleteclass += ' ' + entry.gd$extendedProperty[k].value;
+                } else if (entry.gd$extendedProperty[k].name == 'blogger.displayTime') {
+                  comment.displayTime = entry.gd$extendedProperty[k].value;
+                }
+              }
+            }
+            comments.push(comment);
+          }
+        }
+        return comments;
+      };
+
+      var paginator = function(callback) {
+        if (hasMore()) {
+          var url = config.feed + '?alt=json&v=2&orderby=published&reverse=false&max-results=50';
+          if (cursor) {
+            url += '&published-min=' + new Date(cursor).toISOString();
+          }
+          window.bloggercomments = function(data) {
+            var parsed = parse(data);
+            cursor = parsed.length < 50 ? null
+                : parseInt(parsed[parsed.length - 1].timestamp) + 1
+            callback(parsed);
+            window.bloggercomments = null;
+          }
+          url += '&callback=bloggercomments';
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = url;
+          document.getElementsByTagName('head')[0].appendChild(script);
+        }
+      };
+      var hasMore = function() {
+        return !!cursor;
+      };
+      var getMeta = function(key, comment) {
+        if ('iswriter' == key) {
+          var matches = !!comment.author
+              && comment.author.name == config.authorName
+              && comment.author.profileUrl == config.authorUrl;
+          return matches ? 'true' : '';
+        } else if ('deletelink' == key) {
+          return config.baseUri + '/delete-comment.g?blogID='
+               + config.blogId + '&postID=' + comment.id;
+        } else if ('deleteclass' == key) {
+          return comment.deleteclass;
+        }
+        return '';
+      };
+
+      var replybox = null;
+      var replyUrlParts = null;
+      var replyParent = undefined;
+
+      var onReply = function(commentId, domId) {
+        if (replybox == null) {
+          // lazily cache replybox, and adjust to suit this style:
+          replybox = document.getElementById('comment-editor');
+          if (replybox != null) {
+            replybox.height = '250px';
+            replybox.style.display = 'block';
+            replyUrlParts = replybox.src.split('#');
+          }
+        }
+        if (replybox && (commentId !== replyParent)) {
+          replybox.src = '';
+          document.getElementById(domId).insertBefore(replybox, null);
+          replybox.src = replyUrlParts[0]
+              + (commentId ? '&parentID=' + commentId : '')
+              + '#' + replyUrlParts[1];
+          replyParent = commentId;
+        }
+      };
+
+      var hash = (window.location.hash || '#').substring(1);
+      var startThread, targetComment;
+      if (/^comment-form_/.test(hash)) {
+        startThread = hash.substring('comment-form_'.length);
+      } else if (/^c[0-9]+$/.test(hash)) {
+        targetComment = hash.substring(1);
+      }
+
+      // Configure commenting API:
+      var configJso = {
+        'maxDepth': config.maxThreadDepth
+      };
+      var provider = {
+        'id': config.postId,
+        'data': items,
+        'loadNext': paginator,
+        'hasMore': hasMore,
+        'getMeta': getMeta,
+        'onReply': onReply,
+        'rendered': true,
+        'initComment': targetComment,
+        'initReplyThread': startThread,
+        'config': configJso,
+        'messages': msgs
+      };
+
+      var render = function() {
+        if (window.goog && window.goog.comments) {
+          var holder = document.getElementById('comment-holder');
+          window.goog.comments.render(holder, provider);
+        }
+      };
+
+      // render now, or queue to render when library loads:
+      if (window.goog && window.goog.comments) {
+        render();
+      } else {
+        window.goog = window.goog || {};
+        window.goog.comments = window.goog.comments || {};
+        window.goog.comments.loadQueue = window.goog.comments.loadQueue || [];
+        window.goog.comments.loadQueue.push(render);
+      }
+    })();
+// ]]>
+  </script>
+<div id="comment-holder">
+
+<div id="bc_0_15C" kind="c"><div id="bc_0_15CT"><div id="bc_0_14T" class="comment-thread" kind="r" t="0" u="0"><ol id="bc_0_14TB"><li id="bc_0_3B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA=s35"></div><div id="c4915941558822683097" class="comment-block"><div id="bc_0_3M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/05092613018831617483">Vladimir G</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1434310235308#c4915941558822683097">14 June 2015 at 20:30</a></span></div><p id="bc_0_3MC" class="comment-content">Is there a chance to find your code on github or similar websites?</p><span id="bc_0_3MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1542038143"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=4915941558822683097">Delete</a></span></span></div><div id="bc_0_3BR" class="comment-replies"><span id="bc_0_3b+seedC3axD" kind="d"><div id="bc_0_0T" class="comment-thread inline-thread" kind="t" t="0" u="0"><span id="bc_0_0TT" class="thread-toggle thread-expanded" kind="g"><span id="bc_0_0TA" class="thread-arrow"></span><span id="bc_0_0TN" class="thread-count"><span id="bc_0_0TNT" style="display: none;"></span><span id="bc_0_0TNU" style="display: none;"></span><a href="javascript:;" target="_self">Replies</a><div id="bc_0_0TD" class="thread-dropContainer thread-expanded"><span class="thread-drop"></span></div></span></span><ol id="bc_0_0TC" class="thread-chrome thread-expanded"><div><li id="bc_0_0B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/18a68c153bd688028d9873ce9a11a13d.jpeg"></div><div id="c8379281370663562456" class="comment-block"><div id="bc_0_0M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="https://www.blogger.com/profile/05695786967974402749">aliostad</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1434310682912#c8379281370663562456">14 June 2015 at 20:38</a></span></div><p id="bc_0_0MC" class="comment-content">There is nothing magic about the code I have written. The word2vec part is around 10-20 lines of codes similar to what you find here https://radimrehurek.com/gensim/models/word2vec.html<br><br>The key is to have a corpus. You can try some freely available corpora that are part of NLTK.</p><span id="bc_0_0MN" class="comment-actions secondary-text" kind="m"><span class="item-control blog-admin pid-1154654817"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=8379281370663562456">Delete</a></span></span></div><div id="bc_0_0BR" class="comment-replies"></div><div id="bc_0_0B_box" class="comment-replybox-single"></div></li><li id="bc_0_1B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA=s35"></div><div id="c1249517821919440361" class="comment-block"><div id="bc_0_1M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/09085248537138809861">Gruena Kung</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1434316313183#c1249517821919440361">14 June 2015 at 22:11</a></span></div><p id="bc_0_1MC" class="comment-content">God damnit, "it's very easy", "nothing magic about it", "so simple"... cut the crap and release the source, preferably on GitHub. A .zip-file does the job also, for the case you don't know anything about git.</p><span id="bc_0_1MN" class="comment-actions secondary-text" kind="m"><span class="item-control blog-admin pid-1308187949"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=1249517821919440361">Delete</a></span></span></div><div id="bc_0_1BR" class="comment-replies"></div><div id="bc_0_1B_box" class="comment-replybox-single"></div></li><li id="bc_0_2B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA=s35"></div><div id="c9200879135969431759" class="comment-block"><div id="bc_0_2M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/02046478502079301192">David</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1434338793597#c9200879135969431759">15 June 2015 at 04:26</a></span></div><p id="bc_0_2MC" class="comment-content">Was it really necessary to be so hostile? You can get similar results from the word2vec website</p><span id="bc_0_2MN" class="comment-actions secondary-text" kind="m"><span class="item-control blog-admin pid-826297141"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=9200879135969431759">Delete</a></span></span></div><div id="bc_0_2BR" class="comment-replies"></div><div id="bc_0_2B_box" class="comment-replybox-single"></div></li></div><div id="bc_0_0I" class="continue" kind="ci"><a href="javascript:;" target="_self">Reply</a></div></ol><div id="bc_0_0T_box" class="comment-replybox-thread"></div></div></span></div><div id="bc_0_3B_box" class="comment-replybox-single"></div></li><li id="bc_0_5B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA=s35"></div><div id="c8354423753259164215" class="comment-block"><div id="bc_0_5M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/16561604461063330032">Unknown</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1434548991036#c8354423753259164215">17 June 2015 at 14:49</a></span></div><p id="bc_0_5MC" class="comment-content">How do you calculate vector for a bigram ? <br>Like you gave an example of a stock market . Did you average the vector for staock and market ?<br>I ask because gensim take only unigrams and so in the end I have vectors only for unigrams</p><span id="bc_0_5MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1680802962"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=8354423753259164215">Delete</a></span></span></div><div id="bc_0_5BR" class="comment-replies"><span id="bc_0_5b+seedC3a1D" kind="d"><div id="bc_0_4T" class="comment-thread inline-thread" kind="t" t="0" u="0"><span id="bc_0_4TT" class="thread-toggle thread-expanded" kind="g"><span id="bc_0_4TA" class="thread-arrow"></span><span id="bc_0_4TN" class="thread-count"><span id="bc_0_4TNT" style="display: none;"></span><span id="bc_0_4TNU" style="display: none;"></span><a href="javascript:;" target="_self">Replies</a><div id="bc_0_4TD" class="thread-dropContainer thread-expanded"><span class="thread-drop"></span></div></span></span><ol id="bc_0_4TC" class="thread-chrome thread-expanded"><div><li id="bc_0_4B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/18a68c153bd688028d9873ce9a11a13d.jpeg"></div><div id="c2725196006956301506" class="comment-block"><div id="bc_0_4M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="https://www.blogger.com/profile/05695786967974402749">aliostad</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1434549565898#c2725196006956301506">17 June 2015 at 14:59</a></span></div><p id="bc_0_4MC" class="comment-content">Gensim does not care, you provide a vector of segmented words to it - rather a list or iterable to it.<br><br>That happens at the segmentation phase. Basically at the segmentation, I first segment the document to sentences. Then I segment the sentence to words, which uses a dictionary of named entities and phrases which are to be treated as a single token. I believe this is very important but all examples I have seen use a simple tokenisation. So this way Barack Obama is a single token.<br></p><span id="bc_0_4MN" class="comment-actions secondary-text" kind="m"><span class="item-control blog-admin pid-1154654817"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=2725196006956301506">Delete</a></span></span></div><div id="bc_0_4BR" class="comment-replies"></div><div id="bc_0_4B_box" class="comment-replybox-single"></div></li></div><div id="bc_0_4I" class="continue" kind="ci"><a href="javascript:;" target="_self">Reply</a></div></ol><div id="bc_0_4T_box" class="comment-replybox-thread"></div></div></span></div><div id="bc_0_5B_box" class="comment-replybox-single"></div></li><li id="bc_0_6B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA=s35"></div><div id="c8643943253061843036" class="comment-block"><div id="bc_0_6M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/16561604461063330032">Unknown</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1434550712022#c8643943253061843036">17 June 2015 at 15:18</a></span></div><p id="bc_0_6MC" class="comment-content">Thanks.</p><span id="bc_0_6MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1680802962"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=8643943253061843036">Delete</a></span></span></div><div id="bc_0_6BR" class="comment-replies"></div><div id="bc_0_6B_box" class="comment-replybox-single"></div></li><li id="bc_0_7B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/photo.jpg"></div><div id="c7772479577283902766" class="comment-block"><div id="bc_0_7M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/12997908024250013570">Nikos Souris</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1437133846456#c7772479577283902766">17 July 2015 at 12:50</a></span></div><p id="bc_0_7MC" class="comment-content">Dear Rot,<br><br>Excellent blog! I find your posts very interesting, especially the ones regarding Machine Learning. <br><br>I am one of the executive editors at .NET Code Geeks (www.dotnetcodegeeks.com), a sister site to Java Code Geeks (www.javacodegeeks.com). We have the NCG program, a program that aims to build partnerships between .NET Code Geeks and community bloggers (see http://www.dotnetcodegeeks.com/join-us/ncg/), that I think you’d be perfect for.<br><br>If you’re interested, send me an email to nikos[dot]souris[at]dotnetcodegeeks[dot]com and we can discuss further.<br><br>Best regards,<br>Nikos Souris</p><span id="bc_0_7MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1832575956"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=7772479577283902766">Delete</a></span></span></div><div id="bc_0_7BR" class="comment-replies"></div><div id="bc_0_7B_box" class="comment-replybox-single"></div></li><li id="bc_0_9B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/photo(1).jpg"></div><div id="c1877775428688473647" class="comment-block"><div id="bc_0_9M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/17427077588637523185">Kyle McDonald</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1452508562392#c1877775428688473647">11 January 2016 at 10:36</a></span></div><p id="bc_0_9MC" class="comment-content">word2vec is great, but none of your results correspond to gensim results on the Google New corpus, except almost #4. Here are my top 3 results for your examples, and the code that generated it. I would add a test for "stock market" ~ "thermometer", but the "stock_market" token does not appear in the corpus.<br><br>+ human - animal = mankind humankind humanity<br>+ library - books = Library Terraceview_Lodge rec_center<br>+ Obama + Russia - USA = Medvedev Putin Kremlin<br>+ Iraq - violence = Kuwait Iraqi Chalabi<br>+ President - power = president Vice_President Presdient<br>+ politics - lies = partisan_politics Politics political<br><br>from gensim.models import Word2Vec<br>model = Word2Vec.load_word2vec_format("GoogleNews-vectors-negative300.bin", binary=True)<br>def similar(positive, negative):<br>    results = model.most_similar(positive=positive, negative=negative, topn=3)<br>    print ' '.join(['+ ' + x for x in positive] +<br>                   ['- ' + x for x in negative] + ['='] +<br>                   [result[0] for result in results])<br>similar(['human'], ['animal'])<br>similar(['library'], ['books'])<br>similar(['Obama', 'Russia'], ['USA'])<br>similar(['Iraq'], ['violence'])<br>similar(['President'], ['power'])<br>similar(['politics'], ['lies'])</p><span id="bc_0_9MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1839862465"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=1877775428688473647">Delete</a></span></span></div><div id="bc_0_9BR" class="comment-replies"><span id="bc_0_9b+seedC3a5D" kind="d"><div id="bc_0_8T" class="comment-thread inline-thread" kind="t" t="0" u="0"><span id="bc_0_8TT" class="thread-toggle thread-expanded" kind="g"><span id="bc_0_8TA" class="thread-arrow"></span><span id="bc_0_8TN" class="thread-count"><span id="bc_0_8TNT" style="display: none;"></span><span id="bc_0_8TNU" style="display: none;"></span><a href="javascript:;" target="_self">Replies</a><div id="bc_0_8TD" class="thread-dropContainer thread-expanded"><span class="thread-drop"></span></div></span></span><ol id="bc_0_8TC" class="thread-chrome thread-expanded"><div><li id="bc_0_8B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/18a68c153bd688028d9873ce9a11a13d.jpeg"></div><div id="c6990355339781225842" class="comment-block"><div id="bc_0_8M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="https://www.blogger.com/profile/05695786967974402749">aliostad</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1452515272255#c6990355339781225842">11 January 2016 at 12:27</a></span></div><p id="bc_0_8MC" class="comment-content">Well in fact the results pretty good. One problem is that you would need to normalise the data, the casing throws it off. <br><br>+ human - animal was in the Persian corpus I had which had many spiritual content. So I guess that was why.<br><br>+ library - books: result is strange, what is traceview lodge anyway?!<br><br>+ Obama + Russia - USA: Strange Medvedov is first but well, Putin is second.<br><br>+ Iraq - violence: This works<br><br>+ President - power: This also worked, if casing is normalised<br><br>+ politics - lies: again, the corpus was Persian. But also interesting that comes up with partisan politics.<br><br><br><br><br></p><span id="bc_0_8MN" class="comment-actions secondary-text" kind="m"><span class="item-control blog-admin pid-1154654817"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=6990355339781225842">Delete</a></span></span></div><div id="bc_0_8BR" class="comment-replies"></div><div id="bc_0_8B_box" class="comment-replybox-single"></div></li></div><div id="bc_0_8I" class="continue" kind="ci"><a href="javascript:;" target="_self">Reply</a></div></ol><div id="bc_0_8T_box" class="comment-replybox-thread"></div></div></span></div><div id="bc_0_9B_box" class="comment-replybox-single"></div></li><li id="bc_0_11B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA=s35"></div><div id="c269316586729367867" class="comment-block"><div id="bc_0_11M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/09474702770390677227">Unknown</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1464711518384#c269316586729367867">31 May 2016 at 17:18</a></span></div><p id="bc_0_11MC" class="comment-content">Thx for your article,<br>I work with word2vec on the 200 years corpus. In this curpus they are a lot of scan mistakes and the accuracy of the model is quite low.<br>You wrote about this problem just before the conclusion. Could you develop a little bit more. Did you fix this issue ?</p><span id="bc_0_11MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1086498333"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=269316586729367867">Delete</a></span></span></div><div id="bc_0_11BR" class="comment-replies"><span id="bc_0_11b+seedC3a7D" kind="d"><div id="bc_0_10T" class="comment-thread inline-thread" kind="t" t="0" u="0"><span id="bc_0_10TT" class="thread-toggle thread-expanded" kind="g"><span id="bc_0_10TA" class="thread-arrow"></span><span id="bc_0_10TN" class="thread-count"><span id="bc_0_10TNT" style="display: none;"></span><span id="bc_0_10TNU" style="display: none;"></span><a href="javascript:;" target="_self">Replies</a><div id="bc_0_10TD" class="thread-dropContainer thread-expanded"><span class="thread-drop"></span></div></span></span><ol id="bc_0_10TC" class="thread-chrome thread-expanded"><div><li id="bc_0_10B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/18a68c153bd688028d9873ce9a11a13d.jpeg"></div><div id="c7817183979035520670" class="comment-block"><div id="bc_0_10M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="https://www.blogger.com/profile/05695786967974402749">aliostad</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1464727875199#c7817183979035520670">31 May 2016 at 21:51</a></span></div><p id="bc_0_10MC" class="comment-content">I never had this issue since I worked with the text extracted from web documents. I guess you can use word2vec itself to fix a lot of scan errors: use a dictionary and if it does not match, see which word it is mostly connected to. But the problem is these words do not have a lot of occurrence I suppose.<br><br>I would consult the literature to look for methods, I am sure you are not the only one having this problem. But I am afraid I do not have any experience in this kind of problem.</p><span id="bc_0_10MN" class="comment-actions secondary-text" kind="m"><span class="item-control blog-admin pid-1154654817"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=7817183979035520670">Delete</a></span></span></div><div id="bc_0_10BR" class="comment-replies"></div><div id="bc_0_10B_box" class="comment-replybox-single"></div></li></div><div id="bc_0_10I" class="continue" kind="ci"><a href="javascript:;" target="_self">Reply</a></div></ol><div id="bc_0_10T_box" class="comment-replybox-thread"></div></div></span></div><div id="bc_0_11B_box" class="comment-replybox-single"></div></li><li id="bc_0_12B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA=s35"></div><div id="c1827701814428402471" class="comment-block"><div id="bc_0_12M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/11730242554153654820">Ali Saeed</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1480584625048#c1827701814428402471">1 December 2016 at 09:30</a></span></div><p id="bc_0_12MC" class="comment-content">I am interested to implement Word2vec for Urdu language. Can I use gensim, and how can use  my corpus in iy</p><span id="bc_0_12MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1091974655"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=1827701814428402471">Delete</a></span></span></div><div id="bc_0_12BR" class="comment-replies"></div><div id="bc_0_12B_box" class="comment-replybox-single"></div></li><li id="bc_0_13B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA=s35"></div><div id="c67556895262092132" class="comment-block"><div id="bc_0_13M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/11730242554153654820">Ali Saeed</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html?showComment=1480584706585#c67556895262092132">1 December 2016 at 09:31</a></span></div><p id="bc_0_13MC" class="comment-content">Can anyone send me little code Gensim for Word2vec with small corpus</p><span id="bc_0_13MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1091974655"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=2889416825250254881&amp;postID=67556895262092132">Delete</a></span></span></div><div id="bc_0_13BR" class="comment-replies"></div><div id="bc_0_13B_box" class="comment-replybox-single"></div></li></ol><div id="bc_0_14I" class="continue" kind="ci" style="display: none;"><a href="javascript:;" target="_self">Add comment</a></div><div id="bc_0_14T_box" class="comment-replybox-thread"><iframe allowtransparency="true" class="blogger-iframe-colorize blogger-comment-from-post" frameborder="0" height="250px" id="comment-editor" name="comment-editor" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/comment-iframe.html" width="100%" style="display: block;" data-resized="true"></iframe></div><div id="bc_0_14L" class="loadmore loaded" kind="rb"><a href="javascript:;" target="_self">Load more...</a></div></div></div></div></div>
+</div>
+<p class="comment-footer">
+</p><div class="comment-form">
+<a name="comment-form"></a>
+<p>
+</p>
+<a href="https://www.blogger.com/comment-iframe.g?blogID=2889416825250254881&amp;postID=2072781516592907992&amp;blogspotRpcToken=6000264" id="comment-editor-src"></a>
+
+<script type="text/javascript" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/2926213482-comment_from_post_iframe.js"></script>
+<script type="text/javascript">
+      BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html');
+    </script>
+</div>
+<p></p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+</div>
+</div>
+</div>
+</div>
+
+        </div></div>
+      
+</div>
+<div class="blog-pager" id="blog-pager">
+<span id="blog-pager-newer-link">
+<a class="blog-pager-newer-link" href="http://byterot.blogspot.com/2015/07/daft-punk-tool-muse-word2vec-model-trained-36K-rock-music-corpus-wiki-NLP-gensim.html" id="Blog1_blog-pager-newer-link" title="Newer Post">Newer Post</a>
+</span>
+<span id="blog-pager-older-link">
+<a class="blog-pager-older-link" href="http://byterot.blogspot.com/2015/05/perfit-decoupled-from-web-api-measure-all-parts-of-your-.net-application-using-perfit-aspnetwebapi-telemetry-etw.html" id="Blog1_blog-pager-older-link" title="Older Post">Older Post</a>
+</span>
+<a class="home-link" href="http://byterot.blogspot.com/">Home</a>
+</div>
+<div class="clear"></div>
+<div class="post-feeds">
+<div class="feed-links">
+Subscribe to:
+<a class="feed-link" href="http://byterot.blogspot.com/feeds/2072781516592907992/comments/default" target="_blank" type="application/atom+xml">Post Comments (Atom)</a>
+</div>
+</div>
+<script type="text/javascript">
+    window.___gcfg = { 'lang': 'en-GB' };
+  </script>
+</div></div>
+</div>
+</div>
+<div class="column-left-outer">
+<div class="column-left-inner">
+<aside>
+</aside>
+</div>
+</div>
+<div class="column-right-outer">
+<div class="column-right-inner">
+<aside>
+<div class="sidebar section" id="sidebar-right-1"><div class="widget Image" data-version="1" id="Image1">
+<h2>_</h2>
+<div class="widget-content">
+<img alt="_" height="95" id="Image1_img" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/MVP_Logo_Horizontal_Black_RGB_300ppi.png" width="236" style="visibility: visible;">
+<br>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2889416825250254881&amp;widgetType=Image&amp;widgetId=Image1&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Image1&quot;));" target="configImage1" title="Edit">
+<img alt="" height="18" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget BlogArchive" data-version="1" id="BlogArchive1">
+<h2>Blog Archive</h2>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive1_ArchiveList">
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2017/">
+2017
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2017/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2017/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2016/">
+2016
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2016/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2016/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2016/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2016/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+
+        ▼&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2015/">
+2015
+</a>
+<span class="post-count" dir="ltr">(11)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2015/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2015/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2015/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2015/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+
+        ▼&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2015/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+<ul class="posts">
+<li><a href="http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html">Five crazy abstractions my Deep Learning word2vec ...</a></li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2015/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2015/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2015/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2015/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2014/">
+2014
+</a>
+<span class="post-count" dir="ltr">(14)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2014/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2014/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2014/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2014/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2014/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2014/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2014/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2014/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/">
+2013
+</a>
+<span class="post-count" dir="ltr">(20)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2013/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/">
+2012
+</a>
+<span class="post-count" dir="ltr">(42)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(7)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://byterot.blogspot.com/2012/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(7)</span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2889416825250254881&amp;widgetType=BlogArchive&amp;widgetId=BlogArchive1&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;BlogArchive1&quot;));" target="configBlogArchive1" title="Edit">
+<img alt="" height="18" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget PlusOne" data-version="1" id="PlusOne1">
+<div class="widget-content">
+<div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 106px; height: 24px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 106px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I1_1493014554202" name="I1_1493014554202" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/fastbutton(1).html" data-gapiattached="true" title="+1"></iframe></div>
+<script type="text/javascript">
+      window.___gcfg = {"lang": "en_GB"};
+    </script>
+</div>
+</div><div class="widget HTML" data-version="1" id="HTML2">
+<h2 class="title">Follow me on twitter</h2>
+<div class="widget-content">
+<a href="http://twitter.com/aliostad"><img style="margin-left:20px" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/twitterlogo_1x.png" width="36" height="36"></a><a href="http://twitter.com/aliostad" style="margin-top: 10px;padding: 3px;vertical-align: top;float: left;">@aliostad</a>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2889416825250254881&amp;widgetType=HTML&amp;widgetId=HTML2&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML2&quot;));" target="configHTML2" title="Edit">
+<img alt="" height="18" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" data-version="1" id="HTML1">
+<div class="widget-content">
+<a href="http://stackoverflow.com/users/440502/aliostad">
+<img src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/440502.png" width="208" height="58" alt="profile for Aliostad at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Aliostad at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
+</a>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2889416825250254881&amp;widgetType=HTML&amp;widgetId=HTML1&amp;action=editWidget&amp;sectionId=sidebar-right-1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML1&quot;));" target="configHTML1" title="Edit">
+<img alt="" height="18" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</aside>
+</div>
+</div>
+</div>
+<div style="clear: both"></div>
+<!-- columns -->
+</div>
+<!-- main -->
+</div>
+</div>
+<div class="main-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<footer>
+<div class="footer-outer">
+<div class="footer-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left footer-fauxborder-left">
+<div class="fauxborder-right footer-fauxborder-right"></div>
+<div class="region-inner footer-inner">
+<div class="foot no-items section" id="footer-1"></div>
+<table border="0" cellpadding="0" cellspacing="0" class="section-columns columns-2">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="foot no-items section" id="footer-2-1"></div>
+</td>
+<td class="columns-cell">
+<div class="foot no-items section" id="footer-2-2"></div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- outside of the include in order to lock Attribution widget -->
+<div class="foot section" id="footer-3" name="Footer"><div class="widget Attribution" data-version="1" id="Attribution1">
+<div class="widget-content" style="text-align: center;">
+Awesome Inc. theme. Theme images by <a href="http://www.istockphoto.com/googleimages.php?id=2257912&amp;platform=blogger&amp;langregion=en_GB" target="_blank">claylib</a>. Powered by <a href="https://www.blogger.com/" target="_blank">Blogger</a>.
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=2889416825250254881&amp;widgetType=Attribution&amp;widgetId=Attribution1&amp;action=editWidget&amp;sectionId=footer-3" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Attribution1&quot;));" target="configAttribution1" title="Edit">
+<img alt="" height="18" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+</div>
+<div class="footer-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</footer>
+<!-- content -->
+</div>
+</div>
+<div class="content-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    window.setTimeout(function() {
+        document.body.className = document.body.className.replace('loading', '');
+      }, 10);
+  </script>
+<script type="text/javascript" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/plusone.js" gapi_processed="true"></script>
+
+<script type="text/javascript" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/2472851610-widgets.js"></script>
+<script type="text/javascript">
+window['__wavt'] = 'AOuZoY7t7jLAdX9SZBvj4MVzlF6pIF5ZIg:1492972501561';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d2889416825250254881','//byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html','2889416825250254881');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '2889416825250254881', 'title': 'Byte Rot', 'url': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html', 'canonicalUrl': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html', 'homepageUrl': 'http://byterot.blogspot.com/', 'searchUrl': 'http://byterot.blogspot.com/search', 'canonicalHomepageUrl': 'http://byterot.blogspot.com/', 'blogspotFaviconUrl': 'http://byterot.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'useUniversalAnalytics': false, 'encoding': 'UTF-8', 'locale': 'en-GB', 'localeUnderscoreDelimited': 'en_gb', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Byte Rot - Atom\x22 href\x3d\x22http://byterot.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Byte Rot - RSS\x22 href\x3d\x22http://byterot.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Byte Rot - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/2889416825250254881/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Byte Rot - Atom\x22 href\x3d\x22http://byterot.blogspot.com/feeds/2072781516592907992/comments/default\x22 /\x3e\n', 'meTag': '', 'openIdOpTag': '', 'mobileHeadScript': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'ieCssRetrofitLinks': '\x3c!--[if IE]\x3e\x3cscript type\x3d\x22text/javascript\x22 src\x3d\x22https://www.blogger.com/static/v1/jsbin/1575677651-ieretrofit.js\x22\x3e\x3c/script\x3e\n\x3c![endif]--\x3e', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/de09d9f734448eb1', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'Twitter', 'key': 'twitter', 'shareMessage': 'Share to Twitter', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Google+', 'key': 'googlePlus', 'shareMessage': 'Share to Google+', 'target': 'googleplus'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'googlePlusShareButtonWidth': 300, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en_GB\x27};\x3c/script\x3e'}, 'jumpLinkMessage': 'Read more &#187;', 'pageType': 'item', 'postId': '2072781516592907992', 'postImageThumbnailUrl': 'http://4.bp.blogspot.com/-o6QmaB5arZI/VX1qOexFIjI/AAAAAAAAI9s/R5dfzns6e5o/s72-c/Singularity_Dance%2B%25281%2529.png', 'postImageUrl': 'http://4.bp.blogspot.com/-o6QmaB5arZI/VX1qOexFIjI/AAAAAAAAI9s/R5dfzns6e5o/s640/Singularity_Dance%2B%25281%2529.png', 'pageName': 'Five crazy abstractions my Deep Learning word2vec model just did', 'pageTitle': 'Byte Rot: Five crazy abstractions my Deep Learning word2vec model just did', 'metaDescription': ''}}, {'name': 'features', 'data': {'enhancedSourcesets': 'true', 'unsupported_browser_message': 'false'}}, {'name': 'messages', 'data': {'linkCopiedToClipboard': 'Link copied to clipboard', 'postLink': 'Post link'}}, {'name': 'template', 'data': {'name': 'Awesome Inc.', 'localizedName': 'Awesome Inc.', 'isResponsive': false, 'isAlternateRendering': false, 'isCustom': false, 'variant': 'dark', 'variantId': 'dark', 'variantName': 'Dark', 'localizedVariantName': 'Dark'}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'Five crazy abstractions my Deep Learning word2vec model just did', 'description': 'A blog on programming C#, REST, WCF, ASP.NET Web API and software architecture', 'featuredImage': 'http://4.bp.blogspot.com/-o6QmaB5arZI/VX1qOexFIjI/AAAAAAAAI9s/R5dfzns6e5o/s640/Singularity_Dance%2B%25281%2529.png', 'url': 'http://byterot.blogspot.com/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 2072781516592907992}}]);
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', null, document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/194721083-lbx__en_gb.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/368954415-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ImageView', new _WidgetInfo('Image1', 'sidebar-right-1', null, document.getElementById('Image1'), {'resize': true}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar-right-1', null, document.getElementById('BlogArchive1'), {'languageDirection': 'ltr', 'loadingMessage': 'Loading\x26hellip;'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PlusOneView', new _WidgetInfo('PlusOne1', 'sidebar-right-1', null, document.getElementById('PlusOne1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML2', 'sidebar-right-1', null, document.getElementById('HTML2'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'sidebar-right-1', null, document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer-3', null, document.getElementById('Attribution1'), {}, 'displayModeFull'));
+</script>
+
+<iframe name="oauth2relay435225905" id="oauth2relay435225905" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/postmessageRelay.html" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><link type="text/css" rel="stylesheet" href="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/368954415-lightbox_bundle.css"><script type="text/javascript" src="./Byte Rot_ Five crazy abstractions my Deep Learning word2vec model just did_files/194721083-lbx__en_gb.js"></script></body></html>

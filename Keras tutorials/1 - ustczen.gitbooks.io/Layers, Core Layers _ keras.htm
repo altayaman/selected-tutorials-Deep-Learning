@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://ustczen.gitbooks.io/keras/content/layers/core.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Layers, Core Layers | keras</title>
+        
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.1.0">
+        <meta name="author" content="ustczen">
+        
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://ustczen.gitbooks.io/keras/content/gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="https://ustczen.gitbooks.io/keras/content/gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="./Layers, Core Layers _ keras_files/style.css">
+    
+    
+
+        
+    
+    
+    <link rel="next" href="https://ustczen.gitbooks.io/keras/content/layers/convolutional.html">
+    
+    
+    <link rel="prev" href="https://ustczen.gitbooks.io/keras/content/datasets.html">
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book without-animation with-summary font-size-2 font-family-1" data-level="11" data-basepath=".." data-revision="Tue Jul 07 2015 10:35:24 GMT+0000 (UTC)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control">
+    </div>
+    <ul class="summary">
+        
+        
+        
+            
+            <li>
+                <a href="https://www.gitbook.com/book/ustczen/keras" target="blank" class="custom-link">keras</a>
+            </li>
+        
+        
+
+        
+        <li class="divider"></li>
+        
+
+        
+    
+        <li class="chapter  done" data-level="0" data-path="index.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="1" data-path="examples.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/examples.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        Examples
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="2" data-path="optimizers.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/optimizers.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        Optimizers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="3" data-path="objectives.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/objectives.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        Objectives
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="4" data-path="models.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/models.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        Models
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="5" data-path="activations.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/activations.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        Activations
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="6" data-path="initializations.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/initializations.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        Initializations
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="7" data-path="regularizers.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/regularizers.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.</b>
+                        
+                        Regularizers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="8" data-path="constraints.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/constraints.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.</b>
+                        
+                        Constraints
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="9" data-path="callbacks.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/callbacks.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>9.</b>
+                        
+                        Callbacks
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="10" data-path="datasets.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/datasets.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.</b>
+                        
+                        Datasets
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter active done" data-level="11" data-path="layers/core.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.</b>
+                        
+                        Layers, Core Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="12" data-path="layers/convolutional.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/convolutional.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.</b>
+                        
+                        Layers, Convolutional Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="13" data-path="layers/recurrent.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/recurrent.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>13.</b>
+                        
+                        Layers, Recurrent Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="14" data-path="layers/advanced_activations.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/advanced_activations.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>14.</b>
+                        
+                        Layers, Advanced Activations Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="15" data-path="layers/normalization.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/normalization.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>15.</b>
+                        
+                        Layers, Normalization Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="16" data-path="layers/embeddings.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/embeddings.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>16.</b>
+                        
+                        Layers, Embedding Layers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="17" data-path="layers/containers.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/layers/containers.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>17.</b>
+                        
+                        Layers, Containers
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="18" data-path="preprocessing/sequence.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/sequence.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>18.</b>
+                        
+                        Preprocessing, Sequence Preprocessing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="19" data-path="preprocessing/text.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/text.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>19.</b>
+                        
+                        Preprocessing, Text Preprocessing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter" data-level="20" data-path="preprocessing/image.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/preprocessing/image.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>20.</b>
+                        
+                        Preprocessing, Image Preprocessing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter  done" data-level="21" data-path="utils/visualization.html">
+            
+                
+                    <a href="https://ustczen.gitbooks.io/keras/content/utils/visualization.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>21.</b>
+                        
+                        Utils, Visualization Utilities
+                    </a>
+                
+            
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com/" target="blank" class="gitbook-link">
+                Published with GitBook
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="https://ustczen.gitbooks.io/keras/content/">keras</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h2 id="base-class">Base class</h2>
+<pre><code class="lang-python">keras.layers.core.Layer()
+</code></pre>
+<p><strong>Methods</strong>:</p>
+<pre><code class="lang-python">connect(previous_layer)
+</code></pre>
+<p>Connect the input of the current layer to the output of the argument layer.</p>
+<ul>
+<li><p><strong>Return</strong>: None.</p>
+</li>
+<li><p><strong>Arguments</strong>: </p>
+<ul>
+<li><strong>previous_layer</strong>: Layer object.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-python">output(train)
+</code></pre>
+<p>Get the output of the layer.</p>
+<ul>
+<li><p><strong>Return</strong>: Theano tensor.</p>
+</li>
+<li><p><strong>Arguments</strong>: </p>
+<ul>
+<li><strong>train</strong>: Boolean. Specifies whether output is computed in training mode or in testing mode, which can change the logic, for instance in there are any <code>Dropout</code> layers in the network. </li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-python">get_input(train)
+</code></pre>
+<p>Get the input of the layer.</p>
+<ul>
+<li><p><strong>Return</strong>: Theano tensor.</p>
+</li>
+<li><p><strong>Arguments</strong>: </p>
+<ul>
+<li><strong>train</strong>: Boolean. Specifies whether output is computed in training mode or in testing mode, which can change the logic, for instance in there are any <code>Dropout</code> layers in the network. </li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-python">get_weights()
+</code></pre>
+<p>Get the weights of the parameters of the layer.</p>
+<ul>
+<li><strong>Return</strong>: List of numpy arrays (one per layer parameter). </li>
+</ul>
+<pre><code class="lang-python">set_weights(weights)
+</code></pre>
+<p>Set the weights of the parameters of the layer.</p>
+<ul>
+<li><strong>Arguments</strong>: <ul>
+<li><strong>weights</strong>: List of numpy arrays (one per layer parameter). Should be in the same order as what <code>get_weights(self)</code> returns.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="dense">Dense</h2>
+<pre><code class="lang-python">keras.layers.core.Dense(input_dim, output_dim, init=<span class="hljs-string">'glorot_uniform'</span>, activation=<span class="hljs-string">'linear'</span>, weights=<span class="hljs-keyword">None</span> \
+W_regularizer=<span class="hljs-keyword">None</span>, b_regularizer=<span class="hljs-keyword">None</span>, W_constraint=<span class="hljs-keyword">None</span>, b_constraint=<span class="hljs-keyword">None</span>)
+</code></pre>
+<p>Standard 1D fully-connect layer. </p>
+<ul>
+<li><p><strong>Input shape</strong>: 2D tensor with shape: <code>(nb_samples, input_dim)</code>.</p>
+</li>
+<li><p><strong>Output shape</strong>: 2D tensor with shape: <code>(nb_samples, output_dim)</code>.</p>
+</li>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li><strong>input_dim</strong>: int &gt;= 0. </li>
+<li><strong>output_dim</strong>: int &gt;= 0. </li>
+<li><strong>init</strong>: name of initialization function for the weights of the layer (see: <a href="https://ustczen.gitbooks.io/keras/content/initializations.html">initializations</a>), or alternatively, Theano function to use for weights initialization. This parameter is only relevant if you don't pass a <code>weights</code> argument.</li>
+<li><strong>activation</strong>: name of activation function to use (see: <a href="https://ustczen.gitbooks.io/keras/content/activations.html">activations</a>), or alternatively, elementwise Theano function. If you don't specify anything, no activation is applied (ie. "linear" activation: a(x) = x).</li>
+<li><strong>weights</strong>: list of numpy arrays to set as initial weights. The list should have 1 element, of shape <code>(input_dim, output_dim)</code>.</li>
+<li><strong>W_regularizer</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/regularizers.html">regularizers</a> module (eg. L1 or L2 regularization), applied to the main weights matrix.</li>
+<li><strong>b_regularizer</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/regularizers.html">regularizers</a> module, applied to the bias.</li>
+<li><strong>W_constraint</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/constraints.html">constraints</a> module (eg. maxnorm, nonneg), applied to the main weights matrix.</li>
+<li><strong>b_constraint</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/constraints.html">constraints</a> module, applied to the bias.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="timedistributeddense">TimeDistributedDense</h2>
+<pre><code class="lang-python">keras.layers.core.TimeDistributedDense(input_dim, output_dim, init=<span class="hljs-string">'glorot_uniform'</span>, activation=<span class="hljs-string">'linear'</span>, weights=<span class="hljs-keyword">None</span> \
+W_regularizer=<span class="hljs-keyword">None</span>, b_regularizer=<span class="hljs-keyword">None</span>, W_constraint=<span class="hljs-keyword">None</span>, b_constraint=<span class="hljs-keyword">None</span>)
+</code></pre>
+<p>Fully-connected layer distributed over the time dimension. Useful after a recurrent network set to <code>return_sequences=True</code>.</p>
+<ul>
+<li><p><strong>Input shape</strong>: 3D tensor with shape: <code>(nb_samples, nb_timesteps, input_dim)</code>.</p>
+</li>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li><strong>input_dim</strong>: int &gt;= 0. </li>
+<li><strong>output_dim</strong>: int &gt;= 0. </li>
+<li><strong>init</strong>: name of initialization function for the weights of the layer (see: <a href="https://ustczen.gitbooks.io/keras/content/initializations.html">initializations</a>), or alternatively, Theano function to use for weights initialization. This parameter is only relevant if you don't pass a <code>weights</code> argument.</li>
+<li><strong>activation</strong>: name of activation function to use (see: <a href="https://ustczen.gitbooks.io/keras/content/activations.html">activations</a>), or alternatively, elementwise Theano function. If you don't specify anything, no activation is applied (ie. "linear" activation: a(x) = x).</li>
+<li><strong>weights</strong>: list of numpy arrays to set as initial weights. The list should have 1 element, of shape <code>(input_dim, output_dim)</code>.</li>
+<li><strong>W_regularizer</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/regularizers.html">regularizers</a> module (eg. L1 or L2 regularization), applied to the main weights matrix.</li>
+<li><strong>b_regularizer</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/regularizers.html">regularizers</a> module, applied to the bias.</li>
+<li><strong>W_constraint</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/constraints.html">constraints</a> module (eg. maxnorm, nonneg), applied to the main weights matrix.</li>
+<li><strong>b_constraint</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/constraints.html">constraints</a> module, applied to the bias.</li>
+</ul>
+</li>
+<li><p><strong>Example</strong>:</p>
+<pre><code class="lang-python"><span class="hljs-comment"># input shape: (nb_samples, nb_timesteps, 10)</span>
+model.add(LSTM(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>, return_sequences=<span class="hljs-keyword">True</span>)) <span class="hljs-comment"># output shape: (nb_samples, nb_timesteps, 5)</span>
+model.add(TimeDistributedDense(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)) <span class="hljs-comment"># output shape: (nb_samples, nb_timesteps, 10)</span>
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="autoencoder">AutoEncoder</h2>
+<pre><code class="lang-python">keras.layers.core.AutoEncoder(encoder, decoder, output_reconstruction=<span class="hljs-keyword">True</span>, tie_weights=<span class="hljs-keyword">False</span>, weights=<span class="hljs-keyword">None</span>):
+</code></pre>
+<p>A customizable autoencoder model. If <code>output_reconstruction = True</code> then dim(input) = dim(output) else dim(output) = dim(hidden)</p>
+<ul>
+<li><p><strong>Input shape</strong>: The layer shape is defined by the encoder definitions</p>
+</li>
+<li><p><strong>Output shape</strong>: The layer shape is defined by the decoder definitions</p>
+</li>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li><p><strong>encoder</strong>: A <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html">layer</a> or <a href="https://ustczen.gitbooks.io/keras/content/layers/containers.html">layer container</a>.</p>
+</li>
+<li><p><strong>decoder</strong>: A <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html">layer</a> or <a href="https://ustczen.gitbooks.io/keras/content/layers/containers.html">layer container</a>.</p>
+</li>
+<li><p><strong>output_reconstruction</strong>: If this is False the when .predict() is called the output is the deepest hidden layer's activation. Otherwise the output of the final decoder layer is presented. Be sure your validation data confirms to this logic if you decide to use any.</p>
+</li>
+<li><p><strong>tie_weights</strong>: If True then the encoder bias is tied to the decoder bias. <strong>Note</strong>: This required the encoder layer corresponding to this decoder layer to be of the same time, eg: Dense:Dense</p>
+</li>
+<li><p><strong>weights</strong>: list of numpy arrays to set as initial weights. The list should have 1 element, of shape <code>(input_dim, output_dim)</code>.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Example</strong>:
+```python
+from keras.layers import containers</p>
+</li>
+</ul>
+<h1 id="input-shape-nb-samples-32">input shape: (nb_samples, 32)</h1>
+<p>encoder = containers.Sequential([Dense(32, 16), Dense(16, 8)])
+decoder = containers.Sequential([Dense(8, 16), Dense(16, 32)])
+autoencoder.add(AutoEncoder(encoder=encoder, decoder=decoder, output_reconstruction=False, tie_weights=True))</p>
+<pre><code>
+---
+
+## DenoisingAutoEncoder
+```python
+keras.layers.core.AutoEncoder(encoder, decoder, output_reconstruction=True, tie_weights=False, weights=None, corruption_level=0.3):
+</code></pre><p>A denoising autoencoder model that inherits the base features from autoencoder.
+Since this layer uses similar logic to Dropout it cannot be the first layer in a pipeline.</p>
+<ul>
+<li><p><strong>Input shape</strong>: The layer shape is defined by the encoder definitions</p>
+</li>
+<li><p><strong>Output shape</strong>: The layer shape is defined by the decoder definitions</p>
+</li>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li><p><strong>encoder</strong>: A <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html">layer</a> or <a href="https://ustczen.gitbooks.io/keras/content/layers/containers.html">layer container</a>.</p>
+</li>
+<li><p><strong>decoder</strong>: A <a href="https://ustczen.gitbooks.io/keras/content/layers/core.html">layer</a> or <a href="https://ustczen.gitbooks.io/keras/content/layers/containers.html">layer container</a>.</p>
+</li>
+<li><p><strong>output_reconstruction</strong>: If this is False the when .predict() is called the output is the deepest hidden layer's activation. Otherwise the output of the final decoder layer is presented. Be sure your validation data confirms to this logic if you decide to use any.</p>
+</li>
+<li><p><strong>tie_weights</strong>: If True then the encoder bias is tied to the decoder bias. <strong>Note</strong>: This required the encoder layer corresponding to this decoder layer to be of the same time, eg: Dense:Dense</p>
+</li>
+<li><p><strong>weights</strong>: list of numpy arrays to set as initial weights. The list should have 1 element, of shape <code>(input_dim, output_dim)</code>.</p>
+</li>
+<li><p><strong>corruption_level</strong>: the amount of binomial noise added to the input layer of the model.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Example</strong>:</p>
+<pre><code class="lang-python"><span class="hljs-comment"># input shape: (nb_samples, 32)</span>
+autoencoder.add(Dense(<span class="hljs-number">32</span>, <span class="hljs-number">32</span>))
+autoencoder.add(DenoisingAutoEncoder(encoder=Dense(<span class="hljs-number">32</span>, <span class="hljs-number">16</span>),
+                                   decoder=Dense(<span class="hljs-number">16</span>, <span class="hljs-number">32</span>),
+                                   output_reconstruction=<span class="hljs-keyword">False</span>, tie_weights=<span class="hljs-keyword">True</span>,
+                                   corruption_level=<span class="hljs-number">0.3</span>))
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="activation">Activation</h2>
+<pre><code class="lang-python">keras.layers.core.Activation(activation)
+</code></pre>
+<p>Apply an activation function to the input. </p>
+<ul>
+<li><p><strong>Input shape</strong>: This layer does not assume a specific input shape. As a result, it cannot be used as the first layer in a model.</p>
+</li>
+<li><p><strong>Output shape</strong>: Same as input.</p>
+</li>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li><strong>activation</strong>: name of activation function to use (see: <a href="https://ustczen.gitbooks.io/keras/content/activations.html">activations</a>), or alternatively, elementwise Theano function.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="dropout">Dropout</h2>
+<pre><code class="lang-python">keras.layers.core.Dropout(p)
+</code></pre>
+<p>Apply dropout to the input. Dropout consists in randomly setting a fraction <code>p</code> of input units to 0 at each update during training time, which helps prevent overfitting. Reference: <a href="http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf" target="_blank">Dropout: A Simple Way to Prevent Neural Networks from Overfitting</a></p>
+<ul>
+<li><p><strong>Input shape</strong>: This layer does not assume a specific input shape. </p>
+</li>
+<li><p><strong>Output shape</strong>: Same as input.</p>
+</li>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li><strong>p</strong>: float (0 &lt;= p &lt; 1). Fraction of the input that gets dropped out at training time. </li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="reshape">Reshape</h2>
+<pre><code class="lang-python">keras.layers.core.Reshape(*dims)
+</code></pre>
+<p>Reshape the input to a new shape containing the same number of units. </p>
+<ul>
+<li><p><strong>Input shape</strong>: This layer does not assume a specific input shape. </p>
+</li>
+<li><p><strong>Output shape</strong>: <code>(nb_samples, *dims)</code>.</p>
+</li>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li>*dims: integers. Dimensions of the new shape.</li>
+</ul>
+</li>
+<li><p><strong>Example</strong>:</p>
+<pre><code class="lang-python"><span class="hljs-comment"># input shape: (nb_samples, 10)</span>
+model.add(Dense(<span class="hljs-number">10</span>, <span class="hljs-number">100</span>)) <span class="hljs-comment"># output shape: (nb_samples, 100)</span>
+model.add(Reshape(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>))  <span class="hljs-comment"># output shape: (nb_samples, 10, 10)</span>
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="flatten">Flatten</h2>
+<pre><code class="lang-python">keras.layers.core.Flatten()
+</code></pre>
+<p>Convert a nD input to 1D. </p>
+<ul>
+<li><p><strong>Input shape</strong>: (nb_samples, *). This layer cannot be used as the first layer in a model.</p>
+</li>
+<li><p><strong>Output shape</strong>: <code>(nb_samples, nb_input_units)</code>.</p>
+</li>
+</ul>
+<hr>
+<h2 id="repeatvector">RepeatVector</h2>
+<pre><code class="lang-python">keras.layers.core.RepeatVector(n)
+</code></pre>
+<p>Repeat the 1D input n times. Dimensions of input are assumed to be (nb_samples, dim). Output will have the shape (nb_samples, n, dim).</p>
+<ul>
+<li><p><strong>Input shape</strong>: This layer does not assume a specific input shape. This layer cannot be used as the first layer in a model.</p>
+</li>
+<li><p><strong>Output shape</strong>: <code>(nb_samples, n, input_dims)</code>.</p>
+</li>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li><strong>n</strong>: int. </li>
+</ul>
+</li>
+<li><p><strong>Example</strong>:</p>
+</li>
+</ul>
+<hr>
+<h2 id="maxoutdense">MaxoutDense</h2>
+<pre><code class="lang-python">keras.layers.core.MaxoutDense(input_dim, output_dim, nb_feature=<span class="hljs-number">4</span>, init=<span class="hljs-string">'glorot_uniform'</span>, weights=<span class="hljs-keyword">None</span>, \
+        W_regularizer=<span class="hljs-keyword">None</span>, b_regularizer=<span class="hljs-keyword">None</span>, W_constraint=<span class="hljs-keyword">None</span>, b_constraint=<span class="hljs-keyword">None</span>)
+</code></pre>
+<p>A dense maxout layer. A <code>MaxoutDense</code> layer takes the element-wise maximum of <code>nb_feature</code> <code>Dense(input_dim, output_dim)</code> linear layers. This allows the layer to learn a convex, piecewise linear activation function over the inputs. See <a href="http://arxiv.org/pdf/1302.4389.pdf" target="_blank">this paper</a> for more details. Note that this is a <em>linear</em> layer -- if you wish to apply activation function (you shouldn't need to -- they are universal function approximators), an <code>Activation</code> layer must be added after.</p>
+<ul>
+<li><p><strong>Input shape</strong>: 2D tensor with shape: <code>(nb_samples, input_dim)</code>.</p>
+</li>
+<li><p><strong>Output shape</strong>: 2D tensor with shape: <code>(nb_samples, output_dim)</code>.</p>
+</li>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li><strong>input_dim</strong>: int &gt;= 0. </li>
+<li><strong>output_dim</strong>: int &gt;= 0. </li>
+<li><strong>nb_feature</strong>: int &gt;= 0. the number of features to create for the maxout. This is equivalent to the number of piecewise elements to be allowed for the activation function. </li>
+<li><strong>init</strong>: name of initialization function for the weights of the layer (see: <a href="https://ustczen.gitbooks.io/keras/content/initializations.html">initializations</a>), or alternatively, Theano function to use for weights initialization. This parameter is only relevant if you don't pass a <code>weights</code> argument.</li>
+<li><strong>weights</strong>: list of numpy arrays to set as initial weights. The list should have 1 element, of shape <code>(input_dim, output_dim)</code>.</li>
+<li><strong>W_regularizer</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/regularizers.html">regularizers</a> module (eg. L1 or L2 regularization), applied to the main weights matrix.</li>
+<li><strong>b_regularizer</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/regularizers.html">regularizers</a> module, applied to the bias.</li>
+<li><strong>W_constraint</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/constraints.html">constraints</a> module (eg. maxnorm, nonneg), applied to the main weights matrix.</li>
+<li><strong>b_constraint</strong>: instance of the <a href="https://ustczen.gitbooks.io/keras/content/constraints.html">constraints</a> module, applied to the bias.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-python"><span class="hljs-comment"># input shape: (nb_samples, 10)</span>
+model.add(Dense(<span class="hljs-number">10</span>, <span class="hljs-number">100</span>)) <span class="hljs-comment"># output shape: (nb_samples, 100)</span>
+model.add(MaxoutDense(<span class="hljs-number">100</span>, <span class="hljs-number">100</span>, nb_feature=<span class="hljs-number">10</span>)) <span class="hljs-comment"># output shape: (nb_samples, 100)</span>
+model.add(RepeatVector(<span class="hljs-number">2</span>))  <span class="hljs-comment"># output shape: (nb_samples, 2, 10)</span>
+</code></pre>
+<h2 id="merge">Merge</h2>
+<pre><code class="lang-python">keras.layers.core.Merge(models, mode=<span class="hljs-string">'sum'</span>)
+</code></pre>
+<p>Merge the output of a list of models into a single tensor, following one of two modes: <code>sum</code> or <code>concat</code>. </p>
+<ul>
+<li><p><strong>Arguments</strong>:</p>
+<ul>
+<li><strong>models</strong>: List of <code>Sequential</code> models.</li>
+<li><strong>mode</strong>: String, one of <code>{'sum', 'concat'}</code>. <code>sum</code> will simply sum the outputs of the models (therefore all models should have an output with the same shape). <code>concat</code> will concatenate the outputs along the last dimension (therefore all models should have an output that only differ along the last dimension). </li>
+</ul>
+</li>
+<li><p><strong>Example</strong>:</p>
+</li>
+</ul>
+<pre><code class="lang-python">left = Sequential()
+left.add(Dense(<span class="hljs-number">784</span>, <span class="hljs-number">50</span>))
+left.add(Activation(<span class="hljs-string">'relu'</span>))
+
+right = Sequential()
+right.add(Dense(<span class="hljs-number">784</span>, <span class="hljs-number">50</span>))
+right.add(Activation(<span class="hljs-string">'relu'</span>))
+
+model = Sequential()
+model.add(Merge([left, right], mode=<span class="hljs-string">'sum'</span>))
+
+model.add(Dense(<span class="hljs-number">50</span>, <span class="hljs-number">10</span>))
+model.add(Activation(<span class="hljs-string">'softmax'</span>))
+
+model.compile(loss=<span class="hljs-string">'categorical_crossentropy'</span>, optimizer=<span class="hljs-string">'rmsprop'</span>)
+
+model.fit([X_train, X_train], Y_train, batch_size=<span class="hljs-number">128</span>, nb_epoch=<span class="hljs-number">20</span>, validation_data=([X_test, X_test], Y_test))
+</code></pre>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="https://ustczen.gitbooks.io/keras/content/datasets.html" class="navigation navigation-prev " aria-label="Previous page: Datasets"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="https://ustczen.gitbooks.io/keras/content/layers/convolutional.html" class="navigation navigation-next " aria-label="Next page: Layers, Convolutional Layers" style="margin-right: 0px;"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script async="" src="./Layers, Core Layers _ keras_files/analytics.js"></script><script src="./Layers, Core Layers _ keras_files/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    
+<div><script style="display: none;" type="application/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57505611-7', 'auto', {name: 'microcdn'});
+  ga('microcdn.send', 'pageview');
+
+  var _cdn_prev_loc = window.location.pathname;
+  window.setInterval(function () {
+    if (window.location.pathname !== _cdn_prev_loc) {
+      _cdn_prev_loc = window.location.pathname;
+      ga('microcdn.send', 'pageview');
+    }
+  }, 100);
+
+</script></div>
+
+    
+
+</body></html>

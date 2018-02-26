@@ -1,0 +1,159 @@
+.TzItemPage ul, .TzPortfolioItemPage ul{
+    margin: 0 !important;
+}
+section#tz-main #tz-content{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    position: relative;
+}
+#sidebar-left{
+    background: #3D3D3B;
+}
+#sidebar-right{
+    background: #F4F4F4;
+}
+
+div.sidebar-nav{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    position: relative;
+}
+.single #tz-main #sidebar-right div.sidebar-nav {
+
+    padding-top: 45px;
+}
+.TzItemPage .TzRelated ul{
+    margin: 0 0 0 15px !important;
+}
+.tz_portfolio_user .AuthorAvatar img{
+    border:  0 !important;
+}
+.FacebookButton,
+.TwitterButton,
+.GooglePlusOneButton,
+.PinterestButton,
+.TzLikeQuestion,
+.LinkedinButton{
+    float: left !important;
+}
+
+.TzArticleTag{
+    color: #C3C3C3;
+}
+.TzArticleTag a:first-child{
+    padding-left: 0;
+}
+.TzArticleTag a{
+    padding-left: 5px;
+}
+.tz_portfolio_like_button{
+    margin-bottom: 28px;
+}
+.tz_portfolio_user {
+
+    color: #7E7E7E;
+    margin-bottom: 27px;
+    padding: 5px 0 10px;
+}
+
+/*comment*/
+
+.TzCommentTitle{
+    font-family: 'bebas_neueregular';
+    font-size: 24px;
+    line-height: 25px;
+    color: #414952;
+    text-transform: uppercase;
+
+}
+.tz_portfolio_comment ol,
+.tz_portfolio_comment ul{
+    list-style: none;
+    margin: 0;
+    padding: 31px 0 0;
+}
+.tz_portfolio_comment .comment-author{
+    display: inline-block;
+    float: left;
+    margin-top: 8px;
+
+}
+.tz_portfolio_comment .comment-author img{
+    width: 70px;
+    height: 70px;
+}
+.tz_portfolio_comment .comment-content{
+    padding-left: 100px;
+}
+.tz_portfolio_comment cite.fn{
+    display: block;
+    font-family: 'open_sanssemibold';
+    font-size: 17px;
+    line-height: 25px;
+    color: #3e3f3f;
+}
+.tz_portfolio_comment cite.fn span{
+    font-size: 12px;
+}
+.tz_portfolio_comment .comments-datetime{
+    font-style: italic;
+}
+.tz_portfolio_comment .comments-datetime,
+.tz_portfolio_comment .comment-edit-link,
+.tz_portfolio_comment .comment-reply-link{
+
+    font-family: 'OpenSansItalic';
+    font-size: 17px;
+    line-height: 25px;
+    color: #3e3f3f;
+
+}
+.comment-content p{
+    font-family: 'OpenSansRegular';
+    font-size: 14px;
+    line-height: 22px;
+    color: #3b3b44;
+    margin-bottom: 52px !important;
+}
+ol.children{
+    padding-left: 100px !important;
+    padding-top: 0px !important;
+}
+#reply-title{
+ font-size: 19px !important;
+    line-height: 25px !important;
+    color: #3b3b44;
+}
+.tz_portfolio_comment input{
+    background: #eaeaea !important;
+    border: none !important;
+    color: #3e3f3f !important;
+    font-family: 'OpenSansRegular';
+    font-size: 14px;
+    line-height: 30px;
+    width: 90% !important;
+    height: 40px !important;
+}
+.tz_portfolio_comment textarea{
+    background: #eaeaea !important;
+    border: none !important;
+    color: #3e3f3f !important;
+    font-family: 'OpenSansRegular';
+    font-size: 14px;
+    line-height: 30px;
+
+}
+.tz_portfolio_comment #commentform p{
+    margin-bottom: 21px !important;
+}
+.tz_portfolio_comment #commentform #submit{
+    background: #3498DB !important;
+    width: auto !important;
+    padding: 10px 17px !important;
+    box-shadow: 0px -2px 2px 0px rgba(0,0,0,0.27) inset;
+    color: white !important;
+    font-family: 'open_sanssemibold' !important;
+    font-size: 14px;
+    line-height: 34px;
+    border-radius: 3px !important;
+}

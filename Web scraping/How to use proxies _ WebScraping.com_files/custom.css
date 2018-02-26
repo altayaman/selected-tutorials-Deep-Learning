@@ -1,0 +1,101 @@
+/* custom additions to bootstrap */
+
+body {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.7;
+}
+
+a {
+    text-decoration: none;
+	color: #23527c;
+}
+
+a:hover {
+    text-decoration: underline;
+	color: #23527c;
+}
+
+
+th {
+    padding: 10px 10px 10px 10px;
+    text-align: right;
+}
+
+
+pre {
+    margin: 20px 0px 20px 0px;
+}
+
+.left {
+    text-align: left;
+}.
+.right {
+    text-align: right;
+}
+.center {
+    text-align: center;
+}
+
+
+img.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo {
+    float: left;
+    padding-top: 6.5px;
+    margin-right: 20px;
+}
+
+.clear
+{
+	clear: both;
+}
+
+
+.heading {
+    font-size: 32px;
+}
+.heading a {
+    color: #000;
+}
+.subheading {
+    font-size: 20px;
+    margin: 12px;
+}
+.subheading a {
+    color: black;
+}
+
+
+.help-block {
+    font-size: 14px;
+}
+
+/* search results */
+.web_result {
+    margin-bottom: 20px;    
+}
+.web_result a.url {
+	text-decoration: underline;
+	font-size: 16px;
+}
+.web_result .content {
+	width: 500px;
+}
+.web_result div.url {
+	color: #093;
+	font-size: 14px;
+}
+
+
+/* web2py formatting */
+td.w2p_fw {padding-bottom:1px}
+td.w2p_fl,td.w2p_fw,td.w2p_fc {vertical-align:top}
+td.w2p_fl {text-align:left}
+td.w2p_fl, td.w2p_fw {padding-right:7px}
+td.w2p_fl,td.w2p_fc {padding-top:4px}
+label { display: inline }

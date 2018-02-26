@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)https://iksinc.wordpress.com/tag/lstm/ -->
+<html lang="en" class="js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script defer="" src="./LSTM – From Data to Decisions_files/beacon.js"></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>LSTM – From Data to Decisions</title>
+<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="alternate" type="application/rss+xml" title="From Data to Decisions » Feed" href="https://iksinc.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="From Data to Decisions » Comments Feed" href="https://iksinc.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="From Data to Decisions » LSTM Tag Feed" href="https://iksinc.wordpress.com/tag/lstm/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1488818651h&ver=4.7.4"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./LSTM – From Data to Decisions_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="all-css-0-1" href="./LSTM – From Data to Decisions_files/saved_resource" type="text/css" media="all">
+<link rel="stylesheet" id="twentysixteen-fonts-css" href="./LSTM – From Data to Decisions_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="all-css-2-1" href="./LSTM – From Data to Decisions_files/saved_resource(1)" type="text/css" media="all">
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='https://s0.wp.com/wp-content/themes/pub/twentysixteen/css/ie.css?m=1448353951h&#038;ver=20151123' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='https://s0.wp.com/wp-content/themes/pub/twentysixteen/css/ie8.css?m=1448353951h&#038;ver=20151123' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='https://s0.wp.com/wp-content/themes/pub/twentysixteen/css/ie7.css?m=1448353951h&#038;ver=20151123' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="all-css-8-1" href="./LSTM – From Data to Decisions_files/saved_resource(2)" type="text/css" media="all">
+<script type="text/javascript" src="./LSTM – From Data to Decisions_files/saved_resource(3)"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://iksinc.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress.com">
+<link rel="shortcut icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="https://s0.wp.com/i/webclip.png">
+<link rel="openid.server" href="https://iksinc.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://iksinc.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://iksinc.wordpress.com/osd.xml" title="From Data to Decisions">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="From Data to Decisions"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Integrated Knowledge Solutions"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://iksinc.wordpress.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="Posts about LSTM on From Data to Decisions">
+<meta name="description" content="Posts about LSTM written by Krishan">
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+<script charset="utf-8" src="./LSTM – From Data to Decisions_files/rate.php"></script><style type="text/css"></style><style type="text/css" id="pd_popup_holder_style_6964578_post_622">#pd_popup_holder_6964578_post_622 { position:absolute; display:none; width:350px; height:auto; top:0px; left:0px; z-index:10000; border:solid 1px #CCC; background-color:white; padding:0px 15px;font-family:Arial,Sans;box-shadow: -10px 10px 20px rgba(0, 0, 0, .5);-webkit-box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);-moz-box-shadow: 0px 0px 6px rgba(0, 0, 0, .25); }</style><script type="text/javascript" async="" src="./LSTM – From Data to Decisions_files/saved_resource(4)"></script><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./LSTM – From Data to Decisions_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./LSTM – From Data to Decisions_files/services.css"><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+
+<body class="archive tag tag-lstm tag-5183432 mp6 customizer-styles-applied hfeed highlander-enabled highlander-light">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="https://iksinc.wordpress.com/tag/lstm/#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="https://iksinc.wordpress.com/" rel="home">From Data to Decisions</a></p>
+											<p class="site-description">Integrated Knowledge Solutions</p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-menu3-container"><ul id="menu-menu3" class="primary-menu"><li id="menu-item-755" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-755"><a href="https://iksinc.wordpress.com/">Home</a></li>
+<li id="menu-item-756" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-756"><a href="https://iksinc.wordpress.com/home/">About Integrated Knowledge Solutions</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			<header class="page-header">
+				<h1 class="page-title">Tag: LSTM</h1>			</header><!-- .page-header -->
+
+			
+<article id="post-622" class="post-622 post type-post status-publish format-standard hentry category-machine-learning-2 category-nlp tag-bollywood tag-char-rnn tag-feedforward-neural-networks tag-hindi-in-roman tag-language-modeling tag-lstm tag-one-hot-coding tag-recurrent-neural-networks tag-rnn-package tag-softmax">
+	<header class="entry-header">
+		
+		<h2 class="entry-title"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/" rel="bookmark">Bollywood Lyrics via Recurrent Neural&nbsp;Networks</a></h2>	</header><!-- .entry-header -->
+
+	
+	
+	<div class="entry-content">
+		<div class="pd-rating" id="pd_rating_holder_6964578_post_622" style="display: inline-block;"><div class="rating-icons" id="pd_rate_6964578_post_622" style="float:left;"><div class="rating-star-icon" onmouseout="PDRTJS_6964578_post_622.rebuild();" onclick="PDRTJS_6964578_post_622.rate(1);" onmouseover="PDRTJS_6964578_post_622.hover(1);" id="PDRTJS_6964578_post_622_stars_1" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml@2x.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_6964578_post_622.rebuild();" onclick="PDRTJS_6964578_post_622.rate(2);" onmouseover="PDRTJS_6964578_post_622.hover(2);" id="PDRTJS_6964578_post_622_stars_2" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml@2x.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_6964578_post_622.rebuild();" onclick="PDRTJS_6964578_post_622.rate(3);" onmouseover="PDRTJS_6964578_post_622.hover(3);" id="PDRTJS_6964578_post_622_stars_3" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml@2x.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_6964578_post_622.rebuild();" onclick="PDRTJS_6964578_post_622.rate(4);" onmouseover="PDRTJS_6964578_post_622.hover(4);" id="PDRTJS_6964578_post_622_stars_4" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml@2x.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_6964578_post_622.rebuild();" onclick="PDRTJS_6964578_post_622.rate(5);" onmouseover="PDRTJS_6964578_post_622.hover(5);" id="PDRTJS_6964578_post_622_stars_5" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(https://polldaddy.com/images/ratings/star-yellow-sml@2x.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div></div><span style="float:left;">&nbsp;</span><div id="rating_info_6964578_post_622" style="display:block;float:left;background:url(https://polldaddy.com/images/ratings/info@2x.png) no-repeat 3px 2px;width:16px;height:16px;cursor:pointer; background-size:12px 12px; " onclick="javascript:PDRTJS_6964578_post_622.togglePopup();return false;"><span style="display:none;">i</span></div><div class="pd_popup_holder" id="pd_popup_holder_6964578_post_622">&nbsp;</div><div class="rating-msg" id="PDRTJS_6964578_post_622_msg" style="float:left; padding-left: 5px; text-align: left; font:normal normal /16px ; color: #;">3 Votes</div><p style="padding: 0px; margin: 0px; clear: both;"></p></div><br><p>Having recently read about recurrent neural networks (RNNs) and an <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">excellent blog post</a> about using recurrent neural networks to emulate Shakespeare’s writing, I thought it would be a kind of cool to see if a recurrent neural network can be trained to create Bollywood songs. For those unfamiliar with Bollywood, it refers to the Hindi movie industry based in Mumbai, formerly known as Bombay, in India. Bollywood churns out around 1,000 movies per year, thus making it the biggest center of movie production in the world. Bollywood movies are known for songs and dances. While the present day Bollywood movies tend to have only two or three songs, there was a time when eight to ten songs in a movie was routine. Thus there are hundreds of thousands of Hindi movie songs and most of them can be found on Youtube. Since interest in these songs is high not only in India but across the globe, there are websites where one can find the lyrics of these movie songs in Hindi as well as in Roman Hindi, Hindi written using Roman alphabet, and also in many other languages. Figure 1 gives an example of lyrics of a Bollywood movie song written both in Devanagari script and in Roman script. Thus, creating a corpus of Hindi songs is not a difficult task.&nbsp; So this blog post is about training a recurrent neural network with Bollywood songs inputted in Roman Hindi and the results obtained. Before I get into details, let me provide a brief introduction to recurrent neural networks.</p>
+<figure data-shortcode="caption" id="attachment_647" style="width: 498px" class="wp-caption aligncenter"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/11315_tumse_milana_baate_karna/#main" rel="attachment wp-att-647"><img data-attachment-id="647" data-permalink="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/11315_tumse_milana_baate_karna/" data-orig-file="https://iksinc.files.wordpress.com/2016/11/11315_tumse_milana_baate_karna1.png?w=840" data-orig-size="498,165" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="11315_tumse_milana_baate_karna" data-image-description="" data-medium-file="https://iksinc.files.wordpress.com/2016/11/11315_tumse_milana_baate_karna1.png?w=840?w=300" data-large-file="https://iksinc.files.wordpress.com/2016/11/11315_tumse_milana_baate_karna1.png?w=840?w=498" class="wp-image-647 size-full" src="./LSTM – From Data to Decisions_files/11315_tumse_milana_baate_karna1.png" alt="11315_tumse_milana_baate_karna" srcset="https://iksinc.files.wordpress.com/2016/11/11315_tumse_milana_baate_karna1.png 498w, https://iksinc.files.wordpress.com/2016/11/11315_tumse_milana_baate_karna1.png?w=150 150w, https://iksinc.files.wordpress.com/2016/11/11315_tumse_milana_baate_karna1.png?w=300 300w" sizes="(max-width: 498px) 85vw, 498px"></a><figcaption class="wp-caption-text">Fig. 1: A Bollywood song sample in Roman and Devanagri scripts</figcaption></figure>
+<h3><strong>What is a Recurrent Neural Network?</strong></h3>
+<p>When we think of feedforward neural networks, we typically do not associate any memory capabilities with such networks; this is because the output of such networks at any given instant is 100% dependent upon input at that instant and the connection weights. However, there are numerous situations where we want the network to remember its recent history of inputs and respond accordingly. Such networks are known as recurrent neural networks. To see how information about previous inputs to a neural network can be retained, let us consider the feedforward neural network consisting of three input and two hidden layer neurons as shown in Figure 2.</p>
+<figure data-shortcode="caption" id="attachment_645" style="width: 310px" class="wp-caption aligncenter"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-11-16-at-7-37-50-pm/#main" rel="attachment wp-att-645"><img data-attachment-id="645" data-permalink="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-11-16-at-7-37-50-pm/" data-orig-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-16-at-7-37-50-pm.png" data-orig-size="492,261" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-11-16-at-7-37-50-pm" data-image-description="" data-medium-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-16-at-7-37-50-pm.png?w=300&amp;h=159" data-large-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-16-at-7-37-50-pm.png?w=492" class="wp-image-645 size-medium" src="./LSTM – From Data to Decisions_files/screen-shot-2016-11-16-at-7-37-50-pm.png" alt="screen-shot-2016-11-16-at-7-37-50-pm" width="300" height="159" srcset="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-16-at-7-37-50-pm.png?w=300&amp;h=159 300w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-16-at-7-37-50-pm.png?w=150&amp;h=80 150w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-16-at-7-37-50-pm.png 492w" sizes="(max-width: 300px) 85vw, 300px"></a><figcaption class="wp-caption-text">Fig. 2: A feedforward neural network with three inputs and two hidden layer neurons</figcaption></figure>
+<p>Let <em>WI</em> be the weight matrix which represents the connection weights between the three input neurons and the two hidden neurons H1 and H2. Suppose the weight matrix is given by the following values.</p>
+<p><em>WI</em> =<br>
+-0.197705&nbsp; -0.703846<br>
+-0.232759&nbsp; -0.084652<br>
+0.462215&nbsp; -0.858601</p>
+<p>Assume the input neurons are fed the values as shown at time instant <em>t</em>. With sigmoidal activation function for hidden neurons, H1 and H2 will produce the following output at time instant <em>t</em>. (Bias term is ignored in all calculations)</p>
+<p>H1 = 0.57855; H2 =&nbsp;&nbsp;0.22663</p>
+<p>Let <em>WO</em> = [0.30716 &nbsp; 0.50222]<sup>T</sup> represent the connection weights between the hidden layer neurons and the output later. Then the output neuron with sigmoidal activation yields 0.74712 as the network output at time instant <em>t</em>.</p>
+<p>Now let us make a change in the configuration of the network of Figure 2 to obtain the network of Figure 3. The change consists of taking the outputs of the hidden neurons and <em>feeding them back via after a unit time delay</em>. Let the weights of the hidden layer to hidden layer feedback links be given by matrix <em>WH</em>. In this case it is a 2×2 matrix. Let this matrix be</p>
+<p><em>WH</em> =<br>
+-0.677205&nbsp; -0.588996<br>
+-0.969968&nbsp; -0.060021</p>
+<figure data-shortcode="caption" id="attachment_672" style="width: 310px" class="wp-caption aligncenter"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-11-30-at-9-28-35-pm/#main" rel="attachment wp-att-672"><img data-attachment-id="672" data-permalink="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-11-30-at-9-28-35-pm/" data-orig-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-11-30-at-9-28-35-pm.png" data-orig-size="779,398" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-11-30-at-9-28-35-pm" data-image-description="" data-medium-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-11-30-at-9-28-35-pm.png?w=300&amp;h=153" data-large-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-11-30-at-9-28-35-pm.png?w=779" class="wp-image-672 size-medium" src="./LSTM – From Data to Decisions_files/screen-shot-2016-11-30-at-9-28-35-pm.png" alt="screen-shot-2016-11-30-at-9-28-35-pm" width="300" height="153" srcset="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-11-30-at-9-28-35-pm.png?w=300&amp;h=153 300w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-11-30-at-9-28-35-pm.png?w=600&amp;h=306 600w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-11-30-at-9-28-35-pm.png?w=150&amp;h=77 150w" sizes="(max-width: 300px) 85vw, 300px"></a><figcaption class="wp-caption-text">Fig. 3: A simple recurrent neural network. Dotted lines show the recurrent connections</figcaption></figure>
+<p>Now suppose we apply the same input at next time instant, that is at time <em>t+1</em>. In this case, the hidden neurons will produce the following output: H1 = 0.44807; H2 =&nbsp; 0.14158; and the network output at time <em>t+1</em> will be 0.81161, different from the output at time <em>t</em> although it is the same input at times <em>t</em> and <em>t+1</em>. This is due to the feedback connections in the hidden layer with unit time delay. These feedback connections are called <em>recurrent</em> connections and the architecture of Figure 3 represents simple recurrent neural networks.</p>
+<p>It can be easily visualized that as newer inputs at times <em>t+2, t+3, </em>and so on are applied, the contribution of the input at time instant <em>t</em> persists in the network but it fades away slowly. This persistence of the input at time <em>t</em> over few following inputs is what gives rise to memory capability of the network. Often, the persistence of input at time <em>t </em>over successive time-steps is shown by drawing an <em>unrolled</em> representation of recurrent neural networks as shown in Figure 4. In this figure, each neural network block is similar to the feedforward network of Figure 2 and the recurrent connections of Figure 3 (shown as dotted lines) are represented by left to right arrows connecting neural network blocks. We can train such networks using the backpropagation algorithm once the training data specifies the input sequence and the corresponding output sequence.</p>
+<figure data-shortcode="caption" id="attachment_659" style="width: 850px" class="wp-caption aligncenter"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-11-20-at-7-55-15-pm/#main" rel="attachment wp-att-659"><img data-attachment-id="659" data-permalink="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-11-20-at-7-55-15-pm/" data-orig-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-20-at-7-55-15-pm.png" data-orig-size="867,275" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-11-20-at-7-55-15-pm" data-image-description="" data-medium-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-20-at-7-55-15-pm.png?w=300" data-large-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-20-at-7-55-15-pm.png?w=840" class="wp-image-659 size-large" src="./LSTM – From Data to Decisions_files/screen-shot-2016-11-20-at-7-55-15-pm.png" alt="screen-shot-2016-11-20-at-7-55-15-pm" srcset="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-20-at-7-55-15-pm.png?w=840&amp;h=267 840w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-20-at-7-55-15-pm.png?w=150&amp;h=48 150w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-20-at-7-55-15-pm.png?w=300&amp;h=95 300w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-20-at-7-55-15-pm.png?w=768&amp;h=244 768w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-20-at-7-55-15-pm.png 867w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px"></a><figcaption class="wp-caption-text">Fig. 4: Unrolled representation of a recurrent neural network</figcaption></figure>
+<p>To illustrate the use of a recurrent neural network, let us consider predicting the gray level of next pixel given the current pixel along a row in an image. Remember that gray levels have a strong correlation with successive pixel values except at discontinuities (where edges are present in an image). Thus, this prediction problem is a good candidate for using a recurrent neural network. A plot of normalized gray level values along a row taken from an image is shown in Figure 5.</p>
+<figure data-shortcode="caption" id="attachment_664" style="width: 500px" class="wp-caption aligncenter"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-11-27-at-7-44-59-pm/#main" rel="attachment wp-att-664"><img data-attachment-id="664" data-permalink="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-11-27-at-7-44-59-pm/" data-orig-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-44-59-pm.png" data-orig-size="1149,842" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-11-27-at-7-44-59-pm" data-image-description="" data-medium-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-44-59-pm.png?w=300" data-large-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-44-59-pm.png?w=840" class="wp-image-664" src="./LSTM – From Data to Decisions_files/screen-shot-2016-11-27-at-7-44-59-pm.png" alt="screen-shot-2016-11-27-at-7-44-59-pm" width="500" height="366" srcset="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-44-59-pm.png?w=500&amp;h=366 500w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-44-59-pm.png?w=1000&amp;h=732 1000w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-44-59-pm.png?w=150&amp;h=110 150w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-44-59-pm.png?w=300&amp;h=220 300w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-44-59-pm.png?w=768&amp;h=563 768w" sizes="(max-width: 500px) 85vw, 500px"></a><figcaption class="wp-caption-text">Fig. 5: A plot of gray level values along an image row</figcaption></figure>
+<p>I used this as input to the <a href="https://cran.r-project.org/web/packages/rnn/rnn.pdf"><em>rnn</em> package in <em>R</em> </a>to predict the next pixel value. The results from a run where the number of hidden neurons was set to 12 and 1200 epochs is shown in Figure 6. It is seen that the network is able to predict reasonably well except at those pixels where the gray level jumps suddenly due to an edge in the image.</p>
+<figure data-shortcode="caption" id="attachment_665" style="width: 500px" class="wp-caption aligncenter"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-11-27-at-7-47-29-pm/#main" rel="attachment wp-att-665"><img data-attachment-id="665" data-permalink="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-11-27-at-7-47-29-pm/" data-orig-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-47-29-pm.png" data-orig-size="1153,845" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-11-27-at-7-47-29-pm" data-image-description="" data-medium-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-47-29-pm.png?w=300" data-large-file="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-47-29-pm.png?w=840" class="wp-image-665" src="./LSTM – From Data to Decisions_files/screen-shot-2016-11-27-at-7-47-29-pm.png" alt="screen-shot-2016-11-27-at-7-47-29-pm" width="500" height="366" srcset="https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-47-29-pm.png?w=500&amp;h=366 500w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-47-29-pm.png?w=1000&amp;h=732 1000w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-47-29-pm.png?w=150&amp;h=110 150w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-47-29-pm.png?w=300&amp;h=220 300w, https://iksinc.files.wordpress.com/2016/11/screen-shot-2016-11-27-at-7-47-29-pm.png?w=768&amp;h=563 768w" sizes="(max-width: 500px) 85vw, 500px"></a><figcaption class="wp-caption-text">Fig. 6: Actual and predicted gray level values</figcaption></figure>
+<h3>Long Short-Term Memory (LSTM) Networks</h3>
+<p>An issue with simple RNN architecture is that it has difficulties memorising long term associations. For example, if you are interested in using RNNs for language modeling to predict next word in a sentence, its not good enough to just look at the current word. Better results are obtained by keeping track of few earlier words to build long term associations. The main source of this deficiency of RNNs not being able to learn long term associations is the vanishing gradient problem wherein the gradient magnitude either becomes too large or too small during the first or last time steps in training. To tackle the vanishing gradient problem and make the network suitable for remembering history over longer duration, LSTM model was introduced by <a href="http://deeplearning.cs.cmu.edu/pdfs/Hochreiter97_lstm.pdf">Hochreiter and Schmidhuber</a> in 1997. Since then, some changes have been incorporated in the model.</p>
+<p>The original LSTM model replaced each hidden layer neuron of RNN architecture with a <em>memory cell</em> consisting of three sigmoidal neurons, two product or multiplier units, and a linear unit with a recurrent connection of <em>fixed unit weight</em>. The recurrent connection with a fixed weight in each cell ensures that gradient values over successive time steps can move freely without being amplified or decimated. Later on, an additional sigmoidal unit was added to the cell. It was also found that using the hyperbolic tangent nonlinearity in place of the sigmoidal nonlinearity in one of the neurons led to better results. A memory cell of LSTM network as used at present is shown in Figure 7.</p>
+<figure data-shortcode="caption" id="attachment_693" style="width: 650px" class="wp-caption aligncenter"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-12-06-at-2-14-41-pm/#main" rel="attachment wp-att-693"><img data-attachment-id="693" data-permalink="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-12-06-at-2-14-41-pm/" data-orig-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-06-at-2-14-41-pm.png" data-orig-size="1031,701" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-12-06-at-2-14-41-pm" data-image-description="" data-medium-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-06-at-2-14-41-pm.png?w=300" data-large-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-06-at-2-14-41-pm.png?w=840" class="wp-image-693" src="./LSTM – From Data to Decisions_files/screen-shot-2016-12-06-at-2-14-41-pm.png" alt="screen-shot-2016-12-06-at-2-14-41-pm" width="650" height="442" srcset="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-06-at-2-14-41-pm.png?w=650&amp;h=442 650w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-06-at-2-14-41-pm.png?w=150&amp;h=102 150w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-06-at-2-14-41-pm.png?w=300&amp;h=204 300w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-06-at-2-14-41-pm.png?w=768&amp;h=522 768w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-06-at-2-14-41-pm.png?w=1024&amp;h=696 1024w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-06-at-2-14-41-pm.png 1031w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 984px) 61vw, (max-width: 1362px) 45vw, 600px"></a><figcaption class="wp-caption-text">Fig. 7: Elements of a memory cell in LSTM network architecture</figcaption></figure>
+<p>Looking at the diagram of a LTSM cell, we see lines/links of two distinct colors to represent signals at current time step <em>t</em> and previous time step <em>t-</em>1. The neuron unit with <em>tanh</em> activation function, <i>g<sub>c</sub><sup>t</sup></i>, is called the <em>input node</em>; it functions just like a hidden neuron unit in an RNN by taking the current input <strong><i>x</i></strong><i><sup>t</sup></i>&nbsp;from input layer and the output of the hidden layer cells, <strong><i>h</i></strong><i><sup>t-1</sup></i>, from previous time step. The neuron unit on immediate right to the input node is termed <em>input gate</em>. It also receives current input and previous time step output from hidden layer. The output of this unit is used to control the input reaching the linear unit with recurrent connection, <i>s<sub>c</sub><sup>t</sup></i>, shown in the center of the cell diagram. This is done by running the outputs of the input node and input gate units through a multiplier shown with symbol <em>Pi</em> in the diagram. Since the output of the input gate can range between 0 and 1, the product unit effectively modulates the input node output reaching the linear unit with the fixed recurrent connection. The unit with a constant weight recurrent connection, <i>s<sub>c</sub><sup>t</sup></i>, is referred as the <em>internal state </em>unit. Because of constant unit weight of the recurrent connection, error during training can propagate back without any attenuation thus avoiding vanishing gradient issue. Since the unit is a linear unit, its new state simply is the sum of previous state and the modulated output of the input node.</p>
+<p>The right most neuron in the diagram above, <i>o<sub>c</sub><sup>t</sup></i>, is called the <em>output gate</em>; its function is similar to the input gate except that it modulates the output of the internal state to produce the memory cell (hidden layer) output, <i>h<sub>c</sub><sup>t</sup></i>. The left most neuron in the cell diagram above is called the <em>forget gate</em>. If the output of this neuron is zero, then the recurrent connection is broken because the product unit Pi produces zero as the result. This means the internal state looses its previous state value and starts building history of inputs afresh. The forget gate was not in the original model of LSTM and was added later. This gate is useful when the present input has no relation with prior inputs, for example at the beginning of a new text paragraph while learning to predict next word.</p>
+<p>Compared to RNN architecture, LSTM has many more parameters, i.e. weights, and thus LSTM requires significantly more training examples to achieve a satisfactorily level of performance. Looking at the RNN of Figure 3, we note that without considering bias weights this configuration requires 3×2 weights for input to hidden layer, 2×1 weights for hidden to output layer, and 2×2 weights for recurrent connections in the hidden layer, giving rise to a total of 12 weights that need to be determined. On the other hand, a LSTM network with three inputs and two hidden layer cells is going to need 3×2 weights for input to input node connections, 3×2 weights for input to input gate connections, 3×2 weights for input to output gate connections, and 3×2 weights for input to forget gate connections. It will also require 4 sets of 2×2 connections to feedback memory cells outputs to respective gates of each cell. Thus, a total of 40 weights need to learned not counting the bias weights.</p>
+<p>The following equations describs the behavior of the LSTM network. All weight matrices are represented using 2 or 3 letters. For example, <em>WN</em> stands for weight matrix representing the connections from input layer to input node unit while <em>WG</em> stands for weights connecting input layer to input gate unit, and so on. <em>BN</em> and <em>BG</em> etc. stand for bias weights. The symbol <em>Φ</em><i></i> stands for hyperbolic tangent function and the sigmoidal function is represented by σ. The pointwise multiplication operations performed by the two Pi units are represented by the multiplication symbol <em>×</em>.</p>
+<p><strong><i>g</i></strong><sup><i>t</i></sup> = <em>Φ</em><i>(WN<strong>x</strong><sup>t</sup> + WNH<strong>h</strong><sup>t-1</sup> + BN</i>)<br>
+<strong><i>i</i></strong><sup><i>t</i></sup> = σ<i>(WG<strong>x</strong><sup>t</sup> + WGH<strong>h</strong><sup>t-1</sup> + BG</i>)<br>
+<strong><i>f</i></strong><sup><i>t</i></sup> = σ<i>(WF<strong>x</strong><sup>t</sup> + WFH<strong>h</strong><sup>t-1</sup> + BF</i>)<br>
+<strong><i>o</i></strong><sup><i>t</i></sup> = σ<i>(WO<strong>x</strong><sup>t</sup> + WOH<strong>h</strong><sup>t-1</sup> + BO</i>)<br>
+<strong><i>s</i></strong><sup><i>t</i></sup> = <strong><i>g</i></strong><em><sup>t</sup>×</em><strong>i</strong><em><sup>t</sup></em> + <strong><i>s</i></strong><em><sup>t-1</sup>×</em><strong><i>f</i></strong><em><sup>t</sup></em><br>
+<strong><i>h</i></strong><sup><i>t</i></sup> = <strong><i>s</i></strong><em><sup>t</sup>×</em><strong><i>o</i></strong><em><sup>t</sup></em></p>
+<h3>Modeling Bollywood Lyrics</h3>
+<p>The objective of modeling Bollywood lyrics is to be able to predict the next word in a lyric given the current word. Since neural networks are trained with numeric input, we need a representation wherein we can represent successive words of a lyric as vectors with numeric components. A popular representation for purpose is known as&nbsp;<em>one hot</em> encoding or&nbsp;<em>1-out-of-K</em> encoding using binary vectors of size&nbsp;<em>K</em> where&nbsp;<em>K</em> is the vocabulary size. For example, if the dictionary of all words appearing in our training corpus of Bollywood lyrics has only 4 words: <em>baate, karna, milna, and tumse</em>. Then these four words will be represented by vectors “1 0 0 0”, “0100”, “0010”, and “0001” respectively. Given that the vocabulary size of 50k to 100k is not unrealistic, the one hot encoding is considered inefficient. Another way to represent words is via vectors of dimensionality of few hundreds obtained using an embedding taking context into account through word co-occurrence statistics. [See my prior <a href="https://iksinc.wordpress.com/2015/04/13/words-as-vectors/">blog</a> on this]. There are two main advantages of this approach. First, the vector size is small, few hundreds versus 50k. Second, vector representation of words via embedding incorporates word meaning into representation, thus giving better results. Such a meaning is totally absent in one hot encoding.</p>
+<p>In place of modeling lyrics at word level, it is also possible to model them at character level. That is we train the neural network to predict next character given the current character of a word. Again taking the example of 4 words used above, we see that we have 13 different characters including a symbol for white space, each character can be represented by a 13-bit vector, for example character “e” will be encoded as “0010000000000.”</p>
+<p>To represent the output of the network, the output neurons use softmax function and the number of neurons is made identical to the dictionary size. This representation is used irrespective of character-based or word-based modelling.</p>
+<p>To model the Bollywood lyrics, I collected lyrics for 10,000 songs from “<a href="http://giitaayan.com/index.asp">giitaayan</a>“, an archive of Hindi songs lyrics. A small sample of downloaded lyrics is shown in Figure 8. The downloaded data was cleaned to remove names of singers and some other symbols such as numbers, parentheses, and period sign that were considered irrelevant to modelling. The final text file of lyrics is approximately 5.3MB in size. I trained the model using Karpathy’s <em><a href="https://github.com/karpathy/char-rnn">char-rnn code</a></em> which performs character level modelling. The character-level modeling for Bollywood songs is interesting because the lyrics in Roman script do not make any sense if someone is not familiar with the original language, Hindi in this case. Given that RNN/LSTM networks capture the transition relationships over the entire training sequence of characters without any meaning (except when using embedded word vector representation where some meaning from contextual information comes into play), Roman scripting of Hindi songs offers an interesting way to study how well the long and short associations are learned. There are several parameters involved in the training. I worked with three layers and rnn size was set to 300. For rest of the parameters, I used the default settings.</p>
+<figure data-shortcode="caption" id="attachment_700" style="width: 604px" class="wp-caption aligncenter"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-12-08-at-2-04-15-pm/#main" rel="attachment wp-att-700"><img data-attachment-id="700" data-permalink="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-12-08-at-2-04-15-pm/" data-orig-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-15-pm.png?w=840" data-orig-size="604,247" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-12-08-at-2-04-15-pm" data-image-description="" data-medium-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-15-pm.png?w=840?w=300" data-large-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-15-pm.png?w=840?w=604" class="wp-image-700 size-full" src="./LSTM – From Data to Decisions_files/screen-shot-2016-12-08-at-2-04-15-pm.png" alt="screen-shot-2016-12-08-at-2-04-15-pm" srcset="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-15-pm.png 604w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-15-pm.png?w=150 150w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-15-pm.png?w=300 300w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 984px) 61vw, (max-width: 1362px) 45vw, 600px"></a><figcaption class="wp-caption-text">Fig. 8: A small downloaded sample text before cleaning</figcaption></figure>
+<p>The <em>char-rnn</em> code generates a sequence of checkpoint files. These checkpoint files can be used to generate text, lyrics in our case, as the network proceeds with learning. Generating text file with any checkpoint file requires a short intial text string, called <em>primetext</em>, in <em>char-rnn</em>. A selected sampling of generated lyrics is shown in Figure 9. The order of these selected samplings is from early checkpoints to later checkpoints to see how well more iterations improve the resulting text. The highlighted text in blue in Figure 9 shows those segments that could be in a Bollywood lyric. Also, it is to be seen that the network is able to even generate two rhiming lines in a lyric.</p>
+<figure data-shortcode="caption" id="attachment_701" style="width: 850px" class="wp-caption aligncenter"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-12-08-at-2-04-40-pm/#main" rel="attachment wp-att-701"><img data-attachment-id="701" data-permalink="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/screen-shot-2016-12-08-at-2-04-40-pm/" data-orig-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-40-pm.png" data-orig-size="1055,995" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-12-08-at-2-04-40-pm" data-image-description="" data-medium-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-40-pm.png?w=300" data-large-file="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-40-pm.png?w=840" class="wp-image-701 size-large" src="./LSTM – From Data to Decisions_files/screen-shot-2016-12-08-at-2-04-40-pm.png" alt="screen-shot-2016-12-08-at-2-04-40-pm" srcset="https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-40-pm.png?w=840&amp;h=792 840w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-40-pm.png?w=150&amp;h=141 150w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-40-pm.png?w=300&amp;h=283 300w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-40-pm.png?w=768&amp;h=724 768w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-40-pm.png?w=1024&amp;h=966 1024w, https://iksinc.files.wordpress.com/2016/12/screen-shot-2016-12-08-at-2-04-40-pm.png 1055w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px"></a><figcaption class="wp-caption-text">Fig. 9: A selected sampling of generated lyrics by a trained LSTM network at different stages of training</figcaption></figure>
+<p>Although I could have fine tuned my network by exploring with different parameter settings, I am happy with the results to conclude that RNN/LSTM can be trained, especially in certain limited domains, to produce output tending towards human-like output. Also, besides language modeling there are many other interesting applications of RNN/LSTM networks.</p>
+<p>Finally, I would like to thank Andrej Karpathy for making his code available; otherwise this blog post wouldn’t have been written.</p>
+<div id="jp-post-flair" class="sharedaddy sd-rating-enabled sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-622" class="share-twitter sd-button share-icon" href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-622" class="share-facebook sd-button share-icon" href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/?share=facebook&amp;nb=1" target="_blank" title="Share on Facebook"><span>Facebook<span class="share-count">4</span></span></a></li><li class="share-email share-service-visible"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon" href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/?share=email&amp;nb=1" target="_blank" title="Click to email"><span>Email</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-622" class="share-linkedin sd-button share-icon" href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/?share=linkedin&amp;nb=1" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn<span class="share-count">6</span></span></a></li><li class="share-pinterest"><a rel="nofollow" data-shared="sharing-pinterest-622" class="share-pinterest sd-button share-icon" href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/?share=pinterest&amp;nb=1" target="_blank" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon" href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/?share=reddit&amp;nb=1" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-48847041-622-58fd8a9fb785c" data-src="//widgets.wp.com/likes/#blog_id=48847041&amp;post_id=622&amp;origin=iksinc.wordpress.com&amp;obj_id=48847041-622-58fd8a9fb785c" data-name="like-post-frame-48847041-622-58fd8a9fb785c"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-48847041-622-58fd8a9fb785c" height="55px" width="100%" frameborder="0" src="./LSTM – From Data to Decisions_files/saved_resource.html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div></div>	</div><!-- .entry-content -->
+
+	<footer class="entry-footer">
+		<span class="byline"><span class="author vcard"><img alt="" src="./LSTM – From Data to Decisions_files/5e572d17a1d8b321ef35581186b9df31" class="avatar avatar-49 grav-hashed grav-hijack" height="49" width="49" originals="49" scale="2" id="grav-5e572d17a1d8b321ef35581186b9df31-0"><span class="screen-reader-text">Author </span> <a class="url fn n" href="https://iksinc.wordpress.com/author/excelvbacomputing/">Krishan</a></span></span><span class="posted-on"><span class="screen-reader-text">Posted on </span><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/" rel="bookmark"><time class="entry-date published" datetime="2016-12-08T21:07:47+00:00">December 8, 2016</time><time class="updated" datetime="2016-12-13T17:27:43+00:00">December 13, 2016</time></a></span><span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://iksinc.wordpress.com/category/machine-learning-2/" rel="category tag">Machine Learning</a>, <a href="https://iksinc.wordpress.com/category/nlp/" rel="category tag">NLP</a></span><span class="tags-links"><span class="screen-reader-text">Tags </span><a href="https://iksinc.wordpress.com/tag/bollywood/" rel="tag">Bollywood</a>, <a href="https://iksinc.wordpress.com/tag/char-rnn/" rel="tag">Char-rnn</a>, <a href="https://iksinc.wordpress.com/tag/feedforward-neural-networks/" rel="tag">feedforward neural networks</a>, <a href="https://iksinc.wordpress.com/tag/hindi-in-roman/" rel="tag">Hindi in Roman</a>, <a href="https://iksinc.wordpress.com/tag/language-modeling/" rel="tag">Language Modeling</a>, <a href="https://iksinc.wordpress.com/tag/lstm/" rel="tag">LSTM</a>, <a href="https://iksinc.wordpress.com/tag/one-hot-coding/" rel="tag">one-hot coding</a>, <a href="https://iksinc.wordpress.com/tag/recurrent-neural-networks/" rel="tag">Recurrent neural networks</a>, <a href="https://iksinc.wordpress.com/tag/rnn-package/" rel="tag">RNN Package</a>, <a href="https://iksinc.wordpress.com/tag/softmax/" rel="tag">softmax</a></span><span class="comments-link"><a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/#comments">2 Comments<span class="screen-reader-text"> on Bollywood Lyrics via Recurrent Neural&nbsp;Networks</span></a></span>			</footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+
+		</main><!-- .site-main -->
+	</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+				<section id="recent-posts-3" class="widget widget_recent_entries">		<h2 class="widget-title">Previous Posts</h2>		<ul>
+					<li>
+				<a href="https://iksinc.wordpress.com/2016/12/08/bollywood-lyrics-via-recurrent-neural-networks/">Bollywood Lyrics via Recurrent Neural&nbsp;Networks</a>
+							<span class="post-date">December 8, 2016</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2016/07/07/autoencoders/">Autoencoders: Sparse and&nbsp;Deep</a>
+							<span class="post-date">July 7, 2016</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2016/05/16/topic-modeling-and-document-clustering-whats-the-difference/">Topic Modeling and Document Clustering; What’s the&nbsp;Difference?</a>
+							<span class="post-date">May 16, 2016</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2016/03/21/what-is-nmf-and-what-can-you-do-with-it/">What is NMF and what can you do with&nbsp;it?</a>
+							<span class="post-date">March 21, 2016</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2015/12/18/feature-engineering-and-deep-learning/">Deep Learning and Feature&nbsp;Engineering</a>
+							<span class="post-date">December 18, 2015</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2015/09/21/a-comparison-of-three-sentiment-analysis-apis-using-blockspring-for-excel/">A Comparison of Three Sentiment Analysis APIs using Blockspring for&nbsp;Excel</a>
+							<span class="post-date">September 21, 2015</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2015/08/04/a-library-of-functions-at-your-finger-tips-that-you-should-know-about/">Monitor Your Favorite Stock’s Sentiment Through Two Formulas in a Spreadsheet and&nbsp;More</a>
+							<span class="post-date">August 4, 2015</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2015/06/23/how-to-use-words-co-occurrence-statistics-to-map-words-to-vectors/">How to Use Words Co-Occurrence Statistics to Map Words to&nbsp;Vectors</a>
+							<span class="post-date">June 23, 2015</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2015/04/13/words-as-vectors/">Words as Vectors</a>
+							<span class="post-date">April 13, 2015</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2015/02/25/the-united-states-in-two-words/">The United States In Two&nbsp;Words</a>
+							<span class="post-date">February 25, 2015</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2014/11/30/word-similarity-google-distance-and-baseball-and-cricket/">Word Similarity, Google Distance, and Baseball and&nbsp;Cricket</a>
+							<span class="post-date">November 30, 2014</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2014/09/03/using-the-named-entity-recognition-module-in-azure-ml-studio/">Using the Named Entity Recognition Module in Azure ML&nbsp;Studio</a>
+							<span class="post-date">September 3, 2014</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2014/08/26/building-predictive-models-with-azure-machine-learning-studio/">Building Predictive Models with Azure Machine Learning&nbsp;Studio</a>
+							<span class="post-date">August 26, 2014</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2014/04/17/k-means-and-k-mediods-clustering/">K-means and K-mediods&nbsp;Clustering</a>
+							<span class="post-date">April 17, 2014</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2014/02/19/generating-descriptors-for-comparing-writing-styles-using-text-functions/">Generating Descriptors for Comparing Writing Styles using Text&nbsp;Functions</a>
+							<span class="post-date">February 19, 2014</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2013/12/02/text-mining/">Text Mining</a>
+							<span class="post-date">December 2, 2013</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2013/11/08/a-bunch-of-weak-classifiers-working-together-can-outperform-a-single-strong-classifier/">A Bunch of Weak Classifiers working together can outperform a single strong&nbsp;classifier</a>
+							<span class="post-date">November 8, 2013</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2013/07/17/information-retrieval-vs-data-retrieval/">Information Retrieval Vs. Data&nbsp;Retrieval</a>
+							<span class="post-date">July 17, 2013</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2013/06/26/good-representation-can-ease-learning/">Good Representation Can Ease&nbsp;Learning</a>
+							<span class="post-date">June 26, 2013</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2013/06/20/data-mining-machine-learning-and-pattern-recognition/">Data Mining, Machine Learning, and Pattern&nbsp;Recognition</a>
+							<span class="post-date">June 20, 2013</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2013/05/13/social-media-and-banking/">Social Media and&nbsp;Banking</a>
+							<span class="post-date">May 13, 2013</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2013/04/18/data-information-and-knowledge/">Data, Information and&nbsp;Knowledge</a>
+							<span class="post-date">April 18, 2013</span>
+						</li>
+					<li>
+				<a href="https://iksinc.wordpress.com/2013/04/06/best-split-doesnt-necessarily-produce-the-best-decision-tree/">Best Split Doesn’t Necessarily Produce the Best Decision&nbsp;Tree</a>
+							<span class="post-date">April 6, 2013</span>
+						</li>
+				</ul>
+		</section>		<section id="facebook-likebox-2" class="widget widget_facebook_likebox"><h2 class="widget-title"><a href="https://www.facebook.com/integratedknowledgesolns">Integrated Knowledge Solutions</a></h2>		<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./LSTM – From Data to Decisions_files/96nq-xsaNcg.html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+		<div class="fb-page fb_iframe_widget" data-href="https://www.facebook.com/integratedknowledgesolns" data-width="200" data-height="432" data-hide-cover="false" data-show-facepile="true" data-show-posts="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=249643311490&amp;container_width=300&amp;height=432&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fintegratedknowledgesolns&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;show_posts=false&amp;width=200"><span style="vertical-align: bottom; width: 200px; height: 230px;"><iframe name="f257125acbca5b4" width="200px" height="432px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:page Facebook Social Plugin" src="./LSTM – From Data to Decisions_files/page.html" style="border: none; visibility: visible; width: 200px; height: 230px;" class=""></iframe></span></div>
+		</section><section id="wp_tag_cloud-2" class="widget wp_widget_tag_cloud"><h2 class="widget-title">Tags</h2><div style="overflow:hidden"><a href="https://iksinc.wordpress.com/tag/adaboost/" class="tag-link-20809387 tag-link-position-1" title="1 topic" style="font-size: 8pt;">AdaBoost</a>
+<a href="https://iksinc.wordpress.com/tag/alchemyapi/" class="tag-link-51092223 tag-link-position-2" title="2 topics" style="font-size: 16.4pt;">AlchemyAPI</a>
+<a href="https://iksinc.wordpress.com/tag/authorship-identification/" class="tag-link-214228626 tag-link-position-3" title="1 topic" style="font-size: 8pt;">authorship identification</a>
+<a href="https://iksinc.wordpress.com/tag/azure-ml-studio/" class="tag-link-260314480 tag-link-position-4" title="1 topic" style="font-size: 8pt;">Azure ML Studio</a>
+<a href="https://iksinc.wordpress.com/tag/bagging/" class="tag-link-1228422 tag-link-position-5" title="1 topic" style="font-size: 8pt;">Bagging</a>
+<a href="https://iksinc.wordpress.com/tag/bag-of-words/" class="tag-link-9420381 tag-link-position-6" title="1 topic" style="font-size: 8pt;">bag of words</a>
+<a href="https://iksinc.wordpress.com/tag/banking/" class="tag-link-26653 tag-link-position-7" title="1 topic" style="font-size: 8pt;">banking</a>
+<a href="https://iksinc.wordpress.com/tag/blockspring/" class="tag-link-258069267 tag-link-position-8" title="2 topics" style="font-size: 16.4pt;">Blockspring</a>
+<a href="https://iksinc.wordpress.com/tag/classification/" class="tag-link-168590 tag-link-position-9" title="1 topic" style="font-size: 8pt;">classification</a>
+<a href="https://iksinc.wordpress.com/tag/cluster-representative/" class="tag-link-223971943 tag-link-position-10" title="1 topic" style="font-size: 8pt;">Cluster Representative</a>
+<a href="https://iksinc.wordpress.com/tag/co-occurrence-matrix/" class="tag-link-5698873 tag-link-position-11" title="1 topic" style="font-size: 8pt;">co-occurrence matrix</a>
+<a href="https://iksinc.wordpress.com/tag/context-words/" class="tag-link-346162632 tag-link-position-12" title="2 topics" style="font-size: 16.4pt;">context words</a>
+<a href="https://iksinc.wordpress.com/tag/continuous-bag-of-words-cbow/" class="tag-link-346162621 tag-link-position-13" title="1 topic" style="font-size: 8pt;">Continuous Bag of Words (CBOW)</a>
+<a href="https://iksinc.wordpress.com/tag/data/" class="tag-link-22379 tag-link-position-14" title="1 topic" style="font-size: 8pt;">Data</a>
+<a href="https://iksinc.wordpress.com/tag/data-mining/" class="tag-link-867 tag-link-position-15" title="1 topic" style="font-size: 8pt;">data mining</a>
+<a href="https://iksinc.wordpress.com/tag/decision-trees/" class="tag-link-202423 tag-link-position-16" title="2 topics" style="font-size: 16.4pt;">Decision trees</a>
+<a href="https://iksinc.wordpress.com/tag/deep-learning/" class="tag-link-1131271 tag-link-position-17" title="2 topics" style="font-size: 16.4pt;">Deep learning</a>
+<a href="https://iksinc.wordpress.com/tag/document-characterization/" class="tag-link-187071551 tag-link-position-18" title="1 topic" style="font-size: 8pt;">document characterization</a>
+<a href="https://iksinc.wordpress.com/tag/document-classification-and-grouping/" class="tag-link-214228627 tag-link-position-19" title="1 topic" style="font-size: 8pt;">document classification and grouping</a>
+<a href="https://iksinc.wordpress.com/tag/ensemble-learning/" class="tag-link-63562582 tag-link-position-20" title="1 topic" style="font-size: 8pt;">Ensemble learning</a>
+<a href="https://iksinc.wordpress.com/tag/entropy/" class="tag-link-45250 tag-link-position-21" title="1 topic" style="font-size: 8pt;">entropy</a>
+<a href="https://iksinc.wordpress.com/tag/feature-representation/" class="tag-link-858598 tag-link-position-22" title="1 topic" style="font-size: 8pt;">feature representation</a>
+<a href="https://iksinc.wordpress.com/tag/function-words/" class="tag-link-21222248 tag-link-position-23" title="1 topic" style="font-size: 8pt;">Function words</a>
+<a href="https://iksinc.wordpress.com/tag/gini-index/" class="tag-link-708823 tag-link-position-24" title="1 topic" style="font-size: 8pt;">gini index</a>
+<a href="https://iksinc.wordpress.com/tag/hellinger-distance/" class="tag-link-29428775 tag-link-position-25" title="1 topic" style="font-size: 8pt;">Hellinger distance</a>
+<a href="https://iksinc.wordpress.com/tag/image-grouping/" class="tag-link-187071564 tag-link-position-26" title="1 topic" style="font-size: 8pt;">image grouping</a>
+<a href="https://iksinc.wordpress.com/tag/information/" class="tag-link-556 tag-link-position-27" title="1 topic" style="font-size: 8pt;">Information</a>
+<a href="https://iksinc.wordpress.com/tag/information-extraction/" class="tag-link-502988 tag-link-position-28" title="1 topic" style="font-size: 8pt;">information extraction</a>
+<a href="https://iksinc.wordpress.com/tag/information-retrieval/" class="tag-link-57493 tag-link-position-29" title="1 topic" style="font-size: 8pt;">information retrieval</a>
+<a href="https://iksinc.wordpress.com/tag/k-means-clustering/" class="tag-link-5610719 tag-link-position-30" title="1 topic" style="font-size: 8pt;">K-means clustering</a>
+<a href="https://iksinc.wordpress.com/tag/k-mediods/" class="tag-link-223971941 tag-link-position-31" title="1 topic" style="font-size: 8pt;">K-mediods</a>
+<a href="https://iksinc.wordpress.com/tag/knowledge/" class="tag-link-3324 tag-link-position-32" title="1 topic" style="font-size: 8pt;">knowledge</a>
+<a href="https://iksinc.wordpress.com/tag/len-function/" class="tag-link-28453944 tag-link-position-33" title="1 topic" style="font-size: 8pt;">LEN function</a>
+<a href="https://iksinc.wordpress.com/tag/machine-learning/" class="tag-link-40978 tag-link-position-34" title="3 topics" style="font-size: 22pt;">machine learning</a>
+<a href="https://iksinc.wordpress.com/tag/n-grams/" class="tag-link-1928720 tag-link-position-35" title="1 topic" style="font-size: 8pt;">n-grams</a>
+<a href="https://iksinc.wordpress.com/tag/named-entity-recognition/" class="tag-link-5283498 tag-link-position-36" title="1 topic" style="font-size: 8pt;">Named Entity Recognition</a>
+<a href="https://iksinc.wordpress.com/tag/ner/" class="tag-link-411198 tag-link-position-37" title="1 topic" style="font-size: 8pt;">NER</a>
+<a href="https://iksinc.wordpress.com/tag/neural-language-modelling/" class="tag-link-346162630 tag-link-position-38" title="1 topic" style="font-size: 8pt;">neural language modelling</a>
+<a href="https://iksinc.wordpress.com/tag/ngram-viewer/" class="tag-link-47945630 tag-link-position-39" title="1 topic" style="font-size: 8pt;">ngram viewer</a>
+<a href="https://iksinc.wordpress.com/tag/normalized-google-distance/" class="tag-link-15187999 tag-link-position-40" title="1 topic" style="font-size: 8pt;">Normalized Google Distance</a>
+<a href="https://iksinc.wordpress.com/tag/pattern-recognition/" class="tag-link-87334 tag-link-position-41" title="1 topic" style="font-size: 8pt;">pattern recognition</a>
+<a href="https://iksinc.wordpress.com/tag/pattern-representation/" class="tag-link-187071729 tag-link-position-42" title="1 topic" style="font-size: 8pt;">pattern representation</a>
+<a href="https://iksinc.wordpress.com/tag/pca/" class="tag-link-209963 tag-link-position-43" title="1 topic" style="font-size: 8pt;">PCA</a>
+<a href="https://iksinc.wordpress.com/tag/predefined-entities/" class="tag-link-264583374 tag-link-position-44" title="1 topic" style="font-size: 8pt;">predefined entities</a>
+<a href="https://iksinc.wordpress.com/tag/predictive-modeling/" class="tag-link-2576155 tag-link-position-45" title="1 topic" style="font-size: 8pt;">predictive modeling</a>
+<a href="https://iksinc.wordpress.com/tag/project-columns/" class="tag-link-264581739 tag-link-position-46" title="1 topic" style="font-size: 8pt;">Project Columns</a>
+<a href="https://iksinc.wordpress.com/tag/random-forest/" class="tag-link-5858755 tag-link-position-47" title="1 topic" style="font-size: 8pt;">random forest</a>
+<a href="https://iksinc.wordpress.com/tag/sentence-count/" class="tag-link-214228625 tag-link-position-48" title="1 topic" style="font-size: 8pt;">Sentence count</a>
+<a href="https://iksinc.wordpress.com/tag/sentiment-monitoring/" class="tag-link-13472849 tag-link-position-49" title="2 topics" style="font-size: 16.4pt;">sentiment monitoring</a>
+<a href="https://iksinc.wordpress.com/tag/single-link-clustering/" class="tag-link-307485527 tag-link-position-50" title="1 topic" style="font-size: 8pt;">Single link clustering</a>
+<a href="https://iksinc.wordpress.com/tag/skip-gram-model/" class="tag-link-346162638 tag-link-position-51" title="1 topic" style="font-size: 8pt;">skip-gram model</a>
+<a href="https://iksinc.wordpress.com/tag/social-media/" class="tag-link-49818 tag-link-position-52" title="1 topic" style="font-size: 8pt;">social media</a>
+<a href="https://iksinc.wordpress.com/tag/social-media-adoption-challenges/" class="tag-link-168251917 tag-link-position-53" title="1 topic" style="font-size: 8pt;">social media adoption challenges</a>
+<a href="https://iksinc.wordpress.com/tag/social-media-analytics/" class="tag-link-6724294 tag-link-position-54" title="1 topic" style="font-size: 8pt;">social media analytics</a>
+<a href="https://iksinc.wordpress.com/tag/softmax/" class="tag-link-112496 tag-link-position-55" title="2 topics" style="font-size: 16.4pt;">softmax</a>
+<a href="https://iksinc.wordpress.com/tag/stanford-named-entity-tagger/" class="tag-link-264581741 tag-link-position-56" title="1 topic" style="font-size: 8pt;">Stanford Named Entity Tagger</a>
+<a href="https://iksinc.wordpress.com/tag/stock-monitoring/" class="tag-link-5779060 tag-link-position-57" title="1 topic" style="font-size: 8pt;">stock monitoring</a>
+<a href="https://iksinc.wordpress.com/tag/stylometry/" class="tag-link-24234117 tag-link-position-58" title="1 topic" style="font-size: 8pt;">stylometry</a>
+<a href="https://iksinc.wordpress.com/tag/substitute-function/" class="tag-link-27536247 tag-link-position-59" title="1 topic" style="font-size: 8pt;">SUBSTITUTE function</a>
+<a href="https://iksinc.wordpress.com/tag/target-words/" class="tag-link-8793918 tag-link-position-60" title="1 topic" style="font-size: 8pt;">target words</a>
+<a href="https://iksinc.wordpress.com/tag/text-analytics/" class="tag-link-2495437 tag-link-position-61" title="1 topic" style="font-size: 8pt;">text analytics</a>
+<a href="https://iksinc.wordpress.com/tag/textmining-2/" class="tag-link-80103949 tag-link-position-62" title="1 topic" style="font-size: 8pt;">textmining</a>
+<a href="https://iksinc.wordpress.com/tag/text-processing/" class="tag-link-1669124 tag-link-position-63" title="1 topic" style="font-size: 8pt;">text processing</a>
+<a href="https://iksinc.wordpress.com/tag/trim-function/" class="tag-link-4285983 tag-link-position-64" title="1 topic" style="font-size: 8pt;">TRIM function</a>
+<a href="https://iksinc.wordpress.com/tag/unstrucured-text/" class="tag-link-264583046 tag-link-position-65" title="1 topic" style="font-size: 8pt;">unstrucured text</a>
+<a href="https://iksinc.wordpress.com/tag/vector-quantization/" class="tag-link-7513548 tag-link-position-66" title="1 topic" style="font-size: 8pt;">vector quantization</a>
+<a href="https://iksinc.wordpress.com/tag/vector-space/" class="tag-link-7739793 tag-link-position-67" title="1 topic" style="font-size: 8pt;">vector space</a>
+<a href="https://iksinc.wordpress.com/tag/weak-learners/" class="tag-link-200265767 tag-link-position-68" title="1 topic" style="font-size: 8pt;">weak learners</a>
+<a href="https://iksinc.wordpress.com/tag/word2vec/" class="tag-link-191453409 tag-link-position-69" title="1 topic" style="font-size: 8pt;">Word2vec</a>
+<a href="https://iksinc.wordpress.com/tag/word-count/" class="tag-link-12163 tag-link-position-70" title="1 topic" style="font-size: 8pt;">word count</a>
+<a href="https://iksinc.wordpress.com/tag/word-embedding/" class="tag-link-207812639 tag-link-position-71" title="2 topics" style="font-size: 16.4pt;">Word Embedding</a>
+<a href="https://iksinc.wordpress.com/tag/word-similarity/" class="tag-link-63769612 tag-link-position-72" title="1 topic" style="font-size: 8pt;">Word similarity</a>
+<a href="https://iksinc.wordpress.com/tag/word-size/" class="tag-link-5305552 tag-link-position-73" title="1 topic" style="font-size: 8pt;">word size</a>
+<a href="https://iksinc.wordpress.com/tag/words-to-vectors/" class="tag-link-368659955 tag-link-position-74" title="1 topic" style="font-size: 8pt;">words to vectors</a>
+<a href="https://iksinc.wordpress.com/tag/word-vectors/" class="tag-link-6558343 tag-link-position-75" title="1 topic" style="font-size: 8pt;">word vectors</a></div></section><section id="blog_subscription-2" class="widget widget_blog_subscription"><h2 class="widget-title"><label for="subscribe-field">Follow Blog via Email</label></h2>
+				<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="subscribe-blog">
+											<p>Enter your email address to follow this blog and receive notifications of new posts by email.</p>
+<p>Join 40 other followers</p>
+						<p><input type="text" name="email" style="width: 95%; padding: 1px 2px" placeholder="Enter your email address" value="" id="subscribe-field"></p>
+					
+					<p>
+						<input type="hidden" name="action" value="subscribe">
+						<input type="hidden" name="blog_id" value="48847041">
+						<input type="hidden" name="source" value="https://iksinc.wordpress.com/tag/lstm/">
+						<input type="hidden" name="sub-type" value="widget">
+						<input type="hidden" name="redirect_fragment" value="blog_subscription-2">
+						<input type="hidden" id="_wpnonce" name="_wpnonce" value="a7dd9dc2f4">						<input type="submit" value="Follow">
+					</p>
+				</form>
+			
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-menu3-container"><ul id="menu-menu3-1" class="primary-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-755"><a href="https://iksinc.wordpress.com/">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-756"><a href="https://iksinc.wordpress.com/home/">About Integrated Knowledge Solutions</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="https://iksinc.wordpress.com/" rel="home">From Data to Decisions</a></span>
+				<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<!--  -->
+<script type="text/javascript" src="./LSTM – From Data to Decisions_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./LSTM – From Data to Decisions_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-5e572d17a1d8b321ef35581186b9df31">
+	</div>
+	</div>
+
+	<div id="carousel-reblog-box">
+		<form action="https://iksinc.wordpress.com/tag/lstm/#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="https://iksinc.wordpress.com/tag/lstm/#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post">
+				<input type="hidden" id="carousel-reblog-blog-id" value="48847041">
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://iksinc.wordpress.com">
+				<input type="hidden" id="carousel-reblog-blog-title" value="From Data to Decisions">
+				<input type="hidden" id="carousel-reblog-post-url" value="">
+				<input type="hidden" id="carousel-reblog-post-title" value="">
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="541edfd4bd"><input type="hidden" name="_wp_http_referer" value="/tag/lstm/">		</form>
+
+		<div class="arrow"></div>
+	</div>
+<script type="text/javascript" charset="UTF-8" id="polldaddyRatings"><!--//--><![CDATA[//><!--
+PDRTJS_settings_6964578_post_622={"id":6964578,"unique_id":"wp-post-622","title":"Bollywood%20Lyrics%20via%20Recurrent%20Neural%26nbsp%3BNetworks","permalink":"https:\/\/iksinc.wordpress.com\/2016\/12\/08\/bollywood-lyrics-via-recurrent-neural-networks\/","item_id":"_post_622"}; if ( typeof PDRTJS_RATING !== 'undefined' ){if ( typeof PDRTJS_6964578_post_622 == 'undefined' ){PDRTJS_6964578_post_622 = new PDRTJS_RATING( PDRTJS_settings_6964578_post_622 );}}
+//--><!]]></script><script type="text/javascript" charset="UTF-8" src="./LSTM – From Data to Decisions_files/rating.js"></script>
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/iksinc.wordpress.com\/2016\/12\/08\/bollywood-lyrics-via-recurrent-neural-networks\/":622};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+			
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+							<script type="text/javascript">
+				jQuery(document).on('ready', function(){
+					jQuery('body').on('click', 'a.share-pinterest', function(e){
+						e.preventDefault();
+						// Load Pinterest Bookmarklet code
+						var s = document.createElement("script");
+						s.type = "text/javascript";
+						s.src = window.location.protocol + "//assets.pinterest.com/js/pinmarklet.js?r=" + ( Math.random() * 99999999 );
+						var x = document.getElementsByTagName("script")[0];
+						x.parentNode.insertBefore(s, x);
+						// Trigger Stats
+						var s = document.createElement("script");
+						s.type = "text/javascript";
+						s.src = this + ( this.toString().indexOf( '?' ) ? '&' : '?' ) + 'js_only=1';
+						var x = document.getElementsByTagName("script")[0];
+						x.parentNode.insertBefore(s, x);
+					});
+				});
+			</script>
+		<link rel="stylesheet" id="all-css-0-2" href="./LSTM – From Data to Decisions_files/jetpack-carousel.css" type="text/css" media="all">
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type="text/javascript">
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jpfbembed = {"appid":"249643311490","locale":"en_US"};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"48847041","siteName":"From Data to Decisions","siteURL":"http:\/\/iksinc.wordpress.com","icon":"<img alt='' src='https:\/\/s1.wp.com\/i\/logo\/wpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/twentysixteen","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/iksinc.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fiksinc.wordpress.com%2F2016%2F12%2F08%2Fbollywood-lyrics-via-recurrent-neural-networks%2F","themeURL":"https:\/\/wordpress.com\/theme\/twentysixteen\/","xhrURL":"https:\/\/iksinc.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"bae4e94e82","isSingular":"","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"a7dd9dc2f4\" \/>","referer":"https:\/\/iksinc.wordpress.com\/tag\/lstm\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/iksinc.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fiksinc.wordpress.com%2Ftag%2Flstm%2F","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Twenty Sixteen","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in the Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 40 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/iksinc.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fiksinc.wordpress.com%2F2016%2F12%2F08%2Fbollywood-lyrics-via-recurrent-neural-networks%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/iksinc.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"83f595c410","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/iksinc.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fiksinc.wordpress.com%2F2016%2F12%2F08%2Fbollywood-lyrics-via-recurrent-neural-networks%2F","blog_id":"48847041","local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=48847041&v=wpcom&tz=0&user_id=0&subd=iksinc","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./LSTM – From Data to Decisions_files/saved_resource(5)"></script><div id="fb-root"></div><div id="actionbar" class="actnbr-pub-twentysixteen actnbr-has-follow"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href="https://iksinc.wordpress.com/tag/lstm/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename actnbr-hidden"><a href="http://iksinc.wordpress.com/"><img alt="" src="./LSTM – From Data to Decisions_files/wpcom-gray-white.png" class="avatar avatar-50" height="50" width="50" scale="0"> From Data to Decisions</a></li> 				   	<li class="actnbr-folded-customize actnbr-hidden"><a href="https://iksinc.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Fiksinc.wordpress.com%2Ftag%2Flstm%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Customize<span></span></span></a></li> 				    <li class="actnbr-folded-follow actnbr-hidden"><a class="actnbr-action actnbr-actn-follow" href="https://iksinc.wordpress.com/tag/lstm/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a></li> 					<li class="actnbr-signup actnbr-hidden"><a href="https://wordpress.com/start/">Sign up</a></li> 				    <li class="actnbr-login actnbr-hidden"><a href="https://iksinc.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fiksinc.wordpress.com%2F2016%2F12%2F08%2Fbollywood-lyrics-via-recurrent-neural-networks%2F">Log in</a></li> 				     				     				    <li class="flb-report actnbr-hidden"><a href="http://en.wordpress.com/abuse/">Report this content</a></li> 				     				     				    <li class="actnbr-subs actnbr-hidden"><a href="https://subscribe.wordpress.com/">Manage subscriptions</a></li> 				    <li class="actnbr-fold actnbr-hidden"><a href="https://iksinc.wordpress.com/tag/lstm/">Collapse this bar</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "iksinc.wordpress.com";
+	</script>
+	<script type="text/javascript" defer="" src="./LSTM – From Data to Decisions_files/725X1342.skimlinks.js"></script>		<iframe src="./LSTM – From Data to Decisions_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			&lt;p class="robots-nocontent"&gt;&lt;img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /&gt;&lt;/p&gt;
+		</noscript><script src="./LSTM – From Data to Decisions_files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'48847041','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'48847041','v':'wpcom','tz':'0','user_id':'0','subd':'iksinc'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1LVmwrVi5vQS5fVFtfdHBbPyw1VXIrU3hWLHhzVndTdktBX0ddJnpXRjVaOTd6fj1YMX4ydzR4NTB6Qz9YLFBRWTFdSG15X0JwSElHW2RiNC5OY05XUTFhcT1UYTJQTDFtOSY4RjNGSG9lZVR8Rkk4NHU0NW1FWnc2aW42X0lsWGx1Mm1RXXpMdTNYL1N5bGNQMGJxdnZbZXFfRmctSTdBRnQtY3dTTGFkNHRjdC5hU3I5MmhBbjhkUS1vW2xydCw2ckZISzhabX5YWVpkTGR2JVFaTVVlckxQTmpmXSZkS0ksMVtVWGREdGErMkViLTdXSUJfRXxPd3pySmE0JndSdWN2P0FmdE9OOE9KdndsLk1zalFxVnloJUR2R3NYMU9VLnomOUlmakdGNFlCK0t+WQ=='}]);
+_stq.push([ 'clickTrackerInit', '48847041', '0' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<div id="sharing_email" style="display: none;">
+		<form action="https://iksinc.wordpress.com/tag/lstm/" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input type="email" name="target_email" id="target_email" value="">
+
+			
+				<label for="source_name">Your Name</label>
+				<input type="text" name="source_name" id="source_name" value="">
+
+				<label for="source_email">Your Email Address</label>
+				<input type="email" name="source_email" id="source_email" value="">
+
+						<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off">
+			<script> document.getElementById('jetpack-source_f_name').value = ''; </script>
+			<div class="recaptcha" id="sharing_recaptcha"></div><input type="hidden" name="recaptcha_public_key" id="recaptcha_public_key" value="6LcYW8MSAAAAADBAuEH9yaPcF7lWh11Iq62ZKtoo">
+			<img style="float: right; display: none" class="loading" src="./LSTM – From Data to Decisions_files/loading.gif" alt="loading" width="16" height="16" scale="0">
+			<input type="submit" value="Send Email" class="sharing_send">
+			<a rel="nofollow" href="https://iksinc.wordpress.com/tag/lstm/#cancel" class="sharing_cancel">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div><img src="./LSTM – From Data to Decisions_files/g.gif" alt=":)" id="wpstats" scale="0"></body></html>

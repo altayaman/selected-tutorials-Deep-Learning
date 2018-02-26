@@ -1,0 +1,1568 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- saved from url=(0075)http://cognonto.com/use-cases/document-specific-word2vec-training-corpuses/ -->
+<html lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Document-specific word2vec Training Corpuses</title>
+
+      <link rel="alternate" type="application/rss+xml" title="" href="http://cognonto.com/resources/feeds/news.xml">
+      
+      <!-- Meta -->
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <!-- Favicon -->
+      <link rel="shortcut icon" href="http://cognonto.com/favicon.ico">
+
+      <!-- CSS Global Compulsory -->
+      <link rel="stylesheet" href="./Document-specific word2vec Training Corpuses_files/bootstrap.min.css">
+      <link rel="stylesheet" href="./Document-specific word2vec Training Corpuses_files/style.css">
+
+      <!-- CSS Implementing Plugins -->
+      <link rel="stylesheet" href="./Document-specific word2vec Training Corpuses_files/line-icons.css">
+      <link rel="stylesheet" href="./Document-specific word2vec Training Corpuses_files/font-awesome.min.css">
+
+      <!-- CSS Theme -->    
+      <link rel="stylesheet" href="./Document-specific word2vec Training Corpuses_files/blue.css">
+      <link rel="stylesheet" href="./Document-specific word2vec Training Corpuses_files/footer-v1.css">
+      <link rel="stylesheet" href="./Document-specific word2vec Training Corpuses_files/header-v1.css">
+
+      <!-- CSS Customization -->
+      <link rel="stylesheet" href="./Document-specific word2vec Training Corpuses_files/custom.css">
+      
+      
+      
+      
+                  
+      <meta property="og:site_name" content="Cognonto">
+      
+              <meta property="og:title" content="Machine Learning Use Cases: Create Word Embedding Corpuses">
+        <meta property="og:type" content="article">
+      
+              <meta property="og:description" content="The rich structure in KBpedia is used to create training corpuses for word2vec rapidly and cheaply on the fly">
+      
+              <meta property="og:image" content="http://cognonto.com/imgs/cognonto-logo-og.png">
+      
+              <meta property="og:image:width" content="700">
+      
+              <meta property="og:image:height" content="467">
+      
+      
+  </head>        
+  
+  <body>
+  <div class="wrapper">    <div class="header-v1">
+      <!-- Topbar -->
+      <div class="topbar">
+        <div class="container">
+          <div class="col-md-1">   </div>
+          <a class="navbar-brand" href="http://cognonto.com/">
+            <img id="logo-header" src="./Document-specific word2vec Training Corpuses_files/cognonto-header-logo.png" height="75" alt="Cognonto - Data. Structure. Meaning." name="logo-header"> 
+          </a>        
+        </div>
+      </div><!-- End Topbar -->
+      <!-- Navbar -->
+      <div class="navbar navbar-default mega-menu" role="navigation">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+              <span class="sr-only">Toggle navigation</span>
+            </button> 
+          </div>
+          <div style="clear:both; height: 1px;">
+            &nbsp;
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+		         <div class="col-md-1">
+          &nbsp;
+        </div><!--/col-md-1-->
+
+          <div class="collapse navbar-collapse navbar-responsive-collapse col-md-10">
+            <ul class="nav navbar-nav pull-left">
+              <!-- Demo -->
+              <li>
+                <a href="http://cognonto.com/">Home</a>
+              </li>              
+              <!-- Home -->
+              <li>
+                <a href="http://cognonto.com/demo/">Demo</a>
+              </li>              
+              <!-- Story -->
+              <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">The Story</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="http://cognonto.com/story/overview/">Overview</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/story/features-and-benefits/">Features &amp; Benefits</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/story/data-and-knowledge-structures/">Data and Knowledge Structures</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/story/technology/">Technology</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/story/machine-learning/">Machine Learning</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/story/uses/">Uses</a>
+                  </li>
+                </ul>
+              </li><!-- End Uses -->
+              <li>
+                <a href="http://cognonto.com/knowledge-graph/">knowledge Graph</a>
+              </li>                            
+              <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Use Cases</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-submenu">
+                    <a href="javascript:void(0);">Knowledge Graph (KG)</a>
+                    <ul class="dropdown-menu">
+                      <li><a href="http://cognonto.com/use-cases/browse-the-knowledge-graph/">Browse the Knowledge Graph</a></li>
+                      <li><a href="http://cognonto.com/use-cases/search-the-knowledge-graph/">Search the Knowledge Graph</a></li>
+                      <li><a href="http://cognonto.com/use-cases/expand-queries-using-semsets/">Expand Queries Using Semsets</a></li>
+                      <li><a href="http://cognonto.com/use-cases/use-and-control-of-inferencing/">Uses and Control of Inferencing</a></li>
+                      <li><a href="http://cognonto.com/use-cases/leveraging-kbpedia-aspects/">Leverage KBpedia's Aspects</a></li>
+                    </ul>                    
+                  </li>
+                  <li class="dropdown-submenu">
+                    <a href="javascript:void(0);">Machine Learning (KBAI)</a>
+                    <ul class="dropdown-menu">
+                      <li><a href="http://cognonto.com/use-cases/text-classification-using-esa-and-svm/">Create Supervised Learning Training Sets</a></li>
+                      <li><a href="http://cognonto.com/use-cases/document-specific-word2vec-training-corpuses/">Create Word Embedding Corpuses</a></li>
+                      <li><a href="http://cognonto.com/use-cases/extending-kbpedia-with-kbpedia-categories/">Create Graph Embedding Corpuses</a></li>
+                      <li><a href="http://cognonto.com/use-cases/text-classification-using-esa-and-svm/">Classify Text</a></li>
+                      <li><a href="http://cognonto.com/use-cases/dynamic-machine-learning/">Create 'Gold Standards' for Tuning Learners</a></li>
+                      <li><a href="http://cognonto.com/use-cases/disambiguating-kbpedia-knowledge-graph-concepts/">Disambiguate KG Concepts</a></li>
+                      <li><a href="http://cognonto.com/use-cases/dynamic-machine-learning/">Dynamic Machine Learning Using the KG</a></li>
+                    </ul>                    
+                  </li>
+                  <li class="dropdown-submenu">
+                    <a href="javascript:void(0);">Mapping</a>
+                    <ul class="dropdown-menu">
+                      <li><a href="http://cognonto.com/use-cases/mapping-external-data-and-schema/">Map Concepts</a></li>
+                      <li><a href="http://cognonto.com/use-cases/leveraging-kbpedia-aspects/">Map Entities</a></li>
+                      <li><a href="http://cognonto.com/use-cases/extending-kbpedia-with-kbpedia-categories/">Extend KBpedia with Wikipedia</a></li>
+                      <li><a href="http://cognonto.com/use-cases/benefits-from-extending-kbpedia-with-private-datasets/">Extend KBpedia for Domains</a></li>
+                      <li><a href="http://cognonto.com/use-cases/mapping-external-data-and-schema/">General Use of the Cognonto Mapper</a></li>
+                    </ul>                    
+                  </li>
+                </ul>   
+              </li>
+              <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Services</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="http://cognonto.com/services/machine-learning-services/">Machine Learning Services</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/services/taggers-extractors-classifiers/">Taggers, Extractors, Classifiers</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/services/data-integration-and-mapping/">Data Integration &amp; Mapping</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/services/content-harvesters-publishers/">Content Harvesters/Publishers</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/services/data-prep-staging/">Data Preparation &amp; Staging</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/services/knowledge-graph-services/">Knowledge Graph Services</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/services/dedicated-saas/">Dedicated SaaS</a>
+                  </li>
+                  <li>
+                    <a href="http://cognonto.com/services/on-premises-deployment/">On-premises Deployment</a>
+                  </li>
+                </ul>
+              </li>              
+            </ul>
+          </div><!--/navbar-collapse-->
+		  		         <div class="col-md-1">
+          &nbsp;
+        </div><!--/col-md-1-->
+        </div>
+      </div><!-- End Navbar -->
+    </div><!--=== End Header ===-->
+    <!--=== Breadcrumbs ===-->
+    <div class="breadcrumbs">
+      <div class="container">
+        <div class="col-md-1">
+          &nbsp;
+        </div><!--/col-md-1-->
+        <div class="col-md-10">
+          <h1 class="pull-left"></h1>
+          <ul class="pull-right breadcrumb">
+            <li>Use Cases</li>
+            <li class="active">Word Embedding Corpuses</li>
+          </ul>
+        </div><!--/col-md-10-->
+        <div class="col-md-1">
+          &nbsp;
+        </div><!--/col-md-1-->
+      </div>
+    </div>
+    <!--/breadcrumbs-->
+    <!--=== End Breadcrumbs ===-->
+    <!--=== Content Part ===-->
+    <div class="container content">
+
+      <div class="row">
+        <div class="col-md-2">
+          &nbsp;
+        </div>
+        <div class="col-md-8">
+          <div class="use-cases-header">
+            <table border="0" cellpadding="4" cellspacing="2">
+                <tbody>
+                  <tr>
+                    <td colspan="2" align="center">
+                      <h2>
+                        <b>USE CASE</b>
+                      </h2>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 140px;" valign="top">
+                      <b>Title:</b>
+                    </td>
+                    <td valign="top" style="padding-left: 25px;">
+                      <span style="font-weight: bold;">Document-specific word2Vec
+                      Training Corpuses</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top">
+                      <b>Short Description:</b>
+                    </td>
+                    <td valign="top" style="padding-left: 25px;">
+                      The rich structure in KBpedia is used to create training corpuses
+                      for word2vec rapidly and cheaply <span style="font-style: italic;">on the fly</span>
+                      <br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top">
+                      <b>Problem:</b>
+                    </td>
+                    <td valign="top" style="padding-left: 25px;">
+                      We need to cluster or classify documents by topic, or to
+                      characterize them by sentiment or for recommendations
+                      <br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top">
+                      <b>Cognonto Approach:</b>
+                    </td>
+                    <td valign="top" style="padding-left: 25px;">
+                      word2vec is an artificial intelligence 'word embedding' model
+                      that can establish similarities between terms. These similarities
+                      can be used to address the stated problems. The rich structure
+                      and entity types within Cognonto's KBpedia knowledge structure
+                      can be used, with one or two simple queries, to create relevant
+                      domain "slices" of tens of thousands of documents and entities
+                      upon which to train word2vec models. This approach eliminates the
+                      majority of effort normally associated with word2vec for domain
+                      purposes, enabling available effort to be spent on refining the
+                      parameters of the model for superior results
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top">
+                      <b>Key Findings:</b>
+                    </td>
+                    <td valign="top">
+                      <ul>
+                        <li>Domain-specifc training corpuses work better with less
+                        ambiguity than general corpuses for these problems
+                        </li>
+                        <li>Cognonto (through KBpedia) speeds and eases the creation of
+                        domain-specific training corpuses for word2vec (and other
+                        corpus-based models)
+                        </li>
+                        <li>Other public and private text sources may be readily added
+                        to the KBpedia baseline in order to obtain still further
+                        domain-relevant models
+                        </li>
+                        <li>Such domain-specific training corpuses can be used to
+                        establish similarity between local text documents or HTML web
+                        pages
+                        </li>
+                        <li>This method can also be combined with Cognonto's <a href="http://cognonto.com/docs/about-the-demo/#topic-analysis-sub-panel">
+                          topics analyzer</a> to first tag text documents using KBpedia
+                          reference concepts, and then inform or augment these
+                          domain-specific training corpuses
+                        </li>
+                        <li>These capabilities enable rapid testing and refinement of
+                        different combinations of "seed" concepts to obtain better
+                        desired results.
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          
+        </div> 
+        <div class="col-md-2">
+          &nbsp;
+        </div><!--/col-md-2-->
+      </div>    
+      
+      <div class="row">&nbsp;</div>
+      <div class="row">&nbsp;</div>
+      
+      <div class="row">
+        <div class="col-md-2">
+          &nbsp;
+        </div>
+        <div class="col-md-8">
+<p>
+According to DeepLearning4J's <a href="http://deeplearning4j.org/word2vec">Word2Vec tutorial</a>, "Given enough data, usage and contexts, Word2vec can make highly accurate guesses about a word’s meaning based on past appearances. Those guesses can be used to establish a word’s association with other words (e.g., 'man' is to 'boy' what 'woman' is to 'girl'), or cluster documents and classify them by topic. Those clusters can form the basis of search, sentiment analysis and recommendations in such diverse fields as scientific research, legal discovery, e-commerce and customer relationship management."
+</p>
+
+<p>
+<a href="https://en.wikipedia.org/wiki/Word2vec">Word2vec</a> is a two layer <a href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural network</a> used to process text to learn relationships between words within a text corpus. Word2vec takes as its input a large corpus of text and produces a high-dimensional space (typically of several hundred dimensions), with each unique word in the corpus being assigned a corresponding vector in the space. This  "word embedding" approach is able to capture multiple different degrees of similarity between words. To create the <a href="https://en.wikipedia.org/wiki/Mathematical_model">model</a> of relationships between the words, a particular grouping of text or documents is fed to the word2vec process, which is called the <a href="https://en.wikipedia.org/wiki/Test_set">training corpus</a>. 
+</p>
+
+<p>
+This use case shows how <a href="http://cognonto.com/">Cognonto</a>'s knowledge base can be used to automatically create highly accurate domain-specific training corpuses that can be used by word2vec to generate word relationship models, often with superior performance and results to generalized word2vec models. The basic approach in this use case is not only applicable to word2vec, but to any method that uses corpuses of text for training. For example, in another use case, we will show how this can be done with another algorithm called ESA (Explicit Semantic Analysis).
+</p>
+
+<p>
+It is said about word2vec that "given enough data, usage and contexts, word2vec can make highly accurate guesses about a word’s meaning based on past appearances." What this use case shows is how the context of the training corpus may greatly impact the results. This use case also shows how KBpedia may be leveraged to quickly create very responsive domain-specific corpuses for training the model.
+</p>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<br>
+<h2 id="orgheadline1">Training Corpus</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+A training corpus is really just a set of text used to train unsupervised machine learning algorithms. Any kind of text can be used by word2vec. The only thing it does is to learn the relationships between the words that exist in the text. However, not all training corpuses are equal. Training corpuses are often dirty, biaised and ambiguous. Depending on the task at hand, it may be exactly what is required, but more often than not, such errors need to be fixed. Cognonto has the advantage of starting with clean text.
+</p>
+
+<p>
+When we want to create a new training corpus, the first step is to find a source of text that could work to create that corpus. The second step is to select the text we want to add to it. The third step is to pre-process that corpus of text to perform different operations on the text, such as: removing HTML elements; removing punctuation; normalizing text; detecting named entities; etc. The final step is to train word2vec to generate the model.
+</p>
+
+<p>
+Word2vec is somewhat dumb. It only learns what exists in the training corpus. It does not do anything other than "read" the text and then analyze the relationships between the words (which are really just groups of characters separated by spaces). The word2vec process is highly subject to the <a href="https://en.wikipedia.org/wiki/Garbage_in,_garbage_out">Garbage In, Garbage Out</a> principle, which means that if the training set is dirty, biaised and ambiguous, then the learned relationship will end-up being of little or no value.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<br>
+<h2 id="orgheadline2">Domain-specific Training Corpus</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+A domain-specific training corpus is a specialized training corpus where its text is related to a specific domain. Examples of domains are music, mathematics, cars, healthcare, etc. In contrast, a general training corpus is a corpus of text that may contain text that discusses totally different domains. By creating a corpus of text that covers a specific domain of interest, we limit the usage of words (that is, their co-occurrences) to texts that are meaningful to that domain.
+</p>
+
+<p>
+As we will see in this use case, a domain-specific training corpus can be quite useful, and much more powerful, than general ones, if the task at hand is in relation to a specific domain of expertise. In the past, the major problem with domain-specific training corpuses was that they were costly to create. These costs arose because it is necessary to find a source of data to use, and then to select the specific documents to include in the training corpus. This can work if we want a corpus with 100 or 200 documents, but what if you want a training corpus of 100,000 or 200,000 documents? Then it becomes a problem.
+</p>
+
+<p>
+This is the kind of problem that Cognonto helps to resolve. Cognonto and KBpedia, its knowledge base, is a set of ~39,000 reference concepts that have ~138,000 links to schema of external data sources such as Wikipedia, Wikidata and USPTO. It is that structure and these links to external data sources that we use to create domain-specific training corpuses <i>on the fly</i>. We leverage the reference concept structure to select all of the concepts that should be part of the domain that is being defined. Then we use Cognonto's inference capabilities to infer all of the thousands of concepts that define the full scope of the domain. Then we analyze the hundreds or thousands of concepts we selected that way to get all of the links to external data sources. Finally we use these references to create the training corpus. All of this is done automatically once the initial few concepts that define the subject domain get selected. The workflow looks like:
+</p>
+
+
+<div class="figure">
+<p></p><center><img src="./Document-specific word2vec Training Corpuses_files/cognonto-workflow.png" alt="cognonto-workflow.png"></center>          <p></p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<br>
+<h2 id="orgheadline3">The Process</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+To show how this process works, let's create a domain-specific training corpus using KBpedia about, say, <i>musicians</i>. We will compare this domain-specific corpus to the general word2vec model created by Google based on news sources that has about 100 billion words. The Google model contains 300-dimensional vectors for 3 million words and phrases. We will use the Google News model as the general model to compare the results/performance to our domain-specific <i>musicians</i> model.
+</p>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<br>
+<h3 id="orgheadline4">Determining the Domain</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<p>
+The first step is to define the scope of the domain we want to create. For this use case example, we want a domain that is somewhat constrained to create a training corpus that is not too large for demo purposes. The domain we have chosen is <code>musicians</code>. This domain is related to people and bands that play music. It is also related to musical genres, instruments, music industry, etc.
+</p>
+
+<p>
+To create this domain, we beginwith a single KBpedia reference concept: <a href="http://cognonto.com/knowledge-graph/reference-concept/?uri=Musician">Musician</a>. If we want to broaden the scope of the domain, we could have included other concepts such as: <a href="http://cognonto.com/knowledge-graph/reference-concept/?uri=Music">Music</a>, <a href="http://cognonto.com/knowledge-graph/reference-concept/?uri=MusicPerformanceOrganization">Musical Group</a>, <a href="http://cognonto.com/knowledge-graph/reference-concept/?uri=MusicalInstrument">Musical Instrument</a>, etc.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<br>
+<h3 id="orgheadline5">Aggregating the Domain-specific Training Corpus</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+Once we have determined the scope of the domain, the next step is to query the KBpedia knowledge base to aggregate all of the text that will belong to that training corpus. The end result of this operation is to create a training corpus with text that is only related to the scope of the domain we defined.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">defn</span> <span style="color: #A6E22E;">create-domain-specific-training-set</span>
+  <span style="color: #66D9EF;">[</span>target-kbpedia-class corpus-file<span style="color: #66D9EF;">]</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #F92672;">let</span> <span style="color: #A6E22E;">[</span>step 1000
+        entities-dataset <span style="color: #c7254e;">"http://kbpedia.org/knowledge-base/"</span>
+        kbpedia-dataset <span style="color: #c7254e;">"http://kbpedia.org/kko/"</span>
+        nb-entities <span style="color: #c7254e;">(</span>get-nb-entities-for-class-ws target-kbpedia-class entities-dataset kbpedia-dataset<span style="color: #c7254e;">)</span><span style="color: #A6E22E;">]</span>
+    <span style="color: #A6E22E;">(</span><span style="color: #F92672;">loop</span> <span style="color: #c7254e;">[</span>nb 0
+           nb-processed 1<span style="color: #c7254e;">]</span>
+      <span style="color: #c7254e;">(</span><span style="color: #F92672;">when</span> <span style="color: #FD971F;">(</span>&lt; nb nb-entities<span style="color: #FD971F;">)</span>
+        <span style="color: #FD971F;">(</span><span style="color: #F92672;">doseq</span> <span style="color: #F92672;">[</span>entity <span style="color: #AE81FF;">(</span>get-entities-slice target-kbpedia-class entities-dataset kbpedia-dataset <span style="color: #AE81FF;">:limit</span> step <span style="color: #AE81FF;">:offset</span> @nb-processed<span style="color: #AE81FF;">)</span><span style="color: #F92672;">]</span>          
+          <span style="color: #F92672;">(</span>spit corpus-file <span style="color: #AE81FF;">(</span>str <span style="color: #66D9EF;">(</span>get-entity-content entity<span style="color: #66D9EF;">)</span> <span style="color: #c7254e;">"\n"</span><span style="color: #AE81FF;">)</span> <span style="color: #AE81FF;">:append</span> <span style="color: #AE81FF;">true</span><span style="color: #F92672;">)</span>
+          <span style="color: #F92672;">(</span>println <span style="color: #AE81FF;">(</span>str nb-processed <span style="color: #c7254e;">"/"</span> nb-entities<span style="color: #AE81FF;">)</span><span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span>
+        <span style="color: #FD971F;">(</span><span style="color: #F92672;">recur</span> <span style="color: #F92672;">(</span>+ nb step<span style="color: #F92672;">)</span>
+               <span style="color: #F92672;">(</span>inc nb-processed<span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span><span style="color: #c7254e;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span>create-domain-specific-training-set <span style="color: #c7254e;">"http://kbpedia.org/kko/rc/Musician"</span> <span style="color: #c7254e;">"resources/musicians-corpus.txt"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+What this code does is to query the KBpedia knowledge base to get all the named entities that are linked to it, for the scope of the domain we defined. Then the text related to each entity is appended to a text file where each line is the text of a single entity.
+</p>
+
+<p>
+Given the scope of the current use case, the musicians training corpus is composed of <code>47,263</code> documents. With a simple function, we are able to aggregate 47,263 text documents highly related to a conceptual domain we defined on the fly. All of the hard work has been delegated to the knowledge base and its conceptual structure. (In fact, this simple function <a href="http://fgiasson.com/blog/index.php/2016/09/21/cognonto/">leverages 8 years of hard work</a>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<br>
+<h3 id="orgheadline6">Normalizing Text</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<p>
+The next step is a common one related to any <a href="https://en.wikipedia.org/wiki/Natural_language_processing">NLP</a> pipeline. Before learning from the training corpus, we should clean and normalize the text of its raw form.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">defn</span> <span style="color: #A6E22E;">normalize-proper-name</span>
+  <span style="color: #66D9EF;">[</span>name<span style="color: #66D9EF;">]</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #F92672;">-&gt;</span> name
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace #<span style="color: #c7254e;">" "</span> <span style="color: #c7254e;">"_"</span><span style="color: #A6E22E;">)</span>      
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>lower-case<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span><span style="color: #F92672;">defn</span> <span style="color: #A6E22E;">pre-process-line</span>
+  <span style="color: #66D9EF;">[</span>line<span style="color: #66D9EF;">]</span>  
+  <span style="color: #66D9EF;">(</span><span style="color: #F92672;">-&gt;</span> <span style="color: #A6E22E;">(</span><span style="color: #F92672;">let</span> <span style="color: #c7254e;">[</span>line <span style="color: #FD971F;">(</span><span style="color: #F92672;">-&gt;</span> line
+                     <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">1. remove all underscores</span>
+                     <span style="color: #F92672;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace <span style="color: #c7254e;">"_"</span> <span style="color: #c7254e;">" "</span><span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span><span style="color: #c7254e;">]</span>
+        <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">2. detect named entities and change them with their underscore form, like: Fred Giasson -&gt; fred_giasson</span>
+        <span style="color: #c7254e;">(</span><span style="color: #F92672;">loop</span> <span style="color: #FD971F;">[</span>entities <span style="color: #F92672;">(</span>into <span style="color: #AE81FF;">[]</span> <span style="color: #AE81FF;">(</span>re-seq #<span style="color: #c7254e;">"[\p{Lu}]</span><span style="color: #c7254e;">(</span><span style="color: #c7254e;">[\p{Ll}]+</span><span style="color: #c7254e;">|</span><span style="color: #c7254e;">\.</span><span style="color: #c7254e;">)(?:</span><span style="color: #c7254e;">\s+[\p{Lu}]</span><span style="color: #c7254e;">(</span><span style="color: #c7254e;">[\p{Ll}]+</span><span style="color: #c7254e;">|</span><span style="color: #c7254e;">\.</span><span style="color: #c7254e;">))</span><span style="color: #c7254e;">*</span><span style="color: #c7254e;">(?:</span><span style="color: #c7254e;">\s+[\p{Ll}][\p{Ll}\-]{1,3}</span><span style="color: #c7254e;">)</span><span style="color: #c7254e;">{0,1}\s+[\p{Lu}]</span><span style="color: #c7254e;">(</span><span style="color: #c7254e;">[\p{Ll}]+</span><span style="color: #c7254e;">|</span><span style="color: #c7254e;">\.</span><span style="color: #c7254e;">)</span><span style="color: #c7254e;">"</span> line<span style="color: #AE81FF;">)</span><span style="color: #F92672;">)</span>
+               line line<span style="color: #FD971F;">]</span>
+          <span style="color: #FD971F;">(</span><span style="color: #F92672;">if</span> <span style="color: #F92672;">(</span>empty? entities<span style="color: #F92672;">)</span>
+            line
+            <span style="color: #F92672;">(</span><span style="color: #F92672;">let</span> <span style="color: #AE81FF;">[</span>entity <span style="color: #66D9EF;">(</span>first <span style="color: #A6E22E;">(</span>first entities<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">]</span>
+              <span style="color: #AE81FF;">(</span><span style="color: #F92672;">recur</span> <span style="color: #66D9EF;">(</span>rest entities<span style="color: #66D9EF;">)</span>                     
+                     <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace line entity <span style="color: #A6E22E;">(</span>normalize-proper-name entity<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span><span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span><span style="color: #c7254e;">)</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace <span style="color: #c7254e;">(</span>re-pattern stop-list<span style="color: #c7254e;">)</span> <span style="color: #c7254e;">" "</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">4. remove everything between brackets like: [1] [edit] [show]</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace #<span style="color: #c7254e;">"\[.*\]"</span> <span style="color: #c7254e;">" "</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">5. punctuation characters except the dot and the single quote, replace by nothing: (),[]-={}/\~!?%$@&amp;*+:;&lt;&gt;</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace #<span style="color: #c7254e;">"[\^\</span><span style="color: #c7254e;">(</span><span style="color: #c7254e;">\</span><span style="color: #c7254e;">)</span><span style="color: #c7254e;">\,\[\]\=\{\}\/\\\~\!\?\%\$\@\&amp;\*\+:\;\&lt;\&gt;\"\p{Pd}]"</span> <span style="color: #c7254e;">" "</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">6. remove all numbers</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace #<span style="color: #c7254e;">"[0-9]"</span> <span style="color: #c7254e;">" "</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">7. remove all words with 2 characters or less</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace #<span style="color: #c7254e;">"\b[\p{L}]{0,2}\b"</span> <span style="color: #c7254e;">" "</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">10. normalize spaces</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace #<span style="color: #c7254e;">"\s{2,}"</span> <span style="color: #c7254e;">" "</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">11. normalize dots with spaces</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace #<span style="color: #c7254e;">"\s\."</span> <span style="color: #c7254e;">"."</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">12. normalize dots</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace #<span style="color: #c7254e;">"\.{1,}"</span> <span style="color: #c7254e;">"."</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">13. normalize underscores</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace #<span style="color: #c7254e;">"\_{1,}"</span> <span style="color: #c7254e;">"_"</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">14. remove standalone single quotes</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace <span style="color: #c7254e;">" ' "</span> <span style="color: #c7254e;">" "</span><span style="color: #A6E22E;">)</span>
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">15. re-normalize spaces</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>replace #<span style="color: #c7254e;">"\s{2,}"</span> <span style="color: #c7254e;">" "</span><span style="color: #A6E22E;">)</span>        
+      <span style="color: #75715E; font-style: italic;">;; </span><span style="color: #75715E; font-style: italic;">16. put everything lowercase</span>
+      <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">string</span><span style="color: #66D9EF;">/</span>lower-case<span style="color: #A6E22E;">)</span>
+
+      <span style="color: #A6E22E;">(</span>str <span style="color: #c7254e;">"\n"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span><span style="color: #F92672;">defn</span> <span style="color: #A6E22E;">pre-process-corpus</span>
+  <span style="color: #66D9EF;">[</span>in-file out-file<span style="color: #66D9EF;">]</span>
+  <span style="color: #66D9EF;">(</span>spit out-file <span style="color: #c7254e;">""</span> <span style="color: #AE81FF;">:append</span> <span style="color: #AE81FF;">true</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #F92672;">with-open</span> <span style="color: #A6E22E;">[</span>file <span style="color: #c7254e;">(</span><span style="color: #66D9EF;">clojure.java.io</span><span style="color: #66D9EF;">/</span>reader in-file<span style="color: #c7254e;">)</span><span style="color: #A6E22E;">]</span>
+    <span style="color: #A6E22E;">(</span><span style="color: #F92672;">doseq</span> <span style="color: #c7254e;">[</span>line <span style="color: #FD971F;">(</span>line-seq file<span style="color: #FD971F;">)</span><span style="color: #c7254e;">]</span>
+      <span style="color: #c7254e;">(</span>spit out-file <span style="color: #FD971F;">(</span>pre-process-line line<span style="color: #FD971F;">)</span> <span style="color: #AE81FF;">:append</span> <span style="color: #AE81FF;">true</span><span style="color: #c7254e;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span>pre-process-corpus <span style="color: #c7254e;">"resources/musicians-corpus.txt"</span> <span style="color: #c7254e;">"resources/musicians-corpus.clean.txt"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+We remove all of the characters that may cause issues to the tokenizer used by the word2vec implementation. We also remove unnecessary words and other words that appear too often or that add nothing to the model we want to generate (like the listing of days and months). We also drop all numbers. By the way, such cleaning steps are common to most such models, and can be used repeatedly across projects.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<br>
+<h3 id="orgheadline7">Training word2vec</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<p>
+The last step is to train word2vec on our clean domain-specific training corpus to generate the model we will use. For this use case, we will use the <a href="http://deeplearning4j.org/">DL4J</a> (Deep Learning for Java) library that is a Java implementation of the word2vec methods. Training word2vec is as simple as using the DL4J API like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">defn</span> <span style="color: #A6E22E;">train</span>
+  <span style="color: #66D9EF;">[</span>training-set-file model-file<span style="color: #66D9EF;">]</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #F92672;">let</span> <span style="color: #A6E22E;">[</span>sentence-iterator <span style="color: #c7254e;">(</span><span style="color: #F92672;">new</span> <span style="color: #66D9EF;">LineSentenceIterator</span> <span style="color: #FD971F;">(</span><span style="color: #66D9EF;">clojure.java.io</span><span style="color: #66D9EF;">/</span>file training-set-file<span style="color: #FD971F;">)</span><span style="color: #c7254e;">)</span>
+        tokenizer <span style="color: #c7254e;">(</span><span style="color: #F92672;">new</span> <span style="color: #66D9EF;">DefaultTokenizerFactory</span><span style="color: #c7254e;">)</span>
+        vec <span style="color: #c7254e;">(</span><span style="color: #F92672;">..</span> <span style="color: #FD971F;">(</span><span style="color: #F92672;">new</span> word2vec$Builder<span style="color: #FD971F;">)</span>
+                <span style="color: #FD971F;">(</span><span style="color: #F92672;">minWordFrequency</span> 1<span style="color: #FD971F;">)</span>
+                <span style="color: #FD971F;">(</span><span style="color: #F92672;">windowSize</span> 5<span style="color: #FD971F;">)</span>
+                <span style="color: #FD971F;">(</span><span style="color: #F92672;">layerSize</span> 100<span style="color: #FD971F;">)</span>
+                <span style="color: #FD971F;">(</span>iterate sentence-iterator<span style="color: #FD971F;">)</span>
+                <span style="color: #FD971F;">(</span><span style="color: #F92672;">tokenizerFactory</span> tokenizer<span style="color: #FD971F;">)</span>
+                build<span style="color: #c7254e;">)</span><span style="color: #A6E22E;">]</span>
+    <span style="color: #A6E22E;">(</span><span style="color: #F92672;">.fit</span> vec<span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">SerializationUtils</span><span style="color: #66D9EF;">/</span><span style="color: #F92672;">saveObject</span> vec <span style="color: #c7254e;">(</span><span style="color: #66D9EF;">io</span><span style="color: #66D9EF;">/</span>file model-file<span style="color: #c7254e;">)</span><span style="color: #A6E22E;">)</span>
+    vec<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span><span style="color: #F92672;">def</span> <span style="color: #FD971F;">musicians-model</span> <span style="color: #66D9EF;">(</span>train <span style="color: #c7254e;">"resources/musicians-corpus.clean.txt"</span> <span style="color: #c7254e;">"resources/musicians-corpus.model"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+What is important to notice here is the number of parameters that can be defined to train word2vec on a corpus. In fact, word2vec can be sensitive to parametrization. In a standard use case, since creation of the domain-specific training corpus is so easy, most of the total time getting great results is spent tuning these parameters (subjects of other <a href="file://d:/use_cases">use cases</a>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<br>
+<h3 id="orgheadline8">Importing the General Model</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<p>
+To provide our general comparison, we next need to import the Google News model. DL4J can import this model without having to generate it ourselves (in fact, only the model is distributed by Google, not the training corpus):
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">defn</span> <span style="color: #A6E22E;">import-google-news-model</span>
+  <span style="color: #66D9EF;">[]</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">org.deeplearning4j.models.embeddings.loader.WordVectorSerializer</span><span style="color: #66D9EF;">/</span><span style="color: #F92672;">loadGoogleModel</span> <span style="color: #A6E22E;">(</span><span style="color: #66D9EF;">clojure.java.io</span><span style="color: #66D9EF;">/</span>file <span style="color: #c7254e;">"GoogleNews-vectors-negative300.bin.gz"</span><span style="color: #A6E22E;">)</span> <span style="color: #AE81FF;">true</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span><span style="color: #F92672;">def</span> <span style="color: #FD971F;">google-news-model</span> <span style="color: #66D9EF;">(</span>import-google-news-model<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-2">
+<br>
+<h2 id="orgheadline9">Playing With Models</h2>
+<div class="outline-text-2" id="text-orgheadline9">
+<p>
+Now that we have a domain-specific model related to <code>musicians</code> and a general model related to news processed by Google, let's start playing with both to see how they perform on different tasks. In the following examples, we will always compare the domain-specific training corpus with the general one.
+</p>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<br>
+<h3 id="orgheadline10">Ambiguous Words</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<p>
+A characteristic of words is that their surface form can be ambiguous; they can have multiple meanings. An ambiguous word can co-occur with multiple other words that may not have any shared meaning. But all of this depends on the context. If we are in a general context, then this situation will happen more often than we think and will impact the similarity score of these ambiguous terms. However, as we will see, this phenomenum is greatly diminished when we use domain-specific models.
+</p>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-4">
+<br>
+<h4 id="orgheadline11">Similarity Between Piano, Organ and Violin</h4>
+<div class="outline-text-4" id="text-orgheadline11">
+<p>
+What we want to check is the relationship between 3 different music instruments: <code>piano</code>, <code>organ</code> and <code>violin</code>. We want to check the relationship between each of them.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.similarity</span> musicians-model <span style="color: #c7254e;">"piano"</span> <span style="color: #c7254e;">"violin"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">0.8810334205627441
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.similarity</span> musicians-model <span style="color: #c7254e;">"piano"</span> <span style="color: #c7254e;">"organ"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">0.8591226935386658
+</pre>
+
+<p>
+As we can see, both tuples have a high likelihood of co-occurrence. This suggests that these terms of each tuple are probably highly related. In this case, it is probably because violins are often played along with a piano. And, it is probable that an organ looks like a piano (at least it has a keyboard).
+</p>
+
+<p>
+Now let's take a look at what the general model has to say about that:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.similarity</span> google-news-model <span style="color: #c7254e;">"piano"</span> <span style="color: #c7254e;">"violin"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">0.8228187561035156
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.similarity</span> google-news-model <span style="color: #c7254e;">"piano"</span> <span style="color: #c7254e;">"organ"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">0.4616874158382416
+</pre>
+
+<p>
+The surprising fact here is the apparent dissimilarity between <code>piano</code> and <code>organ</code> compared with the results we got with the musicians domain-specific model. If we think a bit about this use case, we will probably conclude that these results makes sense. In fact, <code>organ</code> is an ambiguous word in a general context. An organ can be a musical instrument, but it can also be a part of an anatomy. This means that the word <code>organ</code> will co-occur with <code>piano</code>, but also to all other kinds of words related to human and animal biology. This is why they are less similar in the general model than in the domain one, because it is an ambiguous word in a general context.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-4">
+<br>
+<h4 id="orgheadline12">Similarity Between Album and Track</h4>
+<div class="outline-text-4" id="text-orgheadline12">
+<p>
+Now let's see another similarity example between two other words <code>album</code> and <code>track</code> where <code>track</code> is an ambiguous word depending on the context.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.similarity</span> musicians-model <span style="color: #c7254e;">"album"</span> <span style="color: #c7254e;">"track"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">0.838570237159729
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.similarity</span> google-news-model <span style="color: #c7254e;">"album"</span> <span style="color: #c7254e;">"track"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">0.18461625277996063
+</pre>
+
+<p>
+As expected, because <code>track</code> is ambiguous, there is a big difference in terms of co-occurence probabilities depending on the context (domain-specific or general).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-4">
+<br>
+<h4 id="orgheadline13">Similarity Between Pianist and Violinist</h4>
+<div class="outline-text-4" id="text-orgheadline13">
+<p>
+However, are domain-specific and general differences always the case? Let's take a look at two words that are domain specific and unambiguous: <code>pianist</code> and <code>violinist</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.similarity</span> musicians-model <span style="color: #c7254e;">"pianist"</span> <span style="color: #c7254e;">"violinist"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">0.8497374653816223
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.similarity</span> google-news-model <span style="color: #c7254e;">"pianist"</span> <span style="color: #c7254e;">"violinist"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<pre class="example">0.8616064190864563
+</pre>
+
+<p>
+In this case, the similarity score between the two terms is almost the same. In both contexts (generals and domain specific), their co-occurrence is similar.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<br>
+<h3 id="orgheadline14">Nearest Words</h3>
+<div class="outline-text-3" id="text-orgheadline14">
+<p>
+Now let's look at the similarity between two distinct words in two new and distinct contexts. Let's take a look at a few words and see what other words occur most often with them.
+</p>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-4">
+<br>
+<h4 id="orgheadline15">Music</h4>
+<div class="outline-text-4" id="text-orgheadline15">
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> musicians-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"music"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[]</span> 20<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>music</li>
+        <li>musical</li>
+        <li>vocal</li>
+        <li>orchestral</li>
+        <li>voice</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>dance.</li>
+        <li>artistic</li>
+        <li>widely</li>
+        <li>romantic</li>
+        <li>modern</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>cabaret</li>
+        <li>theatrical</li>
+        <li>belongs</li>
+        <li>opera</li>
+        <li>genres.</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>film</li>
+        <li>middle_eastern</li>
+        <li>songs.</li>
+        <li>specialised</li>
+        <li>genre</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> google-news-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"music"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[]</span> 20<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>music</li>
+        <li>classical_music</li>
+        <li>jazz</li>
+        <li>Music</li>
+        <li>Without_Donny_Kirshner</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>songs</li>
+        <li>musicians</li>
+        <li>tunes</li>
+        <li>musical</li>
+        <li>Logue_typed</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>musics</li>
+        <li>unplugged_acoustic</li>
+        <li>funky_soulful</li>
+        <li>includes_didgeridoo_riff</li>
+        <li>soulful_melodies</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>hip_hop</li>
+        <li>_nova_samba</li>
+        <li>bossa</li>
+        <li>reggae</li>
+        <li>jazz_ragtime</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+<p>
+One observation we can make is that the terms from the <code>musicians</code> model are more general than the ones from the general model.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-4">
+<br>
+<h4 id="orgheadline16">Track</h4>
+<div class="outline-text-4" id="text-orgheadline16">
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> musicians-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"track"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[]</span> 20<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>track</li>
+        <li>album</li>
+        <li>released.</li>
+        <li>titled</li>
+        <li>debut</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>spawned</li>
+        <li>entitled</li>
+        <li>track.</li>
+        <li>latest</li>
+        <li>hit.</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>release</li>
+        <li>week</li>
+        <li>year.</li>
+        <li>dania</li>
+        <li>song</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>summer_of_space_on_quiet</li>
+        <li>positive</li>
+        <li>airplay</li>
+        <li>city_productions.</li>
+        <li>tracks</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> google-news-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"track"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[]</span> 20<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>track</li>
+        <li>tracks</li>
+        <li>Track</li>
+        <li>racetrack</li>
+        <li>www.southbostonspeedway.com</li>
+        <li>cuppy</li>
+        <li>#/#ths-mile</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>horseshoe_shaped_section</li>
+        <li>wagering_parlors</li>
+        <li>levigated</li>
+        <li>Infineon_raceway</li>
+        <li>Tezgam_Express_heading</li>
+        <li>#/##-mile_oval</li>
+        <li>racing</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>president_Brandon_Igdalsky</li>
+        <li>paperclip_shaped</li>
+        <li>cinder_track</li>
+        <li>president_Gillian_Zucker</li>
+        <li>2_#/#-mile_triangular</li>
+        <li>Tapeta_surface</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+<p>
+As we know, <code>track</code> is ambiguous. The difference between these two sets of nearest related words is striking. There is a clear conceptual correlation in the musicians' domain-specific model. But in the general model, it is really going in all directions.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-4">
+<br>
+<h4 id="orgheadline17">Year</h4>
+<div class="outline-text-4" id="text-orgheadline17">
+<p>
+Now let's take a look at a really general word: <code>year</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> musicians-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"year"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[]</span> 20<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>year</li>
+        <li>grammy_award_for_best</li>
+        <li>naacap</li>
+        <li>year.</li>
+        <li>grammy_award</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>nominated</li>
+        <li>rock_new_artist_clip</li>
+        <li>music_award</li>
+        <li>grammy_for_best</li>
+        <li>category.</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>song_of_the</li>
+        <li>music_video_awards_best_pop</li>
+        <li>ghantous.</li>
+        <li>salvador_da_bahia.</li>
+        <li>won</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>so_intense</li>
+        <li>entitled</li>
+        <li>he_was_grammy</li>
+        <li>year_and_recorded</li>
+        <li>song</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> google-news-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"year"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[]</span> 20<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+     
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>year</li>
+        <li>month</li>
+        <li>week</li>
+        <li>months</li>
+        <li>decade</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>years</li>
+        <li>summer</li>
+        <li>year.The</li>
+        <li>September</li>
+        <li>weeks</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>season</li>
+        <li>June</li>
+        <li>yaer</li>
+        <li>weekend</li>
+        <li>July</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>January</li>
+        <li>twoyears</li>
+        <li>August</li>
+        <li>threeyear</li>
+        <li>October</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+<p>
+This one is quite interesting too. Both groups of words makes sense, but only in their respective contexts. With the musicians' model, <code>year</code> is mostly related to awards (like the Grammy Awards 2016), categories like "song of the year", etc.
+</p>
+
+<p>
+In the context of the general model, year is really related to time concepts: months, seasons, etc.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-3">
+<br>
+<h3 id="orgheadline18">Playing With Co-Occurrences Vectors</h3>
+<div class="outline-text-3" id="text-orgheadline18">
+<p>
+Finally we will play with manipulating the co-occurrences vectors by manipulating them. A really popular word2vec equation is <code>king - man + women = queen</code>. What is happening under the hood with this equation is that we are adding and substracting the co-occurence "vectors" for each of these words, and we check the nearest word of the resulting co-occurence vector.
+</p>
+
+<p>
+Now, let's take a look at a few of these equations.
+</p>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-4">
+<br>
+<h4 id="orgheadline19">Pianist + Renowned = ?</h4>
+<div class="outline-text-4" id="text-orgheadline19">
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> musicians-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"pianist"</span> <span style="color: #c7254e;">"renowned"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[]</span> 10<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>renowned</li>
+        <li>pianist</li>
+        <li>teacher</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>teacher.</li>
+        <li>prolific</li>
+        <li>educator.</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>virtuoso</li>
+        <li>violinist</li>
+        <li>conductor</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>composer</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> google-news-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"pianist"</span> <span style="color: #c7254e;">"renowned"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[]</span> 10<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>renowned</li>
+        <li>pianist</li>
+        <li>pianist_composer</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>jazz_pianist</li>
+        <li>classical_pianists</li>
+        <li>composer_pianist</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>virtuoso_pianist</li>
+        <li>renowned_cellist</li>
+        <li>violinist</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>trumpet_virtuoso</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+               
+<p>
+These kinds of operations are also interesting. If we add the two co-occurrence vectors for <code>pianist</code> and <code>renowned</code> then we get that a <code>teacher</code>, an <code>educator</code>, a <code>composer</code> or a <code>virtuoso</code> is a renowned pianist.
+</p>
+
+<p>
+For unambiguous surface forms like <code>pianist</code>, then the two models score quite well. The difference between the two examples comes from the way the general training corpus has been created (pre-processed) compared to the musicians corpus. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline20" class="outline-4">
+<br>
+<h4 id="orgheadline20">Metal + Death = ?</h4>
+<div class="outline-text-4" id="text-orgheadline20">
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> musicians-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"metal"</span> <span style="color: #c7254e;">"death"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[]</span> 10<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>death</li>
+        <li>metal</li>
+        <li>thrash</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>deathcore</li>
+        <li>metalcore</li>
+        <li>grindcore</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>mathcore</li>
+        <li>melodic</li>
+        <li>present_labels_insideout</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>gothic</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>          
+
+<p>&nbsp;</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> google-news-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"metal"</span> <span style="color: #c7254e;">"death"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[]</span> 10<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>death</li>
+        <li>metal</li>
+        <li>Tunstall_bled</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>steel</li>
+        <li>Death</li>
+        <li>compressional_asphyxia</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>untimely_death</li>
+        <li>thallium_toxic</li>
+        <li>metal_grindcore</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>blackened_shards</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>          
+
+<p>&nbsp;</p>
+
+<p>
+This example uses two quite general words with no apparent relationship between them. The results with the musicians' model are all the highly similar genre of music like <code>trash metal</code>, <code>deathcore metal</code>, etc.
+</p>
+
+<p>
+However with the general model, it is a mix of multiple unrelated concepts.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline21" class="outline-4">
+<br>
+<h4 id="orgheadline21">Metal - Death + Smooth = ?</h4>
+<div class="outline-text-4" id="text-orgheadline21">
+<p>
+Let's play some more with these equations. What if we want some kind of smooth metal?
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> musicians-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"metal"</span> <span style="color: #c7254e;">"smooth"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"death"</span><span style="color: #66D9EF;">]</span> 5<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>smooth</li>
+        <li>funk</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>soul</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>disco</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>daniel_håkansson_genres</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>          
+
+<p>&nbsp;</p>
+
+<p>
+This one is also quite interesting. We substracted the <code>death</code> co-occurrence vector to the <code>metal</code> one, and then we added the <code>smooth</code> vector. What we end-up with is a bunch of music genres that are much smoother than <code>death metal</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-clojure"><span style="color: #AE81FF;">(</span><span style="color: #F92672;">.wordsNearest</span> google-news-model <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"metal"</span> <span style="color: #c7254e;">"smooth"</span><span style="color: #66D9EF;">]</span> <span style="color: #66D9EF;">[</span><span style="color: #c7254e;">"death"</span><span style="color: #66D9EF;">]</span> 5<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<table>
+  <tbody><tr>
+    <td>
+      <ul>
+        <li>smooth</li>
+        <li>metal</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>shredding_solos</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>chromed_steel</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>metallic</li>
+      </ul>
+    </td>
+  </tr>
+</tbody></table>          
+
+<p>
+In the case of the general model, we end-up with "smooth metal". The removal of the <code>death</code> vector has no effect on the results, probably since these are three ambiguous and really general terms.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline22" class="outline-2">
+<br>
+<h2 id="orgheadline22">Relevance of the Use Case</h2>
+<div class="outline-text-2" id="text-orgheadline22">
+<p>
+Of course, the likelihood that <code>musicians</code> are a domain of interest to most enterprises is low. However, this use case does have these implications:
+</p>
+
+<ol class="org-ol">
+<li>The speed and ease of creating domain-specific training corpuses for word2vec (and other corpus-based models)</li>
+<li>The ability to include other public and private text sources into the word2vec model (see, for example, how to <a href="http://cognonto.com/services/data-integration-and-mapping/">link your own private datasets to KBpedia</a>)</li>
+<li>To use such domain-specific training corpuses to establish similarity between local text documents or HTML web pages</li>
+<li>To combine with the <a href="http://cognonto.com/docs/about-the-demo/#topic-analysis-sub-pabel">Cognonto topics analyzer</a> to first tag text document using KBpedia reference concepts, and then inform or augment domain-specific training corpuses, and</li>
+<li>To enable the testing and refinement of different combinations of "seed" concepts to produce training corpuses with the desired set of similarity results.</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline23" class="outline-2">
+<br>
+<h2 id="orgheadline23">Conclusion</h2>
+<div class="outline-text-2" id="text-orgheadline23">
+<p>
+As we saw, creating domain-specific training corpuses to use with word2vec can have a dramatic impact on the results and how results can be much more meaningful within the scope of that domain. Another advantage of a domain-specific training corpus is it creates create much smaller models. Smaller models are faster to generate, faster to download/upload, faster to query, and consume  less memory.
+</p>
+
+<p>
+Of the concepts in KBpedia, roughly 33,000 of them correspond to types (or classes) of various sorts. These pre-determined slices are available across all needs and domains to generate such domain-specific corpuses. Further, KBpedia is designed for rapid incorporation of your own domain information to add further to this discriminatory power.
+</p>
+</div>
+</div>
+          
+        </div> 
+        <div class="col-md-2">
+          &nbsp;
+        </div><!--/col-md-2-->
+      </div>          
+      
+      
+    </div><!--/container-->
+    <!--=== End Content Part ===-->
+        <div class="footer-v1">
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <!-- About -->
+            <div class="col-md-3 md-margin-bottom-40">
+              <table>
+               <tbody><tr>
+                <td>
+                  <a href="http://cognonto.com/">
+                    <img id="logo-footer" class="footer-logo" src="./Document-specific word2vec Training Corpuses_files/logo-simple-purple.png" alt="" name="logo-footer">
+                  </a>                
+                </td>
+               </tr>
+               <tr>
+                <td>
+                  <center>
+                    <p>
+                      Cognonto
+                    </p>
+                  </center>
+                </td>
+               </tr>
+              </tbody></table>
+              <p style="font-size: 0.85em;">
+                Cognonto exploits large-scale knowledge bases and semantic technologies for machine learning, data interoperability and mapping, and fact extraction and tagging.
+              </p>
+            </div><!--/col-md-3-->
+            <!-- End About -->
+            <!-- Latest -->
+            <div class="col-md-3 md-margin-bottom-40">
+              <div class="posts">
+                <div class="headline">
+                  <h2>
+                    Latest News
+                  </h2>
+                </div>
+                <ul class="list-unstyled latest-list">
+                  
+<!-- HTML generated from an RSS Feed by rss2html.php, http://www.FeedForAll.com/ a NotePage, Inc. product (http://www.notepage.com/) -->
+    <li>
+        <a href="http://cognonto.com/resources/news/cognonto-gets-new-entry-page/">Cognonto Gets New Entry Page</a>
+        <small>03/27/2017</small>
+    </li>
+<!-- HTML generated from an RSS Feed by rss2html.php, http://www.FeedForAll.com/ a NotePage, Inc. product (http://www.notepage.com/) -->
+    <li>
+        <a href="http://cognonto.com/resources/news/greatly-expanded-kbpedia-v1-40-released/">Greatly Expanded KBpedia v. 1.40 Released</a>
+        <small>02/28/2017</small>
+    </li>
+<!-- HTML generated from an RSS Feed by rss2html.php, http://www.FeedForAll.com/ a NotePage, Inc. product (http://www.notepage.com/) -->
+    <li>
+        <a href="http://cognonto.com/resources/news/cognonto-releases-seventh-use-case-topic-is-extending-kbpedia/">Cognonto Releases Seventh Use Case; Topic is Extending KBpedia</a>
+        <small>01/12/2017</small>
+    </li>
+
+                </ul>
+              </div>
+            </div><!--/col-md-3--><!-- End Latest --><!-- Link List -->
+            <div class="col-md-3 md-margin-bottom-40">
+              <div class="headline">
+                <h2>
+                  Other Resources
+                </h2>
+              </div>
+              <ul class="list-unstyled link-list">
+                <li>
+                  <a href="http://cognonto.com/resources/about/">About</a>
+                </li>
+                <li>
+                  <a href="http://cognonto.com/resources/faq/">FAQ</a>
+                </li>
+                <li>
+                  <a href="http://cognonto.com/resources/news/">News</a>
+                </li>
+                <li>
+                  <a href="http://cognonto.com/use-cases/">Use Cases</a>
+                </li>
+                <li>
+                  <a href="http://cognonto.com/resources/documentation/">Documentation</a>
+                </li>
+                <li>
+                  <a href="http://cognonto.com/resources/privacy/">Privacy</a>
+                </li>
+                <li>
+                  <a href="http://cognonto.com/resources/terms-of-use/">Terms of Use</a>
+                </li>
+              </ul>
+            </div><!--/col-md-3-->
+            <!-- End Link List --><!-- Address -->
+            <div class="col-md-3 map-img md-margin-bottom-40">
+              <div class="headline">
+                <h2>
+                  Contact Us
+                </h2>
+              </div>
+              <address class="md-margin-bottom-40">
+                <a href="mailto:info@cognonto.com?subject=Cognonto%20Inquiry">Cognonto Corp.</a>
+                <br>
+                380 Knowling Drive
+                <br>
+                Coralville, IA 52241
+                <br>
+                U.S.A.
+                <br>
+                Voice: +1 319 621 5225
+              </address>
+            </div><!--/col-md-3-->
+            <!-- End Address -->
+          </div>
+        </div>
+      </div><!--/footer-->
+      <div class="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-7">
+              <p class="copyright">
+                2016-2017 © <a href="http://cognonto.com/"><img id="footer-logo-icon" src="./Document-specific word2vec Training Corpuses_files/16x16_orange.png" alt="Cognonto Corp.">Cognonto Corp.</a> All Rights Reserved.
+              </p>
+            </div>
+            <!-- Social Links -->
+            <div class="col-md-5">
+                <ul class="footer-socials list-inline">
+                    <li>
+                        <a href="http://cognonto.com/resources/feeds/news.xml" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="RSS feed">
+                            <i class="fa fa-rss-square"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://github.com/Cognonto" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Github">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>                    
+                    <li>
+                        <a href="http://twitter.com/cognonto" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Social Links -->
+          </div>
+        </div>
+      </div><!--/copyright-->
+    </div><!--=== End Footer Version 1 ===-->
+    <!--/wrapper-->
+    <!-- JS Global Compulsory -->
+    <script async="" src="./Document-specific word2vec Training Corpuses_files/analytics.js"></script><script type="text/javascript" src="./Document-specific word2vec Training Corpuses_files/jquery.min.js"></script>
+    <script type="text/javascript" src="./Document-specific word2vec Training Corpuses_files/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="./Document-specific word2vec Training Corpuses_files/bootstrap.min.js"></script>
+    <!-- JS Implementing Plugins -->
+    <script type="text/javascript" src="./Document-specific word2vec Training Corpuses_files/back-to-top.js"></script>
+    <!-- JS Customization -->
+    <script type="text/javascript" src="./Document-specific word2vec Training Corpuses_files/custom.js"></script>
+    <!-- JS Page Level -->
+    <script type="text/javascript" src="./Document-specific word2vec Training Corpuses_files/app.js"></script>
+
+        
+    
+        
+    
+    
+    
+    
+       
+        
+    
+    <!--[if lt IE 9]>
+      <script src="/assets/plugins/respond.js"></script>
+      <script src="/assets/plugins/html5shiv.js"></script>
+      <script src="/assets/js/plugins/placeholder-IE-fixes.js"></script>    
+    <![endif]-->
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-84405507-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+  
+
+</div><div id="topcontrol" title="Scroll Back to Top" style="position: fixed; bottom: 5px; right: 5px; opacity: 0; cursor: pointer;"></div></body></html>

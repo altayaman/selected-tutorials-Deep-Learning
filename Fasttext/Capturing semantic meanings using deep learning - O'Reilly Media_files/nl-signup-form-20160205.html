@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!-- saved from url=(0123)https://cdn.oreillystatic.com/oreilly/email/forms/nl-signup-form-20160205.html?site=norm&topic=data&loc=right_cta&emtype=nl -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Email Signup Form</title>
+<style>
+body { font-family: Arial, Helvetica, sans-serif; font-size: 62.5%; color: #000; background-color: transparent; margin: 0; padding: 0; }
+form { margin: 0; position: relative; padding-right:105px; }
+form input.email_address { height: 43px; width:100%; -moz-box-sizing:border-box; box-sizing:border-box; border: 1px solid #ddd; border-right:0; background-color: #fff; font-size: 10px; font-size: 1rem; padding: 0 0 0 10px; margin:0 -3px 0 0; vertical-align: top; -webkit-border-top-left-radius: 4px; -webkit-border-bottom-left-radius: 4px; -moz-border-radius-topleft: 4px; -moz-border-radius-bottomleft: 4px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; } 
+form input.defaultText { color:#999; }
+a { text-decoration:none; color:#008fbf; }
+button { position: absolute; top: 0; right: 0; width: 105px; height: 43px; border: 0; -webkit-border-top-right-radius: 4px; -webkit-border-bottom-right-radius: 4px; -moz-border-radius-topright: 4px; -moz-border-radius-bottomright: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; background: rgb(254,196,26); /* Old browsers */ background: -moz-linear-gradient(top, rgb(254,196,26) 0%, rgb(255,170,0) 100%); /* FF3.6+ */ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(254,196,26)), color-stop(100%,rgb(255,170,0))); /* Chrome,Safari4+ */ background: -webkit-linear-gradient(top, rgb(254,196,26) 0%,rgb(255,170,0) 100%); /* Chrome10+,Safari5.1+ */ background: -o-linear-gradient(top, rgb(254,196,26) 0%,rgb(255,170,0) 100%); /* Opera 11.10+ */ background: -ms-linear-gradient(top, rgb(254,196,26) 0%,rgb(255,170,0) 100%); /* IE10+ */ background: linear-gradient(to bottom, rgb(254,196,26) 0%,rgb(255,170,0) 100%); /* W3C */ padding: 0; color: #222; font-size: 10px; font-size: 1rem; opacity:.95; }
+button:hover { cursor:pointer; opacity:1; }
+#privacy { margin-top:5px; text-align:center; font-size:14px;  }
+.thanks_message { color: #222; text-align: center; font-size: 16px; font-size: 1.6rem; margin: 8px auto; overflow: hidden; }
+
+</style>
+
+<!-- SiteCatalyst code version: H.20.3. Copyright 1997-2009 Omniture, Inc. More info available at http://www.omniture.com -->
+<script language="JavaScript" type="text/javascript">
+var s_account="orglobal" // change report suite ID accordingly
+</script>
+<script language="JavaScript" type="text/javascript" src="./s_code.js"></script>
+
+</head>
+
+<body>
+<div id="signup">
+  <form action="https://conduit.ipost.com/forms.cgi" method="post" id="newsletter-subscribe" style="padding-right: 105px;">
+    <input type="hidden" name="debug" value="0"> 
+    <input type="hidden" name="client_token" value="oreilly">
+    <input type="hidden" name="success_url" value="https://cdn.oreillystatic.com/oreilly/email/forms/nl-signup-form.html?success=true&amp;site=norm&amp;loc=right_cta&amp;emtype=nl&amp;topic=data" id="success_url">
+    <input type="hidden" name="error_url" value="https://cdn.oreillystatic.com/oreilly/email/forms/nl-signup-form.html?success=false&amp;site=norm&amp;loc=right_cta&amp;emtype=nl&amp;topic=data" id="error_url">
+    <input type="hidden" name="redirect_gfh_errors" value="yes"><!-- redirect without including error details from iPost-->
+
+    <input type="hidden" name="subscribe" value="optin">
+    <input type="hidden" name="nl_data" value="1" class="elist" id="news_list">
+    <input type="hidden" name="" value="1" class="elist" id="conf_list">
+    <input type="hidden" name="source" value="norm_right_cta" id="source">
+
+    <input type="email" name="email_addr" class="email_address defaultText" maxlength="100" placeholder="Email Address" aria-label="Email Address" id="email_addr">
+    <!--<input type="email" name="email_addr" class="email_address defaultText" maxlength="100" value="Email Address" aria-label="Email Address" onblur="checkValue(this);" onfocus="checkValue(this);" id="email_addr">-->
+    <button type="Submit" id="join-btn" name="submit" value="Submit" aria-label="Subscribe" style="width: 105px;">Subscribe</button>
+  </form>
+
+  <div id="privacy"><a href="http://oreilly.com/oreilly/privacy.html" target="_blank">We protect your privacy.</a></div>
+</div>
+
+<script type="text/javascript">
+
+//text_color, link_color, conference, location
+function EmailForm(myObject){
+  this.site = myObject.site;
+  this.loc = myObject.loc;
+  this.emtype = myObject.emtype;
+  this.topic = myObject.topic;
+}
+
+EmailForm.prototype.addInputNames = function (){
+  var newsListField = document.getElementById('news_list');
+  var confListField = document.getElementById('conf_list');
+  var listName = this.topic;
+
+  switch (listName) {
+    case 'ai':
+      newsListField.name = "nl_ai";
+      break;
+
+    case 'prog':
+      newsListField.name = "nl_prog";
+      break;
+
+    case 'data':
+      newsListField.name = "nl_data";
+      break;
+
+    case 'webops':
+      newsListField.name = "nl_webops_perf";
+      break;
+
+    case 'web':
+      newsListField.name = "nl_web";
+      break;
+
+    case 'iot':
+      newsListField.name = "nl_iot";
+      break;
+
+    case 'design':
+      newsListField.name = "nl_design";
+      break;
+
+    case '4sl':
+      newsListField.name = "nl_4sl";
+      break;
+
+    case 'economy':
+      newsListField.name = "nl_economy";
+      break;
+
+    case 'fintech':
+      newsListField.name = "nl_money";
+      break;
+
+    case 'money':
+      newsListField.name = "nl_money";
+      break;
+
+    case 'security':
+      confListField.name = "nl_security";
+      break;
+
+    case 'sparkcamp':
+      confListField.name = "con_strata";
+      break;
+
+    case 'biocoder':
+      newsListField.name = "biocoder";
+      break;
+
+    default:
+      break;
+  }
+};
+
+
+EmailForm.prototype.addSource = function(){
+  var efSource = document.getElementById('source');
+  efSource.value = this.site + '_' + this.loc;
+};
+
+EmailForm.prototype.addClickTracking = function(){
+  var efSite = this.site, efTopic = this.topic, efLoc = this.loc, efEtype = this.emtype;
+
+  document.getElementById('join-btn').onclick = function() {
+    var s=s_gi(s_account);
+    s.eVar23= efSite + '-' + efTopic + '-' + efLoc + '-' + efEtype;
+    s.eVar39=efTopic;
+    s.events='event5,event68';
+    s.linkTrackVars='eVar23,eVar39,events';
+    s.linkTrackEvents='event5,event68';
+    s.tl(this,'o','Subscription');
+  }
+}
+
+var checkValue = function(fieldValue){
+  var emailField = document.getElementById('email_addr');
+  emailField.className = 'email_address';
+  if (fieldValue.value === fieldValue.defaultValue || fieldValue.value === 'Error. Please re-enter.') {
+    emailField.className += ' defaultText';
+    emailField.value = '';
+  } else if (fieldValue.value === ''){
+    emailField.value = fieldValue.defaultValue;
+    emailField.className += ' defaultText';
+  } 
+};
+
+var getUrlVars = function(){
+  var vars = { };
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    vars[key] = value;
+  });
+  return vars;   
+};
+
+var settings = getUrlVars();
+
+var emailCollector = new EmailForm(settings);
+emailCollector.addInputNames();
+emailCollector.addSource();
+emailCollector.addClickTracking();
+
+
+//add the correct url for the success and error urls
+var success_url_params = '&site=' + settings.site + '&loc=' + settings.loc + '&emtype=' + settings.emtype + '&topic=' + settings.topic;
+document.getElementById('success_url').value += success_url_params;
+document.getElementById('error_url').value += success_url_params;
+
+if (settings.success != 'undefined') {//append proper language for error-checking  
+  //return message
+  if (settings.success === 'true') {
+    //hide form
+    document.getElementById('newsletter-subscribe').style.display='none';
+    document.getElementById('privacy').style.display='none';
+    document.write('<p class="thanks_message">Thanks for signing up.</p>');
+  } else if (settings.success === 'false') {
+    document.getElementById('email_addr').value = 'Error. Please re-enter.';
+  }
+}//if (status != 'undefined')
+
+
+
+function resize() {
+  curWidth = window.innerWidth;
+  if (curWidth < 100) {
+    if (curBreakpoint != 0) {
+      setBreakpoint(0);
+    }
+  }
+  if (curWidth >= 100 && curWidth < 200) {
+    if (curBreakpoint != 100) {
+      setBreakpoint(100);
+    }
+  }
+  else if (curWidth >= 200 && curWidth < 260) {
+    if (curBreakpoint != 200) {
+      setBreakpoint(200);
+    }
+  }
+  else if (curWidth >= 260) {
+    if (curBreakpoint != 260) {
+      setBreakpoint(260);
+    }
+  }
+}
+
+function setBreakpoint(b) {
+  curBreakpoint = b;
+  console.log(curBreakpoint);
+
+  if (curBreakpoint == 0) {
+    document.getElementById('email_addr').placeholder = "";
+    document.getElementById('join-btn').innerHTML = "&gt;";
+    document.getElementById('newsletter-subscribe').style.paddingRight = "30px";
+    document.getElementById('join-btn').style.width = "30px";
+  }
+  else if (curBreakpoint == 100) {
+    document.getElementById('email_addr').placeholder = "Email";
+    document.getElementById('join-btn').innerHTML = "&gt;";
+    document.getElementById('newsletter-subscribe').style.paddingRight = "30px";
+    document.getElementById('join-btn').style.width = "30px";
+  }
+  else if (curBreakpoint == 200) {
+    document.getElementById('email_addr').placeholder = "Email";
+    document.getElementById('join-btn').innerHTML = "Subscribe";
+    document.getElementById('newsletter-subscribe').style.paddingRight = "105px";
+    document.getElementById('join-btn').style.width = "105px";
+  }
+  else if (curBreakpoint == 260) {
+    document.getElementById('email_addr').placeholder = "Email Address";
+    document.getElementById('join-btn').innerHTML = "Subscribe";
+    document.getElementById('newsletter-subscribe').style.paddingRight = "105px";
+    document.getElementById('join-btn').style.width = "105px";
+  }
+  
+}
+
+var curBreakpoint, curWidth;
+resize();
+
+window.onresize = resize;
+
+</script>
+
+
+
+
+
+</body></html>

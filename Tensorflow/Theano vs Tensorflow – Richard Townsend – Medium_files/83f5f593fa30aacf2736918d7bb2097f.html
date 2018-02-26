@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://medium.com/media/83f5f593fa30aacf2736918d7bb2097f?postId=e25648c31800 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>optimization_faceoff.py – Medium</title><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./e503c68abe7c9d0a40d9775019ed8bed.js" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-9f0a4ad9c85ca776e669003688baa9d55f9db315562ce4d231d37dab2714c70a.css"><div id="gist36216715" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-optimization_faceoff-py" class="file">
+    
+
+  <div itemprop="text" class="blob-wrapper data type-python">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tbody><tr>
+        <td id="file-optimization_faceoff-py-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-optimization_faceoff-py-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Tensorflow</span></td>
+      </tr>
+      <tr>
+        <td id="file-optimization_faceoff-py-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-optimization_faceoff-py-LC2" class="blob-code blob-code-inner js-file-line">loss <span class="pl-k">=</span> tf.reduce_mean(tf.square(y <span class="pl-k">-</span> y_data)) <span class="pl-c"><span class="pl-c">#</span> (1)</span></td>
+      </tr>
+      <tr>
+        <td id="file-optimization_faceoff-py-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-optimization_faceoff-py-LC3" class="blob-code blob-code-inner js-file-line">optimizer <span class="pl-k">=</span> tf.train.GradientDescentOptimizer(<span class="pl-c1">0.5</span>) <span class="pl-c"><span class="pl-c">#</span> (2)</span></td>
+      </tr>
+      <tr>
+        <td id="file-optimization_faceoff-py-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-optimization_faceoff-py-LC4" class="blob-code blob-code-inner js-file-line">train <span class="pl-k">=</span> optimizer.minimize(loss) <span class="pl-c"><span class="pl-c">#</span> (3)</span></td>
+      </tr>
+      <tr>
+        <td id="file-optimization_faceoff-py-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-optimization_faceoff-py-LC5" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-optimization_faceoff-py-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-optimization_faceoff-py-LC6" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Theano</span></td>
+      </tr>
+      <tr>
+        <td id="file-optimization_faceoff-py-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-optimization_faceoff-py-LC7" class="blob-code blob-code-inner js-file-line">cost <span class="pl-k">=</span> T.mean(T.sqr(y <span class="pl-k">-</span> Y)) <span class="pl-c"><span class="pl-c">#</span> (1)</span></td>
+      </tr>
+      <tr>
+        <td id="file-optimization_faceoff-py-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-optimization_faceoff-py-LC8" class="blob-code blob-code-inner js-file-line">gradientW <span class="pl-k">=</span> T.grad(<span class="pl-v">cost</span><span class="pl-k">=</span>cost, <span class="pl-v">wrt</span><span class="pl-k">=</span>W) <span class="pl-c"><span class="pl-c">#</span> (2)</span></td>
+      </tr>
+      <tr>
+        <td id="file-optimization_faceoff-py-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-optimization_faceoff-py-LC9" class="blob-code blob-code-inner js-file-line">gradientB <span class="pl-k">=</span> T.grad(<span class="pl-v">cost</span><span class="pl-k">=</span>cost, <span class="pl-v">wrt</span><span class="pl-k">=</span>b) <span class="pl-c"><span class="pl-c">#</span> (2)</span></td>
+      </tr>
+      <tr>
+        <td id="file-optimization_faceoff-py-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-optimization_faceoff-py-LC10" class="blob-code blob-code-inner js-file-line">updates <span class="pl-k">=</span> [[W, W <span class="pl-k">-</span> gradientW <span class="pl-k">*</span> <span class="pl-c1">0.5</span>], [b, b <span class="pl-k">-</span> gradientB <span class="pl-k">*</span> <span class="pl-c1">0.5</span>]] <span class="pl-c"><span class="pl-c">#</span> (2)</span></td>
+      </tr>
+      <tr>
+        <td id="file-optimization_faceoff-py-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-optimization_faceoff-py-LC11" class="blob-code blob-code-inner js-file-line">train <span class="pl-k">=</span> theano.function(<span class="pl-v">inputs</span><span class="pl-k">=</span>[X, Y], <span class="pl-v">outputs</span><span class="pl-k">=</span>cost, <span class="pl-v">updates</span><span class="pl-k">=</span>updates, <span class="pl-v">allow_input_downcast</span><span class="pl-k">=</span><span class="pl-c1">True</span>) <span class="pl-c"><span class="pl-c">#</span> (3)</span></td>
+      </tr>
+</tbody></table>
+
+  </div>
+
+  </div>
+  
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Sentimentron/e503c68abe7c9d0a40d9775019ed8bed/raw/8fac0e6620981a6207fdc68941b8b793b9474941/optimization_faceoff.py" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Sentimentron/e503c68abe7c9d0a40d9775019ed8bed#file-optimization_faceoff-py">optimization_faceoff.py</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200;function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height); resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);}maybeResize();</script></body></html>

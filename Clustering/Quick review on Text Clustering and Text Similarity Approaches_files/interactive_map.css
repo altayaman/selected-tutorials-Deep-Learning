@@ -1,0 +1,56 @@
+.axis path,
+
+.axis line
+{
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+#errorMessage {
+  height:50%;
+  width:50%;
+  /*text-align:center;*/
+  font-size:20px;
+  font-weight: bold;
+  font-family: monospace;
+}
+#mydiv {
+    width:60%;
+    height:100%;
+    float:left;
+    background:#ffffff;
+}
+
+.axis text
+{
+  font-family: sans-serif;
+  font-size: 11px;
+}
+.node_circle
+{
+  stroke: #777;
+  stroke-width: 1.0px;
+}
+.node_label
+{
+  pointer-events: none;
+}
+.link
+{
+  stroke: #777;
+  stroke-opacity: .2;
+}
+
+.node_count
+{
+  stroke: #777;
+  stroke-width: 1.0px;
+  fill: #999;
+}
+
+text.legend
+{
+  font-family: Verdana;
+  font-size: 13px;
+  fill: #000;
+}
